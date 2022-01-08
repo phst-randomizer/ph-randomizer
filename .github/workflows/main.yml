@@ -8,7 +8,6 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -19,6 +18,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Rename directories with spaces to ensure compatibility with CI tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install rename
+          find . -depth -name '* *' -execdir rename 's/ /_/g' {} +
 
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
@@ -35,7 +40,10 @@ jobs:
       - name: Run the CI tool
         run: |
           cd $GITHUB_WORKSPACE
-          for file in $(find . -name "*.logic" -type f -print)
+          for file in $(find . -type f)
           do
-            ./tmcr-newlogic-ci $file
-          done
+            if [[ $file == *.logic ]]
+            then
+              ./tmcr-newlogic-ci "$file"
+            fi
+          done;
