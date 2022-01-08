@@ -1,0 +1,49 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Rename directories with spaces to ensure compatibility with CI tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install rename
+          find . -depth -name '* *' -execdir rename 's/ /_/g' {} +
+
+      - name: Get the CI tool
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: Ibot02/tmcr-newlogic-ci
+          tag: "v1.0"
+          filename: "tmcr-newlogic-ci"
+          tarBall: false
+          zipBall: false
+
+      - name: Make it executable
+        run: chmod +x "$GITHUB_WORKSPACE/tmcr-newlogic-ci"
+
+      - name: Run the CI tool
+        run: |
+          cd $GITHUB_WORKSPACE
+          for file in $(find . -type f)
+          do
+            if [[ $file == *.logic ]]
+            then
+              ./tmcr-newlogic-ci "$file"
+            fi
+          done;
