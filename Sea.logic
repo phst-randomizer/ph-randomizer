@@ -1,0 +1,227 @@
+area Sea:
+  room SW:
+    node East:
+      entrance XSlate
+
+    node Mercay:
+      door MercayPort
+
+    node CannonIsle:
+      door CannonIslePort
+
+    node Ember:
+      door EmberPort
+
+    node Treasure1: chest Treasure1
+    node Treasure2: chest Treasure2
+    node Treasure3: chest Treasure3
+    node Treasure4: chest Treasure4
+    node SunKey: chest SunKey
+
+    node West:
+      entrance PhiSlate
+      enemy GiantEyePlant
+
+    node SpiritIsle:
+      door SpiritIslePort
+
+    node Molida:
+      door MolidaPort
+
+    node Treasure5: chest Treasure5
+    node Treasure6: chest Treasure6
+    node Treasure7: chest Treasure7
+
+    # TO NW SEA CHART
+    node ToMainNW: door MainNW
+    East <-> ToMainNW: item NWSeaChart
+    node ToFogNW: door FogNW
+    West <-> ToFogNW: item NWSeaChart
+
+    # TO SE SEA CHART
+    node ToSE: door NW
+    East <-> ToSE: item SESeaChart
+
+    West <-> East: item Cannon
+    Mercay <-> East: item SWSeaChart
+    CannonIsle <-> East: item SWSeaChart
+    Ember <-> East: item SWSeaChart
+    Molida <-> West: (item SWSeaChart & defeated GiantEyePlant)
+    SpiritIsle <-> West: item SWSeaChart
+    East <-> Treasure1: (item SalvageArm & item TreasureMap1)
+    East <-> Treasure2: (item SalvageArm & item TreasureMap2)
+    East <-> Treasure3: (item SalvageArm & item TreasureMap3)
+    East <-> Treasure4: (item SalvageArm & item TreasureMap4)
+    West <-> Treasure5: (item SalvageArm & item TreasureMap5)
+    West <-> Treasure6: (item SalvageArm & item TreasureMap6)
+    West <-> Treasure7: (item SalvageArm & item TreasureMap7)
+    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See /Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
+
+  room NW:
+    node Main:
+      entrance NSlate
+      enemy GiantEyePlant
+
+    node Uncharted:
+      door UnchartedPort
+
+    node Zauz:
+      door ZauzPort
+
+    node Gust:
+      door GustPort
+
+    node Bannan:
+      door BannanPort
+
+    node Treasure1: chest Treasure1
+    node Treasure2: chest Treasure2
+    node Treasure3: chest Treasure3
+    node Treasure4: chest Treasure4
+    node Treasure5: chest Treasure5
+    node Treasure6: chest Treasure6
+
+    node Fog:
+      door GhostShip
+
+    # Only accessible from NE
+    node Treasure7: chest Treasure7
+    node Treasure8: chest Treasure8
+
+    # TO SW SEA CHART
+    node ToEastSW: door EastSW
+    Main <-> ToEastSW: item SWSeaChart
+    node ToWestSW: door WestSW
+    Fog <-> ToWestSW: item SWSeaChart
+
+    # TO NE SEA CHART
+    node ToNE: door NE
+
+    Fog <-> Main
+    Uncharted <-> Main: item NWSeaChart
+    Zauz <-> Main: item NWSeaChart
+    Gust <-> Main: item NWSeaChart
+    Bannan <-> Main: (item NWSeaChart & defeated GiantEyePlant)
+    Main <-> Treasure1: (item SalvageArm & item TreasureMap1)
+    Main <-> Treasure2: (item SalvageArm & item TreasureMap2)
+    Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
+    Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
+    Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
+    Main <-> Treasure6: (item SalvageArm & item TreasureMap6)
+    ToNE <-> Treasure7: (item SalvageArm & item TreasureMap7)
+    ToNE <-> Treasure8: (item SalvageArm & item TreasureMap8)
+
+  room SE:
+    node Main:
+      entrance OmegaSlate
+      entrance TeethSlate
+      enemy MassiveEye
+
+    node DeeEss:
+      door DeeEssPort
+
+    node Harrow:
+      door HarrowPort
+
+    node Frost:
+      door FrostPort
+
+    node Goron:
+      door GoronPort
+
+    node Treasure1: chest Treasure1
+    node Treasure2: chest Treasure2
+    node Treasure3: chest Treasure3
+    node Treasure4: chest Treasure4
+    node Treasure5: chest Treasure5
+    node Treasure6: chest Treasure6
+    node Treasure7: chest Treasure7
+    node Treasure8: chest Treasure8
+
+    # TO NE SEA CHART
+    node ToNE: door NE
+    Main <-> ToNE: item NESeaChart
+
+    # TO SW SEA CHART
+    node ToSW: door SW
+    Main <-> ToSW: item SWSeaChart
+
+    DeeEss <-> Main: item SESeaChart
+    Goron <-> Main: (item SESeaChart & defeated MassiveEye)
+    Frost <-> Main: (item SESeaChart & item Cannon)
+    Harrow <-> Main: item SESeaChart
+    Main <-> Treasure1: (item SalvageArm & item TreasureMap1)
+    Main <-> Treasure2: (item SalvageArm & item TreasureMap2)
+    Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
+    Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
+    Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
+    Main <-> Treasure6: (item SalvageArm & item TreasureMap6)
+    Main <-> Treasure7: (item SalvageArm & item TreasureMap7)
+    Main <-> Treasure8: (item SalvageArm & item TreasureMap8)
+
+  room NE:
+    node Main:
+      entrance NESlate
+
+    node Maze:
+      door MazePort
+
+    node Dead:
+      door DeadPort
+
+    node Treasure3: chest Treasure3
+    node Treasure4: chest Treasure4
+    node Treasure5: chest Treasure5
+    node Treasure6: chest Treasure6
+    node Treasure7: chest Treasure7
+    node Treasure8: chest Treasure8
+
+    node Boat:
+      door BoardBoat
+
+    node Ruins:
+      door RuinsIsle
+
+    node Treasure1: chest Treasure1
+    node Treasure2: chest Treasure2
+
+    # TO NW SEA CHART
+    node ToRightNW: door RightNW
+    Main <-> ToRightNW: item NWSeaChart
+
+    # TO SE SEA CHART
+    node ToSE: door SE
+    Main <-> ToSE: item SESeaChart
+
+    Main <-> Ruins: (item RegalNecklace & item NESeaChart)
+    Maze <-> Main: item NESeaChart
+    Dead <-> Main: item NESeaChart
+    Boat <-> Main: item NESeaChart
+    Ruins <-> Treasure1: (item SalvageArm & item TreasureMap1 & item NESeaChart)
+    Ruins <-> Treasure2: (item SalvageArm & item TreasureMap2 & item NESeaChart)
+    Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
+    Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
+    Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
+    Main <-> Treasure6: (item SalvageArm & item TreasureMap6)
+    Main <-> Treasure7: (item SalvageArm & item TreasureMap7)
+    Main <-> Treasure8: (item SalvageArm & item TreasureMap8)
+
+  # BOATS
+  room BeedleBoat:
+    node Main:
+      door Exit
+
+  room ManOfSmilesBoat:
+    node Enemies:
+      door Exit
+      enemy Octorok1
+      enemy Octorok2
+      enemy Octorok3
+      enemy Octorok4
+      enemy Geozard
+
+    node ManOfSmiles:
+      chest NormalThing
+      chest MysteriousThing
+
+    Enemies <-> ManOfSmiles: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Geozard)

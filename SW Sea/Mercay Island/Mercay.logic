@@ -1,0 +1,128 @@
+area Mercay:
+  room OutsideOshus:
+    node Outside:
+      chest PickUpRock
+      door North
+      door OshussHouse
+      door RockHouse
+    node East:
+      door East
+    Outside <-> East: flag BridgeRepaired
+
+  room MercayTown:
+    node Main:
+      door Tavern
+      door Shop
+      door Shipyard
+      door House
+      door TreasureSelling
+      door Boat
+      door West
+      door NorthMain
+      mail Mailbox
+      chest Cucco
+
+    node Ledge:
+      door NorthLedge
+      chest LeftLedgeChest
+      chest RightLedgeChest
+
+    Ledge -> Main
+
+  room OshusCave:
+    node Main:
+      chest SwordChest
+      door Exit
+
+  room EnemyBamboo:
+    node South:
+      door South
+      hint GossipMercay1
+      enemy RedChuchuUp
+      enemy RedChuchuLeft
+      enemy RedChuchuRight
+    node Grotto:
+      door Grotto
+    South <-> Grotto: item Sword
+
+  room MercayShop:
+    node Main:
+      door Outside
+
+  room Tavern:
+    node Main:
+      door Outside
+
+  room TreasureSelling:
+    node Main:
+      door Outside
+
+  room MercayHouse:
+    node Main:
+      door Outside
+
+  room Shipyard:
+    node Main:
+      door Outside
+
+  room RockHouse:
+    node Main:
+      door Outside
+
+  room AboveMercayTown:
+    node Main:
+      enemy RedChuchu1
+      enemy RedChuchu2
+      enemy RedChuchu3
+      enemy RedChuchu4
+      enemy Crow
+      door South
+      door West
+
+    node HiddenBombableWall:
+      door ToBridgeCave
+
+    node Ledge:
+      door Grotto
+      door SouthLedge
+
+    node Island:
+      door IslandGrotto
+      chest AboveEntrance
+
+    Island -> Main
+    Main -> HiddenBombableWall: (item Bombs | item Bombchus)
+    Ledge -> Main
+
+  room PathToToTOK:
+    node Main:
+      door East
+      door ToTOK
+
+    node BombableWall:
+      door Grotto
+
+    BombableWall -> Main
+    Main -> BombableWall: (item Bombs | item Bombchus)
+
+  room GrottoToLedge:
+    node Up:
+      door Left
+      enemy Rat1
+      enemy Rat2
+      enemy Rat3
+      enemy Rat4
+      enemy Rat5
+      hint GossipStone
+      chest PowerGem
+
+    node Down:
+      enemy ZoraWarrior
+      door South
+
+    Up -> Down: item Bow
+
+  room BridgeCave:
+    node Main:
+      door West
+      door East

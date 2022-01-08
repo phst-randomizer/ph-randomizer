@@ -1,0 +1,129 @@
+area FireTemple:
+  room F1:
+    node Entrance:
+      door Outside
+      lock FireKey
+      enemy Keese1
+      enemy Keese2
+      enemy Keese3
+      enemy Keese4
+
+    node Arena:
+      chest KeesesSmallKey
+
+    Entrance <-> Arena: (defeated Keese1 & defeated Keese2 & defeated Keese3 & defeated Keese4)
+
+    node TopRight:
+      chest ChestNearLavaPit
+
+    node Switches:
+      flag FireMiddleDoor
+
+    node StairsMiddle:
+      door F2Middle
+
+    Entrance <-> TopRight: open FireKey
+    TopRight <-> Switches: (item Boomerang | item Sword | item Bombs | item Bombchus)
+    Entrance <-> StairsMiddle: flag FireMiddleDoor
+
+    node TopLeft:
+      door ToF2TopLeft
+
+    node MiddleLeft
+
+    node BottomLeftArena:
+      enemy Bubble1
+      enemy Bubble2
+
+    node StairsBottomLeft:
+      door ToF2BottomRight
+
+    TopLeft -> MiddleLeft: (item Boomerang | item Bombchus | item Bombs | (item Hammer & setting HammerClip))
+    MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
+    MiddleLeft -> BubblesArena
+    StairsBottomLeft -> BubblesArena
+    BubblesArena -> StairsBottomLeft: (defeated Bubble1 & defeated Bubble2)
+    BubblesArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
+
+  room F2:
+    node TopRight:
+      door ToF1Middle
+      enemy Gel1
+      enemy Gel2
+      enemy Gel3
+      enemy Gel4
+      enemy Gel5
+
+    node Arena:
+      chest BoomerangChest
+
+    TopRight <-> Arena: (defeated Gel1 & defeated Gel2 & defeated Gel3 & defeated Gel4 & defeated Gel5)
+
+    node TopLeft:
+      door ToF1TopLeft
+
+    TopRight -> TopLeft: (item Boomerang | item Bow | item Bombs | item GrapplingHook | item Hammer)
+
+    node BottomLeft:
+      enemy FireKeese1
+      enemy FireKeese2
+      enemy FireKeese3
+      enemy Rat
+
+    node KeesesDefeat:
+      chest AfterKeeses
+
+    node RatDefeat:
+      chest RatKey
+
+    node LockedBottomRightDoor:
+      lock FireKey
+
+    node StairsBottomRight:
+      door ToF3
+
+    BottomLeft <-> KeesesDefeat: (defeated FireKeese1 & defeated FireKeese21 & defeated FireKeese3)
+    BottomLeft <-> RatDefeat: defeated Rat
+    BottomLeft -> LockedBottomRightDoor: ((item Hammer & setting HammerClip) | item Bombs | item Boomerang)
+    StairsBottomRight -> LockedBottomRightDoor
+    LockedBottomRightDoor -> StairsBottomRight: open FireKey
+    LockedBottomRightDoor -> BottomLeft: (open FireKey & ((item Hammer & setting HammerClip) | item Bombs | item Boomerang | item Bombchus))
+
+  room F3:
+    node RightSide:
+      door ToF2
+
+    node Switches3214:
+      chest SwitchesSmallKey
+
+    RightSide <-> Switches3214: (item Boomerang | item GrapplingHook)
+
+    node LockedF3Door:
+      lock FireKey
+
+    node BossKeyHoleHallway:
+      enemy FireKeese4
+      enemy FireKeese5
+      enemy YellowChuChu1
+      enemy YellowChuChu2
+
+    RightSide -> LockedF3Door
+    BossKeyHoleHallway -> LockedF3Door
+    LockedF3Door -> RightSide: open FireKey
+    LockedF3Door -> BossKeyHoleHallway: open FireKey
+
+    node StairsBoss:
+      door ToF4
+
+    BossKeyHoleHallway <-> StairsBoss: item FireBossKey
+
+    node TopChest:
+      chest BossKeyChest
+
+    BossKeyHoleHallway <-> TopChest: (defeated FireKeese4 & defeated FireKeese5 & defeated YellowChuChu1 & defeated YellowChuChu2 & item Boomerang)
+
+  room F4:
+    node Main:
+      door ToF3
+      door ToBoss
+      entrance BlueWarp

@@ -1,0 +1,131 @@
+area FrostIsle:
+  room Port:
+    node Main:
+      door Boat
+      mail Mailbox
+      door SmartAnoukiHouse
+      door SensitiveAnoukiHouse
+      door ChiefHouse
+      door ToNorth
+
+    node Ledge:
+      chest LedgeChest
+
+    node DiggingChiefSign:
+      chest BigGreenRupee
+
+    node ToCave:
+      door ToCave
+
+    Main <-> Ledge: item GrapplingHook
+    Main <-> DiggingChiefSign: item Shovel
+    Main <-> ToCave: (flag SolvedAnouki & flag TalkedToChief)
+
+  room AnoukiChiefHouse:
+    flag TalkedToChief
+    door Exit
+
+  room AnoukiRedCauldronHouse:
+    door Exit
+
+  room AnoukiBrownCauldronHouse:
+    door Exit
+
+  room AnoukiVillage:
+    node AnoukiEstates:
+      door ToSouth
+      door GumoHouse
+      door ArooHouse
+      door MazoHouse
+      door DoboHouse
+      door KumuHouse
+      door FofoHouse
+
+    node RightIsland:
+      chest BigGoldRupee
+
+    node UndergroundTreasures:
+      chest DoboSign
+      chest FofoSign
+      chest GossipStoneHint
+      chest BottomLeftIsland
+
+    AnoukiEstates <-> RightIsland: (item Shovel & item GrapplingHook)
+    AnoukiEstates <-> UndergroundTreasures: item Shovel
+
+
+  room GumoHouse:
+    door Exit
+
+  room ArooHouse:
+    flag SolvedAnouki
+    door Exit
+
+  room MazoHouse:
+    door Exit
+
+  room DoboHouse:
+    door Exit
+
+  room KumuHouse:
+    door Exit
+
+  room FofoHouse:
+    door Exit
+
+  room IceCave:
+    door Left
+    door Right
+
+  room GreatIceField:
+    node Main:
+      door ToCave
+      enemy Yook1
+      enemy Yook2
+      enemy Yook3
+      enemy Yook4
+      enemy Yook5
+      enemy Yook6
+
+    node RightLedge:
+      chest DropDown
+      door ToNorthLedgeRight
+
+    node LeftLedge:
+      door ToNorthLedgeLeft
+
+    node GrapplingChests:
+      chest DoubleLeft
+      chest DoubleRight
+      chest RightHigher
+
+    node DefeatAllYooks:
+      door ToNorth
+
+
+    Main -> RightLedge: item GrapplingHook
+    RightLedge -> Main
+    LeftLedge -> Main
+    RightLedge <-> LeftLedge: item GrapplingHook
+    RightLedge <-> GrapplingChests: item GrapplingHook
+    Main <-> DefeatAllYooks: (defeated Yook1 & defeated Yook2 & defeated Yook3 & defeated Yook4 & defeated Yook5 & defeated Yook6)
+
+  room DungeonEntrance:
+    node Main:
+      door ToSouth
+      enemy Yook
+
+    node RightLedge:
+      door ToSouthLedgeRight
+
+    node LeftLedge:
+      door ToSouthLedgeLeft
+
+    node Dungeon:
+      door ToDungeon
+      exit DungeonBlueWarp
+
+    Main -> LeftLedge: item GrapplingHook
+    LeftLedge -> Main
+    RightLedge -> Main
+    Main <-> Dungeon: defeated Yook

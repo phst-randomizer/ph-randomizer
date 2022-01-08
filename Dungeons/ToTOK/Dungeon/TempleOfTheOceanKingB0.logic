@@ -1,0 +1,15 @@
+area TempleOfTheOceanKing:
+  room F1:
+    node Lower:
+      door Exit
+      chest EmptyChest
+      lock ToTOKKey
+
+    node Upper:
+      chest Map
+
+    node Downstairs:
+      door ToB1
+
+    Lower <-> Upper: open ToTOKKey
+    Lower -> Downstairs: item PowerSpirit

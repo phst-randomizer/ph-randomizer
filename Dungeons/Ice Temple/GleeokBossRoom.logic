@@ -1,0 +1,13 @@
+area GleeokBossRoom:
+  room Main:
+    node Fight:
+      door ToDungeon
+      enemy Gleeok
+
+    node BossDefeat:
+      chest Sand
+      chest HeartContainer
+      flag IceTempleBeaten
+      door ToAzurineRoom
+
+    Fight -> BossDefeat: defeated Gleeok

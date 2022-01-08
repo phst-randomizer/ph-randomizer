@@ -1,0 +1,23 @@
+area TempleOfTheOceanKing:
+  room B6:
+    node Main:
+      door ToB5
+      enemy Phantom1
+      enemy Phantom2
+      enemy PhantomEye1
+      enemy PhantomEye2
+
+    node SymbolDoor:
+      door Hourglass
+      door Triforce
+
+    node EyeTarget:
+      chest EyeChest
+
+    node PhantomsDefeated:
+      chest PhantomKiller
+
+    Main -> SymbolDoor
+    SymbolDoor -> Main: item Hammer
+    Main <-> EyeTarget: item Bow
+    Main <-> PhantomsDefeated: (defeated Phantom1 & defeated Phantom2)

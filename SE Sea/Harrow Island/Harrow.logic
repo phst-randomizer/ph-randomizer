@@ -1,0 +1,10 @@
+area HarrowIsland:
+  room Main:
+    node Port:
+      door Boat
+      mail Mailbox
+
+    node Minigame:
+      chest TreasureMap
+
+    Port <-> Minigame: item Shovel

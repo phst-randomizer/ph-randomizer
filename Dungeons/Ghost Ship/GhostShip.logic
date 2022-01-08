@@ -1,0 +1,24 @@
+area GhostShip:
+  room F1:
+    node Main:
+      door Boat
+      door ToB1
+
+  room B1:
+    node MiddleStairsArea:
+      chest AfterJump
+
+    node Arena:
+      enemy Poe1
+      enemy Poe2
+      enemy Poe3
+
+    node CubusPlace:
+      flag Cubus1Saved
+
+    node TopLeftArea
+
+    MiddleStairsArea -> Arena
+    Arena -> MiddleStairsArea: (defeated Poe1 & defeated Poe2 & defeated Poe3)
+    CubusPlace <-> Arena: (defeated Poe1 & defeated Poe2 & defeated Poe3)
+    TopLeftArea <-> Arena: (defeated Poe1 & defeated Poe2 & defeated Poe3)

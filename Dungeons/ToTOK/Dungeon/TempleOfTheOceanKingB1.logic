@@ -1,0 +1,27 @@
+area TempleOfTheOceanKing:
+  room B1:
+    node Lower:
+      door ToF1
+      enemy RightPhantom
+      enemy LeftPhantom
+      lock ToTOKKey
+
+    node Upper:
+      chest Key
+
+    node AllDefeatChest:
+      chest Killer
+
+    node EyeChest:
+      chest EyeTarget
+
+    node Downstairs:
+      door ToB2
+
+
+    Lower -> Downstairs: open ToTOKKey
+
+    Lower <-> Upper: (item Bombs | item Bombchus | item GrapplingHook | item Boomerang)
+
+    Lower <-> AllDefeatChest: (defeated RightPhantom & defeated LeftPhantom)
+    Lower <-> EyeChest: (item GrapplingHook & item Bow)

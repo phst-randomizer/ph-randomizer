@@ -1,0 +1,14 @@
+area CraykBossRoom:
+  room Main:
+    node Fight:
+      door ToDungeon
+      enemy Crayk
+
+    node BossDefeat:
+      chest Sand
+      chest SpiritOfCourage
+      chest HeartContainer
+      flag CourageTempleBeaten
+      entrance ExitWarp
+
+    Fight -> BossDefeat: defeated Crayk

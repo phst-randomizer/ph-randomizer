@@ -1,0 +1,34 @@
+area Cannon:
+  room Outside:
+    node Port:
+      door Boat
+      door HouseLeft
+      mail Mailbox
+
+    node AfterDoor:
+      chest BeeChest
+      door GrottoEntry
+
+    node BombGarden:
+      door GrottoStairs
+      chest NearRocks
+      door HouseRight
+
+    Port -> AfterDoor: flag CannonIsleDoor
+    BombGarden -> AfterDoor
+    AfterDoor -> Port
+
+  room EddoHouseLeft:
+    node Main:
+      door Exit
+    node ToEddo:
+      door ToRight
+
+    Main <-> ToEddo: item Cannon
+
+  room EddoHouseRight:
+    node Main:
+      door Exit
+      chest Cannon
+      chest SalvageArm
+      door ToLeft

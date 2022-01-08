@@ -1,0 +1,30 @@
+area TempleOfTheOceanKing:
+  room B3:
+    node Main:
+      enemy Phantom
+      enemy KeyPhantom
+      chest TopLeft
+      chest BottomRight
+      chest PhantomKey
+      lock ChestBehindDoor
+
+    node EyeTarget:
+      chest EyeChest
+
+    node AllDefeatChest:
+      chest Killer
+
+    node KeyDoor:
+      chest BehindDoor
+
+    node Ledge:
+      door ToChartRoomShortcut
+
+    node DoorToChartRoom
+      door ToChartRoom
+
+    Main <-> KeyDoor: open ChestBehindDoor
+    Main <-> EyeTarget: item Bow
+    Main <-> AllDefeatChest: (item PhantomSword & item GrapplingHook)
+    Main <-> Ledge: item GrapplingHook
+    Main -> DoorToChartRoom: (state Gem1 & state Gem2 & state Gem3)

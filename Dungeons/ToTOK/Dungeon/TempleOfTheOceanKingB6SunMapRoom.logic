@@ -1,0 +1,5 @@
+area TempleOfTheOceanKing:
+  room B3Chart:
+    node Main:
+      flag SunKeyMark
+      entrance BlueWarp

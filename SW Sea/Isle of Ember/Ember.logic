@@ -1,0 +1,80 @@
+area Ember:
+  room EmberLeft:
+    node Main:
+      door Boat
+      door Astrid
+      door Kayo
+      door EmptyHouse
+      door RightLowerBottom
+      door RightTop
+      mail Mailbox
+
+    node Island: chest Hook
+    node ToRightTop: door RightLowerTop
+
+    node Middle:
+      door RightMiddleTop
+      door RightMiddleBottom
+
+    node Summit:
+      door RightHigherBottom
+      door RightHighestBottom
+      door RightHighestTop
+
+    Main <-> Island: item GrapplingHook
+    ToRightTop <-> Island: item GrapplingHook
+    Summit -> Middle
+    Middle -> Main
+
+  room EmberRight:
+    node Lowest:
+      door LeftLowerToppest
+      door LeftLowerTop
+      door LeftLowerBottom
+
+    node AfterDoor:
+      door LeftMiddleBottom
+
+    node TempleFront:
+      door EmberTemple
+      door LeftHigherBottom
+      door LeftHigherTop
+
+    node Summit:
+      door LeftHighestTop
+      door LeftHighestBottom
+
+    Summit -> TempleFront
+    TempleFront -> AfterDoor
+    AfterDoor -> Lowest
+    Lowest -> AfterDoor: flag AstridFreed
+
+  room AstridHouse:
+    node Main:
+      door ToOutside
+      door ToBasement
+
+    node AfterTemple:
+      chest AstridPowerGem
+
+    Main <-> AfterTemple: flag FireTempleBeaten
+
+  room AstridBasement:
+    node Arena:
+      enemy Octorok1
+      enemy Octorok2
+      enemy Octorok3
+      enemy Octorok4
+      enemy Octorok5
+      enemy Octorok6
+
+    node Astrid:
+      flag Astrid
+
+    Arena <-> Astrid: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6)
+
+  room KayoHouse:
+    node Main: hint Book
+
+  room EmberEmptyHouse:
+    node Main
