@@ -1,28 +1,28 @@
 area Bannan:
-  room Outside:
-    node Left:
+  room OutsideLeft:
+    node Main:
       door WayfarerHouse
-      door GrottoLeftEntry
 
-    node LeftIsland:
+    node Island:
       chest IslandChest
+    
+    Main <-> Island: item GrapplingHook
 
-    node RightMain:
-      door GrottoRightEntry
+  room OutsideRight:
+    node Main:
       chest CannonMiniGameBombBag
 
-    node RightIsland:
-      chest LeftIsland
-      chest RightIsland
+    node Island:
+      chest LeftIslandChest
+      chest RightIslandChest
 
-    RightMain <-> RightIsland: item GrapplingHook
-    LeftMain <-> LeftIsland: item GrapplingHook
+    Main <-> Island: item GrapplingHook
 
   room BannanGrotto:
-    node Down:
-      door ExitUp
+    node LeftSide:
+      door OutsideLeft
 
-    node Up:
-      door ExitDown
+    node RightSide:
+      door OutsideRight
 
-    Down <-> Up: (item Bombs | item Bombchus)
+    LeftSide <-> RightSide: (item Bombs | item Bombchus)
