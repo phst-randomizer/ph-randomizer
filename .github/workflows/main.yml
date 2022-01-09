@@ -19,12 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Rename directories with spaces to ensure compatibility with CI tool
-        run: |
-          sudo apt-get update
-          sudo apt-get install rename
-          find . -depth -name '* *' -execdir rename 's/ /_/g' {} +
-
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
         with:
@@ -39,13 +33,9 @@ jobs:
 
       - name: Run the CI tool
         run: |
-          cd $GITHUB_WORKSPACE
-          for file in $(find . -type f)
-          do
-            if [[ $file == *.logic ]]
-            then
-              ./tmcr-newlogic-ci "$file"
-            fi
+          shopt -s globstar
+          for file in **/*.logic; do
+            ./tmcr-newlogic-ci "$file"
           done;
 
   test-shuffler:
@@ -70,7 +60,7 @@ jobs:
       - name: Make it executable
         run: chmod +x rando-shuffler/target/debug/rando_shuffler
 
-      - name: Run the CI tool
+      - name: Run the shuffler
         run: |
           shopt -s globstar
           for file in **/*.logic; do
