@@ -1,16 +1,16 @@
 area SpiritIsle:
   room Inside:
+    node Main: door Outside
     node Power1: chest Power1
     node Power2: chest Power2
     node Wisdom1: chest Wisdom1
     node Wisdom2: chest Widsom2
     node Courage1: chest Courage1
     node Courage2: chest Courage2
-    node Outside: door Outside
 
-    Inside -> Power1: item PowerGem10
-    Inside -> Wisdom1: item WisdomGem10
-    Inside -> Courage1: item CourageGem10
+    Main -> Power1: item PowerGem10
+    Main -> Wisdom1: item WisdomGem10
+    Main -> Courage1: item CourageGem10
 
     Power1 -> Power2: item PowerGem20
     Wisdom1 -> Wisdom2: item WisdomGem20
