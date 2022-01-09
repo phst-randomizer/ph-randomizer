@@ -1,5 +1,5 @@
-area Main:
-room Main:
-  door Down
-  chest AfterWall
-  door Stairs
+area CannonGrotto:
+  room Main:
+    door Down
+    chest AfterWall
+    door Stairs

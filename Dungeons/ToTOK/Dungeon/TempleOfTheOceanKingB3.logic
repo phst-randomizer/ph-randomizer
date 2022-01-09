@@ -20,7 +20,7 @@ area TempleOfTheOceanKing:
     node Ledge:
       door ToChartRoomShortcut
 
-    node DoorToChartRoom
+    node DoorToChartRoom:
       door ToChartRoom
 
     Main <-> KeyDoor: open ChestBehindDoor

@@ -13,7 +13,7 @@ area DeeEssIsland:
       chest BlowInTheMicrophone
       chest GoronGame
 
-    node HinoxChest
+    node HinoxChest:
       chest HinoxSlayer
 
     node DiggingSpotBottomScreen:

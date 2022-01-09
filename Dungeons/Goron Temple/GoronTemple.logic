@@ -34,7 +34,7 @@ area GoronTemple:
     AfterArena -> Entrance
     AfterArena <-> BowTarget: item Bow
 
-    B1Shortcut -> Entrance: (Item Bombchu | (setting HammerClip & item Hammer))
+    B1Shortcut -> Entrance: (item Bombchu | (setting HammerClip & item Hammer))
 
   room BombableF1:
     node LeftSide:

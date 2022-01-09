@@ -124,7 +124,7 @@ area IceTemple:
 
     node AboveBombableWalls
 
-    node RightSide
+    node RightSide:
       chest PullRedLever
       lock IceTempleKey
 
