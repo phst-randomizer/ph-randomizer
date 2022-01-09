@@ -47,3 +47,32 @@ jobs:
               ./tmcr-newlogic-ci "$file"
             fi
           done;
+
+  test-shuffler:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Checkout rando-shuffler repo
+        uses: actions/checkout@v2
+        with:
+          repository: 21aslade/rando-shuffler
+          ref: c03c5f4a9190312ee1d9db503806084495f47423
+          path: rando-shuffler
+
+      - name: Compile rando-shuffler
+        run: cargo build
+        working-directory: rando-shuffler
+        env:
+          CARGO_TERM_COLOR: always
+
+      - name: Make it executable
+        run: chmod +x rando-shuffler/target/debug/rando_shuffler
+
+      - name: Run the CI tool
+        run: |
+          shopt -s globstar
+          for file in **/*.logic; do
+            cat "$file" | rando-shuffler/target/debug/rando_shuffler
+          done;
