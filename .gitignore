@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# NDS files
+data/
+overlay/
+*.bin
+*.nds
