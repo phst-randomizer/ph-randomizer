@@ -7,6 +7,8 @@
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
+            .importobj "../build/faster_boat.o"
+
             @init_flags:
                 .include "include/init_flags.asm"
                 pop r3, pc ; original instruction, do not change
@@ -14,7 +16,7 @@
             @faster_boat:
                 push lr
                 strlt r0,[r4,0x78] ; original instruction, do not change
-                .include "include/faster_boat.asm"
+                bl faster_boat
                 pop pc
         .pool
         .endarea
@@ -34,6 +36,6 @@
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
-            bl @faster_boat
+            bl faster_boat
         .endarea
 .close
