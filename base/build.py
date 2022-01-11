@@ -15,8 +15,8 @@ from common import (
 
 
 def build_arm9():
-    root_directory = (Path(__file__).parent.parent.parent).resolve()
-    asm_directory = (Path(__file__).parent.parent / "asm").resolve()
+    root_directory = (Path(__file__).parent.parent).resolve()
+    asm_directory = (Path(__file__).parent / "src").resolve()
     # important: cast the generator to a list unless you want this
     # loop to keep running until your harddrive runs out of space :)
     for file in list(root_directory.rglob("*.bin")):
