@@ -7,10 +7,12 @@
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
+            .importobj "../build/set_initial_flags.o"
             .importobj "../build/faster_boat.o"
 
             @init_flags:
-                .include "include/init_flags.asm"
+                sub r0, lr, 0x30 ; set_initial_flags() function parameter
+                bl set_initial_flags
                 pop r3, pc ; original instruction, do not change
 
             @faster_boat:
