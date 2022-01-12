@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import os
 from pathlib import Path
 import shutil
 import struct
@@ -10,7 +9,6 @@ import sys
 from common import (
     ARMIPS_EXECUTABLE_PATH,
     BLZ_EXECUTABLE_PATH,
-    FIXY9_EXECUTABLE_PATH,
     NDSTOOL_EXECUTABLE_PATH,
     overlays_to_modify,
 )
@@ -48,18 +46,6 @@ def build_arm9():
 
     for overlay in overlays_to_modify:
         subprocess.run([BLZ_EXECUTABLE_PATH, "-eo", f"overlay/overlay_{overlay}.bin"])
-        shutil.move(f"overlay/overlay_{overlay}.bin", f"overlay_{overlay}.bin")
-
-    # TODO: port this fixy9.exe tool to python so we don't need wine
-    run_y9 = [FIXY9_EXECUTABLE_PATH, "y9.bin"] + [
-        f"overlay_{overlay}.bin" for overlay in overlays_to_modify
-    ]
-    if os.name != "nt":
-        run_y9 = ["wine"] + run_y9
-    subprocess.run(run_y9)
-
-    for overlay in overlays_to_modify:
-        shutil.move(f"overlay_{overlay}.bin", f"overlay/overlay_{overlay}.bin")
 
 
 def build(filename: str):
