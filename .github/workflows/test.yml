@@ -26,6 +26,6 @@ jobs:
 
       - name: Run C tests
         run: |
-          DOCKER_BUILDKIT=1 docker build --target lint .
+          DOCKER_BUILDKIT=1 docker build --target test .
         working-directory:
           base

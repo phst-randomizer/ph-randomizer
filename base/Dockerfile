@@ -29,7 +29,7 @@ ARG PH_ROM_PATH
 ADD $PH_ROM_PATH /app
 RUN make
 
-FROM devkitpro/devkitarm:latest as lint
+FROM devkitpro/devkitarm:latest as test
 RUN wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add - &&\
     echo 'deb http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main' | sudo tee -a /etc/apt/sources.list &&\
     echo 'deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main' | sudo tee -a /etc/apt/sources.list &&\
