@@ -1,4 +1,4 @@
-SHELL=/bin/bash
+.PHONY: all test lint format clean debug
 
 # Make sure devkitARM is installed
 ifeq ($(strip $(DEVKITARM)),)
@@ -99,3 +99,7 @@ format: $(SRC) .clang-format
 # Clean up
 clean:
 	rm -f $(DEST_DIR)/*
+
+all: $(OUTPUT_NDS_FILE)
+
+test: lint

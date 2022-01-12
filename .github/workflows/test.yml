@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
 jobs:
-  test:
+  test-python:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,11 +14,18 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run tox
+      - name: Run Python tests
         run: |
           pip install tox
           tox
 
-      - name: Lint C code
+  test-c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run C tests
         run: |
-          docker run -w /app -v ${PWD}/base:/app $(docker build -q base/) sh -c "make lint"
+          DOCKER_BUILDKIT=1 docker build --target lint .
+        working-directory:
+          base
