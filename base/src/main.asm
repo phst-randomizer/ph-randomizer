@@ -2,13 +2,13 @@
 .relativeinclude on
 .erroronwarning on
 
-.open "arm9_original.bin","arm9_compressed.bin",0x02004000
+.open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
-            .importobj "../build/set_initial_flags.o"
-            .importobj "../build/faster_boat.o"
+            .importobj "src/set_initial_flags.o"
+            .importobj "src/faster_boat.o"
 
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
@@ -25,7 +25,7 @@
 .close
 
 
-.open "overlay/overlay_0000.bin", 0x02077360
+.open "../overlay/overlay_0000.bin", 0x02077360
     .arm
     .org 0x20300 + 0x02077360
         .area 0x4
@@ -34,7 +34,7 @@
 .close
 
 
-.open "overlay/overlay_0031.bin", 0x0211F5C0
+.open "../overlay/overlay_0031.bin", 0x0211F5C0
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
