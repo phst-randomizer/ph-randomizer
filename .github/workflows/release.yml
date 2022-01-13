@@ -1,0 +1,22 @@
+name: release
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build_base_patch:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: base
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Fetch PH rom
+        run: |
+          pip install gdown
+          gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+
+      - name: Apply patches
+        run: |
+          DOCKER_BUILDKIT=1 docker build --build-arg PH_ROM_PATH=$(ls *.nds) -o out .
