@@ -1,4 +1,4 @@
-SHELL=/bin/bash
+.PHONY: all test lint format clean debug
 
 # Make sure devkitARM is installed
 ifeq ($(strip $(DEVKITARM)),)
@@ -38,23 +38,28 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ)
 
 	# Decompress BLZ-compressed binaries
 	./blz -d arm9_original.bin
-	./blz -d overlay/overlay_0000.bin
-	./blz -d overlay/overlay_0031.bin
+	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+		./blz -d overlay/$$file; \
+	done
 
 	# Patch the binaries with our custom code
 	./armips src/main.asm
 
 	# Recompress the binaries
 	./blz -eo arm9_compressed.bin
-	./blz -eo overlay/overlay_0000.bin
-	./blz -eo overlay/overlay_0031.bin
+	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+		./blz -eo overlay/$$file; \
+	done
 
 	# Combine arm9.bin back into a single file
 	# TODO: Do this in bash instead of an inline python script
 	python3 -c "exec(\"\"\"\nimport struct\n\nwith open(\"arm9_compressed.bin\", \"rb\") as input_arm9, open(\n    \"arm9_header.bin\", \"rb\"\n) as input_header, open(\"arm9.bin\", \"wb\") as output_arm9:\n    data = input_header.read() + input_arm9.read()\n    data = data[:0xB78] + struct.pack(\"<I\", len(data) + 0x2000000) + data[0xB7C:]\n    output_arm9.write(data)\n\"\"\")"
 
 	# Update y9.bin to account for new sizes of overlays
-	mv fixy9.exe overlay/ && cd overlay && /opt/wine-stable/bin/wine fixy9.exe overlay_0000.bin overlay_0031.bin
+	mv fixy9.exe overlay/
+	cd overlay && for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+		/opt/wine-stable/bin/wine fixy9.exe $$file; \
+	done
 
 arm7.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -7 arm7.bin
@@ -94,3 +99,7 @@ format: $(SRC) .clang-format
 # Clean up
 clean:
 	rm -f $(DEST_DIR)/*
+
+all: $(OUTPUT_NDS_FILE)
+
+test: lint
