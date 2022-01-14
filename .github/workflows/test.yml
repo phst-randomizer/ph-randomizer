@@ -29,3 +29,25 @@ jobs:
           DOCKER_BUILDKIT=1 docker build --target test .
         working-directory:
           base
+
+  test-desmume:
+    needs: [test-python, test-c]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Fetch PH rom
+        run: |
+          pip install gdown
+          gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+
+      - name: Apply patches
+        run: |
+          $env:DOCKER_BUILDKIT=1
+          docker build --build-arg PH_ROM_PATH=$(ls *.nds) -o out .
+
+      - name: Run tests
+        run: |
+          pip install tox
+          $env:PH_ROM_PATH=$(ls *.nds)
+          tox -e test

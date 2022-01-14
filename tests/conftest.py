@@ -21,8 +21,6 @@ class DesmumeEmulator:
         self.frame = 0
         self.emu.open(rom_path)
         self._next_frame()
-        self.emu.input.touch_release()
-        self._next_frame()
 
     def _next_frame(self):
         self.emu.cycle()
@@ -49,8 +47,6 @@ class DesmumeEmulator:
         self.wait(idle_frames)
         if isinstance(buttons, int):
             buttons = [buttons]
-        for button in buttons:
-            self.emu.input.keypad_rm_key(keymask(button))
         self.wait(2)
         for button in buttons:
             self.emu.input.keypad_add_key(keymask(button))
@@ -70,10 +66,9 @@ class DesmumeEmulator:
         """
         self.wait(idle_frames)
         x, y = position
-        self.emu.input.touch_release()
         self._next_frame()
         self.emu.input.touch_set_pos(x, y)
-        self._next_frame()
+        self.wait(2)
         self.emu.input.touch_release()
 
 
@@ -86,19 +81,36 @@ def desmume_emulator() -> DesmumeEmulator:
 
 @pytest.fixture
 def emulator_at_file_select(desmume_emulator: DesmumeEmulator) -> DesmumeEmulator:
-    desmume_emulator.wait(350)
-    desmume_emulator.touch_input(
-        (
-            SCREEN_WIDTH // 2,
-            SCREEN_HEIGHT // 2,
+    for i in range(2):
+        desmume_emulator.wait(500)
+        desmume_emulator.touch_input(
+            (
+                SCREEN_WIDTH // 2,
+                SCREEN_HEIGHT // 2,
+            )
         )
-    )
-    desmume_emulator.wait(50)
-    desmume_emulator.touch_input(
-        (
-            SCREEN_WIDTH // 2,
-            SCREEN_HEIGHT // 2,
+        desmume_emulator.wait(100)
+        desmume_emulator.touch_input(
+            (
+                SCREEN_WIDTH // 2,
+                SCREEN_HEIGHT // 2,
+            )
         )
-    )
-    desmume_emulator.wait(200)
+        desmume_emulator.wait(200)
+        desmume_emulator.touch_input(
+            (
+                SCREEN_WIDTH // 2,
+                SCREEN_HEIGHT // 2,
+            )
+        )
+
+        if i == 0:
+            # NOTE: The next three lines may appear to be useless, but they
+            # handle waiting and clicking the "Creating save data" text
+            # that appears when there is no save data on the card.
+            # Do not remove them.
+            # desmume_emulator.wait(400)
+            desmume_emulator.wait(400)
+            desmume_emulator.emu.reset()
+
     return desmume_emulator
