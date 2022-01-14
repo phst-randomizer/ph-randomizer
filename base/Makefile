@@ -28,7 +28,7 @@ $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin head
 data: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -d data/
 
-arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ)
+arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 	./ndstool -x $(INPUT_NDS_FILE) -9 arm9.bin -y overlay/
 
 	# Split arm9.bin into two files - uncompressed and compressed parts
@@ -57,9 +57,12 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ)
 
 	# Update y9.bin to account for new sizes of overlays
 	mv fixy9.exe overlay/
-	cd overlay && for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		/opt/wine-stable/bin/wine fixy9.exe $$file; \
+	mv y9.bin overlay/
+	cd overlay && for file in $$(cat ../src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+		echo $$file; \
+		/opt/wine-stable/bin/wine fixy9.exe y9.bin $$file; \
 	done
+	mv overlay/y9.bin .
 
 arm7.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -7 arm7.bin
@@ -75,7 +78,6 @@ banner.bin: $(INPUT_NDS_FILE)
 
 header.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -h header.bin
-
 # Same as `all`, but also includes readable .asm file
 debug: $(OBJ) $(ASM)
 
