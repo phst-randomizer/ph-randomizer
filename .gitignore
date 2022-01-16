@@ -128,9 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# clang-format
-.clang-format
-
 # NDS files
 data/
 overlay/

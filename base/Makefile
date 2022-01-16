@@ -89,13 +89,10 @@ debug: $(OBJ) $(ASM)
 %.o: %.c
 	$(CC) $(CFLAGS) -c "$<" -o "$@"
 
-.clang-format:
-	clang-format-12 --style=llvm --dump-config > .clang-format
-
-lint: $(SRC) .clang-format
+lint: $(SRC)
 	clang-format-12 --dry-run --Werror $(SRC)
 
-format: $(SRC) .clang-format
+format: $(SRC)
 	clang-format-12 -i --Werror $(SRC)
 
 # Clean up

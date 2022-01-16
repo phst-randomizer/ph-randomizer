@@ -37,6 +37,7 @@ RUN wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add - &&\
 RUN wget -O checkmake.deb https://github.com/mrtazz/checkmake/releases/download/0.2.0/checkmake_0.2.0-1_amd64.deb &&\
     dpkg -i checkmake.deb && apt-get install -f
 ADD Makefile .
+ADD .clang-format .
 ADD src/ src/
 RUN checkmake Makefile
 RUN make test
