@@ -1,8 +1,8 @@
-#include <stdint.h>
 #include "flags.h"
+#include <stdint.h>
 
 void set_flag(int addr, uint8_t bit) {
-  *((uint8_t*)addr) |= bit;
+  *((uint8_t *)addr) |= bit;
 }
 
 void set_initial_flags(uint32_t base_flag_address) {
