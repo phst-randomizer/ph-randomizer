@@ -38,6 +38,6 @@
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
-            bl faster_boat
+            bl @faster_boat
         .endarea
 .close
