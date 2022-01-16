@@ -68,6 +68,10 @@ jobs:
         with:
           name: out.nds
 
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: out.nds
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
