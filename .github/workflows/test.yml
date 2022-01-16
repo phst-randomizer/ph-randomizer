@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
 jobs:
-  test:
+  test-python:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,7 +14,69 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run tests
+      - name: Run Python tests
         run: |
           pip install tox
           tox
+
+  test-c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run C tests
+        run: |
+          DOCKER_BUILDKIT=1 docker build --target test .
+        working-directory:
+          base
+
+  patch-base-rom:
+    needs: [test-python, test-c]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: base
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Fetch PH rom
+        run: |
+          pip install gdown
+          gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+
+      - name: Apply patches
+        run: |
+          DOCKER_BUILDKIT=1 docker build --build-arg PH_ROM_PATH=$(ls *.nds) -o out .
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: out.nds
+          path: base/out/out.nds
+
+  test-desmume:
+    needs: patch-base-rom
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: out.nds
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Run tests
+        run: |
+          pip install tox
+          tox -e test
+        working-directory: base
+        env:
+          PH_ROM_PATH: out.nds
