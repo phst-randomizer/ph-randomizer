@@ -30,47 +30,86 @@ jobs:
         working-directory:
           base
 
-  patch-base-rom:
+  generate-base-patch:
     needs: [test-python, test-c]
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: base
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Fetch PH rom
         run: |
           pip install gdown
           gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+        working-directory: base
 
       - name: Apply patches
         run: |
           DOCKER_BUILDKIT=1 docker build --build-arg PH_ROM_PATH=$(ls *.nds) -o out .
+        working-directory: base
+
+      - name: Clone Flips repo
+        uses: actions/checkout@v2
+        with:
+          repository: Alcaro/Flips
+          path: base/Flips
+
+      - name: Compile Flips tool
+        run: |
+          sudo apt-get install g++ build-essential
+          chmod +x ./make.sh
+          ./make.sh
+        working-directory: base/Flips
+
+      - name: Create patch
+        run: |
+          chmod +x ./Flips/flips
+          ./Flips/flips --create $(ls *.nds) out/out.nds patch.bps
+        working-directory: base
 
       - uses: actions/upload-artifact@v2
         with:
-          name: out.nds
-          path: base/out/out.nds
+          name: patch.bps
+          path: base/patch.bps
 
   test-desmume:
-    needs: patch-base-rom
+    needs: generate-base-patch
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
 
       - uses: actions/download-artifact@v2
         with:
-          name: out.nds
-
-      - uses: geekyeggo/delete-artifact@v1
+          name: patch.bps
+        
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
         with:
-          name: out.nds
+          platform: x64
+
+      - name: Clone Flips repo
+        uses: actions/checkout@v2
+        with:
+          repository: Alcaro/Flips
+          path: Flips
+
+      - name: Compile Flips tool
+        run: |
+          mingw32-make CFLAGS=-O3
+        working-directory: Flips
+
+      - name: Fetch PH rom
+        run: |
+          pip install gdown
+          gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+
+      - name: Patch the rom
+        run: |
+          .\Flips\flips.exe --apply patch.bps $(ls *.nds) out.nds
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -81,6 +120,5 @@ jobs:
         run: |
           pip install tox
           tox -e test
-        working-directory: base
         env:
           PH_ROM_PATH: out.nds
