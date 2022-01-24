@@ -34,6 +34,15 @@
 .close
 
 
+.open "../overlay/overlay_0029.bin", 0x0211F5C0 ; overlay 14 in ghidra
+    .arm
+    .org 0x213b0e8
+        .area 0x74, 0xFF
+            .importobj "src/extend_RUPY_npc.o"
+        .endarea
+.close
+
+
 .open "../overlay/overlay_0031.bin", 0x0211F5C0
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
