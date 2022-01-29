@@ -22,14 +22,17 @@ area FrostIsle:
     Main <-> ToCave: (flag SolvedAnouki & flag TalkedToChief)
 
   room AnoukiChiefHouse:
-    flag TalkedToChief
-    door Exit
+    node Main:
+      flag TalkedToChief
+      door Exit
 
   room AnoukiRedCauldronHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room AnoukiBrownCauldronHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room AnoukiVillage:
     node AnoukiEstates:
@@ -55,27 +58,34 @@ area FrostIsle:
 
 
   room GumoHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room ArooHouse:
-    flag SolvedAnouki
-    door Exit
+    node Main:
+      flag SolvedAnouki
+      door Exit
 
   room MazoHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room DoboHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room KumuHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room FofoHouse:
-    door Exit
+    node Main:
+      door Exit
 
   room IceCave:
-    door Left
-    door Right
+    node Main:
+      door Left
+      door Right
 
   room GreatIceField:
     node Main:
