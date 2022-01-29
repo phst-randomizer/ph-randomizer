@@ -63,6 +63,7 @@ jobs:
       - name: Run the shuffler
         run: |
           shopt -s globstar
+          rm -f rando-shuffler/*.logic  # remove test files
           failed=0;
           for file in **/*.logic; do
             echo "$file... ";
