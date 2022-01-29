@@ -40,10 +40,10 @@ area FireTemple:
 
     TopLeft -> MiddleLeft: (item Boomerang | item Bombchus | item Bombs | (item Hammer & setting HammerClip))
     MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
-    MiddleLeft -> BubblesArena
-    StairsBottomLeft -> BubblesArena
-    BubblesArena -> StairsBottomLeft: (defeated Bubble1 & defeated Bubble2)
-    BubblesArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
+    MiddleLeft -> BottomLeftArena
+    StairsBottomLeft -> BottomLeftArena
+    BottomLeftArena -> StairsBottomLeft: (defeated Bubble1 & defeated Bubble2)
+    BottomLeftArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
 
   room F2:
     node TopRight:
