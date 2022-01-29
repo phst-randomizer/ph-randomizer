@@ -63,6 +63,20 @@ jobs:
       - name: Run the shuffler
         run: |
           shopt -s globstar
+          failed=0;
           for file in **/*.logic; do
-            cat "$file" | rando-shuffler/target/debug/rando_shuffler
+            echo "$file... ";
+            status=0
+            cat "$file" | rando-shuffler/target/debug/rando_shuffler || status=1
+            if [[ $status != 0 ]]; then
+              failed=1;
+            else
+              echo " PASSED";
+            fi
+            echo "-------------------------------"
+            echo ""
           done;
+          if [[ $failed != 0 ]]; then
+            exit 1;
+          fi
+
