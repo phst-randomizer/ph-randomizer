@@ -19,13 +19,13 @@ area CourageTemple:
 
     Entrance <-> BehindBombableWall: (item Bombs | item Bombchus)
 
-    Entrance -> LockArena
-    MoldormArena -> LockArena: (defeated Moldorm1 & defeated Moldorm2)
-    LockArena -> Entrance: open CourageKey
-    LockArena -> MoldormArena: open CourageKey
+    Entrance -> LockedDoorToArena
+    MoldormArena -> LockedDoorToArena: (defeated Moldorm1 & defeated Moldorm2)
+    LockedDoorToArena -> Entrance: open CourageKey
+    LockedDoorToArena -> MoldormArena: open CourageKey
 
-    MoldormArena -> StairsMoldorm: (defeated Moldorm1 & defeated Moldorm2)
-    StairsMoldorm -> MoldormArena
+    MoldormArena -> StairsAfterMoldorm: (defeated Moldorm1 & defeated Moldorm2)
+    StairsAfterMoldorm -> MoldormArena
 
 
     node PolsVoiceArea:
