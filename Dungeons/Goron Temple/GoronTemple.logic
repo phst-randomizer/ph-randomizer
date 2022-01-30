@@ -78,7 +78,7 @@ area GoronTemple:
 
     TopLeftArena -> LeftMain: (defeated FireBubble1 & defeated FireBubble2)
     LeftMain <-> LinkArenas
-    LikeLikeArena <-> BombchuChest: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
+    LinkArenas <-> BombchuChest: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
     LeftMain <-> BottomLeft: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
 
     BottomLeft <-> EyeSlugChest: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5)
