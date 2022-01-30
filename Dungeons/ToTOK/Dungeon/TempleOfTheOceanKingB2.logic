@@ -5,6 +5,8 @@ area TempleOfTheOceanKing:
       enemy StationaryPhantom
       enemy PatrollingPhantom
 
+    node Lower
+
     node KeyArea:
       chest Key
 
@@ -18,6 +20,9 @@ area TempleOfTheOceanKing:
       door ToB3
 
     Upper -> Downstairs: open ToTOKKey
+
+    Upper -> Lower: item Boomerang # TODO: Check if hammer/bombs/bombchus/something else works here
+    Lower -> Upper
 
     Lower <-> AllDefeatChest: (defeated RightPhantom & defeated LeftPhantom)
     Lower <-> BombchuChest: item Bombchus
