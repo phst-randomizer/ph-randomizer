@@ -9,18 +9,15 @@ area TempleOfTheOceanKing:
       enemy LeftPhantomEye
       enemy TopPhantomEye
       enemy Phantom
-      lock Right
 
-    node KeyDoorTop:
-      lock TopDoor
+    node KeyDoorTopLeft:
+      lock TopLeftDoor
 
-    node TopStaircase:
+    node TopLeftStaircase:
       door ToB5Shortcut
 
-    node KeyDoorBottom:
-      lock BottomDoor
-
     node BottomDoor:
+      lock BottomDoor
       door ToB5
 
     node SpikeArea:
@@ -35,10 +32,12 @@ area TempleOfTheOceanKing:
     TopRight -> Bottom: ((item Sword & item CourageSpiritLV1) | item Boomerang | item Bow | item Bombchu | item GrapplingHook | item Hammer)
     Bottom -> TopRight: (item Sword | item Boomerang | item Bow | item Bombchu | item GrapplingHook | item Hammer)
 
-    Bottom <-> TopLeft: item Bombchus
-    TopLeft -> Shortcut: open
+    Bottom <-> KeyDoorTopLeft: item Bombchus
+    KeyDoorTopLeft <-> TopLeftStaircase: open TopLeftDoor
+
+    Bottom <-> BottomDoor: open BottomDoor
 
     Bottom <-> SpikeArea: ((setting HammerClip & item Hammer) | (setting BoomerangClip & item Boomerang) | item Bombs | item Bombchu)
 
-    BottomLeft <-> PhantomsDefeated: (defeated SpawnedPhantom & defeated Phantom)
+    Bottom <-> PhantomsDefeated: (defeated SpawnedPhantom & defeated Phantom)
     TopRight <-> EyesDefeated: (defeated RightPhantomEye & defeated LeftPhantomEye & defeated TopPhantomEye)
