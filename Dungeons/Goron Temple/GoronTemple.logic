@@ -165,5 +165,7 @@ area GoronTemple:
       door ToBoss
 
   room CrimsonineRoom:
-    door ToBoss
-    chest Crimsonine
+    node Main:
+      door ToBoss
+      chest Crimsonine
+
