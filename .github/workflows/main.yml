@@ -1,15 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
-
-# Controls when the action will run. 
+ 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
   pull_request:
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -51,7 +45,20 @@ jobs:
           ref: c03c5f4a9190312ee1d9db503806084495f47423
           path: rando-shuffler
 
+      - name: Get cache key
+        id: shuffler-cache-key
+        run: echo "::set-output name=key::$(git rev-parse HEAD)"
+        shell: bash
+        working-directory: rando-shuffler
+
+      - uses: actions/cache@v2
+        id: rando-shuffler-cache
+        with:
+          path: rando-shuffler
+          key: ${{ steps.shuffler-cache-key.outputs.key }}
+
       - name: Compile rando-shuffler
+        if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
         run: cargo build
         working-directory: rando-shuffler
         env:
