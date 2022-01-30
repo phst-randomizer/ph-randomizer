@@ -206,5 +206,6 @@ area IceTemple:
     Right <-> BossKeyChest
 
   room AzurineRoom:
-    chest Azurine
-    entrance BlueWarp
+    node Main:
+      chest Azurine
+      entrance BlueWarp
