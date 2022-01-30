@@ -35,6 +35,4 @@ area TempleOfTheOceanKing:
 
     TopLeft -> StaircaseToB6
 
-    node TopRight
-
     TopRight -> TopLeft
