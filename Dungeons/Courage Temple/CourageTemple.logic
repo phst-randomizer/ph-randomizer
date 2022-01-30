@@ -99,8 +99,10 @@ area CourageTemple:
       door ToF1Arena
       door ToF1PolsVoice
 
-    node InvisibleMaze:
+    node IslandNearMovingPlatform:
       chest IslandChest
+
+    node InvisibleMaze:
       door ToF1InvisibleMaze
       chest BowChest
 
@@ -110,6 +112,7 @@ area CourageTemple:
     MiddleMovingPlatform -> IslandNearMovingPlatform: item GrapplingHook
 
     InvisibleMaze -> LeftmostStairsB1: item Bow
+    InvisibleMaze <-> IslandNearMovingPlatform
 
     node Torches:
       door F1Torches
