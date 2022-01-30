@@ -168,4 +168,3 @@ area GoronTemple:
     node Main:
       door ToBoss
       chest Crimsonine
-
