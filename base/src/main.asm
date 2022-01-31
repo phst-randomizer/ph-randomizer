@@ -9,6 +9,7 @@
         .area 0x228, 0xFF
             .importobj "src/set_initial_flags.o"
             .importobj "src/faster_boat.o"
+            .importobj "src/spawn_custom_freestanding_item.o"
 
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
@@ -26,6 +27,10 @@
                 ldr r0, [r4, 0x6c]
                 b 0x2162790
 
+            @spawn_custom_freestanding_item:
+                push lr
+                bl spawn_freestanding_item
+                pop pc
         .pool
         .endarea
 .close
@@ -45,6 +50,16 @@
     .org 0x213b0e8
         .area 0x74, 0xFF
             .importobj "src/extend_RUPY_npc.o"
+        .endarea
+
+    .org 0x213a108
+        .area 0x10, 0x00
+            ; patch out check that ensures only keys (id 0x1) can be spawned this way
+        .endarea
+
+    .org 0x213a174
+        .area 0x4
+            bl @spawn_custom_freestanding_item
         .endarea
 .close
 
