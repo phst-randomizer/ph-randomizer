@@ -3,7 +3,7 @@ area Molida:
     node Main:
       door LeftmostHouse
       door MiddleHouse
-      door MolidaSHop
+      door MolidaShop
       door RomanoHouse
 
     node Hole: entrance HoleToCave
@@ -45,6 +45,13 @@ area Molida:
   room MiddleHouse:
     node Main: 
       door Outside
+
+  room MolidaShop:
+    node Main:
+      door Outside
+      chest WoodenShield
+      chest QuiverUpgrade
+      chest RandomTreasure
 
   room CaveSystem:
 
