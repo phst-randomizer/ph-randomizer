@@ -44,7 +44,7 @@ jobs:
       - name: Fetch PH rom
         run: |
           pip install gdown
-          gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          gdown --id ${{ secrets.PH_GOOGLE_DRIVE_ID }}
         working-directory: base
 
       - name: Apply patches
@@ -104,8 +104,8 @@ jobs:
 
       - name: Fetch PH rom
         run: |
-          pip install gdown
-          gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          pip install gdown==4.2.0
+          gdown --id ${{ secrets.PH_GOOGLE_DRIVE_ID }}
 
       - name: Patch the rom
         run: |
