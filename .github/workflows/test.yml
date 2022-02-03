@@ -43,7 +43,7 @@ jobs:
 
       - name: Fetch PH rom
         run: |
-          pip install gdown
+          pip install gdown==4.2.0
           gdown https://drive.google.com/uc?id=${{ secrets.PH_GOOGLE_DRIVE_ID }}
         working-directory: base
 
