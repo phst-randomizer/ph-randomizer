@@ -16,7 +16,7 @@ static uint16_t get_item_id() {
  * @param param_3 - original function arg, don't modify
  * @param param_4 - original function arg, don't modify
  */
-uint16_t spawn_freestanding_item(void *param_1, uint32_t npc_type,
+uint16_t spawn_custom_freestanding_item(void *param_1, uint32_t npc_type,
                                  void *param_3, uint16_t *param_4) {
   // declare pointer to the game's `spawn_npc` function
   uint16_t (*spawn_npc)(void *, uint32_t, void *, short *) = (void *)0x20C3FE8;

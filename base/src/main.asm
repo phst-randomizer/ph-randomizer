@@ -26,11 +26,6 @@
                 .include "_additional_tree_items.asm"
                 ldr r0, [r4, 0x6c]
                 b 0x2162790
-
-            @spawn_custom_freestanding_item:
-                push lr
-                bl spawn_freestanding_item
-                pop pc
         .pool
         .endarea
 .close
@@ -59,7 +54,7 @@
 
     .org 0x213a174
         .area 0x4
-            bl @spawn_custom_freestanding_item
+            bl spawn_custom_freestanding_item
         .endarea
 .close
 
