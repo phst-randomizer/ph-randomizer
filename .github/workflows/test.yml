@@ -49,7 +49,10 @@ jobs:
 
       - name: Apply patches
         run: |
-          DOCKER_BUILDKIT=1 docker build --build-arg PH_ROM_PATH=$(ls *.nds) -o out .
+          DOCKER_BUILDKIT=1 docker build \
+            --build-arg PH_ROM_PATH=$(ls *.nds) \
+            --build-arg VERSION_STRING=$(git rev-parse --short HEAD) \
+            -o out .
         working-directory: base
 
       - name: Clone Flips repo
