@@ -52,11 +52,11 @@ def title_screen(insert: bool, input: str, output: str, image: str, version_stri
     colors = graphics2D.loadPalette(narc_file.getFileByName("title.ntfp"))
 
     if insert:
-        bmp = Image.open(image).convert("RGB")
+        img = Image.open(image).convert("RGB")
 
         if version_string:
-            draw = ImageDraw.Draw(bmp)
-            img_width, img_height = bmp.size
+            draw = ImageDraw.Draw(img)
+            img_width, img_height = img.size
             text_width, text_height = draw.textsize(version_string)
             x = img_width - text_width - 2
             y = img_height - text_height
@@ -74,7 +74,7 @@ def title_screen(insert: bool, input: str, output: str, image: str, version_stri
             )
 
         new_image = insert_image(
-            bmp,
+            img,
             [
                 (r, g, b)
                 for (r, g, b, _) in graphics2D.loadPalette(narc_file.getFileByName("title.ntfp"))
@@ -85,11 +85,11 @@ def title_screen(insert: bool, input: str, output: str, image: str, version_stri
         nds_rom.saveToFile(output)
 
     else:
-        image = narc_file.getFileByName("title.ntft")
-        bmp: Image = extract_image(image, colors)
+        image_file: bytes = narc_file.getFileByName("title.ntft")
+        extracted_image: Image = extract_image(image_file, colors)
         if not output.endswith(".bmp"):
             output = f"{output}.bmp"
-        bmp.save(output, compress_level=0)
+        extracted_image.save(output, compress_level=0)
 
 
 if __name__ == "__main__":
