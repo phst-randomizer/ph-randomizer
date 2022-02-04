@@ -24,6 +24,7 @@ OUTPUT_NDS_FILE=out.nds
 
 $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin header.bin
 	./ndstool -c out.nds -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin
+	python3 title_screen.py -i --input out.nds --output out.nds --image title_screen.bmp --version_string $(VERSION_STRING)
 
 data: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -d data/
