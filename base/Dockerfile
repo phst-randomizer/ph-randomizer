@@ -23,9 +23,14 @@ RUN dpkg --add-architecture i386
 RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
 RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/
 RUN apt-get update && apt-get install -y winehq-stable
+# Install python dependencies
+RUN apt-get install -y python3-pip python3-pil
+RUN pip3 install click ndspy
+ADD misc/* /app/
 ADD src/* /app/src/
 ADD Makefile /app
 ARG PH_ROM_PATH
+ARG VERSION_STRING
 ADD $PH_ROM_PATH /app
 RUN make
 
