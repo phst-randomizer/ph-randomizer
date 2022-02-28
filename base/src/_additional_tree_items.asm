@@ -1,4 +1,4 @@
-; Check if the ID from the ZMB file is higher than 0x7 (the max id in the vanilla rom)
+; Check if the ID from the ZMB file is less than or equal to 0x7 (the max id in the vanilla rom)
 ; If it is, return from here and continue executing the existing function.
 ldr r0, [r4, 0x6c]
 cmp r0, 0x7
