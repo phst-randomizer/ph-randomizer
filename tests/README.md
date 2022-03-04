@@ -4,7 +4,7 @@ This subdirectory contains a suite of tests for the randomizer.
 
 ## DeSmuME integration tests
 
-These tests make use of the `py-desmume` Python package to programatically spin up and control a DeSmuME emulator instance. `py-desmume` also allows the programmer to inspect register and memory contents at runtime, making it very simple to write assertions about the state these in tests.
+These tests make use of the `py-desmume` Python package to programatically spin up and control a DeSmuME emulator instance. `py-desmume` also allows the programmer to inspect register and memory contents at runtime, making it very simple to write assertions about the state of these in tests.
 
 ### Using existing save data
 
