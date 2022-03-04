@@ -1,4 +1,7 @@
 import os
+from pathlib import Path
+import shutil
+import sys
 from typing import Union
 
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME, DeSmuME_SDL_Window
@@ -35,48 +38,53 @@ class DesmumeEmulator:
         for _ in range(starting_frame, starting_frame + frames):
             self._next_frame()
 
-    def button_input(self, buttons: Union[int, list[int]], idle_frames: int = 0):
+    def button_input(self, buttons: Union[int, list[int]], frames: int = 1):
         """
         Press buttons.
 
         Params:
             buttons: A single button (int) to press, or a list of buttons to simultaneously press.
-            idle_frames: Optional number of frames to wait before touching the screen.
-                         Shortcut for calling DesmumeEmulator.wait() before this method.
+            frames: Optional number of frames to hold button for.
         """
-        self.wait(idle_frames)
         if isinstance(buttons, int):
             buttons = [buttons]
-        self.wait(2)
         for button in buttons:
             self.emu.input.keypad_add_key(keymask(button))
-        self.wait(2)
+        self.wait(frames + 1)
         for button in buttons:
             self.emu.input.keypad_rm_key(keymask(button))
         self.wait(2)
 
-    def touch_input(self, position: tuple[int, int], idle_frames: int = 0):
+    def touch_input(self, position: tuple[int, int], frames: int = 1):
         """
         Touch screen at a given location.
 
         Params:
             position: tuple in the form of (x, y) representing the location to touch the screen.
-            idle_frames: Optional number of frames to wait before touching the screen.
-                         Shortcut for calling DesmumeEmulator.wait() before this method.
+            frames: Optional number of frames to hold touch screen for.
         """
-        self.wait(idle_frames)
         x, y = position
         self._next_frame()
         self.emu.input.touch_set_pos(x, y)
-        self.wait(2)
+        self.wait(frames + 1)
         self.emu.input.touch_release()
 
 
 @pytest.fixture
 def desmume_emulator() -> DesmumeEmulator:
-    return DesmumeEmulator(
-        rom_path=os.environ["PH_ROM_PATH"], enable_sdl=False
-    )  # TODO: make enable_sdl configurable
+    rom_path = os.environ["PH_ROM_PATH"]
+    test_function_name = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0]
+    battery_file_src = Path(__file__) / "test_data" / f"{test_function_name}.dsv"
+    battery_file_dest = Path(sys.executable).parent / f"{rom_path}.dsv"
+
+    # Remove any existing save file
+    battery_file_dest.unlink(missing_ok=True)
+
+    # Copy save file to directory where py-desmume will find it
+    if battery_file_src.exists():
+        shutil.copy(battery_file_src, battery_file_dest)
+
+    return DesmumeEmulator(rom_path=rom_path, enable_sdl=True)  # TODO: make enable_sdl configurable
 
 
 @pytest.fixture
