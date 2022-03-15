@@ -75,3 +75,26 @@
             b @check_additional_items_tree_drop
         .endarea
 .close
+
+.open "../overlay/overlay_0060.bin", 0x0217bce0
+    .arm
+    .org 0x217ecb4
+        .area 0x1
+            .byte 0x3 ; change the shield sold at the mercay shop to the oshus sword.
+        .endarea
+
+    .org 0x2181928
+        .area 0xC, 0x0
+            .ascii "gd_swA" ; change the shield model at the mercay to the oshus sword model. this crashes the game for some reason
+        .endarea
+
+    .org 0x218365c
+        .area 0x18, 0x0
+            .ascii "Player/get/gd_swA.nsbmd"
+        .endarea
+
+    .org 0x21838bc
+        .area 0x18, 0x0
+            .ascii "Player/get/gd_swA.nsbtx"
+        .endarea
+.close
