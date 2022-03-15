@@ -110,7 +110,7 @@ jobs:
 
       - name: Fetch PH rom
         run: |
-          pip install gdown==4.2.0
+          pip install gdown
           gdown --id ${{ secrets.PH_GOOGLE_DRIVE_ID }}
 
       - name: Patch the rom
