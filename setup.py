@@ -16,5 +16,6 @@ setup(
     include_package_data=True,
     install_requires=[
         "ndspy==3.0.0",
+        "zed @ git+https://github.com/mikeoss/zed.git",
     ],
 )
