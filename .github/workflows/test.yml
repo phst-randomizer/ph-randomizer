@@ -5,10 +5,10 @@ jobs:
   test-python:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.10'
 
@@ -20,7 +20,7 @@ jobs:
   test-c:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Run C tests
         run: |
@@ -29,39 +29,75 @@ jobs:
           base
 
   generate-base-patch:
-    needs: [test-python, test-c]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.10'
 
       - name: Fetch PH rom
         run: |
           pip install gdown
-          gdown --id ${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
         working-directory: base
 
-      - name: Apply patches
+      - name: Get filename of rom
+        id: rom-filename
+        shell: bash
         run: |
-          DOCKER_BUILDKIT=1 docker build \
-            --build-arg PH_ROM_PATH=$(ls *.nds) \
-            --build-arg VERSION_STRING=$(git rev-parse --short HEAD) \
-            -o out .
+          echo "::set-output name=filename::$(ls *.nds)"
         working-directory: base
+
+      - name: Get current commit hash
+        id: commit-hash
+        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+
+      - name: Set up Docker Buildx
+        id: buildx        
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker
+        uses: docker/build-push-action@v2
+        with:
+          context: base/
+          push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            PH_ROM_PATH=${{ steps.rom-filename.outputs.filename }}
+            VERSION_STRING=${{ steps.commit-hash.outputs.hash }}
+          outputs: |
+            base/out
 
       - name: Clone Flips repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: Alcaro/Flips
           path: base/Flips
 
-      - name: Compile Flips tool
+      - name: Get latest commit hash from Flips repo
+        id: flips-hash
+        shell: bash
         run: |
-          sudo apt-get install g++ build-essential
+          echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
+        working-directory: base/Flips
+
+      - name: Cache Flips executable
+        uses: actions/cache@v2
+        id: flips-cache
+        env:
+          cache-name: cache-flips
+        with:
+          path: base/Flips/*
+          key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
+
+      - name: Compile Flips tool
+        if: steps.flips-cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update && sudo apt-get install g++ build-essential
           chmod +x ./make.sh
           ./make.sh
         working-directory: base/Flips
@@ -72,46 +108,66 @@ jobs:
           ./Flips/flips --create $(ls *.nds) out/out.nds patch.bps
         working-directory: base
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: patch.bps
           path: base/patch.bps
+
+      - name: Cleanup
+        run: rm -rf *.nds
 
   test-desmume:
     needs: generate-base-patch
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: patch.bps
-        
+
       - name: Set up MinGW
         uses: egor-tensin/setup-mingw@v2
         with:
           platform: x64
 
       - name: Clone Flips repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: Alcaro/Flips
           path: Flips
 
-      - name: Compile Flips tool
+      - name: Get latest commit hash from Flips repo
+        id: flips-hash
+        shell: pwsh
         run: |
-          mingw32-make CFLAGS=-O3
+          echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
+        working-directory: Flips
+
+      - name: Cache Flips executable
+        uses: actions/cache@v2
+        id: flips-cache
+        env:
+          cache-name: cache-flips
+        with:
+          path: Flips/*
+          key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
+
+      - name: Compile Flips tool
+        if: steps.flips-cache.outputs.cache-hit != 'true'
+        run: |
+          mingw32-make CFLAGS=-O2
         working-directory: Flips
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.9' # py-desmume only supports up to Python 3.9
 
       - name: Fetch PH rom
         run: |
           pip install gdown
-          gdown --id ${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
 
       - name: Patch the rom
         run: |
@@ -121,5 +177,6 @@ jobs:
         run: |
           pip install tox
           tox -e test
+          Get-ChildItem *.nds -Recurse | foreach { Remove-Item -Path $_.FullName }
         env:
           PH_ROM_PATH: out.nds
