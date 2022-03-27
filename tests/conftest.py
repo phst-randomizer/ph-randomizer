@@ -4,7 +4,7 @@ import shutil
 import sys
 from typing import Union
 
-from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME, DeSmuME_SDL_Window
+from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 import pytest
 
 
@@ -85,40 +85,3 @@ def desmume_emulator() -> DesmumeEmulator:
         shutil.copy(battery_file_src, battery_file_dest)
 
     return DesmumeEmulator(rom_path=rom_path, enable_sdl=True)  # TODO: make enable_sdl configurable
-
-
-@pytest.fixture
-def emulator_at_file_select(desmume_emulator: DesmumeEmulator) -> DesmumeEmulator:
-    for i in range(2):
-        desmume_emulator.wait(500)
-        desmume_emulator.touch_input(
-            (
-                SCREEN_WIDTH // 2,
-                SCREEN_HEIGHT // 2,
-            )
-        )
-        desmume_emulator.wait(100)
-        desmume_emulator.touch_input(
-            (
-                SCREEN_WIDTH // 2,
-                SCREEN_HEIGHT // 2,
-            )
-        )
-        desmume_emulator.wait(200)
-        desmume_emulator.touch_input(
-            (
-                SCREEN_WIDTH // 2,
-                SCREEN_HEIGHT // 2,
-            )
-        )
-
-        if i == 0:
-            # NOTE: The next three lines may appear to be useless, but they
-            # handle waiting and clicking the "Creating save data" text
-            # that appears when there is no save data on the card.
-            # Do not remove them.
-            # desmume_emulator.wait(400)
-            desmume_emulator.wait(400)
-            desmume_emulator.emu.reset()
-
-    return desmume_emulator
