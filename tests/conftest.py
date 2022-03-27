@@ -71,17 +71,52 @@ class DesmumeEmulator:
 
 
 @pytest.fixture
-def desmume_emulator() -> DesmumeEmulator:
-    rom_path = os.environ["PH_ROM_PATH"]
-    test_function_name = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0]
-    battery_file_src = Path(__file__) / "test_data" / f"{test_function_name}.dsv"
-    battery_file_dest = Path(sys.executable).parent / f"{rom_path}.dsv"
+def desmume_emulator(tmp_path: Path):
+    base_rom_path = Path(os.environ["PH_ROM_PATH"])
+    python_version = sys.version_info
 
-    # Remove any existing save file
-    battery_file_dest.unlink(missing_ok=True)
+    # The directory where py-desmume keeps its save files. This appears to vary from system
+    # to system, so it's configurable via an environment variable. In the absence of an env
+    # var, it defaults to the location from my Windows system.
+    battery_file_location = Path(
+        os.environ.get(
+            "PY_DESMUME_BATTERY_DIR",
+            f"C:\\Users\\{os.getlogin()}\\AppData\\Local\\Programs\\Python\\"
+            f"Python{python_version[0]}{python_version[1]}",
+        )
+    )
 
-    # Copy save file to directory where py-desmume will find it
+    # The name of the test function that is currently executing. Set automatically
+    # by pytest at runtime.
+    test_name: str = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0]
+
+    # If using parametrized tests (i.e. via `pytest.mark.parametrize`), `PYTEST_CURRENT_TEST` will
+    # have the parameters of the current test appended to it. We want the same .dsv save file to
+    # be used for each parameter, but a different rom for each, so save this as a seperate variable.
+    test_name_with_params: str = test_name.replace("[", "_").replace("]", "_")
+
+    # Path to store rom for the currently running test
+    temp_rom_path = tmp_path / f"{test_name_with_params}.nds"
+
+    battery_file_src = Path(__file__).parent / "test_data" / f"{test_name}.dsv"
+    battery_file_dest = battery_file_location / f"{test_name_with_params}.dsv"
+
+    # Make a copy of the rom for this test
+    shutil.copy(base_rom_path, temp_rom_path)
+
     if battery_file_src.exists():
-        shutil.copy(battery_file_src, battery_file_dest)
+        # Create a symlink to the save file for this test if it exists.
+        # Note, a symlink is used instead of copying to avoid permission
+        # issues with windows.
+        battery_file_src.link_to(battery_file_dest)
+    else:
+        # If a dsv for this test doesn't exist, remove any that exist for this rom.
+        battery_file_dest.unlink(missing_ok=True)
 
-    return DesmumeEmulator(rom_path=rom_path, enable_sdl=True)  # TODO: make enable_sdl configurable
+    desmume_emulator = DesmumeEmulator(rom_path=str(temp_rom_path), enable_sdl=True)
+
+    yield desmume_emulator
+
+    # Cleanup desmume processes
+    desmume_emulator.window.destroy()
+    desmume_emulator.emu.destroy()
