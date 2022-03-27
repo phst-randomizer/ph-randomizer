@@ -17,11 +17,4 @@ setup(
     install_requires=[
         "ndspy==3.0.0",
     ],
-    extras_require={
-        "test": [
-            "pytest",
-            "py-desmume",
-            "tox",
-        ]
-    },
 )
