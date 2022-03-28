@@ -2,8 +2,6 @@ name: CI
  
 on:
   push:
-    branches: [ main ]
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -11,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
@@ -36,13 +34,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Checkout rando-shuffler repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: 21aslade/rando-shuffler
-          ref: 43dda7ad76389598a7a610477144de133f8cd492
           path: rando-shuffler
 
       - name: Get cache key
@@ -51,7 +48,7 @@ jobs:
         shell: bash
         working-directory: rando-shuffler
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: rando-shuffler-cache
         with:
           path: rando-shuffler
