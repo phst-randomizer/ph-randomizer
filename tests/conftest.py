@@ -14,13 +14,9 @@ def keymask(k):
 
 
 class DesmumeEmulator:
-    def __init__(self, rom_path: str, enable_sdl=False):
-        self.emu: DeSmuME = DeSmuME()
-        self.window: DeSmuME_SDL_Window
-        if enable_sdl:
-            self.window = self.emu.create_sdl_window()
-        else:
-            self.window = None
+    def __init__(self, py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], rom_path: str):
+        self.emu = py_desmume_instance[0]
+        self.window = py_desmume_instance[1]
         self.frame = 0
         self.emu.open(rom_path)
         self._next_frame()
@@ -70,8 +66,20 @@ class DesmumeEmulator:
         self.emu.input.touch_release()
 
 
+@pytest.fixture(scope="session")
+def py_desmume_instance():
+    desmume_emulator = DeSmuME()
+    sdl_window = desmume_emulator.create_sdl_window()
+
+    yield desmume_emulator, sdl_window
+
+    # Cleanup desmume processes
+    sdl_window.destroy()
+    desmume_emulator.destroy()
+
+
 @pytest.fixture
-def desmume_emulator(tmp_path: Path):
+def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tmp_path: Path):
     base_rom_path = Path(os.environ["PH_ROM_PATH"])
     python_version = sys.version_info
 
@@ -113,10 +121,8 @@ def desmume_emulator(tmp_path: Path):
         # If a dsv for this test doesn't exist, remove any that exist for this rom.
         battery_file_dest.unlink(missing_ok=True)
 
-    desmume_emulator = DesmumeEmulator(rom_path=str(temp_rom_path), enable_sdl=True)
+    desmume_emulator = DesmumeEmulator(
+        py_desmume_instance=py_desmume_instance, rom_path=str(temp_rom_path)
+    )
 
-    yield desmume_emulator
-
-    # Cleanup desmume processes
-    desmume_emulator.window.destroy()
-    desmume_emulator.emu.destroy()
+    return desmume_emulator
