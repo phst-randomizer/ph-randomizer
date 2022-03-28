@@ -14,6 +14,10 @@ class MapObjectLocation:
     For example, items found in chests or that drop from rolling into a tree.
     """
 
+    # Class variables that track open ZMB files. This is done for performance reasons; a single ZMB
+    # file can contain many item locations, and continously opening the same ZMB file over and over
+    # again causes slowdowns.
+
     # maps filenames objects to ZMB objects
     _zmb_filename_mapping: dict[str, ZMB] = {}
 

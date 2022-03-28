@@ -11,6 +11,9 @@ class EventLocation:
     Most commonly, these take the form of NPCs giving Link an item during dialog.
     """
 
+    # Class variable that tracks open BMG files. This is done for performance reasons; a single BMG
+    # file can contain many item locations, and continously opening the same BMG file over and over
+    # again causes slowdowns.
     _filename_to_bmg_mapping: dict[bmg.BMG, str] = {}
 
     def __init__(self, instruction_index: int, file_path: str, *args, **kwargs):
