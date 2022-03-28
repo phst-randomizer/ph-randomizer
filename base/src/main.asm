@@ -26,6 +26,8 @@
                 .include "_additional_tree_items.asm"
                 ldr r0, [r4, 0x6c]
                 b 0x2162790
+
+            .include "_island_shop_files.asm"
         .pool
         .endarea
 .close
@@ -73,5 +75,43 @@
     .org 0x216278c
         .area 0x4, 0xff
             b @check_additional_items_tree_drop
+        .endarea
+.close
+
+.open "../overlay/overlay_0060.bin", 0x0217bce0
+    .arm
+    ; Relocate the shop item NSBMD/NSBTX filename strings so that
+    ; they can be changed without length overflow issues:
+    .org 0x21822b0
+        .area 0x4
+            .word org(shA_nsbmd)
+        .endarea
+    .org 0x2182304
+        .area 0x4
+            .word org(shA_nsbtx)
+        .endarea
+    .org 0x2182294
+        .area 0x4
+            .word org(arrowpod_nsbmd)
+        .endarea
+    .org 0x21822e8
+        .area 0x4
+            .word org(arrowpod_nsbtx)
+        .endarea
+    .org 0x21822a8
+        .area 0x4
+            .word org(minaP_nsbmd)
+        .endarea
+    .org 0x21822fc
+        .area 0x4
+            .word org(minaP_nsbtx)
+        .endarea
+    .org 0x2182298
+        .area 0x4
+            .word org(bcbagM_nsbmd)
+        .endarea
+    .org 0x21822ec
+        .area 0x4
+            .word org(bcbagM_nsbtx)
         .endarea
 .close
