@@ -8,7 +8,7 @@
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
             .importobj "src/set_initial_flags.o"
-            .importobj "src/faster_boat.o"
+            // .importobj "src/faster_boat.o"
             .importobj "src/spawn_custom_freestanding_item.o"
 
             @init_flags:
@@ -16,11 +16,11 @@
                 bl set_initial_flags
                 pop r3, pc ; original instruction, do not change
 
-            @faster_boat:
-                push lr
-                strlt r0,[r4,0x78] ; original instruction, do not change
-                bl faster_boat
-                pop pc
+            // @faster_boat:
+            //     push lr
+            //     strlt r0,[r4,0x78] ; original instruction, do not change
+            //     bl faster_boat
+            //     pop pc
 
             @check_additional_items_tree_drop:
                 .include "_additional_tree_items.asm"
@@ -61,13 +61,13 @@
 .close
 
 
-.open "../overlay/overlay_0031.bin", 0x0211F5C0
-    .arm
-    .org 0x17420 + 0x0211F5C0 ;0x217bce0
-        .area 0x4
-            bl @faster_boat
-        .endarea
-.close
+// .open "../overlay/overlay_0031.bin", 0x0211F5C0
+//     .arm
+//     .org 0x17420 + 0x0211F5C0 ;0x217bce0
+//         .area 0x4
+//             bl @faster_boat
+//         .endarea
+// .close
 
 
 .open "../overlay/overlay_0037.bin", 0x0215b400
