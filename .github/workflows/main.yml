@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
@@ -34,10 +34,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Checkout rando-shuffler repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: 21aslade/rando-shuffler
           path: rando-shuffler
@@ -48,7 +48,7 @@ jobs:
         shell: bash
         working-directory: rando-shuffler
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: rando-shuffler-cache
         with:
           path: rando-shuffler
