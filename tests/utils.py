@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 
 from tests.conftest import DesmumeEmulator
@@ -32,7 +35,13 @@ def start_first_file(desmume_emulator: DesmumeEmulator):
             )
         )
 
-        if i == 0:
+        test_name = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0].split("[")[0]
+
+        # If this isn't a new save, stop here.
+        if (Path(__file__).parent / "test_data" / f"{test_name}.dsv").exists():
+            break
+        # Otherwise, wait for the game to initialize the save data and repeat this loop once more
+        elif i == 0:
             # NOTE: The next two lines may appear to be useless, but they
             # handle waiting and clicking the "Creating save data" text
             # that appears when there is no save data on the card.
@@ -71,3 +80,7 @@ def start_first_file(desmume_emulator: DesmumeEmulator):
     # Click "Adventure"
     desmume_emulator.touch_input((130, 70), 0)
     desmume_emulator.wait(500)
+
+
+def get_current_rupee_count(desmume: DesmumeEmulator):
+    return int.from_bytes(desmume.emu.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], "little")

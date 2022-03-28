@@ -5,8 +5,12 @@ import sys
 from typing import Union
 
 from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
+from ndspy.rom import NintendoDSRom
 import pytest
 
+from patcher import settings
+from patcher.example import LOCATIONS
+from patcher.location_types.island_shop import GD_MODELS
 
 # TODO: using this temporarily until this is released https://github.com/SkyTemple/py-desmume/pull/19
 def keymask(k):
@@ -14,9 +18,11 @@ def keymask(k):
 
 
 class DesmumeEmulator:
-    def __init__(self, py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], rom_path: str):
+    def __init__(self, py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window]):
         self.emu = py_desmume_instance[0]
         self.window = py_desmume_instance[1]
+
+    def open_rom(self, rom_path: str):
         self.frame = 0
         self.emu.open(rom_path)
         self._next_frame()
@@ -103,6 +109,9 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
     # be used for each parameter, but a different rom for each, so save this as a seperate variable.
     test_name_with_params: str = test_name.replace("[", "_").replace("]", "_")
 
+    # Remove parameters
+    test_name = test_name.split('[')[0]
+
     # Path to store rom for the currently running test
     temp_rom_path = tmp_path / f"{test_name_with_params}.nds"
 
@@ -121,8 +130,44 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
         # If a dsv for this test doesn't exist, remove any that exist for this rom.
         battery_file_dest.unlink(missing_ok=True)
 
-    desmume_emulator = DesmumeEmulator(
-        py_desmume_instance=py_desmume_instance, rom_path=str(temp_rom_path)
+    desmume_emulator = DesmumeEmulator(py_desmume_instance=py_desmume_instance)
+
+    return desmume_emulator
+
+
+@pytest.fixture
+def base_rom_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator):
+    test_name: str = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0]
+    test_name_with_params: str = test_name.replace("[", "_").replace("]", "_")
+
+    temp_rom_path = tmp_path / f"{test_name_with_params}.nds"
+    desmume_emulator.open_rom(str(temp_rom_path))
+    return desmume_emulator
+
+
+@pytest.fixture(
+    params=[val for val in GD_MODELS.keys() if GD_MODELS[val]],
+    ids=[f"{hex(key)}-{val}" for key, val in GD_MODELS.items() if val],
+)
+def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
+    test_name = (
+        os.environ["PYTEST_CURRENT_TEST"]
+        .split(":")[-1]
+        .split(" ")[0]
+        .replace("[", "_")
+        .replace("]", "_")
     )
+    rom_path = str(tmp_path / f"{test_name}.nds")
+
+    settings.ROM = NintendoDSRom.fromFile(rom_path)
+
+    locations = ["mercay_island_shop_shield", "mercay_island_shop_power_gem"]
+
+    for location in locations:
+        LOCATIONS[location].set_location(request.param)
+
+    settings.ROM.saveToFile(rom_path)
+
+    desmume_emulator.open_rom(rom_path)
 
     return desmume_emulator
