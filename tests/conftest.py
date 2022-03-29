@@ -122,10 +122,8 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
     shutil.copy(base_rom_path, temp_rom_path)
 
     if battery_file_src.exists():
-        # Create a symlink to the save file for this test if it exists.
-        # Note, a symlink is used instead of copying to avoid permission
-        # issues with windows.
-        battery_file_src.link_to(battery_file_dest)
+        # Copy save file to py-desmume battery directory
+        shutil.copy(battery_file_src, battery_file_dest)
     else:
         # If a dsv for this test doesn't exist, remove any that exist for this rom.
         battery_file_dest.unlink(missing_ok=True)
