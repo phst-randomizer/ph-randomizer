@@ -12,6 +12,7 @@ from patcher import settings
 from patcher.example import LOCATIONS
 from patcher.location_types.island_shop import GD_MODELS
 
+
 # TODO: using this temporarily until this is released https://github.com/SkyTemple/py-desmume/pull/19
 def keymask(k):
     return 1 << (k - 1) if k > 0 else 0
@@ -110,7 +111,7 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
     test_name_with_params: str = test_name.replace("[", "_").replace("]", "_")
 
     # Remove parameters
-    test_name = test_name.split('[')[0]
+    test_name = test_name.split("[")[0]
 
     # Path to store rom for the currently running test
     temp_rom_path = tmp_path / f"{test_name_with_params}.nds"
