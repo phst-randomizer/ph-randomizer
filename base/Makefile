@@ -1,4 +1,4 @@
-.PHONY: all test lint format clean debug
+.PHONY: all clean debug
 
 # Make sure devkitARM is installed
 ifeq ($(strip $(DEVKITARM)),)
@@ -79,6 +79,7 @@ banner.bin: $(INPUT_NDS_FILE)
 
 header.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -h header.bin
+
 # Same as `all`, but also includes readable .asm file
 debug: $(OBJ) $(ASM)
 
@@ -90,16 +91,8 @@ debug: $(OBJ) $(ASM)
 %.o: %.c
 	$(CC) $(CFLAGS) -c "$<" -o "$@"
 
-lint: $(SRC)
-	clang-format-12 --dry-run --Werror $(SRC)
-
-format: $(SRC)
-	clang-format-12 -i --Werror $(SRC)
-
 # Clean up
 clean:
 	rm -f $(DEST_DIR)/*
 
 all: $(OUTPUT_NDS_FILE)
-
-test: lint
