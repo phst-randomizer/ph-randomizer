@@ -34,18 +34,5 @@ ARG VERSION_STRING
 ADD $PH_ROM_PATH /app
 RUN make
 
-FROM devkitpro/devkitarm:latest as test
-RUN wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add - &&\
-    echo 'deb http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main' | sudo tee -a /etc/apt/sources.list &&\
-    echo 'deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-12 main' | sudo tee -a /etc/apt/sources.list &&\
-    apt-get update && apt-get install -y clang-format-12
-RUN wget -O checkmake.deb https://github.com/mrtazz/checkmake/releases/download/0.2.0/checkmake_0.2.0-1_amd64.deb &&\
-    dpkg -i checkmake.deb && apt-get install -f
-ADD Makefile .
-ADD .clang-format .
-ADD src/ src/
-RUN checkmake Makefile
-RUN make test
-
 FROM scratch
 COPY --from=build /app/out.nds /
