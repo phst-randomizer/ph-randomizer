@@ -2,7 +2,8 @@ name: test
 on:
   push:
 jobs:
-  test-python:
+  lint-type-check:
+    name: Lint and type check code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,23 +13,14 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run Python tests
+      - name: Run tox
         run: |
+          pip install --upgrade pip
           pip install tox
           tox
 
-  test-c:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Run C tests
-        run: |
-          DOCKER_BUILDKIT=1 docker build --target test .
-        working-directory:
-          base
-
   generate-base-patch:
+    name: Run patching toolchain and create base patch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -117,6 +109,7 @@ jobs:
         run: rm -rf *.nds
 
   test-desmume:
+    name: Apply base patch and run py-desmume integration tests
     needs: generate-base-patch
     runs-on: windows-latest
     steps:
