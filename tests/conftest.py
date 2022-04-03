@@ -4,6 +4,7 @@ import shutil
 import sys
 from typing import Union
 
+from desmume.controls import keymask
 from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 from ndspy.rom import NintendoDSRom
 import pytest
@@ -11,11 +12,6 @@ import pytest
 from patcher import settings
 from patcher.example import LOCATIONS
 from patcher.location_types.island_shop import GD_MODELS
-
-
-# TODO: using this temporarily until this is released https://github.com/SkyTemple/py-desmume/pull/19
-def keymask(k):
-    return 1 << (k - 1) if k > 0 else 0
 
 
 class DesmumeEmulator:
