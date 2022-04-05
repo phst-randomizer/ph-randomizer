@@ -13,9 +13,11 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+
       - name: Run tox
         run: |
-          pip install --upgrade pip
           pip install tox
           tox
 
@@ -29,6 +31,9 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: '3.10'
+
+      - name: Upgrade pip
+        run: pip install --upgrade pip
 
       - name: Fetch PH rom
         run: |
@@ -106,12 +111,17 @@ jobs:
           path: base/patch.bps
 
       - name: Cleanup
+        if: always()
         run: rm -rf *.nds
 
   test-desmume:
     name: Apply base patch and run py-desmume integration tests
     needs: generate-base-patch
+    # Windows is used to run the desmume-based tests because py-desmume has issues running on headless ubuntu
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v3
 
@@ -132,7 +142,6 @@ jobs:
 
       - name: Get latest commit hash from Flips repo
         id: flips-hash
-        shell: pwsh
         run: |
           echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
         working-directory: Flips
@@ -155,7 +164,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9' # py-desmume only supports up to Python 3.9
+          python-version: '3.10'
+
+      - name: Upgrade pip
+        run: pip install --upgrade pip
 
       - name: Fetch PH rom
         run: |
@@ -164,12 +176,15 @@ jobs:
 
       - name: Patch the rom
         run: |
-          .\Flips\flips.exe --apply patch.bps $(ls *.nds) out.nds
+          ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
 
       - name: Run tests
         run: |
           pip install tox
-          tox -e test
-          Get-ChildItem *.nds -Recurse | foreach { Remove-Item -Path $_.FullName }
+          PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test
         env:
           PH_ROM_PATH: out.nds
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf *.nds

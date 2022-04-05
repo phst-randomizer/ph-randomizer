@@ -9,7 +9,7 @@ GD_MODELS = {
     0x03: "swA",
     0x04: "shA",
     0x05: "",  # TODO: what is this?
-    0x06: "gd_force_y",  # TODO: find force gem model
+    0x06: "force_y",  # TODO: find force gem model
     0x07: "bomb",
     0x08: "bow",
     0x09: "rupee_g",
@@ -17,7 +17,7 @@ GD_MODELS = {
     0x0B: "",  # TODO: what is this?
     0x0C: "boomerang",
     0x0D: "scp",
-    0x0E: "bombchu",
+    0x0E: "bomchu",
     0x0F: "bosskey",
     0x10: "rev_bin",
     0x11: "",  # TODO: what is this?
@@ -31,9 +31,9 @@ GD_MODELS = {
     0x19: "rupee_r",
     0x1A: "rupee_r",
     0x1B: "rupee_go",
-    0x1C: "gd_force_y",  # NOTE: Used in multiplayer mode only
-    0x1D: "gd_force_r",  # NOTE: Used in multiplayer mode only
-    0x1E: "gd_force_b",  # NOTE: Used in multiplayer mode only
+    0x1C: "force_y",  # NOTE: Used in multiplayer mode only
+    0x1D: "force_r",  # NOTE: Used in multiplayer mode only
+    0x1E: "force_b",  # NOTE: Used in multiplayer mode only
     0x1F: "ham",
     0x20: "rope",
     0x21: "cstl_c",
