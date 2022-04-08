@@ -1,5 +1,5 @@
 from desmume.controls import Keys
-from desmume.emulator import SCREEN_WIDTH
+from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 
 from tests.conftest import DesmumeEmulator
 from tests.utils import get_current_rupee_count, start_first_file
@@ -7,7 +7,69 @@ from tests.utils import get_current_rupee_count, start_first_file
 
 def test_boot_new_game(base_rom_emu: DesmumeEmulator):
     """Test bootup from title screen, name entry, and intro CG."""
-    start_first_file(base_rom_emu)
+    for i in range(2):
+        base_rom_emu.wait(500)
+        base_rom_emu.touch_input(
+            (
+                SCREEN_WIDTH // 2,
+                SCREEN_HEIGHT // 2,
+            )
+        )
+        base_rom_emu.wait(100)
+        base_rom_emu.touch_input(
+            (
+                SCREEN_WIDTH // 2,
+                SCREEN_HEIGHT // 2,
+            )
+        )
+        base_rom_emu.wait(200)
+        base_rom_emu.touch_input(
+            (
+                SCREEN_WIDTH // 2,
+                SCREEN_HEIGHT // 2,
+            )
+        )
+
+        # Wait for the game to initialize the save data and repeat this loop once more
+        if i == 0:
+            # NOTE: The next two lines may appear to be useless, but they
+            # handle waiting and clicking the "Creating save data" text
+            # that appears when there is no save data on the card.
+            # Do not remove them.
+            base_rom_emu.wait(400)
+            base_rom_emu.emu.reset()
+
+    # Touch file
+    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.wait(500)
+
+    # Confirm name
+    base_rom_emu.touch_input((190, 180), 0)
+    base_rom_emu.wait(100)
+
+    # Click yes
+    base_rom_emu.touch_input((210, 110), 0)
+    base_rom_emu.wait(100)
+
+    # Click right hand
+    base_rom_emu.touch_input((210, 110), 0)
+    base_rom_emu.wait(100)
+
+    # Click yes
+    base_rom_emu.touch_input((210, 110), 0)
+    base_rom_emu.wait(100)
+
+    # Click newly created file
+    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.wait(100)
+
+    # Click it again
+    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.wait(100)
+
+    # Click "Adventure"
+    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.wait(500)
 
     # Press start + touch "Skip" button to skip intro cs
     base_rom_emu.button_input(Keys.KEY_START)
