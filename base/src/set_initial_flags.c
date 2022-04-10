@@ -1,7 +1,7 @@
 #include "flags.h"
 #include <stdint.h>
 
-void set_flag(int addr, uint8_t bit) {
+__attribute__((always_inline)) static void set_flag(int addr, uint8_t bit) {
   *((uint8_t *)addr) |= bit;
 }
 
