@@ -27,6 +27,18 @@
                 ldr r0, [r4, 0x6c]
                 b 0x2162790
 
+            @spawn_dig_item:
+                ; Set rupy_id to id of item we want to spawn | 0x8000 (i.e. with MSB set).
+                ; See `extend_RUPY_npc.c` for why this works.
+                orr r0, r5, 0x8000 
+                strh r0, [sp, 0x2c]
+                ; Load r4 with "RUPY" string
+                ldr r4, =0x212f4c4
+                ldr r4, [r4]
+                ; Jump to end of switch statement which will end up calling spawn_npc function
+                ; with the parameters that we have set here
+                b 0x212f3d8
+
             .include "_island_shop_files.asm"
         .pool
         .endarea
@@ -58,6 +70,101 @@
         .area 0x4
             bl spawn_custom_freestanding_item
         .endarea
+
+    ; There is essentially a giant `switch` statement in the game code that determines which item
+    ; id's are "valid" and able to be spawned from a shovel dig spot. For "invalid" items like 
+    ; the sword (id=0x3), the case statement looks like this:
+    ;
+    ;    switch (item_id) {
+    ;      case 0x2: # a rupee, which a valid item
+    ;        goto SPAWN_NPC
+    ;      case 0x3: # a sword, invalid item
+    ;        return
+    ;      case 0x4: # a shield, invalid item
+    ;        return
+    ;      .....
+    ;      case 0x9: # a big green rupee, valid item
+    ;        *rupy_id = 0x3
+    ;         goto SPAWN_NPC
+    ;    }
+    ; 
+    ; Below, we override each of those "invalid" item cases to look something like this:
+    ;
+    ;   case 0x3:
+    ;     *rupy_id = 0x3 | 0x8000
+    ;     goto SPAWN_NPC
+    ;   case 0x4:
+    ;     *rupy_id = 0x4 | 0x8000
+    ;     goto SPAWN_NPC
+    ;
+    ;   ... and so on. See extend_RUPY_npc.c to see why we're OR'ing 0x8000 here.
+
+    ; sword (0x3)
+    .org 0x212f184
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; shield (0x4)
+    .org 0x212f188
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; ?? (0x5)
+    .org 0x212f18c
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Bombs (0x7)
+    .org 0x212f194
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Bow (0x8)
+    .org 0x212f198
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Heart container (0xa)
+    .org 0x212f1a0
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; ?? (0xb)
+    .org 0x212f1a4
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Boomerang (0xc)
+    .org 0x212f1a8
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Shovel (0xd)
+    .org 0x212f1ac
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Bombchus (0xe)
+    .org 0x212f1b0
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Boss key (0xf)
+    .org 0x212f1b4
+        .area 0x4
+            b @spawn_dig_item
+        .endarea
+    ; Enable items with ids in range [0x1c, 0x4b] to be spawned from dig spots
+    .org 0x212f1e0
+        .area 0x8
+            b @spawn_dig_item
+        .endarea
+    ; Enable items with ids greater than 0x61 to be spawned from dig spots
+    .org 0x212f3d0
+        .area 0x8
+            b @spawn_dig_item
+        .endarea
+
 .close
 
 

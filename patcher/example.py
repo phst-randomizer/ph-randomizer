@@ -1,9 +1,12 @@
-from typing import Union
-
 from patcher import settings
-from patcher.location_types import EventLocation, IslandShopLocation, MapObjectLocation
+from patcher.location_types import (
+    DigSpotLocation,
+    EventLocation,
+    IslandShopLocation,
+    MapObjectLocation,
+)
 
-LOCATIONS: dict[str, Union[EventLocation, IslandShopLocation, MapObjectLocation]] = {
+LOCATIONS: dict[str, DigSpotLocation | EventLocation | IslandShopLocation | MapObjectLocation] = {
     "ocean_temple_first_chest": MapObjectLocation(
         34, "Map/dngn_main/map00.bin/zmb/dngn_main_00.zmb"
     ),
@@ -31,6 +34,9 @@ LOCATIONS: dict[str, Union[EventLocation, IslandShopLocation, MapObjectLocation]
     ),
     "mercay_island_shop_shield": IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),
     "mercay_island_shop_power_gem": IslandShopLocation(31, 0x217EC68 - 0x217BCE0),
+    "mercay_island_oshus_house_dig_spot": DigSpotLocation(
+        5, "Map/isle_main/map00.bin/zmb/isle_main_00.zmb"
+    ),
     "isle_ember_chest_near_flame_temple": MapObjectLocation(
         74, "Map/isle_flame/map00.bin/zmb/isle_flame_00.zmb"
     ),
@@ -58,6 +64,7 @@ LOCATIONS: dict[str, Union[EventLocation, IslandShopLocation, MapObjectLocation]
 for _, location in LOCATIONS.items():
     location.set_location(0x1B)
 
+DigSpotLocation.save_all()
 EventLocation.save_all()
 IslandShopLocation.save_all()
 MapObjectLocation.save_all()
