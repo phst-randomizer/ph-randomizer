@@ -10,8 +10,8 @@ from ndspy.rom import NintendoDSRom
 import pytest
 
 from patcher import settings
-from patcher.example import LOCATIONS
 from patcher.location_types.island_shop import GD_MODELS
+from patcher.locations import LOCATIONS
 
 
 class DesmumeEmulator:
