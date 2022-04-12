@@ -8,6 +8,8 @@
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x301, 0xFF
             .importobj "src/faster_boat.o"
+            .importobj "src/fixed_random_treasure_in_shop.o"
+            .include "_island_shop_files.asm"
         .endarea
 
     .org 0x54894 + 0x2004000
@@ -43,8 +45,6 @@
                 ; Jump to end of switch statement which will end up calling spawn_npc function
                 ; with the parameters that we have set here
                 b 0x212f3d8
-
-            .include "_island_shop_files.asm"
         .pool
         .endarea
 .close
@@ -55,6 +55,24 @@
     .org 0x20300 + 0x02077360
         .area 0x4
             b @init_flags
+        .endarea
+.close
+
+
+.open "../overlay/overlay_0021.bin", 0x02112ba0 ; overlay 9 in ghidra
+    .thumb
+    .org 0x211c09a
+        ; This overrides the routine that is in charge of spawning the correct 3D model
+        ; for the randomized treasure item in the shop. This code disables this 
+        ; clock-based randomization and makes it a fixed item.
+        ; This code handles setting the 3D model (i.e. appearence only), see section for
+        ; overlay 60 for the code that actually sets the item id.
+        .area 0x1C, 0x00
+            mov r0, sp
+            ldr r1, =org(random_treasure_nsbmd)
+            ldr r2, =org(random_treasure_nsbtx)
+            bl fixed_random_treasure_in_shop
+            .pool
         .endarea
 .close
 
@@ -192,6 +210,20 @@
 
 .open "../overlay/overlay_0060.bin", 0x0217bce0
     .arm
+
+    ; Make the "random treasure" in shops a fixed item (i.e. "unrandomize" it)
+    ; This defaults it to item id 0x30 (pink coral), but it can be changed
+    ; by the patcher. Either way, we don't want date-randomized items
+    ; for the purposes of the randomizer.
+    .org 0x21801dc
+        .area 0x10, 0x00
+            mov r0, 0x0
+        .endarea
+    .org 0x217ec34
+        .area 0x4
+            mov r1, 0x30
+        .endarea
+
     ; Relocate the shop item NSBMD/NSBTX filename strings so that
     ; they can be changed without length overflow issues:
     .org 0x21822b0
