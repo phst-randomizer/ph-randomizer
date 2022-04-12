@@ -4,6 +4,11 @@
 
 .open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
+    .org 0x54180 + 0x2004000
+        ; Area of unused space in arm9.bin; new code can be stored here
+        .area 0x301, 0xFF
+        .endarea
+
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
