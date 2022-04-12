@@ -182,17 +182,24 @@ class IslandShopLocation:
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
         )
 
-        offset = overlay_table[self.overlay_number].data.index(original_model_name.encode("ascii"))
-        new_data = bytearray(new_model_name.encode("ascii") + b"\x00")
-        overlay_table[self.overlay_number].data = (
-            overlay_table[self.overlay_number].data[:offset]
-            + new_data
-            + overlay_table[self.overlay_number].data[offset + len(new_data) :]
-        )
-        # Pad remaining non-NULL chars to 0. If this isn't done and there are characters
-        # left from the previous item, the game will crash.
-        for i in range(offset + len(new_data), offset + 16):
-            overlay_table[self.overlay_number].data[i] = 0x0
+        try:
+            offset = overlay_table[self.overlay_number].data.index(
+                original_model_name.encode("ascii")
+            )
+            new_data = bytearray(new_model_name.encode("ascii") + b"\x00")
+            overlay_table[self.overlay_number].data = (
+                overlay_table[self.overlay_number].data[:offset]
+                + new_data
+                + overlay_table[self.overlay_number].data[offset + len(new_data) :]
+            )
+            # Pad remaining non-NULL chars to 0. If this isn't done and there are characters
+            # left from the previous item, the game will crash.
+            for i in range(offset + len(new_data), offset + 16):
+                overlay_table[self.overlay_number].data[i] = 0x0
+        except ValueError:
+            # Random treasure items (which should be fixed to Pink Coral in our hacked base rom)
+            # are an exception and do not require this step.
+            assert original_item_id == 0x30
 
         settings.ROM.files[overlay_table[self.overlay_number].fileID] = overlay_table[
             self.overlay_number
