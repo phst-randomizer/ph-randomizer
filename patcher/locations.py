@@ -33,6 +33,7 @@ LOCATIONS: dict[str, DigSpotLocation | EventLocation | IslandShopLocation | MapO
     ),
     "mercay_island_shop_shield": IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),
     "mercay_island_shop_power_gem": IslandShopLocation(31, 0x217EC68 - 0x217BCE0),
+    "mercay_island_shop_random_treasure": IslandShopLocation(31, 0x217EC34 - 0x217BCE0),
     "mercay_island_oshus_house_dig_spot": DigSpotLocation(
         5, "Map/isle_main/map00.bin/zmb/isle_main_00.zmb"
     ),

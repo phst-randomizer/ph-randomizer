@@ -28,3 +28,9 @@ bcbagM_nsbmd:
 bcbagM_nsbtx:
     .asciiz "Player/get/gd_bcbagM.nsbtx"
     .fill 3, 0
+random_treasure_nsbmd:
+    .asciiz "Player/get/gd_sango.nsbmd"
+    .fill 4, 0
+random_treasure_nsbtx:
+    .asciiz "Player/get/gd_sango.nsbtx"
+    .fill 4, 0
