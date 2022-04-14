@@ -14,7 +14,7 @@ LOCATIONS: dict[str, DigSpotLocation | EventLocation | IslandShopLocation | MapO
         54, "Map/isle_main/map02.bin/zmb/isle_main_02.zmb"
     ),
     "mercay_island_rollable_tree": MapObjectLocation(
-        25, "Map/isle_main/map02.bin/zmb/isle_main_02.zmb"
+        25, "Map/isle_main/map02.bin/zmb/isle_main_02.zmb", is_tree_drop_item=True
     ),
     "mercay_island_SE_cliff_chest_left": MapObjectLocation(
         97, "Map/isle_main/map03.bin/zmb/isle_main_03.zmb"

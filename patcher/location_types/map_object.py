@@ -27,9 +27,18 @@ class MapObjectLocation:
     # mapping between ZMB file names and their parent NARC files
     _narc_to_zmb_mapping: dict[narc.NARC, list[str]] = defaultdict(list)
 
-    def __init__(self, child_index: int, file_path: str, *args, **kwargs):
+    def __init__(self, child_index: int, file_path: str, is_tree_drop_item: bool = False):
+        """
+        Initialize the MapObjectLocation.
+
+        Params:
+            file_path: path to zmb file in ROM
+            is_tree_drop_item: true if this location is a tree that drops an item when rolled into;
+                               those locations are exceptions and require additional steps to set.
+        """
         self.child_index = child_index
         self.file_path = file_path
+        self.is_tree_drop_item = is_tree_drop_item
         self.zmb_file: Optional[ZMB] = None
 
         # check if this zmb file is already open first
@@ -50,6 +59,13 @@ class MapObjectLocation:
         assert self.zmb_file is not None
         zmb_child_element: MapObject = self.zmb_file.mapObjects[self.child_index]
         zmb_child_element.unk08 = value
+
+        # Set most significant bit of the item id if this is an item that drops
+        # from a tree when Link rolls into it. See `extend_RUPY_npc.c` in the
+        # base code to see why we do this.
+        if self.is_tree_drop_item:
+            zmb_child_element.unk08 |= 0x8000
+
         MapObjectLocation._zmb_filename_mapping[self._zmb_filepath] = self.zmb_file
 
     @property
