@@ -2,6 +2,8 @@
 .relativeinclude on
 .erroronwarning on
 
+.include "ph.asm"
+
 .open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
     .org 0x54180 + 0x2004000
@@ -17,6 +19,7 @@
         .area 0x228, 0xFF
             .importobj "src/set_initial_flags.o"
             .importobj "src/spawn_custom_freestanding_item.o"
+            .importobj "src/execute_npc_spawner.o"
 
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
@@ -55,6 +58,11 @@
     .org 0x20300 + 0x02077360
         .area 0x4
             b @init_flags
+        .endarea
+
+    .org 0x20c402c
+        .area 0x4
+            bl execute_npc_spawner
         .endarea
 .close
 
