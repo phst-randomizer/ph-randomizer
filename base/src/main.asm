@@ -7,14 +7,17 @@
     .org 0x54180 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x301, 0xFF
+            .arm
             .importobj "src/faster_boat.o"
             .importobj "src/fixed_random_treasure_in_shop.o"
+            .importobj "src/progressive_sword_check.o"
             .include "_island_shop_files.asm"
         .endarea
 
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
+            .arm
             .importobj "src/set_initial_flags.o"
             .importobj "src/spawn_custom_freestanding_item.o"
 
@@ -56,6 +59,18 @@
         .area 0x4
             b @init_flags
         .endarea
+
+    .thumb
+    .org 0x20ade1c
+        ; Overwrite code that gives the player the oshus sword to be progressive
+        .area 0xC, 0x00
+            ; Save scratch registers, since gcc doesn't do it
+            push r0, r1, r2, r3
+            bl progressive_sword_check
+            pop r0, r1, r2, r3
+        .endarea
+
+
 .close
 
 
