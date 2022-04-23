@@ -2,6 +2,8 @@
 .relativeinclude on
 .erroronwarning on
 
+.include "ph.asm"
+
 .open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
     .org 0x54180 + 0x2004000
