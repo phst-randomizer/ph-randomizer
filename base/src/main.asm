@@ -217,6 +217,15 @@
 .close
 
 
+.open "../overlay/overlay_0035.bin", 0x0215b400
+    .arm
+    .org 0x2160760
+        .area 0x4, 0xff
+            mov r0, 0x3 ; make NKEY drop sword
+        .endarea
+.close
+
+
 .open "../overlay/overlay_0037.bin", 0x0215b400
     .arm
     .org 0x216278c
