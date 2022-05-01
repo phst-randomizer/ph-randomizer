@@ -1,3 +1,4 @@
+from enum import Enum
 import os
 from pathlib import Path
 import shutil
@@ -10,6 +11,7 @@ from ndspy.rom import NintendoDSRom
 import pytest
 
 from patcher import settings
+from patcher.location_types import DigSpotLocation
 from patcher.location_types.island_shop import GD_MODELS
 from patcher.locations import LOCATIONS
 
@@ -160,6 +162,68 @@ def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, requ
 
     for location in locations:
         LOCATIONS[location].set_location(request.param)
+
+    settings.ROM.saveToFile(rom_path)
+
+    desmume_emulator.open_rom(rom_path)
+
+    return desmume_emulator
+
+
+class ItemMemoryAddressType(Enum):
+    FLAG = 0
+    COUNTER_8_BIT = 1
+    COUNTER_16_BIT = 2
+
+
+# Maps item ids to a tuple where first element is the memory address of the flag indicating the
+# player has received the item, and the second element is the bit within that address.
+ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
+    0x02: (0x21BA4FE, 1, ItemMemoryAddressType.COUNTER_16_BIT),  # small green rupee
+    0x03: (0x21BA604, 0x01, ItemMemoryAddressType.FLAG),  # oshus sword
+    0x04: (0x21BA604, 0x02, ItemMemoryAddressType.FLAG),  # shield
+    0x07: (0x21BA604, 0x10, ItemMemoryAddressType.FLAG),  # bombs
+    0x08: (0x21BA604, 0x20, ItemMemoryAddressType.FLAG),  # bow
+    0x09: (0x21BA4FE, 100, ItemMemoryAddressType.COUNTER_16_BIT),  # big green rupee
+    0x0A: (0x21BA348, 4, ItemMemoryAddressType.COUNTER_8_BIT),  # heart container
+    0x0C: (0x21BA604, 0x04, ItemMemoryAddressType.FLAG),  # boomerang
+    0x0E: (0x21BA604, 0x80, ItemMemoryAddressType.FLAG),  # bombchus
+    0x13: (0x21BA608, 0x02, ItemMemoryAddressType.FLAG),  # southwest sea chart
+    0x14: (0x21BA608, 0x04, ItemMemoryAddressType.FLAG),  # northwest sea chart
+    0x15: (0x21BA608, 0x08, ItemMemoryAddressType.FLAG),  # southeast sea chart
+    0x16: (0x21BA608, 0x10, ItemMemoryAddressType.FLAG),  # northeast sea chart
+    0x18: (0x21BA4FE, 5, ItemMemoryAddressType.COUNTER_16_BIT),  # small blue rupee
+    0x19: (0x21BA4FE, 20, ItemMemoryAddressType.COUNTER_16_BIT),  # small red rupee
+    0x1A: (0x21BA4FE, 200, ItemMemoryAddressType.COUNTER_16_BIT),  # big red rupee
+    0x1B: (0x21BA4FE, 300, ItemMemoryAddressType.COUNTER_16_BIT),  # big gold rupee
+    0x1F: (0x21BA605, 0x01, ItemMemoryAddressType.FLAG),  # hammer
+    0x20: (0x21BA604, 0x40, ItemMemoryAddressType.FLAG),  # grapping hook
+    0x24: (0x21BA609, 0x1, ItemMemoryAddressType.FLAG),  # fishing rod
+    0x26: (0x21BA608, 0x40, ItemMemoryAddressType.FLAG),  # sun key
+    # TODO: Add rest of items
+}
+
+
+@pytest.fixture(
+    params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
+    ids=[f"{hex(val)}-{GD_MODELS[val]}" for val in ITEM_MEMORY_ADDRESSES.keys()],
+)
+def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
+    """Generate and run a rom with a custom dig/shovel spot item set."""
+    test_name = (
+        os.environ["PYTEST_CURRENT_TEST"]
+        .split(":")[-1]
+        .split(" ")[0]
+        .replace("[", "_")
+        .replace("]", "_")
+    )
+    rom_path = str(tmp_path / f"{test_name}.nds")
+
+    settings.ROM = NintendoDSRom.fromFile(rom_path)
+
+    LOCATIONS["mercay_island_oshus_house_dig_spot"].set_location(request.param)
+
+    DigSpotLocation.save_all()
 
     settings.ROM.saveToFile(rom_path)
 
