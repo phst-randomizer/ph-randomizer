@@ -57,7 +57,9 @@ jobs:
 
       - name: Compile rando-shuffler
         if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
-        run: cargo build
+        run: |
+          rustup install nightly
+          cargo +nightly build
         working-directory: rando-shuffler
         env:
           CARGO_TERM_COLOR: always
