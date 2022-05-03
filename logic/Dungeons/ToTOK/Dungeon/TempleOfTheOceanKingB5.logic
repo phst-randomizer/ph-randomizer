@@ -1,0 +1,38 @@
+area TempleOfTheOceanKing:
+  room B5:
+    node Bottom:
+      door ToB4
+
+    node ArenaLeft:
+      enemy EnemyL1
+      enemy EnemyL2
+      enemy EnemyL3
+      enemy EnemyL4
+
+    node ArenaRight:
+      enemy EnemyR1
+      enemy EnemyR2
+      enemy EnemyR3
+
+    node TopRight:
+      chest AfterSwitch
+      door ToB6
+
+    Bottom -> ArenaLeft: (item Boomerang | item Bow | item GrapplingHook | item Hammer)
+    ArenaLeft -> ArenaRight: (defeated EnemyL1 & defeated EnemyL2 & defeated EnemyL3 & defeated EnemyL4)
+    ArenaRight -> TopRight: (defeated EnemyR1 & defeated EnemyR2 & defeated EnemyR3 & (item Boomerang | item Bow | item GrapplingHook | item Hammer))
+
+    node TopLeft:
+      door ToB4Shortcut
+
+    node TopLeftChest:
+      chest BigChest
+
+    TopLeft <-> TopLeftChest: (item Shovel | item GrapplingHook)
+
+    node StaircaseToB6:
+      door ToB6
+
+    TopLeft -> StaircaseToB6
+
+    TopRight -> TopLeft

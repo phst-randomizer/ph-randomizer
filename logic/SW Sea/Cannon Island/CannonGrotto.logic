@@ -1,0 +1,6 @@
+area CannonGrotto:
+  room Main:
+    node Main:
+      door Down
+      chest AfterWall
+      door Stairs

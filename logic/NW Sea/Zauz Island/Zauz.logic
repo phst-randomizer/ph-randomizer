@@ -1,0 +1,7 @@
+area Zauz:
+  room Port:
+    node Boat:
+      door Ship
+    #martin smith .>>>0q
+    node Ledge:
+      chest CuccoChest

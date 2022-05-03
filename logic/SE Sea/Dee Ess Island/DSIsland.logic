@@ -1,0 +1,23 @@
+area DeeEssIsland:
+  room Main:
+    node Main:
+      door Boat
+      enemy RightSpeakerRockChu1
+      enemy RightSpeakerRockChu2
+      enemy RightSpeakerRockChu3
+      enemy LeftSpeakerRockChu1
+      enemy LeftSpeakerRockChu2
+      enemy LeftSpeakerRockChu3
+      enemy Hinox1
+      enemy Hinox2
+      chest BlowInTheMicrophone
+      chest GoronGame
+
+    node HinoxChest:
+      chest HinoxSlayer
+
+    node DiggingSpotBottomScreen:
+      chest UndergroundGem
+
+    Main <-> HinoxChest: (defeated Hinox1 & defeated Hinox2)
+    Main <-> DiggingSpotBottomScreen: item Shovel

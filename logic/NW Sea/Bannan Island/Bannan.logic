@@ -1,0 +1,28 @@
+area Bannan:
+  room OutsideLeft:
+    node Main:
+      door WayfarerHouse
+
+    node Island:
+      chest IslandChest
+    
+    Main <-> Island: item GrapplingHook
+
+  room OutsideRight:
+    node Main:
+      chest CannonMiniGameBombBag
+
+    node Island:
+      chest LeftIslandChest
+      chest RightIslandChest
+
+    Main <-> Island: item GrapplingHook
+
+  room BannanGrotto:
+    node LeftSide:
+      door OutsideLeft
+
+    node RightSide:
+      door OutsideRight
+
+    LeftSide <-> RightSide: (item Bombs | item Bombchus)

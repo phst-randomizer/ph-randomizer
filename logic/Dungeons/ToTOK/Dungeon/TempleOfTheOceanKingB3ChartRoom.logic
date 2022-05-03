@@ -1,0 +1,12 @@
+area TempleOfTheOceanKing:
+  room B3Chart:
+    node Main:
+      door ToB3Ledge
+      door ToB3Main
+      chest NWChartChest
+      entrance BlueWarp
+
+    node Staircase:
+      door ToB4
+
+    Main <-> Staircase: item WisdomSpirit

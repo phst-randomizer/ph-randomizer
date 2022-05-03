@@ -1,0 +1,211 @@
+area IceTemple:
+  room F1:
+    node Entrance:
+      door Exit
+
+    node Switch:
+      gain SwitchRed    #Switch is Red => Red is UP
+      gain SwitchBlue   #Switch is Blue => Blue is UP
+
+    node MiddlePassage
+
+    node UpperRightSide:
+      enemy BlueChu
+
+    node LowerRightSide
+
+    node RightStairs:
+      door ToF2Right
+
+    Entrance <-> MiddlePassage: (lose SwitchRed & state SwitchBlue)
+    MiddlePassage <-> UpperRightSide: (lose SwitchBlue & state SwitchRed)
+    UpperRightSide <-> LowerRightSide: (lose SwitchBlue & state SwitchRed)
+    UpperRightSide <-> RightStairs: (lose SwitchRed & state SwitchBlue)
+
+    LowerRightSide -> Entrance
+    Entrance -> LowerRightSide: (setting HammerClip & item Hammer)
+
+    Entrance -> Switch
+    MiddlePassage -> Switch: (lose SwitchRed & state SwitchBlue & (item Boomerang | item Bombs | item Bombchu))
+    UpperRightSide -> Switch: (lose SwitchBlue & state SwitchRed & (item Bombs | item Bombchu))
+
+    node TopLeft:
+      door ToF2Left
+      enemy StagBeetleUpper1
+      enemy StagBeetleUpper2
+      enemy StagBeetleUpper3
+      enemy Gel
+
+    node LeftSide:
+      enemy StagBeetleLower
+
+    node DownLeftStairs:
+      door ToB1
+
+    TopLeft -> LeftSide: item GrapplingHook
+
+    LeftSide -> Entrance
+    Entrance -> LeftSide: (setting HammerClip & item Hammer)
+
+    LeftSide -> DownLeftStairs: item GrapplingHook
+
+  room F2:
+    node RightSide:
+      door ToF1Right
+      door ToF3Right
+
+    node Arena:
+      door ToF3Left
+      enemy BrownYook
+      enemy WhiteYook
+
+    node ArenaClear:
+      chest YookSlayer
+
+    node LeftStairs:
+      door ToF1Left
+
+    Arena <-> ArenaClear: (defeated WhiteYook & defeated BrownYook)
+    Arena -> LeftStairs: (item GrapplingHook & defeated WhiteYook & defeated BrownYook)
+
+  room F3:
+    node RightSide:
+      door ToF2Right
+
+    node Main:
+      chest TopRightChest
+      enemy StagBeetleLower1
+      enemy StagBeetleLower2
+      enemy StagBeetleLower3
+      enemy StagBeetleLower4
+      enemy StagBeetleUpper
+      enemy IceKeese1
+      enemy IceBubble1
+      enemy IceKeese2
+      enemy IceBubble2
+      enemy IceKeese3
+
+    node Switch:
+      gain SwitchRed
+      gain SwitchBlue
+
+    node AfterBlue:
+      chest ChestAfterBlue
+
+    node After4Switches:
+      chest FreestandingKey
+
+    node DoorToF2:
+      lock IceTempleKey
+
+    node StairsLeft:
+      door ToF2Left
+
+    RightSide <-> Main: (item GrapplingHook | item Boomerang | item Bow | (item Sword & item CourageSpiritLV1))
+
+    Main <-> Switch: item Bomb
+
+    Main <-> AfterBlue: (lose SwitchBlue & state SwitchRed)
+    Main <-> After4Switches: (lose SwitchBlue & state SwitchRed & item Boomerang)
+
+    Main -> DoorToF2
+    StairsLeft -> DoorToF2
+    DoorToF2 -> Main: open IceTempleKey
+    DoorToF2 -> StairsLeft: open IceTempleKey
+
+  room B1:
+    node StairsToF1:
+      door ToB1
+
+    node LeftSide
+
+    node BelowBombableWalls:
+      chest ChestAfterBombableWallPlate
+
+    node AboveBombableWalls
+
+    node RightSide:
+      chest PullRedLever
+      lock IceTempleKey
+
+    node TopRight:
+      chest AfterLockedDoor
+      gain SwitchRed
+      gain SwitchBlue
+
+    node BeforeBossKey:
+      door ToB2
+
+    node AfterBossKey:
+      door ToBoss
+
+    StairsToF1 <-> LeftSide: (lose SwitchBlue & state SwitchRed)
+
+    LeftSide -> BelowBombableWalls: (((item Bomb | item Bombchu) & item GrapplingHook) | (setting HammerClip & item Hammer))
+    BelowBombableWalls -> LeftSide
+
+    BelowBombableWalls <-> AboveBombableWalls: (item Bomb | item Bombchu)
+
+    AboveBombableWalls <-> RightSide: item GrapplingHook
+
+    RightSide -> TopRight: (open IceTempleKey & lose SwitchBlue & state SwitchRed)
+
+    TopRight -> RightSide: ((lose SwitchBlue & state SwitchRed) | (item Bow | item Boomerang | item Bomb | item Bombchu | (item Sword & item CourageSpiritLV1)))
+
+    AboveBombableWalls -> BeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & lose SwitchRed & state SwitchBlue)
+
+    BeforeBossKey <-> AfterBossKey: item IceTempleBossKey
+
+  room B2:
+    node Stairs:
+      enemy StagBeetle1
+
+    node Arena:
+      enemy WhiteYook
+      enemy Gel
+
+    node AfterArena:
+      enemy IceKeese1
+      enemy IceKeese2
+      enemy IceBubble1
+
+    node BossKeyChest:
+      chest BossKey
+
+    node Middle:
+      enemy StagBeetle2
+      enemy StagBeetle3
+      enemy RockChu
+      lock IceTempleKey
+
+    node Top:
+      chest Bounce
+
+    node TopRight:
+      enemy BrownYook
+      enemy ArenaIceKeese1
+      enemy ArenaIceKeese2
+
+    node TopRightClear:
+      chest DefeatThemAll
+
+    node Right:
+      enemy IceBubble2
+      enemy StagBeetle4
+
+    Stairs <-> Arena: item GrapplingHook
+    Arena <-> AfterArena: (defeated Gel & defeated WhiteYook)
+
+    AfterArena <-> Middle: (item Sword | item Boomerang)
+
+    Middle <-> Top: item Bow
+    Middle <-> TopRight: open IceTempleKey
+    TopRight <-> TopRightClear: (defeated BrownYook & defeated ArenaIceKeese1 & defeated ArenaIceKeese2)
+
+    TopRightClear <-> Right
+    Right <-> BossKeyChest
+
+  room AzurineRoom:
+    node Main:
+      chest Azurine
+      entrance BlueWarp

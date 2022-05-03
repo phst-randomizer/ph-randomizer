@@ -1,0 +1,13 @@
+area BlaazBossRoom:
+  room Main:
+    node Fight:
+      door ToDungeon
+      enemy Blaaz
+
+    node BossDefeat:
+      chest SpiritOfPower
+      chest HeartContainer
+      flag FireTempleBeaten
+      entrance ExitWarp
+
+    Fight -> BossDefeat: defeated Blaaz
