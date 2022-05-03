@@ -40,6 +40,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: 21aslade/rando-shuffler
+          ref: b1100f164d65b7eae517d0bdf2dcaf7f62b70824
           path: rando-shuffler
 
       - name: Get cache key
@@ -56,7 +57,9 @@ jobs:
 
       - name: Compile rando-shuffler
         if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
-        run: cargo build
+        run: |
+          rustup install nightly
+          cargo +nightly build
         working-directory: rando-shuffler
         env:
           CARGO_TERM_COLOR: always
