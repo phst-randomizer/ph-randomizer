@@ -188,3 +188,89 @@ jobs:
       - name: Cleanup
         if: always()
         run: rm -rf *.nds
+  
+  syntax-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get the CI tool
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: Ibot02/tmcr-newlogic-ci
+          tag: "v1.0"
+          filename: "tmcr-newlogic-ci"
+          tarBall: false
+          zipBall: false
+
+      - name: Make it executable
+        run: chmod +x "$GITHUB_WORKSPACE/tmcr-newlogic-ci"
+
+      - name: Run the CI tool
+        run: |
+          shopt -s globstar
+          for file in **/*.logic; do
+            ./tmcr-newlogic-ci "$file"
+          done;
+
+  test-shuffler:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Checkout rando-shuffler repo
+        uses: actions/checkout@v3
+        with:
+          repository: 21aslade/rando-shuffler
+          ref: b1100f164d65b7eae517d0bdf2dcaf7f62b70824
+          path: rando-shuffler
+
+      - name: Get cache key
+        id: shuffler-cache-key
+        run: echo "::set-output name=key::$(git rev-parse HEAD)"
+        shell: bash
+        working-directory: rando-shuffler
+
+      - uses: actions/cache@v3
+        id: rando-shuffler-cache
+        with:
+          path: rando-shuffler
+          key: ${{ steps.shuffler-cache-key.outputs.key }}
+
+      - name: Compile rando-shuffler
+        if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
+        run: |
+          rustup install nightly
+          cargo +nightly build
+        working-directory: rando-shuffler
+        env:
+          CARGO_TERM_COLOR: always
+
+      - name: Make it executable
+        run: chmod +x rando-shuffler/target/debug/rando_shuffler
+
+      - name: Run the shuffler
+        run: |
+          shopt -s globstar
+          find rando-shuffler/ -name "*.logic" -type f -delete # remove test files
+          file_count=0
+          failed=0;
+          for file in **/*.logic; do
+            echo "$file... ";
+            status=0
+            rando-shuffler/target/debug/rando_shuffler "$file" || status=1
+            if [[ $status != 0 ]]; then
+              failed=$((failed + 1));
+            else
+              echo " PASSED";
+            fi
+            echo "-------------------------------"
+            echo ""
+            file_count=$((file_count + 1))
+          done;
+          echo "RESULTS: $((file_count - failed)) / $file_count passed"
+          if [[ $failed != 0 ]]; then
+            exit 1;
+          fi
