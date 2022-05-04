@@ -1,0 +1,13 @@
+area GoronTemple:
+  room Main:
+    node Fight:
+      door ToDungeon
+      enemy Dongorongo
+
+    node BossDefeat:
+      chest Sand
+      chest HeartContainer
+      flag GoronTempleBeaten
+      door ToCrimsonineRoom
+
+    Fight -> BossDefeat: defeated Dongorongo

@@ -1,0 +1,15 @@
+area ManOfSmilesBoat:
+  room Main:
+    node Enemies:
+      door Exit
+      enemy Octorok1
+      enemy Octorok2
+      enemy Octorok3
+      enemy Octorok4
+      enemy Geozard
+
+    node ManOfSmiles:
+      chest NormalThing
+      chest MysteriousThing
+
+    Enemies <-> ManOfSmiles: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Geozard)

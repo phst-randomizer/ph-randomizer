@@ -1,0 +1,12 @@
+area TempleOfTheOceanKingLobby:
+  room Main:
+    node Main:
+      door Outside
+      door Entrance
+      exit B3BlueWarp
+      exit B6BlueWarp
+
+    node PhantomHourglass:
+      chest Hourglass
+
+    Main <-> PhantomHourglass: item PowerSpirit

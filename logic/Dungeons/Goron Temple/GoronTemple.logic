@@ -1,0 +1,170 @@
+area GoronTemple:
+  room F1:
+    node Entrance:
+      door Entrance
+      enemy BlueChuBeforeBeamos
+      enemy BlueChuAfterBeamos
+      enemy ArmosLower
+      enemy ArmosUpper
+
+    node TopRight:
+      chest AfterSwitch
+
+    node Arena:
+      enemy ArmosArenaRight
+      enemy ArmosArenaLeft
+
+    node AfterArena:
+      enemy BlueChu
+      door RightBombableWall
+      door LeftBombableWall
+
+    node BowTarget:
+      chest EyeShot
+
+    node B1Shortcut:
+      door ToB1Shortcut
+
+    Entrance -> TopRight: item Shovel
+    TopRight -> Entrance
+
+    TopRight -> Arena
+    Arena -> Entrance
+    Arena -> AfterArena: (defeated ArmosArenaRight & defeated ArmosArenaLeft)
+    AfterArena -> Entrance
+    AfterArena <-> BowTarget: item Bow
+
+    B1Shortcut -> Entrance: (item Bombchu | (setting HammerClip & item Hammer))
+
+  room BombableF1:
+    node LeftSide:
+      door LeftDoor
+
+    node RightSide:
+      door RightDoor
+      door ToB1
+
+  room B1:
+    node TopLeftArena:
+      door ToBombableF1
+      enemy BeamosRight
+      enemy BeamosLeft
+      enemy FireBubble1
+      enemy FireBubble2
+
+    node LeftMain
+
+    node LinkArenas:
+      enemy Hinox
+      enemy LikeLike1
+      enemy LikeLike2
+
+    node BombchuChest:
+      chest BigChest
+
+    node BottomLeft:
+      enemy EyeSlug1
+      enemy EyeSlug2
+      enemy EyeSlug3
+      enemy EyeSlug4
+      enemy EyeSlug5
+
+    node EyeSlugChest:
+      chest EyeSlugSlayer
+
+    node LeftStaircase:
+      door ToF1Shortcut
+      door ToB2
+
+    TopLeftArena -> LeftMain: (defeated FireBubble1 & defeated FireBubble2)
+    LeftMain <-> LinkArenas
+    LinkArenas <-> BombchuChest: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
+    LeftMain <-> BottomLeft: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
+
+    BottomLeft <-> EyeSlugChest: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5)
+    BottomLeft -> LeftStaircase: ((setting HammerClip & item Hammer) | (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & item Bombchu))
+
+  room B2:
+    node BottomLeft:
+      door ToB1
+      enemy LikeLike
+      enemy RockChu1
+      enemy RockChu2
+
+    node MiddleLeft:
+      door ToB3
+
+    node BottomStaircase:
+      door ToB3BossKey
+      enemy Hinox1
+      enemy Hinox2
+
+    node AfterHinox:
+      enemy BlueChu1
+      enemy BlueChu2
+      enemy Gel1
+      enemy Gel2
+
+    node TopLeft:
+      enemy EyeSlug1
+      enemy EyeSlug2
+      enemy EyeSlug3
+      enemy EyeSlug4
+      enemy EyeSlug5
+      enemy EyeSlug6
+      enemy EyeSlug7
+      enemy EyeSlug8
+
+    node KillEyeSlug:
+      chest EyeSlugSlayer
+
+    node BossKeyChest:
+      chest BossKey
+
+    BottomLeft -> MiddleLeft: (item Bombchu | (setting HammerClip & item Hammer))
+    BottomStaircase -> BottomLeft
+    BottomLeft -> BottomStaircase: ((setting HammerReach & item Hammer) | (setting BombchuCameraLock & item Bombchu & item Hammer))
+
+    AfterHinox <-> TopLeft: (item Bombchu | item Bomb | item Boomerang)
+    TopLeft <-> KillEyeSlug: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & defeated EyeSlug6 & defeated EyeSlug7 & defeated EyeSlug8)
+    AfterHinox <-> BossKeyChest: item Bombchu
+
+
+  room B3:
+    node BottomLeft:
+      enemy Miniblin1
+      enemy Miniblin2
+      enemy Miniblin3
+      enemy Miniblin4
+      enemy Miniblin5
+      enemy Miniblin6
+
+    node BlinChest:
+      chest MiniblinSlayer
+
+    node ArmosRoom:
+      enemy Armos1
+      enemy Armos2
+      enemy Armos3
+      enemy Armos4
+
+    node BossKeyLock:
+      door ToB2Right
+
+    node AfterBossKey:
+      door ToB4
+
+    BottomLeft <-> BlinChest: (defeated Miniblin1 & defeated Miniblin2 & defeated Miniblin3 & defeated Miniblin4 & defeated Miniblin5 & defeated Miniblin6)
+    BottomLeft -> ArmosRoom: (item Bombchu | (setting HammerClip & item Hammer))
+    ArmosRoom -> BossKeyLock: (defeated Armos1 & defeated Armos2 & defeated Armos3 & defeated Armos4)
+    BossKeyLock <-> AfterBossKey: item GoronBossKey
+
+  room B4:
+    node Main:
+      door ToB3
+      door ToBoss
+
+  room CrimsonineRoom:
+    node Main:
+      door ToBoss
+      chest Crimsonine

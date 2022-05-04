@@ -1,0 +1,171 @@
+area CourageTemple:
+  room F1:
+    node Entrance:
+      door Outside
+      chest AfterSpikeTraps
+
+    node BehindBombableWall:
+      chest BombableWallChest
+
+    node LockedDoorToArena:
+      lock CourageKey
+
+    node MoldormArena:
+      enemy Moldorm1
+      enemy Moldorm2
+
+    node StairsAfterMoldorm:
+      door ToB1Arena
+
+    Entrance <-> BehindBombableWall: (item Bombs | item Bombchus)
+
+    Entrance -> LockedDoorToArena
+    MoldormArena -> LockedDoorToArena: (defeated Moldorm1 & defeated Moldorm2)
+    LockedDoorToArena -> Entrance: open CourageKey
+    LockedDoorToArena -> MoldormArena: open CourageKey
+
+    MoldormArena -> StairsAfterMoldorm: (defeated Moldorm1 & defeated Moldorm2)
+    StairsAfterMoldorm -> MoldormArena
+
+
+    node PolsVoiceArea:
+      door ToB1PolsVoice
+      enemy PolsVoice
+
+    node PolsVoiceKill:
+      chest PolsKey
+
+    node LockedDoorToF2:
+      lock CourageKey
+
+    node AfterLeftLockedDoor:
+      door ToF2ElectricMaze
+
+    PolsVoiceArea -> Entrance
+    PolsVoiceArea <-> PolsVoiceKill: defeated PolsVoice
+
+    PolsVoiceArea -> LockedDoorToF2
+    AfterLeftLockedDoor -> LockedDoorToF2
+    LockedDoorToArena -> PolsVoiceArea: open CourageKey
+    LockedDoorToArena -> AfterLeftLockedDoor: open CourageKey
+
+    node AfterSquareCrystal:
+      door ToB1InvisibleMaze
+
+    node SquarePedestal:
+      flag SquarePlaced
+
+    PolsVoiceArea <-> AfterSquareCrystal: flag SquarePlaced
+    PolsVoiceArea <-> SquarePedestal: item CourageTempleSquareCrystal
+
+    node LeftmostStairsF1:
+      door ToB1Leftmost
+
+    node StairsToF2Octorok:
+      door ToF2Octorok
+
+    LeftmostStairsF1 -> PolsVoiceArea: item Bow
+    LeftmostStairsF1 -> StairsToF2Octorok: (item Bow & flag SquarePlaced)
+
+    node BottomRightArea:
+      door F2SpikeTraps
+      door B1Torches
+
+    BottomRightArea -> Entrance
+
+
+    node TopRight:
+      door ToB1AfterTorches
+      enemy PolsVoiceTopRight
+
+    node TopRightPolsVoiceDefeat:
+      chest PolsKeyTopRight
+
+    node TopRightLockedDoor:
+      lock CourageKey
+
+    node StairsToF2EmptyRoom:
+      door ToF2EmptyRoom
+
+    TopRight <-> TopRightPolsVoiceDefeat: defeated PolsVoiceTopRight
+
+    TopRight -> TopRightLockedDoor
+    StairsToF2EmptyRoom -> TopRightLockedDoor
+    TopRightLockedDoor -> TopRight: open CourageKey
+    TopRightLockedDoor -> StairsToF2EmptyRoom: open CourageKey
+
+  room B1:
+    node MiddleMovingPlatform:
+      door ToF1Arena
+      door ToF1PolsVoice
+
+    node IslandNearMovingPlatform:
+      chest IslandChest
+
+    node InvisibleMaze:
+      door ToF1InvisibleMaze
+      chest BowChest
+
+    node LeftmostStairsB1:
+      door ToF1Leftmost
+
+    MiddleMovingPlatform -> IslandNearMovingPlatform: item GrapplingHook
+
+    InvisibleMaze -> LeftmostStairsB1: item Bow
+    InvisibleMaze <-> IslandNearMovingPlatform
+
+    node Torches:
+      door F1Torches
+
+    node AfterTorches:
+      chest EyeTarget
+      door F1TopRight
+
+    Torches -> AfterTorches: (item Bow & item Boomerang)
+
+  room F2:
+    node ElectricMaze:
+      chest AfterUDRL
+      door ToF1ElectricMaze
+
+    node Octoroks:
+      enemy Octorok1
+      enemy Octorok2
+      enemy Octorok3
+      enemy Octorok4
+      enemy Octorok5
+      enemy Octorok6
+      enemy Octorok7
+
+    node ChestAfterEyes:
+      chest TwoEyes
+
+    node StairsAfterSpikeTraps:
+      chest SpikeTraps
+      door ToF1SpikeTraps
+
+    Octoroks -> ChestAfterEyes: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6 & defeated Octorok7 & item Bow)
+    Octoroks -> StairsAfterSpikeTraps: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6 & defeated Octorok7 & (item Bombs | item Bombchus))
+
+    node EmptyRoom:
+      door ToF1EmptyRoom
+
+    node BossKeyChest:
+      chest BossKey
+
+    node StairsToF3:
+      door ToF3
+
+    EmptyRoom <-> BossKeyChest: item Bow
+    EmptyRoom <-> StairsToF3: item CourageBossKey
+
+  room F3:
+    node Main:
+      door ToF2
+      door BlueWarp
+      door ToBoss
+
+    node ChestBehindWall:
+      chest Hidden
+
+    Main <-> ChestBehindWall: (item Bombs | item Bombchus)

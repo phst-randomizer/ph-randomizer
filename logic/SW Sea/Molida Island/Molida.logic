@@ -1,0 +1,104 @@
+area Molida:
+  room Town:
+    node Main:
+      door LeftmostHouse
+      door MiddleHouse
+      door MolidaShop
+      door RomanoHouse
+
+    node Hole: entrance HoleToCave
+
+    node Ledge:
+      door ToUpperIsland
+
+    Main -> Hole: item Shovel
+    Ledge -> Main
+
+  room UpperIsland:
+    node RightSide:
+      door ToCaveSystemRight
+      chest Cliff
+      door ToLowerIsland
+
+    node TempleFront:
+      door ToCaveSystemLeft
+      enemy GeozardLeft
+      enemy GeozardRight
+      exit AfterBoss
+
+    node Statues:
+      flag MolidaDoorOpen
+
+    node TempleEntrance:
+      door FireTemple
+
+    TempleFront <-> TempleEntrance: flag MolidaDoorOpen
+
+    #One statue requires bow or boomerang, so if we can turn on this statue, we can turn them all on
+    TempleFront <-> Statues: (defeated GeozardLeft & defeated GeozardRight & (item Bow | item Boomerang))
+
+  room LeftmostHouse:
+    node Main:
+      door Outside
+      chest TreasureChest
+
+  room MiddleHouse:
+    node Main: 
+      door Outside
+
+  room MolidaShop:
+    node Main:
+      door Outside
+      chest WoodenShield
+      chest QuiverUpgrade
+      chest RandomTreasure
+
+  room CaveSystem:
+
+    node MainLower:
+      door ExitDown
+
+    node Arena:
+      enemy Geozard
+
+    node UpRightDoor:
+      door GrottoRight
+
+    node LedgeRight:
+      chest LedgeChest
+
+    node MainUp:
+      door ExitUpRight
+      door BombableWall
+      door GrottoLeft
+
+    node Ledge:
+      exit HoleNearTree
+      chest NearFogMap
+      hint BookToRomano
+
+    node AfterDoor:
+      door ExitUpLeft
+
+    node ChestLedgeLeft:
+      exit HoleToChest
+      chest ChestAfterHole
+
+    ChestLedgeLeft -> AfterDoor
+    Ledge <-> AfterDoor: item SunKey
+    Ledge -> MainLower
+    MainLower -> Arena
+    MainLower -> LedgeRight: item GrapplingHook
+    Arena -> UpRightDoor: defeated Geozard
+    MainUp -> MainLower
+    MainLower -> MainUp: (item Bombs | item Bombchus)
+
+  room BackOfCaveSystem:
+    node Main:
+      door Left
+      door Right
+
+    node ShovelRoom:
+      door Exit
+      hint WayfarerJournal
+      chest ShovelChest
