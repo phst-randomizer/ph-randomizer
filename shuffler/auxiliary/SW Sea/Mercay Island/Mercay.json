@@ -1,0 +1,97 @@
+{
+  "name": "Mercay",
+  "rooms": {
+    "OutsideOshus": {
+      "chests": {
+        "PickUpRock": {
+          "type": "npc",
+          "contents": "small_green_rupee",
+          "bmg_file_path": "English/Message/main_isl.bmg",
+          "bmg_instruction_index": 135
+        }
+      },
+      "doors": {
+        "North": "EnemyBamboo.South",
+        "OshussHouse": "OshussHouse.Main",
+        "RockHouse": "RockHouse.Main",
+        "East": "MercayTown.Main"
+      }
+    },
+    "OshussHouse": {
+      "doors": {
+        "Outside": "OutsideOshus.Outside"
+      }
+    },
+    "MercayTown": {
+      "chests": {
+        "Cucco": {
+          "type": "chest",
+          "contents": "common_treasure",
+          "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
+          "zmb_mapobject_index": 113
+        }
+      },
+      "doors": {
+        "Tavern": "Tavern.Main",
+        "Shop": "MercayShop.Main",
+        "Shipyard": "Shipyard.Main",
+        "House": "MercayHouse.Main",
+        "TreasureSelling": "TreasureSelling.Main",
+        "Boat": "TODO - this would connect to the `Sea` area",
+        "West": "OutsideOshus.East",
+        "NorthMain": "AboveMercayTown.Main",
+        "NorthLedge": "AboveMercayTown.Ledge"
+      }
+    },
+    "OshusCave": {
+      "chests": {
+        "SwordChest": {
+          "type": "chest",
+          "contents": "oshus_sword",
+          "zmb_file_path": "Map/isle_main/map19.bin/zmb/isle_main_19.zmb",
+          "zmb_mapobject_index": 1
+        }
+      },
+      "doors": {
+        "Exit": "OutsideOshus.Outside"
+      }
+    },
+    "EnemyBamboo": {
+      "doors": {
+        "South": "OutsideOshus.Outside",
+        "Grotto": "TODO - this would connect to the `MercayGrotto` area"
+      }
+    },
+    "MercayShop": {
+      "chests": {
+        "WoodenShield": {
+          "type": "island_shop",
+          "contents": "wooden_shield",
+          "overlay": 31,
+          "overlay_offset": "0x2fd4"
+        },
+        "PowerGem": {
+          "type": "island_shop",
+          "contents": "power_gem",
+          "overlay": 31,
+          "overlay_offset": "0x2f88"
+        },
+        "QuiverUpgrade": {
+          "type": "island_shop",
+          "contents": "quiver_upgrade",
+          "overlay": "TODO",
+          "overlay_offset": "TODO"
+        },
+        "RandomTreasure": {
+          "type": "island_shop",
+          "contents": "common_treasure",
+          "overlay": 31,
+          "overlay_offset": "0x2f54"
+        }
+      },
+      "doors": {
+        "Outside": "MercayTown.Main"
+      }
+    }
+  }
+}
