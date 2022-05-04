@@ -2,7 +2,7 @@ name: test-logic
 on:
   push:
     paths:
-      - logic/**
+      - shuffler/**
 jobs:
   syntax-check:
     runs-on: ubuntu-latest
