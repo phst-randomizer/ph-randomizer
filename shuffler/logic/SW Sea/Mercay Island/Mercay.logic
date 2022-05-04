@@ -9,6 +9,10 @@ area Mercay:
       door East
     Outside <-> East: flag BridgeRepaired
 
+  room OshussHouse:
+    node Main:
+      door Outside
+
   room MercayTown:
     node Main:
       door Tavern
