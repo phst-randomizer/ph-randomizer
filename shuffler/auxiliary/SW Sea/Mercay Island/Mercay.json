@@ -1,97 +1,165 @@
 {
+  "$schema": "../../aux-schema.json",
   "name": "Mercay",
-  "rooms": {
-    "OutsideOshus": {
-      "chests": {
-        "PickUpRock": {
+  "rooms": [
+    {
+      "name": "OutsideOshus",
+      "chests": [
+        {
+          "name": "PickUpRock",
           "type": "npc",
           "contents": "small_green_rupee",
           "bmg_file_path": "English/Message/main_isl.bmg",
           "bmg_instruction_index": 135
         }
-      },
-      "doors": {
-        "North": "EnemyBamboo.South",
-        "OshussHouse": "OshussHouse.Main",
-        "RockHouse": "RockHouse.Main",
-        "East": "MercayTown.Main"
-      }
+      ],
+      "doors": [
+        {
+          "name": "North",
+          "link": "EnemyBamboo.South"
+        },
+        {
+          "name": "OshussHouse",
+          "link": "OshussHouse.Main"
+        },
+        {
+          "name": "RockHouse",
+          "link": "RockHouse.Main"
+        },
+        {
+          "name": "East",
+          "link": "MercayTown.Main"
+        }
+      ]
     },
-    "OshussHouse": {
-      "doors": {
-        "Outside": "OutsideOshus.Outside"
-      }
+    {
+      "name": "OshussHouse",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "OutsideOshus.Outside"
+        }
+      ]
     },
-    "MercayTown": {
-      "chests": {
-        "Cucco": {
+    {
+      "name": "MercayTown",
+      "chests": [
+        {
+          "name": "Cucco",
           "type": "chest",
           "contents": "common_treasure",
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
           "zmb_mapobject_index": 113
         }
-      },
-      "doors": {
-        "Tavern": "Tavern.Main",
-        "Shop": "MercayShop.Main",
-        "Shipyard": "Shipyard.Main",
-        "House": "MercayHouse.Main",
-        "TreasureSelling": "TreasureSelling.Main",
-        "Boat": "TODO - this would connect to the `Sea` area",
-        "West": "OutsideOshus.East",
-        "NorthMain": "AboveMercayTown.Main",
-        "NorthLedge": "AboveMercayTown.Ledge"
-      }
+      ],
+      "doors": [
+        {
+          "name": "Tavern",
+          "link": "Tavern.Main"
+        },
+        {
+          "name": "Shop",
+          "link": "MercayShop.Main"
+        },
+        {
+          "name": "Shipyard",
+          "link": "Shipyard.Main"
+        },
+        {
+          "name": "House",
+          "link": "MercayHouse.Main"
+        },
+        {
+          "name": "TreasureSelling",
+          "link": "TreasureSelling.Main"
+        },
+        {
+          "name": "Boat",
+          "link": "TODO - this would connect to the `Sea` area"
+        },
+        {
+          "name": "West",
+          "link": "OutsideOshus.East"
+        },
+        {
+          "name": "NorthMain",
+          "link": "AboveMercayTown.Main"
+        },
+        {
+          "name": "NorthLedge",
+          "link": "AboveMercayTown.Ledge"
+        }
+      ]
     },
-    "OshusCave": {
-      "chests": {
-        "SwordChest": {
+    {
+      "name": "OshusCave",
+      "chests": [
+        {
+          "name": "SwordChest",
           "type": "chest",
           "contents": "oshus_sword",
           "zmb_file_path": "Map/isle_main/map19.bin/zmb/isle_main_19.zmb",
           "zmb_mapobject_index": 1
         }
-      },
-      "doors": {
-        "Exit": "OutsideOshus.Outside"
-      }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "OutsideOshus.Outside"
+        }
+      ]
     },
-    "EnemyBamboo": {
-      "doors": {
-        "South": "OutsideOshus.Outside",
-        "Grotto": "TODO - this would connect to the `MercayGrotto` area"
-      }
+    {
+      "name": "EnemyBamboo",
+      "doors": [
+        {
+          "name": "South",
+          "link": "OutsideOshus.Outside"
+        },
+        {
+          "name": "Grotto",
+          "link": "TODO - this would connect to the `MercayGrotto` area"
+        }
+      ]
     },
-    "MercayShop": {
-      "chests": {
-        "WoodenShield": {
+    {
+      "name": "MercayShop",
+      "chests": [
+        {
+          "name": "WoodenSield",
           "type": "island_shop",
           "contents": "wooden_shield",
           "overlay": 31,
           "overlay_offset": "0x2fd4"
         },
-        "PowerGem": {
+        {
+          "name": "PowerGem",
           "type": "island_shop",
           "contents": "power_gem",
           "overlay": 31,
           "overlay_offset": "0x2f88"
         },
-        "QuiverUpgrade": {
+        {
+          "name": "QuiverUpgrade",
           "type": "island_shop",
           "contents": "quiver_upgrade",
           "overlay": "TODO",
           "overlay_offset": "TODO"
         },
-        "RandomTreasure": {
+        {
+          "name": "RandomTreasure",
           "type": "island_shop",
           "contents": "common_treasure",
           "overlay": 31,
           "overlay_offset": "0x2f54"
         }
-      },
-      "doors": {
-        "Outside": "MercayTown.Main"
-      }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main"
+        }
+      ]
     }
-  }
+  ]
 }
