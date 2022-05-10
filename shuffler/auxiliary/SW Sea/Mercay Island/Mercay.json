@@ -160,6 +160,51 @@
           "link": "MercayTown.Main"
         }
       ]
+    },
+    {
+      "name": "Tavern",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main"
+        }
+      ]
+    },
+    {
+      "name": "TreasureSelling",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main"
+        }
+      ]
+    },
+    {
+      "name": "MercayHouse",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main"
+        }
+      ]
+    },
+    {
+      "name": "Shipyard",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main"
+        }
+      ]
+    },
+    {
+      "name": "RockHouse",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main"
+        }
+      ]
     }
   ]
 }
