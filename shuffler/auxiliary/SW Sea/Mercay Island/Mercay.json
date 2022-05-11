@@ -205,6 +205,112 @@
           "link": "MercayTown.Main"
         }
       ]
+    },
+    {
+      "name": "AboveMercayTown",
+      "doors": [
+        {
+          "name": "South",
+          "link": "MercayTown.Main"
+        },
+        {
+          "name": "West",
+          "link": "PathToToTOK.Main"
+        },
+        {
+          "name": "ToBridgeCave",
+          "link": "BridgeCave.Main"
+        },
+        {
+          "name": "Grotto",
+          "link": "GrottoToLedge.Down"
+        },
+        {
+          "name": "SouthLedge",
+          "link": "MercayTown.Ledge"
+        },
+        {
+          "name": "IslandGrotto",
+          "link": "BridgeCave.Main"
+        }
+      ],
+      "chests": [
+        {
+          "name": "RollIntoTree",
+          "type": "tree",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
+          "zmb_mapobject_index": 25
+        },
+        {
+          "name": "AboveEntrance",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
+          "zmb_mapobject_index": 54
+        }
+      ]
+    },
+    {
+      "name": "PathToToTOK",
+      "doors": [
+        {
+          "name": "East",
+          "link": "AboveMercayTown.Main"
+        },
+        {
+          "name": "ToTOK",
+          "link": "TODO - link to Temple of Ocean King area"
+        },
+        {
+          "name": "Grotto",
+          "link": "GrottoToLedge.Up"
+        }
+      ]
+    },
+    {
+      "name": "GrottoToLedge",
+      "chests": [
+        {
+          "name": "PowerGem",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
+        }
+      ],
+      "doors": [
+        {
+          "name": "Left",
+          "link": "PathToToTOK.Main"
+        },
+        {
+          "name": "South",
+          "link": "AboveMercayTown.Ledge"
+        }
+      ]
+    },
+    {
+      "name": "BridgeCave",
+      "chests": [
+        {
+          "name": "BridgeChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
+        }
+      ],
+      "doors": [
+        {
+          "name": "West",
+          "link": "AboveMercayTown.Main"
+        },
+        {
+          "name": "East",
+          "link": "AboveMercayTown.Island"
+        }
+      ]
     }
   ]
 }
