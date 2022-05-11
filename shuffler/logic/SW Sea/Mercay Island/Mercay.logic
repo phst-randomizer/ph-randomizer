@@ -9,6 +9,10 @@ area Mercay:
       door East
     Outside <-> East: flag BridgeRepaired
 
+  room OshussHouse:
+    node Main:
+      door Outside
+
   room MercayTown:
     node Main:
       door Tavern
@@ -82,6 +86,7 @@ area Mercay:
       enemy Crow
       door South
       door West
+      chest RollIntoTree
 
     node HiddenBombableWall:
       door ToBridgeCave
@@ -130,3 +135,8 @@ area Mercay:
     node Main:
       door West
       door East
+    
+    node HitBoomerangSwitch:
+      chest BridgeChest
+    
+    Main <-> HitBoomerangSwitch: item Boomerang

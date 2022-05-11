@@ -2,13 +2,14 @@ name: test-logic
 on:
   push:
     paths:
-      - logic/**
+      - shuffler/**
 jobs:
-  syntax-check:
+  check-logic:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
+      # Run basic syntax check
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
         with:
@@ -28,11 +29,7 @@ jobs:
             ./tmcr-newlogic-ci "$file"
           done;
 
-  test-shuffler:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
+      # Run more advanced checks
       - name: Checkout rando-shuffler repo
         uses: actions/checkout@v3
         with:
@@ -84,3 +81,13 @@ jobs:
           if [[ $failed != 0 ]]; then
             exit 1;
           fi
+
+  check-aux-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate aux data
+        uses: walbo/validate-json@v1.1.0
+        with:
+          files: shuffler/auxiliary/**/*.json
+          schema-version: draft-07

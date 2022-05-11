@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Auxiliary Data (Area)",
+  "description": "Auxiliary data, which is needed for the randomizer to work. This is data that can be changed during randomization.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the area",
+      "type": "string"
+    },
+    "rooms": {
+      "description": "All of the rooms inside this area",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the room",
+            "type": "string"
+          },
+          "chests": {
+            "description": "Item checks that can be made in this room",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of the item check",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of item check",
+                  "type": "string",
+                  "enum": [
+                    "npc",
+                    "chest",
+                    "island_shop",
+                    "tree"
+                  ]
+                },
+                "contents": {
+                  "description": "The item that this check contains",
+                  "type": "string"
+                },
+                "bmg_file_path": {
+                  "description": "File path to the bmg the instruction is on",
+                  "type": "string"
+                },
+                "bmg_instruction_index": {
+                  "description": "Index of the instruction in the defined bmg file",
+                  "type": "integer"
+                },
+                "zmb_file_path": {
+                  "description": "File path to the zmb the chest is on",
+                  "type": "string"
+                },
+                "zmb_mapobject_index": {
+                  "description": "Index of the chest in the defined zmb file",
+                  "type": "integer"
+                },
+                "overlay": {
+                  "description": "The code overlay this shop item is on",
+                  "type": "integer"
+                },
+                "overlay_offset": {
+                  "description": "Hex offset from overlay to the shop item",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "contents"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "doors": {
+            "description": "All doors that lead to a different room or area",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of this door",
+                  "type": "string"
+                },
+                "link": {
+                  "description": "Descriptor where the door leads",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "link"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "name",
+          "doors"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "name",
+    "rooms"
+  ]
+}
