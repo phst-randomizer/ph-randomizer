@@ -70,10 +70,10 @@
                 "name",
                 "type",
                 "contents"
-              ],
-              "minItems": 1,
-              "uniqueItems": true
-            }
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
           },
           "doors": {
             "description": "All doors that lead to a different room or area",
