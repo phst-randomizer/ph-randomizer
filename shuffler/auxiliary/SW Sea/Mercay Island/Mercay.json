@@ -143,7 +143,7 @@
           "name": "QuiverUpgrade",
           "type": "island_shop",
           "contents": "quiver_upgrade",
-          "overlay": "TODO",
+          "overlay": -1,
           "overlay_offset": "TODO"
         },
         {
