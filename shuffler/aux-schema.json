@@ -34,7 +34,8 @@
                   "enum": [
                     "npc",
                     "chest",
-                    "island_shop"
+                    "island_shop",
+                    "tree"
                   ]
                 },
                 "contents": {
