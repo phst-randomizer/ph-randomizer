@@ -4,11 +4,12 @@ on:
     paths:
       - shuffler/**
 jobs:
-  syntax-check:
+  check-logic:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
+      # Run basic syntax check
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
         with:
@@ -28,11 +29,7 @@ jobs:
             ./tmcr-newlogic-ci "$file"
           done;
 
-  test-shuffler:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
+      # Run more advanced checks
       - name: Checkout rando-shuffler repo
         uses: actions/checkout@v3
         with:
@@ -85,7 +82,7 @@ jobs:
             exit 1;
           fi
 
-  test-aux-data:
+  check-aux-data:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
