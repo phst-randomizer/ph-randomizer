@@ -84,3 +84,13 @@ jobs:
           if [[ $failed != 0 ]]; then
             exit 1;
           fi
+
+  test-aux-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate aux data
+        uses: walbo/validate-json@v1.1.0
+        with:
+          files: shuffler/auxiliary/**/*.json
+          schema-version: draft-07
