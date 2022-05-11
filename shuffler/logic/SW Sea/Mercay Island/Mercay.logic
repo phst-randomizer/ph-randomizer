@@ -86,6 +86,7 @@ area Mercay:
       enemy Crow
       door South
       door West
+      chest RollIntoTree
 
     node HiddenBombableWall:
       door ToBridgeCave
