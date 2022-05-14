@@ -126,7 +126,7 @@
       "name": "MercayShop",
       "chests": [
         {
-          "name": "WoodenSield",
+          "name": "WoodenShield",
           "type": "island_shop",
           "contents": "wooden_shield",
           "overlay": 31,
