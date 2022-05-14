@@ -2,7 +2,8 @@ name: test
 on:
   push:
     paths-ignore:
-        - shuffler/**
+        - shuffler/auxiliary/**
+        - shuffler/logic/**
 jobs:
   lint-type-check:
     name: Lint and type check code
