@@ -10,10 +10,8 @@ from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from patcher import settings
-from patcher.location_types import DigSpotLocation
+from patcher.location_types import DigSpotLocation, IslandShopLocation
 from patcher.location_types.island_shop import GD_MODELS
-from patcher.locations import LOCATIONS
 
 
 class DesmumeEmulator:
@@ -156,14 +154,17 @@ def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, requ
     )
     rom_path = str(tmp_path / f"{test_name}.nds")
 
-    settings.ROM = NintendoDSRom.fromFile(rom_path)
+    IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
-    locations = ["mercay_island_shop_shield", "mercay_island_shop_power_gem"]
+    locations = [
+        IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),  # shield in mercay shop
+        IslandShopLocation(31, 0x217EC68 - 0x217BCE0),  # power gem in mercay shop
+    ]
 
     for location in locations:
-        LOCATIONS[location].set_location(request.param)
+        location.set_location(request.param)
 
-    settings.ROM.saveToFile(rom_path)
+    IslandShopLocation.ROM.saveToFile(rom_path)
 
     desmume_emulator.open_rom(rom_path)
 
@@ -219,13 +220,12 @@ def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request
     )
     rom_path = str(tmp_path / f"{test_name}.nds")
 
-    settings.ROM = NintendoDSRom.fromFile(rom_path)
+    DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
-    LOCATIONS["mercay_island_oshus_house_dig_spot"].set_location(request.param)
-
+    DigSpotLocation(5, "Map/isle_main/map00.bin/zmb/isle_main_00.zmb").set_location(request.param)
     DigSpotLocation.save_all()
 
-    settings.ROM.saveToFile(rom_path)
+    DigSpotLocation.ROM.saveToFile(rom_path)
 
     desmume_emulator.open_rom(rom_path)
 
