@@ -5,10 +5,10 @@ from ndspy import lz10, narc
 from zed.common import Game
 from zed.zmb import ZMB, MapObject
 
-from patcher import settings
+from ._location import Location
 
 
-class MapObjectLocation:
+class MapObjectLocation(Location):
     """These locations represent items found "inside" a map object.
 
     For example, items found in chests or that drop from rolling into a tree.
@@ -47,7 +47,9 @@ class MapObjectLocation:
                 self.zmb_file = zmb_file
 
         if self.zmb_file is None:
-            narc_file = narc.NARC(lz10.decompress(settings.ROM.getFileByName(self._narc_filepath)))
+            narc_file = narc.NARC(
+                lz10.decompress(self.__class__.ROM.getFileByName(self._narc_filepath))
+            )
             MapObjectLocation._narc_filename_mapping[narc_file] = self._narc_filepath
             self.zmb_file = ZMB(
                 game=Game.PhantomHourglass, data=narc_file.getFileByName(self._zmb_filepath)
@@ -96,6 +98,6 @@ class MapObjectLocation:
                         game=Game.PhantomHourglass
                     ),
                 )
-            settings.ROM.setFileByName(
+            cls.ROM.setFileByName(
                 MapObjectLocation._narc_filename_mapping[narc_file], lz10.compress(narc_file.save())
             )
