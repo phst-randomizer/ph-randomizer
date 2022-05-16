@@ -1,6 +1,6 @@
 from ndspy import code
 
-from ._location import Location
+from . import Location
 
 GD_MODELS = {
     0x00: None,
