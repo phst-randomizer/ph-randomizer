@@ -6,7 +6,7 @@ from ndspy.narc import NARC
 from zed.common import Game
 from zed.zmb import ZMB, Actor
 
-from ._location import Location
+from . import Location
 
 
 class DigSpotLocation(Location):

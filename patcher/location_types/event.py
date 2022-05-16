@@ -2,7 +2,7 @@ import struct
 
 from ndspy import bmg
 
-from ._location import Location
+from . import Location
 
 
 class EventLocation(Location):
