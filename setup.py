@@ -15,6 +15,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
+        "click",
         "ndspy==3.0.0",
         "zed @ git+https://github.com/phst-randomizer/zed.git",
     ],
