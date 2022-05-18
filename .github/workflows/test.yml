@@ -24,6 +24,25 @@ jobs:
           pip install tox
           tox
 
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Upgrade pip
+        run: pip install --upgrade pip --user
+
+      - name: Run tests
+        run: |
+          pip install tox
+          tox -e test
+
   generate-base-patch:
     name: Run patching toolchain and create base patch
     runs-on: ubuntu-latest
@@ -184,7 +203,7 @@ jobs:
       - name: Run tests
         run: |
           pip install tox
-          PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test
+          PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
         env:
           PH_ROM_PATH: out.nds
 

@@ -1,74 +1,25 @@
+from __future__ import annotations
+
 from enum import Enum
 import os
 from pathlib import Path
 import shutil
 import sys
-from typing import Union
 
-from desmume.controls import keymask
-from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from patcher import settings
-from patcher.location_types import DigSpotLocation
+from patcher.location_types import DigSpotLocation, IslandShopLocation
 from patcher.location_types.island_shop import GD_MODELS
-from patcher.locations import LOCATIONS
 
+# Not all tests require py-desmume, so if it's not installed we
+# just silently suppress the error:
+try:
+    from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 
-class DesmumeEmulator:
-    def __init__(self, py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window]):
-        self.emu = py_desmume_instance[0]
-        self.window = py_desmume_instance[1]
-
-    def open_rom(self, rom_path: str):
-        self.frame = 0
-        self.emu.open(rom_path)
-        self._next_frame()
-
-    def _next_frame(self):
-        self.emu.cycle()
-        self.frame += 1
-        if self.window is not None:
-            self.window.draw()
-            self.window.process_input()
-
-    def wait(self, frames: int):
-        """Idle the emulator for `frames` frames."""
-        starting_frame = self.frame
-        for _ in range(starting_frame, starting_frame + frames):
-            self._next_frame()
-
-    def button_input(self, buttons: Union[int, list[int]], frames: int = 1):
-        """
-        Press buttons.
-
-        Params:
-            buttons: A single button (int) to press, or a list of buttons to simultaneously press.
-            frames: Optional number of frames to hold button for.
-        """
-        if isinstance(buttons, int):
-            buttons = [buttons]
-        for button in buttons:
-            self.emu.input.keypad_add_key(keymask(button))
-        self.wait(frames + 1)
-        for button in buttons:
-            self.emu.input.keypad_rm_key(keymask(button))
-        self.wait(2)
-
-    def touch_input(self, position: tuple[int, int], frames: int = 1):
-        """
-        Touch screen at a given location.
-
-        Params:
-            position: tuple in the form of (x, y) representing the location to touch the screen.
-            frames: Optional number of frames to hold touch screen for.
-        """
-        x, y = position
-        self._next_frame()
-        self.emu.input.touch_set_pos(x, y)
-        self.wait(frames + 1)
-        self.emu.input.touch_release()
+    from tests.desmume_utils import DesmumeEmulator
+except ModuleNotFoundError:
+    pass
 
 
 @pytest.fixture(scope="session")
@@ -156,14 +107,17 @@ def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, requ
     )
     rom_path = str(tmp_path / f"{test_name}.nds")
 
-    settings.ROM = NintendoDSRom.fromFile(rom_path)
+    IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
-    locations = ["mercay_island_shop_shield", "mercay_island_shop_power_gem"]
+    locations = [
+        IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),  # shield in mercay shop
+        IslandShopLocation(31, 0x217EC68 - 0x217BCE0),  # power gem in mercay shop
+    ]
 
     for location in locations:
-        LOCATIONS[location].set_location(request.param)
+        location.set_location(request.param)
 
-    settings.ROM.saveToFile(rom_path)
+    IslandShopLocation.ROM.saveToFile(rom_path)
 
     desmume_emulator.open_rom(rom_path)
 
@@ -219,13 +173,12 @@ def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request
     )
     rom_path = str(tmp_path / f"{test_name}.nds")
 
-    settings.ROM = NintendoDSRom.fromFile(rom_path)
+    DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
-    LOCATIONS["mercay_island_oshus_house_dig_spot"].set_location(request.param)
-
+    DigSpotLocation(5, "Map/isle_main/map00.bin/zmb/isle_main_00.zmb").set_location(request.param)
     DigSpotLocation.save_all()
 
-    settings.ROM.saveToFile(rom_path)
+    DigSpotLocation.ROM.saveToFile(rom_path)
 
     desmume_emulator.open_rom(rom_path)
 

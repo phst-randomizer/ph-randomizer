@@ -6,10 +6,10 @@ from ndspy.narc import NARC
 from zed.common import Game
 from zed.zmb import ZMB, Actor
 
-from patcher import settings
+from . import Location
 
 
-class DigSpotLocation:
+class DigSpotLocation(Location):
     """These locations represent items that can be dug up with the shovel."""
 
     # Class variables that track open ZMB files. This is done for performance reasons; a single ZMB
@@ -36,7 +36,7 @@ class DigSpotLocation:
                 self.zmb_file = zmb_file
 
         if self.zmb_file is None:
-            narc_file = NARC(decompress(settings.ROM.getFileByName(self._narc_filepath)))
+            narc_file = NARC(decompress(self.__class__.ROM.getFileByName(self._narc_filepath)))
             DigSpotLocation._narc_filename_mapping[narc_file] = self._narc_filepath
             self.zmb_file = ZMB(
                 game=Game.PhantomHourglass, data=narc_file.getFileByName(self._zmb_filepath)
@@ -81,6 +81,6 @@ class DigSpotLocation:
                         game=Game.PhantomHourglass
                     ),
                 )
-            settings.ROM.setFileByName(
+            cls.ROM.setFileByName(
                 DigSpotLocation._narc_filename_mapping[narc_file], compress(narc_file.save())
             )

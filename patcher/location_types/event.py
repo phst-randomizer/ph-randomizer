@@ -2,10 +2,10 @@ import struct
 
 from ndspy import bmg
 
-from patcher import settings
+from . import Location
 
 
-class EventLocation:
+class EventLocation(Location):
     """These locations represent items given to the player by game events.
 
     Most commonly, these take the form of NPCs giving Link an item during dialog.
@@ -19,7 +19,7 @@ class EventLocation:
     def __init__(self, instruction_index: int, file_path: str, *args, **kwargs):
         self.instruction_index = instruction_index
         self.file_path = file_path
-        self.bmg_file = bmg.BMG(settings.ROM.getFileByName(self.file_path))
+        self.bmg_file = bmg.BMG(self.__class__.ROM.getFileByName(self.file_path))
         EventLocation._filename_to_bmg_mapping[self.bmg_file] = self.file_path
 
     def set_location(self, value: int):
@@ -32,4 +32,4 @@ class EventLocation:
     @classmethod
     def save_all(cls):
         for bmg_file, filename in EventLocation._filename_to_bmg_mapping.items():
-            settings.ROM.setFileByName(filename, bmg_file.save())
+            cls.ROM.setFileByName(filename, bmg_file.save())

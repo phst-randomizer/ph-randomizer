@@ -1,6 +1,6 @@
 from ndspy import code
 
-from patcher import settings
+from . import Location
 
 GD_MODELS = {
     0x00: None,
@@ -143,7 +143,7 @@ GD_MODELS = {
 }
 
 
-class IslandShopLocation:
+class IslandShopLocation(Location):
     """These locations represent items that can be purchased at island shops."""
 
     _overlay_table: dict[int, code.Overlay] = {}
@@ -155,9 +155,9 @@ class IslandShopLocation:
     def set_location(self, new_item_id: int):
         # Load arm9.bin and overlay table
         arm9_executable = bytearray(
-            code.MainCodeFile(settings.ROM.arm9, 0x02000000).save(compress=False)
+            code.MainCodeFile(self.__class__.ROM.arm9, 0x02000000).save(compress=False)
         )
-        overlay_table = settings.ROM.loadArm9Overlays()
+        overlay_table = self.__class__.ROM.loadArm9Overlays()
 
         # Get current values of the items we're about to change
         original_item_id: int = overlay_table[self.overlay_number].data[self.item_id_index]
@@ -201,11 +201,11 @@ class IslandShopLocation:
             # are an exception and do not require this step.
             assert original_item_id == 0x30
 
-        settings.ROM.files[overlay_table[self.overlay_number].fileID] = overlay_table[
+        self.__class__.ROM.files[overlay_table[self.overlay_number].fileID] = overlay_table[
             self.overlay_number
-        ].save(compress=True)
-        settings.ROM.arm9OverlayTable = code.saveOverlayTable(overlay_table)
-        settings.ROM.arm9 = arm9_executable
+        ].save(compress=False)
+        self.__class__.ROM.arm9OverlayTable = code.saveOverlayTable(overlay_table)
+        self.__class__.ROM.arm9 = arm9_executable
 
     @classmethod
     def save_all(cls):
