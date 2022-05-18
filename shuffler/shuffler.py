@@ -166,6 +166,7 @@ def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set
     type=click.Path(exists=True),
     help="File path to directory that contains aux data.",
 )
+@click.option("-l", "--logic-directory", required=True, type=click.Path(exists=True))
 @click.option(
     "-o",
     "--output",
@@ -173,10 +174,10 @@ def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set
     type=click.Path(exists=False, dir_okay=False),
     help="Path to save randomized aux data to.",
 )
-def shuffler(aux_data_directory: str, output: str | None):
+def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     global nodes, edges, visited_nodes, inventory
 
-    nodes, edges = parse()
+    nodes, edges = parse(Path(logic_directory))
 
     # Starting node is Mercay outside of Oshus's house.
     # This would need to be randomized to support entrance rando

@@ -153,10 +153,8 @@ def parse_area(lines: list[str]):
         parse_rooms(area_name, lines)
 
 
-def parse():
-    # logic_files = list(Path(__file__).parent.rglob("*.logic"))
-    # TODO: Limit to just Mercay for now
-    logic_files = [Path(__file__).parent / "logic" / "SW Sea" / "Mercay Island" / "Mercay.logic"]
+def parse(directory: Path):
+    logic_files = list(directory.rglob("*.logic"))
 
     for file in logic_files:
         with open(file, "r") as fd:
