@@ -163,14 +163,14 @@ def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set
     "-a",
     "--aux-data-directory",
     required=True,
-    type=str,
+    type=click.Path(exists=True),
     help="File path to directory that contains aux data.",
 )
 @click.option(
     "-o",
     "--output",
     default=None,
-    type=str,
+    type=click.Path(exists=False, dir_okay=False),
     help="Path to save randomized aux data to.",
 )
 def shuffler(aux_data_directory: str, output: str | None):
