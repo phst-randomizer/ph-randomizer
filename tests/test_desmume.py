@@ -4,7 +4,12 @@ from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 
 from tests.conftest import ITEM_MEMORY_ADDRESSES, DesmumeEmulator, ItemMemoryAddressType
-from tests.utils import equip_item, get_current_rupee_count, start_first_file, use_equipped_item
+from tests.desmume_utils import (
+    equip_item,
+    get_current_rupee_count,
+    start_first_file,
+    use_equipped_item,
+)
 
 
 def test_boot_new_game(base_rom_emu: DesmumeEmulator):
