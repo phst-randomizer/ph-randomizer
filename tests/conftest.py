@@ -1,16 +1,25 @@
+from __future__ import annotations
+
 from enum import Enum
 import os
 from pathlib import Path
 import shutil
 import sys
 
-from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 from ndspy.rom import NintendoDSRom
 import pytest
 
 from patcher.location_types import DigSpotLocation, IslandShopLocation
 from patcher.location_types.island_shop import GD_MODELS
-from tests.desmume_utils import DesmumeEmulator
+
+# Not all tests require py-desmume, so if it's not installed we
+# just silently suppress the error:
+try:
+    from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
+
+    from tests.desmume_utils import DesmumeEmulator
+except ModuleNotFoundError:
+    pass
 
 
 @pytest.fixture(scope="session")
