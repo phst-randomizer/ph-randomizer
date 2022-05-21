@@ -2,10 +2,11 @@ from pathlib import Path
 
 import click
 from ndspy import rom
-from util import load_aux_data, load_rom, patch_rom
+
+from patcher._util import load_aux_data, load_rom, patch_rom
 
 
-def patcher(
+def patch(
     aux_data_directory: str, input_rom_path: str, output_rom_path: str | None
 ) -> rom.NintendoDSRom:
     input_rom = load_rom(Path(input_rom_path))
@@ -38,7 +39,7 @@ def patcher(
     "-o", "--output-rom-path", default=None, type=str, help="Path to save patched ROM to."
 )
 def patcher_cli(aux_data_directory: str, input_rom_path: str, output_rom_path: str | None):
-    return patcher(aux_data_directory, input_rom_path, output_rom_path)
+    return patch(aux_data_directory, input_rom_path, output_rom_path)
 
 
 if __name__ == "__main__":

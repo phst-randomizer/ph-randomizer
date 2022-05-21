@@ -1,12 +1,13 @@
 import json
 import logging
-from parser import Descriptor, Edge, Node, parse
 from pathlib import Path
 from random import randint
 import sys
 from typing import Any
 
 import click
+
+from shuffler._parser import Descriptor, Edge, Node, parse
 
 logging.basicConfig(level=logging.INFO)
 
@@ -188,7 +189,7 @@ def traverse_graph(
     return False
 
 
-def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
+def shuffle(aux_data_directory: str, logic_directory: str, output: str | None):
     global nodes, edges, visited_nodes, inventory
 
     nodes, edges = parse(Path(logic_directory))
@@ -245,7 +246,7 @@ def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     help="Path to save randomized aux data to. Use -- to output to stdout.",
 )
 def shuffler_cli(aux_data_directory: str, logic_directory: str, output: str | None):
-    return shuffler(aux_data_directory, logic_directory, output)
+    return shuffle(aux_data_directory, logic_directory, output)
 
 
 if __name__ == "__main__":
