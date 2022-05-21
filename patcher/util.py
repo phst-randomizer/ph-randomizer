@@ -2,9 +2,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from items import ITEMS
-from location_types import EventLocation, IslandShopLocation, Location, MapObjectLocation
 from ndspy import rom
+
+from .items import ITEMS
+from .location_types import EventLocation, IslandShopLocation, Location, MapObjectLocation
 
 
 def load_rom(file: Path):

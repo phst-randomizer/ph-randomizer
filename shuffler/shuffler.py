@@ -1,12 +1,13 @@
 import json
 import logging
-from parser import Descriptor, Edge, Node, parse
 from pathlib import Path
 from random import randint
 import sys
 from typing import Any
 
 import click
+
+from .parser import Descriptor, Edge, Node, parse
 
 logging.basicConfig(level=logging.INFO)
 

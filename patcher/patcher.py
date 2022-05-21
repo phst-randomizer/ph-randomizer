@@ -2,7 +2,8 @@ from pathlib import Path
 
 import click
 from ndspy import rom
-from util import load_aux_data, load_rom, patch_rom
+
+from .util import load_aux_data, load_rom, patch_rom
 
 
 def patcher(
