@@ -202,7 +202,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "OutsideOshus.Outside"
         }
       ]
     },
