@@ -36,7 +36,8 @@
                     "chest",
                     "island_shop",
                     "tree",
-                    "freestanding"
+                    "freestanding",
+                    "on_enemy"
                   ]
                 },
                 "contents": {
