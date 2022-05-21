@@ -201,8 +201,8 @@ def traverse_graph(
     "-o",
     "--output",
     default=None,
-    type=click.Path(exists=False, dir_okay=False),
-    help="Path to save randomized aux data to.",
+    type=click.Path(exists=False, dir_okay=True, file_okay=False),
+    help="Path to save randomized aux data to. Use -- to output to stdout.",
 )
 def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     global nodes, edges, visited_nodes, inventory
@@ -235,8 +235,11 @@ def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     if output == "--":
         print(json.dumps(areas), file=sys.stdout)
     elif output is not None:
-        with open(output, "w") as fd:
-            fd.write(json.dumps(areas))
+        output_path = Path(output)
+        output_path.mkdir(parents=True, exist_ok=True)
+        for area in areas:
+            with open(output_path / f"{area['name']}.json", "w") as fd:
+                fd.write(json.dumps(area))
 
     return areas
 
