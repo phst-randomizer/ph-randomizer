@@ -150,8 +150,20 @@ def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set
                 for door in room["doors"]:
                     if door["name"] == door_name:
                         for other_node in nodes:
-                            # TODO: this only supports links with format `room.node`.
-                            if door["link"] in [".".join([other_node.room, other_node.node])]:
+                            link: str = door["link"]
+
+                            # TODO: remove this if statement once aux data is complete
+                            if "todo" in link.lower():
+                                continue
+
+                            # Append current area if the linked node doesn't have one specified
+                            # (i.e. `Room1.Node1` is fine and will be transformed to `Area1.Room1.Node1`)
+                            if link.count(".") == 1:
+                                link = f"{node.area}.{link}"
+                            elif link.count(".") != 2:
+                                raise ValueError(f'ERROR: "{link}" is not a valid node name.')
+
+                            if link == other_node.name:
                                 logging.debug(f"{node.name} -> {other_node.name}")
                                 if traverse_graph(other_node, area_aux_data, visited_rooms):
                                     return True
