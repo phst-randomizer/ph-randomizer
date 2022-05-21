@@ -35,7 +35,8 @@
                     "npc",
                     "chest",
                     "island_shop",
-                    "tree"
+                    "tree",
+                    "freestanding"
                   ]
                 },
                 "contents": {
