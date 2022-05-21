@@ -188,22 +188,6 @@ def traverse_graph(
     return False
 
 
-@click.command()
-@click.option(
-    "-a",
-    "--aux-data-directory",
-    required=True,
-    type=click.Path(exists=True),
-    help="File path to directory that contains aux data.",
-)
-@click.option("-l", "--logic-directory", required=True, type=click.Path(exists=True))
-@click.option(
-    "-o",
-    "--output",
-    default=None,
-    type=click.Path(exists=False, dir_okay=True, file_okay=False),
-    help="Path to save randomized aux data to. Use -- to output to stdout.",
-)
 def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     global nodes, edges, visited_nodes, inventory
 
@@ -244,5 +228,25 @@ def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     return areas
 
 
+@click.command()
+@click.option(
+    "-a",
+    "--aux-data-directory",
+    required=True,
+    type=click.Path(exists=True),
+    help="File path to directory that contains aux data.",
+)
+@click.option("-l", "--logic-directory", required=True, type=click.Path(exists=True))
+@click.option(
+    "-o",
+    "--output",
+    default=None,
+    type=click.Path(exists=False, dir_okay=True, file_okay=False),
+    help="Path to save randomized aux data to. Use -- to output to stdout.",
+)
+def shuffler_cli(aux_data_directory: str, logic_directory: str, output: str | None):
+    return shuffler(aux_data_directory, logic_directory, output)
+
+
 if __name__ == "__main__":
-    shuffler()
+    shuffler_cli()
