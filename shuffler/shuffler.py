@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.INFO)
 END_NODE = "Mercay.AboveMercayTown.Island"  # Name of node that player must reach to beat the game
 
 # Global variables
-visited_nodes: set[str]  # Tracks "visited" nodes to avoid infinite recursion
 nodes: list[Node]  # List of nodes that make up the world graph
 edges: dict[str, list[Edge]]  # List of edges that connect nodes. Maps node names to edges.
 inventory: list[str]
@@ -91,7 +90,9 @@ def get_chest_contents(
     raise Exception(f"{chest_name} not found in the given aux data.")
 
 
-def traverse_graph(node: Node, aux_data: list[dict[Any, Any]], visited_rooms: set[str]):
+def traverse_graph(
+    node: Node, aux_data: list[dict[Any, Any]], visited_rooms: set[str], visited_nodes: set[str]
+):
     """
     Traverse the graph (i.e. the nodes and edges) of the current room, starting at `node`.
 
@@ -99,28 +100,32 @@ def traverse_graph(node: Node, aux_data: list[dict[Any, Any]], visited_rooms: se
         `node`: The node to start the traversal at
         `area_aux_data`: The aux data for the current area.
         `visited_rooms`: Rooms that have been visited already in this traversal.
-                         Note that this is not a global variable, since we only want to limit rooms
-                         visited in the _current_ traversal. Future traversals may need to revisit
-                         this room to reach new nodes that were previously inaccessible.
+        `visited_nodes`: Same as `visited_rooms`, but for nodes.
 
     Returns:
         `True` if the `END_NODE` was reached, `False` otherwise.
     """
-    global nodes, edges, visited_nodes, inventory
+    global nodes, edges, inventory
     logging.debug(node.name)
 
     if node.name == END_NODE:
         return True
 
     doors_to_enter: list[str] = []
-    visited_nodes.add(node.name)  # Acknowledge this node as "visited"
 
     # For the current node, find all chests + "collect" their items and note every door so
     # we can go through them later
     for node_info in node.contents:
         if node_info.type == Descriptor.CHEST.value:
-            inventory.append(get_chest_contents(node.area, node.room, node_info.data, aux_data))
-        elif node_info.type in (
+            item = get_chest_contents(node.area, node.room, node_info.data, aux_data)
+            if item not in inventory:
+                inventory.append(item)
+                # Reset visited nodes and rooms because we may now be able to reach
+                # nodes we couldn't before with this new item
+                visited_nodes.clear()
+                visited_rooms.clear()
+    for node_info in node.contents:
+        if node_info.type in (
             Descriptor.DOOR.value,
             Descriptor.ENTRANCE.value,
             Descriptor.EXIT.value,
@@ -136,13 +141,15 @@ def traverse_graph(node: Node, aux_data: list[dict[Any, Any]], visited_rooms: se
                 doors_to_enter.append(full_room_name)
                 visited_rooms.add(full_room_name)
 
+    visited_nodes.add(node.name)  # Acknowledge this node as "visited"
+
     # Check which edges are traversable and do so if they are
     for edge in edges[node.name]:
         if edge.dest.name in visited_nodes:
             continue
         if edge_is_traversable(edge):
             logging.debug(f"{edge.source.name} -> {edge.dest.name}")
-            if traverse_graph(edge.dest, aux_data, visited_rooms):
+            if traverse_graph(edge.dest, aux_data, visited_rooms, visited_nodes):
                 return True
 
     # Go through each door and traverse each of their room graphs
@@ -174,7 +181,9 @@ def traverse_graph(node: Node, aux_data: list[dict[Any, Any]], visited_rooms: se
 
                                     if link == other_node.name:
                                         logging.debug(f"{node.name} -> {other_node.name}")
-                                        if traverse_graph(other_node, aux_data, visited_rooms):
+                                        if traverse_graph(
+                                            other_node, aux_data, visited_rooms, visited_nodes
+                                        ):
                                             return True
     return False
 
@@ -215,11 +224,10 @@ def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     while True:
         tries += 1
         # Initialize global variables
-        visited_nodes = set()  # Tracks "visited" nodes to avoid infinite recursion
         inventory = []
 
         areas = randomize_aux_data(Path(aux_data_directory))
-        if traverse_graph(starting_node, areas, set()):
+        if traverse_graph(starting_node, areas, set(), set()):
             break
 
     logging.debug(f"{tries} tries were needed to get a valid seed.")
