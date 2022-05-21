@@ -75,7 +75,7 @@
         },
         {
           "name": "Boat",
-          "link": "TODO - this would connect to the `Sea` area"
+          "link": "Sea.SW.East"
         },
         {
           "name": "West",
@@ -118,7 +118,7 @@
         },
         {
           "name": "Grotto",
-          "link": "TODO - this would connect to the `MercayGrotto` area"
+          "link": "MercayGrotto.F1.Lower"
         }
       ]
     },
@@ -202,7 +202,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "OutsideOshus.Outside"
         }
       ]
     },
@@ -260,7 +260,7 @@
         },
         {
           "name": "ToTOK",
-          "link": "TODO - link to Temple of Ocean King area"
+          "link": "TempleOfTheOceanKingLobby.Main.Main"
         },
         {
           "name": "Grotto",

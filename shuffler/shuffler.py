@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.INFO)
 END_NODE = "Mercay.AboveMercayTown.Island"  # Name of node that player must reach to beat the game
 
 # Global variables
-visited_nodes: set[str]  # Tracks "visited" nodes to avoid infinite recursion
 nodes: list[Node]  # List of nodes that make up the world graph
 edges: dict[str, list[Edge]]  # List of edges that connect nodes. Maps node names to edges.
 inventory: list[str]
@@ -41,7 +40,6 @@ def randomize_aux_data(aux_data_directory: Path):
         aux_data_directory: Directory that contains the initial aux data
     """
     areas = load_aux_data(aux_data_directory)
-    areas = [areas[0]]  # TODO: for now, just shuffle Mercay
 
     # List of every item in the game
     chest_items: list[str] = []
@@ -79,16 +77,22 @@ def edge_is_traversable(edge: Edge):
     return False
 
 
-def get_chest_contents(chest_name: str, area_aux_data: dict[Any, Any]) -> str:
-    for room in area_aux_data["rooms"]:
-        if "chests" in room:
-            for chest in room["chests"]:
-                if chest["name"] == chest_name:
-                    return chest["contents"]
+def get_chest_contents(
+    area_name: str, room_name: str, chest_name: str, aux_data: list[dict[Any, Any]]
+) -> str:
+    for area in aux_data:
+        if area_name == area["name"]:
+            for room in area["rooms"]:
+                if room_name == room["name"]:
+                    for chest in room["chests"]:
+                        if chest["name"] == chest_name:
+                            return chest["contents"]
     raise Exception(f"{chest_name} not found in the given aux data.")
 
 
-def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set[str]):
+def traverse_graph(
+    node: Node, aux_data: list[dict[Any, Any]], visited_rooms: set[str], visited_nodes: set[str]
+):
     """
     Traverse the graph (i.e. the nodes and edges) of the current room, starting at `node`.
 
@@ -96,28 +100,32 @@ def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set
         `node`: The node to start the traversal at
         `area_aux_data`: The aux data for the current area.
         `visited_rooms`: Rooms that have been visited already in this traversal.
-                         Note that this is not a global variable, since we only want to limit rooms
-                         visited in the _current_ traversal. Future traversals may need to revisit
-                         this room to reach new nodes that were previously inaccessible.
+        `visited_nodes`: Same as `visited_rooms`, but for nodes.
 
     Returns:
         `True` if the `END_NODE` was reached, `False` otherwise.
     """
-    global nodes, edges, visited_nodes, inventory
+    global nodes, edges, inventory
     logging.debug(node.name)
 
     if node.name == END_NODE:
         return True
 
     doors_to_enter: list[str] = []
-    visited_nodes.add(node.name)  # Acknowledge this node as "visited"
 
     # For the current node, find all chests + "collect" their items and note every door so
     # we can go through them later
     for node_info in node.contents:
         if node_info.type == Descriptor.CHEST.value:
-            inventory.append(get_chest_contents(node_info.data, area_aux_data))
-        elif node_info.type in (
+            item = get_chest_contents(node.area, node.room, node_info.data, aux_data)
+            if item not in inventory:
+                inventory.append(item)
+                # Reset visited nodes and rooms because we may now be able to reach
+                # nodes we couldn't before with this new item
+                visited_nodes.clear()
+                visited_rooms.clear()
+    for node_info in node.contents:
+        if node_info.type in (
             Descriptor.DOOR.value,
             Descriptor.ENTRANCE.value,
             Descriptor.EXIT.value,
@@ -133,40 +141,50 @@ def traverse_graph(node: Node, area_aux_data: dict[Any, Any], visited_rooms: set
                 doors_to_enter.append(full_room_name)
                 visited_rooms.add(full_room_name)
 
+    visited_nodes.add(node.name)  # Acknowledge this node as "visited"
+
     # Check which edges are traversable and do so if they are
     for edge in edges[node.name]:
         if edge.dest.name in visited_nodes:
             continue
         if edge_is_traversable(edge):
             logging.debug(f"{edge.source.name} -> {edge.dest.name}")
-            if traverse_graph(edge.dest, area_aux_data, visited_rooms):
+            if traverse_graph(edge.dest, aux_data, visited_rooms, visited_nodes):
                 return True
 
     # Go through each door and traverse each of their room graphs
     for door_name in doors_to_enter:
-        door_name = door_name.split(".")[-1]  # Remove area and room if they are specified
-        for room in area_aux_data["rooms"]:
-            if node.room == room["name"]:
-                for door in room["doors"]:
-                    if door["name"] == door_name:
-                        for other_node in nodes:
-                            link: str = door["link"]
+        area_name = door_name.split(".")[0]
+        room_name = door_name.split(".")[1]
+        door_name = door_name.split(".")[2]
+        for area in aux_data:
+            if area_name == area["name"]:
+                for room in area["rooms"]:
+                    if room_name == room["name"]:
+                        for door in room["doors"]:
+                            if door_name == door["name"]:
+                                for other_node in nodes:
+                                    link: str = door["link"]
 
-                            # TODO: remove this if statement once aux data is complete
-                            if "todo" in link.lower():
-                                continue
+                                    # TODO: remove this if statement once aux data is complete
+                                    if "todo" in link.lower():
+                                        continue
 
-                            # Append current area if the linked node doesn't have one specified
-                            # (i.e. `Room1.Node1` is fine and will be transformed to `Area1.Room1.Node1`)
-                            if link.count(".") == 1:
-                                link = f"{node.area}.{link}"
-                            elif link.count(".") != 2:
-                                raise ValueError(f'ERROR: "{link}" is not a valid node name.')
+                                    # Append current area if the linked node doesn't have one specified
+                                    # (i.e. `Room1.Node1` is fine and will be transformed to `Area1.Room1.Node1`)
+                                    if link.count(".") == 1:
+                                        link = f"{node.area}.{link}"
+                                    elif link.count(".") != 2:
+                                        raise ValueError(
+                                            f'ERROR: "{link}" is not a valid node name.'
+                                        )
 
-                            if link == other_node.name:
-                                logging.debug(f"{node.name} -> {other_node.name}")
-                                if traverse_graph(other_node, area_aux_data, visited_rooms):
-                                    return True
+                                    if link == other_node.name:
+                                        logging.debug(f"{node.name} -> {other_node.name}")
+                                        if traverse_graph(
+                                            other_node, aux_data, visited_rooms, visited_nodes
+                                        ):
+                                            return True
     return False
 
 
@@ -206,12 +224,10 @@ def shuffler(aux_data_directory: str, logic_directory: str, output: str | None):
     while True:
         tries += 1
         # Initialize global variables
-        visited_nodes = set()  # Tracks "visited" nodes to avoid infinite recursion
         inventory = []
 
         areas = randomize_aux_data(Path(aux_data_directory))
-        area = areas[0]  # TODO: for now, just shuffle Mercay
-        if traverse_graph(starting_node, area, set()):
+        if traverse_graph(starting_node, areas, set(), set()):
             break
 
     logging.debug(f"{tries} tries were needed to get a valid seed.")

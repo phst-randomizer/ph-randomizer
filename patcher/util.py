@@ -94,6 +94,14 @@ def patch_rom(aux_data: dict[Any, Any], input_rom: rom.NintendoDSRom) -> rom.Nin
                             patch_tree(chest)
                         case "dig":
                             pass  # TODO: implement this
+                        case "freestanding":
+                            pass  # TODO: implement this
+                        case "on_enemy":
+                            # TODO: is this needed? It represents items that are
+                            # carried by enemies and dropped, like keys on
+                            # phantoms or rats. This *might* be the same as
+                            # freestanding; more research is needed
+                            pass  # TODO: implement this
                         case other:
                             raise NotImplementedError(f'Unknown location type "{other}"')
 
