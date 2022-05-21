@@ -275,8 +275,8 @@
           "name": "PowerGem",
           "type": "chest",
           "contents": "power_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": -1
+          "zmb_file_path": "Map/isle_main/map16.bin/zmb/isle_main_16.zmb",
+          "zmb_mapobject_index": 2
         }
       ],
       "doors": [
@@ -297,8 +297,8 @@
           "name": "BridgeChest",
           "type": "chest",
           "contents": "courage_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": -1
+          "zmb_file_path": "Map/isle_main/map18.bin/zmb/isle_main_18.zmb",
+          "zmb_mapobject_index": 4
         }
       ],
       "doors": [
