@@ -143,8 +143,8 @@
           "name": "QuiverUpgrade",
           "type": "island_shop",
           "contents": "quiver_upgrade",
-          "overlay": -1,
-          "overlay_offset": "TODO"
+          "overlay": 31,
+          "overlay_offset": "0x2ea0"
         },
         {
           "name": "RandomTreasure",
