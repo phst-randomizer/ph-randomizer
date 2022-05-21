@@ -24,6 +24,7 @@ ITEMS = {
     "fishing_rod": 0x24,
     "cannon": 0x25,
     "sun_key": 0x26,
+    "quiver_upgrade": 0x28,
     "king_key": 0x2C,
     "power_gem": 0x2D,
     "wisdom_gem": 0x2E,
