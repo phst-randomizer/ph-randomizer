@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from shuffler.parser import parse
+from shuffler._parser import parse
 
 
 def test_parse(tmp_path: Path):
