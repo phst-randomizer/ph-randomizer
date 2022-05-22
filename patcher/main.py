@@ -7,7 +7,7 @@ from patcher._util import load_aux_data, load_rom, patch_rom
 
 
 def patch(
-    aux_data_directory: str, input_rom_path: str, output_rom_path: str | None
+    aux_data_directory: str, input_rom_path: str, output_rom_path: str | None = None
 ) -> rom.NintendoDSRom:
     input_rom = load_rom(Path(input_rom_path))
     new_aux_data = load_aux_data(Path(aux_data_directory))

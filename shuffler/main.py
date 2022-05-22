@@ -189,7 +189,7 @@ def traverse_graph(
     return False
 
 
-def shuffle(aux_data_directory: str, logic_directory: str, output: str | None):
+def shuffle(aux_data_directory: str, logic_directory: str, output: str | None = None):
     global nodes, edges, visited_nodes, inventory
 
     nodes, edges = parse(Path(logic_directory))
