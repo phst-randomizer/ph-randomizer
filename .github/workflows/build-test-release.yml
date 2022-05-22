@@ -1,4 +1,4 @@
-name: test
+name: build-test-release
 on:
   push:
     paths-ignore:
@@ -44,6 +44,7 @@ jobs:
           tox -e test
 
   check-logic:
+    name: Validate logic
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -122,6 +123,7 @@ jobs:
           fi
 
   check-aux-data:
+    name: Validate aux data
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -300,3 +302,45 @@ jobs:
       - name: Cleanup
         if: always()
         run: rm -rf *.nds
+
+  build:
+    name: Build randomizer
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      # TODO: this fails on windows for some reason.
+      # - name: Upgrade pip
+      #   run: pip install --upgrade pip
+
+      - name: Install randomizer dependencies
+        run: pip install -e .
+
+      - name: Install pyinstaller
+        run: pip install -U pyinstaller
+
+      - name: Build randomizer executable
+        run: pyinstaller --onefile randomizer.py
+
+      - name: Get current commit hash
+        id: commit-hash
+        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
+          path: dist/
+
+# TODO: add job for releasing
