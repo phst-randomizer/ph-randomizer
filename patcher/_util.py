@@ -107,7 +107,6 @@ def patch_rom(aux_data: dict[Any, Any], input_rom: rom.NintendoDSRom) -> rom.Nin
                             raise NotImplementedError(f'Unknown location type "{other}"')
 
     # Write changes to the in-memory ROM
-    for cls in [EventLocation, IslandShopLocation, MapObjectLocation]:
-        cls.save_all()
+    Location.save_all()
 
     return input_rom
