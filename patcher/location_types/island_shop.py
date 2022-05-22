@@ -49,8 +49,8 @@ GD_MODELS = {
     0x2B: "",  # TODO: what is this?
     0x2C: "key_ki",
     0x2D: "minaP",
-    0x2E: "minaY",
-    0x2F: "minaC",
+    0x2E: "minaC",
+    0x2F: "minaY",
     0x30: "sango",
     0x31: "perlA",
     0x32: "perlB",
