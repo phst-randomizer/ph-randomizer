@@ -112,6 +112,7 @@ def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, requ
     locations = [
         IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),  # shield in mercay shop
         IslandShopLocation(31, 0x217EC68 - 0x217BCE0),  # power gem in mercay shop
+        IslandShopLocation(31, 0x217EC34 - 0x217BCE0),  # treasure item in mercay shop
     ]
 
     for location in locations:
