@@ -1,9 +1,6 @@
 name: build-test-release
 on:
   push:
-    paths-ignore:
-        - shuffler/auxiliary/**
-        - shuffler/logic/**
 jobs:
   lint-type-check:
     name: Lint and type check code
