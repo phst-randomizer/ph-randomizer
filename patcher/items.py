@@ -29,5 +29,5 @@ ITEMS = {
     "power_gem": 0x2D,
     "wisdom_gem": 0x2E,
     "courage_gem": 0x2F,
-    "common_treasure": 0x86,  # TODO: figure out difference between this and 0x7D
+    "common_treasure": 0x30,  # TODO: randomize this at run-time
 }
