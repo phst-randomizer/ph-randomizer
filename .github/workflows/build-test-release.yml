@@ -1,4 +1,4 @@
-name: test
+name: build-test-release
 on:
   push:
     paths-ignore:
@@ -42,6 +42,97 @@ jobs:
         run: |
           pip install tox
           tox -e test
+
+  check-logic:
+    name: Validate logic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Run basic syntax check
+      - name: Get the CI tool
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: Ibot02/tmcr-newlogic-ci
+          tag: "v1.0"
+          filename: "tmcr-newlogic-ci"
+          tarBall: false
+          zipBall: false
+
+      - name: Make it executable
+        run: chmod +x "$GITHUB_WORKSPACE/tmcr-newlogic-ci"
+
+      - name: Run the CI tool
+        run: |
+          shopt -s globstar
+          for file in **/*.logic; do
+            ./tmcr-newlogic-ci "$file"
+          done;
+
+      # Run more advanced checks
+      - name: Checkout rando-shuffler repo
+        uses: actions/checkout@v3
+        with:
+          repository: minishmaker/rando-shuffler
+          path: rando-shuffler
+
+      - name: Get cache key
+        id: shuffler-cache-key
+        run: echo "::set-output name=key::$(git rev-parse HEAD)"
+        shell: bash
+        working-directory: rando-shuffler
+
+      - uses: actions/cache@v3
+        id: rando-shuffler-cache
+        with:
+          path: rando-shuffler
+          key: ${{ steps.shuffler-cache-key.outputs.key }}
+
+      - name: Compile rando-shuffler
+        if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
+        run: cargo build
+        working-directory: rando-shuffler
+        env:
+          CARGO_TERM_COLOR: always
+
+      - name: Make it executable
+        run: chmod +x rando-shuffler/target/debug/rando_shuffler
+
+      - name: Run the shuffler
+        run: |
+          shopt -s globstar
+          find rando-shuffler/ -name "*.logic" -type f -delete # remove test files
+          file_count=0
+          failed=0;
+          for file in **/*.logic; do
+            echo "$file... ";
+            status=0
+            rando-shuffler/target/debug/rando_shuffler "$file" || status=1
+            if [[ $status != 0 ]]; then
+              failed=$((failed + 1));
+            else
+              echo " PASSED";
+            fi
+            echo "-------------------------------"
+            echo ""
+            file_count=$((file_count + 1))
+          done;
+          echo "RESULTS: $((file_count - failed)) / $file_count passed"
+          if [[ $failed != 0 ]]; then
+            exit 1;
+          fi
+
+  check-aux-data:
+    name: Validate aux data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate aux data
+        uses: walbo/validate-json@v1.1.0
+        with:
+          files: shuffler/auxiliary/**/*.json
+          schema-version: draft-07
+
 
   generate-base-patch:
     name: Run patching toolchain and create base patch
@@ -211,3 +302,45 @@ jobs:
       - name: Cleanup
         if: always()
         run: rm -rf *.nds
+
+  build:
+    name: Build randomizer
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      # TODO: this fails on windows for some reason.
+      # - name: Upgrade pip
+      #   run: pip install --upgrade pip
+
+      - name: Install randomizer dependencies
+        run: pip install -e .
+
+      - name: Install pyinstaller
+        run: pip install -U pyinstaller
+
+      - name: Build randomizer executable
+        run: pyinstaller --onefile randomizer.py
+
+      - name: Get current commit hash
+        id: commit-hash
+        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
+          path: dist/
+
+# TODO: add job for releasing
