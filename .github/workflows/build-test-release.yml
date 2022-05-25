@@ -302,6 +302,8 @@ jobs:
 
   build:
     name: Build randomizer
+    needs:
+      - generate-base-patch
     strategy:
       fail-fast: false
       matrix:
@@ -331,6 +333,15 @@ jobs:
       - name: Build randomizer executable
         run: pyinstaller --onefile randomizer.py
 
+      - name: Download base rom patch from previous workflow
+        uses: actions/download-artifact@v3
+        with:
+          name: patch.bps
+
+      # TODO: bundle this with pyinstaller instead
+      - name: Move base rom patch to dist/ directory to bundle it with the randomizer
+        run: mv patch.bps dist/
+
       - name: Get current commit hash
         id: commit-hash
         run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
@@ -340,4 +351,49 @@ jobs:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
           path: dist/
 
-# TODO: add job for releasing
+  release:
+    name: Publish a release
+    # Require all tests to pass before a release is possible
+    needs: 
+      - build
+      - lint-type-check
+      - tests
+      - check-logic
+      - check-aux-data
+      - test-desmume
+    # Only create a release if a tag was pushed to main
+    if: "startsWith(github.ref, 'refs/tags/') && github.ref == 'refs/heads/main'"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get current commit hash
+        id: commit-hash
+        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+
+      - name: Get version string
+        id: version-string
+        run: echo "::set-output name=version::$(git describe --tags)"
+
+      - name: Download built executables
+        uses: actions/download-artifact@v3
+
+      - name: Replace commit hash with version string
+        run: |
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_ubuntu-latest ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_macos-latest ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_windows-latest ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+
+      - name: Zip up executables
+        run: |
+          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
+          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
+          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+
+      - name: Create a GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip
