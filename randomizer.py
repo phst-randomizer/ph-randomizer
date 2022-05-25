@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 from tempfile import TemporaryDirectory
 
 import click
@@ -9,6 +10,16 @@ from shuffler import shuffle
 # TODO: this is an example script for how to call the patcher/shuffler.
 # At some point this will be fleshed out into a full CLI (and eventually
 # GUI) to run the full randomizer.
+
+
+def is_frozen():
+    """
+    Whether or not the app is being executed as part of a script or a frozen executable.
+
+    This can be used to determine if the app is running as a regular python script,
+    or if it's a bundled PyInstaller executable.
+    """
+    return getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS")
 
 
 @click.command()
@@ -27,8 +38,12 @@ from shuffler import shuffle
     help="Path to save randomized ROM to.",
 )
 def randomizer(input_rom_path: str, output_rom_path: str):
-    aux_data_directory = str(Path(__file__).parent / "shuffler" / "auxiliary")
-    logic_directory = str(Path(__file__).parent / "shuffler" / "logic")
+    if is_frozen():
+        aux_data_directory = str(Path(sys._MEIPASS) / "auxiliary")  # type: ignore
+        logic_directory = str(Path(sys._MEIPASS) / "logic")  # type: ignore
+    else:
+        aux_data_directory = str(Path(__file__).parent / "shuffler" / "auxiliary")
+        logic_directory = str(Path(__file__).parent / "shuffler" / "logic")
 
     with TemporaryDirectory() as tmp_dir:
         # Run the shuffler
