@@ -331,7 +331,7 @@ jobs:
         run: pip install -U pyinstaller
 
       - name: Build randomizer executable
-        run: pyinstaller --onefile randomizer.py
+        run: pyinstaller randomizer.spec
 
       - name: Download base rom patch from previous workflow
         uses: actions/download-artifact@v3
