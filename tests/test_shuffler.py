@@ -5,12 +5,15 @@ from shuffler._parser import Node, NodeContents, parse
 
 def test_parser(tmp_path: Path):
     test_logic = """
+    # A comment at the top of the file!
     area TestArea:
         room TestRoom1:
+        # Another comment!
             node TestNode1:
                 chest Chest1
                 door Door1
-            
+
+#A line that only contains a comment, nothing else
             node TestNode2:
                 chest Chest2
                 door Door2
@@ -21,7 +24,9 @@ def test_parser(tmp_path: Path):
 
             TestNode1 <-> TestNode3
             TestNode2 -> TestNode3
-
+            
+            # TestNode3 -> TestNode2
+  #
         room TestRoom2:
             node TestNode4:
                 chest Chest3
