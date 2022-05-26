@@ -133,3 +133,6 @@ data/
 overlay/
 *.bin
 *.nds
+
+# PyCharm
+.idea/
