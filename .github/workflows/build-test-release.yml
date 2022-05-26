@@ -225,6 +225,9 @@ jobs:
         run: rm -rf *.nds
 
   test-desmume:
+    # NOTE: This job is only run when one or more files in the base/ directory are modified,
+    # OR when a tag is pushed (i.e. when a new release is cut). The `if` statements on each
+    # step check for this.
     name: Run py-desmume tests against base-patched ROM if `base/` directory has changed
     needs: generate-base-patch
     # Windows is used to run the desmume-based tests because py-desmume has issues running on headless ubuntu
@@ -238,37 +241,40 @@ jobs:
             # Also retrieve previous commit so we can check if there are relevant changes
             fetch-depth: 2
 
+      # Check what files changed in the last commit. This info is used in every other step in this
+      # to determine whether to run the base patch tests (they are only run when files in the base/
+      # directory are modified).
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v21
 
       - uses: actions/download-artifact@v3
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         with:
           name: patch.bps
 
       - name: Set up MinGW
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         uses: egor-tensin/setup-mingw@v2
         with:
           platform: x64
 
       - name: Clone Flips repo
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         uses: actions/checkout@v3
         with:
           repository: Alcaro/Flips
           path: Flips
 
       - name: Get latest commit hash from Flips repo
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         id: flips-hash
         run: |
           echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
         working-directory: Flips
 
       - name: Cache Flips executable
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         uses: actions/cache@v2
         id: flips-cache
         env:
@@ -278,13 +284,13 @@ jobs:
           key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
 
       - name: Compile Flips tool
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         run: |
           mingw32-make CFLAGS=-O2
         working-directory: Flips
 
       - name: Set up Python
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         uses: actions/setup-python@v3
         with:
           python-version: '3.10'
@@ -295,18 +301,18 @@ jobs:
 #         run: pip install --upgrade pip --user
 
       - name: Fetch PH rom
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         run: |
           pip install gdown
           gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
 
       - name: Patch the rom
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         run: |
           ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
 
       - name: Run tests
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         run: |
           pip install tox
           PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
@@ -314,7 +320,7 @@ jobs:
           PH_ROM_PATH: out.nds
 
       - name: Cleanup
-        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
         run: rm -rf *.nds
 
   build:
