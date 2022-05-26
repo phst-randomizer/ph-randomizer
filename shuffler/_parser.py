@@ -157,8 +157,14 @@ def parse(directory: Path):
     logic_files = list(directory.rglob("*.logic"))
 
     for file in logic_files:
+        lines: list[str] = []
         with open(file, "r") as fd:
-            lines = [line.strip() for line in fd.readlines() if line and line.strip()]
+            for line in fd.readlines():
+                line = line.strip()  # strip off leading and trailing whitespace
+                if "#" in line:
+                    line = line[: line.index("#")]  # remove any comments
+                if line:
+                    lines.append(line)
         parse_area(lines)
 
     return nodes, edges
