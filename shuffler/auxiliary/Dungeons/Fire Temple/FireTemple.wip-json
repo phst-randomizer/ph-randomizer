@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "FireTemple",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "KeesesSmallKey",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "ChestNearLavaPit",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "F1"
+    }
+  ]
+}

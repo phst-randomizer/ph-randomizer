@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "Boat",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "TradingSequence",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

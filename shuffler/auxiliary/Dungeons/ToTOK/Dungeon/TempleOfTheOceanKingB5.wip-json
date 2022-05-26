@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../aux-schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "AfterSwitch",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BigChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB4",
+          "link": ""
+        },
+        {
+          "name": "ToB6",
+          "link": ""
+        },
+        {
+          "name": "ToB4Shortcut",
+          "link": ""
+        },
+        {
+          "name": "ToB6",
+          "link": ""
+        }
+      ],
+      "name": "B5"
+    }
+  ]
+}

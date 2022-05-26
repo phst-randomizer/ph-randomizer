@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../aux-schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [],
+      "name": "B3Chart"
+    }
+  ]
+}

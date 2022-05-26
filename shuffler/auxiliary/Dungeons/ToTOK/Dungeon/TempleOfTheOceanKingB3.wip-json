@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../aux-schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "TopLeft",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BottomRight",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "PhantomKey",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "EyeChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Killer",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BehindDoor",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToChartRoomShortcut",
+          "link": ""
+        },
+        {
+          "name": "ToChartRoom",
+          "link": ""
+        }
+      ],
+      "name": "B3"
+    }
+  ]
+}

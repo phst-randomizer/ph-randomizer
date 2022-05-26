@@ -1,0 +1,82 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "Cannon",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "BeeChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "NearRocks",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": ""
+        },
+        {
+          "name": "HouseLeft",
+          "link": ""
+        },
+        {
+          "name": "GrottoEntry",
+          "link": ""
+        },
+        {
+          "name": "GrottoStairs",
+          "link": ""
+        },
+        {
+          "name": "HouseRight",
+          "link": ""
+        }
+      ],
+      "name": "Outside"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        },
+        {
+          "name": "ToRight",
+          "link": ""
+        }
+      ],
+      "name": "EddoHouseLeft"
+    },
+    {
+      "chests": [
+        {
+          "name": "Cannon",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "SalvageArm",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        },
+        {
+          "name": "ToLeft",
+          "link": ""
+        }
+      ],
+      "name": "EddoHouseRight"
+    }
+  ]
+}

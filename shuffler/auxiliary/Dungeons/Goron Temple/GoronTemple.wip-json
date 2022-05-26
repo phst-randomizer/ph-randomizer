@@ -1,0 +1,165 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "GoronTemple",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "AfterSwitch",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "EyeShot",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Entrance",
+          "link": ""
+        },
+        {
+          "name": "RightBombableWall",
+          "link": ""
+        },
+        {
+          "name": "LeftBombableWall",
+          "link": ""
+        },
+        {
+          "name": "ToB1Shortcut",
+          "link": ""
+        }
+      ],
+      "name": "F1"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "LeftDoor",
+          "link": ""
+        },
+        {
+          "name": "RightDoor",
+          "link": ""
+        },
+        {
+          "name": "ToB1",
+          "link": ""
+        }
+      ],
+      "name": "BombableF1"
+    },
+    {
+      "chests": [
+        {
+          "name": "BigChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "EyeSlugSlayer",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToBombableF1",
+          "link": ""
+        },
+        {
+          "name": "ToF1Shortcut",
+          "link": ""
+        },
+        {
+          "name": "ToB2",
+          "link": ""
+        }
+      ],
+      "name": "B1"
+    },
+    {
+      "chests": [
+        {
+          "name": "EyeSlugSlayer",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BossKey",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB1",
+          "link": ""
+        },
+        {
+          "name": "ToB3",
+          "link": ""
+        },
+        {
+          "name": "ToB3BossKey",
+          "link": ""
+        }
+      ],
+      "name": "B2"
+    },
+    {
+      "chests": [
+        {
+          "name": "MiniblinSlayer",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB2Right",
+          "link": ""
+        },
+        {
+          "name": "ToB4",
+          "link": ""
+        }
+      ],
+      "name": "B3"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToB3",
+          "link": ""
+        },
+        {
+          "name": "ToBoss",
+          "link": ""
+        }
+      ],
+      "name": "B4"
+    },
+    {
+      "chests": [
+        {
+          "name": "Crimsonine",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToBoss",
+          "link": ""
+        }
+      ],
+      "name": "CrimsonineRoom"
+    }
+  ]
+}

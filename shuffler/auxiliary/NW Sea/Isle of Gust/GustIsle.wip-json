@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "GustIsle",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": ""
+        },
+        {
+          "name": "Grotto",
+          "link": ""
+        },
+        {
+          "name": "Cave",
+          "link": ""
+        }
+      ],
+      "name": "BeforeCave"
+    }
+  ]
+}

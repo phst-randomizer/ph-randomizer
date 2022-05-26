@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "CraykBossRoom",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Sand",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "SpiritOfCourage",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "HeartContainer",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToDungeon",
+          "link": ""
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

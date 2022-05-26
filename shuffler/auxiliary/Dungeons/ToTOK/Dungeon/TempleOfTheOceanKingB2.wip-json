@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../../aux-schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Key",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Killer",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BombchuPath",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB1",
+          "link": ""
+        },
+        {
+          "name": "ToB3",
+          "link": ""
+        }
+      ],
+      "name": "B2"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "FrostIsle",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "LedgeChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BigGreenRupee",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": ""
+        },
+        {
+          "name": "SmartAnoukiHouse",
+          "link": ""
+        },
+        {
+          "name": "SensitiveAnoukiHouse",
+          "link": ""
+        },
+        {
+          "name": "ChiefHouse",
+          "link": ""
+        },
+        {
+          "name": "ToNorth",
+          "link": ""
+        },
+        {
+          "name": "ToCave",
+          "link": ""
+        }
+      ],
+      "name": "Port"
+    },
+    {
+      "chests": [],
+      "doors": [],
+      "name": "AnoukiChiefHouse"
+    }
+  ]
+}

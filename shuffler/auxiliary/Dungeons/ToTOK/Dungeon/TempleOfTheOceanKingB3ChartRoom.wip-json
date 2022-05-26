@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../aux-schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "NWChartChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB3Ledge",
+          "link": ""
+        },
+        {
+          "name": "ToB3Main",
+          "link": ""
+        },
+        {
+          "name": "ToB4",
+          "link": ""
+        }
+      ],
+      "name": "B3Chart"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "Bannan",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "IslandChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "WayfarerHouse",
+          "link": ""
+        }
+      ],
+      "name": "OutsideLeft"
+    },
+    {
+      "chests": [
+        {
+          "name": "CannonMiniGameBombBag",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "LeftIslandChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "RightIslandChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [],
+      "name": "OutsideRight"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "OutsideLeft",
+          "link": ""
+        },
+        {
+          "name": "OutsideRight",
+          "link": ""
+        }
+      ],
+      "name": "BannanGrotto"
+    }
+  ]
+}

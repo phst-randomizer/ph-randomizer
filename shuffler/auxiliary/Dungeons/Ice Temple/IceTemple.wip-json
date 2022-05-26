@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "IceTemple",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ],
+      "name": "F1"
+    }
+  ]
+}
