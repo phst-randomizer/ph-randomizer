@@ -189,7 +189,21 @@ def traverse_graph(
     return False
 
 
-def shuffle(seed: str | None, aux_data_directory: str, logic_directory: str, output: str | None = None):
+def shuffle(
+    seed: str | None, aux_data_directory: str, logic_directory: str, output: str | None = None
+) -> list[dict]:
+    """
+    Given aux data and logic, shuffles the aux data and returns it.
+
+    Params:
+        seed: Some string that will be hashed and used as a seed for the RNG.
+        aux_data_directory: Path to a directory containing initial, unrandomized aux data
+        logic_directory: Path to a directory containing graph logic files
+        output: Optional directory to output randomized aux data to.
+
+    Returns:
+        Randomized aux data.
+    """
     global nodes, edges, visited_nodes, inventory
 
     if seed is not None:
