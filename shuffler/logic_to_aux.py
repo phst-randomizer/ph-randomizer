@@ -21,9 +21,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
         nodes = parse_area(lines)
 
         path_to_schema = "../"
-        directories_in_between = max(
-            str(file_directory).count("/"), str(file_directory).count("\\")
-        )
+        directories_in_between = str(file_directory.as_posix()).count("/")
 
         for _ in range(directories_in_between):
             path_to_schema += "../"
