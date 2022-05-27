@@ -48,7 +48,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
             rooms[node.room] = room
 
         for room_name, room_content in rooms.items():
-            current_rooms = logic.get("rooms") or []
+            current_rooms = logic.get("rooms", [])
 
             room_content["name"] = room_name
 
