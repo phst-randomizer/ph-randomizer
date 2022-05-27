@@ -33,10 +33,10 @@ def logic_to_aux(logic_directory: str, output: str | None):
         }
 
         for node in nodes:
-            room = rooms.get(node.room) or {}
+            room = rooms.get(node.room, {})
 
-            chests = room.get("chests") or []
-            doors = room.get("doors") or []
+            chests = room.get("chests", [])
+            doors = room.get("doors", [])
             for content in node.contents:
                 match content.type:
                     case "chest":
