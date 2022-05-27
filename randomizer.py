@@ -37,7 +37,8 @@ def is_frozen():
     required=True,
     help="Path to save randomized ROM to.",
 )
-def randomizer(input_rom_path: str, output_rom_path: str):
+@click.option("-s", "--seed", type=str, required=False, help="Seed for the randomizer.")
+def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
     if is_frozen():
         aux_data_directory = str(Path(sys._MEIPASS) / "auxiliary")  # type: ignore
         logic_directory = str(Path(sys._MEIPASS) / "logic")  # type: ignore
@@ -47,7 +48,7 @@ def randomizer(input_rom_path: str, output_rom_path: str):
 
     with TemporaryDirectory() as tmp_dir:
         # Run the shuffler
-        shuffle(aux_data_directory, logic_directory, tmp_dir)
+        shuffle(seed, aux_data_directory, logic_directory, tmp_dir)
         # Run the patcher
         patch(tmp_dir, input_rom_path, output_rom_path)
 

@@ -1,5 +1,8 @@
 from pathlib import Path
 
+import pytest
+
+from shuffler import shuffle
 from shuffler._parser import Node, NodeContents, parse
 
 
@@ -66,3 +69,12 @@ def test_parser(tmp_path: Path):
     assert nodes == expected_nodes
 
     # TODO: test edges once edge parsing is implemented
+
+
+@pytest.mark.parametrize("seed", ["test", "another_test", "ANOTHER_TEST!!", "this_is_a_real_seed"])
+def test_seeds(seed: str, aux_data_directory: str, logic_directory: str):
+    """Test that running the shuffler with the same seed multiple times produces identical aux data."""
+    first = shuffle(seed, aux_data_directory, logic_directory)
+    second = shuffle(seed, aux_data_directory, logic_directory)
+    third = shuffle(seed, aux_data_directory, logic_directory)
+    assert first == second == third

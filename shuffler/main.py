@@ -1,7 +1,7 @@
 import json
 import logging
 from pathlib import Path
-from random import randint
+import random
 import sys
 from typing import Any
 
@@ -57,7 +57,7 @@ def randomize_aux_data(aux_data_directory: Path):
         for room in area["rooms"]:
             if "chests" in room:
                 for chest in room["chests"]:
-                    chest["contents"] = chest_items.pop(randint(0, len(chest_items) - 1))
+                    chest["contents"] = chest_items.pop(random.randint(0, len(chest_items) - 1))
     return areas
 
 
@@ -189,8 +189,25 @@ def traverse_graph(
     return False
 
 
-def shuffle(aux_data_directory: str, logic_directory: str, output: str | None = None):
+def shuffle(
+    seed: str | None, aux_data_directory: str, logic_directory: str, output: str | None = None
+) -> list[dict]:
+    """
+    Given aux data and logic, shuffles the aux data and returns it.
+
+    Params:
+        seed: Some string that will be hashed and used as a seed for the RNG.
+        aux_data_directory: Path to a directory containing initial, unrandomized aux data
+        logic_directory: Path to a directory containing graph logic files
+        output: Optional directory to output randomized aux data to.
+
+    Returns:
+        Randomized aux data.
+    """
     global nodes, edges, visited_nodes, inventory
+
+    if seed is not None:
+        random.seed(seed)
 
     nodes, edges = parse(Path(logic_directory))
 
@@ -245,8 +262,11 @@ def shuffle(aux_data_directory: str, logic_directory: str, output: str | None = 
     type=click.Path(exists=False, dir_okay=True, file_okay=False),
     help="Path to save randomized aux data to. Use -- to output to stdout.",
 )
-def shuffler_cli(aux_data_directory: str, logic_directory: str, output: str | None):
-    return shuffle(aux_data_directory, logic_directory, output)
+@click.option("-s", "--seed", type=str, required=False, help="Seed for the RNG.")
+def shuffler_cli(
+    aux_data_directory: str, logic_directory: str, output: str | None, seed: str | None
+):
+    return shuffle(seed, aux_data_directory, logic_directory, output)
 
 
 if __name__ == "__main__":
