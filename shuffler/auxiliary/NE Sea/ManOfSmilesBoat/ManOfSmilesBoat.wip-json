@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "ManOfSmilesBoat",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "NormalThing",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "MysteriousThing",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

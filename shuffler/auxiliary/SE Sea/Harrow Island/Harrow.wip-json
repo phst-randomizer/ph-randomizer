@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "HarrowIsland",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "TreasureMap",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": ""
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

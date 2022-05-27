@@ -1,0 +1,223 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "GoronIsland",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": ""
+        },
+        {
+          "name": "LowerHouse",
+          "link": ""
+        },
+        {
+          "name": "ToNorth",
+          "link": ""
+        },
+        {
+          "name": "Shop",
+          "link": ""
+        },
+        {
+          "name": "LeftmostHouse",
+          "link": ""
+        },
+        {
+          "name": "RightmostHouse",
+          "link": ""
+        },
+        {
+          "name": "ToEast",
+          "link": ""
+        },
+        {
+          "name": "ToEastLedge",
+          "link": ""
+        }
+      ],
+      "name": "LowerLeft"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "NoRockGoronHouse"
+    },
+    {
+      "chests": [
+        {
+          "name": "BombchuBagUpgrade",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "RandomTreasure",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "GoronShop"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "OneRockSmallGoronHouse"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "ThreeRocksGoronHouse"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToWest",
+          "link": ""
+        },
+        {
+          "name": "ToWestLedge",
+          "link": ""
+        },
+        {
+          "name": "LeftmostHouse",
+          "link": ""
+        },
+        {
+          "name": "CoastHouse",
+          "link": ""
+        },
+        {
+          "name": "ChiefHouse",
+          "link": ""
+        },
+        {
+          "name": "ToNorth",
+          "link": ""
+        }
+      ],
+      "name": "LowerRight"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "OneRockBigGoronHouse"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "TwoRocksGoronHouse"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ],
+      "name": "GoronChiefHouse"
+    },
+    {
+      "chests": [
+        {
+          "name": "BombchuChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToSouth",
+          "link": ""
+        },
+        {
+          "name": "ToWestUpper",
+          "link": ""
+        },
+        {
+          "name": "ToWestLowest",
+          "link": ""
+        },
+        {
+          "name": "ToWestUppest",
+          "link": ""
+        },
+        {
+          "name": "ToWestLower",
+          "link": ""
+        }
+      ],
+      "name": "UpperRight"
+    },
+    {
+      "chests": [
+        {
+          "name": "MazeChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToEastLowest",
+          "link": ""
+        },
+        {
+          "name": "ToEastUppest",
+          "link": ""
+        },
+        {
+          "name": "ToEastLower",
+          "link": ""
+        },
+        {
+          "name": "ToEastUpper",
+          "link": ""
+        },
+        {
+          "name": "GoronTemple",
+          "link": ""
+        },
+        {
+          "name": "ToSouth",
+          "link": ""
+        }
+      ],
+      "name": "UpperLeft"
+    }
+  ]
+}

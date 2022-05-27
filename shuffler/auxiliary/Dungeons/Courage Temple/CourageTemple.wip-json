@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "CourageTemple",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "AfterSpikeTraps",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BombableWallChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "PolsKey",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        },
+        {
+          "name": "ToB1Arena",
+          "link": ""
+        },
+        {
+          "name": "ToB1PolsVoice",
+          "link": ""
+        },
+        {
+          "name": "ToF2ElectricMaze",
+          "link": ""
+        },
+        {
+          "name": "ToB1InvisibleMaze",
+          "link": ""
+        }
+      ],
+      "name": "F1"
+    }
+  ]
+}

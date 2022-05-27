@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../aux-schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "EyeChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "PhantomKiller",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB5",
+          "link": ""
+        },
+        {
+          "name": "Hourglass",
+          "link": ""
+        },
+        {
+          "name": "Triforce",
+          "link": ""
+        }
+      ],
+      "name": "B6"
+    }
+  ]
+}

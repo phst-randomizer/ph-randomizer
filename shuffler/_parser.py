@@ -151,6 +151,11 @@ def parse_area(lines: list[str]):
         area_name = line.split(" ")[1].rstrip(":")
         logging.debug(f"area {area_name}")
         parse_rooms(area_name, lines)
+    return nodes
+
+
+def clear_nodes():
+    nodes.clear()
 
 
 def parse(directory: Path):

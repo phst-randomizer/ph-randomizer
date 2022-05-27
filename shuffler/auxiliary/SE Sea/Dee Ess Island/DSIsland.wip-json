@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../aux-schema.json",
+  "name": "DeeEssIsland",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "BlowInTheMicrophone",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "GoronGame",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "HinoxSlayer",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "UndergroundGem",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": ""
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

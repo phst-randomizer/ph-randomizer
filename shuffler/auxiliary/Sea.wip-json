@@ -1,0 +1,73 @@
+{
+  "$schema": "../aux-schema.json",
+  "name": "Sea",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Treasure1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure3",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure4",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "SunKey",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure5",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure6",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure7",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "MercayPort",
+          "link": ""
+        },
+        {
+          "name": "CannonIslePort",
+          "link": ""
+        },
+        {
+          "name": "EmberPort",
+          "link": ""
+        },
+        {
+          "name": "SpiritIslePort",
+          "link": ""
+        },
+        {
+          "name": "MolidaPort",
+          "link": ""
+        }
+      ],
+      "name": "SW"
+    }
+  ]
+}
