@@ -16,6 +16,7 @@
             .importobj "src/get_npc_model_offset.o"
             .include "_island_shop_files.asm"
 
+            .align
             @spawn_custom_item_with_nkey:
                 ldr r0, =0x21608a8
                 ldr r0, [r0]
