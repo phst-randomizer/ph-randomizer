@@ -128,7 +128,6 @@ jobs:
         uses: walbo/validate-json@v1.1.0
         with:
           files: shuffler/auxiliary/**/*.json
-          schema-version: draft-07
 
 
   generate-base-patch:
