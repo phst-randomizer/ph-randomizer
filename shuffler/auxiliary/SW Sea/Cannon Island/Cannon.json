@@ -1,0 +1,89 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Cannon",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "BeeChest",
+          "type": "chest",
+          "contents": "treasure_map_8",
+          "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
+          "zmb_mapobject_index": 183
+        },
+        {
+          "name": "NearRocks",
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
+          "zmb_mapobject_index": 185
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": "Sea.SW.East"
+        },
+        {
+          "name": "HouseLeft",
+          "link": "EddoHouseLeft.Main"
+        },
+        {
+          "name": "GrottoEntry",
+          "link": "CannonGrotto.Main.Main"
+        },
+        {
+          "name": "GrottoStairs",
+          "link": "CannonGrotto.Main.Main"
+        },
+        {
+          "name": "HouseRight",
+          "link": "EddoHouseRight.Main"
+        }
+      ],
+      "name": "Outside"
+    },
+    {
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Outside.Port"
+        },
+        {
+          "name": "ToRight",
+          "link": "EddoHouseRight.Main"
+        }
+      ],
+      "name": "EddoHouseLeft"
+    },
+    {
+      "chests": [
+        {
+          "name": "Cannon",
+          "type": "npc",
+          "contents": "cannon",
+          "bmg_file_path": "English/Message/torii.bmg",
+          "bmg_instruction_index": 35
+        },
+        {
+          "name": "SalvageArm",
+          "type": "npc",
+          "contents": "salvage_arm",
+          "bmg_file_path": "English/Message/torii.bmg",
+          "bmg_instruction_index": 73
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Outside.BombGarden"
+        },
+        {
+          "name": "ToLeft",
+          "link": "EddoHouseLeft.ToEddo"
+        }
+      ],
+      "name": "EddoHouseRight"
+    }
+  ]
+}
