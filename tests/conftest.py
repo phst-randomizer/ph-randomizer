@@ -200,7 +200,7 @@ def aux_data_directory(tmp_path: Path):
     mercay_json["rooms"][0]["chests"].append(
         {
             "name": "test",
-            "type": "chest",
+            "type": "npc",
             "contents": "bombs",
             "bmg_file_path": "TODO",
             "bmg_instruction_index": -1,
