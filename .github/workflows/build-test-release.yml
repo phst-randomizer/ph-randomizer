@@ -124,6 +124,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Upgrade pip
+        run: pip install --upgrade pip --user
+
+      - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
+        run: |
+          pip install pydantic
+          python shuffler/aux_models.py
+          git diff --exit-code
+          if [ $? -ne 0 ] 
+          then
+            exit 1
+          fi
+
       - name: Validate aux data
         uses: walbo/validate-json@v1.1.0
         with:
