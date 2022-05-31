@@ -3,11 +3,11 @@ import logging
 from pathlib import Path
 import random
 import sys
-from typing import Any
 
 import click
 
 from shuffler._parser import Descriptor, Edge, Node, parse
+from shuffler.aux_models import Area
 
 logging.basicConfig(level=logging.INFO)
 
@@ -23,10 +23,10 @@ def load_aux_data(directory: Path):
     # Find all aux data files in the given directory
     aux_files = list(directory.rglob("*.json"))
 
-    areas: list[dict] = []
+    areas: list[Area] = []
     for file in aux_files:
         with open(file, "r") as fd:
-            areas.append(json.load(fd))
+            areas.append(Area(**json.load(fd)))
     return areas
 
 
@@ -47,17 +47,15 @@ def randomize_aux_data(aux_data_directory: Path):
 
     # Record all items in the game
     for area in areas:
-        for room in area["rooms"]:
-            if "chests" in room:
-                for chest in room["chests"]:
-                    chest_items.append(chest["contents"])
+        for room in area.rooms:
+            for chest in room.chests or []:
+                chest_items.append(chest.contents)
 
     # Randomize the items
     for area in areas:
-        for room in area["rooms"]:
-            if "chests" in room:
-                for chest in room["chests"]:
-                    chest["contents"] = chest_items.pop(random.randint(0, len(chest_items) - 1))
+        for room in area.rooms:
+            for chest in room.chests or []:
+                chest.contents = chest_items.pop(random.randint(0, len(chest_items) - 1))
     return areas
 
 
@@ -79,20 +77,20 @@ def edge_is_traversable(edge: Edge):
 
 
 def get_chest_contents(
-    area_name: str, room_name: str, chest_name: str, aux_data: list[dict[Any, Any]]
+    area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
 ) -> str:
     for area in aux_data:
-        if area_name == area["name"]:
-            for room in area["rooms"]:
-                if room_name == room["name"]:
-                    for chest in room["chests"]:
-                        if chest["name"] == chest_name:
-                            return chest["contents"]
+        if area_name == area.name:
+            for room in area.rooms:
+                if room_name == room.name:
+                    for chest in room.chests or []:
+                        if chest_name == chest.name:
+                            return chest.contents
     raise Exception(f"{chest_name} not found in the given aux data.")
 
 
 def traverse_graph(
-    node: Node, aux_data: list[dict[Any, Any]], visited_rooms: set[str], visited_nodes: set[str]
+    node: Node, aux_data: list[Area], visited_rooms: set[str], visited_nodes: set[str]
 ):
     """
     Traverse the graph (i.e. the nodes and edges) of the current room, starting at `node`.
@@ -159,13 +157,13 @@ def traverse_graph(
         room_name = door_name.split(".")[1]
         door_name = door_name.split(".")[2]
         for area in aux_data:
-            if area_name == area["name"]:
-                for room in area["rooms"]:
-                    if room_name == room["name"]:
-                        for door in room["doors"]:
-                            if door_name == door["name"]:
+            if area_name == area.name:
+                for room in area.rooms:
+                    if room_name == room.name:
+                        for door in room.doors:
+                            if door_name == door.name:
                                 for other_node in nodes:
-                                    link: str = door["link"]
+                                    link = door.link
 
                                     # TODO: remove this if statement once aux data is complete
                                     if "todo" in link.lower():
@@ -240,8 +238,8 @@ def shuffle(
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
         for area in areas:
-            with open(output_path / f"{area['name']}.json", "w") as fd:
-                fd.write(json.dumps(area))
+            with open(output_path / f"{area.name}.json", "w") as fd:
+                fd.write(area.json())
 
     return areas
 

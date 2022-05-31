@@ -25,7 +25,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
 
         for _ in range(directories_in_between):
             path_to_schema += "../"
-        path_to_schema += "aux-schema.json"
+        path_to_schema += "aux_schema.json"
 
         logic: dict[str, Any] = {
             "$schema": str(path_to_schema),
