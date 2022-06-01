@@ -43,8 +43,8 @@ class OnEnemy(Check):
 
 
 class Door(BaseModel):
-    name: str = Field(..., description="The name of this door")
-    link: str = Field(..., description="Descriptor where the door leads")
+    name: str = Field(..., description="The name of this exit")
+    link: str = Field(..., description="The `entrance` or `door` where this exit leads.")
 
 
 class Room(BaseModel):
@@ -57,7 +57,7 @@ class Room(BaseModel):
     )
     doors: list[Door] = Field(
         ...,
-        description="All doors that lead to a different room or area",
+        description="All doors in this room that lead to a different room or area",
         min_items=1,
         unique_items=True,
     )
