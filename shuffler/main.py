@@ -165,6 +165,11 @@ def traverse_graph(
                                 for other_node in nodes:
                                     link = door.link
 
+                                    # Remove the `door`/`entrance` that this `door`/`exit` links to.
+                                    # It is only used for entrance randomization; for chest
+                                    # randomization, we don't care about it.
+                                    link = ".".join(link.split(".")[:-1])
+
                                     # TODO: remove this if statement once aux data is complete
                                     if "todo" in link.lower():
                                         continue
