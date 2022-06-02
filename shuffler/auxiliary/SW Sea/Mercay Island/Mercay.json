@@ -16,19 +16,23 @@
       "doors": [
         {
           "name": "North",
-          "link": "EnemyBamboo.South"
+          "link": "EnemyBamboo.South.South"
         },
         {
           "name": "OshussHouse",
-          "link": "OshussHouse.Main"
+          "link": "OshussHouse.Main.Outside"
         },
         {
           "name": "RockHouse",
-          "link": "RockHouse.Main"
+          "link": "RockHouse.Main.Outside"
         },
         {
           "name": "East",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.West"
+        },
+        {
+          "name": "OshusCave",
+          "link": "OshusCave.Main.Exit"
         }
       ]
     },
@@ -37,7 +41,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "OutsideOshus.Outside"
+          "link": "OutsideOshus.Outside.OshussHouse"
         }
       ]
     },
@@ -54,40 +58,44 @@
       ],
       "doors": [
         {
+          "name": "Grotto",
+          "link": "MercayGrotto.F2.EastExit.East"
+        },
+        {
           "name": "Tavern",
-          "link": "Tavern.Main"
+          "link": "Tavern.Main.Outside"
         },
         {
           "name": "Shop",
-          "link": "MercayShop.Main"
+          "link": "MercayShop.Main.Outside"
         },
         {
           "name": "Shipyard",
-          "link": "Shipyard.Main"
+          "link": "Shipyard.Main.Outside"
         },
         {
           "name": "House",
-          "link": "MercayHouse.Main"
+          "link": "MercayHouse.Main.Outside"
         },
         {
           "name": "TreasureSelling",
-          "link": "TreasureSelling.Main"
+          "link": "TreasureSelling.Main.Outside"
         },
         {
           "name": "Boat",
-          "link": "Sea.SW.East"
+          "link": "Sea.SW.Mercay.MercayPort"
         },
         {
           "name": "West",
-          "link": "OutsideOshus.East"
+          "link": "OutsideOshus.East.East"
         },
         {
           "name": "NorthMain",
-          "link": "AboveMercayTown.Main"
+          "link": "AboveMercayTown.Main.South"
         },
         {
           "name": "NorthLedge",
-          "link": "AboveMercayTown.Ledge"
+          "link": "AboveMercayTown.Ledge.SouthLedge"
         }
       ]
     },
@@ -105,7 +113,7 @@
       "doors": [
         {
           "name": "Exit",
-          "link": "OutsideOshus.Outside"
+          "link": "OutsideOshus.Outside.OshusCave"
         }
       ]
     },
@@ -114,11 +122,11 @@
       "doors": [
         {
           "name": "South",
-          "link": "OutsideOshus.Outside"
+          "link": "OutsideOshus.Outside.North"
         },
         {
           "name": "Grotto",
-          "link": "MercayGrotto.F1.Lower"
+          "link": "MercayGrotto.F1.Lower.West"
         }
       ]
     },
@@ -157,7 +165,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.Shop"
         }
       ]
     },
@@ -166,7 +174,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.Tavern"
         }
       ]
     },
@@ -175,7 +183,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.TreasureSelling"
         }
       ]
     },
@@ -184,7 +192,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.House"
         }
       ]
     },
@@ -193,7 +201,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.Shipyard"
         }
       ]
     },
@@ -202,7 +210,7 @@
       "doors": [
         {
           "name": "Outside",
-          "link": "OutsideOshus.Outside"
+          "link": "OutsideOshus.Outside.RockHouse"
         }
       ]
     },
@@ -211,27 +219,27 @@
       "doors": [
         {
           "name": "South",
-          "link": "MercayTown.Main"
+          "link": "MercayTown.Main.NorthMain"
         },
         {
           "name": "West",
-          "link": "PathToToTOK.Main"
+          "link": "PathToToTOK.Main.East"
         },
         {
           "name": "ToBridgeCave",
-          "link": "BridgeCave.Main"
+          "link": "BridgeCave.Main.West"
         },
         {
           "name": "Grotto",
-          "link": "GrottoToLedge.Down"
+          "link": "GrottoToLedge.Down.South"
         },
         {
           "name": "SouthLedge",
-          "link": "MercayTown.Ledge"
+          "link": "MercayTown.Ledge.NorthLedge"
         },
         {
           "name": "IslandGrotto",
-          "link": "BridgeCave.Main"
+          "link": "BridgeCave.Main.East"
         }
       ],
       "chests": [
@@ -256,15 +264,15 @@
       "doors": [
         {
           "name": "East",
-          "link": "AboveMercayTown.Main"
+          "link": "AboveMercayTown.Main.West"
         },
         {
           "name": "ToTOK",
-          "link": "TempleOfTheOceanKingLobby.Main.Main"
+          "link": "TempleOfTheOceanKingLobby.Main.Main.Outside"
         },
         {
           "name": "Grotto",
-          "link": "GrottoToLedge.Up"
+          "link": "GrottoToLedge.Up.Left"
         }
       ]
     },
@@ -282,11 +290,11 @@
       "doors": [
         {
           "name": "Left",
-          "link": "PathToToTOK.Main"
+          "link": "PathToToTOK.BombableWall.Grotto"
         },
         {
           "name": "South",
-          "link": "AboveMercayTown.Ledge"
+          "link": "AboveMercayTown.Ledge.Grotto"
         }
       ]
     },
@@ -304,11 +312,11 @@
       "doors": [
         {
           "name": "West",
-          "link": "AboveMercayTown.Main"
+          "link": "AboveMercayTown.HiddenBombableWall.ToBridgeCave"
         },
         {
           "name": "East",
-          "link": "AboveMercayTown.Island"
+          "link": "AboveMercayTown.Island.IslandGrotto"
         }
       ]
     }
