@@ -5,6 +5,7 @@ area Mercay:
       door North
       door OshussHouse
       door RockHouse
+      door OshusCave
     node East:
       door East
     Outside <-> East: flag BridgeRepaired
@@ -15,6 +16,7 @@ area Mercay:
 
   room MercayTown:
     node Main:
+      door Grotto
       door Tavern
       door Shop
       door Shipyard
