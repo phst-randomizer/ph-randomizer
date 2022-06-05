@@ -25,7 +25,7 @@ RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/
 RUN apt-get update && apt-get install -y winehq-stable
 # Install python dependencies
 RUN apt-get install -y python3-pip python3-pil
-RUN pip3 install click ndspy==3.0.0
+RUN pip3 install click ndspy==4.0.0
 ADD misc/* /app/
 ADD src/* /app/src/
 ADD Makefile /app
