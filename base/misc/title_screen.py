@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PIL import Image, ImageDraw
 import click
-from ndspy import graphics2D, lz10, narc, rom
+from ndspy import color, lz10, narc, rom
 
 
 class AutoList(list):
@@ -17,6 +17,8 @@ def extract_image(image: bytes, palette: list[tuple[int, int, int, int]]) -> Ima
     for y in range(128):
         for x in range(256):
             px = palette[image[y * 256 + x]]
+            # RGB values are off by a factor of 8 in ndspy 4.0.0 for some reason
+            px = (px[0] * 8, px[1] * 8, px[2] * 8, px[3] * 8)
             img.putpixel((x, y), px)
     return img
 
@@ -33,7 +35,8 @@ def insert_image(img: Image) -> tuple[bytes, bytes]:
                 palette.append(px)
                 image[y * 256 + x] = len(palette) - 1
     assert len(palette) <= 256, "Error: image contains more than 256 colors"
-    return bytes(image), graphics2D.savePalette([(r, g, b, 0) for (r, g, b) in palette])
+    # Divide by 8 b/c RGB values are off by a factor of 8 in ndspy 4.0.0 for some reason
+    return bytes(image), color.savePalette([(r // 8, g // 8, b // 8, 0) for (r, g, b) in palette])
 
 
 @click.command()
@@ -88,7 +91,7 @@ def title_screen(insert: bool, input: str, output: str, image: str, version_stri
 
     else:
         image_file: bytes = narc_file.getFileByName("title.ntft")
-        palette = graphics2D.loadPalette(narc_file.getFileByName("title.ntfp"))
+        palette = color.loadPalette(narc_file.getFileByName("title.ntfp"))
         extracted_image: Image = extract_image(image_file, palette)
         if not output.endswith(".bmp"):
             output = f"{output}.bmp"

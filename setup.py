@@ -16,7 +16,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "click",
-        "ndspy==3.0.0",
+        "ndspy>=4.0.0",
         "pydantic",
         "zed @ git+https://github.com/phst-randomizer/zed.git",
     ],
