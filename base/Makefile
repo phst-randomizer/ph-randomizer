@@ -41,18 +41,18 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 	truncate -s -12 arm9_original.bin
 
 	# Decompress BLZ-compressed binaries
-	./blz -d arm9_original.bin
+	ndspy_codeCompression decompress arm9_original.bin arm9_original.bin
 	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		./blz -d overlay/$$file; \
+		ndspy_codeCompression decompress overlay/$$file overlay/$$file; \
 	done
 
 	# Patch the binaries with our custom code
 	./armips src/main.asm
 
 	# Recompress the binaries
-	./blz -eo arm9_compressed.bin
+	ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin
 	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		./blz -eo overlay/$$file; \
+		ndspy_codeCompression compress overlay/$$file overlay/$$file; \
 	done
 
 	# Combine arm9.bin back into a single file

@@ -16,8 +16,6 @@ WORKDIR /app
 COPY --from=compile_armips /armips/armips /app
 COPY --from=compile_ndstool /ndstool/ndstool /app
 RUN apt-get update && apt-get install -y gcc software-properties-common
-RUN git clone https://github.com/phst-randomizer/nds-compressors.git
-RUN gcc nds-compressors/blz.c -o blz && chmod +x ./blz
 RUN wget -O fixy9.exe https://github.com/StraDaMa/Legend-of-Zelda-Phantom-Hourglass-D-Pad-Patch/raw/master/fixy9.exe
 RUN dpkg --add-architecture i386 
 RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
