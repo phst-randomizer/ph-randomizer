@@ -73,31 +73,30 @@ def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Nintend
     for area in aux_data:
         for room in area.rooms:
             for chest in room.chests or []:
-                match chest.type:
-                    case "chest":
-                        assert isinstance(chest, Chest)
-                        patch_chest(chest)
-                    case "npc":
-                        assert isinstance(chest, Npc)
-                        patch_npc(chest)
-                    case "island_shop":
-                        assert isinstance(chest, IslandShop)
-                        patch_island_shop(chest)
-                    case "tree":
-                        assert isinstance(chest, Tree)
-                        patch_tree(chest)
-                    case "dig":
-                        pass  # TODO: implement this
-                    case "freestanding":
-                        pass  # TODO: implement this
-                    case "on_enemy":
-                        # TODO: is this needed? It represents items that are
-                        # carried by enemies and dropped, like keys on
-                        # phantoms or rats. This *might* be the same as
-                        # freestanding; more research is needed
-                        pass  # TODO: implement this
-                    case other:
-                        raise NotImplementedError(f'Unknown location type "{other}"')
+                if chest.type == "chest":
+                    assert isinstance(chest, Chest)
+                    patch_chest(chest)
+                elif chest.type == "npc":
+                    assert isinstance(chest, Npc)
+                    patch_npc(chest)
+                elif chest.type == "island_shop":
+                    assert isinstance(chest, IslandShop)
+                    patch_island_shop(chest)
+                elif chest.type == "tree":
+                    assert isinstance(chest, Tree)
+                    patch_tree(chest)
+                elif chest.type == "dig":
+                    pass  # TODO: implement this
+                elif chest.type == "freestanding":
+                    pass  # TODO: implement this
+                elif chest.type == "on_enemy":
+                    # TODO: is this needed? It represents items that are
+                    # carried by enemies and dropped, like keys on
+                    # phantoms or rats. This *might* be the same as
+                    # freestanding; more research is needed
+                    pass  # TODO: implement this
+                else:
+                    raise NotImplementedError(f'Unknown location type "{chest.type}"')
 
     # Write changes to the in-memory ROM
     Location.save_all()

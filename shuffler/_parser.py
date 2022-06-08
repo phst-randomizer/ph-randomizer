@@ -106,33 +106,34 @@ def parse_room_contents(node_prefix: str, lines: list[str]):
     ):
         line = lines.pop(0).strip()
         line_split = line.split(" ")
-        match line_split:
-            case ["node", _]:
-                logging.debug(f"    node {line_split[1]}")
-                nodes.append(
-                    Node(
-                        # Also make sure to remove last character if its a colon
-                        name=f"{node_prefix}.{line_split[1].rstrip(':')}",
-                        contents=parse_node(lines),
-                    )
+        if len(line_split) < 2:
+            raise ValueError(f'Malformed expression "{line}"')
+        elif len(line_split) == 2 and line_split[0] == "node":
+            logging.debug(f"    node {line_split[1]}")
+            nodes.append(
+                Node(
+                    # Also make sure to remove last character if its a colon
+                    name=f"{node_prefix}.{line_split[1].rstrip(':')}",
+                    contents=parse_node(lines),
                 )
-            # Note: special case of a one-liner node (for ex- `node X: item B`)
-            case ["node", *_]:
-                logging.debug(f"    node {line_split[1]}")
-                nodes.append(
-                    Node(
-                        # Also make sure to remove last character if its a colon
-                        name=f"{node_prefix}.{line_split[1].rstrip(':')}",
-                        contents=parse_node([" ".join(line_split[2:])] + lines),
-                    )
+            )
+        # Note: special case of a one-liner node (for ex- `node X: item B`)
+        elif len(line_split) > 2 and line_split[0] == "node":
+            logging.debug(f"    node {line_split[1]}")
+            nodes.append(
+                Node(
+                    # Also make sure to remove last character if its a colon
+                    name=f"{node_prefix}.{line_split[1].rstrip(':')}",
+                    contents=parse_node([" ".join(line_split[2:])] + lines),
                 )
-            case [node1, "->", node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, "->")
-            case [node1, "<-", node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, "<-")
-            case [node1, "<->", node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, "->")
-                parse_edge(node_prefix, line, "<-")
+            )
+        elif line_split[1] == "->":
+            parse_edge(node_prefix, line, "->")
+        elif line_split[1] == "<-":
+            parse_edge(node_prefix, line, "<-")
+        elif line_split[1] == "<->":
+            parse_edge(node_prefix, line, "->")
+            parse_edge(node_prefix, line, "<-")
 
 
 def parse_rooms(node_prefix: str, lines: list[str]):

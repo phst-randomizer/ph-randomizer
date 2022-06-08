@@ -62,17 +62,16 @@ def randomize_aux_data(aux_data_directory: Path):
 def edge_is_traversable(edge: Edge):
     """Determine if this edge is traversable given the current state of the game."""
     # TODO: implement this
-    match edge.constraints:
-        case "item Sword":
-            return "oshus_sword" in inventory
-        case "(item Bombs | item Bombchus)":
-            return "bombs" in inventory or "bombchus" in inventory
-        case "item Bow":
-            return "bow" in inventory
-        case "item Boomerang":
-            return "boomerang" in inventory
-        case "flag BridgeRepaired":
-            return True  # TODO: for now, assume bridge is always repaired
+    if edge.constraints == "item Sword":
+        return "oshus_sword" in inventory
+    elif edge.constraints == "(item Bombs | item Bombchus)":
+        return "bombs" in inventory or "bombchus" in inventory
+    elif edge.constraints == "item Bow":
+        return "bow" in inventory
+    elif edge.constraints == "item Boomerang":
+        return "boomerang" in inventory
+    elif edge.constraints == "flag BridgeRepaired":
+        return True  # TODO: for now, assume bridge is always repaired
     return False
 
 
