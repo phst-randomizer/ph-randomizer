@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field
 
@@ -49,13 +50,13 @@ class Door(BaseModel):
 
 class Room(BaseModel):
     name: str = Field(..., description="The name of the room")
-    chests: list[Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy] | None = Field(
+    chests: Optional[List[Union[Chest, Npc, IslandShop, Tree, Freestanding, OnEnemy]]] = Field(
         None,
         description="Item checks that can be made in this room",
         min_items=1,
         unique_items=True,
     )
-    doors: list[Door] = Field(
+    doors: List[Door] = Field(
         ...,
         description="All doors that lead to a different room or area",
         min_items=1,
@@ -65,7 +66,7 @@ class Room(BaseModel):
 
 class Area(BaseModel):
     name: str = Field(..., description="The name of the area")
-    rooms: list[Room] = Field(
+    rooms: List[Room] = Field(
         ..., description="All of the rooms inside this area", min_items=1, unique_items=True
     )
 
