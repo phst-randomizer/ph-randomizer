@@ -18,6 +18,6 @@ setup(
         "click",
         "ndspy>=4.0.0",
         "pydantic",
-        "zed @ git+https://github.com/phst-randomizer/zed.git",
+        "zed @ git+https://github.com/phst-randomizer/zed@4f0fb76e96909f353587ae3b3c48938d75665b6c",
     ],
 )
