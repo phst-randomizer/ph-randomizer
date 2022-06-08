@@ -1,21 +1,19 @@
 from collections import defaultdict
-from dataclasses import dataclass
 from enum import Enum
 import logging
 from pathlib import Path
-from typing import Literal
 
 
-@dataclass
 class NodeContents:
-    type: str
-    data: str
+    def __init__(self, type: str, data: str) -> None:
+        self.type = type
+        self.data = data
 
 
-@dataclass
 class Node:
-    name: str
-    contents: list[NodeContents]
+    def __init__(self, name: str, contents: list[NodeContents]):
+        self.name = name
+        self.contents = contents
 
     @property
     def area(self):
@@ -30,23 +28,25 @@ class Node:
         return self.name.split(".")[2]
 
 
-@dataclass
 class Edge:
-    source: Node
-    dest: Node
-    constraints: str | None  # TODO: parse this. For now, just store it as a string
+    def __init__(
+        self, source: Node, dest: Node, constraints: str | None
+    ):  # TODO: parse constraints. For now, just store it as a string
+        self.source = source
+        self.dest = dest
+        self.constraints = constraints
 
 
-@dataclass
 class Room:
-    name: str
-    nodes: list[Node]
-    edges: list[Edge]
+    def __init__(self, name: str, nodes: list[Node], edges: list[Edge]):
+        self.name = name
+        self.nodes = nodes
+        self.edges = edges
 
 
-@dataclass
 class Area:
-    rooms: list[Room]
+    def __init__(self, rooms: list[Room]):
+        self.rooms = rooms
 
 
 nodes: list[Node] = []
@@ -77,7 +77,7 @@ def parse_node(lines: list[str]) -> list[NodeContents]:
     return node_contents
 
 
-def parse_edge(node_prefix: str, line: str, edge_direction: Literal["<-", "->"]):
+def parse_edge(node_prefix: str, line: str, edge_direction):
     source_node_name = (
         f"{node_prefix}.{line.split('<->' if '<->' in line else edge_direction)[0].strip()}"
     )
