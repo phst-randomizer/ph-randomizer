@@ -133,9 +133,11 @@ jobs:
       - name: Upgrade pip
         run: pip install --upgrade pip --user
 
+      - name: Install dependencies
+        run: pip install -e .
+
       - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
         run: |
-          pip install pydantic
           python shuffler/aux_models.py
           git diff --exit-code
           if [ $? -ne 0 ] 
