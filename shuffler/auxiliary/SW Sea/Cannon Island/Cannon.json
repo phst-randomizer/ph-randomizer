@@ -3,6 +3,7 @@
   "name": "Cannon",
   "rooms": [
     {
+      "name": "Outside",
       "chests": [
         {
           "name": "BeeChest",
@@ -22,41 +23,41 @@
       "doors": [
         {
           "name": "Boat",
-          "link": "Sea.SW.East"
+          "link": "Sea.SW.CannonIsle.CannonIslePort"
         },
         {
           "name": "HouseLeft",
-          "link": "EddoHouseLeft.Main"
+          "link": "EddoHouseLeft.Main.Exit"
         },
         {
           "name": "GrottoEntry",
-          "link": "CannonGrotto.Main.Main"
+          "link": "CannonGrotto.Main.Main.Down"
         },
         {
           "name": "GrottoStairs",
-          "link": "CannonGrotto.Main.Main"
+          "link": "CannonGrotto.Main.Main.Stairs"
         },
         {
           "name": "HouseRight",
-          "link": "EddoHouseRight.Main"
+          "link": "EddoHouseRight.Main.Exit"
         }
-      ],
-      "name": "Outside"
+      ]
     },
     {
+      "name": "EddoHouseLeft",
       "doors": [
         {
           "name": "Exit",
-          "link": "Outside.Port"
+          "link": "Outside.Port.HouseLeft"
         },
         {
           "name": "ToRight",
-          "link": "EddoHouseRight.Main"
+          "link": "EddoHouseRight.Main.ToLeft"
         }
-      ],
-      "name": "EddoHouseLeft"
+      ]
     },
     {
+      "name": "EddoHouseRight",
       "chests": [
         {
           "name": "Cannon",
@@ -76,14 +77,13 @@
       "doors": [
         {
           "name": "Exit",
-          "link": "Outside.BombGarden"
+          "link": "Outside.BombGarden.HouseRight"
         },
         {
           "name": "ToLeft",
-          "link": "EddoHouseLeft.ToEddo"
+          "link": "EddoHouseLeft.ToEddo.ToRight"
         }
-      ],
-      "name": "EddoHouseRight"
+      ]
     }
   ]
 }

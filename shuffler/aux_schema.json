@@ -227,12 +227,12 @@
       "properties": {
         "name": {
           "title": "Name",
-          "description": "The name of this door",
+          "description": "The name of this exit",
           "type": "string"
         },
         "link": {
           "title": "Link",
-          "description": "Descriptor where the door leads",
+          "description": "The `entrance` or `door` where this exit leads.",
           "type": "string"
         }
       },
@@ -281,7 +281,7 @@
         },
         "doors": {
           "title": "Doors",
-          "description": "All doors that lead to a different room or area",
+          "description": "All doors in this room that lead to a different room or area",
           "minItems": 1,
           "uniqueItems": true,
           "type": "array",
