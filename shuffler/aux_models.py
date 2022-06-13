@@ -55,10 +55,9 @@ class Door(BaseModel):
 
 class Room(BaseModel):
     name: str = Field(..., description="The name of the room")
-    chests: list[Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy] | None = Field(
-        None,
+    chests: list[Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy] = Field(
+        [],
         description="Item checks that can be made in this room",
-        min_items=1,
         unique_items=True,
     )
     doors: list[Door] = Field(
