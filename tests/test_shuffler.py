@@ -1,9 +1,11 @@
+import json
 from pathlib import Path
 
 import pytest
 
 from shuffler import shuffle
 from shuffler._parser import Node, NodeContents, parse
+from shuffler.aux_models import Area
 
 
 def test_parser(tmp_path: Path):
@@ -78,3 +80,16 @@ def test_seeds(seed: str, aux_data_directory: str, logic_directory: str):
     second = shuffle(seed, aux_data_directory, logic_directory)
     third = shuffle(seed, aux_data_directory, logic_directory)
     assert first == second == third
+
+
+@pytest.mark.parametrize(
+    "filename",
+    [
+        str(file)
+        for file in (Path(__file__).parent.parent / "shuffler" / "auxiliary").rglob("*.json")
+    ],
+)
+def test_aux_data_validation(filename: str):
+    """Run every aux data json through validation."""
+    with open(filename, "r") as fd:
+        Area(**json.load(fd))
