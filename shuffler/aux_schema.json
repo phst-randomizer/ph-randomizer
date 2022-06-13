@@ -253,7 +253,7 @@
         "chests": {
           "title": "Chests",
           "description": "Item checks that can be made in this room",
-          "minItems": 1,
+          "default": [],
           "uniqueItems": true,
           "type": "array",
           "items": {
