@@ -50,14 +50,13 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 	./armips src/main.asm
 
 	# Recompress the binaries
-	ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin
+	ndspy_codeCompression compress --is_arm9 arm9_patched.bin arm9_compressed.bin
 	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
 		ndspy_codeCompression compress overlay/$$file overlay/$$file; \
 	done
 
 	# Combine arm9.bin back into a single file
-	# TODO: Do this in bash instead of an inline python script
-	python3 -c "exec(\"\"\"\nimport struct\n\nwith open(\"arm9_compressed.bin\", \"rb\") as input_arm9, open(\n    \"arm9_header.bin\", \"rb\"\n) as input_header, open(\"arm9.bin\", \"wb\") as output_arm9:\n    data = input_header.read() + input_arm9.read()\n    data = data[:0xB78] + struct.pack(\"<I\", len(data) + 0x2000000) + data[0xB7C:]\n    output_arm9.write(data)\n\"\"\")"
+	cat arm9_header.bin arm9_compressed.bin > arm9.bin
 
 	# Update y9.bin to account for new sizes of overlays
 	mv fixy9.exe overlay/

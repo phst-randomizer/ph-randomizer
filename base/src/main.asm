@@ -4,7 +4,7 @@
 
 .include "ph.asm"
 
-.open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
+.open "../arm9_original.bin","../arm9_patched.bin",0x02004000
     .arm
     .org 0x54180 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
