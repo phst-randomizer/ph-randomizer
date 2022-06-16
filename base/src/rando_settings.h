@@ -4,6 +4,9 @@
 // RAM address of bitmap encoding randomizer settings
 #define RANDO_SETTINGS_BITMAP_ADDR 0x2058180
 
+// Randomizer setting flags in format (offset_from_base_address, bit)
+#define MERCAY_BRIDGE_REPAIRED_FROM_START 0, 0x1
+
 /**
  * Check if the randomizer setting represented by the given offset/bit is
  * enabled.
