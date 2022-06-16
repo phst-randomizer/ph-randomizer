@@ -2,6 +2,7 @@ import os
 
 from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
+import pytest
 
 from tests.conftest import ITEM_MEMORY_ADDRESSES, DesmumeEmulator, ItemMemoryAddressType
 from tests.desmume_utils import (
@@ -12,8 +13,11 @@ from tests.desmume_utils import (
 )
 
 
-def test_boot_new_game(base_rom_emu: DesmumeEmulator):
-    """Test bootup from title screen, name entry, and intro CG."""
+@pytest.mark.parametrize(
+    "bridge_repaired", [True, False], ids=["Bridge repaired from start", "Bridge broken from start"]
+)
+def test_mercay_bridge_setting(base_rom_emu: DesmumeEmulator, bridge_repaired: bool):
+    """Ensure the "Mercay bridge repaired from start" setting works properly."""
     for i in range(2):
         base_rom_emu.wait(500)
         base_rom_emu.touch_input(
@@ -45,6 +49,8 @@ def test_boot_new_game(base_rom_emu: DesmumeEmulator):
             # Do not remove them.
             base_rom_emu.wait(400)
             base_rom_emu.emu.reset()
+
+    base_rom_emu.emu.memory.unsigned[0x2058180] |= int(bridge_repaired)
 
     # Touch file
     base_rom_emu.touch_input((130, 70), 0)
@@ -96,8 +102,8 @@ def test_boot_new_game(base_rom_emu: DesmumeEmulator):
     base_rom_emu.touch_input((SCREEN_WIDTH, 0))
     base_rom_emu.wait(200)
 
-    # ensure mercay bridge fixed flag is set
-    assert base_rom_emu.emu.memory.unsigned[0x021B553E] & 0x2 == 0x2
+    # ensure mercay bridge fixed flag is set correctly
+    assert (base_rom_emu.emu.memory.unsigned[0x021B553E] & 0x2 == 0x2) is bridge_repaired
 
 
 def test_custom_shop_items(island_shop_test_emu: DesmumeEmulator):
