@@ -9,10 +9,13 @@
     .org 0x54180 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x301, 0xFF
+            .fill 0xA, 0x0 ; bitmap for randomizer settings
+
             .arm
             .importobj "src/faster_boat.o"
             .importobj "src/fixed_random_treasure_in_shop.o"
             .importobj "src/progressive_sword_check.o"
+            .importobj "src/rando_settings.o"
             .include "_island_shop_files.asm"
         .endarea
 
