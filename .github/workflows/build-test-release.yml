@@ -14,7 +14,7 @@ jobs:
           python-version: '3.10'
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: pip install --upgrade pip
 
       - name: Run tox
         run: |
@@ -33,7 +33,7 @@ jobs:
           python-version: '3.10'
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: pip install --upgrade pip
 
       - name: Run tests
         run: |
@@ -131,7 +131,7 @@ jobs:
           python-version: '3.10'
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: pip install --upgrade pip
 
       - name: Install dependencies
         run: pip install -e .
@@ -163,7 +163,7 @@ jobs:
           python-version: '3.10'
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: pip install --upgrade pip
 
       - name: Fetch PH rom
         run: |
@@ -315,10 +315,9 @@ jobs:
         with:
           python-version: '3.10'
 
-# TODO: figure out why this step fails on windows.
-#       - name: Upgrade pip
-#         if: contains(steps.changed-files.outputs.modified_files, 'base/')
-#         run: pip install --upgrade pip --user
+      - name: Upgrade pip
+        if: contains(steps.changed-files.outputs.modified_files, 'base/')
+        run: pip install --upgrade pip
 
       - name: Fetch PH rom
         if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
@@ -363,9 +362,8 @@ jobs:
         with:
           python-version: '3.10'
 
-      # TODO: this fails on windows for some reason.
-      # - name: Upgrade pip
-      #   run: pip install --upgrade pip
+      - name: Upgrade pip
+        run: pip install --upgrade pip
 
       - name: Install randomizer dependencies
         run: pip install -e .
