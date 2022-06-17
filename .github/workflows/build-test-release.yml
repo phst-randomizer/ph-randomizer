@@ -371,17 +371,13 @@ jobs:
       - name: Install pyinstaller
         run: pip install -U pyinstaller
 
-      - name: Build randomizer executable
-        run: pyinstaller randomizer.spec
-
-      - name: Download base rom patch from previous workflow
+      - name: Download base patch
         uses: actions/download-artifact@v3
         with:
           name: patch.bps
 
-      # TODO: bundle this with pyinstaller instead
-      - name: Move base rom patch to dist/ directory to bundle it with the randomizer
-        run: mv patch.bps dist/
+      - name: Build randomizer executable
+        run: pyinstaller randomizer.spec
 
       - name: Get current commit hash
         id: commit-hash
