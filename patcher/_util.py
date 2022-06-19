@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 from ndspy import rom
@@ -6,6 +7,11 @@ from ndspy import rom
 from patcher._items import ITEMS
 from patcher.location_types import EventLocation, IslandShopLocation, Location, MapObjectLocation
 from shuffler.aux_models import Area, Chest, IslandShop, Npc, Tree
+
+# TODO: apply this to the input rom
+BASE_PATCH_PATH = Path(
+    os.environ.get("BASE_PATCH_PATH", Path(__file__).parent.parent / "patch.bps")
+)
 
 
 def load_rom(file: Path):
