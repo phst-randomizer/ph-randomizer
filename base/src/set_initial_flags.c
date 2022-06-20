@@ -2,7 +2,7 @@
 #include "rando_settings.h"
 #include <stdint.h>
 
-__attribute__((always_inline)) static void set_flag(int addr, uint8_t bit) {
+static void set_flag(int addr, uint8_t bit) {
   *((uint8_t *)addr) |= bit;
 }
 
