@@ -21,9 +21,13 @@ ASM=$(SRC:.c=.asm)
 
 INPUT_NDS_FILE=$(PH_ROM_PATH)
 OUTPUT_NDS_FILE=out.nds
+OUTPUT_BPS_FILE=patch.bps
 
 # Set version string to a default if it isn't provided
 VERSION_STRING := $(or $(VERSION_STRING), "no_version")
+
+$(OUTPUT_BPS_FILE): $(INPUT_NDS_FILE) $(OUTPUT_NDS_FILE)
+	./flips --create $^ $@
 
 $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin header.bin
 	./ndstool -c out.nds -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin
@@ -98,4 +102,4 @@ debug: $(OBJ) $(ASM)
 clean:
 	rm -f $(DEST_DIR)/*
 
-all: $(OUTPUT_NDS_FILE)
+all: $(OUTPUT_BPS_FILE)

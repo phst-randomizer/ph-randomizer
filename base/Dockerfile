@@ -13,11 +13,20 @@ WORKDIR /ndstool
 RUN aclocal && autoconf && automake --add-missing && chmod +x ./configure &&\
     ./configure --disable-dependency-tracking && make
 
+# Download and compile Floating IPS patcher
+FROM ubuntu:20.04 as compile_flips
+RUN apt-get update && apt-get install -y git g++ build-essential
+RUN git clone https://github.com/Alcaro/Flips.git
+RUN chmod +x Flips/make.sh
+RUN cd Flips && ./make.sh
+
+
 FROM devkitpro/devkitarm:latest as build
 WORKDIR /app
 # Copy compiled armips and ndstool binaries from previous stage
 COPY --from=compile_armips /armips/armips /app
 COPY --from=compile_ndstool /ndstool/ndstool /app
+COPY --from=compile_flips /Flips/flips /app
 # Install gcc + software-properties-common (the latter so we can use `apt-add-repository`)
 RUN apt-get update && apt-get install -y gcc software-properties-common
 # Download fixy9 utility for updating y9.bin after making changes to overlays
@@ -40,5 +49,6 @@ ARG VERSION_STRING
 ADD $PH_ROM_PATH /app
 RUN make
 
+# Export base patch to host
 FROM scratch
-COPY --from=build /app/out.nds /
+COPY --from=build /app/patch.bps /
