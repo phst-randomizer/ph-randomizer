@@ -186,7 +186,7 @@ jobs:
         id: buildx        
         uses: docker/setup-buildx-action@v2
 
-      - name: Build Docker
+      - name: Build base patch
         uses: docker/build-push-action@v3
         with:
           context: base/
@@ -199,46 +199,10 @@ jobs:
           outputs: |
             base/out
 
-      - name: Clone Flips repo
-        uses: actions/checkout@v3
-        with:
-          repository: Alcaro/Flips
-          path: base/Flips
-
-      - name: Get latest commit hash from Flips repo
-        id: flips-hash
-        shell: bash
-        run: |
-          echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
-        working-directory: base/Flips
-
-      - name: Cache Flips executable
-        uses: actions/cache@v3
-        id: flips-cache
-        env:
-          cache-name: cache-flips
-        with:
-          path: base/Flips/*
-          key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
-
-      - name: Compile Flips tool
-        if: steps.flips-cache.outputs.cache-hit != 'true'
-        run: |
-          sudo apt-get update && sudo apt-get install g++ build-essential
-          chmod +x ./make.sh
-          ./make.sh
-        working-directory: base/Flips
-
-      - name: Create patch
-        run: |
-          chmod +x ./Flips/flips
-          ./Flips/flips --create $(ls *.nds) out/out.nds patch.bps
-        working-directory: base
-
       - uses: actions/upload-artifact@v3
         with:
           name: patch.bps
-          path: base/patch.bps
+          path: base/out/patch.bps
 
       - name: Cleanup
         if: always()
