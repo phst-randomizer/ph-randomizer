@@ -5,21 +5,12 @@ from tempfile import TemporaryDirectory
 import click
 
 from patcher import patch
+from patcher._util import is_frozen
 from shuffler import shuffle
 
 # TODO: this is an example script for how to call the patcher/shuffler.
 # At some point this will be fleshed out into a full CLI (and eventually
 # GUI) to run the full randomizer.
-
-
-def is_frozen():
-    """
-    Whether or not the app is being executed as part of a script or a frozen executable.
-
-    This can be used to determine if the app is running as a regular python script,
-    or if it's a bundled PyInstaller executable.
-    """
-    return getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS")
 
 
 @click.command()
