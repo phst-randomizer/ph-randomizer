@@ -12,5 +12,6 @@ void set_initial_flags(uint32_t base_flag_address) {
   }
 
   set_flag(base_flag_address + TALKED_TO_OSHUS_FIRST_TIME);
+  set_flag(base_flag_address + SAW_BROKEN_MERCAY_BRIDGE_FIRST_TIME);
   // TODO: finish documenting/setting the rest of the needed flags
 }
