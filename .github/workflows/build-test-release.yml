@@ -134,7 +134,7 @@ jobs:
         run: pip install --upgrade pip
 
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -r requirements.txt
 
       - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
         run: |
@@ -330,7 +330,7 @@ jobs:
         run: pip install --upgrade pip
 
       - name: Install randomizer dependencies
-        run: pip install -e .
+        run: pip install -r requirements.txt
 
       - name: Install pyinstaller
         run: pip install -U pyinstaller
