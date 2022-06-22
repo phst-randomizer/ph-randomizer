@@ -18,6 +18,7 @@ setup(
         "click",
         "ndspy>=4.0.0",
         "pydantic",
+        "vidua",
         "zed @ git+https://github.com/phst-randomizer/zed.git",
     ],
 )

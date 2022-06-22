@@ -339,6 +339,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: patch.bps
+          path: base/out/patch.bps
 
       - name: Build randomizer executable
         run: pyinstaller randomizer.spec

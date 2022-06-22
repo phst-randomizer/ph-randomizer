@@ -1,21 +1,44 @@
+from io import BytesIO
 import json
 import os
 from pathlib import Path
+import sys
 
 from ndspy import rom
+from vidua import bps
 
 from patcher._items import ITEMS
 from patcher.location_types import EventLocation, IslandShopLocation, Location, MapObjectLocation
 from shuffler.aux_models import Area, Chest, IslandShop, Npc, Tree
 
-# TODO: apply this to the input rom
-BASE_PATCH_PATH = Path(
-    os.environ.get("BASE_PATCH_PATH", Path(__file__).parent.parent / "patch.bps")
-)
+
+def is_frozen():
+    """
+    Whether or not the app is being executed as part of a script or a frozen executable.
+
+    This can be used to determine if the app is running as a regular python script,
+    or if it's a bundled PyInstaller executable.
+    """
+    return getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS")
 
 
 def load_rom(file: Path):
-    input_rom = rom.NintendoDSRom.fromFile(str(file))
+    """
+    Load a ROM into memory, patch it, and return it as an ndspy NintendoDSRom object.
+
+    Note that the original file is not modified; the contents of the given ROM are copied into
+    memory, and the BPS patch is applied to that in-memory copy.
+    """
+    base_patch_path = Path(
+        Path(sys._MEIPASS) / "patch.bps"  # type: ignore
+        if is_frozen()
+        else os.environ.get(
+            "BASE_PATCH_PATH", Path(__file__).parent.parent / "base" / "out" / "patch.bps"
+        )
+    )
+    with open(base_patch_path, "rb") as patch_file:
+        patched_rom = bps.patch(source=BytesIO(file.read_bytes()), bps_patch=patch_file)
+    input_rom = rom.NintendoDSRom(data=patched_rom.read())
     Location.ROM = input_rom
     return input_rom
 
