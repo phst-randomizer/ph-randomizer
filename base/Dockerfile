@@ -20,10 +20,9 @@ RUN git clone https://github.com/Alcaro/Flips.git
 RUN chmod +x Flips/make.sh
 RUN cd Flips && ./make.sh
 
-
 FROM devkitpro/devkitarm:latest as build
 WORKDIR /app
-# Copy compiled armips and ndstool binaries from previous stage
+# Copy compiled armips, ndstool, and flips binaries from previous stages
 COPY --from=compile_armips /armips/armips /app
 COPY --from=compile_ndstool /ndstool/ndstool /app
 COPY --from=compile_flips /Flips/flips /app
