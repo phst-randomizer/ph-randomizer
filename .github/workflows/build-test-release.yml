@@ -388,14 +388,14 @@ jobs:
 
       - name: Zip up executables
         run: |
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
 
       - name: Create a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip
-            ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip
-            ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip
