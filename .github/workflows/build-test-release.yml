@@ -388,9 +388,9 @@ jobs:
 
       - name: Zip up executables
         run: |
-          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
 
       - name: Create a GitHub Release
         uses: softprops/action-gh-release@v1
