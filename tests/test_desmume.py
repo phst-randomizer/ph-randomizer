@@ -16,8 +16,8 @@ from tests.desmume_utils import (
 @pytest.mark.parametrize(
     "bridge_repaired", [True, False], ids=["Bridge repaired from start", "Bridge broken from start"]
 )
-def test_mercay_bridge_setting(base_rom_emu: DesmumeEmulator, bridge_repaired: bool):
-    """Ensure the "Mercay bridge repaired from start" setting works properly."""
+def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool):
+    """Ensure all flags are set properly + all rando settings work."""
     for i in range(2):
         base_rom_emu.wait(500)
         base_rom_emu.touch_input(
@@ -102,8 +102,16 @@ def test_mercay_bridge_setting(base_rom_emu: DesmumeEmulator, bridge_repaired: b
     base_rom_emu.touch_input((SCREEN_WIDTH, 0))
     base_rom_emu.wait(200)
 
-    # ensure mercay bridge fixed flag is set correctly
-    assert (base_rom_emu.emu.memory.unsigned[0x021B553E] & 0x2 == 0x2) is bridge_repaired
+    ########################################
+    # Assert that flags are set correctly: #
+    ########################################
+
+    # Mercay bridge repaired
+    assert (base_rom_emu.emu.memory.unsigned[0x021B553C + 0x2] & 0x2 == 0x2) is bridge_repaired
+    # Talked to Oshus for first time
+    assert base_rom_emu.emu.memory.unsigned[0x021B553C + 0x18] & 0x2 == 0x2
+    # Saw broken bridge for first time
+    assert base_rom_emu.emu.memory.unsigned[0x021B553C + 0x2C] & 0x1 == 0x1
 
 
 def test_custom_shop_items(island_shop_test_emu: DesmumeEmulator):
