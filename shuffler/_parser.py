@@ -3,7 +3,10 @@ from dataclasses import dataclass
 from enum import Enum
 import logging
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
+
+import inflection
+import pyparsing
 
 
 @dataclass
@@ -34,7 +37,13 @@ class Node:
 class Edge:
     source: Node
     dest: Node
-    constraints: str | None  # TODO: parse this. For now, just store it as a string
+    constraints: str | None
+
+    def is_traversable(self, current_inventory: list[str]) -> bool:
+        if self.constraints:
+            parsed = edge_parser.parse_string(self.constraints)
+            return edge_is_tranversable(parsed.as_list(), current_inventory)
+        return True
 
 
 @dataclass
@@ -65,6 +74,97 @@ class Descriptor(Enum):
 
 
 VALID_DESCRIPTORS = [element.value for element in Descriptor]
+
+# Python type for edge values.
+# TODO: ideally we use the first, commented out option, but it doesn't work due to the lack
+# of recursive type support in mypy (ref: https://github.com/python/mypy/issues/731).
+# If recursive types are ever supported, this should be updated accordingly.
+# EdgeExpression = list[str | 'EdgeExpression']
+EdgeExpression = list[str | Any]
+
+# pyparsing parser for parsing edges in .logic files:
+operand: pyparsing.ParserElement = (
+    pyparsing.Keyword("item") | pyparsing.Keyword("flag")
+) + pyparsing.Word(pyparsing.alphas)
+edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
+    operand,
+    [
+        (pyparsing.Literal("&"), 2, pyparsing.opAssoc.LEFT),
+        (pyparsing.Literal("|"), 2, pyparsing.opAssoc.LEFT),
+    ],
+)
+
+
+def _evaluate_constraint(type: str, value: str, inventory: list[str]) -> bool:
+    """
+    Given an edge constraint "type value", determines if the edge is traversable
+    given the current game state (inventory, set flags, etc).
+
+    Params:
+        type: The type of edge constraint, e.g. "item", "flag", etc.
+
+        value: The value of the edge constraint, e.g. "Bombs", "BridgeRepaired", etc.
+
+        inventory: A list of strings representing the "current inventory", i.e. all items currently
+        accessible given the current shuffled state.
+    """
+    match type:
+        case "item":
+            return value in inventory
+        case "flag":
+            raise NotImplementedError("Edges with type 'flag' are not implemented yet.")
+        case other:
+            raise Exception(f'Invalid edge type "{other}"')
+
+
+def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], result=True) -> bool:
+    """
+    Determine if the given edge expression is traversable.
+
+    Params:
+        parsed_expr: Expression to evaluate. The expression must be a nested list of strings
+        representing a valid pyparsing expression generated from the `edge_parser` parser.
+        The easiest way to do this is to call .as_list() on the `ParseResults` object
+        returned by pyparsing.
+
+        inventory: A list of strings representing the "current inventory", i.e. all items currently
+        accessible given the current shuffled state.
+
+        result: The current boolean "state" of the expression, i.e. whether it is True or False.
+        It's used internally as part of the recursion, but shouldn't need to be set when calling
+        this function externally.
+    """
+    current_op = None  # variable to track current logical operation (AND or OR), if applicable
+
+    while len(parsed_expr):
+        # If the complex expression contains another complex expression, recursively evaluate it
+        if isinstance(parsed_expr[0], list):
+            # TODO: remove 'type: ignore' comment below. see prev note about `EdgeExpression` type.
+            sub_expression: EdgeExpression = parsed_expr.pop(0)  # type: ignore
+            current_result = edge_is_tranversable(sub_expression, inventory, result)
+        else:
+            # Extract type and value (e.g., 'item' and 'Bombs')
+            expr_type = parsed_expr.pop(0)
+            # Convert items in PascalCase or camelCase to snake_case.
+            # The logic format is flexible and supports either of the three formats,
+            # so the shuffler needs to normalize everything to snake_case at runtime.
+            expr_value = inflection.underscore(parsed_expr.pop(0))
+
+            current_result = _evaluate_constraint(expr_type, expr_value, inventory)
+
+        # Apply any pending logical operations
+        if current_op == "&":
+            result &= current_result
+        elif current_op == "|":
+            result |= current_result
+        else:
+            result = current_result
+
+        # Queue up a logical AND or OR for the next expression if needed
+        if len(parsed_expr) and parsed_expr[0] in ("&", "|"):
+            current_op = parsed_expr.pop(0)
+
+    return result
 
 
 def parse_node(lines: list[str]) -> list[NodeContents]:
