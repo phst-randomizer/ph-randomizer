@@ -96,6 +96,18 @@ edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
 
 
 def _evaluate_constraint(type: str, value: str, inventory: list[str]) -> bool:
+    """
+    Given an edge constraint "type value", determines if the edge is traversable
+    given the current game state (inventory, set flags, etc).
+
+    Params:
+        type: The type of edge constraint, e.g. "item", "flag", etc.
+
+        value: The value of the edge constraint, e.g. "Bombs", "BridgeRepaired", etc.
+
+        inventory: A list of strings representing the "current inventory", i.e. all items currently
+        accessible given the current shuffled state.
+    """
     match type:
         case "item":
             return value in inventory
@@ -106,6 +118,22 @@ def _evaluate_constraint(type: str, value: str, inventory: list[str]) -> bool:
 
 
 def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], result=True) -> bool:
+    """
+    Determine if the given edge expression is traversable.
+
+    Params:
+        parsed_expr: Expression to evaluate. The expression must be a nested list of strings
+        representing a valid pyparsing expression generated from the `edge_parser` parser.
+        The easiest way to do this is to call .as_list() on the `ParseResults` object
+        returned by pyparsing.
+
+        inventory: A list of strings representing the "current inventory", i.e. all items currently
+        accessible given the current shuffled state.
+
+        result: The current boolean "state" of the expression, i.e. whether it is True or False.
+        It's used internally as part of the recursion, but shouldn't need to be set when calling
+        this function externally.
+    """
     current_op = None  # variable to track current logical operation (AND or OR), if applicable
 
     while len(parsed_expr):
