@@ -5,6 +5,7 @@ import logging
 from pathlib import Path
 from typing import Any, Literal
 
+import inflection
 import pyparsing
 
 
@@ -116,7 +117,10 @@ def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], resu
         else:
             # Extract type and value (e.g., 'item' and 'Bombs')
             expr_type = parsed_expr.pop(0)
-            expr_value = parsed_expr.pop(0)
+            # Convert items in PascalCase or camelCase to snake_case.
+            # The logic format is flexible and supports either of the three formats,
+            # so the shuffler needs to normalize everything to snake_case at runtime.
+            expr_value = inflection.underscore(parsed_expr.pop(0))
 
             current_result = _evaluate_constraint(expr_type, expr_value, inventory)
 

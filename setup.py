@@ -16,6 +16,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "click==8.1.3",
+        "inflection==0.5.1",
         "ndspy==4.0.0",
         "pydantic==1.9.1",
         "pyparsing==3.0.9",
