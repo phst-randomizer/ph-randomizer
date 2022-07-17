@@ -3,7 +3,13 @@
   "name": "GustIsle",
   "rooms": [
     {
-      "chests": [],
+      "chests": [
+        {
+          "type": "dig",
+          "name": "DigSpot1",
+          "contents": "small_red_rupee"
+        }
+      ],
       "doors": [
         {
           "name": "Boat",
