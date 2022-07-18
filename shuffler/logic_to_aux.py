@@ -16,7 +16,13 @@ def logic_to_aux(logic_directory: str, output: str | None):
 
         rooms: dict[str, dict[str, Any]] = {}
         with open(file, "r") as fd:
-            lines = [line.strip() for line in fd.readlines() if line and line.strip()]
+            lines: list[str] = []
+            for line in fd.readlines():
+                line = line.strip()  # strip off leading and trailing whitespace
+                if "#" in line:
+                    line = line[: line.index("#")]  # remove any comments
+                if line:
+                    lines.append(line)
         clear_nodes()
         nodes = parse_area(lines)
 
@@ -64,6 +70,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
 
             with open(output_path, "w") as fd:
                 fd.write(json.dumps(logic, indent=2))
+                fd.write("\n")
 
 
 @click.command()
