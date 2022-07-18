@@ -3,7 +3,13 @@
   "name": "Zauz",
   "rooms": [
     {
-      "chests": [],
+      "chests": [
+        {
+          "name": "CuccoChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
       "doors": [
         {
           "name": "Ship",

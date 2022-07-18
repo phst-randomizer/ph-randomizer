@@ -3,7 +3,23 @@
   "name": "GustIsle",
   "rooms": [
     {
-      "chests": [],
+      "chests": [
+        {
+          "name": "DigSpot1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "DigSpot2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "DigSpot3",
+          "type": "",
+          "contents": ""
+        }
+      ],
       "doors": [
         {
           "name": "Boat",
@@ -19,6 +35,92 @@
         }
       ],
       "name": "BeforeCave"
+    },
+    {
+      "chests": [
+        {
+          "name": "GrottoChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "BeforeCave",
+          "link": ""
+        }
+      ],
+      "name": "Grotto"
+    },
+    {
+      "chests": [
+        {
+          "name": "FreeChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "EnemyClearChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "BeforeCave",
+          "link": ""
+        },
+        {
+          "name": "AfterCave",
+          "link": ""
+        }
+      ],
+      "name": "Cave"
+    },
+    {
+      "chests": [
+        {
+          "name": "DigSpot1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "LedgeChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Cave",
+          "link": ""
+        },
+        {
+          "name": "WindTemple",
+          "link": ""
+        },
+        {
+          "name": "WindmillArea",
+          "link": ""
+        }
+      ],
+      "name": "AfterCave"
+    },
+    {
+      "chests": [
+        {
+          "name": "DigSpot1",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "AfterCave",
+          "link": ""
+        }
+      ],
+      "name": "WindmillArea"
     }
   ]
 }
