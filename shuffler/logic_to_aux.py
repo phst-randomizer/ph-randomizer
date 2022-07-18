@@ -70,6 +70,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
 
             with open(output_path, "w") as fd:
                 fd.write(json.dumps(logic, indent=2))
+                fd.write("\n")
 
 
 @click.command()
