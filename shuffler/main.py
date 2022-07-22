@@ -17,6 +17,7 @@ END_NODE = "Mercay.AboveMercayTown.Island"  # Name of node that player must reac
 nodes: list[Node]  # List of nodes that make up the world graph
 edges: dict[str, list[Edge]]  # List of edges that connect nodes. Maps node names to edges.
 inventory: list[str]
+flags: set[str]
 
 
 def load_aux_data(directory: Path):
@@ -87,7 +88,7 @@ def traverse_graph(
     Returns:
         `True` if the `END_NODE` was reached, `False` otherwise.
     """
-    global nodes, edges, inventory
+    global nodes, edges, inventory, flags
     logging.debug(node.name)
 
     if node.name == END_NODE:
@@ -104,6 +105,13 @@ def traverse_graph(
                 inventory.append(item)
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
+                visited_nodes.clear()
+                visited_rooms.clear()
+        elif node_info.type == Descriptor.FLAG.value:
+            if node_info.data not in flags:
+                flags.add(node_info.data)
+                # Reset visited nodes and rooms because we may now be able to reach
+                # nodes we couldn't before with this new flag
                 visited_nodes.clear()
                 visited_rooms.clear()
     for node_info in node.contents:
@@ -129,7 +137,7 @@ def traverse_graph(
     for edge in edges[node.name]:
         if edge.dest.name in visited_nodes:
             continue
-        if edge.is_traversable(inventory):
+        if edge.is_traversable(inventory, flags):
             logging.debug(f"{edge.source.name} -> {edge.dest.name}")
             if traverse_graph(edge.dest, aux_data, visited_rooms, visited_nodes):
                 return True
@@ -190,7 +198,7 @@ def shuffle(
     Returns:
         Randomized aux data.
     """
-    global nodes, edges, visited_nodes, inventory
+    global nodes, edges, visited_nodes, inventory, flags
 
     if seed is not None:
         random.seed(seed)
@@ -213,6 +221,7 @@ def shuffle(
         tries += 1
         # Initialize global variables
         inventory = []
+        flags = set()
 
         areas = randomize_aux_data(Path(aux_data_directory))
         if traverse_graph(starting_node, areas, set(), set()):
