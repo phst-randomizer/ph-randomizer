@@ -1,3 +1,4 @@
+from collections import defaultdict
 import json
 import logging
 from pathlib import Path
@@ -16,7 +17,7 @@ END_NODE = "Mercay.AboveMercayTown.Island"  # Name of node that player must reac
 # Global variables
 nodes: list[Node]  # List of nodes that make up the world graph
 edges: dict[str, list[Edge]]  # List of edges that connect nodes. Maps node names to edges.
-inventory: list[str]
+inventory: dict[str, int]
 
 
 def load_aux_data(directory: Path):
@@ -118,7 +119,7 @@ def traverse_graph(
         if node_info.type == Descriptor.CHEST.value:
             item = get_chest_contents(node.area, node.room, node_info.data, aux_data)
             if item not in inventory:
-                inventory.append(item)
+                inventory[item] += 1
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
                 visited_nodes.clear()
@@ -229,7 +230,7 @@ def shuffle(
     while True:
         tries += 1
         # Initialize global variables
-        inventory = []
+        inventory = defaultdict(int)
 
         areas = randomize_aux_data(Path(aux_data_directory))
         if traverse_graph(starting_node, areas, set(), set()):
