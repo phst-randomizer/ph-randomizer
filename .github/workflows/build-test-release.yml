@@ -16,10 +16,11 @@ jobs:
       - name: Upgrade pip
         run: pip install --upgrade pip
 
+      - name: Install tox
+        run: pip install tox
+
       - name: Run tox
-        run: |
-          pip install tox
-          tox
+        run: tox
 
   tests:
     name: Run tests
@@ -35,10 +36,11 @@ jobs:
       - name: Upgrade pip
         run: pip install --upgrade pip
 
+      - name: Install tox
+        run: pip install tox
+
       - name: Run tests
-        run: |
-          pip install tox
-          tox -e test
+        run: tox -e test
 
   check-logic:
     name: Validate logic
@@ -294,11 +296,13 @@ jobs:
         run: |
           ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
 
+      - name: Install tox
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        run: pip install tox
+
       - name: Run tests
         if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
-        run: |
-          pip install tox
-          PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
+        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
         env:
           PH_ROM_PATH: out.nds
 
