@@ -62,7 +62,7 @@ def randomize_aux_data(aux_data_directory: Path):
 
 def get_chest_contents(
     area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
-) -> str:
+) -> str | None:
     for area in aux_data:
         if area_name == area.name:
             for room in area.rooms:
@@ -70,6 +70,11 @@ def get_chest_contents(
                     for chest in room.chests or []:
                         if chest_name == chest.name:
                             return chest.contents
+    # TODO: remove this logging + return statement when aux data is complete.
+    # The randomizer should fail loudly if this condition occurs, but for now
+    # this is needed since the aux data is incomplete.
+    logging.error(f"{chest_name} not found in the given aux data.")
+    return None
     raise Exception(f"{chest_name} not found in the given aux data.")
 
 
