@@ -110,8 +110,9 @@ area IceTemple:
 
     Main -> DoorToF2
     StairsLeft -> DoorToF2
-    DoorToF2 -> Main: open IceTempleKey
-    DoorToF2 -> StairsLeft: open IceTempleKey
+    # TODO: remove `open` keyword once key logic is implemented
+    #DoorToF2 -> Main: open IceTempleKey
+    #DoorToF2 -> StairsLeft: open IceTempleKey
 
   room B1:
     node StairsToF1:
@@ -148,7 +149,8 @@ area IceTemple:
 
     AboveBombableWalls <-> RightSide: item GrapplingHook
 
-    RightSide -> TopRight: (open IceTempleKey & lose SwitchBlue & state SwitchRed)
+    # TODO: remove `open` keyword once key logic is implemented
+    RightSide -> TopRight#: (open IceTempleKey & lose SwitchBlue & state SwitchRed)
 
     TopRight -> RightSide: ((lose SwitchBlue & state SwitchRed) | (item Bow | item Boomerang | item Bomb | item Bombchu | (item Sword & item CourageSpiritLV1)))
 
@@ -199,7 +201,8 @@ area IceTemple:
     AfterArena <-> Middle: (item Sword | item Boomerang)
 
     Middle <-> Top: item Bow
-    Middle <-> TopRight: open IceTempleKey
+    # TODO: remove `open` keyword once key logic is implemented
+    Middle <-> TopRight#: open IceTempleKey
     TopRight <-> TopRightClear: (defeated BrownYook & defeated ArenaIceKeese1 & defeated ArenaIceKeese2)
 
     TopRightClear <-> Right

@@ -17,6 +17,7 @@ END_NODE = "Mercay.AboveMercayTown.Island"  # Name of node that player must reac
 nodes: list[Node]  # List of nodes that make up the world graph
 edges: dict[str, list[Edge]]  # List of edges that connect nodes. Maps node names to edges.
 inventory: list[str]
+flags: set[str]
 
 
 def load_aux_data(directory: Path):
@@ -59,26 +60,9 @@ def randomize_aux_data(aux_data_directory: Path):
     return areas
 
 
-def edge_is_traversable(edge: Edge):
-    """Determine if this edge is traversable given the current state of the game."""
-    # TODO: implement this
-    match edge.constraints:
-        case "item Sword":
-            return "oshus_sword" in inventory
-        case "(item Bombs | item Bombchus)":
-            return "bombs" in inventory or "bombchus" in inventory
-        case "item Bow":
-            return "bow" in inventory
-        case "item Boomerang":
-            return "boomerang" in inventory
-        case "flag BridgeRepaired":
-            return True  # TODO: for now, assume bridge is always repaired
-    return False
-
-
 def get_chest_contents(
     area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
-) -> str:
+) -> str | None:
     for area in aux_data:
         if area_name == area.name:
             for room in area.rooms:
@@ -86,6 +70,11 @@ def get_chest_contents(
                     for chest in room.chests or []:
                         if chest_name == chest.name:
                             return chest.contents
+    # TODO: remove this logging + return statement when aux data is complete.
+    # The randomizer should fail loudly if this condition occurs, but for now
+    # this is needed since the aux data is incomplete.
+    logging.error(f"{chest_name} not found in the given aux data.")
+    return None
     raise Exception(f"{chest_name} not found in the given aux data.")
 
 
@@ -104,7 +93,7 @@ def traverse_graph(
     Returns:
         `True` if the `END_NODE` was reached, `False` otherwise.
     """
-    global nodes, edges, inventory
+    global nodes, edges, inventory, flags
     logging.debug(node.name)
 
     if node.name == END_NODE:
@@ -121,6 +110,13 @@ def traverse_graph(
                 inventory.append(item)
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
+                visited_nodes.clear()
+                visited_rooms.clear()
+        elif node_info.type == Descriptor.FLAG.value:
+            if node_info.data not in flags:
+                flags.add(node_info.data)
+                # Reset visited nodes and rooms because we may now be able to reach
+                # nodes we couldn't before with this new flag
                 visited_nodes.clear()
                 visited_rooms.clear()
     for node_info in node.contents:
@@ -146,7 +142,7 @@ def traverse_graph(
     for edge in edges[node.name]:
         if edge.dest.name in visited_nodes:
             continue
-        if edge_is_traversable(edge):
+        if edge.is_traversable(inventory, flags):
             logging.debug(f"{edge.source.name} -> {edge.dest.name}")
             if traverse_graph(edge.dest, aux_data, visited_rooms, visited_nodes):
                 return True
@@ -207,7 +203,7 @@ def shuffle(
     Returns:
         Randomized aux data.
     """
-    global nodes, edges, visited_nodes, inventory
+    global nodes, edges, visited_nodes, inventory, flags
 
     if seed is not None:
         random.seed(seed)
@@ -230,6 +226,7 @@ def shuffle(
         tries += 1
         # Initialize global variables
         inventory = []
+        flags = set()
 
         areas = randomize_aux_data(Path(aux_data_directory))
         if traverse_graph(starting_node, areas, set(), set()):

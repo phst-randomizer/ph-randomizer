@@ -19,7 +19,8 @@ area TempleOfTheOceanKing:
     node Downstairs:
       door ToB3
 
-    Upper -> Downstairs: open ToTOKKey
+    # TODO: remove `open` keyword once key logic is implemented
+    Upper -> Downstairs#: open ToTOKKey
 
     Upper -> Lower: item Boomerang # TODO: Check if hammer/bombs/bombchus/something else works here
     Lower -> Upper
