@@ -8,7 +8,10 @@ area Mercay:
       door OshusCave
     node East:
       door East
-    Outside <-> East: flag BridgeRepaired
+    # TODO: this should be configurable based on rando settings.
+    # Outside <-> East: item SWSeaChart
+    # For now, don't require SWSeaChart:
+    Outside <-> East
 
   room OshussHouse:
     node Main:
