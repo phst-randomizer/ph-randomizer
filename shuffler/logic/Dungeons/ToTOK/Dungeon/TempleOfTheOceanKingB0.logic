@@ -10,6 +10,7 @@ area TempleOfTheOceanKing:
 
     node Downstairs:
       door ToB1
-
-    Lower <-> Upper: open ToTOKKey
+    
+    # TODO: remove `open` keyword once key logic is implemented
+    Lower <-> Upper#: open ToTOKKey
     Lower -> Downstairs: item PowerSpirit

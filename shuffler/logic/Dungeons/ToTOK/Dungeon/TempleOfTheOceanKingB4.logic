@@ -33,9 +33,11 @@ area TempleOfTheOceanKing:
     Bottom -> TopRight: (item Sword | item Boomerang | item Bow | item Bombchu | item GrapplingHook | item Hammer)
 
     Bottom <-> KeyDoorTopLeft: item Bombchus
-    KeyDoorTopLeft <-> TopLeftStaircase: open TopLeftDoor
+    # TODO: remove `open` keyword once key logic is implemented
+    KeyDoorTopLeft <-> TopLeftStaircase#: open TopLeftDoor
 
-    Bottom <-> BottomDoor: open BottomDoor
+    # TODO: remove `open` keyword once key logic is implemented
+    Bottom <-> BottomDoor#: open BottomDoor
 
     Bottom <-> SpikeArea: ((setting HammerClip & item Hammer) | (setting BoomerangClip & item Boomerang) | item Bombs | item Bombchu)
 

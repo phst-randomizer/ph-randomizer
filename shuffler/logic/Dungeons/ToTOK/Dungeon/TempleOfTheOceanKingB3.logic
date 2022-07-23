@@ -23,7 +23,8 @@ area TempleOfTheOceanKing:
     node DoorToChartRoom:
       door ToChartRoom
 
-    Main <-> KeyDoor: open ChestBehindDoor
+    # TODO: remove `open` keyword once key logic is implemented
+    Main <-> KeyDoor#: open ChestBehindDoor
     Main <-> EyeTarget: item Bow
     Main <-> AllDefeatChest: (item PhantomSword & item GrapplingHook)
     Main <-> Ledge: item GrapplingHook

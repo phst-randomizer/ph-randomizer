@@ -34,13 +34,17 @@ area MercayGrotto:
 
     NorthDoor -> LockedDoorUp
     Upper -> LockedDoorUp
-    LockedDoorUp -> Upper: open MercayKey
-    LockedDoorUp -> NorthDoor: open MercayKey
+
+    # TODO: remove `open` keyword once key logic is implemented
+    LockedDoorUp -> Upper#: open MercayKey
+    LockedDoorUp -> NorthDoor#: open MercayKey
 
     Lower -> LockedDoorDown
     Upper -> LockedDoorDown
-    LockedDoorDown -> Upper: open MercayKey
-    LockedDoorDown -> Lower: open MercayKey
+
+    # TODO: remove `open` keyword once key logic is implemented
+    LockedDoorDown -> Upper#: open MercayKey
+    LockedDoorDown -> Lower#: open MercayKey
 
   room F2:
     node Main:
@@ -70,7 +74,9 @@ area MercayGrotto:
 
     Main -> LockedDoor
     EastExit -> LockedDoor
-    LockedDoor -> Main: open MercayKey
-    LockedDoor -> EastExit: open MercayKey
+
+    # TODO: remove `open` keyword once key logic is implemented
+    LockedDoor -> Main#: open MercayKey
+    LockedDoor -> EastExit#: open MercayKey
 
     Main <-> RatKey: defeated Rat
