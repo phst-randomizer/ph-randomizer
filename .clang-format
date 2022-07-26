@@ -163,4 +163,7 @@ WhitespaceSensitiveMacros:
   - NS_SWIFT_NAME
   - CF_SWIFT_NAME
 ...
+---
+Language: Json
+BasedOnStyle: llvm
 
