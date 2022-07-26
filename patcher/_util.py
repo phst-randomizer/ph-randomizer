@@ -47,7 +47,7 @@ def load_aux_data(directory: Path):
     aux_data: list[Area] = []
     aux_files = list(directory.rglob("*.json"))
     for file in aux_files:
-        with open(file, "r") as fd:
+        with open(file) as fd:
             aux_data.append(Area(**json.load(fd)))
     return aux_data
 

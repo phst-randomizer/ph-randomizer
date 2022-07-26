@@ -1,5 +1,4 @@
 from collections import defaultdict
-from typing import Optional
 
 from ndspy import lz10, narc
 from zed.common import Game
@@ -39,7 +38,7 @@ class MapObjectLocation(Location):
         self.child_index = child_index
         self.file_path = file_path
         self.is_tree_drop_item = is_tree_drop_item
-        self.zmb_file: Optional[ZMB] = None
+        self.zmb_file: ZMB | None = None
 
         # check if this zmb file is already open first
         for filename, zmb_file in MapObjectLocation._zmb_filename_mapping.items():

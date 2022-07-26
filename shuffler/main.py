@@ -25,7 +25,7 @@ def load_aux_data(directory: Path):
 
     areas: list[Area] = []
     for file in aux_files:
-        with open(file, "r") as fd:
+        with open(file) as fd:
             areas.append(Area(**json.load(fd)))
     return areas
 

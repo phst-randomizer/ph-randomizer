@@ -1,5 +1,4 @@
 from collections import defaultdict
-from typing import Optional
 
 from ndspy.lz10 import compress, decompress
 from ndspy.narc import NARC
@@ -28,7 +27,7 @@ class DigSpotLocation(Location):
     def __init__(self, actor_index: int, file_path: str, *args, **kwargs):
         self.actor_index = actor_index
         self.file_path = file_path
-        self.zmb_file: Optional[ZMB] = None
+        self.zmb_file: ZMB | None = None
 
         # check if this zmb file is already open first
         for filename, zmb_file in DigSpotLocation._zmb_filename_mapping.items():

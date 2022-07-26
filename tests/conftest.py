@@ -195,7 +195,7 @@ def aux_data_directory(tmp_path: Path):
     # Add a new chest to Mercay aux data containing bombs, so that a beatable seed can actually
     # be generated.
     # TODO: Remove this once there's enough aux data completed to generate a beatable seed.
-    with open(dest / "SW Sea" / "Mercay Island" / "Mercay.json", "r") as fd:
+    with open(dest / "SW Sea" / "Mercay Island" / "Mercay.json") as fd:
         mercay_json = json.load(fd)
     mercay_json["rooms"][0]["chests"].append(
         {

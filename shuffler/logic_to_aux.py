@@ -15,7 +15,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
         file_directory = file.relative_to(logic_directory)
 
         rooms: dict[str, dict[str, Any]] = {}
-        with open(file, "r") as fd:
+        with open(file) as fd:
             lines: list[str] = []
             for line in fd.readlines():
                 line = line.strip()  # strip off leading and trailing whitespace

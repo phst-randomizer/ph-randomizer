@@ -263,7 +263,7 @@ def parse(directory: Path):
 
     for file in logic_files:
         lines: list[str] = []
-        with open(file, "r") as fd:
+        with open(file) as fd:
             for line in fd.readlines():
                 line = line.strip()  # strip off leading and trailing whitespace
                 if "#" in line:

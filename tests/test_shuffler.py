@@ -91,7 +91,7 @@ def test_seeds(seed: str, aux_data_directory: str, logic_directory: str):
 )
 def test_aux_data_validation(filename: str):
     """Run every aux data json through validation."""
-    with open(filename, "r") as fd:
+    with open(filename) as fd:
         Area(**json.load(fd))
 
 

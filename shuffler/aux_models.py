@@ -91,7 +91,7 @@ class Area(BaseModel):
                         logic_doors.add(contents.data)
 
             # Get all doors in the aux data
-            aux_data_doors = set([door.name for door in room.doors])
+            aux_data_doors = {door.name for door in room.doors}
 
             # Make sure they are the same.
             # If not, display the differences.
