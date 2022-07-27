@@ -43,7 +43,7 @@ area Molida:
       chest TreasureChest
 
   room MiddleHouse:
-    node Main: 
+    node Main:
       door Outside
 
   room MolidaShop:

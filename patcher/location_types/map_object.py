@@ -73,19 +73,19 @@ class MapObjectLocation(Location):
     def _narc_filepath(self):
         """Return the filepath of the NARC archive (ending with '.bin' extension) containing this ZMB file."""
         path: list[str] = []
-        for part in self.file_path.split("/"):
+        for part in self.file_path.split('/'):
             path.append(part)
-            if "." in part:
-                return "/".join(path)
+            if '.' in part:
+                return '/'.join(path)
 
     @property
     def _zmb_filepath(self):
         """Return the filepath of the ZMB file within its parent NARC archive."""
         index: int
         part: str
-        for index, part in enumerate(self.file_path.split("/")):
-            if "." in part:
-                return "/".join(self.file_path.split("/")[index + 1 :])
+        for index, part in enumerate(self.file_path.split('/')):
+            if '.' in part:
+                return '/'.join(self.file_path.split('/')[index + 1 :])
 
     @classmethod
     def save_all(cls):

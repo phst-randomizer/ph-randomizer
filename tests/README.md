@@ -4,7 +4,7 @@ This subdirectory contains a suite of tests for the randomizer written using the
 
 ## Patcher/shuffler tests
 
-These are tests for the randomizer program itself (i.e. the desktop application you run on your PC). For example, these might be unit tests for python functions that are part of the shuffler, integration-style tests that run the randomizer and examine its output, etc. 
+These are tests for the randomizer program itself (i.e. the desktop application you run on your PC). For example, these might be unit tests for python functions that are part of the shuffler, integration-style tests that run the randomizer and examine its output, etc.
 
 ### How to run
 

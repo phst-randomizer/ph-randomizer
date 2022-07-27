@@ -5,7 +5,7 @@ area Bannan:
 
     node Island:
       chest IslandChest
-    
+
     Main <-> Island: item GrapplingHook
 
   room OutsideRight:

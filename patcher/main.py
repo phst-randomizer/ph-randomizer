@@ -22,25 +22,25 @@ def patch(
 
 @click.command()
 @click.option(
-    "-a",
-    "--aux-data-directory",
+    '-a',
+    '--aux-data-directory',
     required=True,
     type=str,
-    help="Path to directory containing the aux data to patch the ROM with.",
+    help='Path to directory containing the aux data to patch the ROM with.',
 )
 @click.option(
-    "-i",
-    "--input-rom-path",
+    '-i',
+    '--input-rom-path',
     required=True,
     type=str,
-    help="Path to ROM to patch.",
+    help='Path to ROM to patch.',
 )
 @click.option(
-    "-o", "--output-rom-path", default=None, type=str, help="Path to save patched ROM to."
+    '-o', '--output-rom-path', default=None, type=str, help='Path to save patched ROM to.'
 )
 def patcher_cli(aux_data_directory: str, input_rom_path: str, output_rom_path: str | None):
     return patch(aux_data_directory, input_rom_path, output_rom_path)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     patcher_cli()

@@ -18,7 +18,7 @@ str r1, [sp, 0x20]
 str r1, [sp, 0x24]
 bl 0x20c32e8
 
-; NOTE: this differs from the original RUPY spawning code. 
+; NOTE: this differs from the original RUPY spawning code.
 ; Instead of copying in a specific "RUPY type id", we're just passing the ZMB
 ; item id with the MSB set
 ldr r0, [r4, 0x6c] ; just copy id into r0

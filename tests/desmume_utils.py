@@ -94,11 +94,11 @@ def start_first_file(desmume_emulator: DesmumeEmulator):
 
 
 def get_current_rupee_count(desmume: DesmumeEmulator):
-    return int.from_bytes(desmume.emu.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], "little")
+    return int.from_bytes(desmume.emu.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], 'little')
 
 
 # Screen coordinates for each item when the "Items" menu is open
-ITEMS_MENU_COORDINATES = {"shovel": (225, 175)}
+ITEMS_MENU_COORDINATES = {'shovel': (225, 175)}
 
 
 def open_items_menu(desmume: DesmumeEmulator):

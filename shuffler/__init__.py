@@ -1,3 +1,3 @@
 from .main import shuffle
 
-__all__ = ["shuffle"]
+__all__ = ['shuffle']

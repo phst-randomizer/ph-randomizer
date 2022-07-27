@@ -142,7 +142,7 @@ jobs:
         run: |
           python shuffler/aux_models.py
           git diff --exit-code
-          if [ $? -ne 0 ] 
+          if [ $? -ne 0 ]
           then
             exit 1
           fi
@@ -360,7 +360,7 @@ jobs:
   release:
     name: Publish a release
     # Require all tests to pass before a release is possible
-    needs: 
+    needs:
       - build
       - lint-type-check
       - tests
