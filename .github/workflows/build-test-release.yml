@@ -16,11 +16,8 @@ jobs:
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
 
-      - name: Install tox and pre-commit
-        run: pip install tox pre-commit
-
-      - name: Run tox checks
-        run: tox
+      - name: Install pre-commit
+        run: pip install pre-commit
 
       - name: Run pre-commit checks
         run: pre-commit run --all-files --verbose
