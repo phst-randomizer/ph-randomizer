@@ -1,4 +1,23 @@
 repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+        args:
+          - --allow-multiple-documents
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: double-quote-string-fixer
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
   - repo: https://github.com/psf/black
     rev: 22.6.0
     hooks:
@@ -9,16 +28,11 @@ repos:
     hooks:
       - id: isort
 
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
-    hooks:
-      - id: debug-statements
-
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.37.2 
+    rev: v2.37.2
     hooks:
       - id: pyupgrade
-        args: 
+        args:
           - --py3-plus
           - --py36-plus
           - --py37-plus
@@ -42,13 +56,13 @@ repos:
     rev: 4.0.1
     hooks:
       - id: flake8
-        additional_dependencies: 
+        additional_dependencies:
           - flake8-black
           - flake8-bugbear
           - flake8-docstrings
           - flake8-isort
           - flake8-quotes
-        args: 
+        args:
           - --config
           - .flake8
 
@@ -56,7 +70,7 @@ repos:
     rev: v0.971
     hooks:
       - id: mypy
-        args: 
+        args:
           - --ignore-missing-imports
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
