@@ -1,5 +1,4 @@
 from collections import defaultdict
-from typing import Optional
 
 from ndspy import lz10, narc
 from zed.common import Game
@@ -39,7 +38,7 @@ class MapObjectLocation(Location):
         self.child_index = child_index
         self.file_path = file_path
         self.is_tree_drop_item = is_tree_drop_item
-        self.zmb_file: Optional[ZMB] = None
+        self.zmb_file: ZMB | None = None
 
         # check if this zmb file is already open first
         for filename, zmb_file in MapObjectLocation._zmb_filename_mapping.items():
@@ -74,19 +73,19 @@ class MapObjectLocation(Location):
     def _narc_filepath(self):
         """Return the filepath of the NARC archive (ending with '.bin' extension) containing this ZMB file."""
         path: list[str] = []
-        for part in self.file_path.split("/"):
+        for part in self.file_path.split('/'):
             path.append(part)
-            if "." in part:
-                return "/".join(path)
+            if '.' in part:
+                return '/'.join(path)
 
     @property
     def _zmb_filepath(self):
         """Return the filepath of the ZMB file within its parent NARC archive."""
         index: int
         part: str
-        for index, part in enumerate(self.file_path.split("/")):
-            if "." in part:
-                return "/".join(self.file_path.split("/")[index + 1 :])
+        for index, part in enumerate(self.file_path.split('/')):
+            if '.' in part:
+                return '/'.join(self.file_path.split('/')[index + 1 :])
 
     @classmethod
     def save_all(cls):

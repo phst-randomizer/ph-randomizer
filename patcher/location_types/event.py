@@ -25,7 +25,7 @@ class EventLocation(Location):
     def set_location(self, value: int):
         self.bmg_file.instructions[self.instruction_index] = (
             self.bmg_file.instructions[self.instruction_index][:4]
-            + struct.pack("<B", value)
+            + struct.pack('<B', value)
             + self.bmg_file.instructions[self.instruction_index][5:]
         )
 

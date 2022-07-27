@@ -22,15 +22,15 @@ class Node:
 
     @property
     def area(self):
-        return self.name.split(".")[0]
+        return self.name.split('.')[0]
 
     @property
     def room(self):
-        return self.name.split(".")[1]
+        return self.name.split('.')[1]
 
     @property
     def node(self):
-        return self.name.split(".")[2]
+        return self.name.split('.')[2]
 
 
 @dataclass
@@ -63,14 +63,14 @@ edges: dict[str, list[Edge]] = defaultdict(list)  # Maps node names to edges
 
 
 class Descriptor(Enum):
-    CHEST = "chest"
-    DOOR = "door"
-    ENTRANCE = "entrance"
-    EXIT = "exit"
-    MAIL = "mail"
-    HINT = "hint"
-    ENEMY = "enemy"
-    LOCK = "lock"
+    CHEST = 'chest'
+    DOOR = 'door'
+    ENTRANCE = 'entrance'
+    EXIT = 'exit'
+    MAIL = 'mail'
+    HINT = 'hint'
+    ENEMY = 'enemy'
+    LOCK = 'lock'
 
 
 VALID_DESCRIPTORS = [element.value for element in Descriptor]
@@ -84,13 +84,13 @@ EdgeExpression = list[str | Any]
 
 # pyparsing parser for parsing edges in .logic files:
 operand: pyparsing.ParserElement = (
-    pyparsing.Keyword("item") | pyparsing.Keyword("flag")
+    pyparsing.Keyword('item') | pyparsing.Keyword('flag')
 ) + pyparsing.Word(pyparsing.alphas)
 edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
     operand,
     [
-        (pyparsing.Literal("&"), 2, pyparsing.opAssoc.LEFT),
-        (pyparsing.Literal("|"), 2, pyparsing.opAssoc.LEFT),
+        (pyparsing.Literal('&'), 2, pyparsing.opAssoc.LEFT),
+        (pyparsing.Literal('|'), 2, pyparsing.opAssoc.LEFT),
     ],
 )
 
@@ -109,9 +109,9 @@ def _evaluate_constraint(type: str, value: str, inventory: list[str]) -> bool:
         accessible given the current shuffled state.
     """
     match type:
-        case "item":
+        case 'item':
             return value in inventory
-        case "flag":
+        case 'flag':
             raise NotImplementedError("Edges with type 'flag' are not implemented yet.")
         case other:
             raise Exception(f'Invalid edge type "{other}"')
@@ -153,15 +153,15 @@ def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], resu
             current_result = _evaluate_constraint(expr_type, expr_value, inventory)
 
         # Apply any pending logical operations
-        if current_op == "&":
+        if current_op == '&':
             result &= current_result
-        elif current_op == "|":
+        elif current_op == '|':
             result |= current_result
         else:
             result = current_result
 
         # Queue up a logical AND or OR for the next expression if needed
-        if len(parsed_expr) and parsed_expr[0] in ("&", "|"):
+        if len(parsed_expr) and parsed_expr[0] in ('&', '|'):
             current_op = parsed_expr.pop(0)
 
     return result
@@ -169,29 +169,29 @@ def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], resu
 
 def parse_node(lines: list[str]) -> list[NodeContents]:
     node_contents: list[NodeContents] = []
-    while lines and (lines[0].lstrip().split(" ")[0] in VALID_DESCRIPTORS):
-        line = lines.pop(0).strip().split(" ")
+    while lines and (lines[0].lstrip().split(' ')[0] in VALID_DESCRIPTORS):
+        line = lines.pop(0).strip().split(' ')
         node_type = line[0]
-        node_contents.append(NodeContents(type=node_type, data=" ".join(line[1:])))
-        logging.debug(f"      {node_contents[-1].type} {node_contents[-1].data}")
+        node_contents.append(NodeContents(type=node_type, data=' '.join(line[1:])))
+        logging.debug(f'      {node_contents[-1].type} {node_contents[-1].data}')
     return node_contents
 
 
-def parse_edge(node_prefix: str, line: str, edge_direction: Literal["<-", "->"]):
+def parse_edge(node_prefix: str, line: str, edge_direction: Literal['<-', '->']):
     source_node_name = (
         f"{node_prefix}.{line.split('<->' if '<->' in line else edge_direction)[0].strip()}"
     )
     dest_node_name = f"{node_prefix}.{line.split('<->' if '<->' in line else edge_direction)[1].strip().split(':')[0]}"
 
     edge_content = None
-    if ":" in line:
-        edge_content = line.split(":")[1].strip()
+    if ':' in line:
+        edge_content = line.split(':')[1].strip()
 
     node1 = [node for node in nodes if node.name == source_node_name][0]
     node2 = [node for node in nodes if node.name == dest_node_name][0]
-    if edge_direction == "->":
+    if edge_direction == '->':
         edges[node1.name].append(Edge(source=node1, dest=node2, constraints=edge_content))
-    elif edge_direction == "<-":
+    elif edge_direction == '<-':
         edges[node2.name].append(Edge(source=node2, dest=node1, constraints=edge_content))
     else:
         raise NotImplementedError(f'Invalid edge direction token "{edge_direction}"')
@@ -199,16 +199,16 @@ def parse_edge(node_prefix: str, line: str, edge_direction: Literal["<-", "->"])
 
 def parse_room_contents(node_prefix: str, lines: list[str]):
     while lines and (
-        lines[0].lstrip().startswith("node")
-        or "<->" in lines[0].lstrip()
-        or "<-" in lines[0].lstrip()
-        or "->" in lines[0].lstrip()
+        lines[0].lstrip().startswith('node')
+        or '<->' in lines[0].lstrip()
+        or '<-' in lines[0].lstrip()
+        or '->' in lines[0].lstrip()
     ):
         line = lines.pop(0).strip()
-        line_split = line.split(" ")
+        line_split = line.split(' ')
         match line_split:
-            case ["node", _]:
-                logging.debug(f"    node {line_split[1]}")
+            case ['node', _]:
+                logging.debug(f'    node {line_split[1]}')
                 nodes.append(
                     Node(
                         # Also make sure to remove last character if its a colon
@@ -217,39 +217,39 @@ def parse_room_contents(node_prefix: str, lines: list[str]):
                     )
                 )
             # Note: special case of a one-liner node (for ex- `node X: item B`)
-            case ["node", *_]:
-                logging.debug(f"    node {line_split[1]}")
+            case ['node', *_]:
+                logging.debug(f'    node {line_split[1]}')
                 nodes.append(
                     Node(
                         # Also make sure to remove last character if its a colon
                         name=f"{node_prefix}.{line_split[1].rstrip(':')}",
-                        contents=parse_node([" ".join(line_split[2:])] + lines),
+                        contents=parse_node([' '.join(line_split[2:])] + lines),
                     )
                 )
-            case [node1, "->", node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, "->")
-            case [node1, "<-", node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, "<-")
-            case [node1, "<->", node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, "->")
-                parse_edge(node_prefix, line, "<-")
+            case [node1, '->', node2, *_]:  # noqa: F841
+                parse_edge(node_prefix, line, '->')
+            case [node1, '<-', node2, *_]:  # noqa: F841
+                parse_edge(node_prefix, line, '<-')
+            case [node1, '<->', node2, *_]:  # noqa: F841
+                parse_edge(node_prefix, line, '->')
+                parse_edge(node_prefix, line, '<-')
 
 
 def parse_rooms(node_prefix: str, lines: list[str]):
-    while lines and (lines[0].lstrip().startswith("room")):
+    while lines and (lines[0].lstrip().startswith('room')):
         line = lines.pop(0).strip()
-        assert line.split(" ")[0] == "room"
-        room_name = line.split(" ")[1].rstrip(":")
-        logging.debug(f"  room {room_name}")
-        parse_room_contents(f"{node_prefix}.{room_name}", lines)
+        assert line.split(' ')[0] == 'room'
+        room_name = line.split(' ')[1].rstrip(':')
+        logging.debug(f'  room {room_name}')
+        parse_room_contents(f'{node_prefix}.{room_name}', lines)
 
 
 def parse_area(lines: list[str]):
-    while lines and (lines[0].lstrip().startswith("area")):
+    while lines and (lines[0].lstrip().startswith('area')):
         line = lines.pop(0)
-        assert line.startswith("area")
-        area_name = line.split(" ")[1].rstrip(":")
-        logging.debug(f"area {area_name}")
+        assert line.startswith('area')
+        area_name = line.split(' ')[1].rstrip(':')
+        logging.debug(f'area {area_name}')
         parse_rooms(area_name, lines)
     return nodes
 
@@ -259,15 +259,15 @@ def clear_nodes():
 
 
 def parse(directory: Path):
-    logic_files = list(directory.rglob("*.logic"))
+    logic_files = list(directory.rglob('*.logic'))
 
     for file in logic_files:
         lines: list[str] = []
-        with open(file, "r") as fd:
+        with open(file) as fd:
             for line in fd.readlines():
                 line = line.strip()  # strip off leading and trailing whitespace
-                if "#" in line:
-                    line = line[: line.index("#")]  # remove any comments
+                if '#' in line:
+                    line = line[: line.index('#')]  # remove any comments
                 if line:
                     lines.append(line)
         parse_area(lines)

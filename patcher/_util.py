@@ -19,7 +19,7 @@ def is_frozen():
     This can be used to determine if the app is running as a regular python script,
     or if it's a bundled PyInstaller executable.
     """
-    return getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS")
+    return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
 
 def load_rom(file: Path):
@@ -30,13 +30,13 @@ def load_rom(file: Path):
     memory, and the BPS patch is applied to that in-memory copy.
     """
     base_patch_path = Path(
-        Path(sys._MEIPASS) / "patch.bps"  # type: ignore
+        Path(sys._MEIPASS) / 'patch.bps'  # type: ignore
         if is_frozen()
         else os.environ.get(
-            "BASE_PATCH_PATH", Path(__file__).parent.parent / "base" / "out" / "patch.bps"
+            'BASE_PATCH_PATH', Path(__file__).parent.parent / 'base' / 'out' / 'patch.bps'
         )
     )
-    with open(base_patch_path, "rb") as patch_file:
+    with open(base_patch_path, 'rb') as patch_file:
         patched_rom = bps.patch(source=BytesIO(file.read_bytes()), bps_patch=patch_file)
     input_rom = rom.NintendoDSRom(data=patched_rom.read())
     Location.ROM = input_rom
@@ -45,16 +45,16 @@ def load_rom(file: Path):
 
 def load_aux_data(directory: Path):
     aux_data: list[Area] = []
-    aux_files = list(directory.rglob("*.json"))
+    aux_files = list(directory.rglob('*.json'))
     for file in aux_files:
-        with open(file, "r") as fd:
+        with open(file) as fd:
             aux_data.append(Area(**json.load(fd)))
     return aux_data
 
 
 def patch_chest(chest: Chest):
     # TODO: remove this when all file paths are set correctly in aux data
-    if chest.zmb_file_path == "TODO":
+    if chest.zmb_file_path == 'TODO':
         return
 
     location = MapObjectLocation(
@@ -103,23 +103,23 @@ def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Nintend
         for room in area.rooms:
             for chest in room.chests or []:
                 match chest.type:
-                    case "chest":
+                    case 'chest':
                         assert isinstance(chest, Chest)
                         patch_chest(chest)
-                    case "npc":
+                    case 'npc':
                         assert isinstance(chest, Npc)
                         patch_npc(chest)
-                    case "island_shop":
+                    case 'island_shop':
                         assert isinstance(chest, IslandShop)
                         patch_island_shop(chest)
-                    case "tree":
+                    case 'tree':
                         assert isinstance(chest, Tree)
                         patch_tree(chest)
-                    case "dig":
+                    case 'dig':
                         pass  # TODO: implement this
-                    case "freestanding":
+                    case 'freestanding':
                         pass  # TODO: implement this
-                    case "on_enemy":
+                    case 'on_enemy':
                         # TODO: is this needed? It represents items that are
                         # carried by enemies and dropped, like keys on
                         # phantoms or rats. This *might* be the same as

@@ -78,7 +78,7 @@ arm7.bin: $(INPUT_NDS_FILE)
 y9.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -y9 y9.bin
 
-y7.bin: $(INPUT_NDS_FILE)	
+y7.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -y7 y7.bin
 
 banner.bin: $(INPUT_NDS_FILE)

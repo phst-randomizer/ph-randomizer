@@ -45,7 +45,7 @@
             @spawn_dig_item:
                 ; Set rupy_id to id of item we want to spawn | 0x8000 (i.e. with MSB set).
                 ; See `extend_RUPY_npc.c` for why this works.
-                orr r0, r5, 0x8000 
+                orr r0, r5, 0x8000
                 strh r0, [sp, 0x2c]
                 ; Load r4 with "RUPY" string
                 ldr r4, =0x212f4c4
@@ -83,7 +83,7 @@
     .thumb
     .org 0x211c09a
         ; This overrides the routine that is in charge of spawning the correct 3D model
-        ; for the randomized treasure item in the shop. This code disables this 
+        ; for the randomized treasure item in the shop. This code disables this
         ; clock-based randomization and makes it a fixed item.
         ; This code handles setting the 3D model (i.e. appearence only), see section for
         ; overlay 60 for the code that actually sets the item id.
@@ -115,7 +115,7 @@
         .endarea
 
     ; There is essentially a giant `switch` statement in the game code that determines which item
-    ; id's are "valid" and able to be spawned from a shovel dig spot. For "invalid" items like 
+    ; id's are "valid" and able to be spawned from a shovel dig spot. For "invalid" items like
     ; the sword (id=0x3), the case statement looks like this:
     ;
     ;    switch (item_id) {
@@ -130,7 +130,7 @@
     ;        *rupy_id = 0x3
     ;         goto SPAWN_NPC
     ;    }
-    ; 
+    ;
     ; Below, we override each of those "invalid" item cases to look something like this:
     ;
     ;   case 0x3:

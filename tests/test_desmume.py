@@ -14,7 +14,7 @@ from tests.desmume_utils import (
 
 
 @pytest.mark.parametrize(
-    "bridge_repaired", [True, False], ids=["Bridge repaired from start", "Bridge broken from start"]
+    'bridge_repaired', [True, False], ids=['Bridge repaired from start', 'Bridge broken from start']
 )
 def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool):
     """Ensure all flags are set properly + all rando settings work."""
@@ -133,7 +133,7 @@ def test_custom_shop_items(island_shop_test_emu: DesmumeEmulator):
 
 
 def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
-    item_id = int(os.environ["PYTEST_CURRENT_TEST"].split("[")[1].split("-")[0], 16)
+    item_id = int(os.environ['PYTEST_CURRENT_TEST'].split('[')[1].split('-')[0], 16)
 
     start_first_file(dig_spot_test_emu)
 
@@ -154,7 +154,7 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
                 dig_spot_test_emu.emu.memory.unsigned[
                     ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                 ],
-                "little",
+                'little',
             )
 
     # Walk down from Oshus house
@@ -166,7 +166,7 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
     dig_spot_test_emu.wait(30)
 
     # Take out shovel
-    equip_item(dig_spot_test_emu, "shovel")
+    equip_item(dig_spot_test_emu, 'shovel')
     use_equipped_item(dig_spot_test_emu)
 
     # Tap ground where item is buried to dig it up
@@ -204,7 +204,7 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
                     dig_spot_test_emu.emu.memory.unsigned[
                         ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                     ],
-                    "little",
+                    'little',
                 )
                 - ITEM_MEMORY_ADDRESSES[item_id][1]
                 == original_value
