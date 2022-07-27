@@ -4,15 +4,13 @@ Note, this document is very much a work-in-progress.
 
 ## Code style/formatting guidelines
 
-All code is linted and, in the case of Python, type-checked in CI on every commit. To run these checks locally, make sure you have `tox` installed:
+All code is linted and, in the case of Python, type-checked in CI on every commit. These checks are handled through [`pre-commit`](https://github.com/pre-commit/pre-commit). First, install `pre-commit` through `pip`:
 
-`pip install tox`
+`pip install pre-commit`
 
-and simply run `tox` in the root of the repository.
+`pre-commit` can be configured as a `git` hook, which will cause all style/type-checks to be run on commit. This is the recommended mode to use `pre-commit` in, as it will reduce the chance of CI failures due to incorrectly formatted code and/or type-checking failures. To configure this, run `pre-commit install` in the root of the repository.
 
-You can also auto-format your code with `tox -e format`. It won't fix every linting error, but it will fix most.
-
-It's recommended that you run `tox -e format` and `tox` prior to opening a PR to avoid unexpected CI failures.
+Alternatively, you can run the checks manually at any time with `pre-commit run --all-files`.
 
 
 ## Automated testing
