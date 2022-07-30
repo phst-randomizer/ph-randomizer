@@ -103,14 +103,14 @@ def test_aux_data_validation(filename: str):
         ('item Boomerang', ['boomerang', 'sword'], True),
         ('item Boomerang', ['sword'], False),
         # Test expressions with basic logic operators
-        ('item Boomerang & item Bombs)', ['boomerang', 'bombs'], True),
-        ('item Boomerang & item Bombs)', ['boomerang', 'sword'], False),
-        ('item Boomerang & item Bombs)', ['bombs'], False),
-        ('item Boomerang & item Bombs)', [], False),
-        ('item Boomerang | item Bombs)', ['boomerang', 'bombs'], True),
-        ('item Boomerang | item Bombs)', ['boomerang', 'sword'], True),
-        ('item Boomerang | item Bombs)', ['bombs'], True),
-        ('item Boomerang | item Bombs)', ['sword'], False),
+        ('item Boomerang & item Bombs', ['boomerang', 'bombs'], True),
+        ('item Boomerang & item Bombs', ['boomerang', 'sword'], False),
+        ('item Boomerang & item Bombs', ['bombs'], False),
+        ('item Boomerang & item Bombs', [], False),
+        ('item Boomerang | item Bombs', ['boomerang', 'bombs'], True),
+        ('item Boomerang | item Bombs', ['boomerang', 'sword'], True),
+        ('item Boomerang | item Bombs', ['bombs'], True),
+        ('item Boomerang | item Bombs', ['sword'], False),
         # Test nested expressions
         ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs', 'bombchus'], True),
         ('item Boomerang & (item Bombs | item Bombchus | item Hammer)', ['boomerang', 'bombchus'], True),  # noqa: E501
