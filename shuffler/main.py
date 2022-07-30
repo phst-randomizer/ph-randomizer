@@ -13,13 +13,8 @@ logging.basicConfig(level=logging.INFO)
 
 END_NODE = 'Mercay.AboveMercayTown.Island'  # Name of node that player must reach to beat the game
 
-# Global variables
-nodes: list[Node]  # List of nodes that make up the world graph
-edges: dict[str, list[Edge]]  # List of edges that connect nodes. Maps node names to edges.
-inventory: list[str]
 
-
-def load_aux_data(directory: Path):
+def load_aux_data(directory: Path) -> list[Area]:
     # Find all aux data files in the given directory
     aux_files = list(directory.rglob('*.json'))
 
@@ -30,7 +25,7 @@ def load_aux_data(directory: Path):
     return areas
 
 
-def randomize_aux_data(aux_data_directory: Path):
+def randomize_aux_data(aux_data: list[Area]) -> list[Area]:
     """
     Return aux data for the logic with the item locations randomized.
 
@@ -40,26 +35,24 @@ def randomize_aux_data(aux_data_directory: Path):
     Params:
         aux_data_directory: Directory that contains the initial aux data
     """
-    areas = load_aux_data(aux_data_directory)
-
     # List of every item in the game
     chest_items: list[str] = []
 
     # Record all items in the game
-    for area in areas:
+    for area in aux_data:
         for room in area.rooms:
             for chest in room.chests or []:
                 chest_items.append(chest.contents)
 
     # Randomize the items
-    for area in areas:
+    for area in aux_data:
         for room in area.rooms:
             for chest in room.chests or []:
                 chest.contents = chest_items.pop(random.randint(0, len(chest_items) - 1))
-    return areas
+    return aux_data
 
 
-def edge_is_traversable(edge: Edge):
+def edge_is_traversable(edge: Edge, inventory: list[str]):
     """Determine if this edge is traversable given the current state of the game."""
     # TODO: implement this
     match edge.constraints:
@@ -90,7 +83,13 @@ def get_chest_contents(
 
 
 def traverse_graph(
-    node: Node, aux_data: list[Area], visited_rooms: set[str], visited_nodes: set[str]
+    starting_node: Node,
+    nodes: list[Node],
+    edges: dict[str, list[Edge]],
+    aux_data: list[Area],
+    inventory: list[str],
+    visited_rooms: set[str],
+    visited_nodes: set[str],
 ):
     """
     Traverse the graph (i.e. the nodes and edges) of the current room, starting at `node`.
@@ -104,26 +103,27 @@ def traverse_graph(
     Returns:
         `True` if the `END_NODE` was reached, `False` otherwise.
     """
-    global nodes, edges, inventory
-    logging.debug(node.name)
+    logging.debug(starting_node.name)
 
-    if node.name == END_NODE:
+    if starting_node.name == END_NODE:
         return True
 
     doors_to_enter: list[str] = []
 
     # For the current node, find all chests + "collect" their items and note every door so
     # we can go through them later
-    for node_info in node.contents:
+    for node_info in starting_node.contents:
         if node_info.type == Descriptor.CHEST.value:
-            item = get_chest_contents(node.area, node.room, node_info.data, aux_data)
+            item = get_chest_contents(
+                starting_node.area, starting_node.room, node_info.data, aux_data
+            )
             if item not in inventory:
                 inventory.append(item)
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
                 visited_nodes.clear()
                 visited_rooms.clear()
-    for node_info in node.contents:
+    for node_info in starting_node.contents:
         if node_info.type in (
             Descriptor.DOOR.value,
             Descriptor.ENTRANCE.value,
@@ -132,23 +132,31 @@ def traverse_graph(
             full_room_name = node_info.data
             # Get "path" to node, including Area and Room, if they're not included
             if len(full_room_name.split('.')) == 2:
-                full_room_name = f'{node.area}.{full_room_name}'
+                full_room_name = f'{starting_node.area}.{full_room_name}'
             elif len(full_room_name.split('.')) == 1:
-                full_room_name = f'{node.area}.{node.room}.{full_room_name}'
+                full_room_name = f'{starting_node.area}.{starting_node.room}.{full_room_name}'
 
             if full_room_name not in visited_rooms:
                 doors_to_enter.append(full_room_name)
                 visited_rooms.add(full_room_name)
 
-    visited_nodes.add(node.name)  # Acknowledge this node as "visited"
+    visited_nodes.add(starting_node.name)  # Acknowledge this node as "visited"
 
     # Check which edges are traversable and do so if they are
-    for edge in edges[node.name]:
+    for edge in edges[starting_node.name]:
         if edge.dest.name in visited_nodes:
             continue
-        if edge_is_traversable(edge):
+        if edge_is_traversable(edge, inventory):
             logging.debug(f'{edge.source.name} -> {edge.dest.name}')
-            if traverse_graph(edge.dest, aux_data, visited_rooms, visited_nodes):
+            if traverse_graph(
+                starting_node=edge.dest,
+                nodes=nodes,
+                edges=edges,
+                aux_data=aux_data,
+                inventory=inventory,
+                visited_rooms=visited_rooms,
+                visited_nodes=visited_nodes,
+            ):
                 return True
 
     # Go through each door and traverse each of their room graphs
@@ -177,24 +185,34 @@ def traverse_graph(
                                     # Append current area if the linked node doesn't have one specified
                                     # (i.e. `Room1.Node1` is fine and will be transformed to `Area1.Room1.Node1`)
                                     if link.count('.') == 1:
-                                        link = f'{node.area}.{link}'
+                                        link = f'{starting_node.area}.{link}'
                                     elif link.count('.') != 2:
                                         raise ValueError(
                                             f'ERROR: "{link}" is not a valid node name.'
                                         )
 
                                     if link == other_node.name:
-                                        logging.debug(f'{node.name} -> {other_node.name}')
+                                        logging.debug(f'{starting_node.name} -> {other_node.name}')
                                         if traverse_graph(
-                                            other_node, aux_data, visited_rooms, visited_nodes
+                                            starting_node=other_node,
+                                            nodes=nodes,
+                                            edges=edges,
+                                            aux_data=aux_data,
+                                            inventory=inventory,
+                                            visited_rooms=visited_rooms,
+                                            visited_nodes=visited_nodes,
                                         ):
                                             return True
     return False
 
 
 def shuffle(
-    seed: str | None, aux_data_directory: str, logic_directory: str, output: str | None = None
-) -> list[dict]:
+    seed: str | None,
+    nodes: list[Node],
+    edges: dict[str, list[Edge]],
+    aux_data: list[Area],
+    output: str | None = None,
+) -> list[Area]:
     """
     Given aux data and logic, shuffles the aux data and returns it.
 
@@ -207,12 +225,8 @@ def shuffle(
     Returns:
         Randomized aux data.
     """
-    global nodes, edges, visited_nodes, inventory
-
     if seed is not None:
         random.seed(seed)
-
-    nodes, edges = parse(Path(logic_directory))
 
     # Starting node is Mercay outside of Oshus's house.
     # This would need to be randomized to support entrance rando
@@ -228,25 +242,31 @@ def shuffle(
     tries = 0
     while True:
         tries += 1
-        # Initialize global variables
-        inventory = []
 
-        areas = randomize_aux_data(Path(aux_data_directory))
-        if traverse_graph(starting_node, areas, set(), set()):
+        randomized_aux_data = randomize_aux_data(aux_data)
+        if traverse_graph(
+            starting_node=starting_node,
+            nodes=nodes,
+            edges=edges,
+            aux_data=randomized_aux_data,
+            inventory=[],
+            visited_rooms=set(),
+            visited_nodes=set(),
+        ):
             break
 
     logging.debug(f'{tries} tries were needed to get a valid seed.')
 
     if output == '--':
-        print(json.dumps(areas), file=sys.stdout)
+        print(json.dumps(randomized_aux_data), file=sys.stdout)
     elif output is not None:
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
-        for area in areas:
+        for area in randomized_aux_data:
             with open(output_path / f'{area.name}.json', 'w') as fd:
                 fd.write(area.json())
 
-    return areas
+    return randomized_aux_data
 
 
 @click.command()
@@ -269,7 +289,13 @@ def shuffle(
 def shuffler_cli(
     aux_data_directory: str, logic_directory: str, output: str | None, seed: str | None
 ):
-    return shuffle(seed, aux_data_directory, logic_directory, output)
+    # Parse logic files
+    nodes, edges = parse(Path(logic_directory))
+
+    # Parse aux data files
+    aux_data = load_aux_data(Path(aux_data_directory))
+
+    return shuffle(seed, nodes, edges, aux_data, output)
 
 
 if __name__ == '__main__':

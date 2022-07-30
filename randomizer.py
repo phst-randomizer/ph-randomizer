@@ -1,12 +1,13 @@
 from pathlib import Path
 import sys
-from tempfile import TemporaryDirectory
 
 import click
 
 from patcher import patch
-from patcher._util import is_frozen
+from patcher._util import is_frozen, load_rom
 from shuffler import shuffle
+from shuffler._parser import parse
+from shuffler.main import load_aux_data
 
 # TODO: this is an example script for how to call the patcher/shuffler.
 # At some point this will be fleshed out into a full CLI (and eventually
@@ -37,11 +38,17 @@ def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
         aux_data_directory = str(Path(__file__).parent / 'shuffler' / 'auxiliary')
         logic_directory = str(Path(__file__).parent / 'shuffler' / 'logic')
 
-    with TemporaryDirectory() as tmp_dir:
-        # Run the shuffler
-        shuffle(seed, aux_data_directory, logic_directory, tmp_dir)
-        # Run the patcher
-        patch(tmp_dir, input_rom_path, output_rom_path)
+    # Parse logic files
+    nodes, edges = parse(Path(logic_directory))
+
+    # Parse aux data files
+    aux_data = load_aux_data(Path(aux_data_directory))
+
+    # Run the shuffler
+    shuffled_aux_data = shuffle(seed, nodes, edges, aux_data)
+
+    # Run the patcher
+    patch(shuffled_aux_data, load_rom(Path(input_rom_path)), output_rom_path)
 
 
 if __name__ == '__main__':
