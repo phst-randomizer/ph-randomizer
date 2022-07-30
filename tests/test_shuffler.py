@@ -74,11 +74,13 @@ def test_parser(tmp_path: Path):
 
 
 @pytest.mark.parametrize('seed', ['test', 'another_test', 'ANOTHER_TEST!!', 'this_is_a_real_seed'])
-def test_seeds(seed: str, aux_data_directory: str, logic_directory: str):
+def test_seeds(seed: str, aux_data: list[Area], logic: tuple[list[Node], dict[str, list[Edge]]]):
     """Test that running the shuffler with the same seed multiple times produces identical aux data."""
-    first = shuffle(seed, aux_data_directory, logic_directory)
-    second = shuffle(seed, aux_data_directory, logic_directory)
-    third = shuffle(seed, aux_data_directory, logic_directory)
+    nodes, edges = logic
+
+    first = shuffle(seed, nodes, edges, aux_data)
+    second = shuffle(seed, nodes, edges, aux_data)
+    third = shuffle(seed, nodes, edges, aux_data)
     assert first == second == third
 
 
