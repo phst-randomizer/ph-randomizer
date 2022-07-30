@@ -258,7 +258,7 @@ def clear_nodes():
     nodes.clear()
 
 
-def parse(directory: Path):
+def parse(directory: Path) -> tuple[list[Node], dict[str, list[Edge]]]:
     logic_files = list(directory.rglob('*.logic'))
 
     for file in logic_files:
