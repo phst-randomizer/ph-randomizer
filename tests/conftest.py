@@ -12,6 +12,9 @@ import pytest
 
 from patcher.location_types import DigSpotLocation, IslandShopLocation
 from patcher.location_types.island_shop import GD_MODELS
+from shuffler._parser import Edge, Node, parse
+from shuffler.aux_models import Area
+from shuffler.main import load_aux_data
 
 # Not all tests require py-desmume, so if it's not installed we
 # just silently suppress the error:
@@ -213,7 +216,18 @@ def aux_data_directory(tmp_path: Path):
 
 
 @pytest.fixture
+def aux_data(aux_data_directory: str) -> list[Area]:
+    return load_aux_data(Path(aux_data_directory))
+
+
+@pytest.fixture
 def logic_directory(tmp_path: Path):
     dest = tmp_path / 'logic'
     shutil.copytree(Path(__file__).parent.parent / 'shuffler' / 'logic', dest)
     return str(dest)
+
+
+@pytest.fixture
+def logic(logic_directory: Path) -> tuple[list[Node], dict[str, list[Edge]]]:
+    nodes, edges = parse(Path(logic_directory))
+    return nodes, edges
