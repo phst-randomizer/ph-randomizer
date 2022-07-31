@@ -228,6 +228,6 @@ def logic_directory(tmp_path: Path):
 
 
 @pytest.fixture
-def logic(logic_directory: Path) -> tuple[list[Node], dict[str, list[Edge]]]:
+def logic(logic_directory: str) -> tuple[list[Node], dict[str, list[Edge]]]:
     nodes, edges = parse(Path(logic_directory))
     return nodes, edges
