@@ -32,6 +32,13 @@ class Node:
     def node(self):
         return self.name.split('.')[2]
 
+    # Provide implementations of __eq__ and __hash__ so that Nodes can be added to a `set`
+    def __eq__(self, other_node) -> bool:
+        return self.name == other_node.name
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
 
 @dataclass
 class Edge:
