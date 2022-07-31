@@ -100,6 +100,7 @@ def assumed_search(
     edges: dict[str, list[Edge]],
     aux_data: list[Area],
     inventory: list[str],
+    flags: set[str],
     visited_rooms: set[str],
     visited_nodes: set[str],
 ) -> set[Node]:
@@ -137,6 +138,13 @@ def assumed_search(
                 # nodes we couldn't before with this new item
                 visited_nodes.clear()
                 visited_rooms.clear()
+        elif node_info.type == Descriptor.FLAG.value:
+            if node_info.data not in flags:
+                flags.add(node_info.data)
+                # Reset visited nodes and rooms because we may now be able to reach
+                # nodes we couldn't before with this new flag set
+                visited_nodes.clear()
+                visited_rooms.clear()
     for node_info in starting_node.contents:
         if node_info.type in (
             Descriptor.DOOR.value,
@@ -164,7 +172,14 @@ def assumed_search(
             logging.debug(f'{edge.source.name} -> {edge.dest.name}')
             return reachable_nodes.union(
                 assumed_search(
-                    edge.dest, nodes, edges, aux_data, inventory, visited_rooms, visited_nodes
+                    edge.dest,
+                    nodes,
+                    edges,
+                    aux_data,
+                    inventory,
+                    flags,
+                    visited_rooms,
+                    visited_nodes,
                 )
             )
 
@@ -209,6 +224,7 @@ def assumed_search(
                                                 edges,
                                                 aux_data,
                                                 inventory,
+                                                flags,
                                                 visited_rooms,
                                                 visited_nodes,
                                             )
@@ -270,7 +286,7 @@ def shuffle(
         i = I.pop()
 
         # Determine all reachable logic nodes
-        R = assumed_search(starting_node, nodes, edges, aux_data, deepcopy(I), set(), set())
+        R = assumed_search(starting_node, nodes, edges, aux_data, deepcopy(I), set(), set(), set())
 
         # Determine which of these nodes contain items, and thus are candidates for item placement
         candidates = [

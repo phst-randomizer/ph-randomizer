@@ -46,10 +46,10 @@ class Edge:
     dest: Node
     constraints: str | None
 
-    def is_traversable(self, current_inventory: list[str]) -> bool:
+    def is_traversable(self, current_inventory: list[str], current_flags: set[str]) -> bool:
         if self.constraints:
             parsed = edge_parser.parse_string(self.constraints)
-            return edge_is_tranversable(parsed.as_list(), current_inventory)
+            return edge_is_tranversable(parsed.as_list(), current_inventory, current_flags)
         return True
 
 
@@ -71,6 +71,7 @@ edges: dict[str, list[Edge]] = defaultdict(list)  # Maps node names to edges
 
 class Descriptor(Enum):
     CHEST = 'chest'
+    FLAG = 'flag'
     DOOR = 'door'
     ENTRANCE = 'entrance'
     EXIT = 'exit'
@@ -102,7 +103,7 @@ edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
 )
 
 
-def _evaluate_constraint(type: str, value: str, inventory: list[str]) -> bool:
+def _evaluate_constraint(type: str, value: str, inventory: list[str], flags: set[str]) -> bool:
     """
     Given an edge constraint "type value", determines if the edge is traversable
     given the current game state (inventory, set flags, etc).
@@ -119,12 +120,14 @@ def _evaluate_constraint(type: str, value: str, inventory: list[str]) -> bool:
         case 'item':
             return value in inventory
         case 'flag':
-            raise NotImplementedError("Edges with type 'flag' are not implemented yet.")
+            return value in flags
         case other:
             raise Exception(f'Invalid edge type "{other}"')
 
 
-def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], result=True) -> bool:
+def edge_is_tranversable(
+    parsed_expr: EdgeExpression, inventory: list[str], flags: set[str], result=True
+) -> bool:
     """
     Determine if the given edge expression is traversable.
 
@@ -148,7 +151,7 @@ def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], resu
         if isinstance(parsed_expr[0], list):
             # TODO: remove 'type: ignore' comment below. see prev note about `EdgeExpression` type.
             sub_expression: EdgeExpression = parsed_expr.pop(0)  # type: ignore
-            current_result = edge_is_tranversable(sub_expression, inventory, result)
+            current_result = edge_is_tranversable(sub_expression, inventory, flags, result)
         else:
             # Extract type and value (e.g., 'item' and 'Bombs')
             expr_type = parsed_expr.pop(0)
@@ -157,7 +160,7 @@ def edge_is_tranversable(parsed_expr: EdgeExpression, inventory: list[str], resu
             # so the shuffler needs to normalize everything to snake_case at runtime.
             expr_value = inflection.underscore(parsed_expr.pop(0))
 
-            current_result = _evaluate_constraint(expr_type, expr_value, inventory)
+            current_result = _evaluate_constraint(expr_type, expr_value, inventory, flags)
 
         # Apply any pending logical operations
         if current_op == '&':
