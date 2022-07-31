@@ -53,23 +53,6 @@ def randomize_aux_data(aux_data: list[Area]) -> list[Area]:
     return aux_data
 
 
-def edge_is_traversable(edge: Edge, inventory: list[str]):
-    """Determine if this edge is traversable given the current state of the game."""
-    # TODO: implement this
-    match edge.constraints:
-        case 'item Sword':
-            return 'oshus_sword' in inventory
-        case '(item Bombs | item Bombchus)':
-            return 'bombs' in inventory or 'bombchus' in inventory
-        case 'item Bow':
-            return 'bow' in inventory
-        case 'item Boomerang':
-            return 'boomerang' in inventory
-        case 'flag BridgeRepaired':
-            return True  # TODO: for now, assume bridge is always repaired
-    return False
-
-
 def get_chest_contents(
     area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
 ) -> str:
@@ -168,7 +151,7 @@ def assumed_search(
     for edge in edges[starting_node.name]:
         if edge.dest.name in visited_nodes:
             continue
-        if edge_is_traversable(edge, inventory):
+        if edge.is_traversable(inventory, flags):
             logging.debug(f'{edge.source.name} -> {edge.dest.name}')
             return reachable_nodes.union(
                 assumed_search(
