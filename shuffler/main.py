@@ -26,33 +26,6 @@ def load_aux_data(directory: Path) -> list[Area]:
     return areas
 
 
-def randomize_aux_data(aux_data: list[Area]) -> list[Area]:
-    """
-    Return aux data for the logic with the item locations randomized.
-
-    Note: the item locations are *not* guaranteed (and are unlikely) to be logic-compliant.
-    This function just performs a "dumb" shuffle and returns the results.
-
-    Params:
-        aux_data_directory: Directory that contains the initial aux data
-    """
-    # List of every item in the game
-    chest_items: list[str] = []
-
-    # Record all items in the game
-    for area in aux_data:
-        for room in area.rooms:
-            for chest in room.chests or []:
-                chest_items.append(chest.contents)
-
-    # Randomize the items
-    for area in aux_data:
-        for room in area.rooms:
-            for chest in room.chests or []:
-                chest.contents = chest_items.pop(random.randint(0, len(chest_items) - 1))
-    return aux_data
-
-
 def get_chest_contents(
     area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
 ) -> str:
