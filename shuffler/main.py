@@ -1,3 +1,4 @@
+from copy import deepcopy
 import json
 import logging
 from pathlib import Path
@@ -6,7 +7,7 @@ import sys
 
 import click
 
-from shuffler._parser import Descriptor, Edge, Node, parse
+from shuffler._parser import Descriptor, Edge, Node, NodeContents, parse
 from shuffler.aux_models import Area
 
 logging.basicConfig(level=logging.INFO)
@@ -82,7 +83,18 @@ def get_chest_contents(
     raise Exception(f'{chest_name} not found in the given aux data.')
 
 
-def traverse_graph(
+def get_chest_from_node_contents(node: Node, node_contents: NodeContents, aux_data: list[Area]):
+    for area in aux_data:
+        if node.area == area.name:
+            for room in area.rooms:
+                if node.room == room.name:
+                    for chest in room.chests:
+                        if node_contents.data == chest.name:
+                            return chest
+    raise Exception(f'{node_contents.data} not found in the given aux data.')
+
+
+def assumed_search(
     starting_node: Node,
     nodes: list[Node],
     edges: dict[str, list[Edge]],
@@ -90,23 +102,25 @@ def traverse_graph(
     inventory: list[str],
     visited_rooms: set[str],
     visited_nodes: set[str],
-):
+) -> set[Node]:
     """
-    Traverse the graph (i.e. the nodes and edges) of the current room, starting at `node`.
+    Calculate the set of nodes reachable from the `starting_node` given the current inventory.
 
     Params:
-        `node`: The node to start the traversal at
-        `area_aux_data`: The aux data for the current area.
+        `starting_node`: The node to start at.
+        `nodes`: The nodes that make up the game's logic graph.
+        `edges`: The edges that connect the `nodes`.
+        `aux_data`: Complete aux data for the game as a list of `Area`s.
+        `inventory`: Current inventory.
         `visited_rooms`: Rooms that have been visited already in this traversal.
         `visited_nodes`: Same as `visited_rooms`, but for nodes.
 
     Returns:
-        `True` if the `END_NODE` was reached, `False` otherwise.
+        The set of nodes that is reachable given the current inventory.
     """
     logging.debug(starting_node.name)
 
-    if starting_node.name == END_NODE:
-        return True
+    reachable_nodes: set[Node] = {starting_node}
 
     doors_to_enter: list[str] = []
 
@@ -117,7 +131,7 @@ def traverse_graph(
             item = get_chest_contents(
                 starting_node.area, starting_node.room, node_info.data, aux_data
             )
-            if item not in inventory:
+            if item and item not in inventory:
                 inventory.append(item)
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
@@ -148,16 +162,11 @@ def traverse_graph(
             continue
         if edge_is_traversable(edge, inventory):
             logging.debug(f'{edge.source.name} -> {edge.dest.name}')
-            if traverse_graph(
-                starting_node=edge.dest,
-                nodes=nodes,
-                edges=edges,
-                aux_data=aux_data,
-                inventory=inventory,
-                visited_rooms=visited_rooms,
-                visited_nodes=visited_nodes,
-            ):
-                return True
+            return reachable_nodes.union(
+                assumed_search(
+                    edge.dest, nodes, edges, aux_data, inventory, visited_rooms, visited_nodes
+                )
+            )
 
     # Go through each door and traverse each of their room graphs
     for door_name in doors_to_enter:
@@ -193,17 +202,18 @@ def traverse_graph(
 
                                     if link == other_node.name:
                                         logging.debug(f'{starting_node.name} -> {other_node.name}')
-                                        if traverse_graph(
-                                            starting_node=other_node,
-                                            nodes=nodes,
-                                            edges=edges,
-                                            aux_data=aux_data,
-                                            inventory=inventory,
-                                            visited_rooms=visited_rooms,
-                                            visited_nodes=visited_nodes,
-                                        ):
-                                            return True
-    return False
+                                        return reachable_nodes.union(
+                                            assumed_search(
+                                                other_node,
+                                                nodes,
+                                                edges,
+                                                aux_data,
+                                                inventory,
+                                                visited_rooms,
+                                                visited_nodes,
+                                            )
+                                        )
+    return reachable_nodes
 
 
 def shuffle(
@@ -216,11 +226,19 @@ def shuffle(
     """
     Given aux data and logic, shuffles the aux data and returns it.
 
+    The Assumed Fill algorithm is used to place the items. The implementation is based on the
+    following paper:
+    https://digitalcommons.lsu.edu/cgi/viewcontent.cgi?article=6325&context=gradschool_theses
+    There are some deviations due to how our logic is structured, but it follows the same general
+    Assumed Fill algorithm described there; where possible, variable/function names are identical
+    to their counterparts in the pseudo-code in that paper.
+
     Params:
-        seed: Some string that will be hashed and used as a seed for the RNG.
-        aux_data_directory: Path to a directory containing initial, unrandomized aux data
-        logic_directory: Path to a directory containing graph logic files
-        output: Optional directory to output randomized aux data to.
+        `seed`: Some string that will be hashed and used as a seed for the RNG.
+        `nodes`: The nodes that make up the game's logic graph.
+        `edges`: The edges that connect the `nodes`.
+        `aux_data`: Complete aux data for the game as a list of `Area`s.
+        `output`: Optional directory to output randomized aux data to, or '--' to output to stdout.
 
     Returns:
         Randomized aux data.
@@ -232,41 +250,70 @@ def shuffle(
     # This would need to be randomized to support entrance rando
     starting_node = [node for node in nodes if node.name == 'Mercay.OutsideOshus.Outside'][0]
 
-    # Begin the random fill algorithm.
-    # The program will generate a completely random seed without using logic.
-    # It will then attempt to traverse the seed's world graph. If it fails to reach the node
-    # required to beat the game, it will generate another seed and check it again. This repeats
-    # until a valid seed is generated.
-    # TODO: we'll want to instead use the assumed fill algorithm eventually, but this naive
-    # approach is sufficient for now.
-    tries = 0
-    while True:
-        tries += 1
+    # Set G to all chests
+    G = [chest for area in aux_data for room in area.rooms for chest in room.chests]
 
-        randomized_aux_data = randomize_aux_data(aux_data)
-        if traverse_graph(
-            starting_node=starting_node,
-            nodes=nodes,
-            edges=edges,
-            aux_data=randomized_aux_data,
-            inventory=[],
-            visited_rooms=set(),
-            visited_nodes=set(),
-        ):
+    # Set I to all chest contents (i.e. every item in the item pool) and shuffle it
+    I = [chest.contents for chest in G]  # noqa: E741
+    random.shuffle(I)
+
+    # Make all item locations empty
+    for chest in G:
+        # Disable type-checking for this line.
+        # `contents` should normally never be `None`, but during the assumed fill it must be.
+        chest.contents = None  # type: ignore
+
+    I_prime: list[str] = []
+
+    while True:
+        # Select a random item to place
+        i = I.pop()
+
+        # Determine all reachable logic nodes
+        R = assumed_search(starting_node, nodes, edges, aux_data, deepcopy(I), set(), set())
+
+        # Determine which of these nodes contain items, and thus are candidates for item placement
+        candidates = [
+            get_chest_from_node_contents(node, content, aux_data)
+            for node in R
+            for content in node.contents
+            if content.type == Descriptor.CHEST.value
+        ]
+
+        # Shuffle them
+        random.shuffle(candidates)
+
+        # Find an empty item location and place the item in it
+        for chest in candidates:
+            if chest.contents is None:
+                chest.contents = i
+                I_prime.append(i)
+                break
+        else:
+            raise Exception(
+                f'Error: shuffler ran out of locations to place item. Remaining items: {[i] + I}'
+            )
+
+        # TODO: these conditions should both become true at the same time, once shuffling
+        # is complete. If one is true but not the other, that indicates that either not all items
+        # were placed, or not every location received an item. However, until the aux data and
+        # logic are complete, this will not be true; once they are complete, this statement should
+        # be changed to an `and` instead of `or` and an explicit check should be added to avoid
+        # an infinite loop.
+        if not len(I) or None not in {r.contents for r in candidates}:
             break
 
-    logging.debug(f'{tries} tries were needed to get a valid seed.')
-
     if output == '--':
-        print(json.dumps(randomized_aux_data), file=sys.stdout)
+        for area in aux_data:
+            print(area.json(), file=sys.stdout)
     elif output is not None:
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
-        for area in randomized_aux_data:
+        for area in aux_data:
             with open(output_path / f'{area.name}.json', 'w') as fd:
                 fd.write(area.json())
 
-    return randomized_aux_data
+    return aux_data
 
 
 @click.command()
