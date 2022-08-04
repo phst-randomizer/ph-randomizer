@@ -58,7 +58,7 @@ def assumed_search(
     inventory: list[str],
     flags: set[str],
     visited_rooms: set[str],
-    visited_nodes: set[str],
+    visited_nodes: set[Node],
 ) -> set[Node]:
     """
     Calculate the set of nodes reachable from the `starting_node` given the current inventory.
@@ -76,8 +76,6 @@ def assumed_search(
         The set of nodes that is reachable given the current inventory.
     """
     logging.debug(starting_node.name)
-
-    reachable_nodes: set[Node] = {starting_node}
 
     doors_to_enter: list[str] = []
 
@@ -118,15 +116,15 @@ def assumed_search(
                 doors_to_enter.append(full_room_name)
                 visited_rooms.add(full_room_name)
 
-    visited_nodes.add(starting_node.name)  # Acknowledge this node as "visited"
+    visited_nodes.add(starting_node)  # Acknowledge this node as "visited"
 
     # Check which edges are traversable and do so if they are
     for edge in edges[starting_node.name]:
-        if edge.dest.name in visited_nodes:
+        if edge.dest in visited_nodes:
             continue
         if edge.is_traversable(inventory, flags):
             logging.debug(f'{edge.source.name} -> {edge.dest.name}')
-            return reachable_nodes.union(
+            visited_nodes = visited_nodes.union(
                 assumed_search(
                     edge.dest,
                     nodes,
@@ -140,10 +138,10 @@ def assumed_search(
             )
 
     # Go through each door and traverse each of their room graphs
-    for door_name in doors_to_enter:
-        area_name = door_name.split('.')[0]
-        room_name = door_name.split('.')[1]
-        door_name = door_name.split('.')[2]
+    for door_to_enter in doors_to_enter:
+        area_name = door_to_enter.split('.')[0]
+        room_name = door_to_enter.split('.')[1]
+        door_name = door_to_enter.split('.')[2]
         for area in aux_data:
             if area_name == area.name:
                 for room in area.rooms:
@@ -170,10 +168,9 @@ def assumed_search(
                                         raise ValueError(
                                             f'ERROR: "{link}" is not a valid node name.'
                                         )
-
                                     if link == other_node.name:
                                         logging.debug(f'{starting_node.name} -> {other_node.name}')
-                                        return reachable_nodes.union(
+                                        visited_nodes = visited_nodes.union(
                                             assumed_search(
                                                 other_node,
                                                 nodes,
@@ -185,7 +182,7 @@ def assumed_search(
                                                 visited_nodes,
                                             )
                                         )
-    return reachable_nodes
+    return visited_nodes
 
 
 def shuffle(
@@ -263,7 +260,7 @@ def shuffle(
                 break
         else:
             raise Exception(
-                f'Error: shuffler ran out of locations to place item. Remaining items: {[i] + I}'
+                f'Error: shuffler ran out of locations to place item. Remaining items: {[i] + I} ({len([i] + I)})'
             )
 
         # TODO: these conditions should both become true at the same time, once shuffling
