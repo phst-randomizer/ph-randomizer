@@ -92,7 +92,7 @@ EdgeExpression = list[str | Any]
 
 # pyparsing parser for parsing edges in .logic files:
 operand: pyparsing.ParserElement = (
-    pyparsing.Keyword('item') | pyparsing.Keyword('flag')
+    pyparsing.Keyword('item') | pyparsing.Keyword('flag') | pyparsing.Keyword('open')
 ) + pyparsing.Word(pyparsing.alphas)
 edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
     operand,
@@ -121,6 +121,8 @@ def _evaluate_constraint(type: str, value: str, inventory: list[str], flags: set
             return value in inventory
         case 'flag':
             return value in flags
+        case 'open':
+            return False  # TODO: implement key logic
         case other:
             raise Exception(f'Invalid edge type "{other}"')
 
