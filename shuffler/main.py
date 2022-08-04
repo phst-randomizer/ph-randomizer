@@ -26,50 +26,6 @@ def load_aux_data(directory: Path) -> list[Area]:
     return areas
 
 
-def randomize_aux_data(aux_data: list[Area]) -> list[Area]:
-    """
-    Return aux data for the logic with the item locations randomized.
-
-    Note: the item locations are *not* guaranteed (and are unlikely) to be logic-compliant.
-    This function just performs a "dumb" shuffle and returns the results.
-
-    Params:
-        aux_data_directory: Directory that contains the initial aux data
-    """
-    # List of every item in the game
-    chest_items: list[str] = []
-
-    # Record all items in the game
-    for area in aux_data:
-        for room in area.rooms:
-            for chest in room.chests or []:
-                chest_items.append(chest.contents)
-
-    # Randomize the items
-    for area in aux_data:
-        for room in area.rooms:
-            for chest in room.chests or []:
-                chest.contents = chest_items.pop(random.randint(0, len(chest_items) - 1))
-    return aux_data
-
-
-def edge_is_traversable(edge: Edge, inventory: list[str]):
-    """Determine if this edge is traversable given the current state of the game."""
-    # TODO: implement this
-    match edge.constraints:
-        case 'item Sword':
-            return 'oshus_sword' in inventory
-        case '(item Bombs | item Bombchus)':
-            return 'bombs' in inventory or 'bombchus' in inventory
-        case 'item Bow':
-            return 'bow' in inventory
-        case 'item Boomerang':
-            return 'boomerang' in inventory
-        case 'flag BridgeRepaired':
-            return True  # TODO: for now, assume bridge is always repaired
-    return False
-
-
 def get_chest_contents(
     area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
 ) -> str:
@@ -100,8 +56,9 @@ def assumed_search(
     edges: dict[str, list[Edge]],
     aux_data: list[Area],
     inventory: list[str],
+    flags: set[str],
     visited_rooms: set[str],
-    visited_nodes: set[str],
+    visited_nodes: set[Node],
 ) -> set[Node]:
     """
     Calculate the set of nodes reachable from the `starting_node` given the current inventory.
@@ -120,8 +77,6 @@ def assumed_search(
     """
     logging.debug(starting_node.name)
 
-    reachable_nodes: set[Node] = {starting_node}
-
     doors_to_enter: list[str] = []
 
     # For the current node, find all chests + "collect" their items and note every door so
@@ -135,6 +90,13 @@ def assumed_search(
                 inventory.append(item)
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
+                visited_nodes.clear()
+                visited_rooms.clear()
+        elif node_info.type == Descriptor.FLAG.value:
+            if node_info.data not in flags:
+                flags.add(node_info.data)
+                # Reset visited nodes and rooms because we may now be able to reach
+                # nodes we couldn't before with this new flag set
                 visited_nodes.clear()
                 visited_rooms.clear()
     for node_info in starting_node.contents:
@@ -154,25 +116,32 @@ def assumed_search(
                 doors_to_enter.append(full_room_name)
                 visited_rooms.add(full_room_name)
 
-    visited_nodes.add(starting_node.name)  # Acknowledge this node as "visited"
+    visited_nodes.add(starting_node)  # Acknowledge this node as "visited"
 
     # Check which edges are traversable and do so if they are
     for edge in edges[starting_node.name]:
-        if edge.dest.name in visited_nodes:
+        if edge.dest in visited_nodes:
             continue
-        if edge_is_traversable(edge, inventory):
+        if edge.is_traversable(inventory, flags):
             logging.debug(f'{edge.source.name} -> {edge.dest.name}')
-            return reachable_nodes.union(
+            visited_nodes = visited_nodes.union(
                 assumed_search(
-                    edge.dest, nodes, edges, aux_data, inventory, visited_rooms, visited_nodes
+                    edge.dest,
+                    nodes,
+                    edges,
+                    aux_data,
+                    inventory,
+                    flags,
+                    visited_rooms,
+                    visited_nodes,
                 )
             )
 
     # Go through each door and traverse each of their room graphs
-    for door_name in doors_to_enter:
-        area_name = door_name.split('.')[0]
-        room_name = door_name.split('.')[1]
-        door_name = door_name.split('.')[2]
+    for door_to_enter in doors_to_enter:
+        area_name = door_to_enter.split('.')[0]
+        room_name = door_to_enter.split('.')[1]
+        door_name = door_to_enter.split('.')[2]
         for area in aux_data:
             if area_name == area.name:
                 for room in area.rooms:
@@ -199,21 +168,21 @@ def assumed_search(
                                         raise ValueError(
                                             f'ERROR: "{link}" is not a valid node name.'
                                         )
-
                                     if link == other_node.name:
                                         logging.debug(f'{starting_node.name} -> {other_node.name}')
-                                        return reachable_nodes.union(
+                                        visited_nodes = visited_nodes.union(
                                             assumed_search(
                                                 other_node,
                                                 nodes,
                                                 edges,
                                                 aux_data,
                                                 inventory,
+                                                flags,
                                                 visited_rooms,
                                                 visited_nodes,
                                             )
                                         )
-    return reachable_nodes
+    return visited_nodes
 
 
 def shuffle(
@@ -270,7 +239,7 @@ def shuffle(
         i = I.pop()
 
         # Determine all reachable logic nodes
-        R = assumed_search(starting_node, nodes, edges, aux_data, deepcopy(I), set(), set())
+        R = assumed_search(starting_node, nodes, edges, aux_data, deepcopy(I), set(), set(), set())
 
         # Determine which of these nodes contain items, and thus are candidates for item placement
         candidates = [
@@ -291,7 +260,7 @@ def shuffle(
                 break
         else:
             raise Exception(
-                f'Error: shuffler ran out of locations to place item. Remaining items: {[i] + I}'
+                f'Error: shuffler ran out of locations to place item. Remaining items: {[i] + I} ({len([i] + I)})'
             )
 
         # TODO: these conditions should both become true at the same time, once shuffling
