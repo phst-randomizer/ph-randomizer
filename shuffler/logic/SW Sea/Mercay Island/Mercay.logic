@@ -8,7 +8,8 @@ area Mercay:
       door OshusCave
     node East:
       door East
-    Outside <-> East: flag BridgeRepaired
+    # TODO: add this back in when aux data for ToTOK is completed
+    Outside <-> East #: flag BridgeRepaired
 
   room OshussHouse:
     node Main:
