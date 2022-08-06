@@ -12,6 +12,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
@@ -32,6 +33,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
@@ -131,6 +133,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
@@ -163,6 +166,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
@@ -278,6 +282,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
         if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
@@ -327,6 +332,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
