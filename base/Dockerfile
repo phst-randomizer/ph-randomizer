@@ -6,7 +6,7 @@ RUN cmake .
 RUN make
 
 # Download and compile ndstool
-FROM ubuntu:20.04 AS compile_ndstool
+FROM ubuntu:22.04 AS compile_ndstool
 RUN apt-get update && apt-get install -y build-essential git gcc g++ autotools-dev autoconf
 RUN git clone https://github.com/devkitPro/ndstool
 WORKDIR /ndstool
@@ -14,7 +14,7 @@ RUN aclocal && autoconf && automake --add-missing && chmod +x ./configure &&\
     ./configure --disable-dependency-tracking && make
 
 # Download and compile Floating IPS patcher
-FROM ubuntu:20.04 as compile_flips
+FROM ubuntu:22.04 as compile_flips
 RUN apt-get update && apt-get install -y git g++ build-essential
 RUN git clone https://github.com/Alcaro/Flips.git
 RUN chmod +x Flips/make.sh
