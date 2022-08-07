@@ -1,60 +1,64 @@
 {
-    "$schema": "../../../aux-schema.json",
-    "name": "MercayGrotto",
-    "rooms": [
+  "$schema": "../../../aux_schema.json",
+  "name": "MercayGrotto",
+  "rooms": [
+    {
+      "name": "F1",
+      "chests": [
         {
-            "name": "F1",
-            "chests": [
-                {
-                    "name": "KeyChest",
-                    "type": "chest",
-                    "contents": "small_key",
-                    "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
-                    "zmb_mapobject_index": 21
-                },
-                {
-                    "name": "SecondChest",
-                    "type": "chest",
-                    "contents": "small_red_rupee",
-                    "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
-                    "zmb_mapobject_index": 19
-                },
-                {
-                    "name": "KeyAfter2143",
-                    "type": "freestanding",
-                    "contents": "small_key",
-                    "zmb_file_path": "TODO",
-                    "zmb_mapobject_index": -1
-                }
-            ],
-            "doors": [
-                {
-                    "name": "West",
-                    "link": "Mercay.EnemyBamboo.Grotto"
-                },
-                {
-                    "name": "North",
-                    "link": "Mercay.F2.Main"
-                }
-            ]
+          "name": "KeyChest",
+          "type": "chest",
+          "contents": "small_key",
+          "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
+          "zmb_mapobject_index": 21
         },
         {
-            "name": "F2",
-            "chests": [
-                {
-                    "name": "SmallKey",
-                    "type": "on_enemy",
-                    "contents": "small_key",
-                    "zmb_file_path": "TODO",
-                    "zmb_mapobject_index": -1
-                }
-            ],
-            "doors": [
-                {
-                    "name": "East",
-                    "link": "Mercay.MercayTown.Main"
-                }
-            ]
+          "name": "SecondChest",
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
+          "zmb_mapobject_index": 19
+        },
+        {
+          "name": "KeyAfter2143",
+          "type": "freestanding",
+          "contents": "small_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
         }
-    ]
+      ],
+      "doors": [
+        {
+          "name": "West",
+          "link": "Mercay.EnemyBamboo.Grotto.Grotto"
+        },
+        {
+          "name": "North",
+          "link": "F2.Main.Downstairs"
+        }
+      ]
+    },
+    {
+      "name": "F2",
+      "chests": [
+        {
+          "name": "SmallKey",
+          "type": "on_enemy",
+          "contents": "small_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
+        }
+      ],
+      "doors": [
+        {
+          "name": "Downstairs",
+          "link": "F1.NorthDoor.North"
+        },
+        {
+          "name": "East",
+          "link": "Mercay.MercayTown.Main.Grotto"
+        }
+      ]
+    }
+  ]
 }

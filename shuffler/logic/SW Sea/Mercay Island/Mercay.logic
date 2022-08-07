@@ -5,9 +5,11 @@ area Mercay:
       door North
       door OshussHouse
       door RockHouse
+      door OshusCave
     node East:
       door East
-    Outside <-> East: flag BridgeRepaired
+    # TODO: add this back in when aux data for ToTOK is completed
+    Outside <-> East #: flag BridgeRepaired
 
   room OshussHouse:
     node Main:
@@ -15,6 +17,7 @@ area Mercay:
 
   room MercayTown:
     node Main:
+      door Grotto
       door Tavern
       door Shop
       door Shipyard
@@ -135,8 +138,8 @@ area Mercay:
     node Main:
       door West
       door East
-    
+
     node HitBoomerangSwitch:
       chest BridgeChest
-    
+
     Main <-> HitBoomerangSwitch: item Boomerang

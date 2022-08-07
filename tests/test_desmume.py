@@ -2,6 +2,7 @@ import os
 
 from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
+import pytest
 
 from tests.conftest import ITEM_MEMORY_ADDRESSES, DesmumeEmulator, ItemMemoryAddressType
 from tests.desmume_utils import (
@@ -12,8 +13,11 @@ from tests.desmume_utils import (
 )
 
 
-def test_boot_new_game(base_rom_emu: DesmumeEmulator):
-    """Test bootup from title screen, name entry, and intro CG."""
+@pytest.mark.parametrize(
+    'bridge_repaired', [True, False], ids=['Bridge repaired from start', 'Bridge broken from start']
+)
+def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool):
+    """Ensure all flags are set properly + all rando settings work."""
     for i in range(2):
         base_rom_emu.wait(500)
         base_rom_emu.touch_input(
@@ -45,6 +49,8 @@ def test_boot_new_game(base_rom_emu: DesmumeEmulator):
             # Do not remove them.
             base_rom_emu.wait(400)
             base_rom_emu.emu.reset()
+
+    base_rom_emu.emu.memory.unsigned[0x2058180] |= int(bridge_repaired)
 
     # Touch file
     base_rom_emu.touch_input((130, 70), 0)
@@ -96,8 +102,16 @@ def test_boot_new_game(base_rom_emu: DesmumeEmulator):
     base_rom_emu.touch_input((SCREEN_WIDTH, 0))
     base_rom_emu.wait(200)
 
-    # ensure mercay bridge fixed flag is set
-    assert base_rom_emu.emu.memory.unsigned[0x021B553E] & 0x2 == 0x2
+    ########################################
+    # Assert that flags are set correctly: #
+    ########################################
+
+    # Mercay bridge repaired
+    assert (base_rom_emu.emu.memory.unsigned[0x021B553C + 0x2] & 0x2 == 0x2) is bridge_repaired
+    # Talked to Oshus for first time
+    assert base_rom_emu.emu.memory.unsigned[0x021B553C + 0x18] & 0x2 == 0x2
+    # Saw broken bridge for first time
+    assert base_rom_emu.emu.memory.unsigned[0x021B553C + 0x2C] & 0x1 == 0x1
 
 
 def test_custom_shop_items(island_shop_test_emu: DesmumeEmulator):
@@ -119,7 +133,7 @@ def test_custom_shop_items(island_shop_test_emu: DesmumeEmulator):
 
 
 def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
-    item_id = int(os.environ["PYTEST_CURRENT_TEST"].split("[")[1].split("-")[0], 16)
+    item_id = int(os.environ['PYTEST_CURRENT_TEST'].split('[')[1].split('-')[0], 16)
 
     start_first_file(dig_spot_test_emu)
 
@@ -140,7 +154,7 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
                 dig_spot_test_emu.emu.memory.unsigned[
                     ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                 ],
-                "little",
+                'little',
             )
 
     # Walk down from Oshus house
@@ -152,7 +166,7 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
     dig_spot_test_emu.wait(30)
 
     # Take out shovel
-    equip_item(dig_spot_test_emu, "shovel")
+    equip_item(dig_spot_test_emu, 'shovel')
     use_equipped_item(dig_spot_test_emu)
 
     # Tap ground where item is buried to dig it up
@@ -190,7 +204,7 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
                     dig_spot_test_emu.emu.memory.unsigned[
                         ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                     ],
-                    "little",
+                    'little',
                 )
                 - ITEM_MEMORY_ADDRESSES[item_id][1]
                 == original_value

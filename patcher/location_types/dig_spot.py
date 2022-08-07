@@ -1,5 +1,4 @@
 from collections import defaultdict
-from typing import Optional
 
 from ndspy.lz10 import compress, decompress
 from ndspy.narc import NARC
@@ -28,7 +27,7 @@ class DigSpotLocation(Location):
     def __init__(self, actor_index: int, file_path: str, *args, **kwargs):
         self.actor_index = actor_index
         self.file_path = file_path
-        self.zmb_file: Optional[ZMB] = None
+        self.zmb_file: ZMB | None = None
 
         # check if this zmb file is already open first
         for filename, zmb_file in DigSpotLocation._zmb_filename_mapping.items():
@@ -48,7 +47,7 @@ class DigSpotLocation(Location):
         assert self.zmb_file is not None
         zmb_actor: Actor = self.zmb_file.actors[self.actor_index]
         assert (
-            zmb_actor.type == "DGTG"
+            zmb_actor.type == 'DGTG'
         ), f"Error: DigSpotLocation with invalid actor type '{zmb_actor.type}'"
         zmb_actor.unk0C = value
         DigSpotLocation._zmb_filename_mapping[self._zmb_filepath] = self.zmb_file
@@ -57,19 +56,19 @@ class DigSpotLocation(Location):
     def _narc_filepath(self):
         """Return the filepath of the NARC archive (ending with '.bin' extension) containing this ZMB file."""
         path: list[str] = []
-        for part in self.file_path.split("/"):
+        for part in self.file_path.split('/'):
             path.append(part)
-            if "." in part:
-                return "/".join(path)
+            if '.' in part:
+                return '/'.join(path)
 
     @property
     def _zmb_filepath(self):
         """Return the filepath of the ZMB file within its parent NARC archive."""
         index: int
         part: str
-        for index, part in enumerate(self.file_path.split("/")):
-            if "." in part:
-                return "/".join(self.file_path.split("/")[index + 1 :])
+        for index, part in enumerate(self.file_path.split('/')):
+            if '.' in part:
+                return '/'.join(self.file_path.split('/')[index + 1 :])
 
     @classmethod
     def save_all(cls):

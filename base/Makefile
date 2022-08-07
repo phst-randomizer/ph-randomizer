@@ -21,9 +21,13 @@ ASM=$(SRC:.c=.asm)
 
 INPUT_NDS_FILE=$(PH_ROM_PATH)
 OUTPUT_NDS_FILE=out.nds
+OUTPUT_BPS_FILE=patch.bps
 
 # Set version string to a default if it isn't provided
 VERSION_STRING := $(or $(VERSION_STRING), "no_version")
+
+$(OUTPUT_BPS_FILE): $(INPUT_NDS_FILE) $(OUTPUT_NDS_FILE)
+	./flips --create $^ $@
 
 $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin header.bin
 	./ndstool -c out.nds -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin
@@ -41,18 +45,18 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 	truncate -s -12 arm9_original.bin
 
 	# Decompress BLZ-compressed binaries
-	./blz -d arm9_original.bin
+	ndspy_codeCompression decompress arm9_original.bin arm9_original.bin
 	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		./blz -d overlay/$$file; \
+		ndspy_codeCompression decompress overlay/$$file overlay/$$file; \
 	done
 
 	# Patch the binaries with our custom code
 	./armips src/main.asm
 
 	# Recompress the binaries
-	./blz -eo arm9_compressed.bin
+	ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin
 	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		./blz -eo overlay/$$file; \
+		ndspy_codeCompression compress overlay/$$file overlay/$$file; \
 	done
 
 	# Combine arm9.bin back into a single file
@@ -74,7 +78,7 @@ arm7.bin: $(INPUT_NDS_FILE)
 y9.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -y9 y9.bin
 
-y7.bin: $(INPUT_NDS_FILE)	
+y7.bin: $(INPUT_NDS_FILE)
 	./ndstool -x $(INPUT_NDS_FILE) -y7 y7.bin
 
 banner.bin: $(INPUT_NDS_FILE)
@@ -98,4 +102,4 @@ debug: $(OBJ) $(ASM)
 clean:
 	rm -f $(DEST_DIR)/*
 
-all: $(OUTPUT_NDS_FILE)
+all: $(OUTPUT_BPS_FILE)

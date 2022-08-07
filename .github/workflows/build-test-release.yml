@@ -9,17 +9,19 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: python -m pip install --upgrade pip
 
-      - name: Run tox
-        run: |
-          pip install tox
-          tox
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Run pre-commit checks
+        run: pre-commit run --all-files --verbose
 
   tests:
     name: Run tests
@@ -28,17 +30,19 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: python -m pip install --upgrade pip
+
+      - name: Install tox
+        run: pip install tox
 
       - name: Run tests
-        run: |
-          pip install tox
-          tox -e test
+        run: tox -e test
 
   check-logic:
     name: Validate logic
@@ -124,11 +128,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: '.python-version'
+          check-latest: true
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
+        run: |
+          python shuffler/aux_models.py
+          git diff --exit-code
+          if [ $? -ne 0 ]
+          then
+            exit 1
+          fi
+
       - name: Validate aux data
         uses: walbo/validate-json@v1.1.0
         with:
           files: shuffler/auxiliary/**/*.json
-          schema-version: draft-07
 
 
   generate-base-patch:
@@ -138,12 +163,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version-file: '.python-version'
+          check-latest: true
 
       - name: Upgrade pip
-        run: pip install --upgrade pip --user
+        run: python -m pip install --upgrade pip
 
       - name: Fetch PH rom
         run: |
@@ -163,11 +189,11 @@ jobs:
         run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
 
       - name: Set up Docker Buildx
-        id: buildx        
-        uses: docker/setup-buildx-action@v1
+        id: buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: Build Docker
-        uses: docker/build-push-action@v2
+      - name: Build base patch
+        uses: docker/build-push-action@v3
         with:
           context: base/
           push: false
@@ -179,46 +205,10 @@ jobs:
           outputs: |
             base/out
 
-      - name: Clone Flips repo
-        uses: actions/checkout@v3
-        with:
-          repository: Alcaro/Flips
-          path: base/Flips
-
-      - name: Get latest commit hash from Flips repo
-        id: flips-hash
-        shell: bash
-        run: |
-          echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
-        working-directory: base/Flips
-
-      - name: Cache Flips executable
-        uses: actions/cache@v2
-        id: flips-cache
-        env:
-          cache-name: cache-flips
-        with:
-          path: base/Flips/*
-          key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
-
-      - name: Compile Flips tool
-        if: steps.flips-cache.outputs.cache-hit != 'true'
-        run: |
-          sudo apt-get update && sudo apt-get install g++ build-essential
-          chmod +x ./make.sh
-          ./make.sh
-        working-directory: base/Flips
-
-      - name: Create patch
-        run: |
-          chmod +x ./Flips/flips
-          ./Flips/flips --create $(ls *.nds) out/out.nds patch.bps
-        working-directory: base
-
       - uses: actions/upload-artifact@v3
         with:
           name: patch.bps
-          path: base/patch.bps
+          path: base/out/patch.bps
 
       - name: Cleanup
         if: always()
@@ -238,44 +228,42 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-            # Also retrieve previous commit so we can check if there are relevant changes
-            fetch-depth: 2
+          # Also retrieve previous commit so we can check if there are relevant changes
+          fetch-depth: 2
 
       # Check what files changed in the last commit. This info is used in every other step in this
       # to determine whether to run the base patch tests (they are only run when files in the base/
-      # directory are modified).
+      # directory or the tests themselves are modified).
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v21
+        uses: tj-actions/changed-files@v24
 
       - uses: actions/download-artifact@v3
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         with:
           name: patch.bps
 
-      - name: Set up MinGW
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
-        uses: egor-tensin/setup-mingw@v2
-        with:
-          platform: x64
+      - name: Setup MSYS2
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        uses: msys2/setup-msys2@v2
 
       - name: Clone Flips repo
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         uses: actions/checkout@v3
         with:
           repository: Alcaro/Flips
           path: Flips
 
       - name: Get latest commit hash from Flips repo
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         id: flips-hash
         run: |
           echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
         working-directory: Flips
 
       - name: Cache Flips executable
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
-        uses: actions/cache@v2
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        uses: actions/cache@v3
         id: flips-cache
         env:
           cache-name: cache-flips
@@ -284,43 +272,45 @@ jobs:
           key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
 
       - name: Compile Flips tool
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         run: |
           mingw32-make CFLAGS=-O2
         working-directory: Flips
 
       - name: Set up Python
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
-        uses: actions/setup-python@v3
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version-file: '.python-version'
+          check-latest: true
 
-# TODO: figure out why this step fails on windows.
-#       - name: Upgrade pip
-#         if: contains(steps.changed-files.outputs.modified_files, 'base/')
-#         run: pip install --upgrade pip --user
+      - name: Upgrade pip
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        run: python -m pip install --upgrade pip
 
       - name: Fetch PH rom
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         run: |
           pip install gdown
           gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
 
       - name: Patch the rom
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         run: |
           ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
 
+      - name: Install tox
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        run: pip install tox
+
       - name: Run tests
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
-        run: |
-          pip install tox
-          PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
         env:
           PH_ROM_PATH: out.nds
 
       - name: Cleanup
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
         run: rm -rf *.nds
 
   build:
@@ -339,13 +329,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version-file: '.python-version'
+          check-latest: true
 
-      # TODO: this fails on windows for some reason.
-      # - name: Upgrade pip
-      #   run: pip install --upgrade pip
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
 
       - name: Install randomizer dependencies
         run: pip install -e .
@@ -353,17 +343,14 @@ jobs:
       - name: Install pyinstaller
         run: pip install -U pyinstaller
 
-      - name: Build randomizer executable
-        run: pyinstaller randomizer.spec
-
-      - name: Download base rom patch from previous workflow
+      - name: Download base patch
         uses: actions/download-artifact@v3
         with:
           name: patch.bps
+          path: base/out/patch.bps
 
-      # TODO: bundle this with pyinstaller instead
-      - name: Move base rom patch to dist/ directory to bundle it with the randomizer
-        run: mv patch.bps dist/
+      - name: Build randomizer executable
+        run: pyinstaller randomizer.spec
 
       - name: Get current commit hash
         id: commit-hash
@@ -377,7 +364,7 @@ jobs:
   release:
     name: Publish a release
     # Require all tests to pass before a release is possible
-    needs: 
+    needs:
       - build
       - lint-type-check
       - tests
@@ -409,14 +396,14 @@ jobs:
 
       - name: Zip up executables
         run: |
-          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          zip -r ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
 
       - name: Create a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest.zip
-            ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest.zip
-            ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip

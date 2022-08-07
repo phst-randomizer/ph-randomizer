@@ -9,10 +9,10 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        # Bundle logic + aux data files inside executable
+        # Bundle logic, aux data, and base patch files inside executable
         ('shuffler/auxiliary/', 'auxiliary'),
         ('shuffler/logic/', 'logic'),
-        # TODO: bundle base patches as well
+        ('base/out/patch.bps', '.'),
     ],
     hiddenimports=[],
     hookspath=[],

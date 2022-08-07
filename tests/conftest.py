@@ -12,6 +12,9 @@ import pytest
 
 from patcher.location_types import DigSpotLocation, IslandShopLocation
 from patcher.location_types.island_shop import GD_MODELS
+from shuffler._parser import Edge, Node, parse
+from shuffler.aux_models import Area
+from shuffler.main import load_aux_data
 
 # Not all tests require py-desmume, so if it's not installed we
 # just silently suppress the error:
@@ -23,7 +26,7 @@ except ModuleNotFoundError:
     pass
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def py_desmume_instance():
     desmume_emulator = DeSmuME()
     sdl_window = desmume_emulator.create_sdl_window()
@@ -37,7 +40,7 @@ def py_desmume_instance():
 
 @pytest.fixture
 def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tmp_path: Path):
-    base_rom_path = Path(os.environ["PH_ROM_PATH"])
+    base_rom_path = Path(os.environ['PH_ROM_PATH'])
     python_version = sys.version_info
 
     # The directory where py-desmume keeps its save files. This appears to vary from system
@@ -45,29 +48,29 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
     # var, it defaults to the location from my Windows system.
     battery_file_location = Path(
         os.environ.get(
-            "PY_DESMUME_BATTERY_DIR",
-            f"C:\\Users\\{os.getlogin()}\\AppData\\Local\\Programs\\Python\\"
-            f"Python{python_version[0]}{python_version[1]}",
+            'PY_DESMUME_BATTERY_DIR',
+            f'C:\\Users\\{os.getlogin()}\\AppData\\Local\\Programs\\Python\\'
+            f'Python{python_version[0]}{python_version[1]}',
         )
     )
 
     # The name of the test function that is currently executing. Set automatically
     # by pytest at runtime.
-    test_name: str = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0]
+    test_name: str = os.environ['PYTEST_CURRENT_TEST'].split(':')[-1].split(' ')[0]
 
     # If using parametrized tests (i.e. via `pytest.mark.parametrize`), `PYTEST_CURRENT_TEST` will
     # have the parameters of the current test appended to it. We want the same .dsv save file to
     # be used for each parameter, but a different rom for each, so save this as a seperate variable.
-    test_name_with_params: str = test_name.replace("[", "_").replace("]", "_")
+    test_name_with_params: str = test_name.replace('[', '_').replace(']', '_')
 
     # Remove parameters
-    test_name = test_name.split("[")[0]
+    test_name = test_name.split('[')[0]
 
     # Path to store rom for the currently running test
-    temp_rom_path = tmp_path / f"{test_name_with_params}.nds"
+    temp_rom_path = tmp_path / f'{test_name_with_params}.nds'
 
-    battery_file_src = Path(__file__).parent / "test_data" / f"{test_name}.dsv"
-    battery_file_dest = battery_file_location / f"{test_name_with_params}.dsv"
+    battery_file_src = Path(__file__).parent / 'test_data' / f'{test_name}.dsv'
+    battery_file_dest = battery_file_location / f'{test_name_with_params}.dsv'
 
     # Make a copy of the rom for this test
     shutil.copy(base_rom_path, temp_rom_path)
@@ -86,27 +89,27 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
 
 @pytest.fixture
 def base_rom_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator):
-    test_name: str = os.environ["PYTEST_CURRENT_TEST"].split(":")[-1].split(" ")[0]
-    test_name_with_params: str = test_name.replace("[", "_").replace("]", "_")
+    test_name: str = os.environ['PYTEST_CURRENT_TEST'].split(':')[-1].split(' ')[0]
+    test_name_with_params: str = test_name.replace('[', '_').replace(']', '_')
 
-    temp_rom_path = tmp_path / f"{test_name_with_params}.nds"
+    temp_rom_path = tmp_path / f'{test_name_with_params}.nds'
     desmume_emulator.open_rom(str(temp_rom_path))
     return desmume_emulator
 
 
 @pytest.fixture(
     params=[val for val in GD_MODELS.keys() if GD_MODELS[val]],
-    ids=[f"{hex(key)}-{val}" for key, val in GD_MODELS.items() if val],
+    ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val],
 )
 def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
     test_name = (
-        os.environ["PYTEST_CURRENT_TEST"]
-        .split(":")[-1]
-        .split(" ")[0]
-        .replace("[", "_")
-        .replace("]", "_")
+        os.environ['PYTEST_CURRENT_TEST']
+        .split(':')[-1]
+        .split(' ')[0]
+        .replace('[', '_')
+        .replace(']', '_')
     )
-    rom_path = str(tmp_path / f"{test_name}.nds")
+    rom_path = str(tmp_path / f'{test_name}.nds')
 
     IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
@@ -162,22 +165,22 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
 
 @pytest.fixture(
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
-    ids=[f"{hex(val)}-{GD_MODELS[val]}" for val in ITEM_MEMORY_ADDRESSES.keys()],
+    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
 def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
     """Generate and run a rom with a custom dig/shovel spot item set."""
     test_name = (
-        os.environ["PYTEST_CURRENT_TEST"]
-        .split(":")[-1]
-        .split(" ")[0]
-        .replace("[", "_")
-        .replace("]", "_")
+        os.environ['PYTEST_CURRENT_TEST']
+        .split(':')[-1]
+        .split(' ')[0]
+        .replace('[', '_')
+        .replace(']', '_')
     )
-    rom_path = str(tmp_path / f"{test_name}.nds")
+    rom_path = str(tmp_path / f'{test_name}.nds')
 
     DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
-    DigSpotLocation(5, "Map/isle_main/map00.bin/zmb/isle_main_00.zmb").set_location(request.param)
+    DigSpotLocation(5, 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb').set_location(request.param)
     DigSpotLocation.save_all()
 
     DigSpotLocation.ROM.saveToFile(rom_path)
@@ -189,31 +192,42 @@ def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request
 
 @pytest.fixture
 def aux_data_directory(tmp_path: Path):
-    dest = tmp_path / "auxiliary"
-    shutil.copytree(Path(__file__).parent.parent / "shuffler" / "auxiliary", dest)
+    dest = tmp_path / 'auxiliary'
+    shutil.copytree(Path(__file__).parent.parent / 'shuffler' / 'auxiliary', dest)
 
     # Add a new chest to Mercay aux data containing bombs, so that a beatable seed can actually
     # be generated.
     # TODO: Remove this once there's enough aux data completed to generate a beatable seed.
-    with open(dest / "SW Sea" / "Mercay Island" / "Mercay.json", "r") as fd:
+    with open(dest / 'SW Sea' / 'Mercay Island' / 'Mercay.json') as fd:
         mercay_json = json.load(fd)
-    mercay_json["rooms"][0]["chests"].append(
+    mercay_json['rooms'][0]['chests'].append(
         {
-            "name": "test",
-            "type": "chest",
-            "contents": "bombs",
-            "bmg_file_path": "TODO",
-            "bmg_instruction_index": -1,
+            'name': 'test',
+            'type': 'npc',
+            'contents': 'bombs',
+            'bmg_file_path': 'TODO',
+            'bmg_instruction_index': -1,
         }
     )
-    with open(dest / "SW Sea" / "Mercay Island" / "Mercay.json", "w") as fd:
+    with open(dest / 'SW Sea' / 'Mercay Island' / 'Mercay.json', 'w') as fd:
         fd.write(json.dumps(mercay_json))
 
     return str(dest)
 
 
 @pytest.fixture
+def aux_data(aux_data_directory: str) -> list[Area]:
+    return load_aux_data(Path(aux_data_directory))
+
+
+@pytest.fixture
 def logic_directory(tmp_path: Path):
-    dest = tmp_path / "logic"
-    shutil.copytree(Path(__file__).parent.parent / "shuffler" / "logic", dest)
+    dest = tmp_path / 'logic'
+    shutil.copytree(Path(__file__).parent.parent / 'shuffler' / 'logic', dest)
     return str(dest)
+
+
+@pytest.fixture
+def logic(logic_directory: str) -> tuple[list[Node], dict[str, list[Edge]]]:
+    nodes, edges = parse(Path(logic_directory))
+    return nodes, edges

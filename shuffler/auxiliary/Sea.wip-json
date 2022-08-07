@@ -1,5 +1,5 @@
 {
-  "$schema": "../aux-schema.json",
+  "$schema": "../aux_schema.json",
   "name": "Sea",
   "rooms": [
     {
@@ -65,9 +65,273 @@
         {
           "name": "MolidaPort",
           "link": ""
+        },
+        {
+          "name": "MainNW",
+          "link": ""
+        },
+        {
+          "name": "FogNW",
+          "link": ""
+        },
+        {
+          "name": "NW",
+          "link": ""
         }
       ],
       "name": "SW"
+    },
+    {
+      "chests": [
+        {
+          "name": "Treasure1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure3",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure4",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure5",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure6",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure7",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure8",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "UnchartedPort",
+          "link": ""
+        },
+        {
+          "name": "ZauzPort",
+          "link": ""
+        },
+        {
+          "name": "GustPort",
+          "link": ""
+        },
+        {
+          "name": "BannanPort",
+          "link": ""
+        },
+        {
+          "name": "GhostShip",
+          "link": ""
+        },
+        {
+          "name": "EastSW",
+          "link": ""
+        },
+        {
+          "name": "WestSW",
+          "link": ""
+        },
+        {
+          "name": "NE",
+          "link": ""
+        }
+      ],
+      "name": "NW"
+    },
+    {
+      "chests": [
+        {
+          "name": "Treasure1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure3",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure4",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure5",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure6",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure7",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure8",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "DeeEssPort",
+          "link": ""
+        },
+        {
+          "name": "HarrowPort",
+          "link": ""
+        },
+        {
+          "name": "FrostPort",
+          "link": ""
+        },
+        {
+          "name": "GoronPort",
+          "link": ""
+        },
+        {
+          "name": "NE",
+          "link": ""
+        },
+        {
+          "name": "SW",
+          "link": ""
+        }
+      ],
+      "name": "SE"
+    },
+    {
+      "chests": [
+        {
+          "name": "Treasure3",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure4",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure5",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure6",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure7",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure8",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Treasure2",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "MazePort",
+          "link": ""
+        },
+        {
+          "name": "DeadPort",
+          "link": ""
+        },
+        {
+          "name": "BoardBoat",
+          "link": ""
+        },
+        {
+          "name": "RuinsIsle",
+          "link": ""
+        },
+        {
+          "name": "RightNW",
+          "link": ""
+        },
+        {
+          "name": "SE",
+          "link": ""
+        }
+      ],
+      "name": "NE"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ],
+      "name": "BeedleBoat"
+    },
+    {
+      "chests": [
+        {
+          "name": "NormalThing",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "MysteriousThing",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ],
+      "name": "ManOfSmilesBoat"
     }
   ]
 }

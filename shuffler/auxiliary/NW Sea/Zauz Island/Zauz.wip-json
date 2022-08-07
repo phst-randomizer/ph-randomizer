@@ -1,9 +1,15 @@
 {
-  "$schema": "../../../aux-schema.json",
+  "$schema": "../../../aux_schema.json",
   "name": "Zauz",
   "rooms": [
     {
-      "chests": [],
+      "chests": [
+        {
+          "name": "CuccoChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
       "doors": [
         {
           "name": "Ship",

@@ -10,7 +10,7 @@ area GustIsle:
       chest DigSpot1 # 20 rupee
       chest DigSpot2 # 20 rupee
       chest DigSpot3 # 20 rupee
-    
+
     Main -> DigSpots: item Shovel
 
   room Grotto:
@@ -52,7 +52,7 @@ area GustIsle:
     Main -> WindTempleEntrance: flag ActivateWindmills
     Main -> Ledge: item Shovel
     Ledge -> Main
-    Main <-> ToWindmillArea: (item Shovel | flag ActivateWindmills) 
+    Main <-> ToWindmillArea: (item Shovel | flag ActivateWindmills)
 
   room WindmillArea:
     node BeforeWindmills:
