@@ -3,56 +3,57 @@
   "name": "Sea",
   "rooms": [
     {
+      "name": "SW",
       "chests": [
         {
           "name": "Treasure1",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure2",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure3",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure4",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "SunKey",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure5",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure6",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure7",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         }
       ],
       "doors": [
         {
           "name": "MercayPort",
-          "link": ""
+          "link": "Mercay.MercayTown.Main.Boat"
         },
         {
           "name": "CannonIslePort",
-          "link": ""
+          "link": "Cannon.Outside.Port.Boat"
         },
         {
           "name": "EmberPort",
@@ -78,49 +79,48 @@
           "name": "NW",
           "link": ""
         }
-      ],
-      "name": "SW"
+      ]
     },
     {
       "chests": [
         {
           "name": "Treasure1",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure2",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure3",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure4",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure5",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure6",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure7",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure8",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         }
       ],
@@ -164,42 +164,42 @@
       "chests": [
         {
           "name": "Treasure1",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure2",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure3",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure4",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure5",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure6",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure7",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure8",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         }
       ],
@@ -235,42 +235,42 @@
       "chests": [
         {
           "name": "Treasure3",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure4",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure5",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure6",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure7",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure8",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure1",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         },
         {
           "name": "Treasure2",
-          "type": "",
+          "type": "salvage_treasure",
           "contents": ""
         }
       ],
@@ -303,26 +303,31 @@
       "name": "NE"
     },
     {
+      "name": "BeedleBoat",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "BeedleBoat"
+      ]
     },
     {
+      "name": "ManOfSmilesBoat",
       "chests": [
         {
           "name": "NormalThing",
-          "type": "",
-          "contents": ""
+          "type": "npc",
+          "contents": "",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": -1
         },
         {
           "name": "MysteriousThing",
-          "type": "",
-          "contents": ""
+          "type": "npc",
+          "contents": "",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": -1
         }
       ],
       "doors": [
@@ -330,8 +335,7 @@
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "ManOfSmilesBoat"
+      ]
     }
   ]
 }
