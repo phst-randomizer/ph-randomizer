@@ -48,6 +48,11 @@ class OnEnemy(Check):
     # TODO: what other fields are needed? Can this be replaced by Freestanding?
 
 
+class SalvageTreasure(Check):
+    type = Field('salvage_treasure', const=True)
+    # TODO: add other fields here
+
+
 class Door(BaseModel):
     name: str = Field(..., description='The name of this exit')
     link: str = Field(..., description='The `entrance` or `door` where this exit leads.')
@@ -55,7 +60,9 @@ class Door(BaseModel):
 
 class Room(BaseModel):
     name: str = Field(..., description='The name of the room')
-    chests: list[Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy] = Field(
+    chests: list[
+        Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure
+    ] = Field(
         [],
         description='Item checks that can be made in this room',
         unique_items=True,
