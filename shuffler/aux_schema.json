@@ -221,6 +221,31 @@
         "contents"
       ]
     },
+    "SalvageTreasure": {
+      "title": "SalvageTreasure",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "The name of the item check",
+          "type": "string"
+        },
+        "contents": {
+          "title": "Contents",
+          "description": "The item that this check contains",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "const": "salvage_treasure",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "contents"
+      ]
+    },
     "Door": {
       "title": "Door",
       "type": "object",
@@ -275,6 +300,9 @@
               },
               {
                 "$ref": "#/definitions/OnEnemy"
+              },
+              {
+                "$ref": "#/definitions/SalvageTreasure"
               }
             ]
           }
