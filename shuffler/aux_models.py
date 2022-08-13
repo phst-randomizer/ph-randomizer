@@ -5,8 +5,8 @@ from pydantic import BaseModel, Field, validator
 
 from shuffler._parser import Descriptor, parse
 
-AUX_DATA_DIRECTORY = os.environ.get('AUX_DATA_DIRECTORY', Path(__file__).parent / 'auxiliary')
-LOGIC_DATA_DIRECTORY = os.environ.get('LOGIC_DATA_DIRECTORY', Path(__file__).parent / 'logic')
+AUX_DATA_DIRECTORY = Path(os.environ.get('AUX_DATA_DIRECTORY', Path(__file__).parent / 'auxiliary'))
+LOGIC_DATA_DIRECTORY = Path(os.environ.get('LOGIC_DATA_DIRECTORY', Path(__file__).parent / 'logic'))
 
 
 class Check(BaseModel):
@@ -86,7 +86,7 @@ class Area(BaseModel):
         cls, v: list[Room], values  # noqa: N805
     ):
         """Check that all doors/exits in the aux data are also in the logic (and vice-versa)."""
-        nodes, _ = parse(Path(LOGIC_DATA_DIRECTORY))
+        nodes, _ = parse(LOGIC_DATA_DIRECTORY)
         for room in v:
             # Get all doors in the logic
             logic_doors = set()
