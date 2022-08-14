@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+import re
 
 from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
@@ -10,6 +12,14 @@ from tests.desmume_utils import (
     get_current_rupee_count,
     start_first_file,
     use_equipped_item,
+)
+
+RANDO_SETTINGS_BITMAP_ADDR = int(
+    re.findall(
+        r'#define RANDO_SETTINGS_BITMAP_ADDR (.+)',
+        (Path(__file__).parent.parent / 'base' / 'src' / 'rando_settings.h').read_text(),
+    )[0],
+    16,
 )
 
 
@@ -50,7 +60,7 @@ def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool
             base_rom_emu.wait(400)
             base_rom_emu.emu.reset()
 
-    base_rom_emu.emu.memory.unsigned[0x2058180] |= int(bridge_repaired)
+    base_rom_emu.emu.memory.unsigned[RANDO_SETTINGS_BITMAP_ADDR] |= int(bridge_repaired)
 
     # Touch file
     base_rom_emu.touch_input((130, 70), 0)
