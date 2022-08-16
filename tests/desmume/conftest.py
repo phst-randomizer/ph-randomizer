@@ -5,11 +5,7 @@ import shutil
 import sys
 
 from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
-from ndspy.rom import NintendoDSRom
 import pytest
-
-from patcher.location_types import DigSpotLocation, IslandShopLocation
-from patcher.location_types.island_shop import GD_MODELS
 
 from .desmume_utils import DesmumeEmulator
 
@@ -85,38 +81,6 @@ def base_rom_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator):
     return desmume_emulator
 
 
-@pytest.fixture(
-    params=[val for val in GD_MODELS.keys() if GD_MODELS[val]],
-    ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val],
-)
-def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
-    test_name = (
-        os.environ['PYTEST_CURRENT_TEST']
-        .split(':')[-1]
-        .split(' ')[0]
-        .replace('[', '_')
-        .replace(']', '_')
-    )
-    rom_path = str(tmp_path / f'{test_name}.nds')
-
-    IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
-
-    locations = [
-        IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),  # shield in mercay shop
-        IslandShopLocation(31, 0x217EC68 - 0x217BCE0),  # power gem in mercay shop
-        IslandShopLocation(31, 0x217EC34 - 0x217BCE0),  # treasure item in mercay shop
-    ]
-
-    for location in locations:
-        location.set_location(request.param)
-
-    IslandShopLocation.ROM.saveToFile(rom_path)
-
-    desmume_emulator.open_rom(rom_path)
-
-    return desmume_emulator
-
-
 class ItemMemoryAddressType(Enum):
     FLAG = 0
     COUNTER_8_BIT = 1
@@ -149,30 +113,3 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x26: (0x21BA608, 0x40, ItemMemoryAddressType.FLAG),  # sun key
     # TODO: Add rest of items
 }
-
-
-@pytest.fixture(
-    params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
-    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
-)
-def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
-    """Generate and run a rom with a custom dig/shovel spot item set."""
-    test_name = (
-        os.environ['PYTEST_CURRENT_TEST']
-        .split(':')[-1]
-        .split(' ')[0]
-        .replace('[', '_')
-        .replace(']', '_')
-    )
-    rom_path = str(tmp_path / f'{test_name}.nds')
-
-    DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
-
-    DigSpotLocation(5, 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb').set_location(request.param)
-    DigSpotLocation.save_all()
-
-    DigSpotLocation.ROM.saveToFile(rom_path)
-
-    desmume_emulator.open_rom(rom_path)
-
-    return desmume_emulator

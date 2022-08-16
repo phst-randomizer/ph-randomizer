@@ -1,9 +1,42 @@
 import os
+from pathlib import Path
 
 from conftest import ITEM_MEMORY_ADDRESSES, DesmumeEmulator, ItemMemoryAddressType
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
+from ndspy.rom import NintendoDSRom
+import pytest
+
+from patcher.location_types import DigSpotLocation
+from patcher.location_types.island_shop import GD_MODELS
 
 from .desmume_utils import equip_item, start_first_file, use_equipped_item
+
+
+@pytest.fixture(
+    params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
+    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
+)
+def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
+    """Generate and run a rom with a custom dig/shovel spot item set."""
+    test_name = (
+        os.environ['PYTEST_CURRENT_TEST']
+        .split(':')[-1]
+        .split(' ')[0]
+        .replace('[', '_')
+        .replace(']', '_')
+    )
+    rom_path = str(tmp_path / f'{test_name}.nds')
+
+    DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
+
+    DigSpotLocation(5, 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb').set_location(request.param)
+    DigSpotLocation.save_all()
+
+    DigSpotLocation.ROM.saveToFile(rom_path)
+
+    desmume_emulator.open_rom(rom_path)
+
+    return desmume_emulator
 
 
 def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
