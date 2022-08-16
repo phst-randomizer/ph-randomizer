@@ -246,30 +246,30 @@ jobs:
         uses: tj-actions/changed-files@v25
 
       - uses: actions/download-artifact@v3
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         with:
           name: patch.bps
 
       - name: Setup MSYS2
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         uses: msys2/setup-msys2@v2
 
       - name: Clone Flips repo
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         uses: actions/checkout@v3
         with:
           repository: Alcaro/Flips
           path: Flips
 
       - name: Get latest commit hash from Flips repo
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         id: flips-hash
         run: |
           echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
         working-directory: Flips
 
       - name: Cache Flips executable
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         uses: actions/cache@v3
         id: flips-cache
         env:
@@ -279,45 +279,45 @@ jobs:
           key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
 
       - name: Compile Flips tool
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: |
           mingw32-make CFLAGS=-O2
         working-directory: Flips
 
       - name: Set up Python
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         uses: actions/setup-python@v4
         with:
           python-version-file: '.python-version'
           check-latest: true
 
       - name: Upgrade pip
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: python -m pip install --upgrade pip
 
       - name: Fetch PH rom
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: |
           pip install gdown
           gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
 
       - name: Patch the rom
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: |
           ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
 
       - name: Install tox
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: pip install tox
 
       - name: Run tests
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
         env:
           PH_ROM_PATH: out.nds
 
       - name: Cleanup
-        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'test_desmume.py')"
+        if: "startsWith(github.ref, 'refs/tags/') || contains(steps.changed-files.outputs.modified_files, 'base/') || contains(steps.changed-files.outputs.modified_files, 'tests/desmume/')"
         run: rm -rf *.nds
 
   build:
