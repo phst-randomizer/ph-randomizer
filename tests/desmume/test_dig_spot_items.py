@@ -18,14 +18,7 @@ from .desmume_utils import equip_item, start_first_file, use_equipped_item
 )
 def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
     """Generate and run a rom with a custom dig/shovel spot item set."""
-    test_name = (
-        os.environ['PYTEST_CURRENT_TEST']
-        .split(':')[-1]
-        .split(' ')[0]
-        .replace('[', '_')
-        .replace(']', '_')
-    )
-    rom_path = str(tmp_path / f'{test_name}.nds')
+    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
 
     DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
 

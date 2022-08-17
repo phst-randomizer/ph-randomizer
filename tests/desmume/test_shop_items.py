@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from ndspy.rom import NintendoDSRom
@@ -15,14 +14,7 @@ from .desmume_utils import DesmumeEmulator, get_current_rupee_count, start_first
     ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val],
 )
 def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
-    test_name = (
-        os.environ['PYTEST_CURRENT_TEST']
-        .split(':')[-1]
-        .split(' ')[0]
-        .replace('[', '_')
-        .replace(']', '_')
-    )
-    rom_path = str(tmp_path / f'{test_name}.nds')
+    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
 
     IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
 

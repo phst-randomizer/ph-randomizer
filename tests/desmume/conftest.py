@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import shutil
 import sys
+from time import sleep
 
 from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 import pytest
@@ -38,23 +39,15 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
         )
     )
 
-    # The name of the test function that is currently executing. Set automatically
-    # by pytest at runtime.
-    test_name: str = os.environ['PYTEST_CURRENT_TEST'].split(':')[-1].split(' ')[0]
-
-    # If using parametrized tests (i.e. via `pytest.mark.parametrize`), `PYTEST_CURRENT_TEST` will
-    # have the parameters of the current test appended to it. We want the same .dsv save file to
-    # be used for each parameter, but a different rom for each, so save this as a seperate variable.
-    test_name_with_params: str = test_name.replace('[', '_').replace(']', '_')
-
-    # Remove parameters
-    test_name = test_name.split('[')[0]
+    # The name of the test function that is currently executing.
+    # PYTEST_CURRENT_TEST env var is set automatically by pytest at runtime.
+    test_name = os.environ['PYTEST_CURRENT_TEST'].split(':')[-1].split(' ')[0].split('[')[0]
 
     # Path to store rom for the currently running test
-    temp_rom_path = tmp_path / f'{test_name_with_params}.nds'
+    temp_rom_path = tmp_path / f'{tmp_path.name}.nds'
 
     battery_file_src = Path(__file__).parent / 'test_data' / f'{test_name}.dsv'
-    battery_file_dest = battery_file_location / f'{test_name_with_params}.dsv'
+    battery_file_dest = battery_file_location / f'{tmp_path.name}.dsv'
 
     # Make a copy of the rom for this test
     shutil.copy(base_rom_path, temp_rom_path)
@@ -63,8 +56,15 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
         # Copy save file to py-desmume battery directory
         shutil.copy(battery_file_src, battery_file_dest)
     else:
-        # If a dsv for this test doesn't exist, remove any that exist for this rom.
-        battery_file_dest.unlink(missing_ok=True)
+        while True:
+            try:
+                # If a dsv for this test doesn't exist, remove any that exist for this rom.
+                battery_file_dest.unlink(missing_ok=True)
+                break
+            except PermissionError:
+                # If another test is using this file, wait 10 seconds
+                # and try again.
+                sleep(10)
 
     desmume_emulator = DesmumeEmulator(py_desmume_instance=py_desmume_instance)
 
@@ -73,10 +73,7 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
 
 @pytest.fixture
 def base_rom_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator):
-    test_name: str = os.environ['PYTEST_CURRENT_TEST'].split(':')[-1].split(' ')[0]
-    test_name_with_params: str = test_name.replace('[', '_').replace(']', '_')
-
-    temp_rom_path = tmp_path / f'{test_name_with_params}.nds'
+    temp_rom_path = tmp_path / f'{tmp_path.name}.nds'
     desmume_emulator.open_rom(str(temp_rom_path))
     return desmume_emulator
 
