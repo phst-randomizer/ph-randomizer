@@ -211,11 +211,17 @@
 .close
 
 
-.open "../overlay/overlay_0031.bin", 0x0211F5C0
+.open "../overlay/overlay_0031.bin", 0x0211F5C0 ; overlay 15 in ghidra
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
             bl @faster_boat
+        .endarea
+    ; Patch salvage item item-giving function so that any item can be given
+    .org 0x2146430
+        .area 0x8
+            bic r1, r0, 0x8000 ; Unset most significant bit of the value specified in the ZMB
+            ldr r0, [0x2146470]
         .endarea
 .close
 
