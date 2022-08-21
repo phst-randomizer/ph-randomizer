@@ -50,7 +50,10 @@ class OnEnemy(Check):
 
 class SalvageTreasure(Check):
     type = Field('salvage_treasure', const=True)
-    # TODO: add other fields here
+    zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
+    zmb_actor_index: int = Field(
+        ..., description='Index of the chest in the NPCA section of the zmb file'
+    )
 
 
 class Door(BaseModel):

@@ -235,6 +235,16 @@
           "description": "The item that this check contains",
           "type": "string"
         },
+        "zmb_file_path": {
+          "title": "Zmb File Path",
+          "description": "File path to the zmb the chest is on",
+          "type": "string"
+        },
+        "zmb_actor_index": {
+          "title": "Zmb Actor Index",
+          "description": "Index of the chest in the NPCA section of the zmb file",
+          "type": "integer"
+        },
         "type": {
           "title": "Type",
           "const": "salvage_treasure",
@@ -243,7 +253,9 @@
       },
       "required": [
         "name",
-        "contents"
+        "contents",
+        "zmb_file_path",
+        "zmb_actor_index"
       ]
     },
     "Door": {
