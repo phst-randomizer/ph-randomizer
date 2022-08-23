@@ -8,8 +8,14 @@ from ndspy import rom
 from vidua import bps
 
 from patcher._items import ITEMS
-from patcher.location_types import EventLocation, IslandShopLocation, Location, MapObjectLocation
-from shuffler.aux_models import Area, Chest, IslandShop, Npc, Tree
+from patcher.location_types import (
+    EventLocation,
+    IslandShopLocation,
+    Location,
+    MapObjectLocation,
+    SalvageTreasureLocation,
+)
+from shuffler.aux_models import Area, Chest, IslandShop, Npc, SalvageTreasure, Tree
 
 
 def is_frozen():
@@ -91,6 +97,14 @@ def patch_island_shop(shop_item: IslandShop):
     location.set_location(ITEMS[shop_item.contents])
 
 
+def patch_salvage_treasure(salvage_treasure: SalvageTreasure):
+    location = SalvageTreasureLocation(
+        actor_index=salvage_treasure.zmb_actor_index,
+        file_path=salvage_treasure.zmb_file_path,
+    )
+    location.set_location(ITEMS[salvage_treasure.contents])
+
+
 def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
     """
     Patches a ROM with the given aux data.
@@ -115,6 +129,9 @@ def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Nintend
                     case 'tree':
                         assert isinstance(chest, Tree)
                         patch_tree(chest)
+                    case 'salvage_treasure':
+                        assert isinstance(chest, SalvageTreasure)
+                        patch_salvage_treasure(chest)
                     case 'dig':
                         pass  # TODO: implement this
                     case 'freestanding':

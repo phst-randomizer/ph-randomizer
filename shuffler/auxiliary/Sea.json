@@ -8,42 +8,58 @@
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "SunKey",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         }
       ],
       "doors": [
@@ -82,46 +98,63 @@
       ]
     },
     {
+      "name": "NW",
       "chests": [
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure8",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         }
       ],
       "doors": [
@@ -157,50 +190,66 @@
           "name": "NE",
           "link": ""
         }
-      ],
-      "name": "NW"
+      ]
     },
     {
+      "name": "SE",
       "chests": [
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure8",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         }
       ],
       "doors": [
@@ -228,50 +277,66 @@
           "name": "SW",
           "link": ""
         }
-      ],
-      "name": "SE"
+      ]
     },
     {
+      "name": "NE",
       "chests": [
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure8",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": ""
+          "contents": "",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         }
       ],
       "doors": [
@@ -299,8 +364,7 @@
           "name": "SE",
           "link": ""
         }
-      ],
-      "name": "NE"
+      ]
     },
     {
       "name": "BeedleBoat",
