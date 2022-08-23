@@ -53,6 +53,39 @@
                 ; Jump to end of switch statement which will end up calling spawn_npc function
                 ; with the parameters that we have set here
                 b 0x212f3d8
+
+            @custom_salvage_item:
+                push lr
+
+                ; Unset most significant bit of the value specified in the ZMB,
+                ; so we can get the real item id that we want to spawn
+                bic r1, r0, 0x8000
+
+                ; Check if it's a heart container. If so, manually increment the player's max
+                ; health by 4. For some reason, this doesn't happen automatically when a
+                ; heart container is found in a salvage chest.
+                cmp r1, 0xa
+                bne @@end
+
+                push r0, r1
+                ; get current max health
+                ldr r0, =0x021BA348
+                ldrb r1, [r0]
+                ; add 4 (i.e. a new heart container) to it and set it to that value
+                add r1, r1, 0x4
+                strb r1, [r0]
+                ; set current health to new value (i.e. restore empty heart containers)
+                ldr r0, =0x021BA34A
+                strb r1, [r0]
+                pop r0, r1
+
+                @@end:
+                ldr r0, =0x2146470
+                ldr r0, [r0]
+                str r1, [r0, 0xEC]
+
+                pop pc
+
         .pool
         .endarea
 .close
@@ -219,9 +252,8 @@
         .endarea
     ; Patch salvage item item-giving function so that any item can be given
     .org 0x2146430
-        .area 0x8
-            bic r1, r0, 0x8000 ; Unset most significant bit of the value specified in the ZMB
-            ldr r0, [0x2146470]
+        .area 0xC, 0x0
+            bl @custom_salvage_item
         .endarea
 .close
 
