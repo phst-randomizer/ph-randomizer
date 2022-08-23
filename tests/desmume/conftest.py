@@ -109,5 +109,8 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x24: (0x21BA609, 0x1, ItemMemoryAddressType.FLAG),  # fishing rod
     0x26: (0x21BA608, 0x40, ItemMemoryAddressType.FLAG),  # sun key
     0x2C: (0x21BA609, 0x4, ItemMemoryAddressType.FLAG),  # king's key
+    0x2D: (0x21BA501, 1, ItemMemoryAddressType.COUNTER_8_BIT),  # power gem
+    0x2E: (0x21BA502, 1, ItemMemoryAddressType.COUNTER_8_BIT),  # wisdom gem
+    0x2F: (0x21BA500, 1, ItemMemoryAddressType.COUNTER_8_BIT),  # courage gem
     # TODO: Add rest of items
 }
