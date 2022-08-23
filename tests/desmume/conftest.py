@@ -108,5 +108,6 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x20: (0x21BA604, 0x40, ItemMemoryAddressType.FLAG),  # grapping hook
     0x24: (0x21BA609, 0x1, ItemMemoryAddressType.FLAG),  # fishing rod
     0x26: (0x21BA608, 0x40, ItemMemoryAddressType.FLAG),  # sun key
+    0x2C: (0x21BA609, 0x4, ItemMemoryAddressType.FLAG),  # king's key
     # TODO: Add rest of items
 }
