@@ -108,5 +108,19 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x20: (0x21BA604, 0x40, ItemMemoryAddressType.FLAG),  # grapping hook
     0x24: (0x21BA609, 0x1, ItemMemoryAddressType.FLAG),  # fishing rod
     0x26: (0x21BA608, 0x40, ItemMemoryAddressType.FLAG),  # sun key
+    0x2C: (0x21BA609, 0x4, ItemMemoryAddressType.FLAG),  # king's key
+    0x2D: (0x21BA501, 1, ItemMemoryAddressType.COUNTER_8_BIT),  # power gem
+    0x2E: (0x21BA502, 1, ItemMemoryAddressType.COUNTER_8_BIT),  # wisdom gem
+    0x2F: (0x21BA500, 1, ItemMemoryAddressType.COUNTER_8_BIT),  # courage gem
+    0x38: (0x21BA609, 0x8, ItemMemoryAddressType.FLAG),  # ghost key
+    # TODO: nothing happens when these three items are collected from a location
+    # different from the original game. We may have to set the appropriate flags
+    # in memory manually in the base patch code, but more investigation is needed.
+    # 0x39: (0x21B554A, 0x40, ItemMemoryAddressType.FLAG),  # freebie card
+    # 0x3A: (0x21B554A, 0x80, ItemMemoryAddressType.FLAG),  # compliment card
+    # 0x3B: (0x21B554A, 0x20, ItemMemoryAddressType.FLAG),  # complimentary card
+    0x72: (0x21B554B, 0x40, ItemMemoryAddressType.FLAG),  # crimsonine
+    0x73: (0x21B554B, 0x20, ItemMemoryAddressType.FLAG),  # azurine
+    0x74: (0x21B554B, 0x80, ItemMemoryAddressType.FLAG),  # aquanine
     # TODO: Add rest of items
 }
