@@ -117,5 +117,6 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x3A: (0x21B554A, 0x80, ItemMemoryAddressType.FLAG),  # compliment card
     0x3B: (0x21B554A, 0x20, ItemMemoryAddressType.FLAG),  # complimentary card
     0x72: (0x21B554B, 0x40, ItemMemoryAddressType.FLAG),  # crimsonine
+    0x73: (0x21B554B, 0x20, ItemMemoryAddressType.FLAG),  # azurine
     # TODO: Add rest of items
 }
