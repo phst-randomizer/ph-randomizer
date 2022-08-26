@@ -160,8 +160,9 @@ def assumed_search(
                                     if 'todo' in link.lower():
                                         continue
 
-                                    # Append current area if the linked node doesn't have one specified
-                                    # (i.e. `Room1.Node1` is fine and will be transformed to `Area1.Room1.Node1`)
+                                    # Append current area if the linked node doesn't have one
+                                    # specified (i.e. `Room1.Node1` is fine and will be
+                                    # transformed to `Area1.Room1.Node1`)
                                     if link.count('.') == 1:
                                         link = f'{starting_node.area}.{link}'
                                     elif link.count('.') != 2:
@@ -260,7 +261,8 @@ def shuffle(
                 break
         else:
             raise Exception(
-                f'Error: shuffler ran out of locations to place item. Remaining items: {[i] + I} ({len([i] + I)})'
+                'Error: shuffler ran out of locations to place item.'
+                f'Remaining items: {[i] + I} ({len([i] + I)})'
             )
 
         # TODO: these conditions should both become true at the same time, once shuffling

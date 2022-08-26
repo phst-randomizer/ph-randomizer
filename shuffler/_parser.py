@@ -193,7 +193,10 @@ def parse_edge(node_prefix: str, line: str, edge_direction: Literal['<-', '->'])
     source_node_name = (
         f"{node_prefix}.{line.split('<->' if '<->' in line else edge_direction)[0].strip()}"
     )
-    dest_node_name = f"{node_prefix}.{line.split('<->' if '<->' in line else edge_direction)[1].strip().split(':')[0]}"
+    dest_node_name = (
+        f'{node_prefix}.'
+        f"{line.split('<->' if '<->' in line else edge_direction)[1].strip().split(':')[0]}"
+    )
 
     edge_content = None
     if ':' in line:

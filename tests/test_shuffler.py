@@ -75,7 +75,7 @@ def test_parser(tmp_path: Path):
 
 @pytest.mark.parametrize('seed', ['test', 'another_test', 'ANOTHER_TEST!!', 'this_is_a_real_seed'])
 def test_seeds(seed: str, aux_data: list[Area], logic: tuple[list[Node], dict[str, list[Edge]]]):
-    """Test that running the shuffler with the same seed multiple times produces identical aux data."""
+    """Test that running the shuffler with same seed multiple times produces identical aux data."""
     nodes, edges = logic
 
     first = shuffle(seed, nodes, edges, aux_data)
@@ -117,7 +117,7 @@ def test_aux_data_validation(filename: str):
         ('item Boomerang | flag BridgeRepaired', [], {'bridge_repaired'}, True),
         ('item Boomerang | flag BridgeRepaired', ['bombs'], {}, False),
         # Test nested expressions
-        ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs', 'bombchus'], {}, True),
+        ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs', 'bombchus'], {}, True),  # noqa: E501
         ('item Boomerang & (item Bombs | item Bombchus | item Hammer)', ['boomerang', 'bombchus'], {}, True),  # noqa: E501
         ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs'], {}, True),
         ('item Boomerang & (item Bombs | item Bombchus)', ['bombs', 'bombchus'], {}, False),

@@ -86,8 +86,8 @@ class Area(BaseModel):
 
     @validator('rooms')
     def check_if_doors_are_consistent_between_aux_data_and_logic(
-        cls, v: list[Room], values  # noqa: N805
-    ):
+        cls, v: list[Room], values
+    ):  # noqa: N805
         """Check that all doors/exits in the aux data are also in the logic (and vice-versa)."""
         nodes, _ = parse(LOGIC_DATA_DIRECTORY)
         for room in v:
