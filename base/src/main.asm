@@ -12,6 +12,64 @@
             .fill 0xA, 0x0 ; bitmap for randomizer settings
 
             .arm
+            .align
+            @key_helper:
+                push r4, lr
+                mov r4, r0
+                bl 0x20c14f4
+                ldr r1, =0x2160710
+                ldr r1, [r1]
+                ldr r0, =0x27e0fec
+                str r1, [r4, 0x0]
+                ldr r0, [r0, 0x0]
+                add r0, r0, 0x2a0
+                bl 0x20c4528
+                mov r1, r0
+                add r0, r4, 0x158
+                blx 0x20a9528
+                mov r0, 0x1
+                strb r0, [r4, 0x12a]
+                mov r1, 0x0
+                str r1,[r4, 0x1b8]
+                str r1, [r4, 0x1bc]
+                mov r0, r4
+                str r1, [r4, 0x1c0]
+                pop r4, pc
+
+
+            .align
+            @spawn_NKEY:
+                push r3, lr
+                ldr r1, =0x21606bc
+                ldr r1, [r1]
+                mov r0, 0x1c8
+                ldr r1,[r1,#0x0]
+                mov r2, 0x4
+                ldr r1,[r1,#0x0]
+                bl 0x202e9d8
+                cmp r0,#0x0
+                popeq r3, pc
+                bl @key_helper
+                pop r3, pc
+
+            @NKEY:
+                .ascii "YEKN"
+            @init_NKEY_actor:
+                ldr r0, =0x216b3ec
+                ldr r0, [r0]
+                ldr r1, =org(@NKEY)
+                ldr r1, [r1]
+                ldr r2, =org(@spawn_NKEY)
+                mov r3, 0x0
+                bl 0x203e740
+                ldr r0, =0x216CEAC
+                ldr r1, =0x216b3f8
+                ldr r1, [r1]
+                ldr r2, =0x216CEA0
+                bl 0x204f890
+                pop r3, pc
+
+            .arm
             .importobj "src/faster_boat.o"
             .importobj "src/fixed_random_treasure_in_shop.o"
             .importobj "src/progressive_sword_check.o"
@@ -132,6 +190,12 @@
 
 .open "../overlay/overlay_0029.bin", 0x0211F5C0 ; overlay 14 in ghidra
     .arm
+    .org 0x2155114
+        .area 0x4
+            b @init_NKEY_actor
+            // pop r3, pc
+        .endarea
+
     .org 0x213b0e8
         .area 0x74, 0xFF
             .importobj "src/extend_RUPY_npc.o"
