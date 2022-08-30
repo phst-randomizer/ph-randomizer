@@ -8,57 +8,57 @@
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "sand_of_hours",
+          "zmb_actor_index": 18,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "ship_part",
+          "zmb_actor_index": 23,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "ship_part",
+          "zmb_actor_index": 24,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "sand_of_hours",
+          "zmb_actor_index": 25,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "SunKey",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "sun_key",
+          "zmb_actor_index": 17,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "ship_part",
+          "zmb_actor_index": 26,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "ship_part",
+          "zmb_actor_index": 27,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": "",
-          "zmb_actor_index": -1,
+          "contents": "ship_part",
+          "zmb_actor_index": 28,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         }
       ],
