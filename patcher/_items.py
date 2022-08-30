@@ -25,6 +25,7 @@ ITEMS = {
     'cannon': 0x25,
     'sun_key': 0x26,
     'quiver_upgrade': 0x28,
+    'ship_part': 0x2B,
     'king_key': 0x2C,
     'power_gem': 0x2D,
     'wisdom_gem': 0x2E,
@@ -32,4 +33,5 @@ ITEMS = {
     'common_treasure': 0x30,  # TODO: randomize this at run-time
     'salvage_arm': 0x3D,
     'treasure_map_8': 0x52,
+    'sand_of_hours': 0x78,
 }
