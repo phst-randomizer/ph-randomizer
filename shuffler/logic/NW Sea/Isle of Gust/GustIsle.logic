@@ -28,7 +28,7 @@ area GustIsle:
     node ClearEnemies:
       chest EnemyClearChest # Treasure chart
 
-    Main -> ClearEnemies: defeat Miniblins
+    Main -> ClearEnemies: defeated Miniblins
     ClearEnemies -> Main
 
   room AfterCave:
