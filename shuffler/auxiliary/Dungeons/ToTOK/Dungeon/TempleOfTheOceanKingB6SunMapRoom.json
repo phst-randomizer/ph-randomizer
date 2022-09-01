@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "SunKeyMap",
+          "type": "chest",
+          "contents": "treasure_map_SW_8",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB6",
+          "link": "B6.SymbolDoor.Hourglass"
+        }
+      ],
+      "name": "B6Sun"
+    }
+  ]
+}

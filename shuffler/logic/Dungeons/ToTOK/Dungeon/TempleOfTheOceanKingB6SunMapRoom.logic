@@ -1,5 +1,6 @@
 area TempleOfTheOceanKing:
-  room B3Chart:
+  room B6Sun:
     node Main:
-      flag SunKeyMark
+      chest SunKeyMap
+      door ToB6
       entrance BlueWarp

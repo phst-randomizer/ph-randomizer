@@ -6,27 +6,31 @@
       "chests": [
         {
           "name": "EyeChest",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "treasure_map_NW_2",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         },
         {
           "name": "PhantomKiller",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "doors": [
         {
           "name": "ToB5",
-          "link": ""
+          "link": "B5.StaircaseToB6.ToB6"
         },
         {
           "name": "Hourglass",
-          "link": ""
+          "link": "B6Sun.Main.ToB6"
         },
         {
           "name": "Triforce",
-          "link": ""
+          "link": "B6Chart.Main.ToB6"
         }
       ],
       "name": "B6"

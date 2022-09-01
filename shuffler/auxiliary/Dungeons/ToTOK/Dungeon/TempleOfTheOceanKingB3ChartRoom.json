@@ -6,22 +6,24 @@
       "chests": [
         {
           "name": "NWChartChest",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "NW Sea Chart",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "doors": [
         {
           "name": "ToB3Ledge",
-          "link": ""
+          "link": "B3.Ledge.ToChartRoomShortcut"
         },
         {
           "name": "ToB3Main",
-          "link": ""
+          "link": "B3.DoorToChartRoom.ToChartRoom"
         },
         {
           "name": "ToB4",
-          "link": ""
+          "link": "B4.TopRight.ToB3"
         }
       ],
       "name": "B3Chart"
