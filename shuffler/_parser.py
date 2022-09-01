@@ -49,8 +49,15 @@ EdgeExpression = list[str | Any]
 
 # pyparsing parser for parsing edges in .logic files:
 operand: pyparsing.ParserElement = (
-    pyparsing.Keyword('item') | pyparsing.Keyword('flag') | pyparsing.Keyword('open')
-) + pyparsing.Word(pyparsing.alphas)
+    pyparsing.Keyword('item')
+    | pyparsing.Keyword('flag')
+    # TODO: figure out which of these are needed
+    | pyparsing.Keyword('open')
+    | pyparsing.Keyword('defeated')
+    | pyparsing.Keyword('defeat')
+    | pyparsing.Keyword('setting')
+    | pyparsing.Keyword('state')
+) + pyparsing.Word(pyparsing.alphanums)
 edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
     operand,
     [
