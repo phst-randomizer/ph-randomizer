@@ -13,6 +13,24 @@ class Check(BaseModel):
     name: str = Field(..., description='The name of the item check')
     contents: str = Field(..., description='The item that this check contains')
 
+    @validator('contents')
+    def check_if_item_is_valid(cls, v: str):
+        """
+        Ensure that this check's `contents` is set to a valid item.
+
+        It'd be nice to have this be a JSON-Schema level check instead of a pydantic validator,
+        but to do that, we need to dynamically generate an `Enum` with all possible item values
+        using the ITEMS dict in patcher._items.py. As part of that, we would want to use pydantic's
+        `use_enum_values` setting for the model, but mypy doesn't support it currently:
+        https://github.com/pydantic/pydantic/issues/3809 and reports type errors all over the
+        place if it's used. If this is ever fixed, it should be changed.
+        """
+        from patcher._items import ITEMS
+
+        # TODO: Use the following assertion instead once all aux data chest contents is complete.
+        # assert v in ITEMS
+        assert v in ITEMS or not v or v.lower() == 'todo'
+
 
 class Chest(Check):
     type = Field('chest', const=True)
