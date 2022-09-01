@@ -40,16 +40,35 @@ class Node:
         return hash(repr(self))
 
 
+# Python type for edge values.
+# TODO: ideally we use the first, commented out option, but it doesn't work due to the lack
+# of recursive type support in mypy (ref: https://github.com/python/mypy/issues/731).
+# If recursive types are ever supported, this should be updated accordingly.
+# EdgeExpression = list[str | 'EdgeExpression']
+EdgeExpression = list[str | Any]
+
+# pyparsing parser for parsing edges in .logic files:
+operand: pyparsing.ParserElement = (
+    pyparsing.Keyword('item') | pyparsing.Keyword('flag') | pyparsing.Keyword('open')
+) + pyparsing.Word(pyparsing.alphas)
+edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
+    operand,
+    [
+        (pyparsing.Literal('&'), 2, pyparsing.opAssoc.LEFT),
+        (pyparsing.Literal('|'), 2, pyparsing.opAssoc.LEFT),
+    ],
+)
+
+
 @dataclass
 class Edge:
     source: Node
     dest: Node
-    constraints: str | None
+    constraints: EdgeExpression | None
 
     def is_traversable(self, current_inventory: list[str], current_flags: set[str]) -> bool:
         if self.constraints:
-            parsed = edge_parser.parse_string(self.constraints)
-            return edge_is_tranversable(parsed.as_list(), current_inventory, current_flags)
+            return edge_is_tranversable(self.constraints, current_inventory, current_flags)
         return True
 
 
@@ -82,25 +101,6 @@ class Descriptor(Enum):
 
 
 VALID_DESCRIPTORS = [element.value for element in Descriptor]
-
-# Python type for edge values.
-# TODO: ideally we use the first, commented out option, but it doesn't work due to the lack
-# of recursive type support in mypy (ref: https://github.com/python/mypy/issues/731).
-# If recursive types are ever supported, this should be updated accordingly.
-# EdgeExpression = list[str | 'EdgeExpression']
-EdgeExpression = list[str | Any]
-
-# pyparsing parser for parsing edges in .logic files:
-operand: pyparsing.ParserElement = (
-    pyparsing.Keyword('item') | pyparsing.Keyword('flag') | pyparsing.Keyword('open')
-) + pyparsing.Word(pyparsing.alphas)
-edge_parser: pyparsing.ParserElement = pyparsing.infix_notation(
-    operand,
-    [
-        (pyparsing.Literal('&'), 2, pyparsing.opAssoc.LEFT),
-        (pyparsing.Literal('|'), 2, pyparsing.opAssoc.LEFT),
-    ],
-)
 
 
 def _evaluate_constraint(type: str, value: str, inventory: list[str], flags: set[str]) -> bool:
@@ -200,7 +200,7 @@ def parse_edge(node_prefix: str, line: str, edge_direction: Literal['<-', '->'])
 
     edge_content = None
     if ':' in line:
-        edge_content = line.split(':')[1].strip()
+        edge_content = edge_parser.parse_string(line.split(':')[1].strip()).as_list()
 
     node1 = [node for node in nodes if node.name == source_node_name][0]
     node2 = [node for node in nodes if node.name == dest_node_name][0]
