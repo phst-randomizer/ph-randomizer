@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from shuffler import shuffle
-from shuffler._parser import Edge, Node, NodeContents, parse
+from shuffler._parser import Edge, Node, NodeContents, edge_parser, parse
 from shuffler.aux_models import Area
 
 
@@ -142,6 +142,8 @@ def test_aux_data_validation(filename: str):
 )
 def test_edge_parser(expression: str, inventory: list[str], flags: set[str], expected_result: bool):
     assert (
-        Edge(Node('test1', []), Node('test2', []), expression).is_traversable(inventory, flags)
+        Edge(
+            Node('test1', []), Node('test2', []), edge_parser.parse_string(expression).as_list()
+        ).is_traversable(inventory, flags)
         == expected_result
     )
