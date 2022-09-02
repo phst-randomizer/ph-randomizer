@@ -33,5 +33,7 @@ ITEMS = {
     'common_treasure': 0x30,  # TODO: randomize this at run-time
     'salvage_arm': 0x3D,
     'treasure_map_SW_7': 0x52,
+    'treasure_map_NW_1': 0x53,
     'sand_of_hours': 0x78,
+    'cyclone_slate': 0x7F,
 }
