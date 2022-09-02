@@ -9,13 +9,14 @@ from vidua import bps
 
 from patcher._items import ITEMS
 from patcher.location_types import (
+    DigSpotLocation,
     EventLocation,
     IslandShopLocation,
     Location,
     MapObjectLocation,
     SalvageTreasureLocation,
 )
-from shuffler.aux_models import Area, Chest, IslandShop, Npc, SalvageTreasure, Tree
+from shuffler.aux_models import Area, Chest, DigSpot, IslandShop, Npc, SalvageTreasure, Tree
 
 
 def is_frozen():
@@ -105,6 +106,13 @@ def patch_salvage_treasure(salvage_treasure: SalvageTreasure):
     location.set_location(ITEMS[salvage_treasure.contents])
 
 
+def patch_dig_spot_treasure(dig_spot: DigSpot):
+    location = DigSpotLocation(
+        actor_index=dig_spot.zmb_actor_index, file_path=dig_spot.zmb_file_path
+    )
+    location.set_location(ITEMS[dig_spot.contents])
+
+
 def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
     """
     Patches a ROM with the given aux data.
@@ -132,8 +140,9 @@ def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Nintend
                     case 'salvage_treasure':
                         assert isinstance(chest, SalvageTreasure)
                         patch_salvage_treasure(chest)
-                    case 'dig':
-                        pass  # TODO: implement this
+                    case 'dig_spot':
+                        assert isinstance(chest, DigSpot)
+                        patch_dig_spot_treasure(chest)
                     case 'freestanding':
                         pass  # TODO: implement this
                     case 'on_enemy':
