@@ -74,6 +74,10 @@ class SalvageTreasure(Check):
     )
 
 
+class DigSpot(SalvageTreasure):
+    type = Field('dig_spot', const=True)
+
+
 class Door(BaseModel):
     name: str = Field(..., description='The name of this exit')
     link: str = Field(..., description='The `entrance` or `door` where this exit leads.')
@@ -82,7 +86,7 @@ class Door(BaseModel):
 class Room(BaseModel):
     name: str = Field(..., description='The name of the room')
     chests: list[
-        Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure
+        Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
     ] = Field(
         [],
         description='Item checks that can be made in this room',
