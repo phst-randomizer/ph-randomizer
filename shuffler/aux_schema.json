@@ -49,6 +49,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "chest",
           "const": "chest",
           "type": "string"
         }
@@ -86,6 +87,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "npc",
           "const": "npc",
           "type": "string"
         }
@@ -123,6 +125,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "island_shop",
           "const": "island_shop",
           "type": "string"
         }
@@ -160,6 +163,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "tree",
           "const": "tree",
           "type": "string"
         }
@@ -187,6 +191,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "freestanding",
           "const": "freestanding",
           "type": "string"
         }
@@ -212,6 +217,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "on_enemy",
           "const": "on_enemy",
           "type": "string"
         }
@@ -247,6 +253,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "salvage_treasure",
           "const": "salvage_treasure",
           "type": "string"
         }
@@ -284,6 +291,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "dig_spot",
           "const": "dig_spot",
           "type": "string"
         }
