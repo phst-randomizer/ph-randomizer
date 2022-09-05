@@ -1,10 +1,13 @@
 area SpiritIsle:
   room Inside:
     node Main: door Outside
+
     node Power1: chest Power1
     node Power2: chest Power2
+
     node Wisdom1: chest Wisdom1
     node Wisdom2: chest Widsom2
+    
     node Courage1: chest Courage1
     node Courage2: chest Courage2
 
@@ -17,9 +20,12 @@ area SpiritIsle:
     Courage1 -> Courage2: item CourageGem20
 
   room Outside:
-    node Main: chest LeftSide #Courage Gem
-    node Right: chest AfterJumps #Wisdom Gem
-    node Grotto: door Grotto
-    node Ship: door Ship
+    node Main: 
+      chest LeftSide
+      door Grotto
+      door Ship
+
+    node Right:
+      chest AfterJumps
 
     Main <-> Right: (item GrapplingHook & item Shield)

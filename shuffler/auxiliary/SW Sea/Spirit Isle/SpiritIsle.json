@@ -1,0 +1,88 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "SpiritIsle",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Power1",
+          "type": "chest",
+          "contents": "spirit_power_lv1",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Power2",
+          "type": "chest",
+          "contents": "spirit_power_lv2",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Wisdom1",
+          "type": "chest",
+          "contents": "spirit_wisdom_lv1",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Widsom2",
+          "type": "chest",
+          "contents": "spirit_wisdom_lv2",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Courage1",
+          "type": "chest",
+          "contents": "spirit_courage_lv1",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Courage2",
+          "type": "chest",
+          "contents": "spirit_courage_lv2",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "SpiritIsle.Outside.Main.Grotto"
+        }
+      ],
+      "name": "Inside"
+    },
+    {
+      "chests": [
+        {
+          "name": "LeftSide",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "AfterJumps",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Grotto",
+          "link": "SpiritIsle.Inside.Main.Outside"
+        },
+        {
+          "name": "Ship",
+          "link": "Sea.SW.SpiritIsle.SpiritIslePort"
+        }
+      ],
+      "name": "Outside"
+    }
+  ]
+}
