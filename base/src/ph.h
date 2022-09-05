@@ -4,6 +4,7 @@
 // definitions, etc that are present in the base game.
 
 extern void strcat(char *dest, char *src);
+extern void strcpy(char *dest, char *src);
 extern int32_t strlen(char *s);
 
 // TODO: verify this is correct. I'm not sure if this
