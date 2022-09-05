@@ -55,7 +55,7 @@ area Sea:
     West <-> Treasure5: (item SalvageArm & item TreasureMap5)
     West <-> Treasure6: (item SalvageArm & item TreasureMap6)
     West <-> Treasure7: (item SalvageArm & item TreasureMap7)
-    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See /Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
+    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See ./Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
 
   room NW:
     node Main:
