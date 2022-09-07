@@ -19,5 +19,6 @@ void set_initial_flags(uint32_t base_flag_address) {
   set_flag(base_flag_address + TALKED_TO_OSHUS_AFTER_SEEING_RED_CHU_CHUS);
   set_flag(base_flag_address + SHOWED_LINEBECK_SW_SEA_CHART);
   set_flag(base_flag_address + SET_SAIL_FOR_THE_FIRST_TIME);
+  set_flag(base_flag_address + UNCHARTED_ISLAND_BRIDGE_EXTENDED);
   // TODO: finish documenting/setting the rest of the needed flags
 }
