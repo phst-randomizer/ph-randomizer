@@ -18,7 +18,7 @@ setup(
         'click==8.1.3',
         'inflection==0.5.1',
         'ndspy==4.0.0',
-        'pydantic==1.9.2',
+        'pydantic==1.10.1',
         'pyparsing==3.0.9',
         'vidua==0.4.4',
         'zed @ git+https://github.com/phst-randomizer/zed.git@b6b654a0a40b2f4dfb6d2b3692bd245ae0f6975b',  # noqa: E501
