@@ -1,7 +1,21 @@
 area Zauz:
-  room Port:
-    node Boat:
-      door Ship
-    #martin smith .>>>0q
-    node Ledge:
+  room Outside:
+    node Main:
       chest CuccoChest
+      door ZauzHouse
+      door Ship
+
+    node DigSpot:
+      chest DigSpot
+
+    Main -> DigSpot: (item Shovel)
+    DigSpot -> Main
+
+  room ZauzHouse:
+    node Main:
+      door Outside
+
+    node HaveMetals:
+      chest ZauzPhantomSword
+
+    Main <-> HaveMetals: (item Crimsonine & item Azurine & item Aquanine)
