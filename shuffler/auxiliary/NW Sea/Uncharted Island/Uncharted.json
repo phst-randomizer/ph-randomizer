@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "UnchartedIsland",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "treasure_map_NW_1",
+          "zmb_actor_index": 4,
+          "zmb_file_path": "Map/isle_small3/map00.bin/zmb/isle_small3_00.zmb"
+        }
+      ],
+      "doors": [
+        {
+          "name": "Cave",
+          "link": "Cave.Main.Entrance"
+        },
+        {
+          "name": "Boat",
+          "link": "Sea.NW.Uncharted.UnchartedPort"
+        }
+      ]
+    },
+    {
+      "name": "Cave",
+      "chests": [
+        {
+          "name": "CycloneSlate",
+          "type": "npc",
+          "contents": "cyclone_slate",
+          "bmg_file_path": "English/Message/kojima3.bmg",
+          "bmg_instruction_index": 108
+        }
+      ],
+      "doors": [
+        {
+          "name": "Entrance",
+          "link": "Main.Main.Cave"
+        }
+      ]
+    }
+  ]
+}
