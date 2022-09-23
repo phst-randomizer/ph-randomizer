@@ -23,4 +23,11 @@ setup(
         'vidua==0.4.4',
         'zed @ git+https://github.com/phst-randomizer/zed.git@b6b654a0a40b2f4dfb6d2b3692bd245ae0f6975b',  # noqa: E501
     ],
+    extras_require={
+        'test': [
+            'pytest==7.1.3',
+            'pytest-xdist==2.5.0',
+            'py-desmume==0.0.5',
+        ],
+    },
 )
