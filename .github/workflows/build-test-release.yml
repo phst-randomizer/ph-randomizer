@@ -1,6 +1,9 @@
 name: build-test-release
 on:
   push:
+    branches:
+      - main
+  pull_request:
 jobs:
   lint-type-check:
     name: Lint and type check code
