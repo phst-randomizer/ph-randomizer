@@ -8,5 +8,13 @@
   ],
   "pre-commit": {
     "enabled": true
-  }
+  },
+  "packageRules": [
+    {
+      "matchPaths": [
+        "+(.pre-commit-config.yaml)"
+      ],
+      "automerge": true
+    }
+  ]
 }
