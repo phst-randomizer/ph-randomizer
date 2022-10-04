@@ -32,9 +32,11 @@ ITEMS = {
     'courage_gem': 0x2F,
     'common_treasure': 0x30,  # TODO: randomize this at run-time
     'salvage_arm': 0x3D,
+    'treasure_map_SW_5': 0x50,
     'treasure_map_SW_6': 0x51,
     'treasure_map_SW_7': 0x52,
     'treasure_map_NW_1': 0x53,
+    'treasure_map_SE_4': 0x5E,
     'treasure_map_NE_4': 0x66,
     'sand_of_hours': 0x78,
     'random_treasure': 0x7D,

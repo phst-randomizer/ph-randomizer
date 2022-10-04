@@ -1,0 +1,106 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Bannan",
+  "rooms": [
+    {
+      "name": "OutsideLeft",
+      "chests": [
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "treasure_map_SW_5",
+          "zmb_actor_index": 4,
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
+        },
+        {
+          "name": "IslandChest",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "zmb_mapobject_index": 111
+        }
+      ],
+      "doors": [
+        {
+          "name": "WayfarerHouse",
+          "link": "WayfarerHouse.Main.Entrance"
+        },
+        {
+          "name": "BannanGrottoEntrance",
+          "link": "BannanGrotto.LeftSide.OutsideLeft"
+        }
+      ]
+    },
+    {
+      "name": "OutsideRight",
+      "chests": [
+        {
+          "name": "CannonMiniGameBombBag",
+          "type": "npc",
+          "contents": "todo",
+          "bmg_file_path": "todo",
+          "bmg_instruction_index": -1
+        },
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "treasure_map_SE_4",
+          "zmb_actor_index": 5,
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
+        },
+        {
+          "name": "LeftIslandChest",
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "zmb_mapobject_index": 86
+        },
+        {
+          "name": "RightIslandChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "zmb_mapobject_index": 87
+        }
+      ],
+      "doors": [
+        {
+          "name": "BannanGrottoEntrance",
+          "link": "BannanGrotto.RightSide.OutsideRight"
+        }
+      ]
+    },
+    {
+      "name": "BannanGrotto",
+      "chests": [],
+      "doors": [
+        {
+          "name": "OutsideLeft",
+          "link": "OutsideLeft.Main.BannanGrottoEntrance"
+        },
+        {
+          "name": "OutsideRight",
+          "link": "OutsideRight.Main.BannanGrottoEntrance"
+        }
+      ]
+    },
+    {
+      "name": "WayfarerHouse",
+      "chests": [
+        {
+          "name": "FishingRodFromOldMan",
+          "type": "npc",
+          "contents": "fishing_rod",
+          "bmg_instruction_index": 87,
+          "bmg_file_path": "English/Message/hidari.bmg"
+        }
+      ],
+      "doors": [
+        {
+          "name": "Entrance",
+          "link": "OutsideLeft.Main.WayfarerHouse"
+        }
+      ]
+    }
+  ]
+}
