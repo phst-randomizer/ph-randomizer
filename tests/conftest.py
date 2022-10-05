@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 import shutil
 
@@ -13,24 +12,6 @@ from shuffler.main import load_aux_data
 def aux_data_directory(tmp_path: Path):
     dest = tmp_path / 'auxiliary'
     shutil.copytree(Path(__file__).parent.parent / 'shuffler' / 'auxiliary', dest)
-
-    # Add a new chest to Mercay aux data containing bombs, so that a beatable seed can actually
-    # be generated.
-    # TODO: Remove this once there's enough aux data completed to generate a beatable seed.
-    with open(dest / 'SW Sea' / 'Mercay Island' / 'Mercay.json') as fd:
-        mercay_json = json.load(fd)
-    mercay_json['rooms'][0]['chests'].append(
-        {
-            'name': 'test',
-            'type': 'npc',
-            'contents': 'bombs',
-            'bmg_file_path': 'TODO',
-            'bmg_instruction_index': -1,
-        }
-    )
-    with open(dest / 'SW Sea' / 'Mercay Island' / 'Mercay.json', 'w') as fd:
-        fd.write(json.dumps(mercay_json))
-
     return str(dest)
 
 
