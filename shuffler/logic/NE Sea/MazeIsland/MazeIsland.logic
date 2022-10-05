@@ -2,17 +2,29 @@ area MazeIsland:
   room Main:
     node Port:
       door Boat
-    node Reward1:
-      chest Lvl1
-    node Reward2:
-      chest Lvl2
-    node Reward3:
-      chest Lvl3
+    node BeginnerReward:
+      chest BeginnerChest
+    node NormalReward:
+      chest NormalChest
+    node ExpertReward:
+      chest ExpertChest
+      chest GoldRupeeChest  # Spawns next to gossip stone after completing expert mode and talking to it
     node BombableWall:
       chest HiddenChest
+    node DigSpots:
+      # "Hidden" dig spots in the west, (over pool from the peg), northwest
+      # (near pegs used to slingshot Link), and southeast (near bottom corner)
+      chest BigGreenRupeeDigSpot1
+      chest BigGreenRupeeDigSpot2
+      chest BigGreenRupeeDigSpot3
+      chest SmallRedRupeeDigSpot1
+      chest SmallRedRupeeDigSpot2
+      chest SmallRedRupeeDigSpot3
 
-    Port -> Reward1: (item Bow & item Sword)
-    Reward1 -> Reward2: (item Bow & item Sword)
-    Reward2 -> Reward3: (item Bow & item Sword & item GrapplingHook & item Boomerang)
+    Port -> BeginnerReward: (item Bow & item Sword)
+    BeginnerReward -> NormalReward: (item Bow & item Sword)
+    NormalReward -> ExpertReward: (item Bow & item Sword & item GrapplingHook & item Boomerang)
 
     Port -> BombableWall: ((item Bomb | item Bombchu) & item Sword)
+
+    Port -> DigSpots: (item Bow & item Sword & item Shovel)
