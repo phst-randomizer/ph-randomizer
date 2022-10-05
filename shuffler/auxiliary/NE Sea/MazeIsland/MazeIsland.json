@@ -1,0 +1,94 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "MazeIsland",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "BeginnerChest",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_mapobject_index": 33
+        },
+        {
+          "name": "NormalChest",
+          "type": "chest",
+          "contents": "treasure_map_NE_4",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_mapobject_index": 34
+        },
+        {
+          "name": "ExpertChest",
+          "type": "chest",
+          "contents": "heart_container",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_mapobject_index": 35
+        },
+        {
+          "name": "GoldRupeeChest",
+          "type": "chest",
+          "contents": "big_gold_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_mapobject_index": 100
+        },
+        {
+          "name": "HiddenChest",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_mapobject_index": 105
+        },
+        {
+          "name": "BigGreenRupeeDigSpot1",
+          "type": "dig_spot",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_actor_index": 37
+        },
+        {
+          "name": "BigGreenRupeeDigSpot2",
+          "type": "dig_spot",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_actor_index": 40
+        },
+        {
+          "name": "BigGreenRupeeDigSpot3",
+          "type": "dig_spot",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_actor_index": 41
+        },
+        {
+          "name": "SmallRedRupeeDigSpot1",
+          "type": "dig_spot",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_actor_index": 38
+        },
+        {
+          "name": "SmallRedRupeeDigSpot2",
+          "type": "dig_spot",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_actor_index": 39
+        },
+        {
+          "name": "SmallRedRupeeDigSpot3",
+          "type": "dig_spot",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
+          "zmb_actor_index": 42
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": "Sea.NE.Maze.MazePort"
+        }
+      ]
+    }
+  ]
+}
