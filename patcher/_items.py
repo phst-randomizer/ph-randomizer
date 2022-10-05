@@ -37,5 +37,7 @@ ITEMS = {
     'treasure_map_NW_1': 0x53,
     'treasure_map_NE_4': 0x66,
     'sand_of_hours': 0x78,
+    'random_treasure': 0x7D,
+    'random_ship_part': 0x7E,
     'cyclone_slate': 0x7F,
 }
