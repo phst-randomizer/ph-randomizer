@@ -14,7 +14,7 @@ class Check(BaseModel):
     contents: str = Field(..., description='The item that this check contains')
 
     @validator('contents')
-    def check_if_item_is_valid(cls, v: str):
+    def check_if_item_is_valid(cls, v: str) -> str:
         """
         Ensure that this check's `contents` is set to a valid item.
 
@@ -30,6 +30,8 @@ class Check(BaseModel):
         # TODO: Use the following assertion instead once all aux data chest contents is complete.
         # assert v in ITEMS
         assert v in ITEMS or not v or v.lower() == 'todo'
+
+        return v
 
 
 class Chest(Check):
