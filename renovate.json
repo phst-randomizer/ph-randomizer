@@ -11,7 +11,8 @@
       "matchPaths": [
         "+(.pre-commit-config.yaml)"
       ],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "branch"
     }
   ]
 }
