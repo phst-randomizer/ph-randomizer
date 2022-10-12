@@ -29,7 +29,7 @@
       "chests": [
         {
           "name": "CycloneSlate",
-          "type": "npc",
+          "type": "event",
           "contents": "cyclone_slate",
           "bmg_file_path": "English/Message/kojima3.bmg",
           "bmg_instruction_index": 108

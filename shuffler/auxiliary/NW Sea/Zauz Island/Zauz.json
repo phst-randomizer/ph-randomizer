@@ -36,7 +36,7 @@
       "chests": [
         {
           "name": "ZauzPhantomSword",
-          "type": "npc",
+          "type": "event",
           "contents": "TODO",
           "bmg_file_path": "English/Message/sennin.bmg",
           "bmg_instruction_index": -1
