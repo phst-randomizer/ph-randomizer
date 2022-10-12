@@ -381,14 +381,14 @@
       "chests": [
         {
           "name": "NormalThing",
-          "type": "npc",
+          "type": "event",
           "contents": "",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": -1
         },
         {
           "name": "MysteriousThing",
-          "type": "npc",
+          "type": "event",
           "contents": "",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": -1

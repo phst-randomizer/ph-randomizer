@@ -61,14 +61,14 @@
       "chests": [
         {
           "name": "Cannon",
-          "type": "npc",
+          "type": "event",
           "contents": "cannon",
           "bmg_file_path": "English/Message/torii.bmg",
           "bmg_instruction_index": 35
         },
         {
           "name": "SalvageArm",
-          "type": "npc",
+          "type": "event",
           "contents": "salvage_arm",
           "bmg_file_path": "English/Message/torii.bmg",
           "bmg_instruction_index": 73

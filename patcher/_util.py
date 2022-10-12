@@ -16,7 +16,7 @@ from patcher.location_types import (
     MapObjectLocation,
     SalvageTreasureLocation,
 )
-from shuffler.aux_models import Area, Chest, DigSpot, IslandShop, Npc, SalvageTreasure, Tree
+from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, SalvageTreasure, Tree
 
 
 def is_frozen():
@@ -79,11 +79,11 @@ def patch_tree(tree: Tree):
     location.set_location(ITEMS[tree.contents])
 
 
-def patch_npc(npc: Npc):
+def patch_event(event: Event):
     location = EventLocation(
-        instruction_index=npc.bmg_instruction_index, file_path=npc.bmg_file_path
+        instruction_index=event.bmg_instruction_index, file_path=event.bmg_file_path
     )
-    location.set_location(ITEMS[npc.contents])
+    location.set_location(ITEMS[event.contents])
 
 
 def patch_island_shop(shop_item: IslandShop):
@@ -128,9 +128,9 @@ def patch_rom(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Nintend
                     case 'chest':
                         assert isinstance(chest, Chest)
                         patch_chest(chest)
-                    case 'npc':
-                        assert isinstance(chest, Npc)
-                        patch_npc(chest)
+                    case 'event':
+                        assert isinstance(chest, Event)
+                        patch_event(chest)
                     case 'island_shop':
                         assert isinstance(chest, IslandShop)
                         patch_island_shop(chest)

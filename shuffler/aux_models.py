@@ -44,8 +44,8 @@ class Tree(Chest):
     type = Field('tree', const=True)
 
 
-class Npc(Check):
-    type = Field('npc', const=True)
+class Event(Check):
+    type = Field('event', const=True)
     bmg_file_path: str = Field(..., description='File path to the bmg the instruction is on')
     bmg_instruction_index: int = Field(
         ..., description='Index of the instruction in the defined bmg file'
@@ -88,7 +88,7 @@ class Door(BaseModel):
 class Room(BaseModel):
     name: str = Field(..., description='The name of the room')
     chests: list[
-        Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
+        Chest | Event | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
     ] = Field(
         [],
         description='Item checks that can be made in this room',

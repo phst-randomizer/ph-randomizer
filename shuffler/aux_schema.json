@@ -61,8 +61,8 @@
         "zmb_mapobject_index"
       ]
     },
-    "Npc": {
-      "title": "Npc",
+    "Event": {
+      "title": "Event",
       "type": "object",
       "properties": {
         "name": {
@@ -87,8 +87,8 @@
         },
         "type": {
           "title": "Type",
-          "default": "npc",
-          "const": "npc",
+          "default": "event",
+          "const": "event",
           "type": "string"
         }
       },
@@ -344,7 +344,7 @@
                 "$ref": "#/definitions/Chest"
               },
               {
-                "$ref": "#/definitions/Npc"
+                "$ref": "#/definitions/Event"
               },
               {
                 "$ref": "#/definitions/IslandShop"
