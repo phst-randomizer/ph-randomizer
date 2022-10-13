@@ -395,15 +395,15 @@ jobs:
 
       - name: Replace commit hash with version string
         run: |
-          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_ubuntu-latest ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_macos-latest ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_windows-latest ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_ubuntu ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_macos ph-randomizer_${{ steps.version-string.outputs.version }}_macos
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_windows ph-randomizer_${{ steps.version-string.outputs.version }}_windows
 
       - name: Zip up executables
         run: |
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_linux.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_linux.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows
 
       - name: Create a GitHub Release
         uses: softprops/action-gh-release@v1
