@@ -32,11 +32,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu, macos, windows]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -329,11 +326,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu, macos, windows]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -405,7 +399,7 @@ jobs:
 
       - name: Zip up executables
         run: |
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_linux.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
           zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
           zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
 
@@ -413,6 +407,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_linux.zip
             ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip
             ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip
