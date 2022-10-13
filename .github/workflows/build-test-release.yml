@@ -4,6 +4,8 @@ on:
     branches:
       - main
       - renovate/**
+    tags:
+      - "*"
   pull_request:
 jobs:
   lint-type-check:
