@@ -1,9 +1,13 @@
 area UnchartedIsland:
   room Main:
     node Main:
-      chest DigSpot # found in front of "eye" statue
       door Cave
       door Boat
+
+    node DigSpot:
+      chest DigSpot # found in front of "eye" statue
+
+    Main <-> DigSpot: item Shovel
 
   room Cave:
     node Main:
