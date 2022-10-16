@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import json
 from os import path
 from pathlib import Path
@@ -33,10 +34,12 @@ def logic_to_aux(logic_directory: str, output: str | None):
             path_to_schema += '../'
         path_to_schema += 'aux_schema.json'
 
-        logic: dict[str, Any] = {
-            '$schema': str(path_to_schema),
-            'name': nodes[0].area,
-        }
+        logic: OrderedDict[str, Any] = OrderedDict(
+            {
+                '$schema': str(path_to_schema),
+                'name': nodes[0].area,
+            }
+        )
 
         for node in nodes:
             room = rooms.get(node.room, {})
@@ -57,6 +60,10 @@ def logic_to_aux(logic_directory: str, output: str | None):
             current_rooms = logic.get('rooms', [])
 
             room_content['name'] = room_name
+
+            room_content = OrderedDict(
+                sorted(room_content.items(), key=lambda i: 0 if i[0] == 'name' else ord(i[0][0]))
+            )
 
             current_rooms.append(room_content)
 
