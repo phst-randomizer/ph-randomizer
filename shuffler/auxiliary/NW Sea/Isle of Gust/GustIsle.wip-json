@@ -3,6 +3,7 @@
   "name": "GustIsle",
   "rooms": [
     {
+      "name": "BeforeCave",
       "chests": [
         {
           "name": "DigSpot1",
@@ -33,10 +34,10 @@
           "name": "Cave",
           "link": ""
         }
-      ],
-      "name": "BeforeCave"
+      ]
     },
     {
+      "name": "Grotto",
       "chests": [
         {
           "name": "GrottoChest",
@@ -49,10 +50,10 @@
           "name": "BeforeCave",
           "link": ""
         }
-      ],
-      "name": "Grotto"
+      ]
     },
     {
+      "name": "Cave",
       "chests": [
         {
           "name": "FreeChest",
@@ -74,10 +75,10 @@
           "name": "AfterCave",
           "link": ""
         }
-      ],
-      "name": "Cave"
+      ]
     },
     {
+      "name": "AfterCave",
       "chests": [
         {
           "name": "DigSpot1",
@@ -103,10 +104,10 @@
           "name": "WindmillArea",
           "link": ""
         }
-      ],
-      "name": "AfterCave"
+      ]
     },
     {
+      "name": "WindmillArea",
       "chests": [
         {
           "name": "DigSpot1",
@@ -124,8 +125,7 @@
           "name": "AfterCave",
           "link": ""
         }
-      ],
-      "name": "WindmillArea"
+      ]
     }
   ]
 }

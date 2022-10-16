@@ -3,6 +3,7 @@
   "name": "GoronTemple",
   "rooms": [
     {
+      "name": "F1",
       "chests": [
         {
           "name": "AfterSwitch",
@@ -32,10 +33,10 @@
           "name": "ToB1Shortcut",
           "link": ""
         }
-      ],
-      "name": "F1"
+      ]
     },
     {
+      "name": "BombableF1",
       "chests": [],
       "doors": [
         {
@@ -50,10 +51,10 @@
           "name": "ToB1",
           "link": ""
         }
-      ],
-      "name": "BombableF1"
+      ]
     },
     {
+      "name": "B1",
       "chests": [
         {
           "name": "BigChest",
@@ -79,10 +80,10 @@
           "name": "ToB2",
           "link": ""
         }
-      ],
-      "name": "B1"
+      ]
     },
     {
+      "name": "B2",
       "chests": [
         {
           "name": "EyeSlugSlayer",
@@ -108,10 +109,10 @@
           "name": "ToB3BossKey",
           "link": ""
         }
-      ],
-      "name": "B2"
+      ]
     },
     {
+      "name": "B3",
       "chests": [
         {
           "name": "MiniblinSlayer",
@@ -128,10 +129,10 @@
           "name": "ToB4",
           "link": ""
         }
-      ],
-      "name": "B3"
+      ]
     },
     {
+      "name": "B4",
       "chests": [],
       "doors": [
         {
@@ -142,10 +143,10 @@
           "name": "ToBoss",
           "link": ""
         }
-      ],
-      "name": "B4"
+      ]
     },
     {
+      "name": "CrimsonineRoom",
       "chests": [
         {
           "name": "Crimsonine",
@@ -158,8 +159,7 @@
           "name": "ToBoss",
           "link": ""
         }
-      ],
-      "name": "CrimsonineRoom"
+      ]
     }
   ]
 }

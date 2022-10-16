@@ -3,6 +3,7 @@
   "name": "Boat",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "TradingSequence",
@@ -15,8 +16,7 @@
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }

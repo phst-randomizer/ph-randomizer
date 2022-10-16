@@ -3,6 +3,7 @@
   "name": "GoronIsland",
   "rooms": [
     {
+      "name": "LowerLeft",
       "chests": [],
       "doors": [
         {
@@ -37,20 +38,20 @@
           "name": "ToEastLedge",
           "link": ""
         }
-      ],
-      "name": "LowerLeft"
+      ]
     },
     {
+      "name": "NoRockGoronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "NoRockGoronHouse"
+      ]
     },
     {
+      "name": "GoronShop",
       "chests": [
         {
           "name": "BombchuBagUpgrade",
@@ -68,30 +69,30 @@
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "GoronShop"
+      ]
     },
     {
+      "name": "OneRockSmallGoronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "OneRockSmallGoronHouse"
+      ]
     },
     {
+      "name": "ThreeRocksGoronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "ThreeRocksGoronHouse"
+      ]
     },
     {
+      "name": "LowerRight",
       "chests": [],
       "doors": [
         {
@@ -118,40 +119,40 @@
           "name": "ToNorth",
           "link": ""
         }
-      ],
-      "name": "LowerRight"
+      ]
     },
     {
+      "name": "OneRockBigGoronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "OneRockBigGoronHouse"
+      ]
     },
     {
+      "name": "TwoRocksGoronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "TwoRocksGoronHouse"
+      ]
     },
     {
+      "name": "GoronChiefHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "GoronChiefHouse"
+      ]
     },
     {
+      "name": "UpperRight",
       "chests": [
         {
           "name": "BombchuChest",
@@ -180,10 +181,10 @@
           "name": "ToWestLower",
           "link": ""
         }
-      ],
-      "name": "UpperRight"
+      ]
     },
     {
+      "name": "UpperLeft",
       "chests": [
         {
           "name": "MazeChest",
@@ -216,8 +217,7 @@
           "name": "ToSouth",
           "link": ""
         }
-      ],
-      "name": "UpperLeft"
+      ]
     }
   ]
 }

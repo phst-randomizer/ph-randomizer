@@ -3,6 +3,7 @@
   "name": "SpiritIsle",
   "rooms": [
     {
+      "name": "Inside",
       "chests": [
         {
           "name": "Power1",
@@ -40,10 +41,10 @@
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "Inside"
+      ]
     },
     {
+      "name": "Outside",
       "chests": [
         {
           "name": "LeftSide",
@@ -65,8 +66,7 @@
           "name": "Ship",
           "link": ""
         }
-      ],
-      "name": "Outside"
+      ]
     }
   ]
 }

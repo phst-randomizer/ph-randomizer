@@ -3,6 +3,7 @@
   "name": "FrostIsle",
   "rooms": [
     {
+      "name": "Port",
       "chests": [
         {
           "name": "LedgeChest",
@@ -40,40 +41,40 @@
           "name": "ToCave",
           "link": ""
         }
-      ],
-      "name": "Port"
+      ]
     },
     {
+      "name": "AnoukiChiefHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "AnoukiChiefHouse"
+      ]
     },
     {
+      "name": "AnoukiRedCauldronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "AnoukiRedCauldronHouse"
+      ]
     },
     {
+      "name": "AnoukiBrownCauldronHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "AnoukiBrownCauldronHouse"
+      ]
     },
     {
+      "name": "AnoukiVillage",
       "chests": [
         {
           "name": "BigGoldRupee",
@@ -130,70 +131,70 @@
           "name": "FofoHouse",
           "link": ""
         }
-      ],
-      "name": "AnoukiVillage"
+      ]
     },
     {
+      "name": "GumoHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "GumoHouse"
+      ]
     },
     {
+      "name": "ArooHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "ArooHouse"
+      ]
     },
     {
+      "name": "MazoHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "MazoHouse"
+      ]
     },
     {
+      "name": "DoboHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "DoboHouse"
+      ]
     },
     {
+      "name": "KumuHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "KumuHouse"
+      ]
     },
     {
+      "name": "FofoHouse",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "FofoHouse"
+      ]
     },
     {
+      "name": "IceCave",
       "chests": [],
       "doors": [
         {
@@ -204,10 +205,10 @@
           "name": "Right",
           "link": ""
         }
-      ],
-      "name": "IceCave"
+      ]
     },
     {
+      "name": "GreatIceField",
       "chests": [
         {
           "name": "DropDown",
@@ -247,10 +248,10 @@
           "name": "ToNorth",
           "link": ""
         }
-      ],
-      "name": "GreatIceField"
+      ]
     },
     {
+      "name": "DungeonEntrance",
       "chests": [],
       "doors": [
         {
@@ -269,8 +270,7 @@
           "name": "ToDungeon",
           "link": ""
         }
-      ],
-      "name": "DungeonEntrance"
+      ]
     }
   ]
 }

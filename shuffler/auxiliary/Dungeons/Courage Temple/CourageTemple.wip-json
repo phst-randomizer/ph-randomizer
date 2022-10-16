@@ -3,6 +3,7 @@
   "name": "CourageTemple",
   "rooms": [
     {
+      "name": "F1",
       "chests": [
         {
           "name": "AfterSpikeTraps",
@@ -70,10 +71,10 @@
           "name": "ToF2EmptyRoom",
           "link": ""
         }
-      ],
-      "name": "F1"
+      ]
     },
     {
+      "name": "B1",
       "chests": [
         {
           "name": "IslandChest",
@@ -116,10 +117,10 @@
           "name": "F1TopRight",
           "link": ""
         }
-      ],
-      "name": "B1"
+      ]
     },
     {
+      "name": "F2",
       "chests": [
         {
           "name": "AfterUDRL",
@@ -159,10 +160,10 @@
           "name": "ToF3",
           "link": ""
         }
-      ],
-      "name": "F2"
+      ]
     },
     {
+      "name": "F3",
       "chests": [
         {
           "name": "Hidden",
@@ -183,8 +184,7 @@
           "name": "ToBoss",
           "link": ""
         }
-      ],
-      "name": "F3"
+      ]
     }
   ]
 }

@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B3",
       "chests": [
         {
           "name": "TopLeft",
@@ -44,8 +45,7 @@
           "name": "ToChartRoom",
           "link": ""
         }
-      ],
-      "name": "B3"
+      ]
     }
   ]
 }

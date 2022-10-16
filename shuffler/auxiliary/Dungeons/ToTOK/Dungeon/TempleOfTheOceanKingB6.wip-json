@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B6",
       "chests": [
         {
           "name": "EyeChest",
@@ -28,8 +29,7 @@
           "name": "Triforce",
           "link": ""
         }
-      ],
-      "name": "B6"
+      ]
     }
   ]
 }

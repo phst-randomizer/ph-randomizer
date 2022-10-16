@@ -3,6 +3,7 @@
   "name": "FireTemple",
   "rooms": [
     {
+      "name": "F1",
       "chests": [
         {
           "name": "KeesesSmallKey",
@@ -32,10 +33,10 @@
           "name": "ToF2BottomRight",
           "link": ""
         }
-      ],
-      "name": "F1"
+      ]
     },
     {
+      "name": "F2",
       "chests": [
         {
           "name": "BoomerangChest",
@@ -66,10 +67,10 @@
           "name": "ToF3",
           "link": ""
         }
-      ],
-      "name": "F2"
+      ]
     },
     {
+      "name": "F3",
       "chests": [
         {
           "name": "SwitchesSmallKey",
@@ -91,10 +92,10 @@
           "name": "ToF4",
           "link": ""
         }
-      ],
-      "name": "F3"
+      ]
     },
     {
+      "name": "F4",
       "chests": [],
       "doors": [
         {
@@ -105,8 +106,7 @@
           "name": "ToBoss",
           "link": ""
         }
-      ],
-      "name": "F4"
+      ]
     }
   ]
 }

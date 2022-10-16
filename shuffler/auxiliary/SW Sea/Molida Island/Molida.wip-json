@@ -3,6 +3,7 @@
   "name": "Molida",
   "rooms": [
     {
+      "name": "Town",
       "chests": [],
       "doors": [
         {
@@ -25,10 +26,10 @@
           "name": "ToUpperIsland",
           "link": ""
         }
-      ],
-      "name": "Town"
+      ]
     },
     {
+      "name": "UpperIsland",
       "chests": [
         {
           "name": "Cliff",
@@ -53,10 +54,10 @@
           "name": "FireTemple",
           "link": ""
         }
-      ],
-      "name": "UpperIsland"
+      ]
     },
     {
+      "name": "LeftmostHouse",
       "chests": [
         {
           "name": "TreasureChest",
@@ -69,20 +70,20 @@
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "LeftmostHouse"
+      ]
     },
     {
+      "name": "MiddleHouse",
       "chests": [],
       "doors": [
         {
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "MiddleHouse"
+      ]
     },
     {
+      "name": "MolidaShop",
       "chests": [
         {
           "name": "WoodenShield",
@@ -105,10 +106,10 @@
           "name": "Outside",
           "link": ""
         }
-      ],
-      "name": "MolidaShop"
+      ]
     },
     {
+      "name": "CaveSystem",
       "chests": [
         {
           "name": "LedgeChest",
@@ -151,10 +152,10 @@
           "name": "ExitUpLeft",
           "link": ""
         }
-      ],
-      "name": "CaveSystem"
+      ]
     },
     {
+      "name": "BackOfCaveSystem",
       "chests": [
         {
           "name": "ShovelChest",
@@ -175,8 +176,7 @@
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "BackOfCaveSystem"
+      ]
     }
   ]
 }

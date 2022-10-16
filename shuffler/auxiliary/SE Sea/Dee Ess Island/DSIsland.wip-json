@@ -3,6 +3,7 @@
   "name": "DeeEssIsland",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "BlowInTheMicrophone",
@@ -30,8 +31,7 @@
           "name": "Boat",
           "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }

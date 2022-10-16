@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B1",
       "chests": [
         {
           "name": "Key",
@@ -29,8 +30,7 @@
           "name": "ToB2",
           "link": ""
         }
-      ],
-      "name": "B1"
+      ]
     }
   ]
 }

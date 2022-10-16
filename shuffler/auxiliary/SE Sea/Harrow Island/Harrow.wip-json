@@ -3,6 +3,7 @@
   "name": "HarrowIsland",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "TreasureMap",
@@ -15,8 +16,7 @@
           "name": "Boat",
           "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }

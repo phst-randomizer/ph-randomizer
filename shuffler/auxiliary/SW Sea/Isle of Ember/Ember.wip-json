@@ -3,6 +3,7 @@
   "name": "Ember",
   "rooms": [
     {
+      "name": "EmberLeft",
       "chests": [
         {
           "name": "Hook",
@@ -59,10 +60,10 @@
           "name": "RightHighestTop",
           "link": ""
         }
-      ],
-      "name": "EmberLeft"
+      ]
     },
     {
+      "name": "EmberRight",
       "chests": [],
       "doors": [
         {
@@ -101,10 +102,10 @@
           "name": "LeftHighestBottom",
           "link": ""
         }
-      ],
-      "name": "EmberRight"
+      ]
     },
     {
+      "name": "AstridHouse",
       "chests": [
         {
           "name": "AstridPowerGem",
@@ -121,23 +122,22 @@
           "name": "ToBasement",
           "link": ""
         }
-      ],
-      "name": "AstridHouse"
+      ]
     },
     {
+      "name": "AstridBasement",
       "chests": [],
-      "doors": [],
-      "name": "AstridBasement"
+      "doors": []
     },
     {
+      "name": "KayoHouse",
       "chests": [],
-      "doors": [],
-      "name": "KayoHouse"
+      "doors": []
     },
     {
+      "name": "EmberEmptyHouse",
       "chests": [],
-      "doors": [],
-      "name": "EmberEmptyHouse"
+      "doors": []
     }
   ]
 }
