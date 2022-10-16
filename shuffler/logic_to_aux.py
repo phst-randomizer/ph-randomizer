@@ -72,6 +72,12 @@ def logic_to_aux(logic_directory: str, output: str | None):
             output_path = (Path(output) / file_directory).with_suffix('.wip-json')
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
+            existing_filename = output_path.with_suffix('.json')
+
+            if existing_filename.exists():
+                print(f'Skipping {output_path.name}, {existing_filename.name} already exists...')
+                continue
+
             with open(output_path, 'w') as fd:
                 fd.write(json.dumps(logic, indent=2))
                 fd.write('\n')
