@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B4",
       "chests": [
         {
           "name": "FreestandingKey",
@@ -33,8 +34,7 @@
           "name": "ToB5",
           "link": ""
         }
-      ],
-      "name": "B4"
+      ]
     }
   ]
 }

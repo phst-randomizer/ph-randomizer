@@ -3,6 +3,7 @@
   "name": "GhostShip",
   "rooms": [
     {
+      "name": "F1",
       "chests": [],
       "doors": [
         {
@@ -13,10 +14,10 @@
           "name": "ToB1",
           "link": ""
         }
-      ],
-      "name": "F1"
+      ]
     },
     {
+      "name": "B1",
       "chests": [
         {
           "name": "AfterJump",
@@ -24,8 +25,7 @@
           "contents": ""
         }
       ],
-      "doors": [],
-      "name": "B1"
+      "doors": []
     }
   ]
 }

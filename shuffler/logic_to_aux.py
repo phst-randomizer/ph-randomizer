@@ -1,11 +1,14 @@
+from collections import OrderedDict
 import json
-from os import path
+from os.path import relpath
 from pathlib import Path
 import sys
 from typing import Any
 
 from _parser import clear_nodes, parse_area
 import click
+
+AUX_DATA_SCHEMA_FILE = (Path(__file__).parent / 'aux_schema.json').resolve()
 
 
 def logic_to_aux(logic_directory: str, output: str | None):
@@ -26,17 +29,14 @@ def logic_to_aux(logic_directory: str, output: str | None):
         clear_nodes()
         nodes = parse_area(lines)
 
-        path_to_schema = '../'
-        directories_in_between = str(file_directory.as_posix()).count('/')
+        path_to_schema = Path(relpath(AUX_DATA_SCHEMA_FILE, file.parent.resolve())).as_posix()
 
-        for _ in range(directories_in_between):
-            path_to_schema += '../'
-        path_to_schema += 'aux_schema.json'
-
-        logic: dict[str, Any] = {
-            '$schema': str(path_to_schema),
-            'name': nodes[0].area,
-        }
+        logic: OrderedDict[str, Any] = OrderedDict(
+            {
+                '$schema': str(path_to_schema),
+                'name': nodes[0].area,
+            }
+        )
 
         for node in nodes:
             room = rooms.get(node.room, {})
@@ -58,6 +58,10 @@ def logic_to_aux(logic_directory: str, output: str | None):
 
             room_content['name'] = room_name
 
+            room_content = OrderedDict(
+                sorted(room_content.items(), key=lambda i: 0 if i[0] == 'name' else ord(i[0][0]))
+            )
+
             current_rooms.append(room_content)
 
             logic['rooms'] = current_rooms
@@ -65,8 +69,14 @@ def logic_to_aux(logic_directory: str, output: str | None):
         if output == '--':
             print(json.dumps(logic, indent=2), file=sys.stdout)
         elif output is not None:
-            output_path = Path(output).joinpath(str(file_directory).split('.')[0] + '.wip-json')
-            Path(path.dirname(output_path)).mkdir(parents=True, exist_ok=True)
+            output_path = (Path(output) / file_directory).with_suffix('.wip-json')
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            existing_filename = output_path.with_suffix('.json')
+
+            if existing_filename.exists():
+                print(f'Skipping {output_path.name}, {existing_filename.name} already exists...')
+                continue
 
             with open(output_path, 'w') as fd:
                 fd.write(json.dumps(logic, indent=2))

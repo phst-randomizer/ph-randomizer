@@ -3,6 +3,7 @@
   "name": "BlaazBossRoom",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "SpiritOfPower",
@@ -20,8 +21,7 @@
           "name": "ToDungeon",
           "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }

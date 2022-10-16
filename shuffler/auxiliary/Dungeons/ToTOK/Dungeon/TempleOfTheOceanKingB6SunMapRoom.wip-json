@@ -3,9 +3,9 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B3Chart",
       "chests": [],
-      "doors": [],
-      "name": "B3Chart"
+      "doors": []
     }
   ]
 }

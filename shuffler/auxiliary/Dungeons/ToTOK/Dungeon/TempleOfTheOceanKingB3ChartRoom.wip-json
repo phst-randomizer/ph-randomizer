@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B3Chart",
       "chests": [
         {
           "name": "NWChartChest",
@@ -23,8 +24,7 @@
           "name": "ToB4",
           "link": ""
         }
-      ],
-      "name": "B3Chart"
+      ]
     }
   ]
 }

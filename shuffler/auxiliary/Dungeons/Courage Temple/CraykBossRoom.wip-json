@@ -3,6 +3,7 @@
   "name": "CraykBossRoom",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "Sand",
@@ -25,8 +26,7 @@
           "name": "ToDungeon",
           "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }

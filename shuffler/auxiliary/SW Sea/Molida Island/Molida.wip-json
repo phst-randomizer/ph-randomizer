@@ -3,6 +3,7 @@
   "name": "Molida",
   "rooms": [
     {
+      "name": "Town",
       "chests": [],
       "doors": [
         {
@@ -25,10 +26,10 @@
           "name": "ToUpperIsland",
           "link": ""
         }
-      ],
-      "name": "Town"
+      ]
     },
     {
+      "name": "UpperIsland",
       "chests": [
         {
           "name": "Cliff",
@@ -48,9 +49,134 @@
         {
           "name": "ToCaveSystemLeft",
           "link": ""
+        },
+        {
+          "name": "FireTemple",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "LeftmostHouse",
+      "chests": [
+        {
+          "name": "TreasureChest",
+          "type": "",
+          "contents": ""
         }
       ],
-      "name": "UpperIsland"
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "MiddleHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "MolidaShop",
+      "chests": [
+        {
+          "name": "WoodenShield",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "QuiverUpgrade",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "RandomTreasure",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "CaveSystem",
+      "chests": [
+        {
+          "name": "LedgeChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "NearFogMap",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "ChestAfterHole",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ExitDown",
+          "link": ""
+        },
+        {
+          "name": "GrottoRight",
+          "link": ""
+        },
+        {
+          "name": "ExitUpRight",
+          "link": ""
+        },
+        {
+          "name": "BombableWall",
+          "link": ""
+        },
+        {
+          "name": "GrottoLeft",
+          "link": ""
+        },
+        {
+          "name": "ExitUpLeft",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "BackOfCaveSystem",
+      "chests": [
+        {
+          "name": "ShovelChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Left",
+          "link": ""
+        },
+        {
+          "name": "Right",
+          "link": ""
+        },
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
     }
   ]
 }

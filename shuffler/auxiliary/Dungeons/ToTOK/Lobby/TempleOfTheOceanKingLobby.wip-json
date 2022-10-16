@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKingLobby",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "Hourglass",
@@ -19,8 +20,7 @@
           "name": "Entrance",
           "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }
