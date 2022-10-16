@@ -19,9 +19,94 @@
         {
           "name": "Outside",
           "link": ""
+        },
+        {
+          "name": "F2Middle",
+          "link": ""
+        },
+        {
+          "name": "ToF2TopLeft",
+          "link": ""
+        },
+        {
+          "name": "ToF2BottomRight",
+          "link": ""
         }
       ],
       "name": "F1"
+    },
+    {
+      "chests": [
+        {
+          "name": "BoomerangChest",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "AfterKeeses",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "RatKey",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF1Middle",
+          "link": ""
+        },
+        {
+          "name": "ToF1TopLeft",
+          "link": ""
+        },
+        {
+          "name": "ToF3",
+          "link": ""
+        }
+      ],
+      "name": "F2"
+    },
+    {
+      "chests": [
+        {
+          "name": "SwitchesSmallKey",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BossKeyChest",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF2",
+          "link": ""
+        },
+        {
+          "name": "ToF4",
+          "link": ""
+        }
+      ],
+      "name": "F3"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToF3",
+          "link": ""
+        },
+        {
+          "name": "ToBoss",
+          "link": ""
+        }
+      ],
+      "name": "F4"
     }
   ]
 }

@@ -112,6 +112,11 @@
           "name": "DigSpot1",
           "type": "",
           "contents": ""
+        },
+        {
+          "name": "WindmillChest",
+          "type": "",
+          "contents": ""
         }
       ],
       "doors": [
