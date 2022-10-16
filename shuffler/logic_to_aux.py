@@ -1,12 +1,14 @@
 from collections import OrderedDict
 import json
-from os import path
+from os.path import relpath
 from pathlib import Path
 import sys
 from typing import Any
 
 from _parser import clear_nodes, parse_area
 import click
+
+AUX_DATA_SCHEMA_FILE = (Path(__file__).parent / 'aux_schema.json').resolve()
 
 
 def logic_to_aux(logic_directory: str, output: str | None):
@@ -27,12 +29,7 @@ def logic_to_aux(logic_directory: str, output: str | None):
         clear_nodes()
         nodes = parse_area(lines)
 
-        path_to_schema = '../'
-        directories_in_between = str(file_directory.as_posix()).count('/')
-
-        for _ in range(directories_in_between):
-            path_to_schema += '../'
-        path_to_schema += 'aux_schema.json'
+        path_to_schema = Path(relpath(AUX_DATA_SCHEMA_FILE, file.parent.resolve())).as_posix()
 
         logic: OrderedDict[str, Any] = OrderedDict(
             {
@@ -72,8 +69,8 @@ def logic_to_aux(logic_directory: str, output: str | None):
         if output == '--':
             print(json.dumps(logic, indent=2), file=sys.stdout)
         elif output is not None:
-            output_path = Path(output).joinpath(str(file_directory).split('.')[0] + '.wip-json')
-            Path(path.dirname(output_path)).mkdir(parents=True, exist_ok=True)
+            output_path = (Path(output) / file_directory).with_suffix('.wip-json')
+            output_path.parent.mkdir(parents=True, exist_ok=True)
 
             with open(output_path, 'w') as fd:
                 fd.write(json.dumps(logic, indent=2))
