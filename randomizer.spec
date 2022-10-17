@@ -12,7 +12,7 @@ a = Analysis(
         # Bundle logic, aux data, and base patch files inside executable
         ('shuffler/auxiliary/', 'auxiliary'),
         ('shuffler/logic/', 'logic'),
-        ('base/out/patch.bps', '.'),
+        ('base/out/*.bps', '.'),
     ],
     hiddenimports=[],
     hookspath=[],

@@ -167,7 +167,15 @@ jobs:
 
 
   generate-base-patch:
-    name: Run patching toolchain and create base patch
+    name: Build base patch
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rom_variant: Phantom Hourglass (US)
+            google_drive_url_secret: PH_US_GOOGLE_DRIVE_ID
+          - rom_variant: Phantom Hourglass (US, D-Pad Patch)
+            google_drive_url_secret: PH_US_DPAD_GOOGLE_DRIVE_ID
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -184,7 +192,7 @@ jobs:
       - name: Fetch PH rom
         run: |
           pip install gdown
-          gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          gdown ${{ secrets[matrix.google_drive_url_secret] }}
         working-directory: base
 
       - name: Get filename of rom
@@ -192,6 +200,11 @@ jobs:
         shell: bash
         run: |
           echo "::set-output name=filename::$(ls *.nds)"
+        working-directory: base
+
+      - name: Get checksum of ROM
+        id: rom-checksum
+        run: echo "::set-output name=checksum::$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')"
         working-directory: base
 
       - name: Get current commit hash
@@ -215,10 +228,14 @@ jobs:
           outputs: |
             base/out
 
-      - uses: actions/upload-artifact@v3
+      - name: Rename base patch file to checksum of source ROM
+        run: mv base/out/patch.bps ${{ steps.rom-checksum.outputs.checksum }}.bps
+
+      - name: Save base patch as an artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: patch.bps
-          path: base/out/patch.bps
+          name: ${{ steps.rom-checksum.outputs.checksum }}.bps
+          path: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
       - name: Cleanup
         if: always()
@@ -243,6 +260,14 @@ jobs:
 
   test-desmume:
     name: Run base patch tests
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rom_variant: Phantom Hourglass (US)
+            google_drive_url_secret: PH_US_GOOGLE_DRIVE_ID
+          - rom_variant: Phantom Hourglass (US, D-Pad Patch)
+            google_drive_url_secret: PH_US_DPAD_GOOGLE_DRIVE_ID
     needs:
       - generate-base-patch
       - check-modified-files
@@ -259,9 +284,33 @@ jobs:
           # Also retrieve previous commit so we can check if there are relevant changes
           fetch-depth: 2
 
-      - uses: actions/download-artifact@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          name: patch.bps
+          python-version-file: '.python-version'
+          check-latest: true
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Fetch PH rom
+        run: |
+          pip install gdown
+          gdown ${{ secrets[matrix.google_drive_url_secret] }}
+
+      - name: Get filename of rom
+        id: rom-filename
+        shell: bash
+        run: echo "::set-output name=filename::$(ls *.nds)"
+
+      - name: Get checksum of ROM
+        id: rom-checksum
+        run: echo "::set-output name=checksum::$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')"
+
+      - name: Download base patch from previous workflow
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
@@ -292,23 +341,9 @@ jobs:
           mingw32-make CFLAGS=-O2
         working-directory: Flips
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-
-      - name: Fetch PH rom
-        run: |
-          pip install gdown
-          gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
-
       - name: Patch the rom
         run: |
-          ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
+          ./Flips/flips.exe --apply ${{ steps.rom-checksum.outputs.checksum }}.bps $(ls *.nds) out.nds
 
       - name: Install tox
         run: pip install tox
@@ -348,11 +383,13 @@ jobs:
       - name: Install pyinstaller
         run: pip install -U pyinstaller
 
-      - name: Download base patch
+      - name: Download base patches
         uses: actions/download-artifact@v3
-        with:
-          name: patch.bps
-          path: base/out/patch.bps
+
+      - name: Move all patch files into the same directory so pyinstaller can find them
+        run: |
+          mkdir -p base/out
+          mv ./**/*.bps base/out
 
       - name: Build randomizer executable
         run: pyinstaller randomizer.spec

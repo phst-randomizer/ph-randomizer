@@ -30,7 +30,8 @@ from shuffler.main import load_aux_data
     help='Path to save randomized ROM to.',
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the randomizer.')
-def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
+@click.option('--dpad-patch', is_flag=True, default=False)
+def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None, dpad_patch: bool):
     if is_frozen():
         aux_data_directory = str(Path(sys._MEIPASS) / 'auxiliary')  # type: ignore
         logic_directory = str(Path(sys._MEIPASS) / 'logic')  # type: ignore
@@ -48,7 +49,7 @@ def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
     shuffled_aux_data = shuffle(seed, nodes, edges, aux_data)
 
     # Run the patcher
-    patch(shuffled_aux_data, load_rom(Path(input_rom_path)), output_rom_path)
+    patch(shuffled_aux_data, load_rom(Path(input_rom_path), dpad_patch), output_rom_path)
 
 
 if __name__ == '__main__':

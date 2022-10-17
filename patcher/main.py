@@ -39,8 +39,14 @@ def patch(
 @click.option(
     '-o', '--output-rom-path', default=None, type=str, help='Path to save patched ROM to.'
 )
-def patcher_cli(aux_data_directory: str, input_rom_path: str, output_rom_path: str | None):
-    input_rom = load_rom(Path(input_rom_path))
+@click.option('--dpad-patch', is_flag=True, default=False)
+def patcher_cli(
+    aux_data_directory: str,
+    input_rom_path: str,
+    output_rom_path: str | None,
+    dpad_patch: bool,
+):
+    input_rom = load_rom(Path(input_rom_path), dpad_patch)
     new_aux_data = load_aux_data(Path(aux_data_directory))
 
     return patch(new_aux_data, input_rom, output_rom_path)

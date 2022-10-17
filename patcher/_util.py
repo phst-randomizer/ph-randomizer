@@ -18,6 +18,11 @@ from patcher.location_types import (
 )
 from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, SalvageTreasure, Tree
 
+CHECKSUMS: dict[str, str] = {
+    'US': '2dd43288c1b7b428cbd09d9a74464b9a46fe0239eaed82849369f261678011f7',
+    'US_DPAD': '7f0caa9d4a071584057ef5c3609d0ed2dfa760fbadd94e1aa431fbdd6dd741fb',
+}
+
 
 def is_frozen():
     """
@@ -29,7 +34,7 @@ def is_frozen():
     return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
 
-def load_rom(file: Path):
+def load_rom(file: Path, dpad_patch: bool):
     """
     Load a ROM into memory, patch it, and return it as an ndspy NintendoDSRom object.
 
@@ -37,10 +42,14 @@ def load_rom(file: Path):
     memory, and the BPS patch is applied to that in-memory copy.
     """
     base_patch_path = Path(
-        Path(sys._MEIPASS) / 'patch.bps'  # type: ignore
+        Path(sys._MEIPASS) / f'{CHECKSUMS[f"US_DPAD" if dpad_patch else "US"]}.bps'  # type: ignore
         if is_frozen()
         else os.environ.get(
-            'BASE_PATCH_PATH', Path(__file__).parent.parent / 'base' / 'out' / 'patch.bps'
+            'BASE_PATCH_PATH',
+            Path(__file__).parent.parent
+            / 'base'
+            / 'out'
+            / f'{CHECKSUMS[f"US_DPAD" if dpad_patch else "US"]}.bps',
         )
     )
     with open(base_patch_path, 'rb') as patch_file:
