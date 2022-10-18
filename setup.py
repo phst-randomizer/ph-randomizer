@@ -21,7 +21,7 @@ setup(
         'pydantic==1.10.2',
         'pyparsing==3.0.9',
         'vidua==0.4.4',
-        'zed @ git+https://github.com/phst-randomizer/zed.git@b6b654a0a40b2f4dfb6d2b3692bd245ae0f6975b',  # noqa: E501
+        'zed @ git+https://github.com/phst-randomizer/zed.git@e2092984b4871d9e74bfa9e0e158d6e3b768af74',  # noqa: E501
     ],
     extras_require={
         'test': [
