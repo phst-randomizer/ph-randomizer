@@ -1,0 +1,169 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Ember",
+  "rooms": [
+    {
+      "name": "EmberLeft",
+      "chests": [
+        {
+          "name": "IslandChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "Map/isle_flame/map00.bin/zmb/isle_flame_00.zmb",
+          "zmb_mapobject_index": 75
+        },
+        {
+          "name": "SummitChest",
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/isle_flame/map00.bin/zmb/isle_flame_00.zmb",
+          "zmb_mapobject_index": 74
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": "Sea.SW.Ember.EmberPort"
+        },
+        {
+          "name": "Astrid",
+          "link": "AstridHouse.Main.ToOutside"
+        },
+        {
+          "name": "Kayo",
+          "link": "KayoHouse.Main.Entrance"
+        },
+        {
+          "name": "EmptyHouse",
+          "link": "EmberEmptyHouse.Main.Entrance"
+        },
+        {
+          "name": "RightLowerBottom",
+          "link": "EmberRight.Lowest.LeftLowerBottom"
+        },
+        {
+          "name": "RightTop",
+          "link": "EmberRight.Lowest.LeftLowerTop"
+        },
+        {
+          "name": "RightLowerTop",
+          "link": "EmberRight.Lowest.LeftLowerToppest"
+        },
+        {
+          "name": "RightMiddleTop",
+          "link": "EmberRight.TempleFront.LeftHigherTop"
+        },
+        {
+          "name": "RightMiddleBottom",
+          "link": "EmberRight.AfterDoor.LeftMiddleBottom"
+        },
+        {
+          "name": "RightHigherBottom",
+          "link": "EmberRight.TempleFront.LeftHigherBottom"
+        },
+        {
+          "name": "RightHighestBottom",
+          "link": "EmberRight.Summit.LeftHighestBottom"
+        },
+        {
+          "name": "RightHighestTop",
+          "link": "EmberRight.Summit.LeftHighestTop"
+        }
+      ]
+    },
+    {
+      "name": "EmberRight",
+      "chests": [],
+      "doors": [
+        {
+          "name": "LeftLowerToppest",
+          "link": "EmberLeft.Main.RightTop"
+        },
+        {
+          "name": "LeftLowerTop",
+          "link": "EmberLeft.ToRightTop.RightLowerTop"
+        },
+        {
+          "name": "LeftLowerBottom",
+          "link": "EmberLeft.Main.RightLowerBottom"
+        },
+        {
+          "name": "LeftMiddleBottom",
+          "link": "EmberLeft.Middle.RightMiddleBottom"
+        },
+        {
+          "name": "EmberTemple",
+          "link": "FireTemple.F1.Entrance.Outside"
+        },
+        {
+          "name": "LeftHigherBottom",
+          "link": "EmberLeft.Summit.RightHigherBottom"
+        },
+        {
+          "name": "LeftHigherTop",
+          "link": "EmberLeft.Middle.RightMiddleTop"
+        },
+        {
+          "name": "LeftHighestTop",
+          "link": "EmberLeft.Summit.RightHighestTop"
+        },
+        {
+          "name": "LeftHighestBottom",
+          "link": "EmberLeft.Summit.RightHighestBottom"
+        }
+      ]
+    },
+    {
+      "name": "AstridHouse",
+      "chests": [
+        {
+          "name": "AstridPowerGem",
+          "type": "event",
+          "contents": "power_gem",
+          "bmg_file_path": "English/Message/flame.bmg",
+          "bmg_instruction_index": 415
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToOutside",
+          "link": "EmberLeft.Main.Astrid"
+        },
+        {
+          "name": "ToBasement",
+          "link": "AstridBasement.Arena.Stairs"
+        }
+      ]
+    },
+    {
+      "name": "AstridBasement",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Stairs",
+          "link": "AstridHouse.Main.ToBasement"
+        }
+      ]
+    },
+    {
+      "name": "KayoHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Entrance",
+          "link": "EmberLeft.Main.Kayo"
+        }
+      ]
+    },
+    {
+      "name": "EmberEmptyHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Entrance",
+          "link": "EmberLeft.Main.EmptyHouse"
+        }
+      ]
+    }
+  ]
+}
