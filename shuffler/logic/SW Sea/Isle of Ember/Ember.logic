@@ -9,7 +9,7 @@ area Ember:
       door RightTop
       mail Mailbox
 
-    node Island: chest Hook
+    node Island: chest IslandChest
     node ToRightTop: door RightLowerTop
 
     node Middle:
@@ -17,6 +17,7 @@ area Ember:
       door RightMiddleBottom
 
     node Summit:
+      chest SummitChest
       door RightHigherBottom
       door RightHighestBottom
       door RightHighestTop
@@ -61,6 +62,7 @@ area Ember:
 
   room AstridBasement:
     node Arena:
+      door Stairs
       enemy Octorok1
       enemy Octorok2
       enemy Octorok3
@@ -74,7 +76,10 @@ area Ember:
     Arena <-> Astrid: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6)
 
   room KayoHouse:
-    node Main: hint Book
+    node Main:
+      door Entrance
+      hint Book
 
   room EmberEmptyHouse:
-    node Main
+    node Main:
+      door Entrance
