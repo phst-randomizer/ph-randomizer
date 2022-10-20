@@ -9,7 +9,7 @@ area Ember:
       door RightTop
       mail Mailbox
 
-    node Island: chest Hook
+    node Island: chest IslandChest
     node ToRightTop: door RightLowerTop
 
     node Middle:
