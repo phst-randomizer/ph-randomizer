@@ -12,7 +12,6 @@ from patcher.location_types import (
     DigSpotLocation,
     EventLocation,
     IslandShopLocation,
-    Location,
     MapObjectLocation,
     SalvageTreasureLocation,
 )
@@ -29,13 +28,8 @@ def is_frozen() -> bool:
     return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
 
-def load_rom(file: Path) -> rom.NintendoDSRom:
-    """
-    Load a ROM into memory, patch it, and return it as an ndspy NintendoDSRom object.
-
-    Note that the original file is not modified; the contents of the given ROM are copied into
-    memory, and the BPS patch is applied to that in-memory copy.
-    """
+def apply_base_patch(input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
+    """Apply the base patch to `input_rom`."""
     base_patch_path = Path(
         Path(sys._MEIPASS) / 'patch.bps'  # type: ignore
         if is_frozen()
@@ -44,10 +38,8 @@ def load_rom(file: Path) -> rom.NintendoDSRom:
         )
     )
     with open(base_patch_path, 'rb') as patch_file:
-        patched_rom = bps.patch(source=BytesIO(file.read_bytes()), bps_patch=patch_file)
-    input_rom = rom.NintendoDSRom(data=patched_rom.read())
-    Location.ROM = input_rom
-    return input_rom
+        patched_rom = bps.patch(source=BytesIO(input_rom.save()), bps_patch=patch_file)
+    return rom.NintendoDSRom(data=patched_rom.read())
 
 
 def load_aux_data(directory: Path) -> list[Area]:

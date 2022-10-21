@@ -4,8 +4,8 @@ import click
 from ndspy import rom
 
 from patcher._util import (
+    apply_base_patch,
     load_aux_data,
-    load_rom,
     patch_chest,
     patch_dig_spot_treasure,
     patch_event,
@@ -22,8 +22,14 @@ def patch(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSR
     Patches a ROM with the given aux data.
 
     Given aux data, an input rom, and an output path, this function reads the aux data and
-    patches the input rom with it accordingly, returning the patched rom.
+    patches the input rom with it accordingly, returning the patched rom. Note, the base
+    ROM patch is also applied and should be located at the expected location (see apply_base_patch
+    function for more details).
     """
+    # TODO: maybe eliminate this global variable and directly
+    # pass the NDS rom object to patcher functions?
+    Location.ROM = apply_base_patch(input_rom)
+
     for area in aux_data:
         for room in area.rooms:
             for chest in room.chests:
@@ -60,7 +66,7 @@ def patch(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSR
     # Write changes to the in-memory ROM
     Location.save_all()
 
-    return input_rom
+    return Location.ROM
 
 
 @click.command()
@@ -82,7 +88,7 @@ def patch(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSR
     '-o', '--output-rom-path', default=None, type=str, help='Path to save patched ROM to.'
 )
 def patcher_cli(aux_data_directory: str, input_rom_path: str, output_rom_path: str | None):
-    input_rom = load_rom(Path(input_rom_path))
+    input_rom = rom.NintendoDSRom.fromFile(input_rom_path)
     new_aux_data = load_aux_data(Path(aux_data_directory))
 
     patched_rom = patch(new_aux_data, input_rom)
