@@ -48,7 +48,11 @@ def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
     shuffled_aux_data = shuffle(seed, nodes, edges, aux_data)
 
     # Run the patcher
-    patch(shuffled_aux_data, load_rom(Path(input_rom_path)), output_rom_path)
+    patched_rom = patch(shuffled_aux_data, load_rom(Path(input_rom_path)))
+
+    if output_rom_path is not None:
+        # Save the ROM to disk
+        patched_rom.saveToFile(output_rom_path)
 
 
 if __name__ == '__main__':
