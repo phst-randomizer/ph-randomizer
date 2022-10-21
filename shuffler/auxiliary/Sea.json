@@ -73,7 +73,7 @@
         },
         {
           "name": "EmberPort",
-          "link": ""
+          "link": "Ember.EmberLeft.Main.Boat"
         },
         {
           "name": "SpiritIslePort",
@@ -160,11 +160,11 @@
       "doors": [
         {
           "name": "UnchartedPort",
-          "link": ""
+          "link": "UnchartedIsland.Main.Main.Boat"
         },
         {
           "name": "ZauzPort",
-          "link": ""
+          "link": "Zauz.Outside.Main.Ship"
         },
         {
           "name": "GustPort",
@@ -172,7 +172,7 @@
         },
         {
           "name": "BannanPort",
-          "link": ""
+          "link": "Bannan.OutsideLeft.Main.Boat"
         },
         {
           "name": "GhostShip",
