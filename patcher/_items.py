@@ -1,4 +1,4 @@
-ITEMS = {
+ITEMS: dict[str, int] = {
     'small_key': 0x1,
     'small_green_rupee': 0x2,
     'oshus_sword': 0x3,

@@ -19,7 +19,7 @@ from patcher.location_types import (
 from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, SalvageTreasure, Tree
 
 
-def is_frozen():
+def is_frozen() -> bool:
     """
     Whether or not the app is being executed as part of a script or a frozen executable.
 
@@ -29,7 +29,7 @@ def is_frozen():
     return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
 
-def load_rom(file: Path):
+def load_rom(file: Path) -> rom.NintendoDSRom:
     """
     Load a ROM into memory, patch it, and return it as an ndspy NintendoDSRom object.
 
@@ -50,7 +50,7 @@ def load_rom(file: Path):
     return input_rom
 
 
-def load_aux_data(directory: Path):
+def load_aux_data(directory: Path) -> list[Area]:
     aux_data: list[Area] = []
     aux_files = list(directory.rglob('*.json'))
     for file in aux_files:
