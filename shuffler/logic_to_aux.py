@@ -5,8 +5,9 @@ from pathlib import Path
 import sys
 from typing import Any
 
-from _parser import clear_nodes, parse_area
 import click
+
+from shuffler._parser import parse_area
 
 AUX_DATA_SCHEMA_FILE = (Path(__file__).parent / 'aux_schema.json').resolve()
 
@@ -26,8 +27,8 @@ def logic_to_aux(logic_directory: str, output: str | None):
                     line = line[: line.index('#')]  # remove any comments
                 if line:
                     lines.append(line)
-        clear_nodes()
-        nodes = parse_area(lines)
+
+        nodes, _ = parse_area(lines, [], {})
 
         path_to_schema = Path(relpath(AUX_DATA_SCHEMA_FILE, file.parent.resolve())).as_posix()
 
