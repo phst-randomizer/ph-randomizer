@@ -29,5 +29,9 @@ setup(
             'pytest-xdist==2.5.0',
             'py-desmume==0.0.5',
         ],
+        'types': [
+            'types-Pillow==9.2.2.2',
+            'types-setuptools==65.5.0.1',
+        ],
     },
 )
