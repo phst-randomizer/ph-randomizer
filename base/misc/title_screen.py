@@ -12,7 +12,7 @@ class AutoList(list):
         list.__setitem__(self, index, value)
 
 
-def extract_image(image: bytes, palette: list[tuple[int, int, int, int]]) -> Image:
+def extract_image(image: bytes, palette: list[tuple[int, int, int, int]]) -> Image.Image:
     img = Image.new('RGB', (256, 128), (0, 0, 0))
     for y in range(128):
         for x in range(256):
@@ -23,7 +23,7 @@ def extract_image(image: bytes, palette: list[tuple[int, int, int, int]]) -> Ima
     return img
 
 
-def insert_image(img: Image) -> tuple[bytes, bytes]:
+def insert_image(img: Image.Image) -> tuple[bytes, bytes]:
     image = AutoList()
     palette: list[tuple[int, int, int]] = []
     for y in range(128):
@@ -92,7 +92,7 @@ def title_screen(insert: bool, input: str, output: str, image: str, version_stri
     else:
         image_file: bytes = narc_file.getFileByName('title.ntft')
         palette = color.loadPalette(narc_file.getFileByName('title.ntfp'))
-        extracted_image: Image = extract_image(image_file, palette)
+        extracted_image: Image.Image = extract_image(image_file, palette)
         if not output.endswith('.bmp'):
             output = f'{output}.bmp'
         extracted_image.save(output, compress_level=0)
