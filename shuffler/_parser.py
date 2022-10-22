@@ -65,10 +65,6 @@ class Area:
     rooms: list[Room]
 
 
-nodes: list[Node] = []
-edges: dict[str, list[Edge]] = defaultdict(list)  # Maps node names to edges
-
-
 class Descriptor(Enum):
     CHEST = 'chest'
     FLAG = 'flag'
@@ -189,7 +185,13 @@ def parse_node(lines: list[str]) -> list[NodeContents]:
     return node_contents
 
 
-def parse_edge(node_prefix: str, line: str, edge_direction: Literal['<-', '->']):
+def parse_edge(
+    node_prefix: str,
+    line: str,
+    edge_direction: Literal['<-', '->'],
+    nodes: list[Node],
+    edges: dict[str, list[Edge]],
+):
     source_node_name = (
         f"{node_prefix}.{line.split('<->' if '<->' in line else edge_direction)[0].strip()}"
     )
@@ -205,14 +207,24 @@ def parse_edge(node_prefix: str, line: str, edge_direction: Literal['<-', '->'])
     node1 = [node for node in nodes if node.name == source_node_name][0]
     node2 = [node for node in nodes if node.name == dest_node_name][0]
     if edge_direction == '->':
+        if node1.name not in edges:
+            edges[node1.name] = []
         edges[node1.name].append(Edge(source=node1, dest=node2, constraints=edge_content))
     elif edge_direction == '<-':
+        if node2.name not in edges:
+            edges[node2.name] = []
         edges[node2.name].append(Edge(source=node2, dest=node1, constraints=edge_content))
     else:
         raise NotImplementedError(f'Invalid edge direction token "{edge_direction}"')
+    return nodes, edges
 
 
-def parse_room_contents(node_prefix: str, lines: list[str]):
+def parse_room_contents(
+    node_prefix: str,
+    lines: list[str],
+    nodes: list[Node],
+    edges: dict[str, list[Edge]],
+):
     while lines and (
         lines[0].lstrip().startswith('node')
         or '<->' in lines[0].lstrip()
@@ -242,38 +254,50 @@ def parse_room_contents(node_prefix: str, lines: list[str]):
                     )
                 )
             case [node1, '->', node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, '->')
+                parse_edge(node_prefix, line, '->', nodes, edges)
             case [node1, '<-', node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, '<-')
+                parse_edge(node_prefix, line, '<-', nodes, edges)
             case [node1, '<->', node2, *_]:  # noqa: F841
-                parse_edge(node_prefix, line, '->')
-                parse_edge(node_prefix, line, '<-')
+                parse_edge(node_prefix, line, '->', nodes, edges)
+                parse_edge(node_prefix, line, '<-', nodes, edges)
+    return nodes, edges
 
 
-def parse_rooms(node_prefix: str, lines: list[str]):
+def parse_rooms(
+    node_prefix: str,
+    lines: list[str],
+    nodes: list[Node],
+    edges: dict[str, list[Edge]],
+):
     while lines and (lines[0].lstrip().startswith('room')):
         line = lines.pop(0).strip()
         assert line.split(' ')[0] == 'room'
+        assert line.endswith(':')
         room_name = line.split(' ')[1].rstrip(':')
         logging.debug(f'  room {room_name}')
-        parse_room_contents(f'{node_prefix}.{room_name}', lines)
+        parse_room_contents(f'{node_prefix}.{room_name}', lines, nodes, edges)
+    return nodes, edges
 
 
-def parse_area(lines: list[str]):
+def parse_area(
+    lines: list[str],
+    nodes: list[Node],
+    edges: dict[str, list[Edge]],
+) -> tuple[list[Node], dict[str, list[Edge]]]:
     while lines and (lines[0].lstrip().startswith('area')):
         line = lines.pop(0)
         assert line.startswith('area')
+        assert line.endswith(':')
         area_name = line.split(' ')[1].rstrip(':')
         logging.debug(f'area {area_name}')
-        parse_rooms(area_name, lines)
-    return nodes
-
-
-def clear_nodes():
-    nodes.clear()
+        parse_rooms(area_name, lines, nodes, edges)
+    return nodes, edges
 
 
 def parse(directory: Path) -> tuple[list[Node], dict[str, list[Edge]]]:
+    nodes: list[Node] = []
+    edges: dict[str, list[Edge]] = defaultdict(list)  # Maps node names to edges
+
     logic_files = list(directory.rglob('*.logic'))
 
     for file in logic_files:
@@ -285,6 +309,6 @@ def parse(directory: Path) -> tuple[list[Node], dict[str, list[Edge]]]:
                     line = line[: line.index('#')]  # remove any comments
                 if line:
                     lines.append(line)
-        parse_area(lines)
+        parse_area(lines, nodes, edges)
 
     return nodes, edges
