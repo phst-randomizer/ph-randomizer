@@ -14,11 +14,5 @@ ignore =
     E203,
     # Line break before binary operator
     W503,
-    # Missing docstring in *
-    D10,
     # Blank line contains whitespace
     W293,
-    # 1 blank line required between summary line and description
-    D205,
-    # First line (of docstring) should end with a period
-    D400,
