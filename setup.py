@@ -1,37 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
-setup(
-    name='ph-randomizer',
-    version='0.0.1',
-    description='',
-    long_description='',
-    long_description_content_type='',
-    license='',
-    author='',
-    author_email='',
-    keywords='',
-    classifiers=[],
-    python_requires='>=3.10',
-    packages=find_packages(),
-    include_package_data=True,
-    install_requires=[
-        'click==8.1.3',
-        'inflection==0.5.1',
-        'ndspy==4.0.0',
-        'pydantic==1.10.2',
-        'pyparsing==3.0.9',
-        'vidua==0.4.4',
-        'zed @ git+https://github.com/phst-randomizer/zed.git@e2092984b4871d9e74bfa9e0e158d6e3b768af74',  # noqa: E501
-    ],
-    extras_require={
-        'test': [
-            'pytest==7.1.3',
-            'pytest-xdist==2.5.0',
-            'py-desmume==0.0.5',
-        ],
-        'types': [
-            'types-Pillow==9.2.2.2',
-            'types-setuptools==65.5.0.1',
-        ],
-    },
-)
+if __name__ == '__main__':
+    setup()
