@@ -26,16 +26,16 @@ jobs:
       - name: Install dependencies
         run: pip install -e .[test,types]
 
-      - name: Install pre-commit and mypy
-        run: pip install pre-commit mypy
+      - name: Install pre-commit and tox
+        run: pip install pre-commit tox
 
       - name: Run pre-commit checks
         run: pre-commit run --all-files --verbose
 
       # The mypy pre-commit hook doesn't support disabling `--ignore-missing-imports`, so
       # we re-run it here without that option.
-      - name: Run mypy
-        run: mypy .
+      - name: Run type checking
+        run: tox -e type
 
   tests:
     name: Run tests
