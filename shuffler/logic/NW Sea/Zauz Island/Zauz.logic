@@ -3,7 +3,7 @@ area Zauz:
     node Main:
       chest CuccoChest
       door ZauzHouse
-      door Ship
+      door Boat
 
     node DigSpot:
       chest DigSpot

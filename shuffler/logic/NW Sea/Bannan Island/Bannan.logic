@@ -2,6 +2,7 @@ area Bannan:
   room OutsideLeft:
     node Main:
       chest DigSpot
+      door Boat
       door WayfarerHouse
       door BannanGrottoEntrance
       enemy Rope1

@@ -26,7 +26,7 @@
           "link": "ZauzHouse.Main.Outside"
         },
         {
-          "name": "Ship",
+          "name": "Boat",
           "link": "Sea.NW.Zauz.ZauzPort"
         }
       ]

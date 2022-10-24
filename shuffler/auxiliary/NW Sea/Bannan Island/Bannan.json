@@ -22,6 +22,10 @@
       ],
       "doors": [
         {
+          "name": "Boat",
+          "link": "Sea.NW.Bannan.BannanPort"
+        },
+        {
           "name": "WayfarerHouse",
           "link": "WayfarerHouse.Main.Entrance"
         },
