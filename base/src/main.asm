@@ -14,9 +14,46 @@
             .arm
             .importobj "src/faster_boat.o"
             .importobj "src/fixed_random_treasure_in_shop.o"
-            .importobj "src/progressive_sword_check.o"
+            .importobj "src/progressive_sword_check.o
+            .importobj "src/get_npc_model_offset.o"
             .importobj "src/rando_settings.o"
             .include "_island_shop_files.asm"
+
+            .align
+            @spawn_custom_item_with_nkey:
+                ldr r0, =0x21608a8
+                ldr r0, [r0]
+                ldr r0, [r0]
+                add r0, r0, 0x2a0
+
+                ; Dynamically determine pointer to string of
+                ; nsbmd/nsbtx model.
+                push r0, r1, r4, r5
+                mov r5, r0
+                ldr r0, [r4, 0x20]
+                bl get_npc_model_offset
+                str r0, [r5, 0x10]
+                pop r0, r1, r4, r5
+                mov r1, 0x0
+                str r1, [r0]
+                bl 0x20c4528
+
+                mov r1, r0
+                add r0, r4, 0x158
+                ldr r2, [r0]
+                ldr r2, [r2, 0xc]
+                blx r2
+
+                ; Note, this instruction differs from the original code.
+                ; Instead of a `mov r0, 0x1` (i.e. always setting the item id
+                ; to 0x1 for a small key), we're loading the item id dynamically
+                ; from the value given in the ITGE actor in the ZMB. See
+                ; `spawn_custom_freestanding_item.c` for more info.
+                ldr r0, [r4, 0x20]
+
+                str r0, [r4, 0x1b4]
+                b 0x2160798
+
         .endarea
 
     .org 0x54894 + 0x2004000
@@ -254,6 +291,15 @@
     .org 0x2146430
         .area 0xC, 0x0
             bl @custom_salvage_item
+        .endarea
+.close
+
+
+.open "../overlay/overlay_0035.bin", 0x0215b400
+    .arm
+    .org 0x216072c
+        .area 0x24, 0x00
+            beq @spawn_custom_item_with_nkey
         .endarea
 .close
 
