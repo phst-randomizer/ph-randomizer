@@ -233,6 +233,7 @@ jobs:
 
   check-modified-files:
     name: Check if base patch tests should be run
+    if: "github.ref != 'refs/heads/main'"
     runs-on: ubuntu-latest
     outputs:
       should-run-tests: ${{ steps.filter.outputs.base-patches }}
@@ -253,8 +254,8 @@ jobs:
     needs:
       - generate-base-patch
       - check-modified-files
-    # Only run these tests if base patches or the tests themselves are modified, or if a release is happening
-    if: "needs.check-modified-files.outputs.should-run-tests == 'true' || startsWith(github.ref, 'refs/tags/')"
+    # Only run these tests if base patches or the tests themselves are modified, or if a release is happening, or on push to main.
+    if: "github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') || needs.check-modified-files.outputs.should-run-tests == 'true'"
     # Windows is used to run the desmume-based tests because py-desmume has issues running on headless ubuntu
     runs-on: windows-latest
     defaults:
