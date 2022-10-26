@@ -260,6 +260,15 @@ jobs:
     defaults:
       run:
         shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - test_chest_items
+          - test_dig_spot_items
+          - test_flags_and_settings
+          - test_salvage_items
+          - test_shop_items
     steps:
       - uses: actions/checkout@v3
         with:
@@ -321,7 +330,7 @@ jobs:
         run: pip install tox
 
       - name: Run tests
-        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
+        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume -- -k ${{ matrix.module }}
         env:
           PH_ROM_PATH: out.nds
 
