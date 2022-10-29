@@ -1,0 +1,126 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "FireTemple",
+  "rooms": [
+    {
+      "name": "F1",
+      "chests": [
+        {
+          "name": "KeesesSmallKey",
+          "type": "chest",
+          "contents": "small_key",
+          "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
+          "zmb_mapobject_index": 26
+        },
+        {
+          "name": "ChestNearLavaPit",
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
+          "zmb_mapobject_index": 68
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Ember.EmberRight.TempleFront.EmberTemple"
+        },
+        {
+          "name": "F2Middle",
+          "link": "F2.TopRight.ToF1Middle"
+        },
+        {
+          "name": "ToF2TopLeft",
+          "link": "F2.TopLeft.ToF1TopLeft"
+        },
+        {
+          "name": "ToF2BottomLeft",
+          "link": "F2.BottomLeft.ToF1BottomLeft"
+        }
+      ]
+    },
+    {
+      "name": "F2",
+      "chests": [
+        {
+          "name": "BoomerangChest",
+          "type": "chest",
+          "contents": "boomerang",
+          "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
+          "zmb_mapobject_index": 7
+        },
+        {
+          "name": "AfterKeeses",
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
+          "zmb_mapobject_index": 74
+        },
+        {
+          "name": "RatKey",
+          "type": "on_enemy",
+          "contents": "small_key"
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF1BottomLeft",
+          "link": "F1.StairsBottomLeft.ToF2BottomLeft"
+        },
+        {
+          "name": "ToF1Middle",
+          "link": "F1.StairsMiddle.F2Middle"
+        },
+        {
+          "name": "ToF1TopLeft",
+          "link": "F1.TopLeft.ToF2TopLeft"
+        },
+        {
+          "name": "ToF3",
+          "link": "F3.RightSide.ToF2"
+        }
+      ]
+    },
+    {
+      "name": "F3",
+      "chests": [
+        {
+          "name": "SwitchesSmallKey",
+          "type": "freestanding",
+          "contents": "small_key"
+        },
+        {
+          "name": "BossKeyChest",
+          "type": "chest",
+          "contents": "boss_key",
+          "zmb_file_path": "Map/dngn_flame/map02.bin/zmb/dngn_flame_02.zmb",
+          "zmb_mapobject_index": 15
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF2",
+          "link": "F2.StairsBottomRight.ToF3"
+        },
+        {
+          "name": "ToF4",
+          "link": "F4.Main.ToF3"
+        }
+      ]
+    },
+    {
+      "name": "F4",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToF3",
+          "link": "F3.StairsBoss.ToF4"
+        },
+        {
+          "name": "ToBoss",
+          "link": "BlaazBossRoom.Main.Fight.ToDungeon"
+        }
+      ]
+    }
+  ]
+}
