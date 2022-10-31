@@ -76,3 +76,12 @@ repos:
     rev: v14.0.6
     hooks:
     - id: clang-format
+
+  # Validate aux data against schema
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.18.4
+    hooks:
+      - id: check-jsonschema
+        files: ^shuffler/auxiliary/.*\.json$
+        args: ["--schemafile", "shuffler/aux_schema.json"]
+      - id: check-github-workflows
