@@ -212,7 +212,7 @@
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": "",
+          "contents": "ship_part",
           "zmb_actor_index": 16,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },

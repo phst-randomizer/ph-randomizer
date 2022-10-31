@@ -25,6 +25,8 @@ ITEMS: dict[str, int] = {
     'cannon': 0x25,
     'sun_key': 0x26,
     'quiver_upgrade': 0x28,
+    'bomb_bag_upgrade': 0x29,
+    'bombchu_bag_upgrade': 0x2A,
     'ship_part': 0x2B,
     'king_key': 0x2C,
     'power_gem': 0x2D,

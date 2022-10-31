@@ -41,7 +41,7 @@
         {
           "name": "CannonMiniGameBombBag",
           "type": "event",
-          "contents": "todo",
+          "contents": "bomb_bag_upgrade",
           "bmg_file_path": "todo",
           "bmg_instruction_index": -1
         },
