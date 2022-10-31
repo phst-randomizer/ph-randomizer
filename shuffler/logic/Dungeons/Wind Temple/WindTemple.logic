@@ -17,6 +17,7 @@ area WindTemple:
 
     Entrance -> Arena
     Arena -> BossKeyHoleRoom: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4)
+    BossKeyHoleRoom -> Arena: setting MirroredArenaDoors
 
     BossKeyHoleRoom -> BossEntrance: (item WindBossKey & item Bombs) # TODO: can bombchu be used here? or other items?
 
@@ -51,6 +52,7 @@ area WindTemple:
       door ToB2BottomRight
 
     Arena -> Bottom: (defeated RockChuChu1 & defeated RockChuChu2 & defeated RockChuChu3)
+    Bottom -> Arena: setting MirroredArenaDoors
     Bottom -> BottomRightStairs
 
     node TopMiddlePlatform:
