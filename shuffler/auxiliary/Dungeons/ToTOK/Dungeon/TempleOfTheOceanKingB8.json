@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "VoidChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "PhantomKiller",
+          "type": "chest",
+          "contents": "TODO",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "BigChest",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB7BottomLeft",
+          "link": "B7.Left.ToB8Left"
+        },
+        {
+          "name": "ToB7BottomRight",
+          "link": "B7.BottomRight.ToB8BottomRight"
+        },
+        {
+          "name": "ToB7TopRight",
+          "link": "B7.TopRightDoor.ToB8TopRight"
+        },
+        {
+          "name": "ToB9Left",
+          "link": "B9.Main.ToB8Left"
+        },
+        {
+          "name": "ToB9Right",
+          "link": "B9.Main.ToB8Right"
+        }
+      ],
+      "name": "B8"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+area TempleOfTheOceanKing:
+  room Main:
+    node Main:
+      door ToB6
+      door ToB7
+      entrance YellowWarp

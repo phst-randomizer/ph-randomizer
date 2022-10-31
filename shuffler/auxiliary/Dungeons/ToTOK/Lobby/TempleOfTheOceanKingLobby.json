@@ -15,11 +15,23 @@
       "doors": [
         {
           "name": "Outside",
-          "link": ""
+          "link": "Mercay.PathToToTOK.Main.ToTOK"
         },
         {
           "name": "Entrance",
-          "link": ""
+          "link": "TempleOfTheOceanKing.F1.Lower.Exit"
+        },
+        {
+          "name": "B3BlueWarp",
+          "link": "TempleOfTheOceanKing.B3Chart.Main.BlueWarp"
+        },
+        {
+          "name": "B6YellowWarp",
+          "link": "TempleOfTheOceanKing.B6YellowWarp.Main.YellowWarp"
+        },
+        {
+          "name": "B9BlueWarp",
+          "link": "TempleOfTheOceanKing.B9BlueWarp.Main.BlueWarp"
         }
       ],
       "name": "Main"

@@ -26,11 +26,11 @@
         },
         {
           "name": "Hourglass",
-          "link": "B6Sun.Main.ToB6"
+          "link": "B6SunMapRoom.Main.ToB6"
         },
         {
           "name": "Triforce",
-          "link": "B6Chart.Main.ToB6"
+          "link": "B6YellowWarpRoom.Main.ToB6"
         }
       ],
       "name": "B6"

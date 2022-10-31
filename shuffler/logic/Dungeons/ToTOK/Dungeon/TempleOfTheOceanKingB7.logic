@@ -1,0 +1,34 @@
+ToB8BottomRightarea TempleOfTheOceanKing:
+  room B7:
+    node Left:
+      door ToB6YellowWarp
+      enemy RedPhantomLeft
+      door ToB8Left
+      
+    node BottomRight:
+      door ToB8BottomRight
+      
+    node TopRight:
+      chest RoundCrystal
+      flag RightFire
+      
+    node TopRightDoor:
+      door ToB8TopRight
+      
+    node RightPhantom:
+      enemy RedPhantomRight
+      
+    TopRight -> RightPhantom
+    BottomRight -> RightPhantom
+    Main -> TopRight: item GrapplingHook
+    TopRight <-> BottomRight: flag RightFire
+      
+    node BigChestSwitch:
+      chest BigChest
+    
+    TopRight -> BigChestSwitch: (item GrapplingHook | item Boomerang | item Bow)
+    
+    node DefeatPhantom
+      chest PhantomKiller
+      
+    TODO -> DefeatPhantom: (defeated RedPhantomRight & defeated RedPhantomLeft)

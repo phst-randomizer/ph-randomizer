@@ -1,0 +1,45 @@
+area TempleOfTheOceanKing:
+  room B9:
+    node Main:
+      door ToB8Right
+      enemy Reaper1
+      enemy Reaper2
+      enemy Reaper3
+      enemy Reaper4
+      enemy RedPhantom
+      
+    node TopLeft:
+      door ToB8Left
+      
+    node SquareCrystalPedestal:
+      gain SquareCrystal[Stairway]
+      
+    Main -> SquareCrystalPedestal: (state SquareCrystal & lose SquareCrystal)
+    
+    Main <-> TopLeft: state SquareCrystal[Stairway]
+      
+    node DefeatReaper:
+      chest ReaperKiller
+      
+    Main -> DefeatReaper: (defeated Reaper1 & defeated Reaper2 & defeated Reaper3 & defeated Reaper4)
+      
+    node DefeatPhantom:
+      chest PhantomKiller
+     
+    Main -> DefeatPhantom: (((item Sword | item Boomerang) & item Bow) | defeated RedPhantom)
+     
+    node PhantomCrystal:
+      chest SquareCrystal
+      
+    DefeatPhantom -> PhantomCrystal
+    Main -> PhantomCrystal: (item Bow | item Bombs)
+    
+    node ToChartRoom:
+      door ToB9ChartRoom
+      
+    node ThreePedestals:
+      gain SquareCrystal[AllSet]
+      
+    Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal & lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
+      
+    Main <-> ToChartRoom: state SquareCrystal[AllSet]
