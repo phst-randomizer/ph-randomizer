@@ -2,7 +2,7 @@
 exclude='\.eggs|\.git|\.mypy_cache|\.tox|\.venv|_build|buck-out|dist'
 line-length = 100
 skip-string-normalization = true
-target-version = ["py310"]
+target-version = ["py311"]
 
 [tool.isort]
 combine_as_imports = true
