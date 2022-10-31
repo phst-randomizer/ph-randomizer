@@ -60,6 +60,8 @@ jobs:
 
       - name: Run tests
         run: tox -e test
+        env:
+          SYSTEM_VERSION_COMPAT: 0
 
   check-logic:
     name: Validate logic
