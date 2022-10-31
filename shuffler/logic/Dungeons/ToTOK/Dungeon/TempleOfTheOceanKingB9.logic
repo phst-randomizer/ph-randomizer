@@ -32,7 +32,7 @@ area TempleOfTheOceanKing:
       chest SquareCrystal
       
     DefeatPhantom -> PhantomCrystal
-    Main -> PhantomCrystal: (item Bow | item Bombs)
+    Main -> PhantomCrystal: (item Bow | item Bombs | item Bombchus | item Sword | item GrapplingHook | item Hammer)
     
     node ToChartRoom:
       door ToB9ChartRoom

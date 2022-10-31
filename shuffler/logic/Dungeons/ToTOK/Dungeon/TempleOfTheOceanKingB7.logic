@@ -1,4 +1,4 @@
-ToB8BottomRightarea TempleOfTheOceanKing:
+area TempleOfTheOceanKing:
   room B7:
     node Left:
       door ToB6YellowWarp
