@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B6",
       "chests": [
         {
           "name": "EyeChest",
@@ -32,8 +33,7 @@
           "name": "Triforce",
           "link": "B6YellowWarpRoom.Main.ToB6"
         }
-      ],
-      "name": "B6"
+      ]
     }
   ]
 }

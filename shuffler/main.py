@@ -191,7 +191,6 @@ def shuffle(
     nodes: list[Node],
     edges: dict[str, list[Edge]],
     aux_data: list[Area],
-    output: str | None = None,
 ) -> list[Area]:
     """
     Given aux data and logic, shuffles the aux data and returns it.
@@ -208,7 +207,6 @@ def shuffle(
         `nodes`: The nodes that make up the game's logic graph.
         `edges`: The edges that connect the `nodes`.
         `aux_data`: Complete aux data for the game as a list of `Area`s.
-        `output`: Optional directory to output randomized aux data to, or '--' to output to stdout.
 
     Returns:
         Randomized aux data.
@@ -274,16 +272,6 @@ def shuffle(
         if not len(I) or None not in {r.contents for r in candidates}:
             break
 
-    if output == '--':
-        for area in aux_data:
-            print(area.json(), file=sys.stdout)
-    elif output is not None:
-        output_path = Path(output)
-        output_path.mkdir(parents=True, exist_ok=True)
-        for area in aux_data:
-            with open(output_path / f'{area.name}.json', 'w') as fd:
-                fd.write(area.json())
-
     return aux_data
 
 
@@ -305,7 +293,10 @@ def shuffle(
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the RNG.')
 def shuffler_cli(
-    aux_data_directory: str, logic_directory: str, output: str | None, seed: str | None
+    aux_data_directory: str,
+    logic_directory: str,
+    output: str | None,
+    seed: str | None,
 ):
     # Parse logic files
     nodes, edges = parse(Path(logic_directory))
@@ -313,7 +304,17 @@ def shuffler_cli(
     # Parse aux data files
     aux_data = load_aux_data(Path(aux_data_directory))
 
-    return shuffle(seed, nodes, edges, aux_data, output)
+    results = shuffle(seed, nodes, edges, aux_data)
+
+    if output == '--':
+        for area in results:
+            print(area.json(), file=sys.stdout)
+    elif output is not None:
+        output_path = Path(output)
+        output_path.mkdir(parents=True, exist_ok=True)
+        for area in results:
+            with open(output_path / f'{area.name}.json', 'w') as fd:
+                fd.write(area.json())
 
 
 if __name__ == '__main__':

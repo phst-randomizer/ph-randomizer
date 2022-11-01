@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Zauz",
+  "rooms": [
+    {
+      "name": "Outside",
+      "chests": [
+        {
+          "name": "CuccoChest",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "Map/isle_wizard/map00.bin/zmb/isle_wizard_00.zmb",
+          "zmb_mapobject_index": 112
+        },
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "treasure_map_SW_6",
+          "zmb_actor_index": 6,
+          "zmb_file_path": "Map/isle_wizard/map00.bin/zmb/isle_wizard_00.zmb"
+        }
+      ],
+      "doors": [
+        {
+          "name": "ZauzHouse",
+          "link": "ZauzHouse.Main.Outside"
+        },
+        {
+          "name": "Boat",
+          "link": "Sea.NW.Zauz.ZauzPort"
+        }
+      ]
+    },
+    {
+      "name": "ZauzHouse",
+      "chests": [
+        {
+          "name": "ZauzPhantomSword",
+          "type": "event",
+          "contents": "TODO",
+          "bmg_file_path": "English/Message/sennin.bmg",
+          "bmg_instruction_index": -1
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Outside.Main.ZauzHouse"
+        }
+      ]
+    }
+  ]
+}

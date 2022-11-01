@@ -13,6 +13,26 @@ class Check(BaseModel):
     name: str = Field(..., description='The name of the item check')
     contents: str = Field(..., description='The item that this check contains')
 
+    @validator('contents')
+    def check_if_item_is_valid(cls, v: str) -> str:
+        """
+        Ensure that this check's `contents` is set to a valid item.
+
+        It'd be nice to have this be a JSON-Schema level check instead of a pydantic validator,
+        but to do that, we need to dynamically generate an `Enum` with all possible item values
+        using the ITEMS dict in patcher._items.py. As part of that, we would want to use pydantic's
+        `use_enum_values` setting for the model, but mypy doesn't support it currently:
+        https://github.com/pydantic/pydantic/issues/3809 and reports type errors all over the
+        place if it's used. If this is ever fixed, it should be changed.
+        """
+        from patcher._items import ITEMS
+
+        # TODO: Use the following assertion instead once all aux data chest contents is complete.
+        # assert v in ITEMS
+        assert v in ITEMS or not v or v.lower() == 'todo'
+
+        return v
+
 
 class Chest(Check):
     type = Field('chest', const=True)
@@ -24,8 +44,8 @@ class Tree(Chest):
     type = Field('tree', const=True)
 
 
-class Npc(Check):
-    type = Field('npc', const=True)
+class Event(Check):
+    type = Field('event', const=True)
     bmg_file_path: str = Field(..., description='File path to the bmg the instruction is on')
     bmg_instruction_index: int = Field(
         ..., description='Index of the instruction in the defined bmg file'
@@ -56,6 +76,10 @@ class SalvageTreasure(Check):
     )
 
 
+class DigSpot(SalvageTreasure):
+    type = Field('dig_spot', const=True)
+
+
 class Door(BaseModel):
     name: str = Field(..., description='The name of this exit')
     link: str = Field(..., description='The `entrance` or `door` where this exit leads.')
@@ -64,7 +88,7 @@ class Door(BaseModel):
 class Room(BaseModel):
     name: str = Field(..., description='The name of the room')
     chests: list[
-        Chest | Npc | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure
+        Chest | Event | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
     ] = Field(
         [],
         description='Item checks that can be made in this room',
@@ -87,7 +111,7 @@ class Area(BaseModel):
     @validator('rooms')
     def check_if_doors_are_consistent_between_aux_data_and_logic(
         cls, v: list[Room], values
-    ):  # noqa: N805
+    ) -> list[Room]:  # noqa: N805
         """Check that all doors/exits in the aux data are also in the logic (and vice-versa)."""
         nodes, _ = parse(LOGIC_DATA_DIRECTORY)
         for room in v:
@@ -110,6 +134,34 @@ class Area(BaseModel):
                 f"{logic_doors - aux_data_doors or '{}'}"
                 '\nThe following doors were found in the aux data but not the logic: '
                 f"{aux_data_doors - logic_doors or '{}'}"
+            )
+
+        return v
+
+    @validator('rooms')
+    def check_if_chests_are_consistent_between_aux_data_and_logic(
+        cls, v: list[Room], values
+    ) -> list[Room]:  # noqa: N805
+        """Check that all chests in the aux data are also in the logic (and vice-versa)."""
+        nodes, _ = parse(LOGIC_DATA_DIRECTORY)
+        for room in v:
+            # Get all chests in the logic
+            logic_chests = set()
+            for node in nodes:
+                if node.area != values['name'] or node.room != room.name:
+                    continue
+                for contents in node.contents:
+                    if contents.type == Descriptor.CHEST.value:
+                        logic_chests.add(contents.data)
+
+            # Get all chests in the aux data
+            aux_data_chests = {chest.name for chest in room.chests or []}
+
+            assert logic_chests == aux_data_chests, (
+                'The following chests were found in the logic but not the aux data: '
+                f"{logic_chests - aux_data_chests or '{}'}"
+                '\nThe following chests were found in the aux data but not the logic: '
+                f"{aux_data_chests - logic_chests or '{}'}"
             )
 
         return v

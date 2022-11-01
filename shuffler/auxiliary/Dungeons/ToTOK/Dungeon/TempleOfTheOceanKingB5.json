@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "B5",
       "chests": [
         {
           "name": "AfterSwitch",
@@ -32,8 +33,7 @@
           "name": "ToB4Shortcut",
           "link": "B4.TopLeftStaircase.ToB5Shortcut"
         }
-      ],
-      "name": "B5"
+      ]
     }
   ]
 }

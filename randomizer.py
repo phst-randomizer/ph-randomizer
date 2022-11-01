@@ -2,9 +2,10 @@ from pathlib import Path
 import sys
 
 import click
+from ndspy import rom
 
 from patcher import patch
-from patcher._util import is_frozen, load_rom
+from patcher._util import is_frozen
 from shuffler import shuffle
 from shuffler._parser import parse
 from shuffler.main import load_aux_data
@@ -47,8 +48,15 @@ def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
     # Run the shuffler
     shuffled_aux_data = shuffle(seed, nodes, edges, aux_data)
 
+    # Load the ROM
+    input_rom = rom.NintendoDSRom.fromFile(input_rom_path)
+
     # Run the patcher
-    patch(shuffled_aux_data, load_rom(Path(input_rom_path)), output_rom_path)
+    patched_rom = patch(shuffled_aux_data, input_rom)
+
+    if output_rom_path is not None:
+        # Save the ROM to disk
+        patched_rom.saveToFile(output_rom_path)
 
 
 if __name__ == '__main__':

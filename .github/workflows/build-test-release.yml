@@ -1,6 +1,11 @@
 name: build-test-release
 on:
   push:
+    branches:
+      - main
+    tags:
+      - "*"
+  pull_request:
 jobs:
   lint-type-check:
     name: Lint and type check code
@@ -17,22 +22,27 @@ jobs:
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
 
-      - name: Install pre-commit
-        run: pip install pre-commit
+      - name: Install dependencies
+        run: pip install -e .[test,types]
+
+      - name: Install pre-commit and tox
+        run: pip install pre-commit tox
 
       - name: Run pre-commit checks
         run: pre-commit run --all-files --verbose
+
+      # The mypy pre-commit hook doesn't support disabling `--ignore-missing-imports`, so
+      # we re-run it here without that option.
+      - name: Run type checking
+        run: tox -e type
 
   tests:
     name: Run tests
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu, macos, windows]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -50,6 +60,8 @@ jobs:
 
       - name: Run tests
         run: tox -e test
+        env:
+          SYSTEM_VERSION_COMPAT: 0
 
   check-logic:
     name: Validate logic
@@ -221,14 +233,44 @@ jobs:
         if: always()
         run: rm -rf *.nds
 
+  check-modified-files:
+    name: Check if base patch tests should be run
+    runs-on: ubuntu-latest
+    outputs:
+      should-run-tests: ${{ steps.filter.outputs.base-patches }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Check if base patch tests should be run
+      uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          base-patches:
+            - 'base/**'
+            - 'tests/desmume/**'
+            - '.github/workflows/**'
+
   test-desmume:
     name: Run base patch tests
-    needs: generate-base-patch
+    needs:
+      - generate-base-patch
+      - check-modified-files
+    # Only run these tests if base patches or the tests themselves are modified, or if a release is happening, or on push to main.
+    if: "github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') || needs.check-modified-files.outputs.should-run-tests == 'true'"
     # Windows is used to run the desmume-based tests because py-desmume has issues running on headless ubuntu
     runs-on: windows-latest
     defaults:
       run:
         shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - test_chest_items
+          - test_dig_spot_items
+          - test_flags_and_settings
+          - test_salvage_items
+          - test_shop_items
     steps:
       - uses: actions/checkout@v3
         with:
@@ -290,7 +332,7 @@ jobs:
         run: pip install tox
 
       - name: Run tests
-        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume
+        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume -- -k ${{ matrix.module }}
         env:
           PH_ROM_PATH: out.nds
 
@@ -304,11 +346,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu, macos, windows]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -374,20 +413,20 @@ jobs:
 
       - name: Replace commit hash with version string
         run: |
-          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_ubuntu-latest ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_macos-latest ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_windows-latest ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_ubuntu ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_macos ph-randomizer_${{ steps.version-string.outputs.version }}_macos
+          mv ph-randomizer_${{ steps.commit-hash.outputs.hash }}_windows ph-randomizer_${{ steps.version-string.outputs.version }}_windows
 
       - name: Zip up executables
         run: |
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu-latest
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos-latest
-          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows-latest
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_linux.zip ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip ph-randomizer_${{ steps.version-string.outputs.version }}_macos
+          zip -r -j ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip ph-randomizer_${{ steps.version-string.outputs.version }}_windows
 
       - name: Create a GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ph-randomizer_${{ steps.version-string.outputs.version }}_ubuntu.zip
+            ph-randomizer_${{ steps.version-string.outputs.version }}_linux.zip
             ph-randomizer_${{ steps.version-string.outputs.version }}_macos.zip
             ph-randomizer_${{ steps.version-string.outputs.version }}_windows.zip

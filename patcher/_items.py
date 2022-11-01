@@ -1,4 +1,4 @@
-ITEMS = {
+ITEMS: dict[str, int] = {
     'small_key': 0x1,
     'small_green_rupee': 0x2,
     'oshus_sword': 0x3,
@@ -25,11 +25,23 @@ ITEMS = {
     'cannon': 0x25,
     'sun_key': 0x26,
     'quiver_upgrade': 0x28,
+    'bomb_bag_upgrade': 0x29,
+    'bombchu_bag_upgrade': 0x2A,
+    'ship_part': 0x2B,
     'king_key': 0x2C,
     'power_gem': 0x2D,
     'wisdom_gem': 0x2E,
     'courage_gem': 0x2F,
     'common_treasure': 0x30,  # TODO: randomize this at run-time
     'salvage_arm': 0x3D,
-    'treasure_map_8': 0x52,
+    'treasure_map_SW_5': 0x50,
+    'treasure_map_SW_6': 0x51,
+    'treasure_map_SW_7': 0x52,
+    'treasure_map_NW_1': 0x53,
+    'treasure_map_SE_4': 0x5E,
+    'treasure_map_NE_4': 0x66,
+    'sand_of_hours': 0x78,
+    'random_treasure': 0x7D,
+    'random_ship_part': 0x7E,
+    'cyclone_slate': 0x7F,
 }

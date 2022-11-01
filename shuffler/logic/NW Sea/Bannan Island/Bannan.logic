@@ -1,18 +1,37 @@
 area Bannan:
   room OutsideLeft:
     node Main:
+      chest DigSpot
+      door Boat
       door WayfarerHouse
+      door BannanGrottoEntrance
+      enemy Rope1
+      enemy Rope2
+      enemy Rope3
+      enemy Rope4
+      enemy Rope5
+      enemy Rope6
+      enemy OrangeChuChu1
+      enemy OrangeChuChu2
+      enemy RedChuChu1
+      enemy RedChuChu2
+
+    node DefeatedAllEnemies:
+      flag MermaidVisible
 
     node Island:
       chest IslandChest
 
     Main <-> Island: item GrapplingHook
+    Main <-> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated OrangeChuChu1 & defeated OrangeChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
 
   room OutsideRight:
     node Main:
       chest CannonMiniGameBombBag
+      door BannanGrottoEntrance
 
     node Island:
+      chest DigSpot
       chest LeftIslandChest
       chest RightIslandChest
 
@@ -26,3 +45,12 @@ area Bannan:
       door OutsideRight
 
     LeftSide <-> RightSide: (item Bombs | item Bombchus)
+
+  room WayfarerHouse:
+    node Main:
+      door Entrance
+
+    node FoundMermaid:
+      chest FishingRodFromOldMan
+
+    Main <-> FoundMermaid: flag MermaidVisible

@@ -1,0 +1,155 @@
+area WindTemple:
+  room F1:
+    node Entrance:
+      door Entrance
+
+    node Arena:
+      enemy Rope1
+      enemy Rope2
+      enemy Rope3
+      enemy Rope4
+
+    node BossKeyHoleRoom:
+      door ToB1BeforeArena
+
+    node BossEntrance:
+      door ToBoss
+
+    Entrance -> Arena
+    Arena -> BossKeyHoleRoom: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4)
+    BossKeyHoleRoom -> Arena: setting MirroredArenaDoors
+
+    BossKeyHoleRoom -> BossEntrance: (item WindBossKey & item Bombs) # TODO: can bombchu be used here? or other items?
+
+    node MiddleRight:
+      door ToB1TopRightStairs
+
+    node TopRight
+
+    node BossKeyChest:
+      chest BossKey
+
+    MiddleRight <-> TopRight: (item Bombs | item Bombchus)
+    TopRight -> BossKeyChest: (item Sword | item Bombs) # you can use two bombs here. TODO: can two bombchus be used?
+    BossKeyChest -> BossKeyHoleRoom
+
+  room B1:
+    node BeforeArena:
+      door ToF1BossKeyHoleRoom
+
+    node Arena:
+      enemy RockChuChu1
+      enemy RockChuChu2
+      enemy RockChuChu3
+
+    BeforeArena -> Arena
+
+    node Bottom:
+      chest BottomRight # Treasure
+      chest AfterAirGeysers # courage gem
+
+    node BottomRightStairs:
+      door ToB2BottomRight
+
+    Arena -> Bottom: (defeated RockChuChu1 & defeated RockChuChu2 & defeated RockChuChu3)
+    Bottom -> Arena: setting MirroredArenaDoors
+    Bottom -> BottomRightStairs
+
+    node TopMiddlePlatform:
+      door ToB2TopRoomStairs
+      flag B1TopWindmill
+
+    TopMiddlePlatform -> Bottom
+
+    node BottomLeftPlatform:
+      door ToB2BottomLeft
+      flag B1BottomWindmill
+
+    BottomLeftPlatform -> Bottom
+
+    node KeyDrop:
+      chest DroppedKey # freestanding key
+
+    Bottom -> KeyDrop: (flag B1TopWindmill & flag B1BottomWindmill)
+
+    node TopLeft:
+      door ToB2LeftRoomStairs
+
+    node TopMiddle:
+      hint BombWallHint
+
+    node TopRight:
+      door ToF1MiddleRightStairs
+
+    TopLeft -> TopMiddle
+    TopMiddle <-> TopRight: (item Bombs | item Bombchus)
+
+
+  room B2:
+    node BottomRight:
+      door ToB1BottomRight
+
+    node Center:
+      chest FarLeftChest # power gem
+
+    node BottomLeftStairs:
+      door ToB1BottomLeft
+
+    node TopDoor:
+      door ToB2TopRoom
+
+    node TopBombWall:
+      door ToB2TopRoomHiddenArea
+
+    BottomRight -> Center
+    Center -> BottomRight: (item Bombs | item Bombchus)
+    Center -> BottomLeftStairs: item Shovel
+    Center -> TopDoor: item Shovel
+    Center -> TopBombWall: (item Bombs | item Bombchus)
+    TopBombWall -> Center
+
+    node TopRightLockedDoor:
+      lock WindKey
+
+    node TopRight:
+      chest BombsChest
+
+    Center -> TopRightLockedDoor
+    TopRight -> TopRightLockedDoor
+    TopRightLockedDoor -> Center: open WindKey
+    TopRightLockedDoor -> TopRight: open WindKey
+
+    node LeftBombWall:
+      door ToB2LeftRoom
+
+    Center -> LeftBombWall: (item Bombs | item Bombchus)
+    LeftBombWall -> Center
+
+  room B2TopRoom:
+    node Main:
+      door ToB2Main
+
+    node Stairs:
+      door ToB1TopMiddle
+
+    node HiddenArea:
+      chest BigGreenRupee # freestanding rupee
+      door ToB2MainBombWall
+
+    Main -> Stairs
+    Stairs -> Main: (item Bombs | item Bombchus)
+
+  room B2LeftRoom:
+    node Bottom:
+      door ToB2Main
+
+    node Top:
+      door ToB1TopLeftStairs
+
+    Bottom -> Top: item Bombs # TODO: what other items work for wind geysers?
+    Top -> Bottom
+
+  room BeforeBoss:
+    node Main:
+      door ToF1
+      door ToBoss

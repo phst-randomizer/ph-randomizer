@@ -49,6 +49,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "chest",
           "const": "chest",
           "type": "string"
         }
@@ -60,8 +61,8 @@
         "zmb_mapobject_index"
       ]
     },
-    "Npc": {
-      "title": "Npc",
+    "Event": {
+      "title": "Event",
       "type": "object",
       "properties": {
         "name": {
@@ -86,7 +87,8 @@
         },
         "type": {
           "title": "Type",
-          "const": "npc",
+          "default": "event",
+          "const": "event",
           "type": "string"
         }
       },
@@ -123,6 +125,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "island_shop",
           "const": "island_shop",
           "type": "string"
         }
@@ -160,6 +163,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "tree",
           "const": "tree",
           "type": "string"
         }
@@ -187,6 +191,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "freestanding",
           "const": "freestanding",
           "type": "string"
         }
@@ -212,6 +217,7 @@
         },
         "type": {
           "title": "Type",
+          "default": "on_enemy",
           "const": "on_enemy",
           "type": "string"
         }
@@ -247,7 +253,46 @@
         },
         "type": {
           "title": "Type",
+          "default": "salvage_treasure",
           "const": "salvage_treasure",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "zmb_file_path",
+        "zmb_actor_index"
+      ]
+    },
+    "DigSpot": {
+      "title": "DigSpot",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "The name of the item check",
+          "type": "string"
+        },
+        "contents": {
+          "title": "Contents",
+          "description": "The item that this check contains",
+          "type": "string"
+        },
+        "zmb_file_path": {
+          "title": "Zmb File Path",
+          "description": "File path to the zmb the chest is on",
+          "type": "string"
+        },
+        "zmb_actor_index": {
+          "title": "Zmb Actor Index",
+          "description": "Index of the chest in the NPCA section of the zmb file",
+          "type": "integer"
+        },
+        "type": {
+          "title": "Type",
+          "default": "dig_spot",
+          "const": "dig_spot",
           "type": "string"
         }
       },
@@ -299,7 +344,7 @@
                 "$ref": "#/definitions/Chest"
               },
               {
-                "$ref": "#/definitions/Npc"
+                "$ref": "#/definitions/Event"
               },
               {
                 "$ref": "#/definitions/IslandShop"
@@ -315,6 +360,9 @@
               },
               {
                 "$ref": "#/definitions/SalvageTreasure"
+              },
+              {
+                "$ref": "#/definitions/DigSpot"
               }
             ]
           }

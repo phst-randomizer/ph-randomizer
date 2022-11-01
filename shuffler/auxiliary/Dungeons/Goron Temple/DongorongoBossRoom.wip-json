@@ -3,6 +3,7 @@
   "name": "GoronTemple",
   "rooms": [
     {
+      "name": "Main",
       "chests": [
         {
           "name": "Sand",
@@ -19,9 +20,12 @@
         {
           "name": "ToDungeon",
           "link": ""
+        },
+        {
+          "name": "ToCrimsonineRoom",
+          "link": ""
         }
-      ],
-      "name": "Main"
+      ]
     }
   ]
 }

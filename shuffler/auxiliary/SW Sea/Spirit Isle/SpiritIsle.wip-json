@@ -1,0 +1,72 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "SpiritIsle",
+  "rooms": [
+    {
+      "name": "Inside",
+      "chests": [
+        {
+          "name": "Power1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Power2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Wisdom1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Widsom2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Courage1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "Courage2",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "Outside",
+      "chests": [
+        {
+          "name": "LeftSide",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "AfterJumps",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "Grotto",
+          "link": ""
+        },
+        {
+          "name": "Ship",
+          "link": ""
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@
   "name": "FrostIsle",
   "rooms": [
     {
+      "name": "Port",
       "chests": [
         {
           "name": "LedgeChest",
@@ -40,13 +41,236 @@
           "name": "ToCave",
           "link": ""
         }
-      ],
-      "name": "Port"
+      ]
     },
     {
+      "name": "AnoukiChiefHouse",
       "chests": [],
-      "doors": [],
-      "name": "AnoukiChiefHouse"
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "AnoukiRedCauldronHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "AnoukiBrownCauldronHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "AnoukiVillage",
+      "chests": [
+        {
+          "name": "BigGoldRupee",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "DoboSign",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "FofoSign",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "GossipStoneHint",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "BottomLeftIsland",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToSouth",
+          "link": ""
+        },
+        {
+          "name": "GumoHouse",
+          "link": ""
+        },
+        {
+          "name": "ArooHouse",
+          "link": ""
+        },
+        {
+          "name": "MazoHouse",
+          "link": ""
+        },
+        {
+          "name": "DoboHouse",
+          "link": ""
+        },
+        {
+          "name": "KumuHouse",
+          "link": ""
+        },
+        {
+          "name": "FofoHouse",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "GumoHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "ArooHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "MazoHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "DoboHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "KumuHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "FofoHouse",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "IceCave",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Left",
+          "link": ""
+        },
+        {
+          "name": "Right",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "GreatIceField",
+      "chests": [
+        {
+          "name": "DropDown",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "DoubleLeft",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "DoubleRight",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "RightHigher",
+          "type": "",
+          "contents": ""
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToCave",
+          "link": ""
+        },
+        {
+          "name": "ToNorthLedgeRight",
+          "link": ""
+        },
+        {
+          "name": "ToNorthLedgeLeft",
+          "link": ""
+        },
+        {
+          "name": "ToNorth",
+          "link": ""
+        }
+      ]
+    },
+    {
+      "name": "DungeonEntrance",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToSouth",
+          "link": ""
+        },
+        {
+          "name": "ToSouthLedgeRight",
+          "link": ""
+        },
+        {
+          "name": "ToSouthLedgeLeft",
+          "link": ""
+        },
+        {
+          "name": "ToDungeon",
+          "link": ""
+        }
+      ]
     }
   ]
 }

@@ -3,14 +3,14 @@
   "name": "IceTemple",
   "rooms": [
     {
+      "name": "F1",
       "chests": [],
       "doors": [
         {
           "name": "Exit",
           "link": ""
         }
-      ],
-      "name": "F1"
+      ]
     }
   ]
 }

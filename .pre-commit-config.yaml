@@ -19,7 +19,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black
-    rev: 22.6.0
+    rev: 22.10.0
     hooks:
       - id: black
 
@@ -29,7 +29,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.37.3
+    rev: v3.2.0
     hooks:
       - id: pyupgrade
         args:
@@ -59,7 +59,6 @@ repos:
         additional_dependencies:
           - flake8-black
           - flake8-bugbear
-          - flake8-docstrings
           - flake8-isort
           - flake8-quotes
         args:

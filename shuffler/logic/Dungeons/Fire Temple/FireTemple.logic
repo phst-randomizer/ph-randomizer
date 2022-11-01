@@ -36,12 +36,11 @@ area FireTemple:
       enemy Bubble2
 
     node StairsBottomLeft:
-      door ToF2BottomRight
+      door ToF2BottomLeft
 
     TopLeft -> MiddleLeft: (item Boomerang | item Bombchus | item Bombs | (item Hammer & setting HammerClip))
     MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
     MiddleLeft -> BottomLeftArena
-    StairsBottomLeft -> BottomLeftArena
     BottomLeftArena -> StairsBottomLeft: (defeated Bubble1 & defeated Bubble2)
     BottomLeftArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
 
@@ -65,6 +64,7 @@ area FireTemple:
     TopRight -> TopLeft: (item Boomerang | item Bow | item Bombs | item GrapplingHook | item Hammer)
 
     node BottomLeft:
+      door ToF1BottomLeft
       enemy FireKeese1
       enemy FireKeese2
       enemy FireKeese3
@@ -107,6 +107,10 @@ area FireTemple:
       enemy YellowChuChu1
       enemy YellowChuChu2
 
+    node AboveArena:
+      enemy FireBubble1
+      enemy FireBubble2
+
     RightSide -> LockedF3Door
     BossKeyHoleHallway -> LockedF3Door
     LockedF3Door -> RightSide: open FireKey
@@ -120,7 +124,8 @@ area FireTemple:
     node TopChest:
       chest BossKeyChest
 
-    BossKeyHoleHallway <-> TopChest: (defeated FireKeese4 & defeated FireKeese5 & defeated YellowChuChu1 & defeated YellowChuChu2 & item Boomerang)
+    BossKeyHoleHallway -> AboveArena: (defeated FireKeese4 & defeated FireKeese5 & defeated YellowChuChu1 & defeated YellowChuChu2)
+    AboveArena -> TopChest: (defeated FireBubble1 & defeated FireBubble2 & item Boomerang)
 
   room F4:
     node Main:
