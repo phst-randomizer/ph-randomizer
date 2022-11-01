@@ -85,9 +85,13 @@ jobs:
       - name: Run the CI tool
         run: |
           shopt -s globstar
+          failed=0
           for file in **/*.logic; do
-            ./tmcr-newlogic-ci "$file"
+            ./tmcr-newlogic-ci "$file" || failed=1
           done;
+          if [[ $failed != 0 ]]; then
+            exit 1;
+          fi
 
       # Run more advanced checks
       - name: Checkout rando-shuffler repo
@@ -127,11 +131,12 @@ jobs:
           for file in **/*.logic; do
             echo "$file... ";
             status=0
-            rando-shuffler/target/debug/rando_shuffler "$file" || status=1
+            rando-shuffler/target/debug/rando_shuffler "$file" > /dev/null || status=1
             if [[ $status != 0 ]]; then
               failed=$((failed + 1));
+              echo -e "\033[0;31mFAILED\033[0m"
             else
-              echo " PASSED";
+              echo -e "\033[0;32mPASSED\033[0m"
             fi
             echo "-------------------------------"
             echo ""
