@@ -28,7 +28,7 @@ area TempleOfTheOceanKing:
 
     TopRight -> BigChestSwitch: (item GrapplingHook | item Boomerang | item Bow)
 
-    node DefeatPhantom
+    node DefeatPhantom:
       chest PhantomKiller
 
     TODO -> DefeatPhantom: (defeated RedPhantomRight & defeated RedPhantomLeft)
