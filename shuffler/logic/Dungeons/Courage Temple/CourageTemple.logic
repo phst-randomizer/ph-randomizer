@@ -66,12 +66,12 @@ area CourageTemple:
       door ToB1InvisibleMaze
 
     node PolsSquarePedestal:
-      gain SquareCrystal[PolsVoice]
+      gain SquarePedestalPolsVoice
     # Placed the Crystal on the pedestal
 
     PolsVoiceArea <-> PolsSquarePedestal: (state SquareCrystal & lose SquareCrystal)
     # Can't put the crystal on the pedestal if we don't have it, and after placing it, we don't have it anymore
-    PolsVoiceArea <-> AfterSquareCrystal: state SquareCrystal[PolsVoice]
+    PolsVoiceArea <-> AfterSquareCrystal: state SquarePedestalPolsVoice
     # The crystal has to be placed on that pedestal to go through
     
 
@@ -92,10 +92,10 @@ area CourageTemple:
       door ToF2Octorok
       
     node LeftSquarePedestal:
-      gain SquarePedestal[BottomLeft]
+      gain SquarePedestalBottomLeft
       
     BottomLeft <-> LeftSquarePedestal: (state SquarePedestal & lose SquarePedestal)
-    BottomLeft <-> StairsToF2Octorok: state SquareCrystal[BottomLeft]
+    BottomLeft <-> StairsToF2Octorok: state SquarePedestalBottomLeft
 
 
     node BottomRightArea:

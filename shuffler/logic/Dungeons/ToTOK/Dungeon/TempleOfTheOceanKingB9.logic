@@ -12,11 +12,11 @@ area TempleOfTheOceanKing:
       door ToB8Left
       
     node SquareCrystalPedestal:
-      gain SquareCrystal[Stairway]
+      gain SquarePedestalStairway
       
     Main -> SquareCrystalPedestal: (state SquareCrystal & lose SquareCrystal)
     
-    Main <-> TopLeft: state SquareCrystal[Stairway]
+    Main <-> TopLeft: state SquarePedestalStairway
       
     node DefeatReaper:
       chest ReaperKiller
@@ -38,8 +38,8 @@ area TempleOfTheOceanKing:
       door ToB9ChartRoom
       
     node ThreePedestals:
-      gain SquareCrystal[AllSet]
+      gain PedestalAllSet
       
     Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal & lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
       
-    Main <-> ToChartRoom: state SquareCrystal[AllSet]
+    Main <-> ToChartRoom: state PedestalAllSet
