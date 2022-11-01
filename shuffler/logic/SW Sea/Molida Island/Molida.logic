@@ -33,6 +33,9 @@ area Molida:
       exit AfterBoss
       exit BlueWarp
 
+    node Island:
+      chest IslandChest
+
     node Statues:
       flag MolidaDoorOpen
 
@@ -41,6 +44,7 @@ area Molida:
 
     TempleFront <-> TempleEntrance: flag MolidaDoorOpen
     TempleFront -> Hole: item Shovel
+    TempleFront <-> Island: item GrapplingHook
 
     # One statue requires bow or boomerang, so if we can turn on this statue, we can turn them all on
     TempleFront <-> Statues: (defeated GeozardLeft & defeated GeozardRight & (item Bow | item Boomerang))
@@ -100,12 +104,12 @@ area Molida:
       exit HoleToChest
       chest ChestAfterHole
 
-    ChestLedgeLeft -> AfterDoor
-    Ledge <-> AfterDoor: item SunKey
+    ChestLedgeLeft -> AfterSunDoor
+    Ledge <-> AfterSunDoor: item SunKey
     Ledge -> MainLower
     MainLower -> Arena
     MainLower -> LedgeRight: item GrapplingHook
-    Arena -> UpRightDoor: defeated Geozard
+    Arena -> DoorAfterArena: defeated Geozard
     MainUp -> MainLower
     MainLower -> MainUp: (item Bombs | item Bombchus)
 

@@ -54,7 +54,7 @@ area CourageTemple:
       door ToF2ElectricMaze
 
     PolsVoiceArea -> Entrance
-    Entrace -> PolsVoiceArea: flag PolsDoorOpen
+    Entrance -> PolsVoiceArea: flag PolsDoorOpen
     PolsVoiceArea <-> PolsVoiceKill: defeated PolsVoice
 
     PolsVoiceArea -> LockedDoorToF2
@@ -176,7 +176,7 @@ area CourageTemple:
     node StairsToF1TopRight:
       door ToF1TopRight
 
-    AfterTorches <-> StairsToF1: (state BlueSwitch & lose RedSwitch)
+    AfterTorches <-> StairsToF1TopRight: (state BlueSwitch & lose RedSwitch)
 
 
   room F2:

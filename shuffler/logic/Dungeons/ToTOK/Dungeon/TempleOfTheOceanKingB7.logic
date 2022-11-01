@@ -20,7 +20,7 @@ area TempleOfTheOceanKing:
 
     TopRight -> RightPhantom
     BottomRight -> RightPhantom
-    Main -> TopRight: item GrapplingHook
+    Left -> TopRight: item GrapplingHook
     TopRight <-> BottomRight: flag RightFire
 
     node BigChestSwitch:
@@ -31,4 +31,4 @@ area TempleOfTheOceanKing:
     node DefeatPhantom:
       chest PhantomKiller
 
-    TODO -> DefeatPhantom: (defeated RedPhantomRight & defeated RedPhantomLeft)
+    Left <-> DefeatPhantom: (defeated RedPhantomRight & defeated RedPhantomLeft)

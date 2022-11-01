@@ -6,7 +6,7 @@
       "chests": [
         {
           "name": "RedGirl",
-          "type": "npc",
+          "type": "event",
           "contents": "treasure_map_SE_3",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
@@ -47,9 +47,16 @@
     {
       "chests": [
         {
+          "name": "IslandChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
           "name": "Cliff",
           "type": "chest",
-          "contents": "",
+          "contents": "random_treasure",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }
@@ -57,15 +64,19 @@
       "doors": [
         {
           "name": "ToCaveSystemRight",
-          "link": ""
+          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
         },
         {
           "name": "ToLowerIsland",
-          "link": ""
+          "link": "Main.Town.Ledge.ToUpperIsland"
         },
         {
           "name": "ToCaveSystemLeft",
-          "link": ""
+          "link": "Molida.CaveSystem.AfterSunDoor.ExitUpLeft"
+        },
+        {
+          "name": "HoleToChest",
+          "link": "Molida.CaveSystem.ChestLedgeLeft.HoleToChest"
         }
       ],
       "name": "UpperIsland"
