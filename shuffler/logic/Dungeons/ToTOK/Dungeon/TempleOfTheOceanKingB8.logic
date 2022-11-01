@@ -1,4 +1,4 @@
-area TempleOfTheOceanKing
+area TempleOfTheOceanKing:
   room B8:
     node Main:
       door ToB7BottomLeft
