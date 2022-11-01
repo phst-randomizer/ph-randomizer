@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "CraykBossRoom",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Sand",
+          "type": "chest",
+          "contents": "sand_2m",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "SpiritOfCourage",
+          "type": "chest",
+          "contents": "courage_spirit",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "HeartContainer",
+          "type": "chest",
+          "contents": "heart_container",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToDungeon",
+          "link": "CourageTemple.F3.Main.ToBoss"
+        },
+        {
+          "name": "AfterBoss",
+          "link": "Molida.UpperIsland.TempleFront.AfterBoss"
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

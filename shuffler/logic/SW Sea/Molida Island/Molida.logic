@@ -31,12 +31,13 @@ area Molida:
       enemy GeozardLeft
       enemy GeozardRight
       exit AfterBoss
+      exit BlueWarp
 
     node Statues:
       flag MolidaDoorOpen
 
     node TempleEntrance:
-      door FireTemple
+      door CourageTemple
 
     TempleFront <-> TempleEntrance: flag MolidaDoorOpen
     TempleFront -> Hole: item Shovel
