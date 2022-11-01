@@ -1,6 +1,6 @@
 area TempleOfTheOceanKing:
   room B9ChartRoom:
-    node Main
+    node Main:
       door ToB9
       door ToB10
       exit BlueWarp
