@@ -22,7 +22,7 @@ area Molida:
       door ToCaveSystemRight
       chest Cliff
       door ToLowerIsland
-    
+
     node Hole:
       entrance HoleToChest
 

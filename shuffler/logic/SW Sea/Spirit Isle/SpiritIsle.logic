@@ -7,7 +7,7 @@ area SpiritIsle:
 
     node Wisdom1: chest Wisdom1
     node Wisdom2: chest Widsom2
-    
+
     node Courage1: chest Courage1
     node Courage2: chest Courage2
 
@@ -20,7 +20,7 @@ area SpiritIsle:
     Courage1 -> Courage2: item CourageGem20
 
   room Outside:
-    node Main: 
+    node Main:
       chest LeftSide
       door Grotto
       door Ship
