@@ -1,14 +1,14 @@
-area BlaazBossRoom:
+area CyclokBossRoom:
   room Main:
     node Fight:
       door ToDungeon
-      enemy Blaaz
+      enemy Cyclok
 
     node BossDefeat:
       chest Sand
-      chest SpiritOfPower
+      chest SpiritOfWisdom
       chest HeartContainer
-      flag FireTempleBeaten
+      flag WindTempleBeaten
       entrance ExitWarp
 
-    Fight -> BossDefeat: defeated Blaaz
+    Fight -> BossDefeat: defeated Cyclok

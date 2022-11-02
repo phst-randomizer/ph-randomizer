@@ -20,7 +20,7 @@
         },
         {
           "name": "PhantomKey",
-          "type": "freestanding",
+          "type": "on_enemy",
           "contents": "small_key"
         },
         {
