@@ -53,9 +53,9 @@ area Gust:
 
     node Ledge:
       door ToTempleFrontLedgeLeft
-      enemy MiniBlin1 
-      enemy MiniBlin2 
-      enemy MiniBlin3 
+      enemy MiniBlin1
+      enemy MiniBlin2
+      enemy MiniBlin3
       enemy MiniBlin4
 
     node LedgeChest:
