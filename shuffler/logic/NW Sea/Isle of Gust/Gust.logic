@@ -2,7 +2,6 @@ area Gust:
   room LowerIsland:
     node BeforeCave:
       door Boat
-      door ToBombableGrotto
       door ToCaveLeft
       mail Mailbox
       enemy MiniBlinLeft1
@@ -29,12 +28,18 @@ area Gust:
       enemy RedChuChu5
       enemy RedChuChu6
 
+    node BombableWall:
+      door ToBombableGrotto
+
     node DigSpotsStart:
       chest DigSpot1
       chest DigSpot2
       chest DigSpot3
 
-    BeforeCave -> DigSpotsStart: item Shovel
+    BeforeCave <-> DigSpotsStart: item Shovel
+    BeforeCave -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> BeforeCave
+
 
 
     node AfterCave:
