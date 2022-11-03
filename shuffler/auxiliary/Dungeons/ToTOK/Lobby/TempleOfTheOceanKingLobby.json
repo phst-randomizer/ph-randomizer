@@ -32,6 +32,10 @@
         {
           "name": "B9BlueWarp",
           "link": "TempleOfTheOceanKing.B9BlueWarp.Main.BlueWarp"
+        },
+        {
+          "name": "B13BlueWarp",
+          "link": "TempleOfTheOceanKing.B13.Main.BlueWarp"
         }
       ],
       "name": "Main"

@@ -6,6 +6,7 @@ area TempleOfTheOceanKingLobby:
       exit B3BlueWarp
       exit B6YellowWarp
       exit B9BlueWarp
+      exit B13BlueWarp
 
     node PhantomHourglass:
       chest Hourglass

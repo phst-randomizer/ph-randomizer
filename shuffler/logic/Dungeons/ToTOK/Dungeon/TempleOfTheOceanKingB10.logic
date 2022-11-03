@@ -3,12 +3,12 @@ area TempleOfTheOceanKing:
     node TopOuter:
       door ToB9ChartRoom
       chest PhantomKey # just push the boulder
-      enemy YellowPhantomRight
+      enemy GoldPhantomRight
     
     node BottomLeftOuter
       
     node LeftPhantom:
-      enemy YellowPhantomLeft
+      enemy GoldPhantomLeft
       
     TopOuter -> LeftPhantom
     BottomLeftOuter -> LeftPhantom
@@ -49,7 +49,7 @@ area TempleOfTheOceanKing:
     DefeatEyes -> Center
     DefeatEyes -> BottomLeftOuter
     
-    MiddleRing <-> DefeatPhantom: (defeated YellowPhantomRight & defeated YellowPhantomLeft)
+    MiddleRing <-> DefeatPhantom: ((defeated GoldPhantomRight & defeated GoldPhantomLeft) | item GrapplingHook)
     
     
     node BrokenPlate:
