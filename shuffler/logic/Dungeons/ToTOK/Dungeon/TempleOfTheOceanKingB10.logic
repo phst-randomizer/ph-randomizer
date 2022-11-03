@@ -20,7 +20,7 @@ area TempleOfTheOceanKing:
       enemy PhantomEye2
       
     TopOuter -> MiddleRing: (item Bombs | item Bombchus)
-    MiddleRing -> (item Bombs | item Bombchus | item Shovel)
+    MiddleRing -> TopOuter: (item Bombs | item Bombchus | item Shovel)
       
       
     node Switch:
