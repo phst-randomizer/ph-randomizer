@@ -204,8 +204,15 @@ def parse_edge(
     if ':' in line:
         edge_content = line.split(':')[1].strip()
 
-    node1 = [node for node in nodes if node.name == source_node_name][0]
-    node2 = [node for node in nodes if node.name == dest_node_name][0]
+    try:
+        node1 = [node for node in nodes if node.name == source_node_name][0]
+    except IndexError:
+        raise Exception(f'ERROR in edge "{line}": node {source_node_name} not found!')
+    try:
+        node2 = [node for node in nodes if node.name == dest_node_name][0]
+    except IndexError:
+        raise Exception(f'ERROR in edge "{line}": node {dest_node_name} not found!')
+
     if edge_direction == '->':
         if node1.name not in edges:
             edges[node1.name] = []
