@@ -152,7 +152,7 @@ jobs:
         with:
           files: shuffler/auxiliary/**/*.json
 
-  logic-aux-pydantic-validators:
+  logic-aux-validators:
     name: Run more advanced logic/aux data validators
     needs:
       - check-logic
@@ -195,7 +195,7 @@ jobs:
 
   tests:
     name: Run tests
-    needs: check-logic-aux-link
+    needs: logic-aux-validators
     strategy:
       fail-fast: false
       matrix:
@@ -440,7 +440,7 @@ jobs:
       - tests
       - check-logic
       - check-aux-data
-      - check-logic-aux-link
+      - logic-aux-validators
       - test-desmume
     # Only create a release if a tag was pushed
     if: "startsWith(github.ref, 'refs/tags/')"
