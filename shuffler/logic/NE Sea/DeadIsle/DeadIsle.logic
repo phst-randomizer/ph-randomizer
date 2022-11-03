@@ -1,4 +1,103 @@
 area DeadIsle:
-  room Main:
-    node Main: 
-      door Temp
+  room Outside:
+    node Boat: 
+      door Boat
+      door ToCave
+      mail MailBox
+      
+    node Main:
+      door ToCave
+      enemy LikeLikeRed
+      enemy LikeLikeBlue1
+      enemy LikeLikeBlue2
+      enemy StalfosMain1
+      enemy StalfosMain2
+      enemy StalfosMain3
+      enemy StalfosMain4
+      enemy StalfosMain5
+      enemy StalfosMain6
+      enemy StalfosMain7
+      enemy StalfosMain8
+      door Pyramid
+      
+    Main -> Boat
+    
+    
+    node Hole:
+      entrance ToBoulderCave
+      
+    Main -> Hole: item Shovel
+    
+    
+    node Head:
+      door ToBoulderCave
+      chest HeadChest
+      
+    node PillarSwitch:
+      flag GraveyardDoor
+      
+    Head -> PillarSwitch: (item Bow | item Boomerang)
+    Head -> Main
+    
+    
+    node Graveyard:
+      enemy StalfosGraveyard1
+      enemy StalfosGraveyard2
+      enemy StalfosGraveyard3
+      flag PathOfCorridor
+    
+    Main <-> Graveyard: flag GraveyardDoor
+    
+    
+    node Island:
+      door Stairs
+      chest RegalNecklace
+    
+  
+  room BottomCave:
+    node Main:
+      door ToBoat
+      hint MiddleBook
+      hint Vol1
+      hint Vol2
+      hint Vol3
+      hint Vol4
+      door ToMain
+      
+      
+  room BoulderCave:
+    node Main:
+      exit Hole
+      enemy Keese1
+      enemy Keese2
+      enemy Keese3
+      enemy Keese4
+      enemy Keese5
+      enemy Keese6
+      door ToHead
+      
+    node BombableWall:
+      door BombableDoor
+      
+    Entrance -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> Entrance
+    
+    
+  room RupeeRoom:
+    node Main:
+      door Exit
+      chest RupeeChest
+      
+      
+  room PhantomCorridor:
+    node Main:
+      door Entrance
+      enemy Keese1
+      enemy Keese2
+    
+    node Brant:
+      door Exit
+      
+    Main -> Brant: flag PathOfCorridor
+    Brant -> Main
+    # Add the spirits as a requirement, as Brant mentions them before opening the door

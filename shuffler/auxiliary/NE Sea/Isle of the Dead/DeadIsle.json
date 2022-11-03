@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "DeadIsle",
+  "rooms": [
+    {
+      "name": "Outside",
+      "chests": [
+        {
+          "name": "HeadChest",
+          "type": "chest",
+          "contents": "treasure_map_ne_5",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "RegalNecklace",
+          "type": "chest",
+          "contents": "regal_necklace",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": "Sea.NE.DeadIslePort.DeadIsle"
+        }
+      ]
+    },
+    {
+      "name": "BottomCave",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToBoat",
+          "link": "Outside.Boat.ToCave"
+        },
+        {
+          "name": "ToMain",
+          "link": "Outside.Main.ToCave"
+        }
+      ]
+    },
+    {
+      "name": "BoulderCave",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Hole",
+          "link": "Outside.Hole.ToBoulderCave"
+        },
+        {
+          "name": "ToHead",
+          "link": "Outside.Head.ToBoulderCave"
+        }
+      ]
+    },
+    {
+      "name": "RupeeRoom",
+      "chests": [
+        {
+          "name": "RupeeChest",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "GraveyardCave.BombableWall.BombableDoor"
+        }
+      ]
+    },
+    {
+      "name": "PhantomCorridor",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Outside.Main.Pyramid"
+        },
+        {
+          "name": "Brant",
+          "link": "Outside.Island.Stairs"
+        }
+      ]
+    }
+  ]
+}
+
