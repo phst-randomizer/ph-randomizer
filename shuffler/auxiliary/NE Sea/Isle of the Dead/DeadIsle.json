@@ -24,6 +24,30 @@
         {
           "name": "Boat",
           "link": "Sea.NE.DeadIslePort.DeadIsle"
+        },
+        {
+          "name": "ToCaveBoat",
+          "link": "BottomCave.Main.ToBoat"
+        },
+        {
+          "name": "ToCaveMain",
+          "link": "BottomCave.Main.ToMain"
+        },
+        {
+          "name": "Pyramid",
+          "link": "PhantomCorridor.Main.Entrance"
+        },
+        {
+          "name": "ToBoulderCaveHole",
+          "link": "BoulderCave.Main.Hole"
+        },
+        {
+          "name": "ToBoulderCaveHead",
+          "link": "BoulderCave.Main.Head"
+        },
+        {
+          "name": "Stairs",
+          "link": "PhantomCorridor.Brant.Exit"
         }
       ]
     },
@@ -33,11 +57,11 @@
       "doors": [
         {
           "name": "ToBoat",
-          "link": "Outside.Boat.ToCave"
+          "link": "Outside.Boat.ToCaveBoat"
         },
         {
           "name": "ToMain",
-          "link": "Outside.Main.ToCave"
+          "link": "Outside.Main.ToCaveMain"
         }
       ]
     },
@@ -52,6 +76,10 @@
         {
           "name": "ToHead",
           "link": "Outside.Head.ToBoulderCave"
+        },
+        {
+          "name": "BombableDoor",
+          "link": "RupeeRoom.Main.Exit"
         }
       ]
     },

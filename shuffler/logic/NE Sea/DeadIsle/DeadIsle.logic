@@ -2,11 +2,11 @@ area DeadIsle:
   room Outside:
     node Boat: 
       door Boat
-      door ToCave
+      door ToCaveBoat
       mail MailBox
       
     node Main:
-      door ToCave
+      door ToCaveMain
       enemy LikeLikeRed
       enemy LikeLikeBlue1
       enemy LikeLikeBlue2
@@ -24,13 +24,13 @@ area DeadIsle:
     
     
     node Hole:
-      entrance ToBoulderCave
+      entrance ToBoulderCaveHole
       
     Main -> Hole: item Shovel
     
     
     node Head:
-      door ToBoulderCave
+      door ToBoulderCaveHead
       chest HeadChest
       
     node PillarSwitch:
@@ -52,6 +52,8 @@ area DeadIsle:
     node Island:
       door Stairs
       chest RegalNecklace
+      
+    Island -> Main
     
   
   room BottomCave:
@@ -66,7 +68,7 @@ area DeadIsle:
       
       
   room BoulderCave:
-    node Main:
+    node Entrance:
       exit Hole
       enemy Keese1
       enemy Keese2
