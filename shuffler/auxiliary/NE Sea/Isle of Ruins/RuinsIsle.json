@@ -1,6 +1,6 @@
 {
   "$schema": "../../../aux_schema.json",
-  "name": "DeadIsle",
+  "name": "RuinsIsle",
   "rooms": [
     {
       "name": "Outside",
