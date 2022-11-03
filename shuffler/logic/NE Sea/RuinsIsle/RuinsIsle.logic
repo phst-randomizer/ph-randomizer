@@ -1,0 +1,4 @@
+area RuinsIsle:
+  room Main:
+    node Main: 
+      door Temp

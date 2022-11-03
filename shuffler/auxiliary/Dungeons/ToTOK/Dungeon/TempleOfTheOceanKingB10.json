@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "PhantomKey",
+          "contents": "small_key",
+          "type": "on_enemy"
+        },
+        {
+          "name": "PhantomKiller",
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "EyeKiller",
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "ChestAfterHammer",
+          "type": "chest",
+          "contents": "treasure_map_ne_7",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB9ChartRoom",
+          "link": "B9ChartRoom.Main.ToB10"
+        },
+        {
+          "name": "ToB11",
+          "link": "B11.Main.ToB10"
+        }
+      ],
+      "name": "B10"
+    }
+  ]
+}

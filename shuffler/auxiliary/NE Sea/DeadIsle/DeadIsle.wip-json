@@ -1,0 +1,5 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "DeadIsle",
+  "rooms": []
+}

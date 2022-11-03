@@ -1,0 +1,4 @@
+area DeadIsle:
+  room Main:
+    node Main: 
+      door Temp

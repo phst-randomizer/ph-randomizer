@@ -1,0 +1,4 @@
+area MutohTemple:
+  room Main:
+    node Main: 
+      door Temp
