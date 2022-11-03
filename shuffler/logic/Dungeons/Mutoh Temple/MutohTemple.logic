@@ -1,4 +1,85 @@
 area MutohTemple:
-  room Main:
-    node Main: 
-      door Temp
+  room F1:
+    node Entrance: 
+      gain WaterUp
+      door Exit
+      enemy Keese1
+      enemy Keese2
+      enemy Keese3
+      enemy Keese4
+      enemy StalfosRight1
+      enemy StalfosRight2
+      enemy StalfosLeft1
+      enemy StalfosLeft2
+      
+    node Up:
+      door ToF1Top
+      
+    Entrance -> Up: (item Bombs & defeated StalfosRight1 & defeated StalfosRight2 & defeated StalfosLeft1 & defeated StalfosLeft2)
+    
+    
+    node Middle:
+      door ToB1Bottom
+      enemy Turtle1
+      enemy Turtle2
+      enemy Turtle3
+      door ToF2
+      
+    node HammeredPlate:
+      door ToB1Middle
+      
+    Middle -> HammeredPlate: item Hammer
+    
+    
+  room B1:
+    node Up:
+      door ToF1Top
+      enemy RedStalfos1
+      enemy RedStalfos2
+      
+    node BottomStairsF1:
+      door ToF1Bottom
+      
+    Up <-> BottomStairsF1: (state WaterUp & lose WaterDown)
+      
+    node MiddleStairsF1:
+      door ToF1Middle
+      
+   
+  room F2:
+    node Right:
+      door ToF1
+      enemy LikeLikeGreen1
+      enemy LikeLikeGreen2
+      enemy LikeLikeGreen3
+      chest LikeLikeChest # random treasure
+      
+    node Bottom:
+      door ToF3
+      
+    Right -> Bottom
+    
+    
+    node HammerTutorial:
+      enemy Turtle1
+      enemy Turtle2
+      enemy Turtle3
+      hint GossipStone
+      
+    Bottom -> HammerTutorial: item Hammer
+    HammerTutorial -> Right
+    
+    
+  room F3:
+    node Stairs:
+      door ToF2
+      enemy RedStalfos1
+      enemy RedStalfos2
+      enemy LikeLikeGreen
+      
+    node Reward:
+      chest Hammer
+      
+    Stairs <-> Reward: (defeated RedStalfos1 & defeated RedStalfos2 & defeated LikeLikeGreen)
+      
+    
