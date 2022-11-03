@@ -152,8 +152,8 @@ jobs:
         with:
           files: shuffler/auxiliary/**/*.json
 
-  check-logic-aux-link:
-    name: Verify consistency between logic and aux data
+  logic-aux-pydantic-validators:
+    name: Run more advanced logic/aux data validators
     needs:
       - check-logic
       - check-aux-data
