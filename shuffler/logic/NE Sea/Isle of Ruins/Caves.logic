@@ -2,9 +2,9 @@ area RuinsIsle:
   room GeozardCave:
     node RightDoor:
       door ToBoat
-      
+
     node Arena:
       enemy Geozard
-      
+
     node LeftDoor:
       door ToMazeUpper

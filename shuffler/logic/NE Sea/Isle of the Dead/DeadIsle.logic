@@ -1,10 +1,10 @@
 area DeadIsle:
   room Outside:
-    node Boat: 
+    node Boat:
       door Boat
       door ToCaveBoat
       mail MailBox
-      
+
     node Main:
       door ToCaveMain
       enemy LikeLikeRed
@@ -19,43 +19,43 @@ area DeadIsle:
       enemy StalfosMain7
       enemy StalfosMain8
       door Pyramid
-      
+
     Main -> Boat
-    
-    
+
+
     node Hole:
       entrance ToBoulderCaveHole
-      
+
     Main -> Hole: item Shovel
-    
-    
+
+
     node Head:
       door ToBoulderCaveHead
       chest HeadChest
-      
+
     node PillarSwitch:
       flag GraveyardDoor
-      
+
     Head -> PillarSwitch: (item Bow | item Boomerang)
     Head -> Main
-    
-    
+
+
     node Graveyard:
       enemy StalfosGraveyard1
       enemy StalfosGraveyard2
       enemy StalfosGraveyard3
       flag PathOfCorridor
-    
+
     Main <-> Graveyard: flag GraveyardDoor
-    
-    
+
+
     node Island:
       door Stairs
       chest RegalNecklace
-      
+
     Island -> Main
-    
-  
+
+
   room BottomCave:
     node Main:
       door ToBoat
@@ -65,8 +65,8 @@ area DeadIsle:
       hint Vol3
       hint Vol4
       door ToMain
-      
-      
+
+
   room BoulderCave:
     node Entrance:
       exit Hole
@@ -77,29 +77,29 @@ area DeadIsle:
       enemy Keese5
       enemy Keese6
       door ToHead
-      
+
     node BombableWall:
       door BombableDoor
-      
+
     Entrance -> BombableWall: (item Bombs | item Bombchus)
     BombableWall -> Entrance
-    
-    
+
+
   room RupeeRoom:
     node Main:
       door Exit
       chest RupeeChest
-      
-      
+
+
   room PhantomCorridor:
     node Main:
       door Entrance
       enemy Keese1
       enemy Keese2
-    
+
     node Brant:
       door Exit
-      
+
     Main -> Brant: flag PathOfCorridor
     Brant -> Main
     # Add the spirits as a requirement, as Brant mentions them before opening the door

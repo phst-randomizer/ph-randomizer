@@ -4,70 +4,70 @@ area TempleOfTheOceanKing:
       door ToB9ChartRoom
       chest PhantomKey # just push the boulder
       enemy GoldPhantomRight
-    
+
     node BottomLeftOuter
-      
+
     node LeftPhantom:
       enemy GoldPhantomLeft
-      
+
     TopOuter -> LeftPhantom
     BottomLeftOuter -> LeftPhantom
     TopOuter <-> BottomLeftOuter: flag LeftSpikes
-    
-    
+
+
     node MiddleRing:
       enemy PhantomEye1
       enemy PhantomEye2
-      
+
     TopOuter -> MiddleRing: (item Bombs | item Bombchus)
     MiddleRing -> TopOuter: (item Bombs | item Bombchus | item Shovel)
-      
-      
+
+
     node Switch:
       flag LeftSpikes
-      
+
     TopOuter -> Switch: item Bombchus
     Middle -> Switch: (item Sword | item Boomerang | item Bombs | item Bombchus | item Bow | item Hammer)
-      
-      
+
+
     node Center:
       enemy PhantomEye3
-      
+
     MiddleRing -> Center: (item Sword | item Boomerang | item Bombs | item Bombchus | item Bow | item Hammer)
     Center -> MiddleRing
-      
-      
+
+
     node DefeatEyes:
       chest EyeKiller # big green rupee
-      
+
     node DefeatPhantom:
       chest PhantomKiller # big green rupee
-      
+
     TopOuter -> DefeatEyes: (item GrapplingHook & defeated PhantomEye1 & defeated PhantomEye2 & defeated PhantomEye3)
     DefeatEyes -> TopOuter
     DefeatEyes -> MiddleRing
     DefeatEyes -> Center
     DefeatEyes -> BottomLeftOuter
-    
+
     MiddleRing <-> DefeatPhantom: ((defeated GoldPhantomRight & defeated GoldPhantomLeft) | item GrapplingHook)
-    
-    
+
+
     node BrokenPlate:
       flag HammeredPlate
-      
+
     node HammeredChest:
       chest ChestAfterHammer # treasure map NE 7
-    
+
     BottomLeftOuter -> BrokenPlate: item Hammer
     Center -> HammeredChest: flag HammeredPlate
-    
-    
+
+
     node LockedDoor:
       lock ToTOKKey
-    
+
     node CenterStairs:
       door ToB11
-      
+
     Center -> LockedDoor
     CenterStairs -> LockedDoor
     LockedDoor -> Center: open ToTOKKey

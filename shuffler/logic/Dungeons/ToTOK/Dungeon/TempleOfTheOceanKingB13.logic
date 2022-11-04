@@ -4,7 +4,7 @@ area TempleOfTheOceanKing:
       chest NESeaChart
       door ToB12
       entrance BlueWarp
-      
+
     node Gauntlet:
       enemy BluePhantom1
       enemy BluePhantom2
@@ -15,10 +15,10 @@ area TempleOfTheOceanKing:
       enemy GoldPhantom1
       enemy GoldPhantom2
       enemy GoldPhantom3
-      
+
     node DefeatPhantom:
       door ToBridgeRoom
-      
+
     Main -> Gauntlet: item PhantomSword
     Gauntlet -> DefeatPhantom:
       and:

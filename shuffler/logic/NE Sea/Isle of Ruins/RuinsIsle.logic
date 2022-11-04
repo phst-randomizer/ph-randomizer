@@ -1,9 +1,9 @@
 area RuinsIsle:
   room BottomLeft:
-    node Boat: 
+    node Boat:
       door Boat
       door ToCaveBoat
-      
+
     node MazeUpper:
       door ToCaveUpper
       enemy LikeLikeRed1
@@ -11,47 +11,47 @@ area RuinsIsle:
       enemy LikeLikeRed3
       enemy LikeLikeBlue1
       enemy LikeLikeBlue2
-      
+
     MazeUpper -> Boat
-    
-    
+
+
     node AboveCave:
       door ToNorthShortcut
       door ToEastShortcut
-      
+
     AboveCave -> Boat
     AboveCave -> MazeUpper
-    
+
     node Underwater:
       door ToNorthUnderwater
       enemy LikeLikeGreen1
       enemy LikeLikeGreen2
       enemy LikeLikeRed
-      
+
     node ToNorthLeft:
       door ToNorthLeft
-      
+
     AboveMaze -> Underwater: flag KingKeyInserted
     ToNorthLeft <-> Underwater: flag KingKeyInserted
-    
-  
+
+
   room TopLeft:
     node FromSouthRight:
       door ToSouthRight
-    
+
     node FromSouthLeft:
       door ToSouthLeft
-    
+
     node Main:
       enemy TreeStalfos1
       enemy TreeStalfos2
       enemy LikeLikeRed
       door BreumeurPyramid
-    
+
     FromSouthRight -> Main
     FromSouthLeft -> Main
-    
-    
+
+
     node AfterBremeurBridge:
       enemy PirateBlin1
       enemy PirateBlin2
@@ -59,51 +59,51 @@ area RuinsIsle:
       enemy PirateBlin4
       enemy PirateBlin5
       door ToEastBottom
-    
+
     Main -> AfterBremeurBridge: flag BremeurBridge
     AfterBremeurBridge -> Main
-    
-    
+
+
     node ToSouth:
       enemy Stalfos
       door ToSouthShortcut
-    
+
     Main -> ToSouth
     AfterBremeurBridge -> ToSouth
-    
-    
+
+
     node FromEast:
       door ToEastTop
       enemy PirateBlin1
       enemy PirateBlin2
       enemy PirateBlin3
-      
+
     FromEast -> Main
-    
-    
+
+
     node ToSouthUnderwater:
       chest Underwater # power gem
       door ToSouthUnderwater
-      
+
     ToSouth -> ToSouthUnderwater: flag KingKeyInserted
-    
-    
+
+
     node NearPyramidUnderwater:
       enemy Stalfos1
       enemy Stalfos2
       door ToEastUnderwaterTop
-      
+
     node AfterBremeurUnderwater:
       door ToEastUnderwaterBottom
-      
+
     Main -> PyramidUnderwater: flag KingKeyInserted
     AfterBremeurBridge -> AfterBremeurUnderwater: flag KingKeyInserted
-    
-    
+
+
   room TopRight:
     node FromWest:
       door ToWestBottom
-    
+
     node Main:
       enemy PirateBlin1
       enemy PirateBlin2
@@ -111,50 +111,50 @@ area RuinsIsle:
       enemy Stalfos
       door ToWestTop
       door ToDoylanPyramid
-      
+
     node RangedStalfos:
       enemy Stalfos1
       enemy Stalfos2
       enemy Stalfos3
       enemy Stalfos4
       enemy Stalfos5
-    
+
     FromWest -> Main
-    
-    
+
+
     node Underwater:
       door ToWestUnderwaterTop
       chest Underwater # big green rupee
       door ToWestUnderwaterBottom
       door ToSouthLeftmost
-     
+
     Main -> Underwater: flag KingKeyInserted
-    
-    
+
+
     node Corridor:
       enemy Geozard1
       enemy Geozard2
-      
+
     node PyramidEntrance:
       door MutohTemple
       exit BlueWarpExit
-      
+
     Corridor <-> PyramidEntrance: (defeated Geozard1 & defeated Geozard2)
-    
-    
+
+
     node ChestLedge:
       door ToSouthMiddle
       chest LedgeChest # wisdom gem
-      
+
     node UnderwaterNearPyramids:
       chest NearDoylanPyramid # courage gem
       chest NearMutohPyramid # big red rupee
       door ToSouthRight
-    
+
     PyramidEntrance -> UnderwaterNearPyramid
     Main -> UnderwaterNearPyramid: flag KingKey
-    
-    
+
+
   room BottomRight:
     node Main:
       door ToNorthLeftmost
@@ -168,52 +168,52 @@ area RuinsIsle:
       enemy Stalfos8
       door ToMaxPyramid
       door ToNorthMiddle
-      
+
     node Corridor:
       enemy Stalfos
       door ToNorthCorridor
-      
+
     Main <-> Corridor: flag DoorToCorridorDoorToCorridor
-    
-    
+
+
     node ToWestShortcut:
       door ToWestShortcut
-      
+
     Main -> ToWestShortcut
-    
-    
+
+
     node FromNorthRight:
       door ToNorthRight
       enemy StalfosRight1
       enemy StalfosRight2
-  
-  
+
+
   room BremeurPyramid:
     node Entrance:
       door Exit
-      
+
     node Bremeur:
       flag BremeurBridge
-      
+
     node Obelisk:
       flag KingKeyInserted
-      
+
     Entrance -> Bremeur # would need to check for regal necklace
     Entrance -> Obelisk: item KingKey
-    
-    
+
+
   room DoylanPyramid:
     node Entrance:
       door Exit
       enemy Stalfos1
       enemy Stalfos2
       door ToDoylan
-      
+
     node F2:
       door ToF1
       chest KingKey
-      
-      
+
+
   room MaxPyramid:
     node Main:
       door Exit

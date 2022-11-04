@@ -58,7 +58,7 @@ area Gust:
 
     node DigSpotAfterCave:
       chest DigSpot4
-    
+
     AfterCave <-> DigSpotAfterCave: item Shovel
     node Ledge:
       door ToTempleFrontLedgeLeft

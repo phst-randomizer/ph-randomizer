@@ -3,11 +3,11 @@ area EoxBossRoom:
     node Fight:
       door ToDungeon
       enemy Eox
-      
+
     node BossDefeat:
       chest Sand
       chest HeartContainer
       flag MutohTempleBeaten
       door ToAquanineRoom
-      
+
     Fight -> BossDefeat: defeated Eox

@@ -171,7 +171,7 @@ area CourageTemple:
       gain RedSwitch
 
     AfterTorches <-> Target: (item Bow & item Boomerang)
-    AfterTorches <-> ColorSwitchRight: item Bow
+    AfterTorches <-> ColorSwitchRight: (item Bow & item Boomerang)
 
     node StairsToF1TopRight:
       door ToF1TopRight

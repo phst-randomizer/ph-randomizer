@@ -8,54 +8,53 @@ area TempleOfTheOceanKing:
       enemy PhantomEyeRight
       chest LeftPowerGem
       chest RightPowerGem
-    
+
     node RightSafe:
       door ToB11Right
-    
+
     node LeftStairs:
       door ToB11Left
       flag LeftOpen
-    
+
     LeftStairs <-> Main: LeftOpen
     RightSafe <-> Main: item Hammer
-    
-    
+
+
     node RightSwitch:
       chest SafeSwitch
-    
+
     RightSafe -> RightSwitch: item Hammer
     Main -> RightSwitch: (item Hammer & setting HammerClip)
     RightSwitch -> Main
-    
-    
+
+
     node PhantomGem:
       chest PhantomPowerGem
-      
+
     Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | item Bombs | item Bombchus | item Sword)
-    
-    
+
+
     node AfterTriforce:
       door ToB13
-      
+
     Main -> AfterTriforce (state ForceGem1 & state ForceGem2 & state ForceGem3)
-    
-    
+
+
     node FirstReaper:
       enemy ReaperLeft
-      
+
     node SecondReaper:
       enemy ReaperRighy
-      
+
     Main -> FirstReaper
     Main -> SecondReaper
-      
-      
+
+
     node DefeatReapers:
       chest ReaperKiller
-      
+
     node DefeatPhantom:
       chest PhantomKiller
-      
+
     Main -> DefeatReapers: (defeated ReaperLeft & defeated ReaperRight)
     Main -> DefeatPhantom: (defeated GoldPhantom & defeated RedPhantom & defeated BluePhantom)
-
