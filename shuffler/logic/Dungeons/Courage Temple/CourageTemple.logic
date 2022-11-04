@@ -25,7 +25,7 @@ area CourageTemple:
     LockedDoorToArena -> MoldormArena: open CourageKey
 
     MoldormArena -> StairsAfterMoldorm: (defeated Moldorm1 & defeated Moldorm2)
-    StairsAfterMoldorm -> MoldormArena
+    StairsAfterMoldorm -> MoldormArena: setting MirroredArenaDoors
 
 
     node PolsVoiceStairs:
