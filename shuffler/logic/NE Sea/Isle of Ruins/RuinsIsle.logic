@@ -137,6 +137,7 @@ area RuinsIsle:
       
     node PyramidEntrance:
       door MutohTemple
+      exit BlueWarpExit
       
     Corridor <-> PyramidEntrance: (defeated Geozard1 & defeated Geozard2)
     
@@ -145,7 +146,6 @@ area RuinsIsle:
       door ToSouthMiddle
       chest LedgeChest # wisdom gem
       
-      
     node UnderwaterNearPyramids:
       chest NearDoylanPyramid # courage gem
       chest NearMutohPyramid # big red rupee
@@ -153,7 +153,6 @@ area RuinsIsle:
     
     PyramidEntrance -> UnderwaterNearPyramid
     Main -> UnderwaterNearPyramid: flag KingKey
-    
     
     
   room BottomRight:
@@ -176,10 +175,12 @@ area RuinsIsle:
       
     Main <-> Corridor: flag DoorToCorridorDoorToCorridor
     
+    
     node ToWestShortcut:
       door ToWestShortcut
       
     Main -> ToWestShortcut
+    
     
     node FromNorthRight:
       door ToNorthRight
