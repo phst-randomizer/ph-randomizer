@@ -59,7 +59,7 @@ area DeadIsle:
   room BottomCave:
     node Main:
       door ToBoat
-      hint MiddleBook
+      hint Middle
       hint Vol1
       hint Vol2
       hint Vol3

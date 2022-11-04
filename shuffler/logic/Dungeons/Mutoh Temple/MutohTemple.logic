@@ -162,7 +162,6 @@ area MutohTemple:
     MiddleUnderwater -> MiddleUnderwaterHammer: item Hammer
     MiddleUnderwaterHammer -> MiddleUnderwater
     MiddleUnderwaterHammer -> Up
-    Up -> TopRightLockedDoor: (state WaterDown & lose WaterUp)
 
     node TopRightLockedDoor:
       lock MutohKey
@@ -242,7 +241,7 @@ area MutohTemple:
 
     Bottom -> ToBoss: (item BossKeyMutoh & item Hammer)
     ToBoss -> Bottom: item BossKeyMutoh
-    Bottom -> ToB1BottomRight: item Hammer
+    Bottom -> StairsBottomRight: item Hammer
 
 
     node TopRight:

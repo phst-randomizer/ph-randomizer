@@ -27,7 +27,7 @@ area TempleOfTheOceanKing:
       flag LeftSpikes
 
     TopOuter -> Switch: item Bombchus
-    Middle -> Switch: (item Sword | item Boomerang | item Bombs | item Bombchus | item Bow | item Hammer)
+    MiddleRing -> Switch: (item Sword | item Boomerang | item Bombs | item Bombchus | item Bow | item Hammer)
 
 
     node Center:

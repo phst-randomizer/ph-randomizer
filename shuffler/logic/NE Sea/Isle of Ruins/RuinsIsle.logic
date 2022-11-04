@@ -4,7 +4,7 @@ area RuinsIsle:
       door Boat
       door ToCaveBoat
 
-    node MazeUpper:
+    node AboveMaze:
       door ToCaveUpper
       enemy LikeLikeRed1
       enemy LikeLikeRed2
@@ -12,7 +12,7 @@ area RuinsIsle:
       enemy LikeLikeBlue1
       enemy LikeLikeBlue2
 
-    MazeUpper -> Boat
+    AboveMaze -> Boat
 
 
     node AboveCave:
@@ -20,7 +20,7 @@ area RuinsIsle:
       door ToEastShortcut
 
     AboveCave -> Boat
-    AboveCave -> MazeUpper
+    AboveCave -> AboveMaze
 
     node Underwater:
       door ToNorthUnderwater
@@ -96,7 +96,7 @@ area RuinsIsle:
     node AfterBremeurUnderwater:
       door ToEastUnderwaterBottom
 
-    Main -> PyramidUnderwater: flag KingKeyInserted
+    Main -> NearPyramidUnderwater: flag KingKeyInserted
     AfterBremeurBridge -> AfterBremeurUnderwater: flag KingKeyInserted
 
 
@@ -151,8 +151,8 @@ area RuinsIsle:
       chest NearMutohPyramid # big red rupee
       door ToSouthRight
 
-    PyramidEntrance -> UnderwaterNearPyramid
-    Main -> UnderwaterNearPyramid: flag KingKey
+    PyramidEntrance -> UnderwaterNearPyramids
+    Main -> UnderwaterNearPyramids: flag KingKey
 
 
   room BottomRight:
