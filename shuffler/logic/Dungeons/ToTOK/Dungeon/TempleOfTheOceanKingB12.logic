@@ -37,14 +37,14 @@ area TempleOfTheOceanKing:
     node AfterTriforce:
       door ToB13
 
-    Main -> AfterTriforce (state ForceGem1 & state ForceGem2 & state ForceGem3)
+    Main -> AfterTriforce: (state ForceGem1 & state ForceGem2 & state ForceGem3)
 
 
     node FirstReaper:
       enemy ReaperLeft
 
     node SecondReaper:
-      enemy ReaperRighy
+      enemy ReaperRight
 
     Main -> FirstReaper
     Main -> SecondReaper
@@ -53,8 +53,8 @@ area TempleOfTheOceanKing:
     node DefeatReapers:
       chest ReaperKiller
 
-    node DefeatPhantom:
+    node DefeatPhantoms:
       chest PhantomKiller
 
     Main -> DefeatReapers: (defeated ReaperLeft & defeated ReaperRight)
-    Main -> DefeatPhantom: (defeated GoldPhantom & defeated RedPhantom & defeated BluePhantom)
+    Main -> DefeatPhantoms: (defeated GoldPhantom & defeated RedPhantom & defeated BluePhantom)
