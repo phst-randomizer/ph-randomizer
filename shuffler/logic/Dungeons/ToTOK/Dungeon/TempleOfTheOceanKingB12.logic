@@ -16,7 +16,7 @@ area TempleOfTheOceanKing:
       door ToB11Left
       flag LeftOpen
 
-    LeftStairs <-> Main: LeftOpen
+    LeftStairs <-> Main: flag LeftOpen
     RightSafe <-> Main: item Hammer
 
 
