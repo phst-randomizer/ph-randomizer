@@ -104,10 +104,12 @@ jobs:
           for file in **/*.logic; do
             echo "$file... ";
             status=0
-            rando-shuffler/target/debug/rando_shuffler "$file" > /dev/null || status=1
+            tmpfile=$(mktemp /tmp/output.XXXXXX)  # create temporary file to store output
+            rando-shuffler/target/debug/rando_shuffler "$file" >> $tmpfile 2>&1 || status=1
             if [[ $status != 0 ]]; then
               failed=$((failed + 1));
               echo -e "\033[0;31mFAILED\033[0m"
+              cat $tmpfile  # print output of rando-shuffler if errors occured
             else
               echo -e "\033[0;32mPASSED\033[0m"
             fi
