@@ -21,9 +21,9 @@ area MutohTemple:
 
     node Middle:
       door ToB1Bottom
-      enemy Turtle1
-      enemy Turtle2
-      enemy Turtle3
+      enemy Terrorpin1
+      enemy Terrorpin2
+      enemy Terrorpin3
       door ToF2
 
     node HammeredPlate:
@@ -194,9 +194,9 @@ area MutohTemple:
       door ToF3
 
     node HammerTutorial:
-      enemy Turtle1
-      enemy Turtle2
-      enemy Turtle3
+      enemy Terrorpin1
+      enemy Terrorpin2
+      enemy Terrorpin3
       hint GossipStone
 
     Right -> Bottom
