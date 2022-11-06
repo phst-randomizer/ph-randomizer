@@ -40,21 +40,21 @@ area TempleOfTheOceanKing:
     Main -> AfterTriforce: (state ForceGem1 & state ForceGem2 & state ForceGem3)
 
 
-    node FirstReaper:
-      enemy ReaperLeft
+    node FirstWizzrobe:
+      enemy WizzrobeLeft
 
-    node SecondReaper:
-      enemy ReaperRight
+    node SecondWizzrobe:
+      enemy WizzrobeRight
 
-    Main -> FirstReaper
-    Main -> SecondReaper
+    Main -> FirstWizzrobe: (state ForceGem1 | state ForceGem2 | state ForceGem3)
+    Main -> SecondWizzrobe: ((state ForceGem1 & state ForceGem2) | (state ForceGem2 & state ForceGem3) | (state ForceGem3 & state ForceGem1))
 
 
-    node DefeatReapers:
-      chest ReaperKiller
+    node DefeatWizzrobes:
+      chest WizzrobeKiller
 
     node DefeatPhantoms:
       chest PhantomKiller
 
-    Main -> DefeatReapers: (defeated ReaperLeft & defeated ReaperRight)
+    Main -> DefeatWizzrobes: (defeated WizzrobeLeft & defeated WizzrobeRight)
     Main -> DefeatPhantoms: (defeated GoldPhantom & defeated RedPhantom & defeated BluePhantom)

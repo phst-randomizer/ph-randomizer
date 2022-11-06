@@ -185,10 +185,10 @@ area MutohTemple:
   room F2:
     node Right:
       door ToF1
-      enemy LikeLikeGreen1
-      enemy LikeLikeGreen2
-      enemy LikeLikeGreen3
-      chest LikeLikeChest # random treasure
+      enemy RupeeLikeGreen1
+      enemy RupeeLikeGreen2
+      enemy RupeeLikeGreen3
+      chest RupeeLikeChest # random treasure
 
     node Bottom:
       door ToF3
@@ -209,12 +209,12 @@ area MutohTemple:
       door ToF2
       enemy RedStalfos1
       enemy RedStalfos2
-      enemy LikeLikeGreen
+      enemy RupeeLikeGreen
 
     node Reward:
       chest Hammer
 
-    Stairs <-> Reward: (defeated RedStalfos1 & defeated RedStalfos2 & defeated LikeLikeGreen)
+    Stairs <-> Reward: (defeated RedStalfos1 & defeated RedStalfos2 & defeated RupeeLikeGreen)
 
 
   room B2:

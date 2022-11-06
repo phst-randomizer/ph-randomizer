@@ -12,7 +12,7 @@
           "zmb_mapobject_index": 0
         },
         {
-          "name": "ReaperKiller",
+          "name": "WizzrobeKiller",
           "type": "chest",
           "contents": "ship_part",
           "zmb_file_path": "TODO",

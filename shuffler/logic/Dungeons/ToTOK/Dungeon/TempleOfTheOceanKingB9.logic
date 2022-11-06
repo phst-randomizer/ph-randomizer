@@ -2,10 +2,10 @@ area TempleOfTheOceanKing:
   room B9:
     node Main:
       door ToB8Right
-      enemy Reaper1
-      enemy Reaper2
-      enemy Reaper3
-      enemy Reaper4
+      enemy Wizzrobe1
+      enemy Wizzrobe2
+      enemy Wizzrobe3
+      enemy Wizzrobe4
       enemy RedPhantom
 
     node TopLeft:
@@ -18,10 +18,10 @@ area TempleOfTheOceanKing:
 
     Main <-> TopLeft: state SquarePedestalStairway
 
-    node DefeatReaper:
-      chest ReaperKiller
+    node DefeatWizzrobe:
+      chest WizzrobeKiller
 
-    Main -> DefeatReaper: (defeated Reaper1 & defeated Reaper2 & defeated Reaper3 & defeated Reaper4)
+    Main -> DefeatWizzrobe: (defeated Wizzrobe1 & defeated Wizzrobe2 & defeated Wizzrobe3 & defeated Wizzrobe4)
 
     node DefeatPhantom:
       chest PhantomKiller

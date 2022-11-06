@@ -3,91 +3,44 @@
   "name": "RuinsIsle",
   "rooms": [
     {
-      "name": "Outside",
-      "chests": [
-        {
-          "name": "HeadChest",
-          "type": "chest",
-          "contents": "treasure_map_ne_5",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
-        },
-        {
-          "name": "RegalNecklace",
-          "type": "chest",
-          "contents": "regal_necklace",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
-        }
-      ],
+      "name": "BottomLeft",
+      "chests": [],
       "doors": [
         {
           "name": "Boat",
-          "link": "Sea.NE.DeadIslePort.DeadIsle"
+          "link": "Sea.NE.RuinsIslePort.RuinsIsle"
         },
         {
           "name": "ToCaveBoat",
-          "link": "BottomCave.Main.ToBoat"
+          "link": "GeozardCave.RightDoor.ToBoat"
         },
         {
-          "name": "ToCaveMain",
-          "link": "BottomCave.Main.ToMain"
+          "name": "ToCaveUpper",
+          "link": "GeozardCave.LeftDoor.ToUpper"
         },
         {
-          "name": "Pyramid",
-          "link": "PhantomCorridor.Main.Entrance"
+          "name": "ToNorthShortcut",
+          "link": "TopLeft.ToSouth.ToSouthShortcut"
         },
         {
-          "name": "ToBoulderCaveHole",
-          "link": "BoulderCave.Main.Hole"
+          "name": "ToEastShortcut",
+          "link": "BottomRight.ToWest.ToWestShortcut"
         },
         {
-          "name": "ToBoulderCaveHead",
-          "link": "BoulderCave.Main.Head"
+          "name": "ToNorthUnderwater",
+          "link": "TopLeft.ToSouthUnderwater.ToSouthUnderwater"
         },
         {
-          "name": "Stairs",
-          "link": "PhantomCorridor.Brant.Exit"
+          "name": "ToNorthLeft",
+          "link": "TopLeft.FromSouthWest.ToSouthLeft"
         }
       ]
     },
     {
-      "name": "BottomCave",
-      "chests": [],
-      "doors": [
-        {
-          "name": "ToBoat",
-          "link": "Outside.Boat.ToCaveBoat"
-        },
-        {
-          "name": "ToMain",
-          "link": "Outside.Main.ToCaveMain"
-        }
-      ]
-    },
-    {
-      "name": "BoulderCave",
-      "chests": [],
-      "doors": [
-        {
-          "name": "Hole",
-          "link": "Outside.Hole.ToBoulderCave"
-        },
-        {
-          "name": "ToHead",
-          "link": "Outside.Head.ToBoulderCave"
-        },
-        {
-          "name": "BombableDoor",
-          "link": "RupeeRoom.Main.Exit"
-        }
-      ]
-    },
-    {
-      "name": "RupeeRoom",
+      "name": "TopLeft",
       "chests": [
         {
-          "name": "RupeeChest",
+          "name": "Underwater",
           "type": "chest",
           "contents": "power_gem",
           "zmb_file_path": "TODO",
@@ -96,22 +49,149 @@
       ],
       "doors": [
         {
-          "name": "Exit",
-          "link": "GraveyardCave.BombableWall.BombableDoor"
+          "name": "ToSouthRight",
+          "link": "BottomLeft.AboveMaze.ToNorthRight"
+        },
+        {
+          "name": "ToSouthLeft",
+          "link": "BottomLeft.ToNorthLeft.ToNorthLeft"
+        },
+        {
+          "name": "ToBremeurPyramid",
+          "link": "BremeurPyramid.F1.Main.Exit"
+        },
+        {
+          "name": "ToEastBottom",
+          "link": "TopRight.FromWest.ToWestBottom"
+        },
+        {
+          "name": "ToSouthShortcut",
+          "link": "BottomLeft.AboveCave.ToNorthShortcut"
+        },
+        {
+          "name": "ToEastTop",
+          "link": "TopRight.Main.ToWestTop"
+        },
+        {
+          "name": "ToSouthUnderwater",
+          "link": "BottomLeft.Underwater.ToNorthUnderwater"
+        },
+        {
+          "name": "ToEastUnderwaterTop",
+          "link": "TopRight.Underwater.ToWestUnderwaterTop"
+        },
+        {
+          "name": "ToEastUnderwaterBottom",
+          "link": "TopRight.Underwater.ToWestUnderwaterBottom"
         }
       ]
     },
     {
-      "name": "PhantomCorridor",
+      "name": "TopRight",
+      "chests": [
+        {
+          "name": "Underwater",
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "LedgeChest",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "NearDoylanPyramid",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "NearMutohPyramid",
+          "type": "chest",
+          "contents": "big_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToWestBottom",
+          "link": "TopLeft.AboveMaze.ToNorthRight"
+        },
+        {
+          "name": "ToWestTop",
+          "link": "TopLeft.FromEast.ToEastTop"
+        },
+        {
+          "name": "ToDoylanPyramid",
+          "link": "DoylanPyramid.F1.Main.Exit"
+        },
+        {
+          "name": "ToWestUnderwaterTop",
+          "link": "TopLeft.NearPyramidUnderwater.ToEastUnderwaterTop"
+        },
+        {
+          "name": "ToWestUnderwaterBottom",
+          "link": "TopLeft.AfterBremeurUnderwater.ToEastUnderwaterBottom"
+        },
+        {
+          "name": "ToSouthLeftmost",
+          "link": "BottomRight.Main.ToNorthLeftmost"
+        },
+        {
+          "name": "ToMutohPyramid",
+          "link": "MutohTemple.F1.Entrance.Exit"
+        },
+        {
+          "name": "BlueWarpExit",
+          "link": "MutohTemple.B4.Main.BlueWarp"
+        },
+        {
+          "name": "ToSouthMiddle",
+          "link": "BottomRight.Main.ToNorthMiddle"
+        },
+        {
+          "name": "ToSouthRight",
+          "link": "BottomRight.FromNorthRight.ToNorthRight"
+        },
+        {
+          "name": "ToSouthCorridor",
+          "link": "BottomRight.Corridor.ToNorthCorridor"
+        }
+      ]
+    },
+    {
+      "name": "TopRight",
       "chests": [],
       "doors": [
         {
-          "name": "Exit",
-          "link": "Outside.Main.Pyramid"
+          "name": "ToNorthLeftmost",
+          "link": "TopRight.Underwater.ToSouthLeftmost"
         },
         {
-          "name": "Brant",
-          "link": "Outside.Island.Stairs"
+          "name": "ToMaxPyramid",
+          "link": "MaxPyramid.F1.Main.Exit"
+        },
+        {
+          "name": "ToNorthMiddle",
+          "link": "TopRight.ChestLedge.ToSouthMiddle"
+        },
+        {
+          "name": "ToNorthCorridor",
+          "link": "TopRight.Corridor.ToSouthCorridor"
+        },
+        {
+          "name": "ToNorthRight",
+          "link": "TopRight.UnderwaterNearPyramids.ToSouthRight"
+        },
+        {
+          "name": "ToWestShortcut",
+          "link": "BottomLeft.AboveCave.ToEastShortcut"
         }
       ]
     }

@@ -33,7 +33,7 @@
       "name": "F2",
       "chests": [
         {
-          "name": "LikeLikeChest",
+          "name": "RupeeLikeChest",
           "type": "chest",
           "contents": "random_treasure",
           "zmb_file_path": "TODO",

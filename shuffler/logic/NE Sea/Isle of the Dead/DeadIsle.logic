@@ -7,9 +7,9 @@ area DeadIsle:
 
     node Main:
       door ToCaveMain
-      enemy LikeLikeRed
-      enemy LikeLikeBlue1
-      enemy LikeLikeBlue2
+      enemy RupeeLikeRed
+      enemy RupeeLikeBlue1
+      enemy RupeeLikeBlue2
       enemy StalfosMain1
       enemy StalfosMain2
       enemy StalfosMain3
@@ -100,6 +100,5 @@ area DeadIsle:
     node Brant:
       door Exit
 
+    Brant -> Main # Add the spirits as a requirement, as Brant mentions them before opening the door
     Main -> Brant: flag PathOfCorridor
-    Brant -> Main
-    # Add the spirits as a requirement, as Brant mentions them before opening the door
