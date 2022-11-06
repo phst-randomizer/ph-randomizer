@@ -45,23 +45,32 @@ area FireTemple:
     BottomLeftArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
 
   room F2:
-    node TopRight:
+    node TopRightStairs:
       door ToF1Middle
+      enemy RedChuChu
+      enemy YellowChuChu1
+      gain BlueSwitch
+      gain RedSwitch
+
+    node Arena:
+      enemy YellowChuChu2
       enemy Gel1
       enemy Gel2
       enemy Gel3
       enemy Gel4
       enemy Gel5
 
-    node Arena:
+    TopRightStairs <-> Arena: (state BlueSwitch & lose RedSwitch)
+
+    node ArenaReward:
       chest BoomerangChest
 
-    TopRight <-> Arena: (defeated Gel1 & defeated Gel2 & defeated Gel3 & defeated Gel4 & defeated Gel5)
+    Arena <-> ArenaReward: (defeated Gel1 & defeated Gel2 & defeated Gel3 & defeated Gel4 & defeated Gel5)
 
     node TopLeft:
       door ToF1TopLeft
 
-    TopRight -> TopLeft: (item Boomerang | item Bow | item Bombs | item GrapplingHook | item Hammer)
+    Arena -> TopLeft: (item Boomerang | item Bow | item Bombs | item GrapplingHook | item Hammer)
 
     node BottomLeft:
       door ToF1BottomLeft

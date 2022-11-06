@@ -9,8 +9,11 @@ area Ember:
       door RightTop
       mail Mailbox
 
-    node Island: chest IslandChest
-    node ToRightTop: door RightLowerTop
+    node Island:
+      chest IslandChest
+
+    node ToRightTop:
+      door RightLowerTop
 
     node Middle:
       door RightMiddleTop
@@ -27,11 +30,21 @@ area Ember:
     Summit -> Middle
     Middle -> Main
 
+
+    node Torch:
+      flag SeenTopTorch
+
+    Island -> Torch
+    Main -> Torch
+    ToRightTop -> Torch
+
+
   room EmberRight:
     node Lowest:
       door LeftLowerToppest
       door LeftLowerTop
       door LeftLowerBottom
+      flag Kayo
 
     node AfterDoor:
       door LeftMiddleBottom
@@ -49,6 +62,7 @@ area Ember:
     TempleFront -> AfterDoor
     AfterDoor -> Lowest
     Lowest -> AfterDoor: flag AstridFreed
+
 
   room AstridHouse:
     node Main:
@@ -70,15 +84,19 @@ area Ember:
       enemy Octorok5
       enemy Octorok6
 
+    node Defeat
+
     node Astrid:
       flag Astrid
 
-    Arena <-> Astrid: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6)
+    Arena <-> Defeat: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6)
+    Defeat -> Astrid: (flag Kayo & (setting NoPuzzleSolution | (flag SeenTopTorch & flag SeenKayoTorch)))
 
   room KayoHouse:
     node Main:
       door Entrance
       hint Book
+      flag SeenKayoTorch
 
   room EmberEmptyHouse:
     node Main:

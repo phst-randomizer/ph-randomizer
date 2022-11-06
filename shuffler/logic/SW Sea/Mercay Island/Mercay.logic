@@ -6,14 +6,22 @@ area Mercay:
       door OshussHouse
       door RockHouse
       door OshusCave
+      flag CountedTrees
+      
     node East:
       door East
-    # TODO: add this back in when aux data for ToTOK is completed
-    Outside <-> East #: flag BridgeRepaired
+    
+    Outside <-> East: flag BridgeRepaired
+
 
   room OshussHouse:
     node Main:
       door Outside
+      
+    node PhantomSword:
+      chest PhantomSword
+      
+    Main -> PhantomSword: (item PhantomBlade & item PhantomHourglass)
 
   room MercayTown:
     node Main:
@@ -36,10 +44,15 @@ area Mercay:
 
     Ledge -> Main
 
+
   room OshusCave:
-    node Main:
-      chest SwordChest
+    node Entrance:
       door Exit
+  
+    node Sword:
+      chest SwordChest
+      
+    Entrance -> Sword: (flag CountedTrees | setting NoPuzzleSolution)
 
   room EnemyBamboo:
     node South:
@@ -48,9 +61,11 @@ area Mercay:
       enemy RedChuchuUp
       enemy RedChuchuLeft
       enemy RedChuchuRight
+      
     node Grotto:
       door Grotto
     South <-> Grotto: item Sword
+
 
   room MercayShop:
     node Main:

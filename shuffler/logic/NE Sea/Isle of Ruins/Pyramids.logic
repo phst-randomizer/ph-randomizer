@@ -28,7 +28,7 @@ area DoylanPyramid:
 
 
 area MaxPyramid:
-  room F1
+  room F1:
     node Main:
       door Exit
       flag DoorToCorridor
