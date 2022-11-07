@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import TypeAlias, Union
 
 from pydantic import BaseModel, Field, validator
 
@@ -9,7 +10,7 @@ AUX_DATA_DIRECTORY = Path(os.environ.get('AUX_DATA_DIRECTORY', Path(__file__).pa
 LOGIC_DATA_DIRECTORY = Path(os.environ.get('LOGIC_DATA_DIRECTORY', Path(__file__).parent / 'logic'))
 
 
-class Check(BaseModel):
+class BaseCheck(BaseModel):
     name: str = Field(..., description='The name of the item check')
     contents: str = Field(..., description='The item that this check contains')
 
@@ -34,7 +35,7 @@ class Check(BaseModel):
         return v
 
 
-class Chest(Check):
+class Chest(BaseCheck):
     type = Field('chest', const=True)
     zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
     zmb_mapobject_index: int = Field(..., description='Index of the chest in the defined zmb file')
@@ -44,7 +45,7 @@ class Tree(Chest):
     type = Field('tree', const=True)
 
 
-class Event(Check):
+class Event(BaseCheck):
     type = Field('event', const=True)
     bmg_file_path: str = Field(..., description='File path to the bmg the instruction is on')
     bmg_instruction_index: int = Field(
@@ -52,23 +53,23 @@ class Event(Check):
     )
 
 
-class IslandShop(Check):
+class IslandShop(BaseCheck):
     type = Field('island_shop', const=True)
     overlay: int = Field(..., description='The code overlay this shop item is on')
     overlay_offset: str = Field(..., description='Hex offset from overlay to the shop item')
 
 
-class Freestanding(Check):
+class Freestanding(BaseCheck):
     type = Field('freestanding', const=True)
     # TODO: add other fields that are needed
 
 
-class OnEnemy(Check):
+class OnEnemy(BaseCheck):
     type = Field('on_enemy', const=True)
     # TODO: what other fields are needed? Can this be replaced by Freestanding?
 
 
-class SalvageTreasure(Check):
+class SalvageTreasure(BaseCheck):
     type = Field('salvage_treasure', const=True)
     zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
     zmb_actor_index: int = Field(
@@ -80,6 +81,29 @@ class DigSpot(SalvageTreasure):
     type = Field('dig_spot', const=True)
 
 
+Check: TypeAlias = (
+    Chest | Event | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
+)
+
+
+def validate_check_type():
+    """
+    Ensure that the `Check` type alias includes all of the subclasses of `BaseCheck`.
+    """
+
+    def get_all_subclasses(cls):
+        """Recursively fetch all descendents of a class."""
+        all_subclasses = []
+        for subclass in cls.__subclasses__():
+            all_subclasses.extend([subclass] + get_all_subclasses(subclass))
+        return all_subclasses
+
+    assert Check == Union[*[subclass for subclass in get_all_subclasses(BaseCheck)]]
+
+
+validate_check_type()
+
+
 class Door(BaseModel):
     name: str = Field(..., description='The name of this exit')
     link: str = Field(..., description='The `entrance` or `door` where this exit leads.')
@@ -87,9 +111,7 @@ class Door(BaseModel):
 
 class Room(BaseModel):
     name: str = Field(..., description='The name of the room')
-    chests: list[
-        Chest | Event | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
-    ] = Field(
+    chests: list[Check] = Field(
         [],
         description='Item checks that can be made in this room',
         unique_items=True,
