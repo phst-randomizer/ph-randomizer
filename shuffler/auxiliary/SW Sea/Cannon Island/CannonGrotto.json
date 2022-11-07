@@ -16,11 +16,11 @@
       "doors": [
         {
           "name": "Down",
-          "link": "Cannon.Outside.AfterDoor"
+          "link": "Cannon.Outside.AfterDoor.GrottoEntry"
         },
         {
           "name": "Stairs",
-          "link": "Cannon.Outside.BombGarden"
+          "link": "Cannon.Outside.BombGarden.GrottoStairs"
         }
       ]
     }
