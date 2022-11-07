@@ -7,7 +7,7 @@ import sys
 
 import click
 
-from shuffler._parser import Descriptor, Edge, Node, NodeContents, parse
+from shuffler._parser import Edge, LogicalRoom, Node, parse
 from shuffler.aux_models import Area
 
 logging.basicConfig(level=logging.INFO)
@@ -26,38 +26,55 @@ def load_aux_data(directory: Path) -> list[Area]:
     return areas
 
 
-def get_chest_contents(
-    area_name: str, room_name: str, chest_name: str, aux_data: list[Area]
-) -> str:
-    for area in aux_data:
-        if area_name == area.name:
-            for room in area.rooms:
-                if room_name == room.name:
-                    for chest in room.chests or []:
-                        if chest_name == chest.name:
-                            return chest.contents
-    raise Exception(f'{chest_name} not found in the given aux data.')
+def flatten_rooms(rooms: list[LogicalRoom]) -> list[Node]:
+    """
+    Given a list of `LogicalRooms`, flattens it into a series of nodes and edges.
 
+    TODO: shuffle entrances/exits at start of this function
+    """
 
-def get_chest_from_node_contents(node: Node, node_contents: NodeContents, aux_data: list[Area]):
-    for area in aux_data:
-        if node.area == area.name:
-            for room in area.rooms:
-                if node.room == room.name:
-                    for chest in room.chests:
-                        if node_contents.data == chest.name:
-                            return chest
-    raise Exception(f'{node_contents.data} not found in the given aux data.')
+    nodes: list[Node] = []
+
+    def _get_dest_node(dest_node_entrance: str):
+        entrance_split = dest_node_entrance.split('.')
+        room_name = entrance_split[1]
+        node_name = entrance_split[2]
+
+        for room in rooms:
+            assert room.nodes
+            if room_name == room_name:
+                for node in room.nodes:
+                    if node.node == node_name:
+                        for entrance in node.entrances:
+                            if entrance == dest_node_entrance:
+                                return node
+        raise Exception(f'Entrance "{dest_node_entrance}" not found')
+
+    for room in rooms:
+        assert room.nodes
+        for src_node in room.nodes:
+            nodes.append(src_node)
+            for exit in src_node.exits:
+                if not len(exit.link):
+                    # TODO: make this throw an actual error once aux data is complete
+                    logging.warning(f'exit "{exit.name}" has no "link".')
+                    continue
+                if exit.link.split('.')[0] not in [r.area.name for r in rooms]:
+                    logging.warning(
+                        f'entrance "{exit.link}" not found (no aux data exists for that area)'
+                    )
+                    continue
+                src_node.edges.append(Edge(dest=_get_dest_node(exit.link)))
+
+    return nodes
 
 
 def assumed_search(
     starting_node: Node,
     nodes: list[Node],
-    edges: dict[str, list[Edge]],
     aux_data: list[Area],
     inventory: list[str],
     flags: set[str],
-    visited_rooms: set[str],
     visited_nodes: set[Node],
 ) -> set[Node]:
     """
@@ -66,130 +83,56 @@ def assumed_search(
     Params:
         `starting_node`: The node to start at.
         `nodes`: The nodes that make up the game's logic graph.
-        `edges`: The edges that connect the `nodes`.
         `aux_data`: Complete aux data for the game as a list of `Area`s.
         `inventory`: Current inventory.
-        `visited_rooms`: Rooms that have been visited already in this traversal.
-        `visited_nodes`: Same as `visited_rooms`, but for nodes.
+        `flags`: Current flags that are set.
+        `visited_nodes`: Nodes that have been visited already in this traversal.
 
     Returns:
         The set of nodes that is reachable given the current inventory.
     """
     logging.debug(starting_node.name)
 
-    doors_to_enter: list[str] = []
-
     # For the current node, find all chests + "collect" their items and note every door so
     # we can go through them later
-    for node_info in starting_node.contents:
-        if node_info.type == Descriptor.CHEST.value:
-            item = get_chest_contents(
-                starting_node.area, starting_node.room, node_info.data, aux_data
-            )
-            if item and item not in inventory:
-                inventory.append(item)
-                # Reset visited nodes and rooms because we may now be able to reach
-                # nodes we couldn't before with this new item
-                visited_nodes.clear()
-                visited_rooms.clear()
-        elif node_info.type == Descriptor.FLAG.value:
-            if node_info.data not in flags:
-                flags.add(node_info.data)
-                # Reset visited nodes and rooms because we may now be able to reach
-                # nodes we couldn't before with this new flag set
-                visited_nodes.clear()
-                visited_rooms.clear()
-    for node_info in starting_node.contents:
-        if node_info.type in (
-            Descriptor.DOOR.value,
-            Descriptor.ENTRANCE.value,
-            Descriptor.EXIT.value,
-        ):
-            full_room_name = node_info.data
-            # Get "path" to node, including Area and Room, if they're not included
-            if len(full_room_name.split('.')) == 2:
-                full_room_name = f'{starting_node.area}.{full_room_name}'
-            elif len(full_room_name.split('.')) == 1:
-                full_room_name = f'{starting_node.area}.{starting_node.room}.{full_room_name}'
+    for check in starting_node.checks:
+        if check.contents and check.contents not in inventory:
+            inventory.append(check.contents)
+            # Reset visited nodes and rooms because we may now be able to reach
+            # nodes we couldn't before with this new item
+            visited_nodes.clear()
 
-            if full_room_name not in visited_rooms:
-                doors_to_enter.append(full_room_name)
-                visited_rooms.add(full_room_name)
+    for flag in starting_node.flags:
+        if flag not in flags:
+            flags.add(flag)
+            # Reset visited nodes and rooms because we may now be able to reach
+            # nodes we couldn't before with this new flag set
+            visited_nodes.clear()
 
     visited_nodes.add(starting_node)  # Acknowledge this node as "visited"
 
     # Check which edges are traversable and do so if they are
-    for edge in edges[starting_node.name]:
+    for edge in starting_node.edges:
         if edge.dest in visited_nodes:
             continue
         if edge.is_traversable(inventory, flags):
-            logging.debug(f'{edge.source.name} -> {edge.dest.name}')
+            logging.debug(f'{starting_node.name} -> {edge.dest.name}')
             visited_nodes = visited_nodes.union(
                 assumed_search(
                     edge.dest,
                     nodes,
-                    edges,
                     aux_data,
                     inventory,
                     flags,
-                    visited_rooms,
                     visited_nodes,
                 )
             )
-
-    # Go through each door and traverse each of their room graphs
-    for door_to_enter in doors_to_enter:
-        area_name = door_to_enter.split('.')[0]
-        room_name = door_to_enter.split('.')[1]
-        door_name = door_to_enter.split('.')[2]
-        for area in aux_data:
-            if area_name == area.name:
-                for room in area.rooms:
-                    if room_name == room.name:
-                        for door in room.doors:
-                            if door_name == door.name:
-                                for other_node in nodes:
-                                    link = door.link
-
-                                    # Remove the `door`/`entrance` that this `door`/`exit` links to.
-                                    # It is only used for entrance randomization; for chest
-                                    # randomization, we don't care about it.
-                                    link = '.'.join(link.split('.')[:-1])
-
-                                    # TODO: remove this if statement once aux data is complete
-                                    if 'todo' in link.lower():
-                                        continue
-
-                                    # Append current area if the linked node doesn't have one
-                                    # specified (i.e. `Room1.Node1` is fine and will be
-                                    # transformed to `Area1.Room1.Node1`)
-                                    if link.count('.') == 1:
-                                        link = f'{starting_node.area}.{link}'
-                                    elif link.count('.') != 2:
-                                        raise ValueError(
-                                            f'ERROR: "{link}" is not a valid node name.'
-                                        )
-                                    if link == other_node.name:
-                                        logging.debug(f'{starting_node.name} -> {other_node.name}')
-                                        visited_nodes = visited_nodes.union(
-                                            assumed_search(
-                                                other_node,
-                                                nodes,
-                                                edges,
-                                                aux_data,
-                                                inventory,
-                                                flags,
-                                                visited_rooms,
-                                                visited_nodes,
-                                            )
-                                        )
     return visited_nodes
 
 
 def shuffle(
     seed: str | None,
-    nodes: list[Node],
-    edges: dict[str, list[Edge]],
+    logical_rooms: list[LogicalRoom],
     aux_data: list[Area],
 ) -> list[Area]:
     """
@@ -205,7 +148,6 @@ def shuffle(
     Params:
         `seed`: Some string that will be hashed and used as a seed for the RNG.
         `nodes`: The nodes that make up the game's logic graph.
-        `edges`: The edges that connect the `nodes`.
         `aux_data`: Complete aux data for the game as a list of `Area`s.
 
     Returns:
@@ -213,6 +155,8 @@ def shuffle(
     """
     if seed is not None:
         random.seed(seed)
+
+    nodes = flatten_rooms(logical_rooms)
 
     # Starting node is Mercay outside of Oshus's house.
     # This would need to be randomized to support entrance rando
@@ -238,15 +182,10 @@ def shuffle(
         i = I.pop()
 
         # Determine all reachable logic nodes
-        R = assumed_search(starting_node, nodes, edges, aux_data, deepcopy(I), set(), set(), set())
+        R = assumed_search(starting_node, nodes, aux_data, deepcopy(I), set(), set())
 
         # Determine which of these nodes contain items, and thus are candidates for item placement
-        candidates = [
-            get_chest_from_node_contents(node, content, aux_data)
-            for node in R
-            for content in node.contents
-            if content.type == Descriptor.CHEST.value
-        ]
+        candidates = [check for node in R for check in node.checks]
 
         # Shuffle them
         random.shuffle(candidates)
@@ -280,10 +219,15 @@ def shuffle(
     '-a',
     '--aux-data-directory',
     required=True,
-    type=click.Path(exists=True),
+    type=click.Path(exists=True, path_type=Path),
     help='File path to directory that contains aux data.',
 )
-@click.option('-l', '--logic-directory', required=True, type=click.Path(exists=True))
+@click.option(
+    '-l',
+    '--logic-directory',
+    required=True,
+    type=click.Path(exists=True, path_type=Path),
+)
 @click.option(
     '-o',
     '--output',
@@ -293,18 +237,18 @@ def shuffle(
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the RNG.')
 def shuffler_cli(
-    aux_data_directory: str,
-    logic_directory: str,
+    aux_data_directory: Path,
+    logic_directory: Path,
     output: str | None,
     seed: str | None,
 ):
-    # Parse logic files
-    nodes, edges = parse(Path(logic_directory))
-
     # Parse aux data files
-    aux_data = load_aux_data(Path(aux_data_directory))
+    aux_data = load_aux_data(aux_data_directory)
 
-    results = shuffle(seed, nodes, edges, aux_data)
+    # Parse logic files into series of rooms
+    rooms = parse(logic_directory, aux_data)
+
+    results = shuffle(seed, rooms, aux_data)
 
     if output == '--':
         for area in results:

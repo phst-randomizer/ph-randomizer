@@ -20,33 +20,33 @@ from shuffler.main import load_aux_data
     '-i',
     '--input-rom-path',
     required=True,
-    type=click.Path(exists=True),
+    type=click.Path(exists=True, path_type=Path),
     help='Path to stock ROM to randomize.',
 )
 @click.option(
     '-o',
     '--output-rom-path',
-    type=click.Path(exists=False),
+    type=click.Path(exists=False, path_type=Path),
     required=True,
     help='Path to save randomized ROM to.',
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the randomizer.')
-def randomizer(input_rom_path: str, output_rom_path: str, seed: str | None):
+def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None):
     if is_frozen():
-        aux_data_directory = str(Path(sys._MEIPASS) / 'auxiliary')  # type: ignore
-        logic_directory = str(Path(sys._MEIPASS) / 'logic')  # type: ignore
+        aux_data_directory = Path(sys._MEIPASS) / 'auxiliary'  # type: ignore
+        logic_directory = Path(sys._MEIPASS) / 'logic'  # type: ignore
     else:
-        aux_data_directory = str(Path(__file__).parent / 'shuffler' / 'auxiliary')
-        logic_directory = str(Path(__file__).parent / 'shuffler' / 'logic')
-
-    # Parse logic files
-    nodes, edges = parse(Path(logic_directory))
+        aux_data_directory = Path(__file__).parent / 'shuffler' / 'auxiliary'
+        logic_directory = Path(__file__).parent / 'shuffler' / 'logic'
 
     # Parse aux data files
-    aux_data = load_aux_data(Path(aux_data_directory))
+    aux_data = load_aux_data(aux_data_directory)
+
+    # Parse logic files
+    logical_rooms = parse(logic_directory, aux_data)
 
     # Run the shuffler
-    shuffled_aux_data = shuffle(seed, nodes, edges, aux_data)
+    shuffled_aux_data = shuffle(seed, logical_rooms, aux_data)
 
     # Load the ROM
     input_rom = rom.NintendoDSRom.fromFile(input_rom_path)
