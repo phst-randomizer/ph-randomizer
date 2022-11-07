@@ -103,7 +103,7 @@
       "doors": [
         {
           "name": "ToB1BottomRight",
-          "link": "B1.BottomRightStairs.ToB2BottomLeft"
+          "link": "B1.BottomRightStairs.ToB2BottomRight"
         },
         {
           "name": "ToB1BottomLeft",
@@ -115,11 +115,11 @@
         },
         {
           "name": "ToB2TopRoomHiddenArea",
-          "link": "B2Top.HiddenArea.ToB2MainBombWall"
+          "link": "B2TopRoom.HiddenArea.ToB2MainBombWall"
         },
         {
           "name": "ToB2LeftRoom",
-          "link": "ToB2LeftRoom.Bottom.ToB2Main"
+          "link": "B2LeftRoom.Bottom.ToB2Main"
         }
       ]
     },
