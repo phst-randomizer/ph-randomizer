@@ -29,6 +29,13 @@ area FireTemple:
     node TopLeft:
       door ToF2TopLeft
 
+    node TopLeftColorSwitch:
+      gain BlueSwitch
+
+    node TopLeftColorSwitchHammerClip:
+      gain BlueSwitch
+      gain RedSwitch
+
     node MiddleLeft
 
     node BottomLeftArena:
@@ -38,8 +45,12 @@ area FireTemple:
     node StairsBottomLeft:
       door ToF2BottomLeft
 
-    TopLeft -> MiddleLeft: (item Boomerang | item Bombchus | item Bombs | (item Hammer & setting HammerClip))
+    TopLeft <-> TopLeftColorSwitch: (item Boomerang | item Bombchus | item Bombs)
+    TopLeft <-> TopLeftColorSwitchHammerClip: (item Hammer & setting HammerClip)
+    TopLeft <-> MiddleLeft: (state BlueSwitch & lose RedSwitch)
     MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
+
+    StairsBottomLeft -> BottomLeftArena
     MiddleLeft -> BottomLeftArena
     BottomLeftArena -> StairsBottomLeft: (defeated Bubble1 & defeated Bubble2)
     BottomLeftArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
@@ -87,6 +98,8 @@ area FireTemple:
 
     node LockedBottomRightDoor:
       lock FireKey
+      gain RedSwitch
+      gain BlueSwitch
 
     node StairsBottomRight:
       door ToF3
