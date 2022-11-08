@@ -97,7 +97,7 @@ area Sea:
     # TO NE SEA CHART
     node ToNE: door NE
 
-    Fog <-> Main
+    Fog <-> Main: flag PathThroughFog
     Uncharted <-> Main: item NWSeaChart
     Zauz <-> Main: item NWSeaChart
     Gust <-> Main: item NWSeaChart

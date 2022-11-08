@@ -34,7 +34,7 @@
       "doors": [
         {
           "name": "ToB9ChartRoom",
-          "link": "B9ChartRoom.Main.ToB10"
+          "link": "B9ChartRoom.RightOrder.ToB10"
         },
         {
           "name": "ToB11",

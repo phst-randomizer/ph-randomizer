@@ -40,6 +40,9 @@ area TempleOfTheOceanKing:
     node ThreePedestals:
       gain PedestalAllSet
 
-    Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal & lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
+    node ThreePedestalsGoodOrder:
+      gain PedestalAllSetB10
 
+    Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal & lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
+    ThreePedestals <-> ThreePedestalsGoodOrder: flag KnowCourageTempleOrder
     Main <-> ToChartRoom: state PedestalAllSet

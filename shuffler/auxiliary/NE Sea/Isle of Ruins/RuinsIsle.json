@@ -83,6 +83,10 @@
         {
           "name": "ToEastUnderwaterBottom",
           "link": "TopRight.Underwater.ToWestUnderwaterBottom"
+        },
+        {
+          "name": "ToUnderwaterCave",
+          "link": "UnderwaterCave.Main.Exit"
         }
       ]
     },

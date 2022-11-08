@@ -8,3 +8,8 @@ area RuinsIsle:
 
     node LeftDoor:
       door ToMazeUpper
+
+  room UnderwaterCave:
+    node Main:
+      door Exit
+      chest CaveGem

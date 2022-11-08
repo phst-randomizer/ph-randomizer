@@ -34,6 +34,7 @@ area CourageTemple:
     node PolsVoiceArea:
       enemy PolsVoice
       flag PolsDoorOpen
+      flag KnowCourageTempleOrder
 
     PolsVoiceStairs <-> PolsVoiceArea: (state BlueSwitch & lose RedSwitch)
     # We can't go through if the current state is red, so crossing that point loses the possibility of the switch being red, but still needs the blue state to pass (in case it was already lost before)
@@ -41,8 +42,9 @@ area CourageTemple:
     node PolsBombableWall:
       chest PolsLeft
       chest PolsRight
+      flag InvisibleMazePath
 
-    PolsVoiceArea -> PolsBombableWall: (item Bombs | item Bombchus)
+    PolsVoiceArea <-> PolsBombableWall: (item Bombs | item Bombchus)
 
     node PolsVoiceKill:
       chest PolsKey
@@ -139,6 +141,8 @@ area CourageTemple:
 
     node InvisibleMaze:
       door ToF1InvisibleMaze
+
+    node AfterInvisibleMaze
       chest BowChest
       chest IslandChest
 
@@ -150,10 +154,9 @@ area CourageTemple:
       gain RedSwitch
 
     LeftmostStairsB1 <-> ColorSwitchLeft: item Bow
-
-    MiddleMovingPlatform -> InvisibleMaze: item GrapplingHook
-
-    InvisibleMaze -> LeftmostStairsB1: item Bow
+    MiddleMovingPlatform -> AfterInvisibleMaze: (item GrapplingHook & flag InvisibleMazePath)
+    InvisibleMaze <-> AfterInvisibleMaze: flag InvisibleMazePath
+    AfterInvisibleMaze -> LeftmostStairsB1: item Bow
 
 
     node Torches:
@@ -181,8 +184,12 @@ area CourageTemple:
 
   room F2:
     node ElectricMaze:
-      chest AfterUDRL
       door ToF1ElectricMaze
+
+    node AfterElectricMaze:
+      chest AfterUDLR
+    
+    ElectricMaze <-> AfterElectricMaze: flag KnowCourageTempleOrder
 
     node Octoroks:
       door ToF1Octorok
@@ -214,8 +221,8 @@ area CourageTemple:
     node StairsToF3:
       door ToF3
 
-    EmptyRoom <-> BossKeyChest: item Bow
-    EmptyRoom <-> StairsToF3: item CourageBossKey
+    EmptyRoom <-> BossKeyChest: (item Bow & flag KnowCourageTempleOrder)
+    EmptyRoom <-> StairsToF3: (item CourageBossKey & flag KnowCourageTempleOrder)
 
 
   room F3:

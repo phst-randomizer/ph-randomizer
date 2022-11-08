@@ -28,6 +28,7 @@ area RuinsIsle:
       enemy RupeeLikeGreen1
       enemy RupeeLikeGreen2
       enemy RupeeLikeRed
+      flag StarsOrder
 
     node ToNorthLeft:
       door ToNorthLeft
@@ -96,6 +97,7 @@ area RuinsIsle:
 
     node AfterBremeurUnderwater:
       door ToEastUnderwaterBottom
+      door ToUnderwaterCave
 
     Main -> NearPyramidUnderwater: flag KingKeyInserted
     AfterBremeurBridge -> AfterBremeurUnderwater: flag KingKeyInserted
@@ -175,7 +177,7 @@ area RuinsIsle:
       enemy Stalfos
       door ToNorthCorridor
 
-    Main <-> Corridor: flag DoorToCorridorDoorToCorridor
+    Main <-> Corridor: (flag DoorToCorridor & (flag StarsOrder | setting NoPuzzleSolution))
 
 
     node ToWest:

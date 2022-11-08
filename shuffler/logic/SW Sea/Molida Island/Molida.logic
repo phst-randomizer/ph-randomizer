@@ -14,13 +14,14 @@ area Molida:
     node Ledge:
       door ToUpperIsland
 
-    Main -> Hole: item Shovel
+    Main -> Hole: (item Shovel & flag SeenUpperStone)
     Ledge -> Main
 
   room UpperIsland:
     node RightSide:
       door ToCaveSystemRight
       chest Cliff
+      flag SeenUpperStone
       door ToLowerIsland
 
     node Hole:
@@ -123,3 +124,4 @@ area Molida:
       door Exit
       hint WayfarerJournal
       chest ShovelChest
+      flag PathThroughFog
