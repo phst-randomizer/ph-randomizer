@@ -1,0 +1,34 @@
+area TempleOfTheOceanKing:
+  room B13:
+    node Main:
+      chest NESeaChart
+      door ToB12
+      entrance BlueWarp
+
+    node Gauntlet:
+      enemy BluePhantom1
+      enemy BluePhantom2
+      enemy BluePhantom3
+      enemy RedPhantom1
+      enemy RedPhantom2
+      enemy RedPhantom3
+      enemy GoldPhantom1
+      enemy GoldPhantom2
+      enemy GoldPhantom3
+
+    node DefeatPhantom:
+      door ToBridgeRoom
+
+    Main -> Gauntlet: item PhantomSword
+    Gauntlet -> DefeatPhantom:
+      and:
+        defeated BluePhantom1
+        defeated BluePhantom2
+        defeated BluePhantom3
+        defeated RedPhantom1
+        defeated RedPhantom2
+        defeated RedPhantom3
+        defeated GoldPhantom1
+        defeated GoldPhantom2
+        defeated GoldPhantom3
+    DefeatPhantom -> Main

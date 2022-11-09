@@ -1,0 +1,215 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Molida",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "RedGirl",
+          "type": "event",
+          "contents": "treasure_map_SE_3",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "LeftmostHouse",
+          "link": "Molida.LeftmostHouse.Main.Outside"
+        },
+        {
+          "name": "MiddleHouse",
+          "link": "Molida.MiddleHouse.Main.Outside"
+        },
+        {
+          "name": "MolidaShop",
+          "link": "Molida.MolidaShop.Main.Outside"
+        },
+        {
+          "name": "RomanoHouse",
+          "link": "Molida.RomanoHouse.Main.Outside"
+        },
+        {
+          "name": "CaveEntrance",
+          "link": "Molida.CaveSystem.MainLower.ExitDown"
+        },
+        {
+          "name": "ToUpperIsland",
+          "link": "Molida.UpperIsland.RightSide.ToLowerIsland"
+        },
+        {
+          "name": "HoleToCave",
+          "link": "Molida.CaveSystem.Ledge.HoleNearTree"
+        }
+      ],
+      "name": "Town"
+    },
+    {
+      "chests": [
+        {
+          "name": "IslandChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Cliff",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToCaveSystemRight",
+          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
+        },
+        {
+          "name": "ToLowerIsland",
+          "link": "Main.Town.Ledge.ToUpperIsland"
+        },
+        {
+          "name": "ToCaveSystemLeft",
+          "link": "Molida.CaveSystem.AfterSunDoor.ExitUpLeft"
+        },
+        {
+          "name": "HoleToChest",
+          "link": "Molida.CaveSystem.ChestLedgeLeft.HoleToChest"
+        }
+      ],
+      "name": "UpperIsland"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Molida.Town.Main.LeftmostHouse"
+        }
+      ],
+      "name": "LeftmostHouse"
+    },
+    {
+      "chests": [
+        {
+          "name": "TreasureChest",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Molida.Town.Main.MiddleHouse"
+        }
+      ],
+      "name": "MiddleHouse"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Molida.Town.Main.MolidaShop"
+        }
+      ],
+      "name": "MolidaShop"
+    },
+    {
+      "chests": [
+        {
+          "name": "LedgeChest",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "NearFogMap",
+          "type": "chest",
+          "contents": "treasure_map_SW_4",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "ChestAfterHole",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ExitDown",
+          "link": "Molida.Town.Main.CaveEntrance"
+        },
+        {
+          "name": "GrottoRight",
+          "link": "Molida.BackOfCaveSystem.Main.Right"
+        },
+        {
+          "name": "ExitUpRight",
+          "link": "Molida.UpperIsland.RightSide.ToCaveSystemRight"
+        },
+        {
+          "name": "BombableWall",
+          "link": "Molida.ShovelRoom.Main.Exit"
+        },
+        {
+          "name": "GrottoLeft",
+          "link": "Molida.BackOfCaveSystem.Main.Left"
+        },
+        {
+          "name": "HoleNearTree",
+          "link": "Molida.Town.Hole.HoleToCave"
+        },
+        {
+          "name": "ExitUpLeft",
+          "link": "Molida.UpperIsland.TempleFront.ToCaveSystemLeft"
+        },
+        {
+          "name": "HoleToChest",
+          "link": "Molida.UpperIsland.Hole.HoleToChest"
+        }
+      ],
+      "name": "CaveSystem"
+    },
+    {
+      "chests": [
+        {
+          "name": "ShovelChest",
+          "type": "chest",
+          "contents": "shovel",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Molida.CaveSystem.MainUp.BombableWall"
+        }
+      ],
+      "name": "ShovelRoom"
+    },
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Left",
+          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
+        },
+        {
+          "name": "Right",
+          "link": "Molida.CaveSystem.DoorAfterArena.GrottoRight"
+        }
+      ],
+      "name": "BackOfCaveSystem"
+    }
+  ]
+}

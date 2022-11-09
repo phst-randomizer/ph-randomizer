@@ -1,0 +1,118 @@
+area DeadIsle:
+  room Outside:
+    node Boat:
+      door Boat
+      door ToCaveBoat
+      mail MailBox
+
+    node Main:
+      door ToCaveMain
+      enemy RupeeLikeRed
+      enemy RupeeLikeBlue1
+      enemy RupeeLikeBlue2
+      enemy StalfosMain1
+      enemy StalfosMain2
+      enemy StalfosMain3
+      enemy StalfosMain4
+      enemy StalfosMain5
+      enemy StalfosMain6
+      enemy StalfosMain7
+      enemy StalfosMain8
+      door Pyramid
+
+    Main -> Boat
+
+
+    node Hole:
+      entrance ToBoulderCaveHole
+
+    Main -> Hole: item Shovel
+
+
+    node Head:
+      door ToBoulderCaveHead
+      chest HeadChest
+
+    node PillarSwitch:
+      flag GraveyardDoor
+
+    Head -> PillarSwitch: (item Bow | item Boomerang)
+    Head -> Main
+
+
+    node Graveyard:
+      enemy StalfosGraveyard1
+      enemy StalfosGraveyard2
+      enemy StalfosGraveyard3
+      flag PathOfCorridor
+
+    Main <-> Graveyard: flag GraveyardDoor
+
+
+    node Island:
+      door Stairs
+      chest RegalNecklace
+
+    Island -> Main
+
+
+  room BottomCave:
+    node Main:
+      door ToBoat
+      hint Middle
+      hint Vol1
+      hint Vol2
+      hint Vol3
+      hint Vol4
+      door ToMain
+
+    node BombableWall:
+      door BombableDoor
+
+    Main -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> Main
+
+  room RupoorRoom:
+    node Main:
+      door Exit
+      chest RupoorChest1
+      chest RupoorChest2
+      chest RupoorChest3
+      chest RupoorChest4
+
+
+  room BoulderCave:
+    node Entrance:
+      exit Hole
+      enemy Keese1
+      enemy Keese2
+      enemy Keese3
+      enemy Keese4
+      enemy Keese5
+      enemy Keese6
+      door ToHead
+
+    node BombableWall:
+      door BombableDoor
+
+    Entrance -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> Entrance
+
+
+  room RupeeRoom:
+    node Main:
+      door Exit
+      chest RupeeChest
+
+
+  room PhantomCorridor:
+    node Main:
+      door Entrance
+      enemy Keese1
+      enemy Keese2
+
+    node Brant:
+      door Exit
+
+    Brant -> Main # Add the spirits as a requirement in patch, as Brant mentions them before opening the door
+    Main -> Brant: (flag PathOfCorridor | setting NoPuzzleSolution)

@@ -5,6 +5,7 @@ area BlaazBossRoom:
       enemy Blaaz
 
     node BossDefeat:
+      chest Sand
       chest SpiritOfPower
       chest HeartContainer
       flag FireTempleBeaten

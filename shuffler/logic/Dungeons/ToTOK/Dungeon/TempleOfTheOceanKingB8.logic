@@ -1,0 +1,43 @@
+area TempleOfTheOceanKing:
+  room B8:
+    node Main:
+      door ToB7BottomLeft
+      door ToB7BottomRight
+      enemy RedPhantomLeft
+      enemy RedPhantomRight
+      enemy BluePhantom
+
+    node PhantomDefeat:
+      chest PhantomKiller
+
+    Main -> PhantomDefeat: (defeated RedPhantomLeft & defeated RedPhantomRight & defeated BluePhantom)
+
+    node TopRightLedge:
+      door ToB7TopRight
+
+    TopRightLedge -> Main
+
+    node RoundCrystalPedestal:
+      gain RoundPedestalB8
+
+    node TriangleCrystalPedestal:
+      gain TrianglePedestalB8
+
+    Main -> RoundCrystalPedestal: (state RoundCrystal & lose RoundCrystal)
+
+    Main -> TriangleCrystalPedestal: ((item Bombs | item Bombchus) & state TriangleCrystal & lose TriangleCrystal)
+
+    node TopLeft:
+      flag WindDraft
+      door ToB9Left
+
+    node AfterTriangleCrystal:
+      chest VoidChest
+
+    node TopRightDoor:
+      door ToB9Right
+
+    Main -> TopLeft: (flag WindDraft | state RoundPedestalB8)
+    TopLeft -> Main
+    Main -> TopRightDoor: ((item Hammer & setting HammerClip) | item Bombchus | (state TrianglePedestalB8))
+    TopRightDoor -> Main: state TrianglePedestalB8

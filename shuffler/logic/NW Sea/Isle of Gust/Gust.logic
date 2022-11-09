@@ -1,0 +1,126 @@
+area Gust:
+  room LowerIsland:
+    node BeforeCave:
+      door Boat
+      door ToCaveLeft
+      mail Mailbox
+      enemy MiniBlinLeft1
+      enemy MiniBlinLeft2
+      enemy MiniBlinLeft3
+      enemy MiniBlinLeft4
+      enemy MiniBlinRight1
+      enemy MiniBlinRight2
+      enemy MiniBlinRight3
+      enemy MiniBlinRight4
+      enemy MiniBlinNearBombable1
+      enemy MiniBlinNearBombable2
+      enemy MiniBlinNearBombable3
+      enemy MiniBlinNearBombable4
+      enemy MiniBlinNearCave1
+      enemy MiniBlinNearCave2
+      enemy MiniBlinNearCave3
+      enemy MiniBlinNearCave4
+      enemy MiniBlinNearCave5
+      enemy RedChuChu1
+      enemy RedChuChu2
+      enemy RedChuChu3
+      enemy RedChuChu4
+      enemy RedChuChu5
+      enemy RedChuChu6
+
+    node BombableWall:
+      door ToBombableGrotto
+
+    node DigSpotsStart:
+      chest DigSpot1
+      chest DigSpot2
+      chest DigSpot3
+
+    BeforeCave <-> DigSpotsStart: item Shovel
+    BeforeCave -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> BeforeCave
+
+
+
+    node AfterCave:
+      door ToCaveRight
+      door ToTempleFront
+      door ToTempleFrontLedgeRight
+      enemy RedChuChuRight1
+      enemy RedChuChuRight2
+      enemy RedChuChuLeft1
+      enemy RedChuChuLeft2
+      enemy RedChuChuLeft3
+      enemy MiniBlin1
+      enemy MiniBlin2
+
+    AfterCave -> BeforeCave
+
+    node DigSpotAfterCave:
+      chest DigSpot4
+
+    AfterCave <-> DigSpotAfterCave: item Shovel
+    node Ledge:
+      door ToTempleFrontLedgeLeft
+      enemy MiniBlin1
+      enemy MiniBlin2
+      enemy MiniBlin3
+      enemy MiniBlin4
+
+    node LedgeChest:
+      chest OnLedge
+
+    node LedgeToUpper:
+      enemy RedChuChu1
+      enemy RedChuChu2
+      door ToLeftmostUpper
+
+    Ledge -> LedgeChest: item Shovel
+    Ledge -> LedgeToUpper: item Shovel
+    LedgeChest -> Ledge
+    LedgeToUpper -> Ledge
+    LedgeToUpper -> LedgeChest: item GrapplingHook
+
+
+  room UpperIsland:
+    node TempleFront:
+      door ToLower
+
+    node TempleEntrance:
+      door ToWindTemple
+      exit AfterBoss
+
+    node TempleFrontLedge:
+      door ToLowerLedgeRight
+      enemy RedChuChu1
+      enemy RedChuChu2
+      door ToLowerLedgeLeft
+
+    TempleEntrance -> TempleFront
+    TempleFront -> TempleEntrance: flag Windmills
+
+    node LeftmostToLower:
+      door ToLedgeLower
+      enemy RedChuChu1
+
+    node Leftmost
+
+    node DigSpotLeftmost:
+      chest DigSpot
+
+    LeftmostToLower -> Leftmost: item Shovel
+    Leftmost -> LeftmostToLower
+    Leftmost -> DigSpotLeftmost: item Shovel
+
+    node WindmillArea:
+      hint GossipStoneLeft
+      hint GossipStoneRight
+      flag Windmills
+      chest WindmillChest
+      # The enemies are most likely infinite (went well above 12 during testing)
+
+
+    Leftmost <-> WindmillArea: item Shovel
+
+    WindmillArea <-> TempleFront: flag Windmills
+    WindmillArea <-> TempleFrontLedge: flag Windmills

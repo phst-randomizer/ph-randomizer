@@ -1,0 +1,226 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "MutohTemple",
+  "rooms": [
+    {
+
+      "name": "F1",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "RuinsIsle.TopRight.PyramidEntrance.MutohTemple"
+        },
+        {
+          "name": "BlueWarpExit",
+          "link": "B3.Main.BlueWarp"
+        },
+        {
+          "name": "ToB1Top",
+          "link": "B1.Up.ToF1Top"
+        },
+        {
+          "name": "ToB1",
+          "link": "B1.Up.ToF1Top"
+        },
+        {
+          "name": "ToB1Bottom",
+          "link": "B1.Up.ToF1Bottom"
+        }
+      ]
+    },
+    {
+      "name": "F2",
+      "chests": [
+        {
+          "name": "RupeeLikeChest",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF1",
+          "link": "F1.Middle.ToF2"
+        },
+        {
+          "name": "ToF3",
+          "link": "F3.Stairs.ToF2"
+        }
+      ]
+    },
+    {
+      "name": "F3",
+      "chests": [
+        {
+          "name": "Hammer",
+          "type": "chest",
+          "contents": "hammer",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF2",
+          "link": "F2.Bottom.ToF3"
+        }
+      ]
+    },
+    {
+      "name": "B1",
+      "chests": [
+        {
+          "name": "Middle",
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "MiddleHammer",
+          "type": "chest",
+          "contents": "small_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "BigChest",
+          "type": "chest",
+          "contents": "boss_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF1Top",
+          "link": "F1.Up.ToB1"
+        },
+        {
+          "name": "ToF1Middle",
+          "link": "F1.HammeredPlate.ToB1"
+        },
+        {
+          "name": "ToF1Bottom",
+          "link": "F1.Middle.ToB1"
+        },
+        {
+          "name": "ToB2TopLeft",
+          "link": "B2.TopLeftStairs.ToB1TopLeft"
+        },
+        {
+          "name": "ToB2Leftmost",
+          "link": "B2.Left.ToB1Leftmost"
+        },
+        {
+          "name": "ToB2BottomLeft",
+          "link": "B2.Bottom.ToB1BottomLeft"
+        },
+        {
+          "name": "ToB2BottomRight",
+          "link": "B2.StairsBottomRight.ToB1BottomRight"
+        },
+        {
+          "name": "ToB2TopRight",
+          "link": "B2.TopRight.ToB1TopRight"
+        }
+      ]
+    },
+    {
+      "name": "B2",
+      "chests": [
+        {
+          "name": "Middle",
+          "type": "chest",
+          "contents": "small_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Bottom",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB1TopLeft",
+          "link": "B1.TopLeftStairs.ToB2TopLeft"
+        },
+        {
+          "name": "ToB1Leftmost",
+          "link": "B1.StairsToB2Leftmost.ToB2Leftmost"
+        },
+        {
+          "name": "ToB1BottomLeft",
+          "link": "B1.BottomUnderwater.ToB2BottomLeft"
+        },
+        {
+          "name": "ToB1BottomRight",
+          "link": "B1.BottomRightUnderwater.ToB2BottomRight"
+        },
+        {
+          "name": "ToB1TopRight",
+          "link": "B1.TopRightUnderwater.ToB2TopRight"
+        },
+        {
+          "name": "ToB3",
+          "link": "B3.Stairs.ToB2"
+        }
+      ]
+    },
+    {
+      "name": "B3",
+      "chests": [
+        {
+          "name": "Aquanine",
+          "type": "chest",
+          "contents": "aquanine",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB2",
+          "link": "B2.ToBoss.ToB3"
+        },
+        {
+          "name": "ToBoss",
+          "link": "EoxBossRoom.Main.Fight.ToDungeon"
+        },
+        {
+          "name": "BlueWarp",
+          "link": "F1.Entrance.BlueWarpExit"
+        }
+      ]
+    },
+    {
+      "name": "B4",
+      "chests": [
+        {
+          "name": "Aquanine",
+          "type": "chest",
+          "contents": "aquanine",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToBoss",
+          "link": "EoxBossRoom.Main.BossDefeat.ToAquanineRoom"
+        },
+        {
+          "name": "BlueWarp",
+          "link": "RuinsIsle.TopRight.PyramidEntrance.BlueWarpExit"
+        }
+      ]
+    }
+  ]
+}

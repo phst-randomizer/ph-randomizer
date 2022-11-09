@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "DoylanPyramid",
+  "rooms": [
+    {
+      "name": "F1",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "RuinsIsle.TopRight.Main.ToDoylanPyramid"
+        },
+        {
+          "name": "ToF2",
+          "link": "F2.Main.ToF1"
+        }
+      ]
+    },
+    {
+      "name": "F2",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToF1",
+          "link": "F1.Main.ToF2"
+        }
+      ]
+    }
+  ]
+}

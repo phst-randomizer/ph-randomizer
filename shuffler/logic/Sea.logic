@@ -55,7 +55,7 @@ area Sea:
     West <-> Treasure5: (item SalvageArm & item TreasureMap5)
     West <-> Treasure6: (item SalvageArm & item TreasureMap6)
     West <-> Treasure7: (item SalvageArm & item TreasureMap7)
-    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See /Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
+    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See ./Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
 
   room NW:
     node Main:
@@ -97,7 +97,7 @@ area Sea:
     # TO NE SEA CHART
     node ToNE: door NE
 
-    Fog <-> Main
+    Fog <-> Main: (flag PathThroughFog | setting NoPuzzleSolution)
     Uncharted <-> Main: item NWSeaChart
     Zauz <-> Main: item NWSeaChart
     Gust <-> Main: item NWSeaChart

@@ -29,7 +29,7 @@ class Check(BaseModel):
 
         # TODO: Use the following assertion instead once all aux data chest contents is complete.
         # assert v in ITEMS
-        assert v in ITEMS or not v or v.lower() == 'todo'
+        assert v in ITEMS or not v or v.lower() == 'todo', f'Item "{v}" not valid.'
 
         return v
 

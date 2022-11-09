@@ -1,0 +1,14 @@
+area CyclokBossRoom:
+  room Main:
+    node Fight:
+      door ToDungeon
+      enemy Cyclok
+
+    node BossDefeat:
+      chest Sand
+      chest SpiritOfWisdom
+      chest HeartContainer
+      flag WindTempleBeaten
+      entrance ExitWarp
+
+    Fight -> BossDefeat: defeated Cyclok

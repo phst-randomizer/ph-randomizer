@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToB6",
+          "link": "B6.SymbolDoor.Triforce"
+        },
+        {
+          "name": "ToB7",
+          "link": "B7.Left.ToB6YellowWarp"
+        },
+        {
+          "name": "YellowWarp",
+          "link": "TempleOfTheOceanKingLobby.Main.Main.B6YellowWarp"
+        }
+      ],
+      "name": "B6YellowWarp"
+    }
+  ]
+}

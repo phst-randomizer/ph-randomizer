@@ -16,7 +16,6 @@ area TempleOfTheOceanKing:
 
     node TopRight:
       chest AfterSwitch
-      door ToB6
 
     Bottom -> ArenaLeft: (item Boomerang | item Bow | item GrapplingHook | item Hammer)
     ArenaLeft -> ArenaRight: (defeated EnemyL1 & defeated EnemyL2 & defeated EnemyL3 & defeated EnemyL4)

@@ -1,6 +1,7 @@
 area TempleOfTheOceanKing:
   room B3:
     node Main:
+      door ToB2
       enemy Phantom
       enemy KeyPhantom
       chest TopLeft

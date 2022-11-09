@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "BlaazBossRoom",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "Sand",
+          "type": "event",
+          "contents": "sand_2m",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        },
+        {
+          "name": "SpiritOfPower",
+          "type": "event",
+          "contents": "power_spirit",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        },
+        {
+          "name": "HeartContainer",
+          "type": "chest",
+          "contents": "heart_container",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToDungeon",
+          "link": "FireTemple.F4.Main.ToBoss"
+        }
+      ]
+    }
+  ]
+}

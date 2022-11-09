@@ -29,6 +29,13 @@ area FireTemple:
     node TopLeft:
       door ToF2TopLeft
 
+    node TopLeftColorSwitch:
+      gain BlueSwitch
+
+    node TopLeftColorSwitchHammerClip:
+      gain BlueSwitch
+      gain RedSwitch
+
     node MiddleLeft
 
     node BottomLeftArena:
@@ -38,30 +45,43 @@ area FireTemple:
     node StairsBottomLeft:
       door ToF2BottomLeft
 
-    TopLeft -> MiddleLeft: (item Boomerang | item Bombchus | item Bombs | (item Hammer & setting HammerClip))
+    TopLeft <-> TopLeftColorSwitch: (item Boomerang | item Bombchus | item Bombs)
+    TopLeft <-> TopLeftColorSwitchHammerClip: (item Hammer & setting HammerClip)
+    TopLeft <-> MiddleLeft: (state BlueSwitch & lose RedSwitch)
     MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
+
+    StairsBottomLeft -> BottomLeftArena
     MiddleLeft -> BottomLeftArena
     BottomLeftArena -> StairsBottomLeft: (defeated Bubble1 & defeated Bubble2)
     BottomLeftArena -> MiddleLeft: (defeated Bubble1 & defeated Bubble2)
 
   room F2:
-    node TopRight:
+    node TopRightStairs:
       door ToF1Middle
+      enemy RedChuChu
+      enemy YellowChuChu1
+      gain BlueSwitch
+      gain RedSwitch
+
+    node Arena:
+      enemy YellowChuChu2
       enemy Gel1
       enemy Gel2
       enemy Gel3
       enemy Gel4
       enemy Gel5
 
-    node Arena:
+    TopRightStairs <-> Arena: (state BlueSwitch & lose RedSwitch)
+
+    node ArenaReward:
       chest BoomerangChest
 
-    TopRight <-> Arena: (defeated Gel1 & defeated Gel2 & defeated Gel3 & defeated Gel4 & defeated Gel5)
+    Arena <-> ArenaReward: (defeated Gel1 & defeated Gel2 & defeated Gel3 & defeated Gel4 & defeated Gel5)
 
     node TopLeft:
       door ToF1TopLeft
 
-    TopRight -> TopLeft: (item Boomerang | item Bow | item Bombs | item GrapplingHook | item Hammer)
+    Arena -> TopLeft: (item Boomerang | item Bow | item Bombs | item GrapplingHook | item Hammer)
 
     node BottomLeft:
       door ToF1BottomLeft
@@ -78,6 +98,8 @@ area FireTemple:
 
     node LockedBottomRightDoor:
       lock FireKey
+      gain RedSwitch
+      gain BlueSwitch
 
     node StairsBottomRight:
       door ToF3

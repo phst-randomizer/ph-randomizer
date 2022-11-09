@@ -1,0 +1,60 @@
+area TempleOfTheOceanKing:
+  room B12:
+    node Main:
+      enemy GoldPhantom
+      enemy RedPhantom
+      enemy BluePhantom
+      enemy PhantomEyeLeft
+      enemy PhantomEyeRight
+      chest LeftPowerGem
+      chest RightPowerGem
+
+    node RightSafe:
+      door ToB11Right
+
+    node LeftStairs:
+      door ToB11Left
+      flag LeftOpen
+
+    LeftStairs <-> Main: flag LeftOpen
+    RightSafe <-> Main: item Hammer
+
+
+    node RightSwitch:
+      chest SafeSwitch
+
+    RightSafe -> RightSwitch: item Hammer
+    Main -> RightSwitch: (item Hammer & setting HammerClip)
+    RightSwitch -> Main
+
+
+    node PhantomGem:
+      chest PhantomPowerGem
+
+    Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | item Bombs | item Bombchus | item Sword)
+
+
+    node AfterTriforce:
+      door ToB13
+
+    Main -> AfterTriforce: (state ForceGem1 & state ForceGem2 & state ForceGem3)
+
+
+    node FirstWizzrobe:
+      enemy WizzrobeLeft
+
+    node SecondWizzrobe:
+      enemy WizzrobeRight
+
+    Main -> FirstWizzrobe: (state ForceGem1 | state ForceGem2 | state ForceGem3)
+    Main -> SecondWizzrobe: ((state ForceGem1 & state ForceGem2) | (state ForceGem2 & state ForceGem3) | (state ForceGem3 & state ForceGem1))
+
+
+    node DefeatWizzrobes:
+      chest WizzrobeKiller
+
+    node DefeatPhantoms:
+      chest PhantomKiller
+
+    Main -> DefeatWizzrobes: (defeated WizzrobeLeft & defeated WizzrobeRight)
+    Main -> DefeatPhantoms: (defeated GoldPhantom & defeated RedPhantom & defeated BluePhantom)

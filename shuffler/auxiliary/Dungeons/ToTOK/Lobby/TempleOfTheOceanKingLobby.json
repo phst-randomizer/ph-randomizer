@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKingLobby",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Hourglass",
+          "type": "chest",
+          "contents": "phantom_hourglass",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Mercay.PathToToTOK.Main.ToTOK"
+        },
+        {
+          "name": "Entrance",
+          "link": "TempleOfTheOceanKing.F1.Lower.Exit"
+        },
+        {
+          "name": "B3BlueWarp",
+          "link": "TempleOfTheOceanKing.B3Chart.Main.BlueWarp"
+        },
+        {
+          "name": "B6YellowWarp",
+          "link": "TempleOfTheOceanKing.B6YellowWarp.Main.YellowWarp"
+        },
+        {
+          "name": "B9BlueWarp",
+          "link": "TempleOfTheOceanKing.B9BlueWarp.Main.BlueWarp"
+        },
+        {
+          "name": "B13BlueWarp",
+          "link": "TempleOfTheOceanKing.B13.Main.BlueWarp"
+        }
+      ],
+      "name": "Main"
+    }
+  ]
+}

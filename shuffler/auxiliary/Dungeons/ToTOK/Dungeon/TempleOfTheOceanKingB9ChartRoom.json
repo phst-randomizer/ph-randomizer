@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "SeaChart",
+          "type": "chest",
+          "contents": "se_sea_chart",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB9",
+          "link": "B9.ToChartRoom.ToB9ChartRoom"
+        },
+        {
+          "name": "ToB10",
+          "link": "B10.Main.ToB9ChartRoom"
+        },
+        {
+          "name": "BlueWarp",
+          "link": "TempleOfTheOceanKingLobby.Main.Main.B9BlueWarp"
+        }
+      ],
+      "name": "B9"
+    }
+  ]
+}

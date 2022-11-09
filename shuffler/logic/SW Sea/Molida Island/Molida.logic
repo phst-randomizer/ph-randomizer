@@ -5,63 +5,79 @@ area Molida:
       door MiddleHouse
       door MolidaShop
       door RomanoHouse
+      door CaveEntrance
+      chest RedGirl
 
-    node Hole: entrance HoleToCave
+    node Hole:
+      entrance HoleToCave
 
     node Ledge:
       door ToUpperIsland
 
-    Main -> Hole: item Shovel
+    Main -> Hole: (item Shovel & flag SeenUpperStone)
     Ledge -> Main
 
   room UpperIsland:
     node RightSide:
       door ToCaveSystemRight
       chest Cliff
+      flag SeenUpperStone
       door ToLowerIsland
+
+    node Hole:
+      entrance HoleToChest
 
     node TempleFront:
       door ToCaveSystemLeft
       enemy GeozardLeft
       enemy GeozardRight
       exit AfterBoss
+      exit BlueWarp
+
+    node Island:
+      chest IslandChest
 
     node Statues:
       flag MolidaDoorOpen
 
     node TempleEntrance:
-      door FireTemple
+      door CourageTemple
 
     TempleFront <-> TempleEntrance: flag MolidaDoorOpen
+    TempleFront -> Hole: item Shovel
+    TempleFront <-> Island: item GrapplingHook
 
-    #One statue requires bow or boomerang, so if we can turn on this statue, we can turn them all on
+    # One statue requires bow or boomerang, so if we can turn on this statue, we can turn them all on
     TempleFront <-> Statues: (defeated GeozardLeft & defeated GeozardRight & (item Bow | item Boomerang))
 
   room LeftmostHouse:
     node Main:
       door Outside
-      chest TreasureChest
 
   room MiddleHouse:
     node Main:
       door Outside
+      chest TreasureChest
 
   room MolidaShop:
     node Main:
       door Outside
-      chest WoodenShield
-      chest QuiverUpgrade
-      chest RandomTreasure
+      shop Molida
 
   room CaveSystem:
 
     node MainLower:
       door ExitDown
+      enemy RedChuChu1
+      enemy RedChuChu2
+      enemy RedChuChu3
+      enemy KeesePillar1
+      enemy KeesePillar2
 
     node Arena:
       enemy Geozard
 
-    node UpRightDoor:
+    node DoorAfterArena:
       door GrottoRight
 
     node LedgeRight:
@@ -71,25 +87,30 @@ area Molida:
       door ExitUpRight
       door BombableWall
       door GrottoLeft
+      enemy KeeseUp1
+      enemy KeeseUp2
 
     node Ledge:
+      enemy YellowChuChu1
+      enemy YellowChuChu2
+      enemy YellowChuChu3
       exit HoleNearTree
       chest NearFogMap
       hint BookToRomano
 
-    node AfterDoor:
+    node AfterSunDoor:
       door ExitUpLeft
 
     node ChestLedgeLeft:
       exit HoleToChest
       chest ChestAfterHole
 
-    ChestLedgeLeft -> AfterDoor
-    Ledge <-> AfterDoor: item SunKey
+    ChestLedgeLeft -> AfterSunDoor
+    Ledge <-> AfterSunDoor: item SunKey
     Ledge -> MainLower
     MainLower -> Arena
     MainLower -> LedgeRight: item GrapplingHook
-    Arena -> UpRightDoor: defeated Geozard
+    Arena -> DoorAfterArena: defeated Geozard
     MainUp -> MainLower
     MainLower -> MainUp: (item Bombs | item Bombchus)
 
@@ -98,7 +119,9 @@ area Molida:
       door Left
       door Right
 
-    node ShovelRoom:
+  room ShovelRoom:
+    node Main:
       door Exit
       hint WayfarerJournal
       chest ShovelChest
+      flag PathThroughFog

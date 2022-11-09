@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "TopLeft",
+          "type": "chest",
+          "contents": "force_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "BottomRight",
+          "type": "chest",
+          "contents": "force_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "PhantomKey",
+          "type": "on_enemy",
+          "contents": "small_key"
+        },
+        {
+          "name": "EyeChest",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Killer",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "BehindDoor",
+          "type": "chest",
+          "contents": "force_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB2",
+          "link": "B2.Downstairs.ToB3"
+        },
+        {
+          "name": "ToChartRoomShortcut",
+          "link": "B3ChartRoom.Main.ToB3Ledge"
+        },
+        {
+          "name": "ToChartRoom",
+          "link": "B3ChartRoom.Main.ToB3Main"
+        }
+      ],
+      "name": "B3"
+    }
+  ]
+}

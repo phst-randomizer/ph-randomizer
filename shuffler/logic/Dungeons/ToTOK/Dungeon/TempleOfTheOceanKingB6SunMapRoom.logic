@@ -1,5 +1,6 @@
 area TempleOfTheOceanKing:
-  room B3Chart:
+  room B6SunMapRoom:
     node Main:
-      flag SunKeyMark
+      flag SunKeyMark #See ../../../Sea.logic
+      door ToB6
       entrance BlueWarp

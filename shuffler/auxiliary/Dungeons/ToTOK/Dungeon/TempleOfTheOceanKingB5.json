@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "name": "B5",
+      "chests": [
+        {
+          "name": "AfterSwitch",
+          "type": "chest",
+          "contents": "red_potion",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "BigChest",
+          "type": "chest",
+          "contents": "treasure_map_SE_8",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB4",
+          "link": "B4.BottomDoor.ToB5"
+        },
+        {
+          "name": "ToB6",
+          "link": "B6.Main"
+        },
+        {
+          "name": "ToB4Shortcut",
+          "link": "B4.TopLeftStaircase.ToB5Shortcut"
+        }
+      ]
+    }
+  ]
+}

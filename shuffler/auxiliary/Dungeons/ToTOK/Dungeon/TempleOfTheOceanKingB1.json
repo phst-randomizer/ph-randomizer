@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "Key",
+          "type": "freestanding",
+          "contents": "small_key"
+        },
+        {
+          "name": "Killer",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "EyeTarget",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToF1",
+          "link": "TempleOfTheOceanKingLobby.Main.Main.Entrance"
+        },
+        {
+          "name": "ToB2",
+          "link": "B2.Upper.ToB1"
+        }
+      ],
+      "name": "B1"
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+area MutohTemple:
+  room F1:
+    node Entrance:
+      gain WaterUp
+      exit BlueWarpExit
+      door Exit
+      enemy Keese1
+      enemy Keese2
+      enemy Keese3
+      enemy Keese4
+      enemy StalfosRight1
+      enemy StalfosRight2
+      enemy StalfosLeft1
+      enemy StalfosLeft2
+
+    node Up:
+      door ToF1Top
+
+    Entrance -> Up: (item Bombs & defeated StalfosRight1 & defeated StalfosRight2 & defeated StalfosLeft1 & defeated StalfosLeft2)
+
+
+    node Middle:
+      door ToB1Bottom
+      enemy Terrorpin1
+      enemy Terrorpin2
+      enemy Terrorpin3
+      door ToF2
+
+    node HammeredPlate:
+      door ToB1Middle
+
+    Middle -> HammeredPlate: item Hammer
+
+
+  room B1:
+    node Up:
+      door ToF1Top
+      enemy RedStalfos1
+      enemy RedStalfos2
+
+    node BottomStairsF1:
+      door ToF1Bottom
+
+    Up <-> BottomStairsF1: (state WaterUp & lose WaterDown)
+
+
+    node MiddleStairsF1:
+      door ToF1Middle
+
+    node TopLeft:
+      lock MutohKey
+
+    node HitWaterSwitch:
+      gain WaterUp
+      gain WaterDown
+
+    node TopLeftArena:
+      enemy RedStalfosArena1
+      enemy RedStalfosArena2
+
+    node TopLeftStairs:
+      door ToB2TopLeft
+
+    MiddleStairsF1 <-> TopLeft: (state WaterUp & lose WaterDown)
+    TopLeft <-> HitWaterSwitch: (open MutohKey & (item Sword | item Bow))
+
+
+    TopLeft -> TopLeftArena: (state WaterUp & lose WaterDown)
+    TopLeftStairs -> TopLeftArena
+    TopLeftArena -> TopLeft: (state WaterUp & lose WaterDown & defeated RedStalfosArena1 & defeated RedStalfosArena2)
+    TopLeftArena -> TopLeftStairs: (defeated RedStalfosArena1 & defeated RedStalfosArena2)
+
+
+    node StairsToB2Leftmost:
+      door ToB2Leftmost
+      flag OpenedB2LDoor
+
+    MiddleStairsF1 <-> StairsToB2Leftmost: flag OpenedB2LDoor
+
+
+    node LeftUnderwater
+
+    TopLeft -> LeftUnderwater: (state WaterDown & lose WaterUp)
+    MiddleStairsF1 -> LeftUnderwater: (state WaterDown & lose WaterUp)
+
+
+    node MiddleLeft
+    node MiddleWaterSwitchL:
+      gain WaterUp
+      gain WaterDown
+
+    LeftUnderwater -> MiddleLeft: item Hammer
+    MiddleLeft <-> MiddleWaterSwitchL: item Bow
+
+
+    node BottomLeft
+    node XOPuzzle:
+      flag DoorMiddleWaterSwitch
+
+    # Separation needed because access from one side doesn't give access to all others
+    node MiddleWaterSwitchR: # from Right
+      gain WaterUp
+      gain WaterDown
+
+    node MiddleWaterSwitchR2: # from Right (stairs)
+      gain WaterUp
+      gain WaterDown
+
+    node MiddleWaterSwitchD: # from Down
+      gain WaterUp
+      gain WaterDown
+
+    node WaterSwitchShooting # spot to shoot the switch, and climb back up to
+
+    MiddleLeft <-> BottomLeft: (state WaterUp & lose WaterDown)
+    BottomLeft <-> XOPuzzle: item Hammer
+    BottomLeft <-> WaterSwitchShooting: (state WaterUp & lose WaterDown)
+    BottomLeft -> LeftUnderwater: (state WaterDown & lose WaterUp)
+    BottomLeft <-> MiddleWaterSwitchD: item Bow
+
+    WaterSwitchShooting <-> MiddleWaterSwitchR: (item Bow & flag DoorMiddleWaterSwitch)
+    MiddleStairsF1 <-> MiddleWaterSwitchR2: (item Bow & flag DoorMiddleWaterSwitch)
+
+
+    node BottomUnderwater:
+      door ToB2BottomLeft
+
+    BottomLeft -> BottomUnderwater: (state WaterDown & lose WaterUp)
+    WaterSwitchShooting -> BottomUnderwater: (state WaterDown & lose WaterUp)
+
+    BottomUnderwater -> WaterSwitchShooting: item Hammer
+
+
+    node BottomRightUnderwater:
+      door ToB2BottomRight
+      hint GossipStone
+
+    node BottomRight
+    node BottomRightWaterSwitch:
+      gain WaterUp
+      gain WaterDown
+
+    node BottomRightPuzzle:
+      flag BottomRightDoor
+
+    BottomRightUnderwater -> BottomRight: item Hammer
+    BottomRight -> BottomRightUnderwater: (state WaterDown & lose WaterUp)
+
+    BottomRight <-> BottomRightWaterSwitch: (item Bow & item Boomerang)
+    BottomRight <-> BottomRightPuzzle: (state WaterUp & lose WaterDown)
+
+
+    node MiddleUnderwater:
+      chest Middle # big green rupee
+      enemy RedStalfosMiddle
+
+    node MiddleUnderwaterHammer:
+      chest MiddleHammer # small key
+
+    BottomRight -> MiddleUnderwater: (flag BottomRightDoor & state WaterDown & lose WaterUp)
+    MiddleUnderwater -> LeftUnderwater
+    MiddleUnderwater -> MiddleUnderwaterHammer: item Hammer
+    MiddleUnderwaterHammer -> MiddleUnderwater
+    MiddleUnderwaterHammer -> Up
+
+    node TopRightLockedDoor:
+      lock MutohKey
+
+    node TopRightUnderwater:
+      door ToB2TopRight
+
+    Up -> TopRightLockedDoor: (state WaterDown & lose WaterUp)
+    TopRightLockedDoor -> Up: (item Hammer & open MutohKey)
+    TopRightUnderwater -> TopRightLockedDoor
+    TopRightLockedDoor -> TopRightUnderwater: open MutohKey
+
+    node BossKeyChest:
+      chest BigChest # boss key
+
+    TopRightUnderwater -> BossKeyChest: item Hammer
+    BossKeyChest -> TopRightUnderwater
+    BossKeyChest -> Up
+
+
+  room F2:
+    node Right:
+      door ToF1
+      enemy RupeeLikeGreen1
+      enemy RupeeLikeGreen2
+      enemy RupeeLikeGreen3
+      chest RupeeLikeChest # random treasure
+
+    node Bottom:
+      door ToF3
+
+    node HammerTutorial:
+      enemy Terrorpin1
+      enemy Terrorpin2
+      enemy Terrorpin3
+      hint GossipStone
+
+    Right -> Bottom
+    Bottom -> HammerTutorial: item Hammer
+    HammerTutorial -> Right
+
+
+  room F3:
+    node Stairs:
+      door ToF2
+      enemy RedStalfos1
+      enemy RedStalfos2
+      enemy RupeeLikeGreen
+
+    node Reward:
+      chest Hammer
+
+    Stairs <-> Reward: (defeated RedStalfos1 & defeated RedStalfos2 & defeated RupeeLikeGreen)
+
+
+  room B2:
+    node TopLeftStairs:
+      door ToB1TopLeft
+
+    node Left:
+      chest Middle # small key
+      chest Bottom # courage gem
+      door ToB1Leftmost
+
+    TopLeftStairs -> Left: item Hammer
+
+
+    node Bottom:
+      door ToB1BottomLeft
+      hint GossipStone
+
+    node ToBoss:
+      door ToB3
+
+    node StairsBottomRight:
+      door ToB1BottomRight
+
+    Bottom -> ToBoss: (item BossKeyMutoh & item Hammer)
+    ToBoss -> Bottom: item BossKeyMutoh
+    Bottom -> StairsBottomRight: item Hammer
+
+
+    node TopRight:
+      door ToB1TopRight
+
+    node RangedStalfos:
+      enemy Stalfos1
+      enemy Stalfos2
+      enemy Stalfos3
+      enemy Stalfos4
+      enemy Stalfos5
+      enemy Stalfos6
+      enemy Stalfos7
+
+    TopRight -> Bottom
+
+
+  room B3:
+    node Stairs:
+      door ToB2
+
+    node Main:
+      entrance BlueWarp
+      door ToBoss
+
+    Stairs -> Main
+
+
+  room B4:
+    node Main:
+      door ToBoss
+      chest Aquanine
+      entrance BlueWarp
