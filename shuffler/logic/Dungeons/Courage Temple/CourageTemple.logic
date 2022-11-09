@@ -188,8 +188,8 @@ area CourageTemple:
 
     node AfterElectricMaze:
       chest AfterUDLR
-    
-    ElectricMaze <-> AfterElectricMaze: flag KnowCourageTempleOrder
+
+    ElectricMaze <-> AfterElectricMaze: (flag KnowCourageTempleOrder | setting NoPuzzleSolution)
 
     node Octoroks:
       door ToF1Octorok
@@ -221,8 +221,8 @@ area CourageTemple:
     node StairsToF3:
       door ToF3
 
-    EmptyRoom <-> BossKeyChest: (item Bow & flag KnowCourageTempleOrder)
-    EmptyRoom <-> StairsToF3: (item CourageBossKey & flag KnowCourageTempleOrder)
+    EmptyRoom <-> BossKeyChest: (item Bow & (flag KnowCourageTempleOrder | setting NoPuzzleSolution))
+    EmptyRoom <-> StairsToF3: (item CourageBossKey & (flag KnowCourageTempleOrder | setting NoPuzzleSolution))
 
 
   room F3:

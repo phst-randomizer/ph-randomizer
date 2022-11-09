@@ -114,5 +114,5 @@ area DeadIsle:
     node Brant:
       door Exit
 
-    Brant -> Main # Add the spirits as a requirement, as Brant mentions them before opening the door
-    Main -> Brant: flag PathOfCorridor
+    Brant -> Main # Add the spirits as a requirement in patch, as Brant mentions them before opening the door
+    Main -> Brant: (flag PathOfCorridor | setting NoPuzzleSolution)

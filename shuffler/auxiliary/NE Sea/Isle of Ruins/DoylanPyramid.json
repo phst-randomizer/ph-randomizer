@@ -23,8 +23,8 @@
         {
           "name": "ToF1",
           "link": "F1.Main.ToF2"
-            }
-          ]
+        }
+      ]
     }
   ]
 }
