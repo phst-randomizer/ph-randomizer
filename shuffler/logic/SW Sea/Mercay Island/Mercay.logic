@@ -7,20 +7,20 @@ area Mercay:
       door RockHouse
       door OshusCave
       flag CountedTrees
-      
+
     node East:
       door East
-    
+
     Outside <-> East: flag BridgeRepaired
 
 
   room OshussHouse:
     node Main:
       door Outside
-      
+
     node PhantomSword:
       chest PhantomSword
-      
+
     Main -> PhantomSword: (item PhantomBlade & item PhantomHourglass)
 
   room MercayTown:
@@ -48,10 +48,10 @@ area Mercay:
   room OshusCave:
     node Entrance:
       door Exit
-  
+
     node Sword:
       chest SwordChest
-      
+
     Entrance -> Sword: (flag CountedTrees | setting NoPuzzleSolution)
 
   room EnemyBamboo:
@@ -61,7 +61,7 @@ area Mercay:
       enemy RedChuchuUp
       enemy RedChuchuLeft
       enemy RedChuchuRight
-      
+
     node Grotto:
       door Grotto
     South <-> Grotto: item Sword
