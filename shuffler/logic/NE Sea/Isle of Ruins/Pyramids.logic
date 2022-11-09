@@ -9,8 +9,8 @@ area BremeurPyramid:
     node Obelisk:
       flag KingKeyInserted
 
-    Entrance -> Bremeur # would need to check for regal necklace for ER, but not enforced by the game
-    Entrance -> Obelisk: item KingKey
+    Main -> Bremeur # would need to check for regal necklace for ER, but not enforced by the game
+    Main -> Obelisk: item KingKey
 
 
 area DoylanPyramid:
