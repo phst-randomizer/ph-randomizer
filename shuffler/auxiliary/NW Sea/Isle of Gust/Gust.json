@@ -112,7 +112,7 @@
           "link": "Gust.LowerIsland.LedgeToUpper.ToLeftmostUpper"
         },
         {
-          "name": "WindTemple",
+          "name": "ToWindTemple",
           "link": "WindTemple.F1.Entrance.Entrance"
         }
       ]

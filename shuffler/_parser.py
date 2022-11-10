@@ -238,6 +238,7 @@ def parse_node(
                     )
                 except IndexError:
                     raise Exception(
+                        f'{room.area.name}.{room.name}: '
                         f'{descriptor_type} "{descriptor_value}" not found in aux data.'
                     )
             case (
@@ -247,7 +248,10 @@ def parse_node(
             ):
                 if descriptor_type in (NodeDescriptor.DOOR.value, NodeDescriptor.ENTRANCE.value):
                     if descriptor_value in entrances:
-                        raise Exception(f'entrance "{descriptor_value}" defined more than once')
+                        raise Exception(
+                            f'{room.area.name}.{room.name}: '
+                            f'entrance "{descriptor_value}" defined more than once'
+                        )
                     entrances.add(f'{node_name}.{descriptor_value}')
                 if descriptor_type in (NodeDescriptor.DOOR.value, NodeDescriptor.EXIT.value):
                     try:
@@ -260,6 +264,7 @@ def parse_node(
                         ][0]
                     except IndexError:
                         raise Exception(
+                            f'{room.area.name}.{room.name}: '
                             f'{descriptor_type} "{descriptor_value}" not found in aux data.'
                         )
                     if new_exit.link.count('.') == 2:
@@ -269,13 +274,17 @@ def parse_node(
                         if not len(new_exit.link) or new_exit.link.lower() == 'todo':
                             logging.warning(f'exit "{new_exit.name} has no link.')
                             continue
-                        raise Exception(f'Invalid exit link "{new_exit.link}"')
+                        raise Exception(
+                            f'{room.area.name}.{room.name}: ' f'Invalid exit link "{new_exit.link}"'
+                        )
                     exits.append(new_exit)
             case NodeDescriptor.FLAG.value:
                 flags.add(descriptor_value)
             case other:
                 if other not in NodeDescriptor:
-                    raise Exception(f'Unknown node descriptor "{other}"')
+                    raise Exception(
+                        f'{room.area.name}.{room.name}: Unknown node descriptor "{other}"'
+                    )
                 logging.warning(f'Node descriptor "{other}" not implemented yet.')
 
     return checks, exits, entrances, flags
@@ -406,8 +415,6 @@ def parse_logic_file(lines: list[str], aux_data: list[Area]) -> list[LogicalRoom
 def parse(logic_directory: Path, aux_data: list[Area]) -> list[LogicalRoom]:
     rooms: list[LogicalRoom] = []
     for file in logic_directory.rglob('*.logic'):
-        if 'Mercay.logic' not in str(file):
-            continue
         if file.stem not in [area.name for area in aux_data]:
             logging.warning(f'No aux data found for {file.name}')
             continue

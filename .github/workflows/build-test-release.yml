@@ -42,6 +42,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: '.python-version'
+          check-latest: true
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: pip install -e .
+
       # Run basic syntax check
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
@@ -95,7 +107,7 @@ jobs:
       - name: Make it executable
         run: chmod +x rando-shuffler/target/debug/rando_shuffler
 
-      - name: Run the shuffler
+      - name: Run the MCR shuffler
         run: |
           shopt -s globstar
           find rando-shuffler/ -name "*.logic" -type f -delete # remove test files
@@ -121,6 +133,22 @@ jobs:
           if [[ $failed != 0 ]]; then
             exit 1;
           fi
+
+      - name: Run the logic parser
+        run: |
+          python <<HEREDOC
+
+          from pathlib import Path
+          from shuffler.main import load_aux_data
+          from shuffler._parser import parse
+
+          # Parse aux data files
+          aux_data = load_aux_data(Path.cwd() / 'shuffler' / 'auxiliary')
+
+          # Parse logic files into series of rooms
+          parse(Path.cwd() / 'shuffler' / 'logic', aux_data)
+
+          HEREDOC
 
   check-aux-data:
     name: Validate aux data
@@ -176,6 +204,7 @@ jobs:
 
   tests:
     name: Run tests
+    needs: [check-logic, check-aux-data]
     strategy:
       fail-fast: false
       matrix:

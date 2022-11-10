@@ -22,7 +22,18 @@ def load_aux_data(directory: Path) -> list[Area]:
     areas: list[Area] = []
     for file in aux_files:
         with open(file) as fd:
-            areas.append(Area(**json.load(fd)))
+            area = Area(**json.load(fd))
+
+            # It's possible for an Area to be spread across multiple files.
+            # To support this, check if this area exists first. If it does,
+            # add the new area's rooms to the existing area's rooms.
+            # Otherwise, add the new area to the list.
+            for existing_area in areas:
+                if area.name == existing_area.name:
+                    existing_area.rooms.extend(area.rooms)
+                    break
+            else:
+                areas.append(area)
     return areas
 
 
