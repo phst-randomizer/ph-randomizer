@@ -42,18 +42,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-
-      - name: Install dependencies
-        run: pip install -e .
-
       # Run basic syntax check
       - name: Get the CI tool
         uses: robinraju/release-downloader@v1
@@ -134,9 +122,6 @@ jobs:
             exit 1;
           fi
 
-      - name: Run the shuffler
-        run: python shuffler/main.py -a shuffler/auxiliary -l shuffler/logic
-
   check-aux-data:
     name: Validate aux data
     runs-on: ubuntu-latest
@@ -188,6 +173,28 @@ jobs:
           if failed:
             exit(1)
           HEREDOC
+
+  run-shuffler:
+    name: Run the shuffler against logic and aux data
+    needs: [check-logic, check-aux-data]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: '.python-version'
+          check-latest: true
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Run the shuffler
+        run: python shuffler/main.py -a shuffler/auxiliary -l shuffler/logic
 
   tests:
     name: Run tests
