@@ -443,6 +443,7 @@ jobs:
       - tests
       - check-logic
       - check-aux-data
+      - run-shuffler
       - test-desmume
     # Only create a release if a tag was pushed
     if: "startsWith(github.ref, 'refs/tags/')"
