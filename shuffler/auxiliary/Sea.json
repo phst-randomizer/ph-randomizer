@@ -369,7 +369,7 @@
           "link": "MaskedBeedleBoat.Main.Exit"
         },
         {
-          "name": "RuinsIslePost",
+          "name": "RuinsIslePort",
           "link": "RuinsIsle.BottomLeft.Boat.Boat"
         },
         {
