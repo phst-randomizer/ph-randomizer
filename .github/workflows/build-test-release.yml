@@ -134,21 +134,8 @@ jobs:
             exit 1;
           fi
 
-      - name: Run the logic parser
-        run: |
-          python <<HEREDOC
-
-          from pathlib import Path
-          from shuffler.main import load_aux_data
-          from shuffler._parser import parse
-
-          # Parse aux data files
-          aux_data = load_aux_data(Path.cwd() / 'shuffler' / 'auxiliary')
-
-          # Parse logic files into series of rooms
-          parse(Path.cwd() / 'shuffler' / 'logic', aux_data)
-
-          HEREDOC
+      - name: Run the shuffler
+        run: python shuffler/main.py -a shuffler/auxiliary -l shuffler/logic
 
   check-aux-data:
     name: Validate aux data
