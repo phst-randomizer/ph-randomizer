@@ -19,7 +19,7 @@
       "doors": [
         {
           "name": "Boat",
-          "link": ""
+          "link": "Sea.SE.Frost.FrostPort"
         },
         {
           "name": "SmartAnoukiHouse",

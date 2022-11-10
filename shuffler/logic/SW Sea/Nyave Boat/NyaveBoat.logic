@@ -1,0 +1,5 @@
+area NyaveBoat:
+  room Main:
+    node Main:
+      door Exit
+      enemy MiniBlin

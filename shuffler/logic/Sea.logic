@@ -28,6 +28,12 @@ area Sea:
     node Molida:
       door MolidaPort
 
+    node Boat:
+      door BoardBoat # Nyave's Boat
+
+    node Beedle:
+      door RegularBeedle # TODO implement randomization
+
     node Treasure5: chest Treasure5
     node Treasure6: chest Treasure6
     node Treasure7: chest Treasure7
@@ -39,15 +45,17 @@ area Sea:
     West <-> ToFogNW: item NWSeaChart
 
     # TO SE SEA CHART
-    node ToSE: door NW
+    node ToSE: door SE
     East <-> ToSE: item SESeaChart
 
     West <-> East: item Cannon
     Mercay <-> East: item SWSeaChart
     CannonIsle <-> East: item SWSeaChart
     Ember <-> East: item SWSeaChart
+    Beedle <-> East: item SWSeaChart
     Molida <-> West: (item SWSeaChart & defeated GiantEyePlant)
     SpiritIsle <-> West: item SWSeaChart
+    Boat <-> West: item SWSeaChart
     East <-> Treasure1: (item SalvageArm & item TreasureMap1)
     East <-> Treasure2: (item SalvageArm & item TreasureMap2)
     East <-> Treasure3: (item SalvageArm & item TreasureMap3)
@@ -73,7 +81,7 @@ area Sea:
 
     node Bannan:
       door BannanPort
-
+    
     node Treasure1: chest Treasure1
     node Treasure2: chest Treasure2
     node Treasure3: chest Treasure3
@@ -129,6 +137,9 @@ area Sea:
     node Goron:
       door GoronPort
 
+    node Boat:
+      door BoardBoat
+
     node Treasure1: chest Treasure1
     node Treasure2: chest Treasure2
     node Treasure3: chest Treasure3
@@ -166,8 +177,8 @@ area Sea:
     node Maze:
       door MazePort
 
-    node Dead:
-      door DeadPort
+    node DeadIsle:
+      door DeadIslePort
 
     node Treasure3: chest Treasure3
     node Treasure4: chest Treasure4
@@ -179,8 +190,11 @@ area Sea:
     node Boat:
       door BoardBoat
 
-    node Ruins:
-      door RuinsIsle
+    node Beedle:
+      door MaskedBeedle
+
+    node RuinsIsle:
+      door RuinsIslePort
 
     node Treasure1: chest Treasure1
     node Treasure2: chest Treasure2
@@ -197,6 +211,7 @@ area Sea:
     Maze <-> Main: item NESeaChart
     Dead <-> Main: item NESeaChart
     Boat <-> Main: item NESeaChart
+    Beedle <-> Main: item NESeaChart
     Ruins <-> Treasure1: (item SalvageArm & item TreasureMap1 & item NESeaChart)
     Ruins <-> Treasure2: (item SalvageArm & item TreasureMap2 & item NESeaChart)
     Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
@@ -210,18 +225,9 @@ area Sea:
   room BeedleBoat:
     node Main:
       door Exit
-
-  room ManOfSmilesBoat:
-    node Enemies:
+      shop RegularBeedle
+      
+  room MaskedBeedleBoat:
+    node Main:
       door Exit
-      enemy Octorok1
-      enemy Octorok2
-      enemy Octorok3
-      enemy Octorok4
-      enemy Geozard
-
-    node ManOfSmiles:
-      chest NormalThing
-      chest MysteriousThing
-
-    Enemies <-> ManOfSmiles: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Geozard)
+      shop MaskedBeedle

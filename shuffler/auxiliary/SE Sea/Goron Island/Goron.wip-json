@@ -8,7 +8,7 @@
       "doors": [
         {
           "name": "Boat",
-          "link": ""
+          "link": "Sea.SE.Goron.GoronPort"
         },
         {
           "name": "LowerHouse",

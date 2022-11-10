@@ -77,23 +77,31 @@
         },
         {
           "name": "SpiritIslePort",
-          "link": ""
+          "link": "SpiritIsle.Outside.Main.Boat"
         },
         {
           "name": "MolidaPort",
-          "link": ""
+          "link": "Molida.Town.Main.Boat"
         },
         {
           "name": "MainNW",
-          "link": ""
+          "link": "NW.ToEastSW.EastSW"
+        },
+        {
+          "name": "Boat",
+          "link": "NyaveBoat.Main.Main.Exit"
+        },
+        {
+          "name": "MaskedBeedle",
+          "link": "MaskedBeedleBoat.Main.Exit"
         },
         {
           "name": "FogNW",
-          "link": ""
+          "link": "NW.ToWestSW.WestSW"
         },
         {
-          "name": "NW",
-          "link": ""
+          "name": "SE",
+          "link": "SE.SW.ToSW"
         }
       ]
     },
@@ -168,7 +176,7 @@
         },
         {
           "name": "GustPort",
-          "link": ""
+          "link": "GustIsle.LowerIsland.BeforeCave.Boat"
         },
         {
           "name": "BannanPort",
@@ -176,19 +184,19 @@
         },
         {
           "name": "GhostShip",
-          "link": ""
+          "link": "GhostShip.F1.Main.Boat"
         },
         {
           "name": "EastSW",
-          "link": ""
+          "link": "SW.ToMainNW.MainNW"
         },
         {
           "name": "WestSW",
-          "link": ""
+          "link": "SW.ToFogNW.FogNW"
         },
         {
           "name": "NE",
-          "link": ""
+          "link": "NE.ToRightNW.RightNW"
         }
       ]
     },
@@ -255,27 +263,31 @@
       "doors": [
         {
           "name": "DeeEssPort",
-          "link": ""
+          "link": "DeeEssIsland.Main.Main.Boat"
         },
         {
           "name": "HarrowPort",
-          "link": ""
+          "link": "HarrowIsland.Main.Port.Boat"
         },
         {
           "name": "FrostPort",
-          "link": ""
+          "link": "FrostIsle.Port.Main.Boat"
         },
         {
           "name": "GoronPort",
-          "link": ""
+          "link": "GoronIsland.LowerLeft.Port.Boat"
+        },
+        {
+          "name": "Boat",
+          "link": "HoHoBoat.Main.Main.Exit"
         },
         {
           "name": "NE",
-          "link": ""
+          "link": "NE.ToSE.SE"
         },
         {
           "name": "SW",
-          "link": ""
+          "link": "SW.ToSE.SE"
         }
       ]
     },
@@ -342,27 +354,31 @@
       "doors": [
         {
           "name": "MazePort",
-          "link": ""
+          "link": "MazeIsland.Main.Port.Boat"
         },
         {
           "name": "DeadPort",
-          "link": ""
+          "link": "DeadIsle.Outside.Boat.Boat"
         },
         {
           "name": "BoardBoat",
-          "link": ""
+          "link": "ManOfSmilesBoat.Main.Enemies.Exit"
+        },
+        {
+          "name": "MaskedBeedle",
+          "link": "MaskedBeedleBoat.Main.Exit"
         },
         {
           "name": "RuinsIsle",
-          "link": ""
+          "link": "RuinsIsle.BottomLeft.Boat.Boat"
         },
         {
           "name": "RightNW",
-          "link": ""
+          "link": "NW.ToNE.NE"
         },
         {
           "name": "SE",
-          "link": ""
+          "link": "SE.ToNE.NE"
         }
       ]
     },
@@ -372,32 +388,17 @@
       "doors": [
         {
           "name": "Exit",
-          "link": ""
+          "link": "SW.Beedle.RegularBeedle"
         }
       ]
     },
     {
-      "name": "ManOfSmilesBoat",
-      "chests": [
-        {
-          "name": "NormalThing",
-          "type": "event",
-          "contents": "",
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": -1
-        },
-        {
-          "name": "MysteriousThing",
-          "type": "event",
-          "contents": "",
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": -1
-        }
-      ],
+      "name": "MaskedBeedleBoat",
+      "chests": [],
       "doors": [
         {
           "name": "Exit",
-          "link": ""
+          "link": "NE.Beedle.MaskedBeedle"
         }
       ]
     }

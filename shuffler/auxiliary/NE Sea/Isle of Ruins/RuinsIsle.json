@@ -8,7 +8,7 @@
       "doors": [
         {
           "name": "Boat",
-          "link": "Sea.NE.RuinsIslePort.RuinsIsle"
+          "link": "Sea.NE.RuinsIsle.RuinsIslePort"
         },
         {
           "name": "ToCaveBoat",

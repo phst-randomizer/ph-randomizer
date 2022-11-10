@@ -23,7 +23,7 @@
       "doors": [
         {
           "name": "Boat",
-          "link": "Sea.NE.DeadIslePort.DeadIsle"
+          "link": "Sea.NE.DeadIsle.DeadIslePort"
         },
         {
           "name": "ToCaveBoat",

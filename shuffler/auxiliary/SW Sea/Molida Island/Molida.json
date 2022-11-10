@@ -14,6 +14,10 @@
       ],
       "doors": [
         {
+          "name": "Boat",
+          "link": "Sea.SW.Molida.MolidaPort"
+        },
+        {
           "name": "LeftmostHouse",
           "link": "Molida.LeftmostHouse.Main.Outside"
         },

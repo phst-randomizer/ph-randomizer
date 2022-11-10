@@ -19,7 +19,7 @@
       "doors": [
         {
           "name": "Exit",
-          "link": ""
+          "link": "Sea.NE.Boat.BoardBoat"
         }
       ]
     }

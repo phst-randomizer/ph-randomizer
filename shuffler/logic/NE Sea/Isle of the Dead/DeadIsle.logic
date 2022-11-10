@@ -107,12 +107,12 @@ area DeadIsle:
 
   room PhantomCorridor:
     node Main:
-      door Entrance
+      door Exit
       enemy Keese1
       enemy Keese2
 
     node Brant:
-      door Exit
+      door Brant
 
     Brant -> Main # Add the spirits as a requirement in patch, as Brant mentions them before opening the door
     Main -> Brant: (flag PathOfCorridor | setting NoPuzzleSolution)

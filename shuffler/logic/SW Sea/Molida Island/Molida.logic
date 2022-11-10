@@ -1,6 +1,7 @@
 area Molida:
   room Town:
     node Main:
+      door Boat
       door LeftmostHouse
       door MiddleHouse
       door MolidaShop

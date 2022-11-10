@@ -23,7 +23,7 @@ area SpiritIsle:
     node Main:
       chest LeftSide
       door Grotto
-      door Ship
+      door Boat
 
     node Right:
       chest AfterJumps

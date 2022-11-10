@@ -4,17 +4,11 @@
   "rooms": [
     {
       "name": "Main",
-      "chests": [
-        {
-          "name": "TradingSequence",
-          "type": "",
-          "contents": ""
-        }
-      ],
+      "chests": [],
       "doors": [
         {
           "name": "Exit",
-          "link": "Sea.SE.Boat.BoardBoat"
+          "link": "Sea.SW.Boat.BoardBoat"
         }
       ]
     }
