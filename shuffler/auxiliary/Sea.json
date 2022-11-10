@@ -357,7 +357,7 @@
           "link": "MazeIsland.Main.Port.Boat"
         },
         {
-          "name": "DeadPort",
+          "name": "DeadIslePort",
           "link": "DeadIsle.Outside.Boat.Boat"
         },
         {
@@ -369,7 +369,7 @@
           "link": "MaskedBeedleBoat.Main.Exit"
         },
         {
-          "name": "RuinsIsle",
+          "name": "RuinsIslePost",
           "link": "RuinsIsle.BottomLeft.Boat.Boat"
         },
         {
