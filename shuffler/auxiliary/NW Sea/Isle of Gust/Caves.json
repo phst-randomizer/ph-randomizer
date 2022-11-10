@@ -33,7 +33,7 @@
         {
           "name": "EnemyClearChest",
           "type": "chest",
-          "contents": "treasure_chart_nw_4",
+          "contents": "treasure_map_nw_4",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

@@ -8,7 +8,7 @@
         {
           "name": "BeeChest",
           "type": "chest",
-          "contents": "treasure_map_SW_7",
+          "contents": "treasure_map_sw_7",
           "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
           "zmb_mapobject_index": 183
         },

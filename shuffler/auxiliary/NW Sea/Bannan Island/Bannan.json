@@ -8,7 +8,7 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "treasure_map_SW_5",
+          "contents": "treasure_map_sw_5",
           "zmb_actor_index": 4,
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
         },
@@ -48,7 +48,7 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "treasure_map_SE_4",
+          "contents": "treasure_map_se_4",
           "zmb_actor_index": 5,
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
         },

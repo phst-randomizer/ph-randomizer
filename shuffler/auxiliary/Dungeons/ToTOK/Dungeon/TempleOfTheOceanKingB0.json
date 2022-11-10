@@ -14,7 +14,7 @@
         {
           "name": "Map",
           "type": "chest",
-          "contents": "SW Sea Chart",
+          "contents": "sw_sea_chart",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

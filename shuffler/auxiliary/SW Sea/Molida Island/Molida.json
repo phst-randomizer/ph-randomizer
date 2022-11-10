@@ -7,7 +7,7 @@
         {
           "name": "RedGirl",
           "type": "event",
-          "contents": "treasure_map_SE_3",
+          "contents": "treasure_map_se_3",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         }
@@ -131,7 +131,7 @@
         {
           "name": "NearFogMap",
           "type": "chest",
-          "contents": "treasure_map_SW_4",
+          "contents": "treasure_map_sw_4",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },

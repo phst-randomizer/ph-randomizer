@@ -8,7 +8,7 @@
         {
           "name": "EyeChest",
           "type": "chest",
-          "contents": "treasure_map_NW_2",
+          "contents": "treasure_map_nw_2",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },

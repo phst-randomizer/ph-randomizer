@@ -8,7 +8,7 @@
         {
           "name": "NWChartChest",
           "type": "chest",
-          "contents": "NW Sea Chart",
+          "contents": "nw_sea_chart",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }
