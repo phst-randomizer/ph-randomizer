@@ -207,13 +207,13 @@ area Sea:
     node ToSE: door SE
     Main <-> ToSE: item SESeaChart
 
-    Main <-> Ruins: (item RegalNecklace & item NESeaChart)
+    Main <-> RuinsIsle: (item RegalNecklace & item NESeaChart)
     Maze <-> Main: item NESeaChart
-    Dead <-> Main: item NESeaChart
+    DeadIsle <-> Main: item NESeaChart
     Boat <-> Main: item NESeaChart
     Beedle <-> Main: item NESeaChart
-    Ruins <-> Treasure1: (item SalvageArm & item TreasureMap1 & item NESeaChart)
-    Ruins <-> Treasure2: (item SalvageArm & item TreasureMap2 & item NESeaChart)
+    RuinsIsle <-> Treasure1: (item SalvageArm & item TreasureMap1 & item NESeaChart)
+    RuinsIsle <-> Treasure2: (item SalvageArm & item TreasureMap2 & item NESeaChart)
     Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
     Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
     Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
