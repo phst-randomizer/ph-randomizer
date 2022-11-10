@@ -406,8 +406,6 @@ def parse_logic_file(lines: list[str], aux_data: list[Area]) -> list[LogicalRoom
 def parse(logic_directory: Path, aux_data: list[Area]) -> list[LogicalRoom]:
     rooms: list[LogicalRoom] = []
     for file in logic_directory.rglob('*.logic'):
-        if 'Mercay.logic' not in str(file):
-            continue
         if file.stem not in [area.name for area in aux_data]:
             logging.warning(f'No aux data found for {file.name}')
             continue
