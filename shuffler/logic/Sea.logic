@@ -81,7 +81,7 @@ area Sea:
 
     node Bannan:
       door BannanPort
-    
+
     node Treasure1: chest Treasure1
     node Treasure2: chest Treasure2
     node Treasure3: chest Treasure3
@@ -226,7 +226,7 @@ area Sea:
     node Main:
       door Exit
       shop RegularBeedle
-      
+
   room MaskedBeedleBoat:
     node Main:
       door Exit
