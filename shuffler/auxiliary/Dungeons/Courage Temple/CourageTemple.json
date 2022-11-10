@@ -3,6 +3,7 @@
   "name": "CourageTemple",
   "rooms": [
     {
+      "name": "F1",
       "chests": [
         {
           "name": "AfterSpikeTraps",
@@ -34,6 +35,11 @@
         },
         {
           "name": "PolsKey",
+          "type": "on_enemy",
+          "contents": "small_key"
+        },
+        {
+          "name": "PolsKeyTopRight",
           "type": "on_enemy",
           "contents": "small_key"
         }
@@ -83,10 +89,10 @@
           "name": "ToF2EmptyRoom",
           "link": "F2.EmptyRoom.ToF1EmptyRoom"
         }
-      ],
-      "name": "F1"
+      ]
     },
     {
+      "name": "B1",
       "chests": [
         {
           "name": "BowChest",
@@ -135,10 +141,10 @@
           "name": "ToF1TopRight",
           "link": "F1.TopRight.ToB1AfterTorches"
         }
-      ],
-      "name": "B1"
+      ]
     },
     {
+      "name": "F2",
       "chests": [
         {
           "name": "AfterUDRL",
@@ -190,10 +196,10 @@
           "name": "ToF3",
           "link": "F3.Main.ToF2"
         }
-      ],
-      "name": "F2"
+      ]
     },
     {
+      "name": "F3",
       "chests": [
         {
           "name": "Hidden",
@@ -216,8 +222,7 @@
           "name": "ToBoss",
           "link": "CraykBossRoom.Main.Fight.ToDungeon"
         }
-      ],
-      "name": "F3"
+      ]
     }
   ]
 }
