@@ -7,7 +7,7 @@
         {
           "name": "NESeaChart",
           "type": "chest",
-          "contents": "sea_chart_ne",
+          "contents": "ne_sea_chart",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

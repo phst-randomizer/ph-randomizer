@@ -1,4 +1,4 @@
-area UnchartedIsland:
+area Uncharted:
   room Main:
     node Main:
       door Cave

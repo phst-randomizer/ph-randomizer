@@ -1,6 +1,6 @@
 {
   "$schema": "../../../aux_schema.json",
-  "name": "UnchartedIsland",
+  "name": "Uncharted",
   "rooms": [
     {
       "name": "Main",
@@ -8,7 +8,7 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "treasure_map_NW_1",
+          "contents": "treasure_map_nw_1",
           "zmb_actor_index": 4,
           "zmb_file_path": "Map/isle_small3/map00.bin/zmb/isle_small3_00.zmb"
         }

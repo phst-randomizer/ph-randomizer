@@ -27,7 +27,7 @@
         },
         {
           "name": "F2Middle",
-          "link": "F2.TopRight.ToF1Middle"
+          "link": "F2.TopRightStairs.ToF1Middle"
         },
         {
           "name": "ToF2TopLeft",

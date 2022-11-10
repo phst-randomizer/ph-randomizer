@@ -3,7 +3,7 @@ import shutil
 
 import pytest
 
-from shuffler._parser import Edge, Node, parse
+from shuffler._parser import LogicalRoom, parse
 from shuffler.aux_models import Area
 from shuffler.main import load_aux_data
 
@@ -28,6 +28,5 @@ def logic_directory(tmp_path: Path):
 
 
 @pytest.fixture
-def logic(logic_directory: str) -> tuple[list[Node], dict[str, list[Edge]]]:
-    nodes, edges = parse(Path(logic_directory))
-    return nodes, edges
+def logic(logic_directory: str, aux_data: list[Area]) -> list[LogicalRoom]:
+    return parse(Path(logic_directory), aux_data)

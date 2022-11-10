@@ -15,7 +15,7 @@
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "treasure_map_SE_8",
+          "contents": "treasure_map_se_8",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }
