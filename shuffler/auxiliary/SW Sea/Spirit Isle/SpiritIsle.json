@@ -78,7 +78,7 @@
           "link": "SpiritIsle.Inside.Main.Outside"
         },
         {
-          "name": "Ship",
+          "name": "Boat",
           "link": "Sea.SW.SpiritIsle.SpiritIslePort"
         }
       ],

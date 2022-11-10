@@ -81,6 +81,14 @@
         {
           "name": "HoleToChest",
           "link": "Molida.CaveSystem.ChestLedgeLeft.HoleToChest"
+        },
+        {
+          "name": "CourageTemple",
+          "link": "CourageTemple.F1.Entrance.Outside"
+        },
+        {
+          "name": "AfterBoss",
+          "link": "CraykBossRoom.Main.BossDefeat.ExitWarp"
         }
       ],
       "name": "UpperIsland"

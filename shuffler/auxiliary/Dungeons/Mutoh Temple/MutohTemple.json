@@ -20,8 +20,12 @@
           "link": "B1.Up.ToF1Top"
         },
         {
-          "name": "ToB1",
-          "link": "B1.Up.ToF1Top"
+          "name": "ToF2",
+          "link": "F2.Right.ToF1"
+        },
+        {
+          "name": "ToB1Middle",
+          "link": "B1.MiddleStairsF1.ToF1Middle"
         },
         {
           "name": "ToB1Bottom",

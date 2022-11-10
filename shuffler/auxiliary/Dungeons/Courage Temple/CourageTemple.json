@@ -50,6 +50,10 @@
           "link": "Molida.UpperIsland.TempleEntrance.CourageTemple"
         },
         {
+          "name": "BlueWarp",
+          "link": "F3.Main.BlueWarp"
+        },
+        {
           "name": "ToB1Arena",
           "link": "B1.MiddleMovingPlatform.ToF1Arena"
         },

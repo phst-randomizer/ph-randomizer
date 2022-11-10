@@ -2,6 +2,7 @@ area CourageTemple:
   room F1:
     node Entrance:
       door Outside
+      exit BlueWarp
       chest AfterSpikeTraps
 
     node BehindBombableWall:

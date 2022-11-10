@@ -101,7 +101,7 @@
         },
         {
           "name": "SE",
-          "link": "SE.SW.ToSW"
+          "link": "SE.ToSW.SW"
         }
       ]
     },
@@ -383,7 +383,7 @@
       ]
     },
     {
-      "name": "BeedleBoat",
+      "name": "RegularBeedleBoat",
       "chests": [],
       "doors": [
         {

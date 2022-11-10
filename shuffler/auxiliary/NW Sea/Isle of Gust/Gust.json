@@ -114,6 +114,10 @@
         {
           "name": "ToWindTemple",
           "link": "WindTemple.F1.Entrance.Entrance"
+        },
+        {
+          "name": "AfterBoss",
+          "link": "CyclokBossRoom.Main.BossDefeat.ExitWarp"
         }
       ]
     }

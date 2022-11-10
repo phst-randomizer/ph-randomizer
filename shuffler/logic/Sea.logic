@@ -222,7 +222,7 @@ area Sea:
     Main <-> Treasure8: (item SalvageArm & item TreasureMap8)
 
   # BOATS
-  room BeedleBoat:
+  room RegularBeedleBoat:
     node Main:
       door Exit
       shop RegularBeedle

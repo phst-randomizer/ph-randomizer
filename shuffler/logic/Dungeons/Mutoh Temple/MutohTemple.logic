@@ -14,7 +14,7 @@ area MutohTemple:
       enemy StalfosLeft2
 
     node Up:
-      door ToF1Top
+      door ToB1Top
 
     Entrance -> Up: (item Bombs & defeated StalfosRight1 & defeated StalfosRight2 & defeated StalfosLeft1 & defeated StalfosLeft2)
 

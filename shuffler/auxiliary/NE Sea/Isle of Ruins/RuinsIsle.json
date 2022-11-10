@@ -23,6 +23,10 @@
           "link": "TopLeft.ToSouth.ToSouthShortcut"
         },
         {
+          "name": "ToNorthRight",
+          "link": "TopLeft.FromSouthRight.ToSouthRight"
+        },
+        {
           "name": "ToEastShortcut",
           "link": "BottomRight.ToWest.ToWestShortcut"
         },
@@ -170,7 +174,7 @@
       ]
     },
     {
-      "name": "TopRight",
+      "name": "BottomRight",
       "chests": [],
       "doors": [
         {

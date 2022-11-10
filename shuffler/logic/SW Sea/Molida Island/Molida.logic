@@ -33,7 +33,6 @@ area Molida:
       enemy GeozardLeft
       enemy GeozardRight
       exit AfterBoss
-      exit BlueWarp
 
     node Island:
       chest IslandChest
