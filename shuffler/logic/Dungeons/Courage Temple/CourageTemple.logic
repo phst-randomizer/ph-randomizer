@@ -187,7 +187,7 @@ area CourageTemple:
       door ToF1ElectricMaze
 
     node AfterElectricMaze:
-      chest AfterUDLR
+      chest AfterUDRL
 
     ElectricMaze <-> AfterElectricMaze: (flag KnowCourageTempleOrder | setting NoPuzzleSolution)
 
