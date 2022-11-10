@@ -92,8 +92,8 @@
           "link": "NyaveBoat.Main.Main.Exit"
         },
         {
-          "name": "MaskedBeedle",
-          "link": "MaskedBeedleBoat.Main.Exit"
+          "name": "RegularBeedle",
+          "link": "RegularBeedleBoat.Main.Exit"
         },
         {
           "name": "FogNW",
