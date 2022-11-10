@@ -149,33 +149,12 @@ jobs:
             exit 1
           fi
 
-      - name: Validate aux data
+      - name: Run JSON Schema validation on aux data
         uses: walbo/validate-json@v1.1.0
         with:
           files: shuffler/auxiliary/**/*.json
 
-  logic-aux-validators:
-    name: Run more advanced logic/aux data validators
-    needs:
-      - check-logic
-      - check-aux-data
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-
-      - name: Install dependencies
-        run: pip install -e .
-
-      - name: Run aux_models validators
+      - name: Run pydantic validation on aux data
         run: |
           python <<HEREDOC
           import json, sys
@@ -197,7 +176,6 @@ jobs:
 
   tests:
     name: Run tests
-    needs: logic-aux-validators
     strategy:
       fail-fast: false
       matrix:
@@ -442,7 +420,6 @@ jobs:
       - tests
       - check-logic
       - check-aux-data
-      - logic-aux-validators
       - test-desmume
     # Only create a release if a tag was pushed
     if: "startsWith(github.ref, 'refs/tags/')"
