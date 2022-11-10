@@ -196,6 +196,7 @@ class NodeDescriptor(Enum, metaclass=MetaEnum):
     ENEMY = 'enemy'
     LOCK = 'lock'
     GAIN = 'gain'
+    SHOP = 'shop'
 
 
 class EdgeDescriptor(Enum, metaclass=MetaEnum):
