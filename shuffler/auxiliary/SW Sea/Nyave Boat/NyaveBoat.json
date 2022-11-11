@@ -1,9 +1,9 @@
 {
   "$schema": "../../../aux_schema.json",
-  "name": "NyaveBoat",
+  "name": "Sea",
   "rooms": [
     {
-      "name": "Main",
+      "name": "NyaveBoat",
       "chests": [],
       "doors": [
         {
