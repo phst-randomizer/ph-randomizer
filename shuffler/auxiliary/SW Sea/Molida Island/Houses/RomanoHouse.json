@@ -3,11 +3,12 @@
   "name": "Molida",
   "rooms": [
     {
+      "name": "RomanoHouse",
       "chests": [
         {
           "name": "ShootingGallery",
           "type": "event",
-          "contents": "big_quiver",
+          "contents": "quiver_upgrade",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         }
@@ -17,8 +18,7 @@
           "name": "Outside",
           "link": "Molida.Town.Main.RomanoHouse"
         }
-      ],
-      "name": "RomanoHouse"
+      ]
     }
   ]
 }
