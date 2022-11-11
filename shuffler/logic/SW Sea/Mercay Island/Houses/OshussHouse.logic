@@ -1,0 +1,9 @@
+area Mercay:
+  room OshussHouse:
+    node Main:
+      door Outside
+
+    node PhantomSword:
+      chest PhantomSword
+
+    Main -> PhantomSword: (item PhantomBlade & item PhantomHourglass)

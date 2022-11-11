@@ -1,0 +1,4 @@
+area Mercay:
+  room MercayHouse:
+    node Main:
+      door Outside

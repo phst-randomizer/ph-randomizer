@@ -1,0 +1,12 @@
+area Mercay:
+  room EnemyBamboo:
+    node South:
+      door South
+      hint GossipMercay1
+      enemy RedChuchuUp
+      enemy RedChuchuLeft
+      enemy RedChuchuRight
+
+    node Grotto:
+      door Grotto
+    South <-> Grotto: item Sword

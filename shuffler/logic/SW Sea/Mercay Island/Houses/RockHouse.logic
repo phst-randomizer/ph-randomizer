@@ -1,0 +1,4 @@
+area Mercay:
+  room RockHouse:
+    node Main:
+      door Outside

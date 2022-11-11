@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../aux_schema.json",
+  "$schema": "../../../../aux_schema.json",
   "name": "MercayGrotto",
   "rooms": [
     {
@@ -35,28 +35,6 @@
         {
           "name": "North",
           "link": "F2.Main.Downstairs"
-        }
-      ]
-    },
-    {
-      "name": "F2",
-      "chests": [
-        {
-          "name": "SmallKey",
-          "type": "on_enemy",
-          "contents": "small_key",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": -1
-        }
-      ],
-      "doors": [
-        {
-          "name": "Downstairs",
-          "link": "F1.NorthDoor.North"
-        },
-        {
-          "name": "East",
-          "link": "Mercay.MercayTown.Main.Grotto"
         }
       ]
     }

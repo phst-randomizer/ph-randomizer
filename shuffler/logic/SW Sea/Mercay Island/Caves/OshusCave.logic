@@ -1,0 +1,9 @@
+area Mercay:
+  room OshusCave:
+    node Entrance:
+      door Exit
+
+    node Sword:
+      chest SwordChest
+
+    Entrance -> Sword: (flag CountedTrees | setting NoPuzzleSolution)

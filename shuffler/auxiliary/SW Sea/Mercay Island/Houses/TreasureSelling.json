@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "TreasureSelling",
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main.TreasureSelling"
+        }
+      ]
+    }
+  ]
+}

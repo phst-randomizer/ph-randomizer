@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "BridgeCave",
+      "chests": [
+        {
+          "name": "BridgeChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "Map/isle_main/map18.bin/zmb/isle_main_18.zmb",
+          "zmb_mapobject_index": 4
+        }
+      ],
+      "doors": [
+        {
+          "name": "West",
+          "link": "AboveMercayTown.HiddenBombableWall.ToBridgeCave"
+        },
+        {
+          "name": "East",
+          "link": "AboveMercayTown.Island.IslandGrotto"
+        }
+      ]
+    }
+  ]
+}

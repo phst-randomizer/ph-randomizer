@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "Shipyard",
+      "chests": [
+        {
+          "name": "ShipyardChest",
+          "type": "chest",
+          "contents": "ship_part",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main.Shipyard"
+        }
+      ]
+    }
+  ]
+}

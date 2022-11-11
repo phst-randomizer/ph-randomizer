@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "OshussHouse",
+      "chests": [
+        {
+          "name": "PhantomSword",
+          "contents": "phantom_sword",
+          "type": "event",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": -1
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "OutsideOshus.Outside.OshussHouse"
+        }
+      ]
+    }
+  ]
+}

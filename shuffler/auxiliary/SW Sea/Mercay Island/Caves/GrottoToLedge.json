@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "GrottoToLedge",
+      "chests": [
+        {
+          "name": "PowerGem",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "Map/isle_main/map16.bin/zmb/isle_main_16.zmb",
+          "zmb_mapobject_index": 2
+        }
+      ],
+      "doors": [
+        {
+          "name": "Left",
+          "link": "PathToToTOK.BombableWall.Grotto"
+        },
+        {
+          "name": "South",
+          "link": "AboveMercayTown.Ledge.Grotto"
+        }
+      ]
+    }
+  ]
+}

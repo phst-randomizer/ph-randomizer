@@ -1,0 +1,10 @@
+area Mercay:
+  room BridgeCave:
+    node Main:
+      door West
+      door East
+
+    node HitBoomerangSwitch:
+      chest BridgeChest
+
+    Main <-> HitBoomerangSwitch: item Boomerang

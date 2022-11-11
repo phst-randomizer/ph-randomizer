@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "EnemyBamboo",
+      "doors": [
+        {
+          "name": "South",
+          "link": "OutsideOshus.Outside.North"
+        },
+        {
+          "name": "Grotto",
+          "link": "MercayGrotto.F1.Lower.West"
+        }
+      ]
+    }
+  ]
+}

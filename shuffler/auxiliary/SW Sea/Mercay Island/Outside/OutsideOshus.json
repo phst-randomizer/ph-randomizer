@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "OutsideOshus",
+      "chests": [
+        {
+          "name": "PickUpRock",
+          "type": "event",
+          "contents": "small_green_rupee",
+          "bmg_file_path": "English/Message/main_isl.bmg",
+          "bmg_instruction_index": 135
+        }
+      ],
+      "doors": [
+        {
+          "name": "North",
+          "link": "EnemyBamboo.South.South"
+        },
+        {
+          "name": "OshussHouse",
+          "link": "OshussHouse.Main.Outside"
+        },
+        {
+          "name": "RockHouse",
+          "link": "RockHouse.Main.Outside"
+        },
+        {
+          "name": "East",
+          "link": "MercayTown.Main.West"
+        },
+        {
+          "name": "OshusCave",
+          "link": "OshusCave.Entrance.Exit"
+        }
+      ]
+    }
+  ]
+}

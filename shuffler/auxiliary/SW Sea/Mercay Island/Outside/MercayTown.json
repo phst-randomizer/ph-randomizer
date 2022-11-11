@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "MercayTown",
+      "chests": [
+        {
+          "name": "Cucco",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
+          "zmb_mapobject_index": 113
+        },
+        {
+          "name": "LeftLedgeChest",
+          "type": "chest",
+          "contents": "random_ship_part",
+          "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
+          "zmb_mapobject_index": 97
+        },
+        {
+          "name": "RightLedgeChest",
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
+          "zmb_mapobject_index": 98
+        }
+      ],
+      "doors": [
+        {
+          "name": "Grotto",
+          "link": "MercayGrotto.F2.EastExit.East"
+        },
+        {
+          "name": "Tavern",
+          "link": "Tavern.Main.Outside"
+        },
+        {
+          "name": "Shop",
+          "link": "MercayShop.Main.Outside"
+        },
+        {
+          "name": "Shipyard",
+          "link": "Shipyard.Main.Outside"
+        },
+        {
+          "name": "House",
+          "link": "MercayHouse.Main.Outside"
+        },
+        {
+          "name": "TreasureSelling",
+          "link": "TreasureSelling.Main.Outside"
+        },
+        {
+          "name": "Boat",
+          "link": "Sea.SW.Mercay.MercayPort"
+        },
+        {
+          "name": "West",
+          "link": "OutsideOshus.East.East"
+        },
+        {
+          "name": "NorthMain",
+          "link": "AboveMercayTown.Main.South"
+        },
+        {
+          "name": "NorthLedge",
+          "link": "AboveMercayTown.Ledge.SouthLedge"
+        }
+      ]
+    }
+  ]
+}

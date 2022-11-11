@@ -1,0 +1,4 @@
+area Mercay:
+  room TreasureSelling:
+    node Main:
+      door Outside

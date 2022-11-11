@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "OshusCave",
+      "chests": [
+        {
+          "name": "SwordChest",
+          "type": "chest",
+          "contents": "oshus_sword",
+          "zmb_file_path": "Map/isle_main/map19.bin/zmb/isle_main_19.zmb",
+          "zmb_mapobject_index": 1
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "OutsideOshus.Outside.OshusCave"
+        }
+      ]
+    }
+  ]
+}

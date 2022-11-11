@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "PathToToTOK",
+      "doors": [
+        {
+          "name": "East",
+          "link": "AboveMercayTown.Main.West"
+        },
+        {
+          "name": "ToTOK",
+          "link": "TempleOfTheOceanKingLobby.Main.Main.Outside"
+        },
+        {
+          "name": "Grotto",
+          "link": "GrottoToLedge.Up.Left"
+        }
+      ]
+    }
+  ]
+}

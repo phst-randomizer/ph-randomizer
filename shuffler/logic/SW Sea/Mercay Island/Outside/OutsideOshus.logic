@@ -1,0 +1,14 @@
+area Mercay:
+  room OutsideOshus:
+    node Outside:
+      chest PickUpRock
+      door North
+      door OshussHouse
+      door RockHouse
+      door OshusCave
+      flag CountedTrees
+
+    node East:
+      door East
+
+    Outside <-> East: flag BridgeRepaired

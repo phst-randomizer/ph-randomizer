@@ -1,0 +1,11 @@
+area Mercay:
+  room PathToToTOK:
+    node Main:
+      door East
+      door ToTOK
+
+    node BombableWall:
+      door Grotto
+
+    BombableWall -> Main
+    Main -> BombableWall: (item Bombs | item Bombchus)

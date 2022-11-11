@@ -1,0 +1,26 @@
+area Mercay:
+  room AboveMercayTown:
+    node Main:
+      enemy RedChuchu1
+      enemy RedChuchu2
+      enemy RedChuchu3
+      enemy RedChuchu4
+      enemy Crow
+      door South
+      door West
+      chest RollIntoTree
+
+    node HiddenBombableWall:
+      door ToBridgeCave
+
+    node Ledge:
+      door Grotto
+      door SouthLedge
+
+    node Island:
+      door IslandGrotto
+      chest AboveEntrance
+
+    Island -> Main
+    Main -> HiddenBombableWall: (item Bombs | item Bombchus)
+    Ledge -> Main

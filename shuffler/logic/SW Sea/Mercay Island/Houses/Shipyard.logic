@@ -1,0 +1,5 @@
+area Mercay:
+  room Shipyard:
+    node Main:
+      door Outside
+      chest ShipyardChest

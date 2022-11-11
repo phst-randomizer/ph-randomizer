@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "AboveMercayTown",
+      "doors": [
+        {
+          "name": "South",
+          "link": "MercayTown.Main.NorthMain"
+        },
+        {
+          "name": "West",
+          "link": "PathToToTOK.Main.East"
+        },
+        {
+          "name": "ToBridgeCave",
+          "link": "BridgeCave.Main.West"
+        },
+        {
+          "name": "Grotto",
+          "link": "GrottoToLedge.Down.South"
+        },
+        {
+          "name": "SouthLedge",
+          "link": "MercayTown.Ledge.NorthLedge"
+        },
+        {
+          "name": "IslandGrotto",
+          "link": "BridgeCave.Main.East"
+        }
+      ],
+      "chests": [
+        {
+          "name": "RollIntoTree",
+          "type": "tree",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
+          "zmb_mapobject_index": 25
+        },
+        {
+          "name": "AboveEntrance",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
+          "zmb_mapobject_index": 54
+        }
+      ]
+    }
+  ]
+}

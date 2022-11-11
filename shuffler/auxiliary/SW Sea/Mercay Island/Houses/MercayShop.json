@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Mercay",
+  "rooms": [
+    {
+      "name": "MercayShop",
+      "chests": [
+        {
+          "name": "WoodenShield",
+          "type": "island_shop",
+          "contents": "wooden_shield",
+          "overlay": 31,
+          "overlay_offset": "0x2fd4"
+        },
+        {
+          "name": "PowerGem",
+          "type": "island_shop",
+          "contents": "power_gem",
+          "overlay": 31,
+          "overlay_offset": "0x2f88"
+        },
+        {
+          "name": "QuiverUpgrade",
+          "type": "island_shop",
+          "contents": "quiver_upgrade",
+          "overlay": 31,
+          "overlay_offset": "0x2ea0"
+        },
+        {
+          "name": "RandomTreasure",
+          "type": "island_shop",
+          "contents": "common_treasure",
+          "overlay": 31,
+          "overlay_offset": "0x2f54"
+        }
+      ],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "MercayTown.Main.Shop"
+        }
+      ]
+    }
+  ]
+}

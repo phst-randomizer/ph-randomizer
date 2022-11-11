@@ -1,0 +1,4 @@
+area Mercay:
+  room Tavern:
+    node Main:
+      door Outside

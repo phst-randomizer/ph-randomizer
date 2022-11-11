@@ -1,0 +1,33 @@
+area MercayGrotto:
+  room F2:
+    node Main:
+      door Downstairs
+      enemy KeyRat
+      enemy Rat1
+      enemy Rat2
+      enemy Rat3
+      enemy Rat4
+      enemy Rat5
+      enemy Rat6
+      enemy Rat7
+
+    node RatKey:
+      chest SmallKey
+
+    node EastExit:
+      door East
+      enemy Keese1
+      enemy Keese2
+      enemy Keese3
+      enemy Keese4
+      enemy Keese5
+
+    node LockedDoor:
+      lock MercayKey
+
+    Main -> LockedDoor
+    EastExit -> LockedDoor
+    LockedDoor -> Main: open MercayKey
+    LockedDoor -> EastExit: open MercayKey
+
+    Main <-> RatKey: defeated Rat

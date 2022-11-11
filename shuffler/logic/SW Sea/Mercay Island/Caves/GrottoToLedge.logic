@@ -1,0 +1,17 @@
+area Mercay:
+  room GrottoToLedge:
+    node Up:
+      door Left
+      enemy Rat1
+      enemy Rat2
+      enemy Rat3
+      enemy Rat4
+      enemy Rat5
+      hint GossipStone
+      chest PowerGem
+
+    node Down:
+      enemy ZoraWarrior
+      door South
+
+    Up -> Down: item Bow

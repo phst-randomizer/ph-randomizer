@@ -1,0 +1,8 @@
+area Mercay:
+  room MercayShop:
+    node Main:
+      door Outside
+      chest WoodenShield
+      chest PowerGem
+      chest QuiverUpgrade
+      chest RandomTreasure
