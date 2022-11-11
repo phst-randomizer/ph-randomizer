@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "RuinsIsle",
+  "rooms": [
+    {
+      "name": "BottomRight",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToNorthLeftmost",
+          "link": "TopRight.Underwater.ToSouthLeftmost"
+        },
+        {
+          "name": "ToMaxPyramid",
+          "link": "MaxPyramid.F1.Main.Exit"
+        },
+        {
+          "name": "ToNorthMiddle",
+          "link": "TopRight.ChestLedge.ToSouthMiddle"
+        },
+        {
+          "name": "ToNorthCorridor",
+          "link": "TopRight.Corridor.ToSouthCorridor"
+        },
+        {
+          "name": "ToNorthRight",
+          "link": "TopRight.UnderwaterNearPyramids.ToSouthRight"
+        },
+        {
+          "name": "ToWestShortcut",
+          "link": "BottomLeft.AboveCave.ToEastShortcut"
+        }
+      ]
+    }
+  ]
+}

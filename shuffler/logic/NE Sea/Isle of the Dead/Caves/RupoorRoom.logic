@@ -1,0 +1,8 @@
+area DeadIsle:
+  room RupoorRoom:
+    node Main:
+      door Exit
+      chest RupoorChest1
+      chest RupoorChest2
+      chest RupoorChest3
+      chest RupoorChest4

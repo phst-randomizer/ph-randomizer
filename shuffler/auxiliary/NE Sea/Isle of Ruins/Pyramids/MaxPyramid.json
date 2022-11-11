@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "MaxPyramid",
+  "rooms": [
+    {
+      "name": "F1",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "RuinsIsle.BottomRight.Main.ToMaxPyramid"
+        }
+      ]
+    }
+  ]
+}

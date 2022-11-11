@@ -1,0 +1,32 @@
+area RuinsIsle:
+  room BottomRight:
+    node Main:
+      door ToNorthLeftmost
+      enemy Stalfos1
+      enemy Stalfos2
+      enemy Stalfos3
+      enemy Stalfos4
+      enemy Stalfos5
+      enemy Stalfos6
+      enemy Stalfos7
+      enemy Stalfos8
+      door ToMaxPyramid
+      door ToNorthMiddle
+
+    node Corridor:
+      enemy Stalfos
+      door ToNorthCorridor
+
+    Main <-> Corridor: (flag DoorToCorridor & (flag StarsOrder | setting NoPuzzleSolution))
+
+
+    node ToWest:
+      door ToWestShortcut
+
+    Main -> ToWest
+
+
+    node FromNorthRight:
+      door ToNorthRight
+      enemy StalfosRight1
+      enemy StalfosRight2

@@ -1,6 +1,6 @@
 {
   "$schema": "../../../aux_schema.json",
-  "name": "Boat",
+  "name": "NyaveBoat",
   "rooms": [
     {
       "name": "Main",

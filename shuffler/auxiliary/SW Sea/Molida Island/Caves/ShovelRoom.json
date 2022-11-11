@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Molida",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "ShovelChest",
+          "type": "chest",
+          "contents": "shovel",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Molida.CaveSystem.MainUp.BombableWall"
+        }
+      ],
+      "name": "ShovelRoom"
+    }
+  ]
+}

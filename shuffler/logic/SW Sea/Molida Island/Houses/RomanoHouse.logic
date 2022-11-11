@@ -1,0 +1,5 @@
+area Molida:
+  room RomanoHouse:
+    node Main:
+      door Outside
+      chest ShootingGallery

@@ -1,0 +1,7 @@
+area Molida:
+  room ShovelRoom:
+    node Main:
+      door Exit
+      hint WayfarerJournal
+      chest ShovelChest
+      flag PathThroughFog

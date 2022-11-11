@@ -1,0 +1,23 @@
+area Gust:
+  room Cave:
+    node Main:
+      door LeftDoor
+      door RightDoor
+      chest FreeChest # Wisdom gem
+      enemy MiniblinLeft1
+      enemy MiniblinLeft2
+      enemy MiniblinArena1
+      enemy MiniblinArena2
+      enemy MiniblinArena3
+      enemy MiniblinArena4
+      enemy MiniblinArena5
+      enemy MiniblinArena6
+      enemy MiniblinArena7
+      enemy MiniblinArena8
+      enemy MiniblinArena9
+      enemy MiniblinArena10
+
+    node ClearEnemies:
+      chest EnemyClearChest # Treasure chart
+
+    Main -> ClearEnemies: (defeated MiniblinLeft1 & defeated MiniblinLeft2 & defeated MiniblinArena1 & defeated MiniblinArena2 & defeated MiniblinArena3 & defeated MiniblinArena4 & defeated MiniblinArena5 & defeated MiniblinArena6 & defeated MiniblinArena7 & defeated MiniblinArena8 & defeated MiniblinArena9 & defeated MiniblinArena10)

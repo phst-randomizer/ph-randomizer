@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Molida",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Outside",
+          "link": "Molida.Town.Main.MolidaShop"
+        }
+      ],
+      "name": "MolidaShop"
+    }
+  ]
+}

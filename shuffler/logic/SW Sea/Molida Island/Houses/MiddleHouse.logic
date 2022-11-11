@@ -1,0 +1,5 @@
+area Molida:
+  room MiddleHouse:
+    node Main:
+      door Outside
+      chest TreasureChest

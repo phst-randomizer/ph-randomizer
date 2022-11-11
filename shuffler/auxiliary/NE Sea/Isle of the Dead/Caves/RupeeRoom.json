@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "DeadIsle",
+  "rooms": [
+    {
+      "name": "RupeeRoom",
+      "chests": [
+        {
+          "name": "RupeeChest",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "GraveyardCave.BombableWall.BombableDoor"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+area Molida:
+  room LeftmostHouse:
+    node Main:
+      door Outside

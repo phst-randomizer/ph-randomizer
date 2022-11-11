@@ -1,0 +1,16 @@
+area DeadIsle:
+  room BottomCave:
+    node Main:
+      door ToBoat
+      hint Middle
+      hint Vol1
+      hint Vol2
+      hint Vol3
+      hint Vol4
+      door ToMain
+
+    node BombableWall:
+      door BombableDoor
+
+    Main -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> Main

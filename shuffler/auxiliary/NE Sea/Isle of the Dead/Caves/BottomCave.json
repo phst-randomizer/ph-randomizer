@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "DeadIsle",
+  "rooms": [
+    {
+      "name": "BottomCave",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToBoat",
+          "link": "Outside.Boat.ToCaveBoat"
+        },
+        {
+          "name": "BombableDoor",
+          "link": "RupoorRoom.Main.Exit"
+        },
+        {
+          "name": "ToMain",
+          "link": "Outside.Main.ToCaveMain"
+        }
+      ]
+    }
+  ]
+}

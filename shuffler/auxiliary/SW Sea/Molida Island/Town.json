@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Molida",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "RedGirl",
+          "type": "event",
+          "contents": "treasure_map_se_3",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Boat",
+          "link": "Sea.SW.Molida.MolidaPort"
+        },
+        {
+          "name": "LeftmostHouse",
+          "link": "Molida.LeftmostHouse.Main.Outside"
+        },
+        {
+          "name": "MiddleHouse",
+          "link": "Molida.MiddleHouse.Main.Outside"
+        },
+        {
+          "name": "MolidaShop",
+          "link": "Molida.MolidaShop.Main.Outside"
+        },
+        {
+          "name": "RomanoHouse",
+          "link": "Molida.RomanoHouse.Main.Outside"
+        },
+        {
+          "name": "CaveEntrance",
+          "link": "Molida.CaveSystem.MainLower.ExitDown"
+        },
+        {
+          "name": "ToUpperIsland",
+          "link": "Molida.UpperIsland.RightSide.ToLowerIsland"
+        },
+        {
+          "name": "HoleToCave",
+          "link": "Molida.CaveSystem.Ledge.HoleNearTree"
+        }
+      ],
+      "name": "Town"
+    }
+  ]
+}

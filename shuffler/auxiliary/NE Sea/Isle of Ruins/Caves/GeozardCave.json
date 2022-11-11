@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "RuinsIsle",
+  "rooms": [
+    {
+      "name": "GeozardCave",
+      "chests": [],
+      "doors": [
+        {
+          "name": "ToBoat",
+          "link": "Outside.Boat.ToCaveBoat"
+        },
+        {
+          "name": "ToMazeUpper",
+          "link": "Outside.MazeUpper.ToCaveUpper"
+        }
+      ]
+    }
+  ]
+}

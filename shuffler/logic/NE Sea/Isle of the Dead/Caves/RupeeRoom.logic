@@ -1,0 +1,5 @@
+area DeadIsle:
+  room RupeeRoom:
+    node Main:
+      door Exit
+      chest RupeeChest

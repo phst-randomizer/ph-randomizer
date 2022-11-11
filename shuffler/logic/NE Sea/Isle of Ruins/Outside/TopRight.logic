@@ -1,0 +1,55 @@
+area RuinsIsle:
+  room TopRight:
+    node FromWest:
+      door ToWestBottom
+
+    node Main:
+      enemy PirateBlin1
+      enemy PirateBlin2
+      enemy PirateBlin3
+      enemy Stalfos
+      door ToWestTop
+      door ToDoylanPyramid
+
+    node RangedStalfos:
+      enemy Stalfos1
+      enemy Stalfos2
+      enemy Stalfos3
+      enemy Stalfos4
+      enemy Stalfos5
+
+    FromWest -> Main
+
+
+    node Underwater:
+      door ToWestUnderwaterTop
+      chest Underwater # big green rupee
+      door ToWestUnderwaterBottom
+      door ToSouthLeftmost
+
+    Main -> Underwater: flag KingKeyInserted
+
+
+    node Corridor:
+      door ToSouthCorridor
+      enemy Geozard1
+      enemy Geozard2
+
+    node PyramidEntrance:
+      door MutohTemple
+      exit BlueWarpExit
+
+    Corridor <-> PyramidEntrance: (defeated Geozard1 & defeated Geozard2)
+
+
+    node ChestLedge:
+      door ToSouthMiddle
+      chest LedgeChest # wisdom gem
+
+    node UnderwaterNearPyramids:
+      chest NearDoylanPyramid # courage gem
+      chest NearMutohPyramid # big red rupee
+      door ToSouthRight
+
+    PyramidEntrance -> UnderwaterNearPyramids
+    Main -> UnderwaterNearPyramids: flag KingKey

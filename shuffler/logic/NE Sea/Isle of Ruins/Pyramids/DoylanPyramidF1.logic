@@ -1,0 +1,7 @@
+area DoylanPyramid:
+  room F1:
+    node Main:
+      door Exit
+      enemy Stalfos1
+      enemy Stalfos2
+      door ToF2

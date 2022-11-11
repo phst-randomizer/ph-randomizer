@@ -1,0 +1,32 @@
+area Molida:
+  room UpperIsland:
+    node RightSide:
+      door ToCaveSystemRight
+      chest Cliff
+      flag SeenUpperStone
+      door ToLowerIsland
+
+    node Hole:
+      entrance HoleToChest
+
+    node TempleFront:
+      door ToCaveSystemLeft
+      enemy GeozardLeft
+      enemy GeozardRight
+      exit AfterBoss
+
+    node Island:
+      chest IslandChest
+
+    node Statues:
+      flag MolidaDoorOpen
+
+    node TempleEntrance:
+      door CourageTemple
+
+    TempleFront <-> TempleEntrance: flag MolidaDoorOpen
+    TempleFront -> Hole: item Shovel
+    TempleFront <-> Island: item GrapplingHook
+
+    # One statue requires bow or boomerang, so if we can turn on this statue, we can turn them all on
+    TempleFront <-> Statues: (defeated GeozardLeft & defeated GeozardRight & (item Bow | item Boomerang))

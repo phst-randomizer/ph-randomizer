@@ -1,0 +1,19 @@
+area Molida:
+  room Town:
+    node Main:
+      door Boat
+      door LeftmostHouse
+      door MiddleHouse
+      door MolidaShop
+      door RomanoHouse
+      door CaveEntrance
+      chest RedGirl
+
+    node Hole:
+      entrance HoleToCave
+
+    node Ledge:
+      door ToUpperIsland
+
+    Main -> Hole: (item Shovel & flag SeenUpperStone)
+    Ledge -> Main

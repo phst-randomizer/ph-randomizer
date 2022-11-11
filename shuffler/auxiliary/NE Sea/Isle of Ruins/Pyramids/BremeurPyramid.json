@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "BremeurPyramid",
+  "rooms": [
+    {
+      "name": "F1",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "RuinsIsle.TopLeft.Main.ToBremeurPyramid"
+        }
+      ]
+    }
+  ]
+}

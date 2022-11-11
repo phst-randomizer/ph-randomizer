@@ -1,0 +1,49 @@
+area Molida:
+  room CaveSystem:
+    node MainLower:
+      door ExitDown
+      enemy RedChuChu1
+      enemy RedChuChu2
+      enemy RedChuChu3
+      enemy KeesePillar1
+      enemy KeesePillar2
+
+    node Arena:
+      enemy Geozard
+
+    node DoorAfterArena:
+      door GrottoRight
+
+    node LedgeRight:
+      chest LedgeChest
+
+    node MainUp:
+      door ExitUpRight
+      door BombableWall
+      door GrottoLeft
+      enemy KeeseUp1
+      enemy KeeseUp2
+
+    node Ledge:
+      enemy YellowChuChu1
+      enemy YellowChuChu2
+      enemy YellowChuChu3
+      exit HoleNearTree
+      chest NearFogMap
+      hint BookToRomano
+
+    node AfterSunDoor:
+      door ExitUpLeft
+
+    node ChestLedgeLeft:
+      exit HoleToChest
+      chest ChestAfterHole
+
+    ChestLedgeLeft -> AfterSunDoor
+    Ledge <-> AfterSunDoor: item SunKey
+    Ledge -> MainLower
+    MainLower -> Arena
+    MainLower -> LedgeRight: item GrapplingHook
+    Arena -> DoorAfterArena: defeated Geozard
+    MainUp -> MainLower
+    MainLower -> MainUp: (item Bombs | item Bombchus)

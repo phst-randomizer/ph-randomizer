@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "DeadIsle",
+  "rooms": [
+    {
+      "name": "PhantomCorridor",
+      "chests": [],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Outside.Main.Pyramid"
+        },
+        {
+          "name": "Brant",
+          "link": "Outside.Island.Stairs"
+        }
+      ]
+    }
+  ]
+}

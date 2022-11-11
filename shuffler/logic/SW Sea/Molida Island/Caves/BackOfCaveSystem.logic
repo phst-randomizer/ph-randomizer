@@ -1,0 +1,5 @@
+area Molida:
+  room BackOfCaveSystem:
+    node Main:
+      door Left
+      door Right

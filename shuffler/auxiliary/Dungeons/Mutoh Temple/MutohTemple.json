@@ -29,7 +29,7 @@
         },
         {
           "name": "ToB1Bottom",
-          "link": "B1.Up.ToF1Bottom"
+          "link": "B1.BottomStairsF1.ToF1Bottom"
         }
       ]
     },
@@ -101,15 +101,15 @@
       "doors": [
         {
           "name": "ToF1Top",
-          "link": "F1.Up.ToB1"
+          "link": "F1.Up.ToB1Top"
         },
         {
           "name": "ToF1Middle",
-          "link": "F1.HammeredPlate.ToB1"
+          "link": "F1.HammeredPlate.ToB1Middle"
         },
         {
           "name": "ToF1Bottom",
-          "link": "F1.Middle.ToB1"
+          "link": "F1.Middle.ToB1Bottom"
         },
         {
           "name": "ToB2TopLeft",

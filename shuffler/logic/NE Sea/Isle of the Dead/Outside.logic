@@ -1,0 +1,56 @@
+area DeadIsle:
+  room Outside:
+    node Boat:
+      door Boat
+      door ToCaveBoat
+      mail MailBox
+
+    node Main:
+      door ToCaveMain
+      enemy RupeeLikeRed
+      enemy RupeeLikeBlue1
+      enemy RupeeLikeBlue2
+      enemy StalfosMain1
+      enemy StalfosMain2
+      enemy StalfosMain3
+      enemy StalfosMain4
+      enemy StalfosMain5
+      enemy StalfosMain6
+      enemy StalfosMain7
+      enemy StalfosMain8
+      door Pyramid
+
+    Main -> Boat
+
+
+    node Hole:
+      entrance ToBoulderCaveHole
+
+    Main -> Hole: item Shovel
+
+
+    node Head:
+      door ToBoulderCaveHead
+      chest HeadChest
+
+    node PillarSwitch:
+      flag GraveyardDoor
+
+    Head -> PillarSwitch: (item Bow | item Boomerang)
+    Head -> Main
+
+
+    node Graveyard:
+      enemy StalfosGraveyard1
+      enemy StalfosGraveyard2
+      enemy StalfosGraveyard3
+      flag PathOfCorridor
+
+    Main <-> Graveyard: flag GraveyardDoor
+
+
+    node Island:
+      door Stairs
+      chest RegalNecklace
+
+    Island -> Main

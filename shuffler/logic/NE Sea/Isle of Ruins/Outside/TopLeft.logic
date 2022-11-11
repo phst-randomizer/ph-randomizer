@@ -1,0 +1,65 @@
+area RuinsIsle:
+  room TopLeft:
+    node FromSouthRight:
+      door ToSouthRight
+
+    node FromSouthLeft:
+      door ToSouthLeft
+
+    node Main:
+      enemy TreeStalfos1
+      enemy TreeStalfos2
+      enemy RupeeLikeRed
+      door ToBremeurPyramid
+
+    FromSouthRight -> Main
+    FromSouthLeft -> Main
+
+
+    node AfterBremeurBridge:
+      enemy PirateBlin1
+      enemy PirateBlin2
+      enemy PirateBlin3
+      enemy PirateBlin4
+      enemy PirateBlin5
+      door ToEastBottom
+
+    Main -> AfterBremeurBridge: flag BremeurBridge
+    AfterBremeurBridge -> Main
+
+
+    node ToSouth:
+      enemy Stalfos
+      door ToSouthShortcut
+
+    Main -> ToSouth
+    AfterBremeurBridge -> ToSouth
+
+
+    node FromEast:
+      door ToEastTop
+      enemy PirateBlin1
+      enemy PirateBlin2
+      enemy PirateBlin3
+
+    FromEast -> Main
+
+
+    node ToSouthUnderwater:
+      chest Underwater # power gem
+      door ToSouthUnderwater
+
+    ToSouth -> ToSouthUnderwater: flag KingKeyInserted
+
+
+    node NearPyramidUnderwater:
+      enemy Stalfos1
+      enemy Stalfos2
+      door ToEastUnderwaterTop
+
+    node AfterBremeurUnderwater:
+      door ToEastUnderwaterBottom
+      door ToUnderwaterCave
+
+    Main -> NearPyramidUnderwater: flag KingKeyInserted
+    AfterBremeurBridge -> AfterBremeurUnderwater: flag KingKeyInserted

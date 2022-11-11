@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "Molida",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "IslandChest",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "Cliff",
+          "type": "chest",
+          "contents": "random_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToCaveSystemRight",
+          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
+        },
+        {
+          "name": "ToLowerIsland",
+          "link": "Main.Town.Ledge.ToUpperIsland"
+        },
+        {
+          "name": "ToCaveSystemLeft",
+          "link": "Molida.CaveSystem.AfterSunDoor.ExitUpLeft"
+        },
+        {
+          "name": "HoleToChest",
+          "link": "Molida.CaveSystem.ChestLedgeLeft.HoleToChest"
+        },
+        {
+          "name": "CourageTemple",
+          "link": "CourageTemple.F1.Entrance.Outside"
+        },
+        {
+          "name": "AfterBoss",
+          "link": "CraykBossRoom.Main.BossDefeat.ExitWarp"
+        }
+      ],
+      "name": "UpperIsland"
+    }
+  ]
+}

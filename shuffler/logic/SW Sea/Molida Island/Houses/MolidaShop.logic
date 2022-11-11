@@ -1,0 +1,5 @@
+area Molida:
+  room MolidaShop:
+    node Main:
+      door Outside
+      shop Molida

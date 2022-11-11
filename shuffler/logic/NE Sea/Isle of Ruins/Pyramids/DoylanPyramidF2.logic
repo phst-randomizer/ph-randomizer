@@ -1,0 +1,5 @@
+area DoylanPyramid:
+  room F2:
+    node Main:
+      door ToF1
+      chest KingKey

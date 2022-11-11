@@ -1,0 +1,49 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "DeadIsle",
+  "rooms": [
+    {
+      "name": "RupoorRoom",
+      "chests": [
+        {
+          "name": "RupoorChest1",
+          "type": "chest",
+          "contents": "treasure_map_ne_1",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "RupoorChest2",
+          "type": "chest",
+          "contents": "courage_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "RupoorChest3",
+          "type": "chest",
+          "contents": "ship_part",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "RupoorChest4",
+          "type": "chest",
+          "contents": "ship_part",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "Exit",
+          "link": "Outside.Boat.ToCaveBoat"
+        },
+        {
+          "name": "ToMain",
+          "link": "Outside.Main.ToCaveMain"
+        }
+      ]
+    }
+  ]
+}

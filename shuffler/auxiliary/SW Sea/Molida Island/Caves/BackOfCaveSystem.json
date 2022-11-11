@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "Molida",
+  "rooms": [
+    {
+      "chests": [],
+      "doors": [
+        {
+          "name": "Left",
+          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
+        },
+        {
+          "name": "Right",
+          "link": "Molida.CaveSystem.DoorAfterArena.GrottoRight"
+        }
+      ],
+      "name": "BackOfCaveSystem"
+    }
+  ]
+}

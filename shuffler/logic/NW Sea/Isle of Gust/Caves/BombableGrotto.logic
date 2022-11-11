@@ -1,0 +1,6 @@
+area Gust:
+  room BombableGrotto:
+    node Main:
+      chest GrottoChest
+      hint WayfarersJournal
+      door Exit

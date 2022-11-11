@@ -1,0 +1,13 @@
+area BremeurPyramid:
+  room F1:
+    node Main:
+      door Exit
+
+    node Bremeur:
+      flag BremeurBridge
+
+    node Obelisk:
+      flag KingKeyInserted
+
+    Main -> Bremeur # would need to check for regal necklace for ER, but not enforced by the game
+    Main -> Obelisk: item KingKey

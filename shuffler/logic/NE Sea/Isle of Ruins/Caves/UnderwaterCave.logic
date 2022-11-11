@@ -1,0 +1,5 @@
+area RuinsIsle:
+  room UnderwaterCave:
+    node Main:
+      door Exit
+      chest CaveGem
