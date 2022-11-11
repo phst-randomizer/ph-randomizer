@@ -3,13 +3,14 @@
   "name": "Molida",
   "rooms": [
     {
+      "name": "Town",
       "chests": [
         {
           "name": "RedGirl",
           "type": "event",
           "contents": "treasure_map_se_3",
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_file_path": "English/Message/brave.bmg",
+          "bmg_instruction_index": 42
         }
       ],
       "doors": [
@@ -45,8 +46,7 @@
           "name": "HoleToCave",
           "link": "Molida.CaveSystem.Ledge.HoleNearTree"
         }
-      ],
-      "name": "Town"
+      ]
     }
   ]
 }
