@@ -1,11 +1,7 @@
-import os
 from pathlib import Path
 from typing import TypeAlias, Union
 
 from pydantic import BaseModel, Field, validator
-
-AUX_DATA_DIRECTORY = Path(os.environ.get('AUX_DATA_DIRECTORY', Path(__file__).parent / 'auxiliary'))
-LOGIC_DATA_DIRECTORY = Path(os.environ.get('LOGIC_DATA_DIRECTORY', Path(__file__).parent / 'logic'))
 
 
 class BaseCheck(BaseModel):

@@ -82,6 +82,6 @@ repos:
     rev: 0.19.1
     hooks:
       - id: check-jsonschema
-        files: ^shuffler/auxiliary/.*\.json$
+        files: ^shuffler/logic/.*\.json$
         args: ["--schemafile", "shuffler/aux_schema.json"]
       - id: check-github-workflows

@@ -10,7 +10,6 @@ a = Analysis(
     binaries=[],
     datas=[
         # Bundle logic, aux data, and base patch files inside executable
-        ('shuffler/auxiliary/', 'auxiliary'),
         ('shuffler/logic/', 'logic'),
         ('base/out/patch.bps', '.'),
     ],

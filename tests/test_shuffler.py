@@ -20,10 +20,7 @@ def test_seeds(seed: str):
 
 @pytest.mark.parametrize(
     'filename',
-    [
-        str(file)
-        for file in (Path(__file__).parent.parent / 'shuffler' / 'auxiliary').rglob('*.json')
-    ],
+    [str(file) for file in (Path(__file__).parent.parent / 'shuffler' / 'logic').rglob('*.json')],
 )
 def test_aux_data_validation(filename: str):
     """Run every aux data json through validation."""

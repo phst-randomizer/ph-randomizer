@@ -152,7 +152,7 @@ jobs:
       - name: Run JSON Schema validation on aux data
         uses: walbo/validate-json@v1.1.0
         with:
-          files: shuffler/auxiliary/**/*.json
+          files: shuffler/logic/**/*.json
 
       - name: Run pydantic validation on aux data
         run: |
@@ -162,7 +162,7 @@ jobs:
           from pydantic import ValidationError
           from shuffler.aux_models import Area
           failed = False
-          for file in (Path.cwd() / 'shuffler' / 'auxiliary').rglob('*.json'):
+          for file in (Path.cwd() / 'shuffler' / 'logic').rglob('*.json'):
             with open(file) as f:
               try:
                 Area(**json.load(f))
