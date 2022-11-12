@@ -3,8 +3,7 @@
 from pathlib import Path
 import sys
 
-from shuffler._parser import parse
-from shuffler.main import flatten_rooms, load_aux_data
+from shuffler.logic import Logic
 
 try:
     import pygraphviz as pgv
@@ -14,14 +13,11 @@ except ModuleNotFoundError:
 
 
 def main():
-    # Parse aux data files
-    aux_data = load_aux_data(Path(__file__).parent / 'auxiliary')
+    logic = Logic()
 
-    # Parse logic files into series of rooms
-    rooms = parse(Path(__file__).parent / 'logic', aux_data)
+    logic.connect_rooms()
 
-    # Convert logical rooms into flat nodes/edge graph structure
-    nodes = flatten_rooms(rooms)
+    nodes = logic.nodes
 
     G = pgv.AGraph(strict=False, directed=True)
 

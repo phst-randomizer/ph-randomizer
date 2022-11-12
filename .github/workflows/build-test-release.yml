@@ -194,7 +194,7 @@ jobs:
         run: pip install -e .
 
       - name: Run the shuffler
-        run: python shuffler/main.py -a shuffler/auxiliary -l shuffler/logic
+        run: python shuffler/main.py
 
   tests:
     name: Run tests
