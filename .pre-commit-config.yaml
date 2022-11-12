@@ -79,7 +79,7 @@ repos:
 
   # Validate aux data against schema
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.18.4
+    rev: 0.19.1
     hooks:
       - id: check-jsonschema
         files: ^shuffler/auxiliary/.*\.json$
