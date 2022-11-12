@@ -25,6 +25,14 @@ class LogicRoom(BaseModel):
     name: str
     nodes_and_edges: list[LogicNode | LogicEdge]
 
+    @property
+    def nodes(self):
+        return [n for n in self.nodes_and_edges if isinstance(n, LogicNode)]
+
+    @property
+    def edges(self):
+        return [e for e in self.nodes_and_edges if isinstance(e, LogicEdge)]
+
 
 class LogicArea(BaseModel):
     name: str

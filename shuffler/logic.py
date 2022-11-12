@@ -11,7 +11,7 @@ from typing import Any
 
 import inflection
 
-from shuffler._parser import LogicEdge, parse_edge_constraint, parse_logic
+from shuffler._parser import parse_edge_constraint, parse_logic
 from shuffler.aux_models import Area, Check, Door, Room
 
 
@@ -240,57 +240,43 @@ class Logic:
                         break
                 else:
                     logical_room = LogicalRoom(area=aux_area, name=room.name, nodes=[])
-                for node_or_edge in room.nodes_and_edges:
-                    if isinstance(node_or_edge, LogicEdge):  # edge
-                        for node1 in logical_room.nodes:
-                            if node1.node == node_or_edge.source_node:
-                                for node2 in logical_room.nodes:
-                                    if node2.node == node_or_edge.destination_node:
-                                        node1.edges.append(
-                                            Edge(dest=node2, constraints=node_or_edge.constraints)
-                                        )
-                                        if node_or_edge.direction == '<->':
-                                            node2.edges.append(
-                                                Edge(
-                                                    dest=node1, constraints=node_or_edge.constraints
-                                                )
-                                            )
-                                        break
-                                else:
-                                    raise Exception(
-                                        f'{logical_room.area.name}.{logical_room.name}: '
-                                        f"node {node_or_edge.destination_node} doesn't exist"
+
+                for node in room.nodes:
+                    full_node_name = '.'.join([area.name, room.name, node.name])
+                    _node = Node(
+                        full_node_name,
+                        edges=[],
+                        checks=[],
+                        exits=[],
+                        entrances=set(),
+                        flags=set(),
+                    )
+                    for descriptor in node.descriptors or []:
+                        self._add_descriptor_to_node(_node, descriptor.type, descriptor.value)
+                    logical_room.nodes.append(_node)
+                for edge in room.edges:
+                    for node1 in logical_room.nodes:
+                        if node1.node == edge.source_node:
+                            for node2 in logical_room.nodes:
+                                if node2.node == edge.destination_node:
+                                    node1.edges.append(
+                                        Edge(dest=node2, constraints=edge.constraints)
                                     )
-                                break
-                        else:
-                            raise Exception(
-                                f'{logical_room.area.name}.{logical_room.name}: '
-                                f"node {node_or_edge.source_node} doesn't exist"
-                            )
-                    elif node_or_edge.descriptors is not None:  # node with content
-                        full_node_name = '.'.join([area.name, room.name, node_or_edge.name])
-                        node = Node(
-                            full_node_name,
-                            edges=[],
-                            checks=[],
-                            exits=[],
-                            entrances=set(),
-                            flags=set(),
-                        )
-                        for descriptor in node_or_edge.descriptors:
-                            self._add_descriptor_to_node(node, descriptor.type, descriptor.value)
-                        logical_room.nodes.append(node)
-                    else:  # node with no contents
-                        full_node_name = '.'.join([area.name, room.name, node_or_edge.name])
-                        logical_room.nodes.append(
-                            Node(
-                                full_node_name,
-                                edges=[],
-                                checks=[],
-                                exits=[],
-                                entrances=set(),
-                                flags=set(),
-                            )
+                                    if edge.direction == '<->':
+                                        node2.edges.append(
+                                            Edge(dest=node1, constraints=edge.constraints)
+                                        )
+                                    break
+                            else:
+                                raise Exception(
+                                    f'{logical_room.area.name}.{logical_room.name}: '
+                                    f"node {edge.destination_node} doesn't exist"
+                                )
+                            break
+                    else:
+                        raise Exception(
+                            f'{logical_room.area.name}.{logical_room.name}: '
+                            f"node {edge.source_node} doesn't exist"
                         )
                 if f'{logical_room.area.name}.{logical_room.name}' not in [
                     f'{r.area.name}.{r.name}' for r in self._logical_rooms
