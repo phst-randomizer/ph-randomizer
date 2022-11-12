@@ -75,7 +75,7 @@ class Logic:
                         continue
                     src_node.edges.append(Edge(dest=_get_dest_node(exit.link)))
 
-    def randomize_items(self):
+    def randomize_items(self) -> list[Area]:
         """
         Shuffles the items in the aux data.
 
