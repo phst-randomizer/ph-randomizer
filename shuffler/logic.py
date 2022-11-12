@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, EnumMeta
 import json
 import logging
@@ -12,7 +12,9 @@ from typing import Any
 import inflection
 
 from shuffler._parser import parse_edge_constraint, parse_logic
-from shuffler.aux_models import Area, Check, Exit, Room
+from shuffler.aux_models import Area, Check, Enemy, Exit, Room
+
+ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text())
 
 
 class Logic:
@@ -21,8 +23,6 @@ class Logic:
 
     def __init__(self) -> None:
         self._aux_data = self._parse_aux_data()
-        self._logical_rooms: list[LogicalRoom] = []
-        self.nodes = []
 
         logic_directory = Path(__file__).parent / 'logic'
 
@@ -40,43 +40,54 @@ class Logic:
 
     def connect_rooms(self) -> None:
         """
-        Connects all `LogicalRooms` with edges, forming a graph representing the entire game.
+        Connects all rooms with edges, forming a graph representing the entire game.
+
+        This eliminates the distinction between different `rooms`, and discards all
+        doors/entrances/exists in favor of pure nodes/edges. Thus, this method should
+        be called after any entrance/exit shuffling.
         """
 
         def _get_dest_node(dest_node_entrance: str):
-            entrance_split = dest_node_entrance.split('.')
-            area_name = entrance_split[0]
-            room_name = entrance_split[1]
-            node_name = entrance_split[2]
+            dest_node_split = dest_node_entrance.split('.')
+            area_name = dest_node_split[0]
+            room_name = dest_node_split[1]
+            node_name = dest_node_split[2]
 
-            for room in self._logical_rooms:
-                assert room.nodes
-                if area_name == room.area.name and room_name == room.name:
-                    for node in room.nodes:
-                        if node.node == node_name:
-                            for entrance in node.entrances:
-                                if entrance == dest_node_entrance:
-                                    return node
+            for area in self.aux_data:
+                if area.name == area_name:
+                    for room in area.rooms:
+                        if room.name == room_name:
+                            for node in room.nodes:
+                                if node.node == node_name:
+                                    for entrance in node.entrances:
+                                        if entrance == dest_node_entrance:
+                                            return node
             raise Exception(f'Entrance "{dest_node_entrance}" not found')
 
-        for room in self._logical_rooms:
-            assert room.nodes
-            for src_node in room.nodes:
-                self.nodes.append(src_node)
-                for exit in src_node.exits:
-                    if not len(exit.entrance):
-                        # TODO: make this throw an actual error once aux data is complete
-                        logging.error(f'exit "{exit.name}" has no "link".')
-                        continue
-                    if exit.entrance.split('.')[0] not in [
-                        r.area.name for r in self._logical_rooms
-                    ]:
-                        logging.error(
-                            f'entrance "{exit.entrance}" not found '
-                            '(no aux data exists for that area)'
+        for area in self.aux_data:
+            for room in area.rooms:
+                for src_node in room.nodes:
+                    for exit in src_node.exits:
+                        if not len(exit.entrance):
+                            # TODO: make this throw an actual error once aux data is complete
+                            logging.error(f'exit "{exit.name}" has no "link".')
+                            continue
+                        if exit.entrance.split('.')[0] not in [area.name for area in self.aux_data]:
+                            logging.error(
+                                f'entrance "{exit.entrance}" not found '
+                                '(no aux data exists for that area)'
+                            )
+                            continue
+                        src_node.edges.append(
+                            Edge(src=src_node, dest=_get_dest_node(exit.entrance))
                         )
-                        continue
-                    src_node.edges.append(Edge(dest=_get_dest_node(exit.entrance)))
+        # Delete all exits from nodes. At this point they no longer have any
+        # meaning, and any attempt to access them would likely be a bug.
+        # TODO: maybe remove this?
+        for area in self.aux_data:
+            for room in area.rooms:
+                for node in room.nodes:
+                    delattr(node, 'exits')
 
     def randomize_items(self) -> list[Area]:
         """
@@ -90,7 +101,13 @@ class Logic:
         are identical to their counterparts in the pseudo-code in that paper.
         """
         starting_node_name = 'Mercay.OutsideOshus.Outside'  # TODO: randomize this
-        starting_node = [node for node in self.nodes if node.name == starting_node_name][0]
+        starting_node = [
+            node
+            for area in self.aux_data
+            for room in area.rooms
+            for node in room.nodes
+            if node.name == starting_node_name
+        ][0]
 
         # Set G to all chests
         G = [chest for area in self._aux_data for room in area.rooms for chest in room.chests]
@@ -220,6 +237,16 @@ class Logic:
                     node.exits.append(new_exit)
             case NodeDescriptor.FLAG.value:
                 node.flags.add(descriptor_value)
+            case NodeDescriptor.ENEMY.value:
+                try:
+                    node.enemies.append(
+                        [enemy for enemy in room.enemies if enemy.name == descriptor_value][0]
+                    )
+                except IndexError:
+                    logging.error(
+                        f'{node.area}.{room.name}: '
+                        f'{descriptor_type} "{descriptor_value}" not found in aux data.'
+                    )
             case other:
                 if other not in NodeDescriptor:
                     raise Exception(f'{node.area}.{room.name}: Unknown node descriptor "{other}"')
@@ -231,60 +258,53 @@ class Logic:
 
         parsed_logic = parse_logic(file_content)
 
-        for area in parsed_logic.areas:
-            aux_area = self._get_area(area.name)
-            if not aux_area:  # TODO: remove when logic/aux is complete
+        for logic_area in parsed_logic.areas:
+            area = self._get_area(logic_area.name)
+            if not area:  # TODO: remove when logic/aux is complete
                 continue
-            for room in area.rooms:
-                logical_room = None
-                for lr in self._logical_rooms:
-                    if lr.area.name == aux_area.name and lr.name == room.name:
-                        logical_room = lr
-                        break
-                else:
-                    logical_room = LogicalRoom(area=aux_area, name=room.name, nodes=[])
-
-                for node in room.nodes:
-                    full_node_name = '.'.join([area.name, room.name, node.name])
-                    _node = Node(
-                        full_node_name,
-                        edges=[],
-                        checks=[],
-                        exits=[],
-                        entrances=set(),
-                        flags=set(),
-                    )
-                    for descriptor in node.descriptors or []:
-                        self._add_descriptor_to_node(_node, descriptor.type, descriptor.value)
-                    logical_room.nodes.append(_node)
-                for edge in room.edges:
-                    for node1 in logical_room.nodes:
+            for logic_room in logic_area.rooms:
+                room = self._get_room(logic_area.name, logic_room.name)
+                if not room:  # TODO: remove when logic/aux is complete
+                    continue
+                for logic_node in logic_room.nodes:
+                    full_node_name = '.'.join([logic_area.name, logic_room.name, logic_node.name])
+                    node = Node(full_node_name)
+                    for descriptor in logic_node.descriptors or []:
+                        self._add_descriptor_to_node(node, descriptor.type, descriptor.value)
+                    room.nodes.append(node)
+                for edge in logic_room.edges:
+                    for node1 in room.nodes:
                         if node1.node == edge.source_node:
-                            for node2 in logical_room.nodes:
+                            for node2 in room.nodes:
                                 if node2.node == edge.destination_node:
                                     node1.edges.append(
-                                        Edge(dest=node2, constraints=edge.constraints)
+                                        Edge(
+                                            src=node1,
+                                            dest=node2,
+                                            constraints=edge.constraints,
+                                        )
                                     )
                                     if edge.direction == '<->':
                                         node2.edges.append(
-                                            Edge(dest=node1, constraints=edge.constraints)
+                                            Edge(
+                                                src=node2,
+                                                dest=node1,
+                                                constraints=edge.constraints,
+                                            )
                                         )
                                     break
                             else:
                                 raise Exception(
-                                    f'{logical_room.area.name}.{logical_room.name}: '
+                                    f'{area.name}.{room.name}: '
                                     f"node {edge.destination_node} doesn't exist"
                                 )
                             break
                     else:
                         raise Exception(
-                            f'{logical_room.area.name}.{logical_room.name}: '
-                            f"node {edge.source_node} doesn't exist"
+                            f'{area.name}.{room.name}: ' f"node {edge.source_node} doesn't exist"
                         )
-                if f'{logical_room.area.name}.{logical_room.name}' not in [
-                    f'{r.area.name}.{r.name}' for r in self._logical_rooms
-                ]:
-                    self._logical_rooms.append(logical_room)
+                if f'{area.name}.{room.name}' not in [f'{area.name}.{r.name}' for r in area.rooms]:
+                    area.rooms.append(room)
 
     def _parse_aux_data(self) -> list[Area]:
         aux_data_directory = Path(__file__).parent / 'logic'
@@ -367,11 +387,12 @@ class Logic:
 @dataclass
 class Node:
     name: str
-    edges: list[Edge]
-    checks: list[Check]
-    exits: list[Exit]
-    entrances: set[str]
-    flags: set[str]
+    edges: list[Edge] = field(default_factory=list)
+    checks: list[Check] = field(default_factory=list)
+    exits: list[Exit] = field(default_factory=list)
+    entrances: set[str] = field(default_factory=set)
+    enemies: list[Enemy] = field(default_factory=list)
+    flags: set[str] = field(default_factory=set)
 
     @property
     def area(self) -> str:
@@ -390,14 +411,16 @@ class Node:
         return self.name == other_node.name
 
     def __hash__(self) -> int:
-        return hash(repr(self))
+        return hash(self.name)
 
 
 class Edge:
+    src: Node
     dest: Node
     constraints: list[str | list[str | list]] | None
 
-    def __init__(self, dest: Node, constraints: str | None = None) -> None:
+    def __init__(self, src: Node, dest: Node, constraints: str | None = None) -> None:
+        self.src = src
         self.dest = dest
 
         logging.debug(f'Evaluating "{constraints}"...')
@@ -457,12 +480,6 @@ class Edge:
                 expr_value = parsed_expr.pop(0)
                 assert isinstance(expr_value, str)
 
-                # Convert items in PascalCase or camelCase to snake_case.
-                # The logic format is flexible and supports either of the three formats,
-                # so the shuffler needs to normalize everything to snake_case at runtime.
-                expr_value = inflection.underscore(expr_value)
-                assert isinstance(expr_value, str)
-
                 current_result = self._evaluate_constraint(expr_type, expr_value, inventory, flags)
 
             # Apply any pending logical operations
@@ -496,27 +513,31 @@ class Edge:
         """
         match type:
             case EdgeDescriptor.ITEM.value:
-                return value in inventory
+                # Translate item name from PascalCase to snake_case
+                return inflection.underscore(value) in inventory
             case EdgeDescriptor.FLAG.value:
-                return value in flags
+                # Translate item name from PascalCase to snake_case
+                return inflection.underscore(value) in flags
+            case EdgeDescriptor.DEFEATED.value:
+                for enemy in self.src.enemies:
+                    if enemy.name != value:
+                        continue
+                    if enemy.type not in ENEMIES_MAPPING:
+                        raise Exception(f'{self.src.name}: invalid enemy type "{enemy.type}"')
+                    return self._is_traversable(
+                        parse_edge_constraint(ENEMIES_MAPPING[enemy.type]), inventory, flags
+                    )
+                else:
+                    logging.error(
+                        f'{self.src.name} (Edge "...{type} {value}..."): '
+                        f'enemy {value} not found!'
+                    )
+                    return False
             case other:
                 if other not in EdgeDescriptor:
                     raise Exception(f'Invalid edge descriptor "{other}"')
                 logging.warning(f'Edge descriptor "{other}" not implemented yet.')
                 return False
-
-
-@dataclass
-class LogicalRoom:
-    """
-    A collection of nodes and edges making up an in-game room.
-
-    Note: every `LogicalRoom` has an implicit one-to-one correspondence with every aux data `Room`.
-    """
-
-    area: Area
-    name: str
-    nodes: list[Node]
 
 
 class MetaEnum(EnumMeta):

@@ -1,7 +1,12 @@
-from pathlib import Path
-from typing import TypeAlias, Union
+from __future__ import annotations
 
-from pydantic import BaseModel, Field, validator
+from pathlib import Path
+from typing import TYPE_CHECKING, TypeAlias, Union
+
+from pydantic import BaseModel, Extra, Field, validator
+
+if TYPE_CHECKING:
+    from shuffler.logic import Node
 
 
 class BaseCheck(BaseModel):
@@ -111,6 +116,9 @@ class Enemy(BaseModel):
 
 
 class Room(BaseModel):
+    class Config:
+        extra = Extra.allow
+
     name: str = Field(..., description='The name of the room')
     chests: list[Check] = Field(
         [],
@@ -128,6 +136,17 @@ class Room(BaseModel):
         description='All enemies in this room',
         unique_items=True,
     )
+
+    # Note: pydantic ignores instance variables beginning with an underscore,
+    # so we use that here. Nodes are not parsed by pydantic; they are populated
+    # when the .logic files are parsed, i.e. after the initial aux data parsing.
+    _nodes: list[Node]
+
+    @property
+    def nodes(self) -> list[Node]:
+        if not hasattr(self, '_nodes'):
+            self._nodes = []
+        return self._nodes
 
 
 class Area(BaseModel):
