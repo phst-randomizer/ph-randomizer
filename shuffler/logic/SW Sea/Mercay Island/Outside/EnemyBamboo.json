@@ -13,6 +13,20 @@
           "name": "Grotto",
           "entrance": "MercayGrotto.F1.Lower.West"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RedChuchuUp",
+          "type": "red_chu_chu"
+        },
+        {
+          "name": "RedChuchuLeft",
+          "type": "red_chu_chu"
+        },
+        {
+          "name": "RedChuchuRight",
+          "type": "red_chu_chu"
+        }
       ]
     }
   ]

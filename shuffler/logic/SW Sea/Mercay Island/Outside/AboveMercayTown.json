@@ -45,6 +45,24 @@
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
           "zmb_mapobject_index": 54
         }
+      ],
+      "enemies": [
+        {
+          "name": "RedChuchu1",
+          "type": "red_chu_chu"
+        },
+        {
+          "name": "RedChuchu2",
+          "type": "red_chu_chu"
+        },
+        {
+          "name": "RedChuchu3",
+          "type": "red_chu_chu"
+        },
+        {
+          "name": "RedChuchu4",
+          "type": "red_chu_chu"
+        }
       ]
     }
   ]
