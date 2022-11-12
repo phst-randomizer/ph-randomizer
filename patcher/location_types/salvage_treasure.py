@@ -55,7 +55,7 @@ class SalvageTreasureLocation(Location):
         SalvageTreasureLocation._zmb_filename_mapping[self._zmb_filepath] = self.zmb_file
 
     @property
-    def _narc_filepath(self):
+    def _narc_filepath(self) -> str:
         """
         Return the filepath of the NARC archive (ending with '.bin' extension)
         containing this ZMB file.
@@ -65,15 +65,17 @@ class SalvageTreasureLocation(Location):
             path.append(part)
             if '.' in part:
                 return '/'.join(path)
+        raise Exception('Failed to retrieve narc path')
 
     @property
-    def _zmb_filepath(self):
+    def _zmb_filepath(self) -> str:
         """Return the filepath of the ZMB file within its parent NARC archive."""
         index: int
         part: str
         for index, part in enumerate(self.file_path.split('/')):
             if '.' in part:
                 return '/'.join(self.file_path.split('/')[index + 1 :])
+        raise Exception('Failed to retrieve zmb path')
 
     @classmethod
     def save_all(cls):
