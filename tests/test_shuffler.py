@@ -4,17 +4,17 @@ from pathlib import Path
 import pytest
 
 from shuffler import shuffle
-from shuffler._parser import Edge, LogicalRoom, Node
 from shuffler.aux_models import Area
+from shuffler.logic import Edge, Node
 
 
 @pytest.mark.parametrize('seed', ['test', 'another_test', 'ANOTHER_TEST!!', 'this_is_a_real_seed'])
-def test_seeds(seed: str, aux_data: list[Area], logic: list[LogicalRoom]):
+def test_seeds(seed: str):
     """Test that running the shuffler with same seed multiple times produces identical aux data."""
 
-    first = shuffle(seed, logic, aux_data)
-    second = shuffle(seed, logic, aux_data)
-    third = shuffle(seed, logic, aux_data)
+    first = shuffle(seed)
+    second = shuffle(seed)
+    third = shuffle(seed)
     assert first == second == third
 
 
