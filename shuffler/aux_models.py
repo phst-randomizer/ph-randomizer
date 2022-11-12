@@ -103,6 +103,13 @@ class Exit(BaseModel):
     entrance: str = Field(..., description='The `entrance` or `door` where this exit leads.')
 
 
+class Enemy(BaseModel):
+    name: str = Field(..., description='The name of the referenced `enemy` in the .logic file.')
+    type: str = Field(
+        ..., description='The type of the enemy. Should map to an entry in `shuffler/enemies.json`.'
+    )
+
+
 class Room(BaseModel):
     name: str = Field(..., description='The name of the room')
     chests: list[Check] = Field(
@@ -114,6 +121,11 @@ class Room(BaseModel):
         ...,
         description='All `exits` in this room that lead to an `entrance` in another room',
         min_items=1,
+        unique_items=True,
+    )
+    enemies: list[Enemy] = Field(
+        [],
+        description='All enemies in this room',
         unique_items=True,
     )
 
