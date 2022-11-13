@@ -312,15 +312,15 @@
           "description": "The name of this exit",
           "type": "string"
         },
-        "link": {
-          "title": "Link",
+        "entrance": {
+          "title": "Entrance",
           "description": "The `entrance` or `door` where this exit leads.",
           "type": "string"
         }
       },
       "required": [
         "name",
-        "link"
+        "entrance"
       ]
     },
     "Room": {

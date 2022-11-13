@@ -100,7 +100,7 @@ validate_check_type()
 
 class Exit(BaseModel):
     name: str = Field(..., description='The name of this exit')
-    link: str = Field(..., description='The `entrance` or `door` where this exit leads.')
+    entrance: str = Field(..., description='The `entrance` or `door` where this exit leads.')
 
 
 class Room(BaseModel):
