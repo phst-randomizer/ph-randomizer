@@ -12,7 +12,7 @@ from typing import Any
 import inflection
 
 from shuffler._parser import parse_edge_constraint, parse_logic
-from shuffler.aux_models import Area, Check, Door, Room
+from shuffler.aux_models import Area, Check, Exit, Room
 
 
 class Logic:
@@ -198,7 +198,7 @@ class Logic:
                     node.entrances.add(f'{node.name}.{descriptor_value}')
                 if descriptor_type in (NodeDescriptor.DOOR.value, NodeDescriptor.EXIT.value):
                     try:
-                        new_exit = [door for door in room.doors if door.name == descriptor_value][0]
+                        new_exit = [exit for exit in room.exits if exit.name == descriptor_value][0]
                     except IndexError:
                         raise Exception(
                             f'{node.area}.{node.room}: '
@@ -366,7 +366,7 @@ class Node:
     name: str
     edges: list[Edge]
     checks: list[Check]
-    exits: list[Door]
+    exits: list[Exit]
     entrances: set[str]
     flags: set[str]
 

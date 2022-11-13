@@ -303,8 +303,8 @@
         "zmb_actor_index"
       ]
     },
-    "Door": {
-      "title": "Door",
+    "Exit": {
+      "title": "Exit",
       "type": "object",
       "properties": {
         "name": {
@@ -367,20 +367,20 @@
             ]
           }
         },
-        "doors": {
-          "title": "Doors",
-          "description": "All doors in this room that lead to a different room or area",
+        "exits": {
+          "title": "Exits",
+          "description": "All `exits` in this room that lead to an `entrance` in another room",
           "minItems": 1,
           "uniqueItems": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Door"
+            "$ref": "#/definitions/Exit"
           }
         }
       },
       "required": [
         "name",
-        "doors"
+        "exits"
       ]
     }
   }
