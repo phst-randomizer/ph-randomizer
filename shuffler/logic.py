@@ -161,7 +161,7 @@ class Logic:
                 if room.name == room_name
             ][0]
         except IndexError:
-            logging.warning(f'Room {area_name}.{room_name} not found!')
+            logging.warning(f'{area_name}: Room {area_name}.{room_name} not found!')
             return None
 
     def _add_descriptor_to_node(
