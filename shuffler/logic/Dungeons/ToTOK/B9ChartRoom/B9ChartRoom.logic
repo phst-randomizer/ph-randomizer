@@ -2,7 +2,6 @@ area TempleOfTheOceanKing:
   room B9ChartRoom:
     node Main:
       door ToB9
-      door ToB10
       exit BlueWarp
       chest SeaChart
       flag KnowCrystalOrder

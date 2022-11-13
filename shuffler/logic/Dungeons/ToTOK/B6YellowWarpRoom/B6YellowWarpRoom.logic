@@ -1,5 +1,5 @@
 area TempleOfTheOceanKing:
-  room Main:
+  room B6YellowWarp:
     node Main:
       door ToB6
       door ToB7

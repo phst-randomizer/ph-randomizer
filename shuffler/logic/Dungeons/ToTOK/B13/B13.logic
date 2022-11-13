@@ -20,15 +20,5 @@ area TempleOfTheOceanKing:
       door ToBridgeRoom
 
     Main -> Gauntlet: item PhantomSword
-    Gauntlet -> DefeatPhantom:
-      and:
-        defeated BluePhantom1
-        defeated BluePhantom2
-        defeated BluePhantom3
-        defeated RedPhantom1
-        defeated RedPhantom2
-        defeated RedPhantom3
-        defeated GoldPhantom1
-        defeated GoldPhantom2
-        defeated GoldPhantom3
+    Gauntlet -> DefeatPhantom: (defeated BluePhantom1 & defeated BluePhantom2 & defeated BluePhantom3 & defeated RedPhantom1 & defeated RedPhantom2 & defeated RedPhantom3 & defeated GoldPhantom1 & defeated GoldPhantom2 & defeated GoldPhantom3)
     DefeatPhantom -> Main

@@ -5,42 +5,49 @@
     {
       "chests": [
         {
-          "name": "PhantomKiller",
+          "name": "TopLeftChest",
           "type": "chest",
-          "contents": "TODO",
+          "contents": "triangle_crystal",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "WizzrobeKiller",
           "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "PhantomKiller",
+          "type": "chest",
           "contents": "ship_part",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
-          "name": "RightSwitch",
+          "name": "SquareCrystal",
           "type": "chest",
-          "contents": "treasure_map_ne_8",
+          "contents": "square_crystal",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }
       ],
       "doors": [
         {
-          "name": "ToB11Right",
-          "link": "B11.Main.ToB12Right"
+          "name": "ToB9ChartRoom",
+          "link": "B9ChartRoom.Main.ToB9"
         },
         {
-          "name": "ToB11Left",
-          "link": "B11.LeftStairs.ToB12Left"
+          "name": "ToB8Left",
+          "link": "B8.TopLeft.ToB9Left"
         },
         {
-          "name": "ToB13",
-          "link": "B13.Main.ToB12"
+          "name": "ToB8Right",
+          "link": "B8.TopRightDoor.ToB9Right"
         }
       ],
-      "name": "B12"
+      "name": "B9"
     }
   ]
 }

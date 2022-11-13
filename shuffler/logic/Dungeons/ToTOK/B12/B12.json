@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "TempleOfTheOceanKing",
+  "rooms": [
+    {
+      "chests": [
+        {
+          "name": "PhantomKiller",
+          "type": "chest",
+          "contents": "TODO",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "WizzrobeKiller",
+          "type": "chest",
+          "contents": "ship_part",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "RightSwitch",
+          "type": "chest",
+          "contents": "treasure_map_ne_8",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "LeftPowerGem",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "RightPowerGem",
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "SafeSwitch",
+          "type": "chest",
+          "contents": "TODO",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "PhantomPowerGem",
+          "type": "on_enemy",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "doors": [
+        {
+          "name": "ToB11Right",
+          "link": "B11.Main.ToB12Right"
+        },
+        {
+          "name": "ToB11Left",
+          "link": "B11.LeftStairs.ToB12Left"
+        },
+        {
+          "name": "ToB13",
+          "link": "B13.Main.ToB12"
+        }
+      ],
+      "name": "B12"
+    }
+  ]
+}

@@ -4,7 +4,15 @@
   "rooms": [
     {
       "name": "F2",
-      "chests": [],
+      "chests": [
+        {
+          "name": "KingKey",
+          "type": "chest",
+          "contents": "king_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
       "doors": [
         {
           "name": "ToF1",

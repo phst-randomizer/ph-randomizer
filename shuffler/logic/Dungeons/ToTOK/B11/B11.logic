@@ -2,7 +2,7 @@ area TempleOfTheOceanKing:
   room B11:
     node Main:
       door ToB10
-      door ToB11Right
+      door ToB12Right
       enemy GoldPhantomLeft
       enemy GoldPhantomRight
       enemy PhantomEye1
@@ -16,9 +16,9 @@ area TempleOfTheOceanKing:
     node DefeatPhantom:
       chest PhantomKiller
 
-    node LeftDoor:
-      door ToB11Left
+    node LeftStairs:
+      door ToB12Left
 
     Main -> DefeatEye: (defeated PhantomEye1 & defeated PhantomEye2 & defeated PhantomEye3 & defeated PhantomEye4)
     Main -> DefeatPhantom: (defeated GoldPhantomLeft & defeated GoldPhantomRight)
-    Main -> LeftDoor: (item Shovel & (item Bombs | item Bombchus | item Sword | item Hammer | item Boomerang | item Bow))
+    Main -> LeftStairs: (item Shovel & (item Bombs | item Bombchus | item Sword | item Hammer | item Boomerang | item Bow))

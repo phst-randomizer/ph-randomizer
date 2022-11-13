@@ -1,5 +1,5 @@
 area TempleOfTheOceanKing:
-  room B3Chart:
+  room B3ChartRoom:
     node Main:
       door ToB3Ledge
       door ToB3Main

@@ -41,7 +41,7 @@
         },
         {
           "name": "ToB9Left",
-          "link": "B9.Main.ToB8Left"
+          "link": "B9.TopLeft.ToB8Left"
         },
         {
           "name": "ToB9Right",

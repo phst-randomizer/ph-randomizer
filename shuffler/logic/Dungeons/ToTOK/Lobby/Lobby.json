@@ -23,7 +23,7 @@
         },
         {
           "name": "B3BlueWarp",
-          "link": "TempleOfTheOceanKing.B3Chart.Main.BlueWarp"
+          "link": "TempleOfTheOceanKing.B3ChartRoom.Main.BlueWarp"
         },
         {
           "name": "B6YellowWarp",
@@ -31,7 +31,7 @@
         },
         {
           "name": "B9BlueWarp",
-          "link": "TempleOfTheOceanKing.B9BlueWarp.Main.BlueWarp"
+          "link": "TempleOfTheOceanKing.B9ChartRoom.Main.BlueWarp"
         },
         {
           "name": "B13BlueWarp",

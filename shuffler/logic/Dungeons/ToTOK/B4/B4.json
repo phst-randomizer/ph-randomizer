@@ -28,15 +28,15 @@
       "doors": [
         {
           "name": "ToB3",
-          "link": "B3ChartRoom.Staircase.toB4"
+          "link": "B3ChartRoom.Staircase.ToB4"
         },
         {
           "name": "ToB5Shortcut",
-          "link": ""
+          "link": "B5.TopLeft.ToB4Shortcut"
         },
         {
           "name": "ToB5",
-          "link": ""
+          "link": "B5.Bottom.ToB4"
         }
       ]
     }
