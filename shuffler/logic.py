@@ -284,7 +284,7 @@ class Logic:
                     self._logical_rooms.append(logical_room)
 
     def _parse_aux_data(self) -> list[Area]:
-        aux_data_directory = Path(__file__).parent / 'auxiliary'
+        aux_data_directory = Path(__file__).parent / 'logic'
 
         areas: list[Area] = []
         for file in aux_data_directory.rglob('*.json'):
