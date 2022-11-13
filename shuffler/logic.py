@@ -64,16 +64,19 @@ class Logic:
             for src_node in room.nodes:
                 self.nodes.append(src_node)
                 for exit in src_node.exits:
-                    if not len(exit.link):
+                    if not len(exit.entrance):
                         # TODO: make this throw an actual error once aux data is complete
                         logging.error(f'exit "{exit.name}" has no "link".')
                         continue
-                    if exit.link.split('.')[0] not in [r.area.name for r in self._logical_rooms]:
+                    if exit.entrance.split('.')[0] not in [
+                        r.area.name for r in self._logical_rooms
+                    ]:
                         logging.error(
-                            f'entrance "{exit.link}" not found (no aux data exists for that area)'
+                            f'entrance "{exit.entrance}" not found '
+                            '(no aux data exists for that area)'
                         )
                         continue
-                    src_node.edges.append(Edge(dest=_get_dest_node(exit.link)))
+                    src_node.edges.append(Edge(dest=_get_dest_node(exit.entrance)))
 
     def randomize_items(self) -> list[Area]:
         """
@@ -204,15 +207,15 @@ class Logic:
                             f'{node.area}.{node.room}: '
                             f'{descriptor_type} "{descriptor_value}" not found in aux data.'
                         )
-                    if new_exit.link.count('.') == 2:
-                        new_exit.link = f'{node.area}.{new_exit.link}'
-                    if new_exit.link.count('.') != 3:
+                    if new_exit.entrance.count('.') == 2:
+                        new_exit.entrance = f'{node.area}.{new_exit.entrance}'
+                    if new_exit.entrance.count('.') != 3:
                         # TODO: remove once aux data is complete
-                        if not len(new_exit.link) or new_exit.link.lower() == 'todo':
+                        if not len(new_exit.entrance) or new_exit.entrance.lower() == 'todo':
                             logging.error(f'{node.name}: exit "{new_exit.name} has no link.')
                             return
                         raise Exception(
-                            f'{node.area}.{room.name}: ' f'Invalid exit link "{new_exit.link}"'
+                            f'{node.area}.{room.name}: ' f'Invalid exit link "{new_exit.entrance}"'
                         )
                     node.exits.append(new_exit)
             case NodeDescriptor.FLAG.value:
