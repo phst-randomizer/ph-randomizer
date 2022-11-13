@@ -38,7 +38,7 @@ class Logic:
             file_contents = '\n'.join(lines)
             self._parse_logic(file_contents)
 
-    def connect_rooms(self):
+    def connect_rooms(self) -> None:
         """
         Connects all `LogicalRooms` with edges, forming a graph representing the entire game.
         """
