@@ -209,7 +209,7 @@ class Logic:
                     if new_exit.link.count('.') != 3:
                         # TODO: remove once aux data is complete
                         if not len(new_exit.link) or new_exit.link.lower() == 'todo':
-                            logging.warning(f'exit "{new_exit.name} has no link.')
+                            logging.warning(f'{node.name}: exit "{new_exit.name} has no link.')
                             return
                         raise Exception(
                             f'{node.area}.{room.name}: ' f'Invalid exit link "{new_exit.link}"'
