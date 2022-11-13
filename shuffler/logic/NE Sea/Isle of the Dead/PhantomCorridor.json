@@ -8,11 +8,11 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "Outside.Main.Pyramid"
+          "entrance": "Outside.Main.Pyramid"
         },
         {
           "name": "Brant",
-          "link": "Outside.Island.Stairs"
+          "entrance": "Outside.Island.Stairs"
         }
       ]
     }

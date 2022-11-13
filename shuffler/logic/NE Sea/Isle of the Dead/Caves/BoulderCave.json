@@ -8,15 +8,15 @@
       "exits": [
         {
           "name": "Hole",
-          "link": "Outside.Hole.ToBoulderCave"
+          "entrance": "Outside.Hole.ToBoulderCave"
         },
         {
           "name": "ToHead",
-          "link": "Outside.Head.ToBoulderCave"
+          "entrance": "Outside.Head.ToBoulderCave"
         },
         {
           "name": "BombableDoor",
-          "link": "RupeeRoom.Main.Exit"
+          "entrance": "RupeeRoom.Main.Exit"
         }
       ]
     }

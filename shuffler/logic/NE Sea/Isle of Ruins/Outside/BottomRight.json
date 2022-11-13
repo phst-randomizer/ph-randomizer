@@ -8,27 +8,27 @@
       "exits": [
         {
           "name": "ToNorthLeftmost",
-          "link": "TopRight.Underwater.ToSouthLeftmost"
+          "entrance": "TopRight.Underwater.ToSouthLeftmost"
         },
         {
           "name": "ToMaxPyramid",
-          "link": "MaxPyramid.F1.Main.Exit"
+          "entrance": "MaxPyramid.F1.Main.Exit"
         },
         {
           "name": "ToNorthMiddle",
-          "link": "TopRight.ChestLedge.ToSouthMiddle"
+          "entrance": "TopRight.ChestLedge.ToSouthMiddle"
         },
         {
           "name": "ToNorthCorridor",
-          "link": "TopRight.Corridor.ToSouthCorridor"
+          "entrance": "TopRight.Corridor.ToSouthCorridor"
         },
         {
           "name": "ToNorthRight",
-          "link": "TopRight.UnderwaterNearPyramids.ToSouthRight"
+          "entrance": "TopRight.UnderwaterNearPyramids.ToSouthRight"
         },
         {
           "name": "ToWestShortcut",
-          "link": "BottomLeft.AboveCave.ToEastShortcut"
+          "entrance": "BottomLeft.AboveCave.ToEastShortcut"
         }
       ]
     }

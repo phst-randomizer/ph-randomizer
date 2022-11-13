@@ -7,7 +7,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "OutsideOshus.Outside.RockHouse"
+          "entrance": "OutsideOshus.Outside.RockHouse"
         }
       ]
     }

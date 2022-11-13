@@ -65,43 +65,43 @@
       "exits": [
         {
           "name": "MercayPort",
-          "link": "Mercay.MercayTown.Main.Boat"
+          "entrance": "Mercay.MercayTown.Main.Boat"
         },
         {
           "name": "CannonIslePort",
-          "link": "Cannon.Outside.Port.Boat"
+          "entrance": "Cannon.Outside.Port.Boat"
         },
         {
           "name": "EmberPort",
-          "link": "Ember.EmberLeft.Main.Boat"
+          "entrance": "Ember.EmberLeft.Main.Boat"
         },
         {
           "name": "SpiritIslePort",
-          "link": "SpiritIsle.Outside.Main.Boat"
+          "entrance": "SpiritIsle.Outside.Main.Boat"
         },
         {
           "name": "MolidaPort",
-          "link": "Molida.Town.Main.Boat"
+          "entrance": "Molida.Town.Main.Boat"
         },
         {
           "name": "MainNW",
-          "link": "NW.ToEastSW.EastSW"
+          "entrance": "NW.ToEastSW.EastSW"
         },
         {
           "name": "BoardBoat",
-          "link": "NyaveBoat.Main.Main.Exit"
+          "entrance": "NyaveBoat.Main.Main.Exit"
         },
         {
           "name": "RegularBeedle",
-          "link": "RegularBeedleBoat.Main.Exit"
+          "entrance": "RegularBeedleBoat.Main.Exit"
         },
         {
           "name": "FogNW",
-          "link": "NW.ToWestSW.WestSW"
+          "entrance": "NW.ToWestSW.WestSW"
         },
         {
           "name": "SE",
-          "link": "SE.ToSW.SW"
+          "entrance": "SE.ToSW.SW"
         }
       ]
     },
@@ -168,35 +168,35 @@
       "exits": [
         {
           "name": "UnchartedPort",
-          "link": "Uncharted.Main.Main.Boat"
+          "entrance": "Uncharted.Main.Main.Boat"
         },
         {
           "name": "ZauzPort",
-          "link": "Zauz.Outside.Main.Boat"
+          "entrance": "Zauz.Outside.Main.Boat"
         },
         {
           "name": "GustPort",
-          "link": "GustIsle.LowerIsland.BeforeCave.Boat"
+          "entrance": "GustIsle.LowerIsland.BeforeCave.Boat"
         },
         {
           "name": "BannanPort",
-          "link": "Bannan.OutsideLeft.Main.Boat"
+          "entrance": "Bannan.OutsideLeft.Main.Boat"
         },
         {
           "name": "GhostShip",
-          "link": "GhostShip.F1.Main.Boat"
+          "entrance": "GhostShip.F1.Main.Boat"
         },
         {
           "name": "EastSW",
-          "link": "SW.ToMainNW.MainNW"
+          "entrance": "SW.ToMainNW.MainNW"
         },
         {
           "name": "WestSW",
-          "link": "SW.ToFogNW.FogNW"
+          "entrance": "SW.ToFogNW.FogNW"
         },
         {
           "name": "NE",
-          "link": "NE.ToRightNW.RightNW"
+          "entrance": "NE.ToRightNW.RightNW"
         }
       ]
     },
@@ -263,31 +263,31 @@
       "exits": [
         {
           "name": "DeeEssPort",
-          "link": "DeeEssIsland.Main.Main.Boat"
+          "entrance": "DeeEssIsland.Main.Main.Boat"
         },
         {
           "name": "HarrowPort",
-          "link": "HarrowIsland.Main.Port.Boat"
+          "entrance": "HarrowIsland.Main.Port.Boat"
         },
         {
           "name": "FrostPort",
-          "link": "FrostIsle.Port.Main.Boat"
+          "entrance": "FrostIsle.Port.Main.Boat"
         },
         {
           "name": "GoronPort",
-          "link": "GoronIsland.LowerLeft.Port.Boat"
+          "entrance": "GoronIsland.LowerLeft.Port.Boat"
         },
         {
           "name": "BoardBoat",
-          "link": "HoHoBoat.Main.Main.Exit"
+          "entrance": "HoHoBoat.Main.Main.Exit"
         },
         {
           "name": "NE",
-          "link": "NE.ToSE.SE"
+          "entrance": "NE.ToSE.SE"
         },
         {
           "name": "SW",
-          "link": "SW.ToSE.SE"
+          "entrance": "SW.ToSE.SE"
         }
       ]
     },
@@ -354,31 +354,31 @@
       "exits": [
         {
           "name": "MazePort",
-          "link": "MazeIsland.Main.Port.Boat"
+          "entrance": "MazeIsland.Main.Port.Boat"
         },
         {
           "name": "DeadIslePort",
-          "link": "DeadIsle.Outside.Boat.Boat"
+          "entrance": "DeadIsle.Outside.Boat.Boat"
         },
         {
           "name": "BoardBoat",
-          "link": "ManOfSmilesBoat.Main.Enemies.Exit"
+          "entrance": "ManOfSmilesBoat.Main.Enemies.Exit"
         },
         {
           "name": "MaskedBeedle",
-          "link": "MaskedBeedleBoat.Main.Exit"
+          "entrance": "MaskedBeedleBoat.Main.Exit"
         },
         {
           "name": "RuinsIslePort",
-          "link": "RuinsIsle.BottomLeft.Boat.Boat"
+          "entrance": "RuinsIsle.BottomLeft.Boat.Boat"
         },
         {
           "name": "RightNW",
-          "link": "NW.ToNE.NE"
+          "entrance": "NW.ToNE.NE"
         },
         {
           "name": "SE",
-          "link": "SE.ToNE.NE"
+          "entrance": "SE.ToNE.NE"
         }
       ]
     },
@@ -388,7 +388,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "SW.Beedle.RegularBeedle"
+          "entrance": "SW.Beedle.RegularBeedle"
         }
       ]
     },
@@ -398,7 +398,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "NE.Beedle.MaskedBeedle"
+          "entrance": "NE.Beedle.MaskedBeedle"
         }
       ]
     }

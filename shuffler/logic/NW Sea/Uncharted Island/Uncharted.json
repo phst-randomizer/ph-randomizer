@@ -16,11 +16,11 @@
       "exits": [
         {
           "name": "Cave",
-          "link": "Cave.Main.Entrance"
+          "entrance": "Cave.Main.Entrance"
         },
         {
           "name": "Boat",
-          "link": "Sea.NW.Uncharted.UnchartedPort"
+          "entrance": "Sea.NW.Uncharted.UnchartedPort"
         }
       ]
     },
@@ -38,7 +38,7 @@
       "exits": [
         {
           "name": "Entrance",
-          "link": "Main.Main.Cave"
+          "entrance": "Main.Main.Cave"
         }
       ]
     }

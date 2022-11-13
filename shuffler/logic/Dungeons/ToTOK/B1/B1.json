@@ -27,11 +27,11 @@
       "exits": [
         {
           "name": "ToF1",
-          "link": "TempleOfTheOceanKingLobby.Main.Main.Entrance"
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.Entrance"
         },
         {
           "name": "ToB2",
-          "link": "B2.Upper.ToB1"
+          "entrance": "B2.Upper.ToB1"
         }
       ],
       "name": "B1"

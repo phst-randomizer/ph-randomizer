@@ -23,11 +23,11 @@
       "exits": [
         {
           "name": "ZauzHouse",
-          "link": "ZauzHouse.Main.Outside"
+          "entrance": "ZauzHouse.Main.Outside"
         },
         {
           "name": "Boat",
-          "link": "Sea.NW.Zauz.ZauzPort"
+          "entrance": "Sea.NW.Zauz.ZauzPort"
         }
       ]
     },
@@ -45,7 +45,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "Outside.Main.ZauzHouse"
+          "entrance": "Outside.Main.ZauzHouse"
         }
       ]
     }

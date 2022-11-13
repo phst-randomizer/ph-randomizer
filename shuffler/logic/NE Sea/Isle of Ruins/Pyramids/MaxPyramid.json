@@ -8,7 +8,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "RuinsIsle.BottomRight.Main.ToMaxPyramid"
+          "entrance": "RuinsIsle.BottomRight.Main.ToMaxPyramid"
         }
       ]
     }

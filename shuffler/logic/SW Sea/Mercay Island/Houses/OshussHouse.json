@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "OutsideOshus.Outside.OshussHouse"
+          "entrance": "OutsideOshus.Outside.OshussHouse"
         }
       ]
     }

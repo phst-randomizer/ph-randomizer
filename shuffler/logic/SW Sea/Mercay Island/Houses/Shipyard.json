@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main.Shipyard"
+          "entrance": "MercayTown.Main.Shipyard"
         }
       ]
     }

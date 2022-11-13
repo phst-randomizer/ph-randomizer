@@ -19,11 +19,11 @@
       "exits": [
         {
           "name": "ToDungeon",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToAzurineRoom",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "GraveyardCave.BombableWall.BombableDoor"
+          "entrance": "GraveyardCave.BombableWall.BombableDoor"
         }
       ]
     }

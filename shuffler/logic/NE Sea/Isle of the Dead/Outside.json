@@ -23,31 +23,31 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.NE.DeadIsle.DeadIslePort"
+          "entrance": "Sea.NE.DeadIsle.DeadIslePort"
         },
         {
           "name": "ToCaveBoat",
-          "link": "BottomCave.Main.ToBoat"
+          "entrance": "BottomCave.Main.ToBoat"
         },
         {
           "name": "ToCaveMain",
-          "link": "BottomCave.Main.ToMain"
+          "entrance": "BottomCave.Main.ToMain"
         },
         {
           "name": "Pyramid",
-          "link": "PhantomCorridor.Main.Exit"
+          "entrance": "PhantomCorridor.Main.Exit"
         },
         {
           "name": "ToBoulderCaveHole",
-          "link": "BoulderCave.Main.Hole"
+          "entrance": "BoulderCave.Main.Hole"
         },
         {
           "name": "ToBoulderCaveHead",
-          "link": "BoulderCave.Main.Head"
+          "entrance": "BoulderCave.Main.Head"
         },
         {
           "name": "Stairs",
-          "link": "PhantomCorridor.Brant.Exit"
+          "entrance": "PhantomCorridor.Brant.Exit"
         }
       ]
     }

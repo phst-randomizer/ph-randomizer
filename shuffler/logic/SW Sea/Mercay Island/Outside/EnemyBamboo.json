@@ -7,11 +7,11 @@
       "exits": [
         {
           "name": "South",
-          "link": "OutsideOshus.Outside.North"
+          "entrance": "OutsideOshus.Outside.North"
         },
         {
           "name": "Grotto",
-          "link": "MercayGrotto.F1.Lower.West"
+          "entrance": "MercayGrotto.F1.Lower.West"
         }
       ]
     }

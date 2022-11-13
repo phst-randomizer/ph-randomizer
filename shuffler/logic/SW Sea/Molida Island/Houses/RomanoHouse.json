@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "Molida.Town.Main.RomanoHouse"
+          "entrance": "Molida.Town.Main.RomanoHouse"
         }
       ]
     }

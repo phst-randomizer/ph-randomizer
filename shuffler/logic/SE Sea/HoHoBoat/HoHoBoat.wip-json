@@ -14,7 +14,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "Sea.SE.Boat.BoardBoat"
+          "entrance": "Sea.SE.Boat.BoardBoat"
         }
       ]
     }

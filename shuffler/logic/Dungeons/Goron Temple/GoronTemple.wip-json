@@ -19,19 +19,19 @@
       "exits": [
         {
           "name": "Entrance",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "RightBombableWall",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "LeftBombableWall",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB1Shortcut",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -41,15 +41,15 @@
       "exits": [
         {
           "name": "LeftDoor",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "RightDoor",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB1",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -70,15 +70,15 @@
       "exits": [
         {
           "name": "ToBombableF1",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToF1Shortcut",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB2",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -99,15 +99,15 @@
       "exits": [
         {
           "name": "ToB1",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB3",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB3BossKey",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -123,11 +123,11 @@
       "exits": [
         {
           "name": "ToB2Right",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB4",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -137,11 +137,11 @@
       "exits": [
         {
           "name": "ToB3",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToBoss",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -157,7 +157,7 @@
       "exits": [
         {
           "name": "ToBoss",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

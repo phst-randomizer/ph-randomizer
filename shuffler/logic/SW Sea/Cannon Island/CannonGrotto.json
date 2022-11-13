@@ -16,11 +16,11 @@
       "exits": [
         {
           "name": "Down",
-          "link": "Cannon.Outside.AfterDoor.GrottoEntry"
+          "entrance": "Cannon.Outside.AfterDoor.GrottoEntry"
         },
         {
           "name": "Stairs",
-          "link": "Cannon.Outside.BombGarden.GrottoStairs"
+          "entrance": "Cannon.Outside.BombGarden.GrottoStairs"
         }
       ]
     }

@@ -8,35 +8,35 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SE.Goron.GoronPort"
+          "entrance": "Sea.SE.Goron.GoronPort"
         },
         {
           "name": "LowerHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "Shop",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "LeftmostHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "RightmostHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToEast",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToEastLedge",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -46,7 +46,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -67,7 +67,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -77,7 +77,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -87,7 +87,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -97,27 +97,27 @@
       "exits": [
         {
           "name": "ToWest",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToWestLedge",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "LeftmostHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "CoastHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ChiefHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorth",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -127,7 +127,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -137,7 +137,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -147,7 +147,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -163,23 +163,23 @@
       "exits": [
         {
           "name": "ToSouth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToWestUpper",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToWestLowest",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToWestUppest",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToWestLower",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -195,27 +195,27 @@
       "exits": [
         {
           "name": "ToEastLowest",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToEastUppest",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToEastLower",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToEastUpper",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "GoronTemple",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToSouth",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

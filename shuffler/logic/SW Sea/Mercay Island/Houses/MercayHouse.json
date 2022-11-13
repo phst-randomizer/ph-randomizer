@@ -7,7 +7,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main.House"
+          "entrance": "MercayTown.Main.House"
         }
       ]
     }

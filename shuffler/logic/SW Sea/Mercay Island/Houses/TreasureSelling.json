@@ -7,7 +7,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main.TreasureSelling"
+          "entrance": "MercayTown.Main.TreasureSelling"
         }
       ]
     }

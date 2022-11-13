@@ -23,15 +23,15 @@
       "exits": [
         {
           "name": "ToB5",
-          "link": "B5.StaircaseToB6.ToB6"
+          "entrance": "B5.StaircaseToB6.ToB6"
         },
         {
           "name": "Hourglass",
-          "link": "B6SunMapRoom.Main.ToB6"
+          "entrance": "B6SunMapRoom.Main.ToB6"
         },
         {
           "name": "Triforce",
-          "link": "B6YellowWarp.Main.ToB6"
+          "entrance": "B6YellowWarp.Main.ToB6"
         }
       ]
     }

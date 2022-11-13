@@ -8,15 +8,15 @@
       "exits": [
         {
           "name": "ToBoat",
-          "link": "Outside.Boat.ToCaveBoat"
+          "entrance": "Outside.Boat.ToCaveBoat"
         },
         {
           "name": "BombableDoor",
-          "link": "RupoorRoom.Main.Exit"
+          "entrance": "RupoorRoom.Main.Exit"
         },
         {
           "name": "ToMain",
-          "link": "Outside.Main.ToCaveMain"
+          "entrance": "Outside.Main.ToCaveMain"
         }
       ]
     }

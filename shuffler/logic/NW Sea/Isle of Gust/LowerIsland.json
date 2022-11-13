@@ -44,35 +44,35 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.NW.Gust.GustPort"
+          "entrance": "Sea.NW.Gust.GustPort"
         },
         {
           "name": "ToBombableGrotto",
-          "link": "Gust.BombableGrotto.Main.Exit"
+          "entrance": "Gust.BombableGrotto.Main.Exit"
         },
         {
           "name": "ToCaveLeft",
-          "link": "Gust.Cave.Main.LeftDoor"
+          "entrance": "Gust.Cave.Main.LeftDoor"
         },
         {
           "name": "ToCaveRight",
-          "link": "Gust.Cave.Main.RightDoor"
+          "entrance": "Gust.Cave.Main.RightDoor"
         },
         {
           "name": "ToTempleFront",
-          "link": "Gust.UpperIsland.TempleFront.ToLower"
+          "entrance": "Gust.UpperIsland.TempleFront.ToLower"
         },
         {
           "name": "ToTempleFrontLedgeRight",
-          "link": "Gust.UpperIsland.TempleFrontLedge.ToLowerLedgeRight"
+          "entrance": "Gust.UpperIsland.TempleFrontLedge.ToLowerLedgeRight"
         },
         {
           "name": "ToTempleFrontLedgeLeft",
-          "link": "Gust.UpperIsland.TempleFrontLedge.ToLowerLedgeLeft"
+          "entrance": "Gust.UpperIsland.TempleFrontLedge.ToLowerLedgeLeft"
         },
         {
           "name": "ToLeftmostUpper",
-          "link": "Gust.UpperIsland.LeftmostToLower.ToLedgeLower"
+          "entrance": "Gust.UpperIsland.LeftmostToLower.ToLedgeLower"
         }
       ]
     }

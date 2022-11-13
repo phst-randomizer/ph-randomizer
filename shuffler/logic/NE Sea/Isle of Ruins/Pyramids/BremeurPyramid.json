@@ -8,7 +8,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "RuinsIsle.TopLeft.Main.ToBremeurPyramid"
+          "entrance": "RuinsIsle.TopLeft.Main.ToBremeurPyramid"
         }
       ]
     }

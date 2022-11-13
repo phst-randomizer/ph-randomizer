@@ -86,7 +86,7 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.NE.Maze.MazePort"
+          "entrance": "Sea.NE.Maze.MazePort"
         }
       ]
     }

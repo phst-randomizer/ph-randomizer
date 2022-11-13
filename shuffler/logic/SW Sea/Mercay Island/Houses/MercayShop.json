@@ -37,7 +37,7 @@
       "exits": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main.Shop"
+          "entrance": "MercayTown.Main.Shop"
         }
       ]
     }

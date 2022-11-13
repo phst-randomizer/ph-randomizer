@@ -34,11 +34,11 @@
       "exits": [
         {
           "name": "ToB9ChartRoom",
-          "link": "B9ChartRoom.RightOrder.ToB10"
+          "entrance": "B9ChartRoom.RightOrder.ToB10"
         },
         {
           "name": "ToB11",
-          "link": "B11.Main.ToB10"
+          "entrance": "B11.Main.ToB10"
         }
       ],
       "name": "B10"

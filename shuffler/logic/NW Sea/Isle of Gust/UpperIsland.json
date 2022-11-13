@@ -23,27 +23,27 @@
       "exits": [
         {
           "name": "ToLower",
-          "link": "Gust.LowerIsland.AfterCave.ToTempleFront"
+          "entrance": "Gust.LowerIsland.AfterCave.ToTempleFront"
         },
         {
           "name": "ToLowerLedgeRight",
-          "link": "Gust.LowerIsland.AfterCave.ToTempleFrontLedgeRight"
+          "entrance": "Gust.LowerIsland.AfterCave.ToTempleFrontLedgeRight"
         },
         {
           "name": "ToLowerLedgeLeft",
-          "link": "Gust.LowerIsland.Ledge.ToTempleFrontLedgeLeft"
+          "entrance": "Gust.LowerIsland.Ledge.ToTempleFrontLedgeLeft"
         },
         {
           "name": "ToLedgeLower",
-          "link": "Gust.LowerIsland.LedgeToUpper.ToLeftmostUpper"
+          "entrance": "Gust.LowerIsland.LedgeToUpper.ToLeftmostUpper"
         },
         {
           "name": "ToWindTemple",
-          "link": "WindTemple.F1.Entrance.Entrance"
+          "entrance": "WindTemple.F1.Entrance.Entrance"
         },
         {
           "name": "AfterBoss",
-          "link": "CyclokBossRoom.Main.BossDefeat.ExitWarp"
+          "entrance": "CyclokBossRoom.Main.BossDefeat.ExitWarp"
         }
       ]
     }

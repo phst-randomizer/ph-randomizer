@@ -16,11 +16,11 @@
       "exits": [
         {
           "name": "West",
-          "link": "AboveMercayTown.HiddenBombableWall.ToBridgeCave"
+          "entrance": "AboveMercayTown.HiddenBombableWall.ToBridgeCave"
         },
         {
           "name": "East",
-          "link": "AboveMercayTown.Island.IslandGrotto"
+          "entrance": "AboveMercayTown.Island.IslandGrotto"
         }
       ]
     }

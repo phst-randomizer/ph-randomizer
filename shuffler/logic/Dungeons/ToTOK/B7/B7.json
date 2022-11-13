@@ -29,19 +29,19 @@
       "exits": [
         {
           "name": "ToB6YellowWarp",
-          "link": "B6YellowWarp.Main.ToB7"
+          "entrance": "B6YellowWarp.Main.ToB7"
         },
         {
           "name": "ToB8Left",
-          "link": "B8.Main.ToB7BottomLeft"
+          "entrance": "B8.Main.ToB7BottomLeft"
         },
         {
           "name": "ToB8BottomRight",
-          "link": "B8.Main.ToB7BottomRight"
+          "entrance": "B8.Main.ToB7BottomRight"
         },
         {
           "name": "ToB8TopRight",
-          "link": "B8.TopRightLedge.ToB7TopRight"
+          "entrance": "B8.TopRightLedge.ToB7TopRight"
         }
       ],
       "name": "B7"

@@ -22,15 +22,15 @@
       "exits": [
         {
           "name": "ToB10",
-          "link": "B10.CenterStairs.ToB11"
+          "entrance": "B10.CenterStairs.ToB11"
         },
         {
           "name": "ToB12Right",
-          "link": "B12.RightSafe.ToB11Right"
+          "entrance": "B12.RightSafe.ToB11Right"
         },
         {
           "name": "ToB12Left",
-          "link": "B12.LeftStairs.ToB11Left"
+          "entrance": "B12.LeftStairs.ToB11Left"
         }
       ],
       "name": "B11"

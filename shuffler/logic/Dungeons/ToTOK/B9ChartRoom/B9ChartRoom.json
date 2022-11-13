@@ -15,15 +15,15 @@
       "exits": [
         {
           "name": "ToB9",
-          "link": "B9.ToChartRoom.ToB9ChartRoom"
+          "entrance": "B9.ToChartRoom.ToB9ChartRoom"
         },
         {
           "name": "ToB10",
-          "link": "B10.Main.ToB9ChartRoom"
+          "entrance": "B10.Main.ToB9ChartRoom"
         },
         {
           "name": "BlueWarp",
-          "link": "TempleOfTheOceanKingLobby.Main.Main.B9BlueWarp"
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.B9BlueWarp"
         }
       ],
       "name": "B9ChartRoom"

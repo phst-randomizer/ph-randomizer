@@ -14,7 +14,7 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SE.Harrow.HarrowPort"
+          "entrance": "Sea.SE.Harrow.HarrowPort"
         }
       ]
     }

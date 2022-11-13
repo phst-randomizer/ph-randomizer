@@ -8,11 +8,11 @@
       "exits": [
         {
           "name": "Boat",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB1",
-          "link": ""
+          "entrance": ""
         }
       ]
     },

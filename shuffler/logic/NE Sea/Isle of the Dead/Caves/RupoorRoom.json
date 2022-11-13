@@ -37,11 +37,11 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "Outside.Boat.ToCaveBoat"
+          "entrance": "Outside.Boat.ToCaveBoat"
         },
         {
           "name": "ToMain",
-          "link": "Outside.Main.ToCaveMain"
+          "entrance": "Outside.Main.ToCaveMain"
         }
       ]
     }

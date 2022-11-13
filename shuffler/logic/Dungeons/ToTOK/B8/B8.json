@@ -29,23 +29,23 @@
       "exits": [
         {
           "name": "ToB7BottomLeft",
-          "link": "B7.Left.ToB8Left"
+          "entrance": "B7.Left.ToB8Left"
         },
         {
           "name": "ToB7BottomRight",
-          "link": "B7.BottomRight.ToB8BottomRight"
+          "entrance": "B7.BottomRight.ToB8BottomRight"
         },
         {
           "name": "ToB7TopRight",
-          "link": "B7.TopRightDoor.ToB8TopRight"
+          "entrance": "B7.TopRightDoor.ToB8TopRight"
         },
         {
           "name": "ToB9Left",
-          "link": "B9.TopLeft.ToB8Left"
+          "entrance": "B9.TopLeft.ToB8Left"
         },
         {
           "name": "ToB9Right",
-          "link": "B9.Main.ToB8Right"
+          "entrance": "B9.Main.ToB8Right"
         }
       ],
       "name": "B8"

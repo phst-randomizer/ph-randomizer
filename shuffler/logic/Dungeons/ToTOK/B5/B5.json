@@ -23,15 +23,15 @@
       "exits": [
         {
           "name": "ToB4",
-          "link": "B4.BottomDoor.ToB5"
+          "entrance": "B4.BottomDoor.ToB5"
         },
         {
           "name": "ToB6",
-          "link": "B6.Main.ToB5"
+          "entrance": "B6.Main.ToB5"
         },
         {
           "name": "ToB4Shortcut",
-          "link": "B4.TopLeftStaircase.ToB5Shortcut"
+          "entrance": "B4.TopLeftStaircase.ToB5Shortcut"
         }
       ]
     }

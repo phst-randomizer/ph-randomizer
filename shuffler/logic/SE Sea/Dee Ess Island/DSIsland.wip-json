@@ -29,7 +29,7 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SE.DeeEss.DeeEssPort"
+          "entrance": "Sea.SE.DeeEss.DeeEssPort"
         }
       ]
     }

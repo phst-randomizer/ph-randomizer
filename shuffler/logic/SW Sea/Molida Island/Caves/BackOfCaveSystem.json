@@ -7,11 +7,11 @@
       "exits": [
         {
           "name": "Left",
-          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
+          "entrance": "Molida.CaveSystem.MainUp.ExitUpRight"
         },
         {
           "name": "Right",
-          "link": "Molida.CaveSystem.DoorAfterArena.GrottoRight"
+          "entrance": "Molida.CaveSystem.DoorAfterArena.GrottoRight"
         }
       ],
       "name": "BackOfCaveSystem"

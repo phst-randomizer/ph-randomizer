@@ -30,7 +30,7 @@
       "exits": [
         {
           "name": "ToDungeon",
-          "link": "FireTemple.F4.Main.ToBoss"
+          "entrance": "FireTemple.F4.Main.ToBoss"
         }
       ]
     }

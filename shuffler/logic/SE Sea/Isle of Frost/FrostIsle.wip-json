@@ -19,27 +19,27 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SE.Frost.FrostPort"
+          "entrance": "Sea.SE.Frost.FrostPort"
         },
         {
           "name": "SmartAnoukiHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "SensitiveAnoukiHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ChiefHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToCave",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -49,7 +49,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -59,7 +59,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -69,7 +69,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -105,31 +105,31 @@
       "exits": [
         {
           "name": "ToSouth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "GumoHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ArooHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "MazoHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "DoboHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "KumuHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "FofoHouse",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -139,7 +139,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -149,7 +149,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -159,7 +159,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -169,7 +169,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -179,7 +179,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -189,7 +189,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -199,11 +199,11 @@
       "exits": [
         {
           "name": "Left",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "Right",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -234,19 +234,19 @@
       "exits": [
         {
           "name": "ToCave",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorthLedgeRight",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorthLedgeLeft",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorth",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -256,19 +256,19 @@
       "exits": [
         {
           "name": "ToSouth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToSouthLedgeRight",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToSouthLedgeLeft",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToDungeon",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

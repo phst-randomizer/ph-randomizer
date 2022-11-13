@@ -48,15 +48,15 @@
       "exits": [
         {
           "name": "ToB2",
-          "link": "B2.Downstairs.ToB3"
+          "entrance": "B2.Downstairs.ToB3"
         },
         {
           "name": "ToChartRoomShortcut",
-          "link": "B3ChartRoom.Main.ToB3Ledge"
+          "entrance": "B3ChartRoom.Main.ToB3Ledge"
         },
         {
           "name": "ToChartRoom",
-          "link": "B3ChartRoom.Main.ToB3Main"
+          "entrance": "B3ChartRoom.Main.ToB3Main"
         }
       ],
       "name": "B3"

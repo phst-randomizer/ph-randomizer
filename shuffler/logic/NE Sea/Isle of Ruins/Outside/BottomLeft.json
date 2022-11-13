@@ -8,35 +8,35 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.NE.RuinsIsle.RuinsIslePort"
+          "entrance": "Sea.NE.RuinsIsle.RuinsIslePort"
         },
         {
           "name": "ToCaveBoat",
-          "link": "GeozardCave.RightDoor.ToBoat"
+          "entrance": "GeozardCave.RightDoor.ToBoat"
         },
         {
           "name": "ToCaveUpper",
-          "link": "GeozardCave.LeftDoor.ToUpper"
+          "entrance": "GeozardCave.LeftDoor.ToUpper"
         },
         {
           "name": "ToNorthShortcut",
-          "link": "TopLeft.ToSouth.ToSouthShortcut"
+          "entrance": "TopLeft.ToSouth.ToSouthShortcut"
         },
         {
           "name": "ToNorthRight",
-          "link": "TopLeft.FromSouthRight.ToSouthRight"
+          "entrance": "TopLeft.FromSouthRight.ToSouthRight"
         },
         {
           "name": "ToEastShortcut",
-          "link": "BottomRight.ToWest.ToWestShortcut"
+          "entrance": "BottomRight.ToWest.ToWestShortcut"
         },
         {
           "name": "ToNorthUnderwater",
-          "link": "TopLeft.ToSouthUnderwater.ToSouthUnderwater"
+          "entrance": "TopLeft.ToSouthUnderwater.ToSouthUnderwater"
         },
         {
           "name": "ToNorthLeft",
-          "link": "TopLeft.FromSouthWest.ToSouthLeft"
+          "entrance": "TopLeft.FromSouthWest.ToSouthLeft"
         }
       ]
     }

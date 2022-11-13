@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Exit",
-          "link": "TopLeft.AfterBremeurUnderwater.ToUnderwaterCave"
+          "entrance": "TopLeft.AfterBremeurUnderwater.ToUnderwaterCave"
         }
       ]
     }

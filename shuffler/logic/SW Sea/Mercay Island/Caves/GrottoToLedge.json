@@ -16,11 +16,11 @@
       "exits": [
         {
           "name": "Left",
-          "link": "PathToToTOK.BombableWall.Grotto"
+          "entrance": "PathToToTOK.BombableWall.Grotto"
         },
         {
           "name": "South",
-          "link": "AboveMercayTown.Ledge.Grotto"
+          "entrance": "AboveMercayTown.Ledge.Grotto"
         }
       ]
     }

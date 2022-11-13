@@ -16,43 +16,43 @@
       "exits": [
         {
           "name": "ToSouthRight",
-          "link": "BottomLeft.AboveMaze.ToNorthRight"
+          "entrance": "BottomLeft.AboveMaze.ToNorthRight"
         },
         {
           "name": "ToSouthLeft",
-          "link": "BottomLeft.ToNorthLeft.ToNorthLeft"
+          "entrance": "BottomLeft.ToNorthLeft.ToNorthLeft"
         },
         {
           "name": "ToBremeurPyramid",
-          "link": "BremeurPyramid.F1.Main.Exit"
+          "entrance": "BremeurPyramid.F1.Main.Exit"
         },
         {
           "name": "ToEastBottom",
-          "link": "TopRight.FromWest.ToWestBottom"
+          "entrance": "TopRight.FromWest.ToWestBottom"
         },
         {
           "name": "ToSouthShortcut",
-          "link": "BottomLeft.AboveCave.ToNorthShortcut"
+          "entrance": "BottomLeft.AboveCave.ToNorthShortcut"
         },
         {
           "name": "ToEastTop",
-          "link": "TopRight.Main.ToWestTop"
+          "entrance": "TopRight.Main.ToWestTop"
         },
         {
           "name": "ToSouthUnderwater",
-          "link": "BottomLeft.Underwater.ToNorthUnderwater"
+          "entrance": "BottomLeft.Underwater.ToNorthUnderwater"
         },
         {
           "name": "ToEastUnderwaterTop",
-          "link": "TopRight.Underwater.ToWestUnderwaterTop"
+          "entrance": "TopRight.Underwater.ToWestUnderwaterTop"
         },
         {
           "name": "ToEastUnderwaterBottom",
-          "link": "TopRight.Underwater.ToWestUnderwaterBottom"
+          "entrance": "TopRight.Underwater.ToWestUnderwaterBottom"
         },
         {
           "name": "ToUnderwaterCave",
-          "link": "UnderwaterCave.Main.Exit"
+          "entrance": "UnderwaterCave.Main.Exit"
         }
       ]
     }

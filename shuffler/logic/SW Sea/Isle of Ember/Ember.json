@@ -23,51 +23,51 @@
       "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SW.Ember.EmberPort"
+          "entrance": "Sea.SW.Ember.EmberPort"
         },
         {
           "name": "Astrid",
-          "link": "AstridHouse.Main.ToOutside"
+          "entrance": "AstridHouse.Main.ToOutside"
         },
         {
           "name": "Kayo",
-          "link": "KayoHouse.Main.Entrance"
+          "entrance": "KayoHouse.Main.Entrance"
         },
         {
           "name": "EmptyHouse",
-          "link": "EmberEmptyHouse.Main.Entrance"
+          "entrance": "EmberEmptyHouse.Main.Entrance"
         },
         {
           "name": "RightLowerBottom",
-          "link": "EmberRight.Lowest.LeftLowerBottom"
+          "entrance": "EmberRight.Lowest.LeftLowerBottom"
         },
         {
           "name": "RightTop",
-          "link": "EmberRight.Lowest.LeftLowerTop"
+          "entrance": "EmberRight.Lowest.LeftLowerTop"
         },
         {
           "name": "RightLowerTop",
-          "link": "EmberRight.Lowest.LeftLowerToppest"
+          "entrance": "EmberRight.Lowest.LeftLowerToppest"
         },
         {
           "name": "RightMiddleTop",
-          "link": "EmberRight.TempleFront.LeftHigherTop"
+          "entrance": "EmberRight.TempleFront.LeftHigherTop"
         },
         {
           "name": "RightMiddleBottom",
-          "link": "EmberRight.AfterDoor.LeftMiddleBottom"
+          "entrance": "EmberRight.AfterDoor.LeftMiddleBottom"
         },
         {
           "name": "RightHigherBottom",
-          "link": "EmberRight.TempleFront.LeftHigherBottom"
+          "entrance": "EmberRight.TempleFront.LeftHigherBottom"
         },
         {
           "name": "RightHighestBottom",
-          "link": "EmberRight.Summit.LeftHighestBottom"
+          "entrance": "EmberRight.Summit.LeftHighestBottom"
         },
         {
           "name": "RightHighestTop",
-          "link": "EmberRight.Summit.LeftHighestTop"
+          "entrance": "EmberRight.Summit.LeftHighestTop"
         }
       ]
     },
@@ -77,39 +77,39 @@
       "exits": [
         {
           "name": "LeftLowerToppest",
-          "link": "EmberLeft.Main.RightTop"
+          "entrance": "EmberLeft.Main.RightTop"
         },
         {
           "name": "LeftLowerTop",
-          "link": "EmberLeft.ToRightTop.RightLowerTop"
+          "entrance": "EmberLeft.ToRightTop.RightLowerTop"
         },
         {
           "name": "LeftLowerBottom",
-          "link": "EmberLeft.Main.RightLowerBottom"
+          "entrance": "EmberLeft.Main.RightLowerBottom"
         },
         {
           "name": "LeftMiddleBottom",
-          "link": "EmberLeft.Middle.RightMiddleBottom"
+          "entrance": "EmberLeft.Middle.RightMiddleBottom"
         },
         {
           "name": "EmberTemple",
-          "link": "FireTemple.F1.Entrance.Outside"
+          "entrance": "FireTemple.F1.Entrance.Outside"
         },
         {
           "name": "LeftHigherBottom",
-          "link": "EmberLeft.Summit.RightHigherBottom"
+          "entrance": "EmberLeft.Summit.RightHigherBottom"
         },
         {
           "name": "LeftHigherTop",
-          "link": "EmberLeft.Middle.RightMiddleTop"
+          "entrance": "EmberLeft.Middle.RightMiddleTop"
         },
         {
           "name": "LeftHighestTop",
-          "link": "EmberLeft.Summit.RightHighestTop"
+          "entrance": "EmberLeft.Summit.RightHighestTop"
         },
         {
           "name": "LeftHighestBottom",
-          "link": "EmberLeft.Summit.RightHighestBottom"
+          "entrance": "EmberLeft.Summit.RightHighestBottom"
         }
       ]
     },
@@ -127,11 +127,11 @@
       "exits": [
         {
           "name": "ToOutside",
-          "link": "EmberLeft.Main.Astrid"
+          "entrance": "EmberLeft.Main.Astrid"
         },
         {
           "name": "ToBasement",
-          "link": "AstridBasement.Arena.Stairs"
+          "entrance": "AstridBasement.Arena.Stairs"
         }
       ]
     },
@@ -141,7 +141,7 @@
       "exits": [
         {
           "name": "Stairs",
-          "link": "AstridHouse.Main.ToBasement"
+          "entrance": "AstridHouse.Main.ToBasement"
         }
       ]
     },
@@ -151,7 +151,7 @@
       "exits": [
         {
           "name": "Entrance",
-          "link": "EmberLeft.Main.Kayo"
+          "entrance": "EmberLeft.Main.Kayo"
         }
       ]
     },
@@ -161,7 +161,7 @@
       "exits": [
         {
           "name": "Entrance",
-          "link": "EmberLeft.Main.EmptyHouse"
+          "entrance": "EmberLeft.Main.EmptyHouse"
         }
       ]
     }
