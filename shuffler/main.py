@@ -8,8 +8,6 @@ import click
 from shuffler.aux_models import Area
 from shuffler.logic import Logic
 
-logging.basicConfig(level=logging.INFO)
-
 
 def shuffle(seed: str | None) -> list[Area]:
     """
@@ -42,7 +40,18 @@ def shuffle(seed: str | None) -> list[Area]:
     type=click.Path(exists=False, dir_okay=True, file_okay=False),
     help='Path to save randomized aux data to. Use -- to output to stdout.',
 )
-def shuffler_cli(seed: str | None, output: str | None):
+@click.option(
+    '-l',
+    '--log-level',
+    type=click.Choice(
+        list(logging.getLevelNamesMapping().keys()),
+        case_sensitive=False,
+    ),
+    default='INFO',
+)
+def shuffler_cli(seed: str | None, output: str | None, log_level: str):
+    logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
+
     results = shuffle(seed)
 
     if output == '--':
