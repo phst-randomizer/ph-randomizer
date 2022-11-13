@@ -4,7 +4,7 @@
   "rooms": [
     {
       "name": "MercayHouse",
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "MercayTown.Main.House"

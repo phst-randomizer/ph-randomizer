@@ -6,7 +6,7 @@
 
       "name": "F1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": "RuinsIsle.TopRight.PyramidEntrance.MutohTemple"
@@ -44,7 +44,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1",
           "link": "F1.Middle.ToF2"
@@ -66,7 +66,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF2",
           "link": "F2.Bottom.ToF3"
@@ -98,7 +98,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1Top",
           "link": "F1.Up.ToB1Top"
@@ -151,7 +151,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1TopLeft",
           "link": "B1.TopLeftStairs.ToB2TopLeft"
@@ -189,7 +189,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2",
           "link": "B2.ToBoss.ToB3"
@@ -215,7 +215,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoss",
           "link": "EoxBossRoom.Main.BossDefeat.ToAquanineRoom"

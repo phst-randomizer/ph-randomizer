@@ -44,7 +44,7 @@
           "contents": "small_key"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "Molida.UpperIsland.TempleEntrance.CourageTemple"
@@ -120,7 +120,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1Arena",
           "link": "F1.StairsAfterMoldorm.ToB1Arena"
@@ -179,7 +179,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1ElectricMaze",
           "link": "F1.AfterLeftLockedDoor.ToF2ElectricMaze"
@@ -213,7 +213,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF2",
           "link": "F2.StairsToF3.ToF3"

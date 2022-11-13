@@ -4,7 +4,7 @@
   "rooms": [
     {
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Left",
           "link": "Molida.CaveSystem.MainUp.ExitUpRight"

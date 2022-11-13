@@ -26,7 +26,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB6YellowWarp",
           "link": "B6YellowWarp.Main.ToB7"

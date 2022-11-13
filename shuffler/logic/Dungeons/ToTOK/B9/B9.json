@@ -33,7 +33,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB9ChartRoom",
           "link": "B9ChartRoom.Main.ToB9"

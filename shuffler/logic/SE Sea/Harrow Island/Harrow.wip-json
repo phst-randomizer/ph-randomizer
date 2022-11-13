@@ -11,7 +11,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.SE.Harrow.HarrowPort"

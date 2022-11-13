@@ -34,7 +34,7 @@
           "overlay_offset": "0x2f54"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "MercayTown.Main.Shop"

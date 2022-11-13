@@ -13,7 +13,7 @@
           "bmg_instruction_index": -1
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "OutsideOshus.Outside.OshussHouse"

@@ -20,7 +20,7 @@
           "zmb_mapobject_index": 68
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "Ember.EmberRight.TempleFront.EmberTemple"
@@ -62,7 +62,7 @@
           "contents": "small_key"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1BottomLeft",
           "link": "F1.StairsBottomLeft.ToF2BottomLeft"
@@ -97,7 +97,7 @@
           "zmb_mapobject_index": 15
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF2",
           "link": "F2.StairsBottomRight.ToF3"
@@ -111,7 +111,7 @@
     {
       "name": "F4",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToF3",
           "link": "F3.StairsBoss.ToF4"

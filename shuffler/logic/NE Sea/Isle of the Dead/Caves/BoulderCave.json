@@ -5,7 +5,7 @@
     {
       "name": "BoulderCave",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Hole",
           "link": "Outside.Hole.ToBoulderCave"

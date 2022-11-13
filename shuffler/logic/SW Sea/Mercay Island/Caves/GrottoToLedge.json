@@ -13,7 +13,7 @@
           "zmb_mapobject_index": 2
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Left",
           "link": "PathToToTOK.BombableWall.Grotto"

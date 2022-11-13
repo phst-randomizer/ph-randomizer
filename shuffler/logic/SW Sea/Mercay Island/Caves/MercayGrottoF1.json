@@ -27,7 +27,7 @@
           "zmb_mapobject_index": -1
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "West",
           "link": "Mercay.EnemyBamboo.Grotto.Grotto"

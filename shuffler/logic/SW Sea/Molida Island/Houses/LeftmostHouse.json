@@ -4,7 +4,7 @@
   "rooms": [
     {
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "Molida.Town.Main.LeftmostHouse"

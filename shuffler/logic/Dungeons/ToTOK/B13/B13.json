@@ -12,7 +12,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB12",
           "link": "B12.AfterTriforce.ToB13"

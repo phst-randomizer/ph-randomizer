@@ -25,7 +25,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1",
           "link": "B1.Downstairs.ToB2"

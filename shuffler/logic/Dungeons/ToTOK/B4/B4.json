@@ -25,7 +25,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB3",
           "link": "B3ChartRoom.Staircase.ToB4"

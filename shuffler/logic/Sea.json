@@ -62,7 +62,7 @@
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "MercayPort",
           "link": "Mercay.MercayTown.Main.Boat"
@@ -165,7 +165,7 @@
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "UnchartedPort",
           "link": "Uncharted.Main.Main.Boat"
@@ -260,7 +260,7 @@
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "DeeEssPort",
           "link": "DeeEssIsland.Main.Main.Boat"
@@ -351,7 +351,7 @@
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "MazePort",
           "link": "MazeIsland.Main.Port.Boat"
@@ -385,7 +385,7 @@
     {
       "name": "RegularBeedleBoat",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": "SW.Beedle.RegularBeedle"
@@ -395,7 +395,7 @@
     {
       "name": "MaskedBeedleBoat",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": "NE.Beedle.MaskedBeedle"

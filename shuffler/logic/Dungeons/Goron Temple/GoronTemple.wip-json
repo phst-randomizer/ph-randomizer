@@ -16,7 +16,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
           "link": ""
@@ -38,7 +38,7 @@
     {
       "name": "BombableF1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "LeftDoor",
           "link": ""
@@ -67,7 +67,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToBombableF1",
           "link": ""
@@ -96,7 +96,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1",
           "link": ""
@@ -120,7 +120,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2Right",
           "link": ""
@@ -134,7 +134,7 @@
     {
       "name": "B4",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB3",
           "link": ""
@@ -154,7 +154,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoss",
           "link": ""

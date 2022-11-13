@@ -83,7 +83,7 @@
           "zmb_actor_index": 42
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.NE.Maze.MazePort"

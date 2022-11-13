@@ -5,7 +5,7 @@
     {
       "name": "F1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": ""
@@ -25,7 +25,7 @@
           "contents": ""
         }
       ],
-      "doors": []
+      "exits": []
     }
   ]
 }

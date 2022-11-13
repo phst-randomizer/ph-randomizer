@@ -20,7 +20,7 @@
           "zmb_mapobject_index": 111
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.NW.Bannan.BannanPort"
@@ -67,7 +67,7 @@
           "zmb_mapobject_index": 87
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "BannanGrottoEntrance",
           "link": "BannanGrotto.RightSide.OutsideRight"
@@ -77,7 +77,7 @@
     {
       "name": "BannanGrotto",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "OutsideLeft",
           "link": "OutsideLeft.Main.BannanGrottoEntrance"
@@ -99,7 +99,7 @@
           "bmg_file_path": "English/Message/hidari.bmg"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
           "link": "OutsideLeft.Main.WayfarerHouse"

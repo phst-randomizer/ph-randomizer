@@ -54,7 +54,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB11Right",
           "link": "B11.Main.ToB12Right"

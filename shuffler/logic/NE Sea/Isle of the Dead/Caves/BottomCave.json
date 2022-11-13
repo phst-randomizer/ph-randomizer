@@ -5,7 +5,7 @@
     {
       "name": "BottomCave",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoat",
           "link": "Outside.Boat.ToCaveBoat"

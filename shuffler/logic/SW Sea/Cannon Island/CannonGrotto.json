@@ -13,7 +13,7 @@
           "zmb_mapobject_index": 32
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Down",
           "link": "Cannon.Outside.AfterDoor.GrottoEntry"

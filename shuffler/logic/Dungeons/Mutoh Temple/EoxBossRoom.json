@@ -20,7 +20,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToDungeon",
           "link": "MutohTemple.B3.Main.ToBoss"

@@ -4,7 +4,7 @@
   "rooms": [
     {
       "name": "AboveMercayTown",
-      "doors": [
+      "exits": [
         {
           "name": "South",
           "link": "MercayTown.Main.NorthMain"

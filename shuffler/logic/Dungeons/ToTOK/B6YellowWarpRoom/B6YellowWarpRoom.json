@@ -4,7 +4,7 @@
   "rooms": [
     {
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB6",
           "link": "B6.SymbolDoor.Triforce"

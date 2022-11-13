@@ -5,7 +5,7 @@
     {
       "name": "PhantomCorridor",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": "Outside.Main.Pyramid"

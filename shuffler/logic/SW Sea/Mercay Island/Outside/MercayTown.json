@@ -27,7 +27,7 @@
           "zmb_mapobject_index": 98
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Grotto",
           "link": "MercayGrotto.F2.EastExit.East"

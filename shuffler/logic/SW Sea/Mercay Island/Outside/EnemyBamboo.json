@@ -4,7 +4,7 @@
   "rooms": [
     {
       "name": "EnemyBamboo",
-      "doors": [
+      "exits": [
         {
           "name": "South",
           "link": "OutsideOshus.Outside.North"

@@ -24,7 +24,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1",
           "link": "TempleOfTheOceanKingLobby.Main.Main.Entrance"

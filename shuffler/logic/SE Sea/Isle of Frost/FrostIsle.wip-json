@@ -16,7 +16,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.SE.Frost.FrostPort"
@@ -46,7 +46,7 @@
     {
       "name": "AnoukiChiefHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -56,7 +56,7 @@
     {
       "name": "AnoukiRedCauldronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -66,7 +66,7 @@
     {
       "name": "AnoukiBrownCauldronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -102,7 +102,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToSouth",
           "link": ""
@@ -136,7 +136,7 @@
     {
       "name": "GumoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -146,7 +146,7 @@
     {
       "name": "ArooHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -156,7 +156,7 @@
     {
       "name": "MazoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -166,7 +166,7 @@
     {
       "name": "DoboHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -176,7 +176,7 @@
     {
       "name": "KumuHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -186,7 +186,7 @@
     {
       "name": "FofoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": ""
@@ -196,7 +196,7 @@
     {
       "name": "IceCave",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Left",
           "link": ""
@@ -231,7 +231,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToCave",
           "link": ""
@@ -253,7 +253,7 @@
     {
       "name": "DungeonEntrance",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToSouth",
           "link": ""

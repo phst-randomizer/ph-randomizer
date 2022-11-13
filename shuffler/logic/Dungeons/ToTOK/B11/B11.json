@@ -19,7 +19,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB10",
           "link": "B10.CenterStairs.ToB11"

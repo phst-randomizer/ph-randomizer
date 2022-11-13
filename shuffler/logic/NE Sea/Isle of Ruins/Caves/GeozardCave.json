@@ -5,7 +5,7 @@
     {
       "name": "GeozardCave",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoat",
           "link": "Outside.Boat.ToCaveBoat"

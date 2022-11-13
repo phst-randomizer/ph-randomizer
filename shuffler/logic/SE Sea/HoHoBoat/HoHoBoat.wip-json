@@ -11,7 +11,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
           "link": "Sea.SE.Boat.BoardBoat"

@@ -5,7 +5,7 @@
     {
       "name": "BottomLeft",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.NE.RuinsIsle.RuinsIslePort"

@@ -13,7 +13,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB3Ledge",
           "link": "B3.Ledge.ToChartRoomShortcut"

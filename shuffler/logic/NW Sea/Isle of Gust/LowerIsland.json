@@ -41,7 +41,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.NW.Gust.GustPort"

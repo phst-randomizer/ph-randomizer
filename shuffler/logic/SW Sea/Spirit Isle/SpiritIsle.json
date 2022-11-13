@@ -47,7 +47,7 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": "SpiritIsle.Outside.Main.Grotto"
@@ -72,7 +72,7 @@
           "zmb_mapobject_index": 105
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Grotto",
           "link": "SpiritIsle.Inside.Main.Outside"

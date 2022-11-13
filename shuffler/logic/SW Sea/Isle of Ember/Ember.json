@@ -20,7 +20,7 @@
           "zmb_mapobject_index": 74
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.SW.Ember.EmberPort"
@@ -74,7 +74,7 @@
     {
       "name": "EmberRight",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "LeftLowerToppest",
           "link": "EmberLeft.Main.RightTop"
@@ -124,7 +124,7 @@
           "bmg_instruction_index": 415
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToOutside",
           "link": "EmberLeft.Main.Astrid"
@@ -138,7 +138,7 @@
     {
       "name": "AstridBasement",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Stairs",
           "link": "AstridHouse.Main.ToBasement"
@@ -148,7 +148,7 @@
     {
       "name": "KayoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
           "link": "EmberLeft.Main.Kayo"
@@ -158,7 +158,7 @@
     {
       "name": "EmberEmptyHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
           "link": "EmberLeft.Main.EmptyHouse"

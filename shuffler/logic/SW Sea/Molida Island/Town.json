@@ -13,7 +13,7 @@
           "bmg_instruction_index": 42
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.SW.Molida.MolidaPort"

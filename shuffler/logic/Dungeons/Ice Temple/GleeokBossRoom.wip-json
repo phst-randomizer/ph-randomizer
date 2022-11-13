@@ -16,7 +16,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToDungeon",
           "link": ""

@@ -13,7 +13,7 @@
           "zmb_mapobject_index": 29
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
           "link": "GustIsle.AfterCave.WindTempleEntrance.WindTemple"
@@ -55,7 +55,7 @@
           "contents": "small_key"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1BossKeyHoleRoom",
           "link": "F1.BossKeyHoleRoom.ToB1BeforeArena"
@@ -100,7 +100,7 @@
           "zmb_mapobject_index": 7
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1BottomRight",
           "link": "B1.BottomRightStairs.ToB2BottomRight"
@@ -132,7 +132,7 @@
           "contents": "big_green_rupee"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2Main",
           "link": "B2.TopDoor.ToB2TopRoom"
@@ -150,7 +150,7 @@
     {
       "name": "B2LeftRoom",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2Main",
           "link": "B2.LeftBombWall.ToB2LeftRoom"
@@ -164,7 +164,7 @@
     {
       "name": "BeforeBoss",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1",
           "link": "F1.BossEntrance.ToBoss"

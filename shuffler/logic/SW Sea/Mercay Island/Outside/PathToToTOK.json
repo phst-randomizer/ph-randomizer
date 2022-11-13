@@ -4,7 +4,7 @@
   "rooms": [
     {
       "name": "PathToToTOK",
-      "doors": [
+      "exits": [
         {
           "name": "East",
           "link": "AboveMercayTown.Main.West"

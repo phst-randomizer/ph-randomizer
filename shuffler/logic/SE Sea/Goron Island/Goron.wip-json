@@ -5,7 +5,7 @@
     {
       "name": "LowerLeft",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
           "link": "Sea.SE.Goron.GoronPort"
@@ -43,7 +43,7 @@
     {
       "name": "NoRockGoronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -64,7 +64,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -74,7 +74,7 @@
     {
       "name": "OneRockSmallGoronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -84,7 +84,7 @@
     {
       "name": "ThreeRocksGoronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -94,7 +94,7 @@
     {
       "name": "LowerRight",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToWest",
           "link": ""
@@ -124,7 +124,7 @@
     {
       "name": "OneRockBigGoronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -134,7 +134,7 @@
     {
       "name": "TwoRocksGoronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -144,7 +144,7 @@
     {
       "name": "GoronChiefHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
           "link": ""
@@ -160,7 +160,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToSouth",
           "link": ""
@@ -192,7 +192,7 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToEastLowest",
           "link": ""
