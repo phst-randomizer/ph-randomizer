@@ -26,38 +26,38 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ExitDown",
-          "link": "Molida.Town.Main.CaveEntrance"
+          "entrance": "Molida.Town.Main.CaveEntrance"
         },
         {
           "name": "GrottoRight",
-          "link": "Molida.BackOfCaveSystem.Main.Right"
+          "entrance": "Molida.BackOfCaveSystem.Main.Right"
         },
         {
           "name": "ExitUpRight",
-          "link": "Molida.UpperIsland.RightSide.ToCaveSystemRight"
+          "entrance": "Molida.UpperIsland.RightSide.ToCaveSystemRight"
         },
         {
           "name": "BombableWall",
-          "link": "Molida.ShovelRoom.Main.Exit"
+          "entrance": "Molida.ShovelRoom.Main.Exit"
         },
         {
           "name": "GrottoLeft",
-          "link": "Molida.BackOfCaveSystem.Main.Left"
+          "entrance": "Molida.BackOfCaveSystem.Main.Left"
         },
         {
           "name": "HoleNearTree",
-          "link": "Molida.Town.Hole.HoleToCave"
+          "entrance": "Molida.Town.Hole.HoleToCave"
         },
         {
           "name": "ExitUpLeft",
-          "link": "Molida.UpperIsland.TempleFront.ToCaveSystemLeft"
+          "entrance": "Molida.UpperIsland.TempleFront.ToCaveSystemLeft"
         },
         {
           "name": "HoleToChest",
-          "link": "Molida.UpperIsland.Hole.HoleToChest"
+          "entrance": "Molida.UpperIsland.Hole.HoleToChest"
         }
       ],
       "name": "CaveSystem"

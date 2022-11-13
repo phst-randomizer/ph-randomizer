@@ -20,14 +20,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "LeftDoor",
-          "link": "Gust.LowerIsland.BeforeCave.ToCaveLeft"
+          "entrance": "Gust.LowerIsland.BeforeCave.ToCaveLeft"
         },
         {
           "name": "RightDoor",
-          "link": "Gust.LowerIsland.AfterCave.ToCaveRight"
+          "entrance": "Gust.LowerIsland.AfterCave.ToCaveRight"
         }
       ]
     }

@@ -5,14 +5,14 @@
     {
       "name": "GeozardCave",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoat",
-          "link": "Outside.Boat.ToCaveBoat"
+          "entrance": "Outside.Boat.ToCaveBoat"
         },
         {
           "name": "ToMazeUpper",
-          "link": "Outside.MazeUpper.ToCaveUpper"
+          "entrance": "Outside.MazeUpper.ToCaveUpper"
         }
       ]
     }

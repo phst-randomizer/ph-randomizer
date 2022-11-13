@@ -19,30 +19,30 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToCaveSystemRight",
-          "link": "Molida.CaveSystem.MainUp.ExitUpRight"
+          "entrance": "Molida.CaveSystem.MainUp.ExitUpRight"
         },
         {
           "name": "ToLowerIsland",
-          "link": "Main.Town.Ledge.ToUpperIsland"
+          "entrance": "Main.Town.Ledge.ToUpperIsland"
         },
         {
           "name": "ToCaveSystemLeft",
-          "link": "Molida.CaveSystem.AfterSunDoor.ExitUpLeft"
+          "entrance": "Molida.CaveSystem.AfterSunDoor.ExitUpLeft"
         },
         {
           "name": "HoleToChest",
-          "link": "Molida.CaveSystem.ChestLedgeLeft.HoleToChest"
+          "entrance": "Molida.CaveSystem.ChestLedgeLeft.HoleToChest"
         },
         {
           "name": "CourageTemple",
-          "link": "CourageTemple.F1.Entrance.Outside"
+          "entrance": "CourageTemple.F1.Entrance.Outside"
         },
         {
           "name": "AfterBoss",
-          "link": "CraykBossRoom.Main.BossDefeat.ExitWarp"
+          "entrance": "CraykBossRoom.Main.BossDefeat.ExitWarp"
         }
       ],
       "name": "UpperIsland"

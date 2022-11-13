@@ -4,30 +4,30 @@
   "rooms": [
     {
       "name": "AboveMercayTown",
-      "doors": [
+      "exits": [
         {
           "name": "South",
-          "link": "MercayTown.Main.NorthMain"
+          "entrance": "MercayTown.Main.NorthMain"
         },
         {
           "name": "West",
-          "link": "PathToToTOK.Main.East"
+          "entrance": "PathToToTOK.Main.East"
         },
         {
           "name": "ToBridgeCave",
-          "link": "BridgeCave.Main.West"
+          "entrance": "BridgeCave.Main.West"
         },
         {
           "name": "Grotto",
-          "link": "GrottoToLedge.Down.South"
+          "entrance": "GrottoToLedge.Down.South"
         },
         {
           "name": "SouthLedge",
-          "link": "MercayTown.Ledge.NorthLedge"
+          "entrance": "MercayTown.Ledge.NorthLedge"
         },
         {
           "name": "IslandGrotto",
-          "link": "BridgeCave.Main.East"
+          "entrance": "BridgeCave.Main.East"
         }
       ],
       "chests": [

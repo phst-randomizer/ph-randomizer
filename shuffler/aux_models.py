@@ -98,9 +98,9 @@ def validate_check_type():
 validate_check_type()
 
 
-class Door(BaseModel):
+class Exit(BaseModel):
     name: str = Field(..., description='The name of this exit')
-    link: str = Field(..., description='The `entrance` or `door` where this exit leads.')
+    entrance: str = Field(..., description='The `entrance` or `door` where this exit leads.')
 
 
 class Room(BaseModel):
@@ -110,9 +110,9 @@ class Room(BaseModel):
         description='Item checks that can be made in this room',
         unique_items=True,
     )
-    doors: list[Door] = Field(
+    exits: list[Exit] = Field(
         ...,
-        description='All doors in this room that lead to a different room or area',
+        description='All `exits` in this room that lead to an `entrance` in another room',
         min_items=1,
         unique_items=True,
     )

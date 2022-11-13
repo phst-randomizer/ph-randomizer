@@ -54,18 +54,18 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB11Right",
-          "link": "B11.Main.ToB12Right"
+          "entrance": "B11.Main.ToB12Right"
         },
         {
           "name": "ToB11Left",
-          "link": "B11.LeftStairs.ToB12Left"
+          "entrance": "B11.LeftStairs.ToB12Left"
         },
         {
           "name": "ToB13",
-          "link": "B13.Main.ToB12"
+          "entrance": "B13.Main.ToB12"
         }
       ],
       "name": "B12"

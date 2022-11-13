@@ -47,10 +47,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "SpiritIsle.Outside.Main.Grotto"
+          "entrance": "SpiritIsle.Outside.Main.Grotto"
         }
       ],
       "name": "Inside"
@@ -72,14 +72,14 @@
           "zmb_mapobject_index": 105
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Grotto",
-          "link": "SpiritIsle.Inside.Main.Outside"
+          "entrance": "SpiritIsle.Inside.Main.Outside"
         },
         {
           "name": "Boat",
-          "link": "Sea.SW.SpiritIsle.SpiritIslePort"
+          "entrance": "Sea.SW.SpiritIsle.SpiritIslePort"
         }
       ],
       "name": "Outside"

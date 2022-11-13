@@ -26,14 +26,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToDungeon",
-          "link": "CourageTemple.F3.Main.ToBoss"
+          "entrance": "CourageTemple.F3.Main.ToBoss"
         },
         {
           "name": "AfterBoss",
-          "link": "Molida.UpperIsland.TempleFront.AfterBoss"
+          "entrance": "Molida.UpperIsland.TempleFront.AfterBoss"
         }
       ],
       "name": "Main"

@@ -13,14 +13,14 @@
           "zmb_mapobject_index": -1
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Downstairs",
-          "link": "F1.NorthDoor.North"
+          "entrance": "F1.NorthDoor.North"
         },
         {
           "name": "East",
-          "link": "Mercay.MercayTown.Main.Grotto"
+          "entrance": "Mercay.MercayTown.Main.Grotto"
         }
       ]
     }

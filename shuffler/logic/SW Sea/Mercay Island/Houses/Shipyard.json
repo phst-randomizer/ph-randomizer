@@ -13,10 +13,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main.Shipyard"
+          "entrance": "MercayTown.Main.Shipyard"
         }
       ]
     }

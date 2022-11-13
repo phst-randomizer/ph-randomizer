@@ -27,46 +27,46 @@
           "zmb_mapobject_index": 98
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Grotto",
-          "link": "MercayGrotto.F2.EastExit.East"
+          "entrance": "MercayGrotto.F2.EastExit.East"
         },
         {
           "name": "Tavern",
-          "link": "Tavern.Main.Outside"
+          "entrance": "Tavern.Main.Outside"
         },
         {
           "name": "Shop",
-          "link": "MercayShop.Main.Outside"
+          "entrance": "MercayShop.Main.Outside"
         },
         {
           "name": "Shipyard",
-          "link": "Shipyard.Main.Outside"
+          "entrance": "Shipyard.Main.Outside"
         },
         {
           "name": "House",
-          "link": "MercayHouse.Main.Outside"
+          "entrance": "MercayHouse.Main.Outside"
         },
         {
           "name": "TreasureSelling",
-          "link": "TreasureSelling.Main.Outside"
+          "entrance": "TreasureSelling.Main.Outside"
         },
         {
           "name": "Boat",
-          "link": "Sea.SW.Mercay.MercayPort"
+          "entrance": "Sea.SW.Mercay.MercayPort"
         },
         {
           "name": "West",
-          "link": "OutsideOshus.East.East"
+          "entrance": "OutsideOshus.East.East"
         },
         {
           "name": "NorthMain",
-          "link": "AboveMercayTown.Main.South"
+          "entrance": "AboveMercayTown.Main.South"
         },
         {
           "name": "NorthLedge",
-          "link": "AboveMercayTown.Ledge.SouthLedge"
+          "entrance": "AboveMercayTown.Ledge.SouthLedge"
         }
       ]
     }

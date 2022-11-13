@@ -20,14 +20,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToDungeon",
-          "link": "MutohTemple.B3.Main.ToBoss"
+          "entrance": "MutohTemple.B3.Main.ToBoss"
         },
         {
           "name": "ToAquanineRoom",
-          "link": "MutohTemple.B4.Main.ToBoss"
+          "entrance": "MutohTemple.B4.Main.ToBoss"
         }
       ]
     }

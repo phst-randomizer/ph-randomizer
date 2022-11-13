@@ -4,10 +4,10 @@
   "rooms": [
     {
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB13",
-          "link": "B13.DefeatPhantom.ToBridgeDoor"
+          "entrance": "B13.DefeatPhantom.ToBridgeDoor"
         }
       ],
       "name": "BridgeRoom"

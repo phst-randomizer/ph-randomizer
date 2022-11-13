@@ -12,30 +12,30 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "Mercay.PathToToTOK.Main.ToTOK"
+          "entrance": "Mercay.PathToToTOK.Main.ToTOK"
         },
         {
           "name": "Entrance",
-          "link": "TempleOfTheOceanKing.F1.Lower.Exit"
+          "entrance": "TempleOfTheOceanKing.F1.Lower.Exit"
         },
         {
           "name": "B3BlueWarp",
-          "link": "TempleOfTheOceanKing.B3ChartRoom.Main.BlueWarp"
+          "entrance": "TempleOfTheOceanKing.B3ChartRoom.Main.BlueWarp"
         },
         {
           "name": "B6YellowWarp",
-          "link": "TempleOfTheOceanKing.B6YellowWarp.Main.YellowWarp"
+          "entrance": "TempleOfTheOceanKing.B6YellowWarp.Main.YellowWarp"
         },
         {
           "name": "B9BlueWarp",
-          "link": "TempleOfTheOceanKing.B9ChartRoom.Main.BlueWarp"
+          "entrance": "TempleOfTheOceanKing.B9ChartRoom.Main.BlueWarp"
         },
         {
           "name": "B13BlueWarp",
-          "link": "TempleOfTheOceanKing.B13.Main.BlueWarp"
+          "entrance": "TempleOfTheOceanKing.B13.Main.BlueWarp"
         }
       ],
       "name": "Main"

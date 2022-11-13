@@ -5,10 +5,10 @@
     {
       "name": "NyaveBoat",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Sea.SW.Boat.BoardBoat"
+          "entrance": "Sea.SW.Boat.BoardBoat"
         }
       ]
     }

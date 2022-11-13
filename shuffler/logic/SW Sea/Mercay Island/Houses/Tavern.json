@@ -4,10 +4,10 @@
   "rooms": [
     {
       "name": "Tavern",
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "MercayTown.Main.Tavern"
+          "entrance": "MercayTown.Main.Tavern"
         }
       ]
     }

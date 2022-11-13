@@ -13,14 +13,14 @@
           "zmb_file_path": "Map/isle_small3/map00.bin/zmb/isle_small3_00.zmb"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Cave",
-          "link": "Cave.Main.Entrance"
+          "entrance": "Cave.Main.Entrance"
         },
         {
           "name": "Boat",
-          "link": "Sea.NW.Uncharted.UnchartedPort"
+          "entrance": "Sea.NW.Uncharted.UnchartedPort"
         }
       ]
     },
@@ -35,10 +35,10 @@
           "bmg_instruction_index": 108
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
-          "link": "Main.Main.Cave"
+          "entrance": "Main.Main.Cave"
         }
       ]
     }

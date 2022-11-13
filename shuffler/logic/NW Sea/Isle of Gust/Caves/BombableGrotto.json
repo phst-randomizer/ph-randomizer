@@ -13,10 +13,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Gust.LowerIsland.BeforeCave.ToBombableGrotto"
+          "entrance": "Gust.LowerIsland.BeforeCave.ToBombableGrotto"
         }
       ]
     }

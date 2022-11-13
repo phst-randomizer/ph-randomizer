@@ -13,10 +13,10 @@
           "zmb_mapobject_index": 1
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "OutsideOshus.Outside.OshusCave"
+          "entrance": "OutsideOshus.Outside.OshusCave"
         }
       ]
     }

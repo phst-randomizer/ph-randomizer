@@ -16,14 +16,14 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToDungeon",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToCrimsonineRoom",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

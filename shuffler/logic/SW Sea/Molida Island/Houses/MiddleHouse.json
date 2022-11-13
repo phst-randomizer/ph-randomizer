@@ -12,10 +12,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "Molida.Town.Main.MiddleHouse"
+          "entrance": "Molida.Town.Main.MiddleHouse"
         }
       ],
       "name": "MiddleHouse"

@@ -33,18 +33,18 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB9ChartRoom",
-          "link": "B9ChartRoom.Main.ToB9"
+          "entrance": "B9ChartRoom.Main.ToB9"
         },
         {
           "name": "ToB8Left",
-          "link": "B8.TopLeft.ToB9Left"
+          "entrance": "B8.TopLeft.ToB9Left"
         },
         {
           "name": "ToB8Right",
-          "link": "B8.TopRightDoor.ToB9Right"
+          "entrance": "B8.TopRightDoor.ToB9Right"
         }
       ],
       "name": "B9"

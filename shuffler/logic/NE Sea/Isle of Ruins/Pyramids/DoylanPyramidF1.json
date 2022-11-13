@@ -5,14 +5,14 @@
     {
       "name": "F1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "RuinsIsle.TopRight.Main.ToDoylanPyramid"
+          "entrance": "RuinsIsle.TopRight.Main.ToDoylanPyramid"
         },
         {
           "name": "ToF2",
-          "link": "F2.Main.ToF1"
+          "entrance": "F2.Main.ToF1"
         }
       ]
     }

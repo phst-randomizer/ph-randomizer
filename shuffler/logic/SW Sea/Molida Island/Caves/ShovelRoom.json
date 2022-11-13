@@ -12,10 +12,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Molida.CaveSystem.MainUp.BombableWall"
+          "entrance": "Molida.CaveSystem.MainUp.BombableWall"
         }
       ],
       "name": "ShovelRoom"

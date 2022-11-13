@@ -12,18 +12,18 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB12",
-          "link": "B12.AfterTriforce.ToB13"
+          "entrance": "B12.AfterTriforce.ToB13"
         },
         {
           "name": "ToBridgeRoom",
-          "link": "BridgeRoom.Main.ToB13"
+          "entrance": "BridgeRoom.Main.ToB13"
         },
         {
           "name": "BlueWarp",
-          "link": "TempleOfTheOceanKingLobby.Main.B13BlueWarp"
+          "entrance": "TempleOfTheOceanKingLobby.Main.B13BlueWarp"
         }
       ],
       "name": "B13"

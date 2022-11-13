@@ -26,14 +26,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToDungeon",
-          "link": "WindTemple.BeforeBoss.Main.ToBoss"
+          "entrance": "WindTemple.BeforeBoss.Main.ToBoss"
         },
         {
           "name": "AfterBoss",
-          "link": "GustIsle.UpperIsland.TempleFront.AfterBoss"
+          "entrance": "GustIsle.UpperIsland.TempleFront.AfterBoss"
         }
       ],
       "name": "Main"

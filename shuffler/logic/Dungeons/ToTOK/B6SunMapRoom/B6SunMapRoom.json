@@ -4,10 +4,10 @@
   "rooms": [
     {
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB6",
-          "link": "B6.SymbolDoor.Hourglass"
+          "entrance": "B6.SymbolDoor.Hourglass"
         }
       ],
       "name": "B6SunMapRoom"

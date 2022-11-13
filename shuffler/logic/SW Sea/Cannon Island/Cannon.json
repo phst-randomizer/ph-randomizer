@@ -20,39 +20,39 @@
           "zmb_mapobject_index": 185
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SW.CannonIsle.CannonIslePort"
+          "entrance": "Sea.SW.CannonIsle.CannonIslePort"
         },
         {
           "name": "HouseLeft",
-          "link": "EddoHouseLeft.Main.Exit"
+          "entrance": "EddoHouseLeft.Main.Exit"
         },
         {
           "name": "GrottoEntry",
-          "link": "CannonGrotto.Main.Main.Down"
+          "entrance": "CannonGrotto.Main.Main.Down"
         },
         {
           "name": "GrottoStairs",
-          "link": "CannonGrotto.Main.Main.Stairs"
+          "entrance": "CannonGrotto.Main.Main.Stairs"
         },
         {
           "name": "HouseRight",
-          "link": "EddoHouseRight.Main.Exit"
+          "entrance": "EddoHouseRight.Main.Exit"
         }
       ]
     },
     {
       "name": "EddoHouseLeft",
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Outside.Port.HouseLeft"
+          "entrance": "Outside.Port.HouseLeft"
         },
         {
           "name": "ToRight",
-          "link": "EddoHouseRight.Main.ToLeft"
+          "entrance": "EddoHouseRight.Main.ToLeft"
         }
       ]
     },
@@ -74,14 +74,14 @@
           "bmg_instruction_index": 73
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Outside.BombGarden.HouseRight"
+          "entrance": "Outside.BombGarden.HouseRight"
         },
         {
           "name": "ToLeft",
-          "link": "EddoHouseLeft.ToEddo.ToRight"
+          "entrance": "EddoHouseLeft.ToEddo.ToRight"
         }
       ]
     }

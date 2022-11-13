@@ -16,10 +16,10 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Sea.NE.Boat.BoardBoat"
+          "entrance": "Sea.NE.Boat.BoardBoat"
         }
       ]
     }

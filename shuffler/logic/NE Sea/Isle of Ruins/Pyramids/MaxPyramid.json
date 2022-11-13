@@ -5,10 +5,10 @@
     {
       "name": "F1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "RuinsIsle.BottomRight.Main.ToMaxPyramid"
+          "entrance": "RuinsIsle.BottomRight.Main.ToMaxPyramid"
         }
       ]
     }

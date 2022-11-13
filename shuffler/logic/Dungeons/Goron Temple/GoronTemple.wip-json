@@ -16,40 +16,40 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "RightBombableWall",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "LeftBombableWall",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB1Shortcut",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "BombableF1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "LeftDoor",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "RightDoor",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB1",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -67,18 +67,18 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToBombableF1",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToF1Shortcut",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB2",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -96,18 +96,18 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB3",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB3BossKey",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -120,28 +120,28 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2Right",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB4",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "B4",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB3",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToBoss",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -154,10 +154,10 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoss",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

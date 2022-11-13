@@ -13,14 +13,14 @@
           "zmb_mapobject_index": 32
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Down",
-          "link": "Cannon.Outside.AfterDoor.GrottoEntry"
+          "entrance": "Cannon.Outside.AfterDoor.GrottoEntry"
         },
         {
           "name": "Stairs",
-          "link": "Cannon.Outside.BombGarden.GrottoStairs"
+          "entrance": "Cannon.Outside.BombGarden.GrottoStairs"
         }
       ]
     }

@@ -4,18 +4,18 @@
   "rooms": [
     {
       "name": "PathToToTOK",
-      "doors": [
+      "exits": [
         {
           "name": "East",
-          "link": "AboveMercayTown.Main.West"
+          "entrance": "AboveMercayTown.Main.West"
         },
         {
           "name": "ToTOK",
-          "link": "TempleOfTheOceanKingLobby.Main.Main.Outside"
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.Outside"
         },
         {
           "name": "Grotto",
-          "link": "GrottoToLedge.Up.Left"
+          "entrance": "GrottoToLedge.Up.Left"
         }
       ]
     }

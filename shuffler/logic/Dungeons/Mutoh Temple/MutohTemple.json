@@ -6,30 +6,30 @@
 
       "name": "F1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "RuinsIsle.TopRight.PyramidEntrance.MutohTemple"
+          "entrance": "RuinsIsle.TopRight.PyramidEntrance.MutohTemple"
         },
         {
           "name": "BlueWarpExit",
-          "link": "B3.Main.BlueWarp"
+          "entrance": "B3.Main.BlueWarp"
         },
         {
           "name": "ToB1Top",
-          "link": "B1.Up.ToF1Top"
+          "entrance": "B1.Up.ToF1Top"
         },
         {
           "name": "ToF2",
-          "link": "F2.Right.ToF1"
+          "entrance": "F2.Right.ToF1"
         },
         {
           "name": "ToB1Middle",
-          "link": "B1.MiddleStairsF1.ToF1Middle"
+          "entrance": "B1.MiddleStairsF1.ToF1Middle"
         },
         {
           "name": "ToB1Bottom",
-          "link": "B1.BottomStairsF1.ToF1Bottom"
+          "entrance": "B1.BottomStairsF1.ToF1Bottom"
         }
       ]
     },
@@ -44,14 +44,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1",
-          "link": "F1.Middle.ToF2"
+          "entrance": "F1.Middle.ToF2"
         },
         {
           "name": "ToF3",
-          "link": "F3.Stairs.ToF2"
+          "entrance": "F3.Stairs.ToF2"
         }
       ]
     },
@@ -66,10 +66,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF2",
-          "link": "F2.Bottom.ToF3"
+          "entrance": "F2.Bottom.ToF3"
         }
       ]
     },
@@ -98,38 +98,38 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1Top",
-          "link": "F1.Up.ToB1Top"
+          "entrance": "F1.Up.ToB1Top"
         },
         {
           "name": "ToF1Middle",
-          "link": "F1.HammeredPlate.ToB1Middle"
+          "entrance": "F1.HammeredPlate.ToB1Middle"
         },
         {
           "name": "ToF1Bottom",
-          "link": "F1.Middle.ToB1Bottom"
+          "entrance": "F1.Middle.ToB1Bottom"
         },
         {
           "name": "ToB2TopLeft",
-          "link": "B2.TopLeftStairs.ToB1TopLeft"
+          "entrance": "B2.TopLeftStairs.ToB1TopLeft"
         },
         {
           "name": "ToB2Leftmost",
-          "link": "B2.Left.ToB1Leftmost"
+          "entrance": "B2.Left.ToB1Leftmost"
         },
         {
           "name": "ToB2BottomLeft",
-          "link": "B2.Bottom.ToB1BottomLeft"
+          "entrance": "B2.Bottom.ToB1BottomLeft"
         },
         {
           "name": "ToB2BottomRight",
-          "link": "B2.StairsBottomRight.ToB1BottomRight"
+          "entrance": "B2.StairsBottomRight.ToB1BottomRight"
         },
         {
           "name": "ToB2TopRight",
-          "link": "B2.TopRight.ToB1TopRight"
+          "entrance": "B2.TopRight.ToB1TopRight"
         }
       ]
     },
@@ -151,30 +151,30 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1TopLeft",
-          "link": "B1.TopLeftStairs.ToB2TopLeft"
+          "entrance": "B1.TopLeftStairs.ToB2TopLeft"
         },
         {
           "name": "ToB1Leftmost",
-          "link": "B1.StairsToB2Leftmost.ToB2Leftmost"
+          "entrance": "B1.StairsToB2Leftmost.ToB2Leftmost"
         },
         {
           "name": "ToB1BottomLeft",
-          "link": "B1.BottomUnderwater.ToB2BottomLeft"
+          "entrance": "B1.BottomUnderwater.ToB2BottomLeft"
         },
         {
           "name": "ToB1BottomRight",
-          "link": "B1.BottomRightUnderwater.ToB2BottomRight"
+          "entrance": "B1.BottomRightUnderwater.ToB2BottomRight"
         },
         {
           "name": "ToB1TopRight",
-          "link": "B1.TopRightUnderwater.ToB2TopRight"
+          "entrance": "B1.TopRightUnderwater.ToB2TopRight"
         },
         {
           "name": "ToB3",
-          "link": "B3.Stairs.ToB2"
+          "entrance": "B3.Stairs.ToB2"
         }
       ]
     },
@@ -189,18 +189,18 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2",
-          "link": "B2.ToBoss.ToB3"
+          "entrance": "B2.ToBoss.ToB3"
         },
         {
           "name": "ToBoss",
-          "link": "EoxBossRoom.Main.Fight.ToDungeon"
+          "entrance": "EoxBossRoom.Main.Fight.ToDungeon"
         },
         {
           "name": "BlueWarp",
-          "link": "F1.Entrance.BlueWarpExit"
+          "entrance": "F1.Entrance.BlueWarpExit"
         }
       ]
     },
@@ -215,14 +215,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToBoss",
-          "link": "EoxBossRoom.Main.BossDefeat.ToAquanineRoom"
+          "entrance": "EoxBossRoom.Main.BossDefeat.ToAquanineRoom"
         },
         {
           "name": "BlueWarp",
-          "link": "RuinsIsle.TopRight.PyramidEntrance.BlueWarpExit"
+          "entrance": "RuinsIsle.TopRight.PyramidEntrance.BlueWarpExit"
         }
       ]
     }

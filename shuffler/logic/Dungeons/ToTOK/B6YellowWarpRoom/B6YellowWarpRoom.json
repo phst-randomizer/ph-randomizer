@@ -4,18 +4,18 @@
   "rooms": [
     {
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB6",
-          "link": "B6.SymbolDoor.Triforce"
+          "entrance": "B6.SymbolDoor.Triforce"
         },
         {
           "name": "ToB7",
-          "link": "B7.Left.ToB6YellowWarp"
+          "entrance": "B7.Left.ToB6YellowWarp"
         },
         {
           "name": "YellowWarp",
-          "link": "TempleOfTheOceanKingLobby.Main.Main.B6YellowWarp"
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.B6YellowWarp"
         }
       ],
       "name": "B6YellowWarp"

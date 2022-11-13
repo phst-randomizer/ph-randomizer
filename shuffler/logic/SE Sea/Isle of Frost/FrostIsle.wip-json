@@ -16,60 +16,60 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
-          "link": "Sea.SE.Frost.FrostPort"
+          "entrance": "Sea.SE.Frost.FrostPort"
         },
         {
           "name": "SmartAnoukiHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "SensitiveAnoukiHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ChiefHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToCave",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "AnoukiChiefHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "AnoukiRedCauldronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "AnoukiBrownCauldronHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -102,108 +102,108 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToSouth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "GumoHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ArooHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "MazoHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "DoboHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "KumuHouse",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "FofoHouse",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "GumoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "ArooHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "MazoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "DoboHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "KumuHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "FofoHouse",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "IceCave",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Left",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "Right",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -231,44 +231,44 @@
           "contents": ""
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToCave",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorthLedgeRight",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorthLedgeLeft",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToNorth",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
     {
       "name": "DungeonEntrance",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToSouth",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToSouthLedgeRight",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToSouthLedgeLeft",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToDungeon",
-          "link": ""
+          "entrance": ""
         }
       ]
     }

@@ -19,14 +19,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "Mercay.PathToToTOK.Main.ToTOK"
+          "entrance": "Mercay.PathToToTOK.Main.ToTOK"
         },
         {
           "name": "ToB1",
-          "link": "TempleOfTheOceanKingLobby.Main.Main.Outside"
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.Outside"
         }
       ],
       "name": "F1"

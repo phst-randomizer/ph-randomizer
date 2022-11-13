@@ -13,26 +13,26 @@
           "bmg_instruction_index": 135
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "North",
-          "link": "EnemyBamboo.South.South"
+          "entrance": "EnemyBamboo.South.South"
         },
         {
           "name": "OshussHouse",
-          "link": "OshussHouse.Main.Outside"
+          "entrance": "OshussHouse.Main.Outside"
         },
         {
           "name": "RockHouse",
-          "link": "RockHouse.Main.Outside"
+          "entrance": "RockHouse.Main.Outside"
         },
         {
           "name": "East",
-          "link": "MercayTown.Main.West"
+          "entrance": "MercayTown.Main.West"
         },
         {
           "name": "OshusCave",
-          "link": "OshusCave.Entrance.Exit"
+          "entrance": "OshusCave.Entrance.Exit"
         }
       ]
     }

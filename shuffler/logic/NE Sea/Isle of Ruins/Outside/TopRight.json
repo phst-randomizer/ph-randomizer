@@ -34,50 +34,50 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToWestBottom",
-          "link": "TopLeft.AboveMaze.ToNorthRight"
+          "entrance": "TopLeft.AboveMaze.ToNorthRight"
         },
         {
           "name": "ToWestTop",
-          "link": "TopLeft.FromEast.ToEastTop"
+          "entrance": "TopLeft.FromEast.ToEastTop"
         },
         {
           "name": "ToDoylanPyramid",
-          "link": "DoylanPyramid.F1.Main.Exit"
+          "entrance": "DoylanPyramid.F1.Main.Exit"
         },
         {
           "name": "ToWestUnderwaterTop",
-          "link": "TopLeft.NearPyramidUnderwater.ToEastUnderwaterTop"
+          "entrance": "TopLeft.NearPyramidUnderwater.ToEastUnderwaterTop"
         },
         {
           "name": "ToWestUnderwaterBottom",
-          "link": "TopLeft.AfterBremeurUnderwater.ToEastUnderwaterBottom"
+          "entrance": "TopLeft.AfterBremeurUnderwater.ToEastUnderwaterBottom"
         },
         {
           "name": "ToSouthLeftmost",
-          "link": "BottomRight.Main.ToNorthLeftmost"
+          "entrance": "BottomRight.Main.ToNorthLeftmost"
         },
         {
           "name": "MutohTemple",
-          "link": "MutohTemple.F1.Entrance.Exit"
+          "entrance": "MutohTemple.F1.Entrance.Exit"
         },
         {
           "name": "BlueWarpExit",
-          "link": "MutohTemple.B4.Main.BlueWarp"
+          "entrance": "MutohTemple.B4.Main.BlueWarp"
         },
         {
           "name": "ToSouthMiddle",
-          "link": "BottomRight.Main.ToNorthMiddle"
+          "entrance": "BottomRight.Main.ToNorthMiddle"
         },
         {
           "name": "ToSouthRight",
-          "link": "BottomRight.FromNorthRight.ToNorthRight"
+          "entrance": "BottomRight.FromNorthRight.ToNorthRight"
         },
         {
           "name": "ToSouthCorridor",
-          "link": "BottomRight.Corridor.ToNorthCorridor"
+          "entrance": "BottomRight.Corridor.ToNorthCorridor"
         }
       ]
     }

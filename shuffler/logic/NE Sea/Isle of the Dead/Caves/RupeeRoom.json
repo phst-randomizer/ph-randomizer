@@ -13,10 +13,10 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Exit",
-          "link": "GraveyardCave.BombableWall.BombableDoor"
+          "entrance": "GraveyardCave.BombableWall.BombableDoor"
         }
       ]
     }

@@ -13,22 +13,22 @@
           "zmb_mapobject_index": 29
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Entrance",
-          "link": "GustIsle.AfterCave.WindTempleEntrance.WindTemple"
+          "entrance": "GustIsle.AfterCave.WindTempleEntrance.WindTemple"
         },
         {
           "name": "ToB1BeforeArena",
-          "link": "B1.BeforeArena.ToF1BossKeyHoleRoom"
+          "entrance": "B1.BeforeArena.ToF1BossKeyHoleRoom"
         },
         {
           "name": "ToBoss",
-          "link": "BeforeBoss.Main.ToF1"
+          "entrance": "BeforeBoss.Main.ToF1"
         },
         {
           "name": "ToB1TopRightStairs",
-          "link": "B1.TopRight.ToF1MiddleRightStairs"
+          "entrance": "B1.TopRight.ToF1MiddleRightStairs"
         }
       ]
     },
@@ -55,30 +55,30 @@
           "contents": "small_key"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1BossKeyHoleRoom",
-          "link": "F1.BossKeyHoleRoom.ToB1BeforeArena"
+          "entrance": "F1.BossKeyHoleRoom.ToB1BeforeArena"
         },
         {
           "name": "ToB2BottomRight",
-          "link": "B2.BottomRight.ToB1BottomRight"
+          "entrance": "B2.BottomRight.ToB1BottomRight"
         },
         {
           "name": "ToB2TopRoomStairs",
-          "link": "B2TopRoom.Stairs.ToB1TopMiddle"
+          "entrance": "B2TopRoom.Stairs.ToB1TopMiddle"
         },
         {
           "name": "ToB2BottomLeft",
-          "link": "B2.BottomLeftStairs.ToB1BottomLeft"
+          "entrance": "B2.BottomLeftStairs.ToB1BottomLeft"
         },
         {
           "name": "ToB2LeftRoomStairs",
-          "link": "B2LeftRoom.Top.ToB1TopLeftStairs"
+          "entrance": "B2LeftRoom.Top.ToB1TopLeftStairs"
         },
         {
           "name": "ToF1MiddleRightStairs",
-          "link": "F1.MiddleRight.ToB1TopRightStairs"
+          "entrance": "F1.MiddleRight.ToB1TopRightStairs"
         }
       ]
     },
@@ -100,26 +100,26 @@
           "zmb_mapobject_index": 7
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1BottomRight",
-          "link": "B1.BottomRightStairs.ToB2BottomRight"
+          "entrance": "B1.BottomRightStairs.ToB2BottomRight"
         },
         {
           "name": "ToB1BottomLeft",
-          "link": "B1.BottomLeftPlatform.ToB2BottomLeft"
+          "entrance": "B1.BottomLeftPlatform.ToB2BottomLeft"
         },
         {
           "name": "ToB2TopRoom",
-          "link": "B2TopRoom.Main.ToB2Main"
+          "entrance": "B2TopRoom.Main.ToB2Main"
         },
         {
           "name": "ToB2TopRoomHiddenArea",
-          "link": "B2TopRoom.HiddenArea.ToB2MainBombWall"
+          "entrance": "B2TopRoom.HiddenArea.ToB2MainBombWall"
         },
         {
           "name": "ToB2LeftRoom",
-          "link": "B2LeftRoom.Bottom.ToB2Main"
+          "entrance": "B2LeftRoom.Bottom.ToB2Main"
         }
       ]
     },
@@ -132,46 +132,46 @@
           "contents": "big_green_rupee"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2Main",
-          "link": "B2.TopDoor.ToB2TopRoom"
+          "entrance": "B2.TopDoor.ToB2TopRoom"
         },
         {
           "name": "ToB1TopMiddle",
-          "link": "B1.TopMiddlePlatform.ToB2TopRoomStairs"
+          "entrance": "B1.TopMiddlePlatform.ToB2TopRoomStairs"
         },
         {
           "name": "ToB2MainBombWall",
-          "link": "B2.TopBombWall.ToB2TopRoomHiddenArea"
+          "entrance": "B2.TopBombWall.ToB2TopRoomHiddenArea"
         }
       ]
     },
     {
       "name": "B2LeftRoom",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToB2Main",
-          "link": "B2.LeftBombWall.ToB2LeftRoom"
+          "entrance": "B2.LeftBombWall.ToB2LeftRoom"
         },
         {
           "name": "ToB1TopLeftStairs",
-          "link": "B1.TopLeft.ToB2LeftRoomStairs"
+          "entrance": "B1.TopLeft.ToB2LeftRoomStairs"
         }
       ]
     },
     {
       "name": "BeforeBoss",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1",
-          "link": "F1.BossEntrance.ToBoss"
+          "entrance": "F1.BossEntrance.ToBoss"
         },
         {
           "name": "ToBoss",
-          "link": "CyclokBossRoom.Main.Fight.ToDungeon"
+          "entrance": "CyclokBossRoom.Main.Fight.ToDungeon"
         }
       ]
     }

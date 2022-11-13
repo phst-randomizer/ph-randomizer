@@ -20,14 +20,14 @@
           "zmb_file_path": "Map/isle_wizard/map00.bin/zmb/isle_wizard_00.zmb"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ZauzHouse",
-          "link": "ZauzHouse.Main.Outside"
+          "entrance": "ZauzHouse.Main.Outside"
         },
         {
           "name": "Boat",
-          "link": "Sea.NW.Zauz.ZauzPort"
+          "entrance": "Sea.NW.Zauz.ZauzPort"
         }
       ]
     },
@@ -42,10 +42,10 @@
           "bmg_instruction_index": -1
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "Outside.Main.ZauzHouse"
+          "entrance": "Outside.Main.ZauzHouse"
         }
       ]
     }

@@ -13,18 +13,18 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB3Ledge",
-          "link": "B3.Ledge.ToChartRoomShortcut"
+          "entrance": "B3.Ledge.ToChartRoomShortcut"
         },
         {
           "name": "ToB3Main",
-          "link": "B3.DoorToChartRoom.ToChartRoom"
+          "entrance": "B3.DoorToChartRoom.ToChartRoom"
         },
         {
           "name": "ToB4",
-          "link": "B4.TopRight.ToB3"
+          "entrance": "B4.TopRight.ToB3"
         }
       ]
     }

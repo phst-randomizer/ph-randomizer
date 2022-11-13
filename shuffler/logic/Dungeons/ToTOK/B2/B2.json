@@ -25,14 +25,14 @@
           "zmb_mapobject_index": 0
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToB1",
-          "link": "B1.Downstairs.ToB2"
+          "entrance": "B1.Downstairs.ToB2"
         },
         {
           "name": "ToB3",
-          "link": "B3.Main.ToB2"
+          "entrance": "B3.Main.ToB2"
         }
       ]
     }

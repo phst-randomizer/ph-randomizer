@@ -20,22 +20,22 @@
           "zmb_mapobject_index": 68
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "Outside",
-          "link": "Ember.EmberRight.TempleFront.EmberTemple"
+          "entrance": "Ember.EmberRight.TempleFront.EmberTemple"
         },
         {
           "name": "F2Middle",
-          "link": "F2.TopRightStairs.ToF1Middle"
+          "entrance": "F2.TopRightStairs.ToF1Middle"
         },
         {
           "name": "ToF2TopLeft",
-          "link": "F2.TopLeft.ToF1TopLeft"
+          "entrance": "F2.TopLeft.ToF1TopLeft"
         },
         {
           "name": "ToF2BottomLeft",
-          "link": "F2.BottomLeft.ToF1BottomLeft"
+          "entrance": "F2.BottomLeft.ToF1BottomLeft"
         }
       ]
     },
@@ -62,22 +62,22 @@
           "contents": "small_key"
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF1BottomLeft",
-          "link": "F1.StairsBottomLeft.ToF2BottomLeft"
+          "entrance": "F1.StairsBottomLeft.ToF2BottomLeft"
         },
         {
           "name": "ToF1Middle",
-          "link": "F1.StairsMiddle.F2Middle"
+          "entrance": "F1.StairsMiddle.F2Middle"
         },
         {
           "name": "ToF1TopLeft",
-          "link": "F1.TopLeft.ToF2TopLeft"
+          "entrance": "F1.TopLeft.ToF2TopLeft"
         },
         {
           "name": "ToF3",
-          "link": "F3.RightSide.ToF2"
+          "entrance": "F3.RightSide.ToF2"
         }
       ]
     },
@@ -97,28 +97,28 @@
           "zmb_mapobject_index": 15
         }
       ],
-      "doors": [
+      "exits": [
         {
           "name": "ToF2",
-          "link": "F2.StairsBottomRight.ToF3"
+          "entrance": "F2.StairsBottomRight.ToF3"
         },
         {
           "name": "ToF4",
-          "link": "F4.Main.ToF3"
+          "entrance": "F4.Main.ToF3"
         }
       ]
     },
     {
       "name": "F4",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "ToF3",
-          "link": "F3.StairsBoss.ToF4"
+          "entrance": "F3.StairsBoss.ToF4"
         },
         {
           "name": "ToBoss",
-          "link": "BlaazBossRoom.Main.Fight.ToDungeon"
+          "entrance": "BlaazBossRoom.Main.Fight.ToDungeon"
         }
       ]
     }

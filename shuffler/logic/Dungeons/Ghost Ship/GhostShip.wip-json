@@ -5,14 +5,14 @@
     {
       "name": "F1",
       "chests": [],
-      "doors": [
+      "exits": [
         {
           "name": "Boat",
-          "link": ""
+          "entrance": ""
         },
         {
           "name": "ToB1",
-          "link": ""
+          "entrance": ""
         }
       ]
     },
@@ -25,7 +25,7 @@
           "contents": ""
         }
       ],
-      "doors": []
+      "exits": []
     }
   ]
 }
