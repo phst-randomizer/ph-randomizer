@@ -66,10 +66,10 @@ class Logic:
                 for exit in src_node.exits:
                     if not len(exit.link):
                         # TODO: make this throw an actual error once aux data is complete
-                        logging.warning(f'exit "{exit.name}" has no "link".')
+                        logging.error(f'exit "{exit.name}" has no "link".')
                         continue
                     if exit.link.split('.')[0] not in [r.area.name for r in self._logical_rooms]:
-                        logging.warning(
+                        logging.error(
                             f'entrance "{exit.link}" not found (no aux data exists for that area)'
                         )
                         continue
@@ -148,7 +148,7 @@ class Logic:
         try:
             return [area for area in self._aux_data if area.name == area_name][0]
         except IndexError:
-            logging.warning(f'Area {area_name} not found!')
+            logging.error(f'Area {area_name} not found!')
             return None
 
     def _get_room(self, area_name: str, room_name: str) -> Room | None:
@@ -161,7 +161,7 @@ class Logic:
                 if room.name == room_name
             ][0]
         except IndexError:
-            logging.warning(f'{area_name}: Room {area_name}.{room_name} not found!')
+            logging.error(f'{area_name}: Room {area_name}.{room_name} not found!')
             return None
 
     def _add_descriptor_to_node(
@@ -209,7 +209,7 @@ class Logic:
                     if new_exit.link.count('.') != 3:
                         # TODO: remove once aux data is complete
                         if not len(new_exit.link) or new_exit.link.lower() == 'todo':
-                            logging.warning(f'{node.name}: exit "{new_exit.name} has no link.')
+                            logging.error(f'{node.name}: exit "{new_exit.name} has no link.')
                             return
                         raise Exception(
                             f'{node.area}.{room.name}: ' f'Invalid exit link "{new_exit.link}"'
