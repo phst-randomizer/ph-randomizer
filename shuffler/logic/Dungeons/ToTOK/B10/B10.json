@@ -41,7 +41,29 @@
           "entrance": "B11.Main.ToB10"
         }
       ],
-      "name": "B10"
+      "name": "B10",
+      "enemies": [
+        {
+          "name": "GoldPhantomLeft",
+          "type": "gold_phantom"
+        },
+        {
+          "name": "GoldPhantomRight",
+          "type": "gold_phantom"
+        },
+        {
+          "name": "PhantomEye1",
+          "type": "phantom_eye"
+        },
+        {
+          "name": "PhantomEye2",
+          "type": "phantom_eye"
+        },
+        {
+          "name": "PhantomEye3",
+          "type": "phantom_eye"
+        }
+      ]
     }
   ]
 }

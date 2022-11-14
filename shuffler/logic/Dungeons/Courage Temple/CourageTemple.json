@@ -97,15 +97,15 @@
       "enemies": [
         {
           "name": "Moldorm1",
-          "type": ""
+          "type": "moldorm"
         },
         {
           "name": "Moldorm2",
-          "type": ""
+          "type": "modlorm"
         },
         {
           "name": "PolsVoice",
-          "type": ""
+          "type": "pols_voice"
         }
       ]
     },

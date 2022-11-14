@@ -30,39 +30,39 @@
       "enemies": [
         {
           "name": "BluePhantom1",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "BluePhantom2",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "BluePhantom3",
-          "type": ""
+          "type": "phantom"
         },
         {
-          "name": "RedPhantom1",
-          "type": ""
+          "name": "SwiftPhantom1",
+          "type": "swift_phantom"
         },
         {
-          "name": "RedPhantom2",
-          "type": ""
+          "name": "SwiftPhantom2",
+          "type": "swift_phantom"
         },
         {
-          "name": "RedPhantom3",
-          "type": ""
+          "name": "SwiftPhantom3",
+          "type": "swift_phantom"
         },
         {
           "name": "GoldPhantom1",
-          "type": ""
+          "type": "gold_phantom"
         },
         {
           "name": "GoldPhantom2",
-          "type": ""
+          "type": "gold_phantom"
         },
         {
           "name": "GoldPhantom3",
-          "type": ""
+          "type": "gold_phantom"
         }
       ]
     }

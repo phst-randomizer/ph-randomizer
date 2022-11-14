@@ -9,9 +9,9 @@ area TempleOfTheOceanKing:
       enemy BluePhantom1
       enemy BluePhantom2
       enemy BluePhantom3
-      enemy RedPhantom1
-      enemy RedPhantom2
-      enemy RedPhantom3
+      enemy SwiftPhantom1
+      enemy SwiftPhantom2
+      enemy SwiftPhantom3
       enemy GoldPhantom1
       enemy GoldPhantom2
       enemy GoldPhantom3

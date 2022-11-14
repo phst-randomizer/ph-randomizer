@@ -58,51 +58,51 @@
       "enemies": [
         {
           "name": "TreeStalfos1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "TreeStalfos2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "RupeeLikeRed",
-          "type": ""
+          "type": "red_rupee_like"
         },
         {
           "name": "PirateBlin1",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin2",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin3",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin4",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin5",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "Stalfos",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "PirateBlin6",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin7",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin8",
-          "type": ""
+          "type": "pirate_blin"
         }
       ]
     }

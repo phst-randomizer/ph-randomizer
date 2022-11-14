@@ -37,43 +37,43 @@
       "enemies": [
         {
           "name": "Rope1",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope2",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope3",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope4",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope5",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope6",
-          "type": ""
+          "type": "rope"
         },
         {
-          "name": "OrangeChuChu1",
-          "type": ""
+          "name": "YellowChuChu1",
+          "type": "yellow_chu_chu"
         },
         {
-          "name": "OrangeChuChu2",
-          "type": ""
+          "name": "YellowChuChu2",
+          "type": "yellow_chu_chu"
         },
         {
           "name": "RedChuChu1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu2",
-          "type": ""
+          "type": "red_chu_chu"
         }
       ]
     },

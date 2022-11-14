@@ -2,7 +2,7 @@ area TempleOfTheOceanKing:
   room B12:
     node Main:
       enemy GoldPhantom
-      enemy RedPhantom
+      enemy SwiftPhantom
       enemy BluePhantom
       enemy PhantomEyeLeft
       enemy PhantomEyeRight

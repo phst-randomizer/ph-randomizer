@@ -53,59 +53,59 @@
       "enemies": [
         {
           "name": "RupeeLikeRed",
-          "type": ""
+          "type": "red_rupee_like"
         },
         {
           "name": "RupeeLikeBlue1",
-          "type": ""
+          "type": "blue_rupee_like"
         },
         {
           "name": "RupeeLikeBlue2",
-          "type": ""
+          "type": "blue_rupee_like"
         },
         {
           "name": "StalfosMain1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain3",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain4",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain5",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain6",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain7",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosMain8",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosGraveyard1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosGraveyard2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosGraveyard3",
-          "type": ""
+          "type": "stalfos"
         }
       ]
     }

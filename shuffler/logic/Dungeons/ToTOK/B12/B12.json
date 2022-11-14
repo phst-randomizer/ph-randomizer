@@ -72,31 +72,31 @@
       "enemies": [
         {
           "name": "GoldPhantom",
-          "type": ""
+          "type": "gold_phantom"
         },
         {
-          "name": "RedPhantom",
-          "type": ""
+          "name": "SwiftPhantom",
+          "type": "swift_phantom"
         },
         {
           "name": "BluePhantom",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "PhantomEyeLeft",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "PhantomEyeRight",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "WizzrobeLeft",
-          "type": ""
+          "type": "wizzrobe"
         },
         {
           "name": "WizzrobeRight",
-          "type": ""
+          "type": "wizzrobe"
         }
       ]
     }

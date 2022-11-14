@@ -37,31 +37,31 @@
       "enemies": [
         {
           "name": "EnemyL1",
-          "type": ""
+          "type": "yellow_chuchu"
         },
         {
           "name": "EnemyL2",
-          "type": ""
+          "type": "yellow_chuchu"
         },
         {
           "name": "EnemyL3",
-          "type": ""
+          "type": "yellow_chuchu"
         },
         {
           "name": "EnemyL4",
-          "type": ""
+          "type": "yellow_chuchu"
         },
         {
           "name": "EnemyR1",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "EnemyR2",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "EnemyR3",
-          "type": ""
+          "type": "mini_blin"
         }
       ]
     }

@@ -27,7 +27,7 @@ area RuinsIsle:
       door ToNorthUnderwater
       enemy RupeeLikeGreen1
       enemy RupeeLikeGreen2
-      enemy RupeeLikeRed
+      enemy RupeeLikeRed4
       flag StarsOrder
 
     node ToNorthLeft:

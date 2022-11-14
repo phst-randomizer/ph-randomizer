@@ -37,19 +37,19 @@
       "enemies": [
         {
           "name": "Phantom1",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "Phantom2",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "PhantomEye1",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "PhantomEye2",
-          "type": ""
+          "type": "phantom_eye"
         }
       ]
     }

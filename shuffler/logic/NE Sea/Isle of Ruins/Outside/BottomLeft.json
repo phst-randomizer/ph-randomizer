@@ -42,35 +42,35 @@
       "enemies": [
         {
           "name": "RupeeLikeRed1",
-          "type": ""
+          "type": "red_rupee_like"
         },
         {
           "name": "RupeeLikeRed2",
-          "type": ""
+          "type": "red_rupee_like"
         },
         {
           "name": "RupeeLikeRed3",
-          "type": ""
+          "type": "red_rupee_like"
         },
         {
           "name": "RupeeLikeBlue1",
-          "type": ""
+          "type": "blue_rupee_like"
         },
         {
           "name": "RupeeLikeBlue2",
-          "type": ""
+          "type": "blue_rupee_like"
         },
         {
           "name": "RupeeLikeGreen1",
-          "type": ""
+          "type": "green_rupee_like"
         },
         {
           "name": "RupeeLikeGreen2",
-          "type": ""
+          "type": "green_rupee_like"
         },
         {
-          "name": "RupeeLikeRed",
-          "type": ""
+          "name": "RupeeLikeRed4",
+          "type": "red_rupee_like"
         }
       ]
     }

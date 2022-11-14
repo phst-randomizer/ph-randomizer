@@ -6,7 +6,7 @@ area TempleOfTheOceanKing:
       enemy Wizzrobe2
       enemy Wizzrobe3
       enemy Wizzrobe4
-      enemy RedPhantom
+      enemy SwiftPhantom
 
     node TopLeft:
       door ToB8Left

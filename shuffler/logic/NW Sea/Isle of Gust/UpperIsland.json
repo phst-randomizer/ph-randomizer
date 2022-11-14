@@ -49,15 +49,15 @@
       "enemies": [
         {
           "name": "RedChuChu1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu3",
-          "type": ""
+          "type": "red_chu_chu"
         }
       ]
     }

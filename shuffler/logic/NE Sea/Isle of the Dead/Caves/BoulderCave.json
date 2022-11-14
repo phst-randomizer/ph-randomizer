@@ -22,27 +22,27 @@
       "enemies": [
         {
           "name": "Keese1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese3",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese4",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese5",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese6",
-          "type": ""
+          "type": "keese"
         }
       ]
     }

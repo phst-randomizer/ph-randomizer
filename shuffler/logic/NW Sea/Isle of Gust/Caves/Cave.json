@@ -29,6 +29,56 @@
           "name": "RightDoor",
           "entrance": "Gust.LowerIsland.AfterCave.ToCaveRight"
         }
+      ],
+      "enemies": [
+        {
+          "name": "MiniblinLeft1",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinLeft1",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena1",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena2",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena3",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena4",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena5",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena6",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena7",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena8",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena9",
+          "type": "mini_blin"
+        },
+        {
+          "name": "MiniblinArena10",
+          "type": "mini_blin"
+        }
       ]
     }
   ]

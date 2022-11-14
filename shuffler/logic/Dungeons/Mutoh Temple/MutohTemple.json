@@ -34,47 +34,47 @@
       "enemies": [
         {
           "name": "Keese1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese3",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese4",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "StalfosRight1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosRight2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosLeft1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosLeft2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Terrorpin1",
-          "type": ""
+          "type": "terrorpin"
         },
         {
           "name": "Terrorpin2",
-          "type": ""
+          "type": "terrorpin"
         },
         {
           "name": "Terrorpin3",
-          "type": ""
+          "type": "terrorpin"
         }
       ]
     },
@@ -179,20 +179,20 @@
       ],
       "enemies": [
         {
-          "name": "RedStalfos1",
-          "type": ""
+          "name": "StalfosWarrior1",
+          "type": "red_stalfos"
         },
         {
-          "name": "RedStalfos2",
-          "type": ""
+          "name": "StalfosWarrior2",
+          "type": "red_stalfos"
         },
         {
-          "name": "RedStalfosArena1",
-          "type": ""
+          "name": "StalfosWarriorArena1",
+          "type": "red_stalfos"
         },
         {
-          "name": "RedStalfosArena2",
-          "type": ""
+          "name": "StalfosWarriorArena2",
+          "type": "red_stalfos"
         }
       ]
     },

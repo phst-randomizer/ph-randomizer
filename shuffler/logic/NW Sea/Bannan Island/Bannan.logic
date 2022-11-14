@@ -11,8 +11,8 @@ area Bannan:
       enemy Rope4
       enemy Rope5
       enemy Rope6
-      enemy OrangeChuChu1
-      enemy OrangeChuChu2
+      enemy YellowChuChu1
+      enemy YellowChuChu2
       enemy RedChuChu1
       enemy RedChuChu2
 
@@ -23,7 +23,7 @@ area Bannan:
       chest IslandChest
 
     Main <-> Island: item GrapplingHook
-    Main <-> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated OrangeChuChu1 & defeated OrangeChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
+    Main <-> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated YellowChuChu1 & defeated YellowChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
 
   room OutsideRight:
     node Main:

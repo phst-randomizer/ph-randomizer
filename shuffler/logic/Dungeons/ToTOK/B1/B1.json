@@ -38,11 +38,11 @@
       "enemies": [
         {
           "name": "RightPhantom",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "LeftPhantom",
-          "type": ""
+          "type": "phantom"
         }
       ]
     }

@@ -107,7 +107,7 @@
       "enemies": [
         {
           "name": "GiantEyePlant",
-          "type": ""
+          "type": "giant_eye_plant"
         }
       ]
     },

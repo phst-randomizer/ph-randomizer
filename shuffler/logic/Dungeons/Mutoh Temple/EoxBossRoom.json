@@ -33,7 +33,7 @@
       "enemies": [
         {
           "name": "Eox",
-          "type": ""
+          "type": "eox"
         }
       ]
     }

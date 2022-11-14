@@ -18,7 +18,7 @@
       "enemies": [
         {
           "name": "Geozard",
-          "type": ""
+          "type": "geozard"
         }
       ]
     }

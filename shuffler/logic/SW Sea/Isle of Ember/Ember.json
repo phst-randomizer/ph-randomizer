@@ -147,27 +147,27 @@
       "enemies": [
         {
           "name": "Octorok1",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok2",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok3",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok4",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok5",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok6",
-          "type": ""
+          "type": "octorok"
         }
       ]
     },

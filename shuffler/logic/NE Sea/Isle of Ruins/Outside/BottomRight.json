@@ -34,47 +34,47 @@
       "enemies": [
         {
           "name": "Stalfos1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos3",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos4",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos5",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos6",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos7",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos8",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosRight1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "StalfosRight2",
-          "type": ""
+          "type": "stalfos"
         }
       ]
     }

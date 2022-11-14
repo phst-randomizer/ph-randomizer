@@ -63,11 +63,11 @@
       "enemies": [
         {
           "name": "Phantom",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "KeyPhantom",
-          "type": ""
+          "type": "phantom"
         }
       ]
     }

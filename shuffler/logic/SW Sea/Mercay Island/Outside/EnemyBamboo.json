@@ -16,16 +16,20 @@
       ],
       "enemies": [
         {
-          "name": "RedChuchuUp",
-          "type": ""
+          "name": "RedChuChuUp",
+          "type": "red_chu_chu"
         },
         {
-          "name": "RedChuchuLeft",
-          "type": ""
+          "name": "RedChuChuLeft",
+          "type": "red_chu_chu"
         },
         {
-          "name": "RedChuchuRight",
-          "type": ""
+          "name": "RedChuChuRight",
+          "type": "red_chu_chu"
+        },
+        {
+          "name": "RedChuChuRightmost",
+          "type": "red_chu_chu"
         }
       ]
     }

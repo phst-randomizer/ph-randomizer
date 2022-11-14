@@ -18,11 +18,11 @@
       "enemies": [
         {
           "name": "Keese1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese2",
-          "type": ""
+          "type": "keese"
         }
       ]
     }

@@ -26,55 +26,55 @@
       "enemies": [
         {
           "name": "KeyRat",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat1",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat2",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat3",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat4",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat5",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat6",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat7",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Keese1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese3",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese4",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese5",
-          "type": ""
+          "type": "keese"
         }
       ]
     }

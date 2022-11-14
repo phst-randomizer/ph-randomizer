@@ -47,12 +47,12 @@
       "name": "B7",
       "enemies": [
         {
-          "name": "RedPhantomLeft",
-          "type": ""
+          "name": "SwiftPhantomLeft",
+          "type": "swift_phantom"
         },
         {
-          "name": "RedPhantomRight",
-          "type": ""
+          "name": "SwiftPhantomRight",
+          "type": "swift_phantom"
         }
       ]
     }

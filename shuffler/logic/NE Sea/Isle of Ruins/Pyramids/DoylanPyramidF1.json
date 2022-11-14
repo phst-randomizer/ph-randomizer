@@ -18,11 +18,11 @@
       "enemies": [
         {
           "name": "Stalfos1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos2",
-          "type": ""
+          "type": "stalfos"
         }
       ]
     }

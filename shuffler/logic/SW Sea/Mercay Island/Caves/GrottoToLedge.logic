@@ -11,7 +11,7 @@ area Mercay:
       chest PowerGem
 
     node Down:
-      enemy ZoraWarrior
+      enemy Geozard
       door South
 
     Up -> Down: item Bow

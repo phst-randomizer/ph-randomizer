@@ -3,8 +3,8 @@ area TempleOfTheOceanKing:
     node Main:
       door ToB7BottomLeft
       door ToB7BottomRight
-      enemy RedPhantomLeft
-      enemy RedPhantomRight
+      enemy SwiftPhantomLeft
+      enemy SwiftPhantomRight
       enemy BluePhantom
 
     node PhantomDefeat:

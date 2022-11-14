@@ -40,63 +40,63 @@
       "enemies": [
         {
           "name": "RedChuchu1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchu2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchu3",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchu4",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchuLeft1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchuLeft2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchuRight1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchuRight2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuchuRight3",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "KeeseLeft1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeeseLeft2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeeseRight1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeeseRight2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeeseRight3",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeeseRight4",
-          "type": ""
+          "type": "keese"
         }
       ]
     }

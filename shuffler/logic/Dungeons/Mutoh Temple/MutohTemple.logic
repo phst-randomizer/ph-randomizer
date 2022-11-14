@@ -2,7 +2,7 @@ area MutohTemple:
   room F1:
     node Entrance:
       gain WaterUp
-      exit BlueWarpExit
+      entrance BlueWarpExit
       door Exit
       enemy Keese1
       enemy Keese2
@@ -35,8 +35,8 @@ area MutohTemple:
   room B1:
     node Up:
       door ToF1Top
-      enemy RedStalfos1
-      enemy RedStalfos2
+      enemy StalfosWarrior1
+      enemy StalfosWarrior2
 
     node BottomStairsF1:
       door ToF1Bottom
@@ -55,8 +55,8 @@ area MutohTemple:
       gain WaterDown
 
     node TopLeftArena:
-      enemy RedStalfosArena1
-      enemy RedStalfosArena2
+      enemy StalfosWarriorArena1
+      enemy StalfosWarriorArena2
 
     node TopLeftStairs:
       door ToB2TopLeft
@@ -152,7 +152,7 @@ area MutohTemple:
 
     node MiddleUnderwater:
       chest Middle # big green rupee
-      enemy RedStalfosMiddle
+      enemy StalfosWarriorMiddle
 
     node MiddleUnderwaterHammer:
       chest MiddleHammer # small key
@@ -207,8 +207,8 @@ area MutohTemple:
   room F3:
     node Stairs:
       door ToF2
-      enemy RedStalfos1
-      enemy RedStalfos2
+      enemy StalfosWarrior1
+      enemy StalfosWarrior2
       enemy RupeeLikeGreen
 
     node Reward:
@@ -274,4 +274,4 @@ area MutohTemple:
     node Main:
       door ToBoss
       chest Aquanine
-      entrance BlueWarp
+      exit BlueWarp

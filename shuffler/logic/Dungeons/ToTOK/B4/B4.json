@@ -42,23 +42,23 @@
       "enemies": [
         {
           "name": "SpawnedPhantom",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "RightPhantomEye",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "LeftPhantomEye",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "TopPhantomEye",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "Phantom",
-          "type": ""
+          "type": "phantom"
         }
       ]
     }

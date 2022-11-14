@@ -38,11 +38,11 @@
       "enemies": [
         {
           "name": "StationaryPhantom",
-          "type": ""
+          "type": "phantom"
         },
         {
           "name": "PatrollingPhantom",
-          "type": ""
+          "type": "phantom"
         }
       ]
     }

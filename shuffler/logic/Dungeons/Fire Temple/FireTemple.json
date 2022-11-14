@@ -41,27 +41,27 @@
       "enemies": [
         {
           "name": "Keese1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese3",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Keese4",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Bubble1",
-          "type": ""
+          "type": "fire_bubble"
         },
         {
           "name": "Bubble2",
-          "type": ""
+          "type": "fire_bubble"
         }
       ]
     },
@@ -109,51 +109,51 @@
       "enemies": [
         {
           "name": "RedChuChu",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "YellowChuChu1",
-          "type": ""
+          "type": "yellow_chu_chu"
         },
         {
           "name": "YellowChuChu2",
-          "type": ""
+          "type": "yellow_chu_chu"
         },
         {
           "name": "Gel1",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "Gel2",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "Gel3",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "Gel4",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "Gel5",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "FireKeese1",
-          "type": ""
+          "type": "fire_keese"
         },
         {
           "name": "FireKeese2",
-          "type": ""
+          "type": "fire_keese"
         },
         {
           "name": "FireKeese3",
-          "type": ""
+          "type": "fire_keese"
         },
         {
           "name": "Rat",
-          "type": ""
+          "type": "rat"
         }
       ]
     },
@@ -186,27 +186,27 @@
       "enemies": [
         {
           "name": "FireKeese4",
-          "type": ""
+          "type": "fire_keese"
         },
         {
           "name": "FireKeese5",
-          "type": ""
+          "type": "fire_keese"
         },
         {
           "name": "YellowChuChu1",
-          "type": ""
+          "type": "yellow_chu_chu"
         },
         {
           "name": "YellowChuChu2",
-          "type": ""
+          "type": "yellow_chu_chu"
         },
         {
           "name": "FireBubble1",
-          "type": ""
+          "type": "fire_bubble"
         },
         {
           "name": "FireBubble2",
-          "type": ""
+          "type": "fire_bubble"
         }
       ]
     },

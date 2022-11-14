@@ -51,23 +51,23 @@
       "enemies": [
         {
           "name": "Wizzrobe1",
-          "type": ""
+          "type": "wizzrobe"
         },
         {
           "name": "Wizzrobe2",
-          "type": ""
+          "type": "wizzrobe"
         },
         {
           "name": "Wizzrobe3",
-          "type": ""
+          "type": "wizzrobe"
         },
         {
           "name": "Wizzrobe4",
-          "type": ""
+          "type": "wizzrobe"
         },
         {
-          "name": "RedPhantom",
-          "type": ""
+          "name": "SwiftPhantom",
+          "type": "swift_phantom"
         }
       ]
     }

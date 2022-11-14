@@ -83,39 +83,39 @@
       "enemies": [
         {
           "name": "PirateBlin1",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin2",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "PirateBlin3",
-          "type": ""
+          "type": "pirate_blin"
         },
         {
           "name": "Stalfos",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos1",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos2",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos3",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos4",
-          "type": ""
+          "type": "stalfos"
         },
         {
           "name": "Stalfos5",
-          "type": ""
+          "type": "stalfos"
         }
       ]
     }

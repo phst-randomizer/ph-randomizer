@@ -3,9 +3,10 @@ area Mercay:
     node South:
       door South
       hint GossipMercay1
-      enemy RedChuchuUp
-      enemy RedChuchuLeft
-      enemy RedChuchuRight
+      enemy RedChuChuUp
+      enemy RedChuChuLeft
+      enemy RedChuChuRight
+      enemy RedChuChuRightmost
 
     node Grotto:
       door Grotto

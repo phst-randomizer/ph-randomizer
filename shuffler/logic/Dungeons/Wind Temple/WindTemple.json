@@ -34,19 +34,19 @@
       "enemies": [
         {
           "name": "Rope1",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope2",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope3",
-          "type": ""
+          "type": "rope"
         },
         {
           "name": "Rope4",
-          "type": ""
+          "type": "rope"
         }
       ]
     },
@@ -102,15 +102,15 @@
       "enemies": [
         {
           "name": "RockChuChu1",
-          "type": ""
+          "type": "rock_chu_chu"
         },
         {
           "name": "RockChuChu2",
-          "type": ""
+          "type": "rock_chu_chu"
         },
         {
           "name": "RockChuChu3",
-          "type": ""
+          "type": "rock_chu_chu"
         }
       ]
     },

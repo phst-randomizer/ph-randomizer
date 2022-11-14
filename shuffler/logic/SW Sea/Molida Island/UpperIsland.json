@@ -49,11 +49,11 @@
       "enemies": [
         {
           "name": "GeozardLeft",
-          "type": ""
+          "type": "geozard"
         },
         {
           "name": "GeozardRight",
-          "type": ""
+          "type": "geozard"
         }
       ]
     }

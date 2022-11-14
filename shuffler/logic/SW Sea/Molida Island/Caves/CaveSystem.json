@@ -64,47 +64,47 @@
       "enemies": [
         {
           "name": "RedChuChu1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu3",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "KeesePillar1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeesePillar2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "Geozard",
-          "type": ""
+          "type": "geozard"
         },
         {
           "name": "KeeseUp1",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "KeeseUp2",
-          "type": ""
+          "type": "keese"
         },
         {
           "name": "YellowChuChu1",
-          "type": ""
+          "type": "yellow_chu_chu"
         },
         {
           "name": "YellowChuChu2",
-          "type": ""
+          "type": "yellow_chu_chu"
         },
         {
           "name": "YellowChuChu3",
-          "type": ""
+          "type": "yellow_chu_chu"
         }
       ]
     }

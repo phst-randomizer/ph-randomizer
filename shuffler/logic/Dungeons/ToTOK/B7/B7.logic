@@ -2,7 +2,7 @@ area TempleOfTheOceanKing:
   room B7:
     node Left:
       door ToB6YellowWarp
-      enemy RedPhantomLeft
+      enemy SwiftPhantomLeft
       door ToB8Left
 
     node BottomRight:
@@ -16,7 +16,7 @@ area TempleOfTheOceanKing:
       door ToB8TopRight
 
     node RightPhantom:
-      enemy RedPhantomRight
+      enemy SwiftPhantomRight
 
     TopRight -> RightPhantom
     BottomRight -> RightPhantom

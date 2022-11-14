@@ -78,147 +78,147 @@
       "enemies": [
         {
           "name": "MiniBlinLeft1",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinLeft2",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinLeft3",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinLeft4",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinRight1",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinRight2",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinRight3",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinRight4",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearBombable1",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearBombable2",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearBombable3",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearBombable4",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearCave1",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearCave2",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearCave3",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearCave4",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlinNearCave5",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "RedChuChu1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu3",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu4",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu5",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu6",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChuRight1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChuRight2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChuLeft1",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChuLeft2",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChuLeft3",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "MiniBlin1",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlin2",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlin3",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlin4",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlin5",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "MiniBlin6",
-          "type": ""
+          "type": "mini_blin"
         },
         {
           "name": "RedChuChu7",
-          "type": ""
+          "type": "red_chu_chu"
         },
         {
           "name": "RedChuChu8",
-          "type": ""
+          "type": "red_chu_chu"
         }
       ]
     }

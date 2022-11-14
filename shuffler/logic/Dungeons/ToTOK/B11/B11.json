@@ -37,27 +37,27 @@
       "enemies": [
         {
           "name": "GoldPhantomLeft",
-          "type": ""
+          "type": "gold_phantom"
         },
         {
           "name": "GoldPhantomRight",
-          "type": ""
+          "type": "gold_phantom"
         },
         {
           "name": "PhantomEye1",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "PhantomEye2",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "PhantomEye3",
-          "type": ""
+          "type": "phantom_eye"
         },
         {
           "name": "PhantomEye4",
-          "type": ""
+          "type": "phantom_eye"
         }
       ]
     }

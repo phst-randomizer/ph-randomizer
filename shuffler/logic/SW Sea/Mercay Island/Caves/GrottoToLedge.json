@@ -26,27 +26,27 @@
       "enemies": [
         {
           "name": "Rat1",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat2",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat3",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat4",
-          "type": ""
+          "type": "rat"
         },
         {
           "name": "Rat5",
-          "type": ""
+          "type": "rat"
         },
         {
-          "name": "ZoraWarrior",
-          "type": ""
+          "name": "Geozard",
+          "type": "geozard"
         }
       ]
     }
