@@ -181,6 +181,24 @@
           "name": "ToWestLower",
           "entrance": ""
         }
+      ],
+      "enemies": [
+        {
+          "name": "BlueChu1",
+          "type": ""
+        },
+        {
+          "name": "BlueChu2",
+          "type": ""
+        },
+        {
+          "name": "RockChu1",
+          "type": ""
+        },
+        {
+          "name": "RockChu2",
+          "type": ""
+        }
       ]
     },
     {
@@ -216,6 +234,12 @@
         {
           "name": "ToSouth",
           "entrance": ""
+        }
+      ],
+      "enemies": [
+        {
+          "name": "LikeLike",
+          "type": ""
         }
       ]
     }

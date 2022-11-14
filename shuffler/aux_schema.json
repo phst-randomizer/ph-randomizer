@@ -323,6 +323,26 @@
         "entrance"
       ]
     },
+    "Enemy": {
+      "title": "Enemy",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "The name of the referenced `enemy` in the .logic file.",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "description": "The type of the enemy. Should map to an entry in `shuffler/enemies.json`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
     "Room": {
       "title": "Room",
       "type": "object",
@@ -375,6 +395,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Exit"
+          }
+        },
+        "enemies": {
+          "title": "Enemies",
+          "description": "All enemies in this room",
+          "default": [],
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Enemy"
           }
         }
       },

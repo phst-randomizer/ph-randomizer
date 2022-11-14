@@ -33,6 +33,36 @@
           "name": "ToB4Shortcut",
           "entrance": "B4.TopLeftStaircase.ToB5Shortcut"
         }
+      ],
+      "enemies": [
+        {
+          "name": "EnemyL1",
+          "type": ""
+        },
+        {
+          "name": "EnemyL2",
+          "type": ""
+        },
+        {
+          "name": "EnemyL3",
+          "type": ""
+        },
+        {
+          "name": "EnemyL4",
+          "type": ""
+        },
+        {
+          "name": "EnemyR1",
+          "type": ""
+        },
+        {
+          "name": "EnemyR2",
+          "type": ""
+        },
+        {
+          "name": "EnemyR3",
+          "type": ""
+        }
       ]
     }
   ]

@@ -22,6 +22,32 @@
           "name": "South",
           "entrance": "AboveMercayTown.Ledge.Grotto"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Rat1",
+          "type": ""
+        },
+        {
+          "name": "Rat2",
+          "type": ""
+        },
+        {
+          "name": "Rat3",
+          "type": ""
+        },
+        {
+          "name": "Rat4",
+          "type": ""
+        },
+        {
+          "name": "Rat5",
+          "type": ""
+        },
+        {
+          "name": "ZoraWarrior",
+          "type": ""
+        }
       ]
     }
   ]

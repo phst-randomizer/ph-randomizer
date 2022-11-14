@@ -14,6 +14,16 @@
           "name": "ToF2",
           "entrance": "F2.Main.ToF1"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Stalfos1",
+          "type": ""
+        },
+        {
+          "name": "Stalfos2",
+          "type": ""
+        }
       ]
     }
   ]

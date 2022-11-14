@@ -38,9 +38,9 @@ area RuinsIsle:
 
     node FromEast:
       door ToEastTop
-      enemy PirateBlin1
-      enemy PirateBlin2
-      enemy PirateBlin3
+      enemy PirateBlin6
+      enemy PirateBlin7
+      enemy PirateBlin8
 
     FromEast -> Main
 

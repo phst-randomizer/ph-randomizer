@@ -14,6 +14,16 @@
           "name": "Brant",
           "entrance": "Outside.Island.Stairs"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Keese1",
+          "type": ""
+        },
+        {
+          "name": "Keese2",
+          "type": ""
+        }
       ]
     }
   ]

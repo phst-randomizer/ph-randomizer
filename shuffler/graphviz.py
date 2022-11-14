@@ -17,14 +17,14 @@ def main():
 
     logic.connect_rooms()
 
-    nodes = logic.nodes
-
     G = pgv.AGraph(strict=False, directed=True)
 
-    for node in nodes:
-        G.add_node(node.name)
-        for edge in node.edges:
-            G.add_edge(node.name, edge.dest.name)
+    for area in logic.aux_data:
+        for room in area.rooms:
+            for node in room.nodes:
+                G.add_node(node.name)
+                for edge in node.edges:
+                    G.add_edge(node.name, edge.dest.name)
 
     graph_dir = Path.cwd() / 'graphs'
     graph_dir.mkdir(exist_ok=True)

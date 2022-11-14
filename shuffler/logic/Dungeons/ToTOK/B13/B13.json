@@ -26,7 +26,45 @@
           "entrance": "TempleOfTheOceanKingLobby.Main.B13BlueWarp"
         }
       ],
-      "name": "B13"
+      "name": "B13",
+      "enemies": [
+        {
+          "name": "BluePhantom1",
+          "type": ""
+        },
+        {
+          "name": "BluePhantom2",
+          "type": ""
+        },
+        {
+          "name": "BluePhantom3",
+          "type": ""
+        },
+        {
+          "name": "RedPhantom1",
+          "type": ""
+        },
+        {
+          "name": "RedPhantom2",
+          "type": ""
+        },
+        {
+          "name": "RedPhantom3",
+          "type": ""
+        },
+        {
+          "name": "GoldPhantom1",
+          "type": ""
+        },
+        {
+          "name": "GoldPhantom2",
+          "type": ""
+        },
+        {
+          "name": "GoldPhantom3",
+          "type": ""
+        }
+      ]
     }
   ]
 }

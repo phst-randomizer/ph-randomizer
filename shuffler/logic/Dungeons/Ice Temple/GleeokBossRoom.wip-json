@@ -25,6 +25,12 @@
           "name": "ToAzurineRoom",
           "entrance": ""
         }
+      ],
+      "enemies": [
+        {
+          "name": "Gleeok",
+          "type": ""
+        }
       ]
     }
   ]

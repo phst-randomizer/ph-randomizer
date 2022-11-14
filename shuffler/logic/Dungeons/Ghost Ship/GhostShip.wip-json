@@ -25,7 +25,21 @@
           "contents": ""
         }
       ],
-      "exits": []
+      "exits": [],
+      "enemies": [
+        {
+          "name": "Poe1",
+          "type": ""
+        },
+        {
+          "name": "Poe2",
+          "type": ""
+        },
+        {
+          "name": "Poe3",
+          "type": ""
+        }
+      ]
     }
   ]
 }

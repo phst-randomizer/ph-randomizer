@@ -18,6 +18,32 @@
           "name": "BombableDoor",
           "entrance": "RupeeRoom.Main.Exit"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Keese1",
+          "type": ""
+        },
+        {
+          "name": "Keese2",
+          "type": ""
+        },
+        {
+          "name": "Keese3",
+          "type": ""
+        },
+        {
+          "name": "Keese4",
+          "type": ""
+        },
+        {
+          "name": "Keese5",
+          "type": ""
+        },
+        {
+          "name": "Keese6",
+          "type": ""
+        }
       ]
     }
   ]

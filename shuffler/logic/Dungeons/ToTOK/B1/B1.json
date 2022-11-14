@@ -34,7 +34,17 @@
           "entrance": "B2.Upper.ToB1"
         }
       ],
-      "name": "B1"
+      "name": "B1",
+      "enemies": [
+        {
+          "name": "RightPhantom",
+          "type": ""
+        },
+        {
+          "name": "LeftPhantom",
+          "type": ""
+        }
+      ]
     }
   ]
 }

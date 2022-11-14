@@ -34,6 +34,16 @@
           "name": "ToB3",
           "entrance": "B3.Main.ToB2"
         }
+      ],
+      "enemies": [
+        {
+          "name": "StationaryPhantom",
+          "type": ""
+        },
+        {
+          "name": "PatrollingPhantom",
+          "type": ""
+        }
       ]
     }
   ]

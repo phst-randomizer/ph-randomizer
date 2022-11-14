@@ -48,7 +48,21 @@
           "entrance": "B9.Main.ToB8Right"
         }
       ],
-      "name": "B8"
+      "name": "B8",
+      "enemies": [
+        {
+          "name": "RedPhantomLeft",
+          "type": ""
+        },
+        {
+          "name": "RedPhantomRight",
+          "type": ""
+        },
+        {
+          "name": "BluePhantom",
+          "type": ""
+        }
+      ]
     }
   ]
 }

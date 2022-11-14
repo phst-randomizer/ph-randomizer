@@ -248,6 +248,32 @@
           "name": "ToNorth",
           "entrance": ""
         }
+      ],
+      "enemies": [
+        {
+          "name": "Yook1",
+          "type": ""
+        },
+        {
+          "name": "Yook2",
+          "type": ""
+        },
+        {
+          "name": "Yook3",
+          "type": ""
+        },
+        {
+          "name": "Yook4",
+          "type": ""
+        },
+        {
+          "name": "Yook5",
+          "type": ""
+        },
+        {
+          "name": "Yook6",
+          "type": ""
+        }
       ]
     },
     {
@@ -269,6 +295,12 @@
         {
           "name": "ToDungeon",
           "entrance": ""
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Yook",
+          "type": ""
         }
       ]
     }

@@ -14,6 +14,12 @@
           "name": "ToMazeUpper",
           "entrance": "Outside.MazeUpper.ToCaveUpper"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Geozard",
+          "type": ""
+        }
       ]
     }
   ]

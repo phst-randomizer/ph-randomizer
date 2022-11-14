@@ -143,6 +143,32 @@
           "name": "Stairs",
           "entrance": "AstridHouse.Main.ToBasement"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Octorok1",
+          "type": ""
+        },
+        {
+          "name": "Octorok2",
+          "type": ""
+        },
+        {
+          "name": "Octorok3",
+          "type": ""
+        },
+        {
+          "name": "Octorok4",
+          "type": ""
+        },
+        {
+          "name": "Octorok5",
+          "type": ""
+        },
+        {
+          "name": "Octorok6",
+          "type": ""
+        }
       ]
     },
     {

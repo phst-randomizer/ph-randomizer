@@ -72,7 +72,8 @@ def test_aux_data_validation(filename: str):
     ],
 )
 def test_edge_parser(expression: str, inventory: list[str], flags: set[str], expected_result: bool):
-    assert (
-        Edge(Node('test1', [], [], [], set(), set()), expression).is_traversable(inventory, flags)
-        == expected_result
-    )
+    node1 = Node(name='test1')
+    node2 = Node(name='test2')
+    edge = Edge(node1, node2, expression)
+    node1.edges.append(edge)
+    assert edge.is_traversable(inventory, flags) == expected_result

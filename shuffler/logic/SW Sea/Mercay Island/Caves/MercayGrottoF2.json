@@ -22,6 +22,60 @@
           "name": "East",
           "entrance": "Mercay.MercayTown.Main.Grotto"
         }
+      ],
+      "enemies": [
+        {
+          "name": "KeyRat",
+          "type": ""
+        },
+        {
+          "name": "Rat1",
+          "type": ""
+        },
+        {
+          "name": "Rat2",
+          "type": ""
+        },
+        {
+          "name": "Rat3",
+          "type": ""
+        },
+        {
+          "name": "Rat4",
+          "type": ""
+        },
+        {
+          "name": "Rat5",
+          "type": ""
+        },
+        {
+          "name": "Rat6",
+          "type": ""
+        },
+        {
+          "name": "Rat7",
+          "type": ""
+        },
+        {
+          "name": "Keese1",
+          "type": ""
+        },
+        {
+          "name": "Keese2",
+          "type": ""
+        },
+        {
+          "name": "Keese3",
+          "type": ""
+        },
+        {
+          "name": "Keese4",
+          "type": ""
+        },
+        {
+          "name": "Keese5",
+          "type": ""
+        }
       ]
     }
   ]
