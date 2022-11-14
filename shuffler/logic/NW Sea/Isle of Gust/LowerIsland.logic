@@ -62,17 +62,17 @@ area Gust:
     AfterCave <-> DigSpotAfterCave: item Shovel
     node Ledge:
       door ToTempleFrontLedgeLeft
-      enemy MiniBlin1
-      enemy MiniBlin2
       enemy MiniBlin3
       enemy MiniBlin4
+      enemy MiniBlin5
+      enemy MiniBlin6
 
     node LedgeChest:
       chest OnLedge
 
     node LedgeToUpper:
-      enemy RedChuChu1
-      enemy RedChuChu2
+      enemy RedChuChu7
+      enemy RedChuChu8
       door ToLeftmostUpper
 
     Ledge -> LedgeChest: item Shovel

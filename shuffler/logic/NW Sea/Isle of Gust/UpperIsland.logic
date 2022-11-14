@@ -18,7 +18,7 @@ area Gust:
 
     node LeftmostToLower:
       door ToLedgeLower
-      enemy RedChuChu1
+      enemy RedChuChu3
 
     node Leftmost
 

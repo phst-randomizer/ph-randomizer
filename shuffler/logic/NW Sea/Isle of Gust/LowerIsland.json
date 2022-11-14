@@ -197,14 +197,6 @@
           "type": ""
         },
         {
-          "name": "MiniBlin1",
-          "type": ""
-        },
-        {
-          "name": "MiniBlin2",
-          "type": ""
-        },
-        {
           "name": "MiniBlin3",
           "type": ""
         },
@@ -213,11 +205,19 @@
           "type": ""
         },
         {
-          "name": "RedChuChu1",
+          "name": "MiniBlin5",
           "type": ""
         },
         {
-          "name": "RedChuChu2",
+          "name": "MiniBlin6",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu7",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu8",
           "type": ""
         }
       ]
