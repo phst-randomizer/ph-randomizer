@@ -24,7 +24,7 @@ area DeadIsle:
 
 
     node Hole:
-      entrance ToBoulderCaveHole
+      exit ToBoulderCaveHole
 
     Main -> Hole: item Shovel
 

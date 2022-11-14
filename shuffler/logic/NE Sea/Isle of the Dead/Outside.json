@@ -43,7 +43,7 @@
         },
         {
           "name": "ToBoulderCaveHead",
-          "entrance": "BoulderCave.Main.Head"
+          "entrance": "BoulderCave.Main.ToHead"
         },
         {
           "name": "Stairs",

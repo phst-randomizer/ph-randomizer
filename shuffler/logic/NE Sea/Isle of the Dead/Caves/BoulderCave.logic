@@ -1,7 +1,7 @@
 area DeadIsle:
   room BoulderCave:
-    node Entrance:
-      exit Hole
+    node Main:
+      entrance Hole
       enemy Keese1
       enemy Keese2
       enemy Keese3
@@ -13,5 +13,5 @@ area DeadIsle:
     node BombableWall:
       door BombableDoor
 
-    Entrance -> BombableWall: (item Bombs | item Bombchus)
-    BombableWall -> Entrance
+    Main -> BombableWall: (item Bombs | item Bombchus)
+    BombableWall -> Main

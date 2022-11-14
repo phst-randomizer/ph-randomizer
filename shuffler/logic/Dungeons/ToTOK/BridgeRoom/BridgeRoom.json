@@ -7,7 +7,7 @@
       "exits": [
         {
           "name": "ToB13",
-          "entrance": "B13.DefeatPhantom.ToBridgeDoor"
+          "entrance": "B13.DefeatPhantom.ToBridgeRoom"
         }
       ],
       "name": "BridgeRoom"

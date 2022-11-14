@@ -37,7 +37,7 @@
       "exits": [
         {
           "name": "ToWestBottom",
-          "entrance": "TopLeft.AboveMaze.ToNorthRight"
+          "entrance": "TopLeft.AfterBremeurBridge.ToEastBottom"
         },
         {
           "name": "ToWestTop",

@@ -19,7 +19,7 @@
         },
         {
           "name": "ToB10",
-          "entrance": "B10.Main.ToB9ChartRoom"
+          "entrance": "B10.TopOuter.ToB9ChartRoom"
         },
         {
           "name": "BlueWarp",

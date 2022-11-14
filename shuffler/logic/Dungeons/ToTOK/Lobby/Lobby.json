@@ -20,22 +20,6 @@
         {
           "name": "Entrance",
           "entrance": "TempleOfTheOceanKing.F1.Lower.Exit"
-        },
-        {
-          "name": "B3BlueWarp",
-          "entrance": "TempleOfTheOceanKing.B3ChartRoom.Main.BlueWarp"
-        },
-        {
-          "name": "B6YellowWarp",
-          "entrance": "TempleOfTheOceanKing.B6YellowWarp.Main.YellowWarp"
-        },
-        {
-          "name": "B9BlueWarp",
-          "entrance": "TempleOfTheOceanKing.B9ChartRoom.Main.BlueWarp"
-        },
-        {
-          "name": "B13BlueWarp",
-          "entrance": "TempleOfTheOceanKing.B13.Main.BlueWarp"
         }
       ],
       "name": "Main"

@@ -25,6 +25,10 @@
         {
           "name": "ToB4",
           "entrance": "B4.TopRight.ToB3"
+        },
+        {
+          "name": "BlueWarp",
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.B3BlueWarp"
         }
       ]
     }

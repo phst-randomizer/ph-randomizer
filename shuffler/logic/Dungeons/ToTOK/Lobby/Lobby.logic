@@ -3,10 +3,10 @@ area TempleOfTheOceanKingLobby:
     node Main:
       door Outside
       door Entrance
-      exit B3BlueWarp
-      exit B6YellowWarp
-      exit B9BlueWarp
-      exit B13BlueWarp
+      entrance B3BlueWarp
+      entrance B6YellowWarp
+      entrance B9BlueWarp
+      entrance B13BlueWarp
 
     node PhantomHourglass:
       chest Hourglass

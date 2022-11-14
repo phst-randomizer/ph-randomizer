@@ -16,7 +16,7 @@
         },
         {
           "name": "ToCaveUpper",
-          "entrance": "GeozardCave.LeftDoor.ToUpper"
+          "entrance": "GeozardCave.LeftDoor.ToMazeUpper"
         },
         {
           "name": "ToNorthShortcut",
@@ -36,7 +36,7 @@
         },
         {
           "name": "ToNorthLeft",
-          "entrance": "TopLeft.FromSouthWest.ToSouthLeft"
+          "entrance": "TopLeft.FromSouthLeft.ToSouthLeft"
         }
       ],
       "enemies": [

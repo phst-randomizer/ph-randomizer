@@ -12,7 +12,7 @@
         },
         {
           "name": "ToHead",
-          "entrance": "Outside.Head.ToBoulderCave"
+          "entrance": "Outside.Head.ToBoulderCaveHead"
         },
         {
           "name": "BombableDoor",

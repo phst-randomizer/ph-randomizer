@@ -3,4 +3,4 @@ area TempleOfTheOceanKing:
     node Main:
       door ToB6
       door ToB7
-      entrance YellowWarp
+      exit YellowWarp

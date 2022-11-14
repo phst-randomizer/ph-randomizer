@@ -3,7 +3,7 @@ area TempleOfTheOceanKing:
     node Main:
       chest NESeaChart
       door ToB12
-      entrance BlueWarp
+      exit BlueWarp
 
     node Gauntlet:
       enemy BluePhantom1

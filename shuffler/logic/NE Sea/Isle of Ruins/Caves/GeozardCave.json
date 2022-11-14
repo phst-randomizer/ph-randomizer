@@ -8,11 +8,11 @@
       "exits": [
         {
           "name": "ToBoat",
-          "entrance": "Outside.Boat.ToCaveBoat"
+          "entrance": "BottomLeft.Boat.ToCaveBoat"
         },
         {
           "name": "ToMazeUpper",
-          "entrance": "Outside.MazeUpper.ToCaveUpper"
+          "entrance": "BottomLeft.AboveMaze.ToCaveUpper"
         }
       ],
       "enemies": [

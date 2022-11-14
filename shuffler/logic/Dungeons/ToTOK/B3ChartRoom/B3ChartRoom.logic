@@ -4,7 +4,7 @@ area TempleOfTheOceanKing:
       door ToB3Ledge
       door ToB3Main
       chest NWChartChest
-      entrance BlueWarp
+      exit BlueWarp
 
     node Staircase:
       door ToB4

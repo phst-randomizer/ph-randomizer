@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": "Gust.LowerIsland.BeforeCave.ToBombableGrotto"
+          "entrance": "Gust.LowerIsland.BombableWall.ToBombableGrotto"
         }
       ]
     }
