@@ -3,7 +3,6 @@
   "name": "MutohTemple",
   "rooms": [
     {
-
       "name": "F1",
       "chests": [],
       "exits": [
@@ -30,6 +29,52 @@
         {
           "name": "ToB1Bottom",
           "entrance": "B1.BottomStairsF1.ToF1Bottom"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Keese1",
+          "type": ""
+        },
+        {
+          "name": "Keese2",
+          "type": ""
+        },
+        {
+          "name": "Keese3",
+          "type": ""
+        },
+        {
+          "name": "Keese4",
+          "type": ""
+        },
+        {
+          "name": "StalfosRight1",
+          "type": ""
+        },
+        {
+          "name": "StalfosRight2",
+          "type": ""
+        },
+        {
+          "name": "StalfosLeft1",
+          "type": ""
+        },
+        {
+          "name": "StalfosLeft2",
+          "type": ""
+        },
+        {
+          "name": "Terrorpin1",
+          "type": ""
+        },
+        {
+          "name": "Terrorpin2",
+          "type": ""
+        },
+        {
+          "name": "Terrorpin3",
+          "type": ""
         }
       ]
     },
@@ -130,6 +175,24 @@
         {
           "name": "ToB2TopRight",
           "entrance": "B2.TopRight.ToB1TopRight"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "RedStalfos1",
+          "type": ""
+        },
+        {
+          "name": "RedStalfos2",
+          "type": ""
+        },
+        {
+          "name": "RedStalfosArena1",
+          "type": ""
+        },
+        {
+          "name": "RedStalfosArena2",
+          "type": ""
         }
       ]
     },

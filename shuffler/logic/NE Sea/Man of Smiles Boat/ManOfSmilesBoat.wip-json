@@ -21,6 +21,28 @@
           "name": "Exit",
           "entrance": "Sea.NE.Boat.BoardBoat"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Octorok1",
+          "type": ""
+        },
+        {
+          "name": "Octorok2",
+          "type": ""
+        },
+        {
+          "name": "Octorok3",
+          "type": ""
+        },
+        {
+          "name": "Octorok4",
+          "type": ""
+        },
+        {
+          "name": "Geozard",
+          "type": ""
+        }
       ]
     }
   ]

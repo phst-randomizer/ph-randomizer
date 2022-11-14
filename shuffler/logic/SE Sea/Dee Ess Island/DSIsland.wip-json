@@ -31,6 +31,40 @@
           "name": "Boat",
           "entrance": "Sea.SE.DeeEss.DeeEssPort"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RightSpeakerRockChu1",
+          "type": ""
+        },
+        {
+          "name": "RightSpeakerRockChu2",
+          "type": ""
+        },
+        {
+          "name": "RightSpeakerRockChu3",
+          "type": ""
+        },
+        {
+          "name": "LeftSpeakerRockChu1",
+          "type": ""
+        },
+        {
+          "name": "LeftSpeakerRockChu2",
+          "type": ""
+        },
+        {
+          "name": "LeftSpeakerRockChu3",
+          "type": ""
+        },
+        {
+          "name": "Hinox1",
+          "type": ""
+        },
+        {
+          "name": "Hinox2",
+          "type": ""
+        }
       ]
     }
   ]

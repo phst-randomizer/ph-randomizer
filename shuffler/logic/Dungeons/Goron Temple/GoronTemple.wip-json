@@ -33,6 +33,36 @@
           "name": "ToB1Shortcut",
           "entrance": ""
         }
+      ],
+      "enemies": [
+        {
+          "name": "BlueChuBeforeBeamos",
+          "type": ""
+        },
+        {
+          "name": "BlueChuAfterBeamos",
+          "type": ""
+        },
+        {
+          "name": "ArmosLower",
+          "type": ""
+        },
+        {
+          "name": "ArmosUpper",
+          "type": ""
+        },
+        {
+          "name": "ArmosArenaRight",
+          "type": ""
+        },
+        {
+          "name": "ArmosArenaLeft",
+          "type": ""
+        },
+        {
+          "name": "BlueChu",
+          "type": ""
+        }
       ]
     },
     {
@@ -80,6 +110,56 @@
           "name": "ToB2",
           "entrance": ""
         }
+      ],
+      "enemies": [
+        {
+          "name": "BeamosRight",
+          "type": ""
+        },
+        {
+          "name": "BeamosLeft",
+          "type": ""
+        },
+        {
+          "name": "FireBubble1",
+          "type": ""
+        },
+        {
+          "name": "FireBubble2",
+          "type": ""
+        },
+        {
+          "name": "Hinox",
+          "type": ""
+        },
+        {
+          "name": "LikeLike1",
+          "type": ""
+        },
+        {
+          "name": "LikeLike2",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug1",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug2",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug3",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug4",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug5",
+          "type": ""
+        }
       ]
     },
     {
@@ -109,6 +189,76 @@
           "name": "ToB3BossKey",
           "entrance": ""
         }
+      ],
+      "enemies": [
+        {
+          "name": "LikeLike",
+          "type": ""
+        },
+        {
+          "name": "RockChu1",
+          "type": ""
+        },
+        {
+          "name": "RockChu2",
+          "type": ""
+        },
+        {
+          "name": "Hinox1",
+          "type": ""
+        },
+        {
+          "name": "Hinox2",
+          "type": ""
+        },
+        {
+          "name": "BlueChu1",
+          "type": ""
+        },
+        {
+          "name": "BlueChu2",
+          "type": ""
+        },
+        {
+          "name": "Gel1",
+          "type": ""
+        },
+        {
+          "name": "Gel2",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug1",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug2",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug3",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug4",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug5",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug6",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug7",
+          "type": ""
+        },
+        {
+          "name": "EyeSlug8",
+          "type": ""
+        }
       ]
     },
     {
@@ -128,6 +278,48 @@
         {
           "name": "ToB4",
           "entrance": ""
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Miniblin1",
+          "type": ""
+        },
+        {
+          "name": "Miniblin2",
+          "type": ""
+        },
+        {
+          "name": "Miniblin3",
+          "type": ""
+        },
+        {
+          "name": "Miniblin4",
+          "type": ""
+        },
+        {
+          "name": "Miniblin5",
+          "type": ""
+        },
+        {
+          "name": "Miniblin6",
+          "type": ""
+        },
+        {
+          "name": "Armos1",
+          "type": ""
+        },
+        {
+          "name": "Armos2",
+          "type": ""
+        },
+        {
+          "name": "Armos3",
+          "type": ""
+        },
+        {
+          "name": "Armos4",
+          "type": ""
         }
       ]
     },

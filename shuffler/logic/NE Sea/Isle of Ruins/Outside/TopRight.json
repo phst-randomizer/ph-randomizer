@@ -79,6 +79,44 @@
           "name": "ToSouthCorridor",
           "entrance": "BottomRight.Corridor.ToNorthCorridor"
         }
+      ],
+      "enemies": [
+        {
+          "name": "PirateBlin1",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin2",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin3",
+          "type": ""
+        },
+        {
+          "name": "Stalfos",
+          "type": ""
+        },
+        {
+          "name": "Stalfos1",
+          "type": ""
+        },
+        {
+          "name": "Stalfos2",
+          "type": ""
+        },
+        {
+          "name": "Stalfos3",
+          "type": ""
+        },
+        {
+          "name": "Stalfos4",
+          "type": ""
+        },
+        {
+          "name": "Stalfos5",
+          "type": ""
+        }
       ]
     }
   ]

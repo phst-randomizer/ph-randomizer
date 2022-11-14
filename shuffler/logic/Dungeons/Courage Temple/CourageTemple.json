@@ -93,6 +93,20 @@
           "name": "ToF2EmptyRoom",
           "entrance": "F2.EmptyRoom.ToF1EmptyRoom"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Moldorm1",
+          "type": ""
+        },
+        {
+          "name": "Moldorm2",
+          "type": ""
+        },
+        {
+          "name": "PolsVoice",
+          "type": ""
+        }
       ]
     },
     {

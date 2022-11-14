@@ -45,6 +45,20 @@
           "name": "AfterBoss",
           "entrance": "CyclokBossRoom.Main.BossDefeat.ExitWarp"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RedChuChu1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu2",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu1",
+          "type": ""
+        }
       ]
     }
   ]

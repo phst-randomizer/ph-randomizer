@@ -33,6 +33,24 @@
           "name": "Triforce",
           "entrance": "B6YellowWarp.Main.ToB6"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Phantom1",
+          "type": ""
+        },
+        {
+          "name": "Phantom2",
+          "type": ""
+        },
+        {
+          "name": "PhantomEye1",
+          "type": ""
+        },
+        {
+          "name": "PhantomEye2",
+          "type": ""
+        }
       ]
     }
   ]

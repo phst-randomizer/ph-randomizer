@@ -47,7 +47,29 @@
           "entrance": "B8.TopRightDoor.ToB9Right"
         }
       ],
-      "name": "B9"
+      "name": "B9",
+      "enemies": [
+        {
+          "name": "Wizzrobe1",
+          "type": ""
+        },
+        {
+          "name": "Wizzrobe2",
+          "type": ""
+        },
+        {
+          "name": "Wizzrobe3",
+          "type": ""
+        },
+        {
+          "name": "Wizzrobe4",
+          "type": ""
+        },
+        {
+          "name": "RedPhantom",
+          "type": ""
+        }
+      ]
     }
   ]
 }

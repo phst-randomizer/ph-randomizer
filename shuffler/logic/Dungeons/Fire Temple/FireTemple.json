@@ -37,6 +37,32 @@
           "name": "ToF2BottomLeft",
           "entrance": "F2.BottomLeft.ToF1BottomLeft"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Keese1",
+          "type": ""
+        },
+        {
+          "name": "Keese2",
+          "type": ""
+        },
+        {
+          "name": "Keese3",
+          "type": ""
+        },
+        {
+          "name": "Keese4",
+          "type": ""
+        },
+        {
+          "name": "Bubble1",
+          "type": ""
+        },
+        {
+          "name": "Bubble2",
+          "type": ""
+        }
       ]
     },
     {
@@ -79,6 +105,56 @@
           "name": "ToF3",
           "entrance": "F3.RightSide.ToF2"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RedChuChu",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu1",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu2",
+          "type": ""
+        },
+        {
+          "name": "Gel1",
+          "type": ""
+        },
+        {
+          "name": "Gel2",
+          "type": ""
+        },
+        {
+          "name": "Gel3",
+          "type": ""
+        },
+        {
+          "name": "Gel4",
+          "type": ""
+        },
+        {
+          "name": "Gel5",
+          "type": ""
+        },
+        {
+          "name": "FireKeese1",
+          "type": ""
+        },
+        {
+          "name": "FireKeese2",
+          "type": ""
+        },
+        {
+          "name": "FireKeese3",
+          "type": ""
+        },
+        {
+          "name": "Rat",
+          "type": ""
+        }
       ]
     },
     {
@@ -105,6 +181,32 @@
         {
           "name": "ToF4",
           "entrance": "F4.Main.ToF3"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "FireKeese4",
+          "type": ""
+        },
+        {
+          "name": "FireKeese5",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu1",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu2",
+          "type": ""
+        },
+        {
+          "name": "FireBubble1",
+          "type": ""
+        },
+        {
+          "name": "FireBubble2",
+          "type": ""
         }
       ]
     },

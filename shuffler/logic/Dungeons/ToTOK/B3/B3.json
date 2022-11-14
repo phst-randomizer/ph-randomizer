@@ -59,7 +59,17 @@
           "entrance": "B3ChartRoom.Main.ToB3Main"
         }
       ],
-      "name": "B3"
+      "name": "B3",
+      "enemies": [
+        {
+          "name": "Phantom",
+          "type": ""
+        },
+        {
+          "name": "KeyPhantom",
+          "type": ""
+        }
+      ]
     }
   ]
 }

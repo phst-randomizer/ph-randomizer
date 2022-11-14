@@ -30,6 +30,52 @@
           "name": "ToWestShortcut",
           "entrance": "BottomLeft.AboveCave.ToEastShortcut"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Stalfos1",
+          "type": ""
+        },
+        {
+          "name": "Stalfos2",
+          "type": ""
+        },
+        {
+          "name": "Stalfos3",
+          "type": ""
+        },
+        {
+          "name": "Stalfos4",
+          "type": ""
+        },
+        {
+          "name": "Stalfos5",
+          "type": ""
+        },
+        {
+          "name": "Stalfos6",
+          "type": ""
+        },
+        {
+          "name": "Stalfos7",
+          "type": ""
+        },
+        {
+          "name": "Stalfos8",
+          "type": ""
+        },
+        {
+          "name": "Stalfos",
+          "type": ""
+        },
+        {
+          "name": "StalfosRight1",
+          "type": ""
+        },
+        {
+          "name": "StalfosRight2",
+          "type": ""
+        }
       ]
     }
   ]

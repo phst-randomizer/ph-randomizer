@@ -60,7 +60,53 @@
           "entrance": "Molida.UpperIsland.Hole.HoleToChest"
         }
       ],
-      "name": "CaveSystem"
+      "name": "CaveSystem",
+      "enemies": [
+        {
+          "name": "RedChuChu1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu2",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu3",
+          "type": ""
+        },
+        {
+          "name": "KeesePillar1",
+          "type": ""
+        },
+        {
+          "name": "KeesePillar2",
+          "type": ""
+        },
+        {
+          "name": "Geozard",
+          "type": ""
+        },
+        {
+          "name": "KeeseUp1",
+          "type": ""
+        },
+        {
+          "name": "KeeseUp2",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu1",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu2",
+          "type": ""
+        },
+        {
+          "name": "YellowChuChu3",
+          "type": ""
+        }
+      ]
     }
   ]
 }

@@ -36,6 +36,68 @@
           "name": "North",
           "entrance": "F2.Main.Downstairs"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RedChuchu1",
+          "type": ""
+        },
+        {
+          "name": "RedChuchu2",
+          "type": ""
+        },
+        {
+          "name": "RedChuchu3",
+          "type": ""
+        },
+        {
+          "name": "RedChuchu4",
+          "type": ""
+        },
+        {
+          "name": "RedChuchuLeft1",
+          "type": ""
+        },
+        {
+          "name": "RedChuchuLeft2",
+          "type": ""
+        },
+        {
+          "name": "RedChuchuRight1",
+          "type": ""
+        },
+        {
+          "name": "RedChuchuRight2",
+          "type": ""
+        },
+        {
+          "name": "RedChuchuRight3",
+          "type": ""
+        },
+        {
+          "name": "KeeseLeft1",
+          "type": ""
+        },
+        {
+          "name": "KeeseLeft2",
+          "type": ""
+        },
+        {
+          "name": "KeeseRight1",
+          "type": ""
+        },
+        {
+          "name": "KeeseRight2",
+          "type": ""
+        },
+        {
+          "name": "KeeseRight3",
+          "type": ""
+        },
+        {
+          "name": "KeeseRight4",
+          "type": ""
+        }
       ]
     }
   ]

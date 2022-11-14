@@ -44,7 +44,17 @@
           "entrance": "B8.TopRightLedge.ToB7TopRight"
         }
       ],
-      "name": "B7"
+      "name": "B7",
+      "enemies": [
+        {
+          "name": "RedPhantomLeft",
+          "type": ""
+        },
+        {
+          "name": "RedPhantomRight",
+          "type": ""
+        }
+      ]
     }
   ]
 }

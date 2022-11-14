@@ -33,7 +33,33 @@
           "entrance": "B12.LeftStairs.ToB11Left"
         }
       ],
-      "name": "B11"
+      "name": "B11",
+      "enemies": [
+        {
+          "name": "GoldPhantomLeft",
+          "type": ""
+        },
+        {
+          "name": "GoldPhantomRight",
+          "type": ""
+        },
+        {
+          "name": "PhantomEye1",
+          "type": ""
+        },
+        {
+          "name": "PhantomEye2",
+          "type": ""
+        },
+        {
+          "name": "PhantomEye3",
+          "type": ""
+        },
+        {
+          "name": "PhantomEye4",
+          "type": ""
+        }
+      ]
     }
   ]
 }

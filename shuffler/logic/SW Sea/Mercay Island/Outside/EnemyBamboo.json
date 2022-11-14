@@ -17,15 +17,15 @@
       "enemies": [
         {
           "name": "RedChuchuUp",
-          "type": "red_chu_chu"
+          "type": ""
         },
         {
           "name": "RedChuchuLeft",
-          "type": "red_chu_chu"
+          "type": ""
         },
         {
           "name": "RedChuchuRight",
-          "type": "red_chu_chu"
+          "type": ""
         }
       ]
     }

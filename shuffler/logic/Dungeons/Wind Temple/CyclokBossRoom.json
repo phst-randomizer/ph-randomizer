@@ -36,7 +36,13 @@
           "entrance": "GustIsle.UpperIsland.TempleFront.AfterBoss"
         }
       ],
-      "name": "Main"
+      "name": "Main",
+      "enemies": [
+        {
+          "name": "Cyclok",
+          "type": ""
+        }
+      ]
     }
   ]
 }

@@ -38,6 +38,28 @@
           "name": "ToB5",
           "entrance": "B5.Bottom.ToB4"
         }
+      ],
+      "enemies": [
+        {
+          "name": "SpawnedPhantom",
+          "type": ""
+        },
+        {
+          "name": "RightPhantomEye",
+          "type": ""
+        },
+        {
+          "name": "LeftPhantomEye",
+          "type": ""
+        },
+        {
+          "name": "TopPhantomEye",
+          "type": ""
+        },
+        {
+          "name": "Phantom",
+          "type": ""
+        }
       ]
     }
   ]

@@ -29,6 +29,12 @@
           "name": "ToAquanineRoom",
           "entrance": "MutohTemple.B4.Main.ToBoss"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Eox",
+          "type": ""
+        }
       ]
     }
   ]

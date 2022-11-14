@@ -45,7 +45,17 @@
           "entrance": "CraykBossRoom.Main.BossDefeat.ExitWarp"
         }
       ],
-      "name": "UpperIsland"
+      "name": "UpperIsland",
+      "enemies": [
+        {
+          "name": "GeozardLeft",
+          "type": ""
+        },
+        {
+          "name": "GeozardRight",
+          "type": ""
+        }
+      ]
     }
   ]
 }

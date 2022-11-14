@@ -103,6 +103,12 @@
           "name": "SE",
           "entrance": "SE.ToSW.SW"
         }
+      ],
+      "enemies": [
+        {
+          "name": "GiantEyePlant",
+          "type": ""
+        }
       ]
     },
     {

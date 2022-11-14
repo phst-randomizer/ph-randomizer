@@ -68,7 +68,37 @@
           "entrance": "B13.Main.ToB12"
         }
       ],
-      "name": "B12"
+      "name": "B12",
+      "enemies": [
+        {
+          "name": "GoldPhantom",
+          "type": ""
+        },
+        {
+          "name": "RedPhantom",
+          "type": ""
+        },
+        {
+          "name": "BluePhantom",
+          "type": ""
+        },
+        {
+          "name": "PhantomEyeLeft",
+          "type": ""
+        },
+        {
+          "name": "PhantomEyeRight",
+          "type": ""
+        },
+        {
+          "name": "WizzrobeLeft",
+          "type": ""
+        },
+        {
+          "name": "WizzrobeRight",
+          "type": ""
+        }
+      ]
     }
   ]
 }

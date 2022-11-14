@@ -30,6 +30,24 @@
           "name": "ToB1TopRightStairs",
           "entrance": "B1.TopRight.ToF1MiddleRightStairs"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Rope1",
+          "type": ""
+        },
+        {
+          "name": "Rope2",
+          "type": ""
+        },
+        {
+          "name": "Rope3",
+          "type": ""
+        },
+        {
+          "name": "Rope4",
+          "type": ""
+        }
       ]
     },
     {
@@ -79,6 +97,20 @@
         {
           "name": "ToF1MiddleRightStairs",
           "entrance": "F1.MiddleRight.ToB1TopRightStairs"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "RockChuChu1",
+          "type": ""
+        },
+        {
+          "name": "RockChuChu2",
+          "type": ""
+        },
+        {
+          "name": "RockChuChu3",
+          "type": ""
         }
       ]
     },

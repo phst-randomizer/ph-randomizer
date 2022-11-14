@@ -33,6 +33,48 @@
           "name": "BannanGrottoEntrance",
           "entrance": "BannanGrotto.LeftSide.OutsideLeft"
         }
+      ],
+      "enemies": [
+        {
+          "name": "Rope1",
+          "type": ""
+        },
+        {
+          "name": "Rope2",
+          "type": ""
+        },
+        {
+          "name": "Rope3",
+          "type": ""
+        },
+        {
+          "name": "Rope4",
+          "type": ""
+        },
+        {
+          "name": "Rope5",
+          "type": ""
+        },
+        {
+          "name": "Rope6",
+          "type": ""
+        },
+        {
+          "name": "OrangeChuChu1",
+          "type": ""
+        },
+        {
+          "name": "OrangeChuChu2",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu2",
+          "type": ""
+        }
       ]
     },
     {

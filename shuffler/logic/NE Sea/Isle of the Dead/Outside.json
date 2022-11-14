@@ -49,6 +49,64 @@
           "name": "Stairs",
           "entrance": "PhantomCorridor.Brant.Exit"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RupeeLikeRed",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeBlue1",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeBlue2",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain1",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain2",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain3",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain4",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain5",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain6",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain7",
+          "type": ""
+        },
+        {
+          "name": "StalfosMain8",
+          "type": ""
+        },
+        {
+          "name": "StalfosGraveyard1",
+          "type": ""
+        },
+        {
+          "name": "StalfosGraveyard2",
+          "type": ""
+        },
+        {
+          "name": "StalfosGraveyard3",
+          "type": ""
+        }
       ]
     }
   ]

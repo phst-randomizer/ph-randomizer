@@ -38,6 +38,40 @@
           "name": "ToNorthLeft",
           "entrance": "TopLeft.FromSouthWest.ToSouthLeft"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RupeeLikeRed1",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeRed2",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeRed3",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeBlue1",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeBlue2",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeGreen1",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeGreen2",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeRed",
+          "type": ""
+        }
       ]
     }
   ]

@@ -49,19 +49,23 @@
       "enemies": [
         {
           "name": "RedChuchu1",
-          "type": "red_chu_chu"
+          "type": ""
         },
         {
           "name": "RedChuchu2",
-          "type": "red_chu_chu"
+          "type": ""
         },
         {
           "name": "RedChuchu3",
-          "type": "red_chu_chu"
+          "type": ""
         },
         {
           "name": "RedChuchu4",
-          "type": "red_chu_chu"
+          "type": ""
+        },
+        {
+          "name": "Crow",
+          "type": ""
         }
       ]
     }

@@ -54,6 +54,56 @@
           "name": "ToUnderwaterCave",
           "entrance": "UnderwaterCave.Main.Exit"
         }
+      ],
+      "enemies": [
+        {
+          "name": "TreeStalfos1",
+          "type": ""
+        },
+        {
+          "name": "TreeStalfos2",
+          "type": ""
+        },
+        {
+          "name": "RupeeLikeRed",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin1",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin2",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin3",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin4",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin5",
+          "type": ""
+        },
+        {
+          "name": "Stalfos",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin1",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin2",
+          "type": ""
+        },
+        {
+          "name": "PirateBlin3",
+          "type": ""
+        }
       ]
     }
   ]

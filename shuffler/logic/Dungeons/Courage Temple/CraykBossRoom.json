@@ -36,7 +36,13 @@
           "entrance": "Molida.UpperIsland.TempleFront.AfterBoss"
         }
       ],
-      "name": "Main"
+      "name": "Main",
+      "enemies": [
+        {
+          "name": "Crayk",
+          "type": ""
+        }
+      ]
     }
   ]
 }

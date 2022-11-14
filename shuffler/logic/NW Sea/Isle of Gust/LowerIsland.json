@@ -74,6 +74,152 @@
           "name": "ToLeftmostUpper",
           "entrance": "Gust.UpperIsland.LeftmostToLower.ToLedgeLower"
         }
+      ],
+      "enemies": [
+        {
+          "name": "MiniBlinLeft1",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinLeft2",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinLeft3",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinLeft4",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinRight1",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinRight2",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinRight3",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinRight4",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearBombable1",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearBombable2",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearBombable3",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearBombable4",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearCave1",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearCave2",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearCave3",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearCave4",
+          "type": ""
+        },
+        {
+          "name": "MiniBlinNearCave5",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu2",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu3",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu4",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu5",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu6",
+          "type": ""
+        },
+        {
+          "name": "RedChuChuRight1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChuRight2",
+          "type": ""
+        },
+        {
+          "name": "RedChuChuLeft1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChuLeft2",
+          "type": ""
+        },
+        {
+          "name": "RedChuChuLeft3",
+          "type": ""
+        },
+        {
+          "name": "MiniBlin1",
+          "type": ""
+        },
+        {
+          "name": "MiniBlin2",
+          "type": ""
+        },
+        {
+          "name": "MiniBlin1",
+          "type": ""
+        },
+        {
+          "name": "MiniBlin2",
+          "type": ""
+        },
+        {
+          "name": "MiniBlin3",
+          "type": ""
+        },
+        {
+          "name": "MiniBlin4",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu1",
+          "type": ""
+        },
+        {
+          "name": "RedChuChu2",
+          "type": ""
+        }
       ]
     }
   ]
