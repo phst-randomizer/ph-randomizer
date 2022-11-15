@@ -18,10 +18,10 @@ ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text(
 
 
 class Logic:
-    _aux_data: list[Area]
+    areas: dict[str, Area]
 
     def __init__(self) -> None:
-        self._aux_data = self._parse_aux_data()
+        self.areas = self._parse_aux_data()
 
         logic_directory = Path(__file__).parent / 'logic'
 
@@ -52,18 +52,16 @@ class Logic:
             room_name = dest_node_split[1]
             node_name = dest_node_split[2]
 
-            for area in self.aux_data:
-                if area.name == area_name:
-                    for room in area.rooms:
-                        if room.name == room_name:
-                            for node in room.nodes:
-                                if node.node == node_name:
-                                    for entrance in node.entrances:
-                                        if entrance == dest_node_entrance:
-                                            return node
+            for room in self.areas[area_name].rooms:
+                if room.name == room_name:
+                    for node in room.nodes:
+                        if node.node == node_name:
+                            for entrance in node.entrances:
+                                if entrance == dest_node_entrance:
+                                    return node
             raise Exception(f'Entrance "{dest_node_entrance}" not found')
 
-        for area in self.aux_data:
+        for area in self.areas.values():
             for room in area.rooms:
                 for src_node in room.nodes:
                     for exit in src_node.exits:
@@ -71,7 +69,7 @@ class Logic:
                             # TODO: make this throw an actual error once aux data is complete
                             logging.error(f'exit "{exit.name}" has no "link".')
                             continue
-                        if exit.entrance.split('.')[0] not in [area.name for area in self.aux_data]:
+                        if exit.entrance.split('.')[0] not in self.areas:
                             logging.error(
                                 f'entrance "{exit.entrance}" not found '
                                 '(no aux data exists for that area)'
@@ -83,7 +81,7 @@ class Logic:
         # Delete all exits from nodes. At this point they no longer have any
         # meaning, and any attempt to access them would likely be a bug.
         # TODO: maybe remove this?
-        for area in self.aux_data:
+        for area in self.areas.values():
             for room in area.rooms:
                 for node in room.nodes:
                     delattr(node, 'exits')
@@ -102,14 +100,13 @@ class Logic:
         starting_node_name = 'Mercay.OutsideOshus.Outside'  # TODO: randomize this
         starting_node = [
             node
-            for area in self.aux_data
-            for room in area.rooms
+            for room in self.areas['Mercay'].rooms
             for node in room.nodes
             if node.name == starting_node_name
         ][0]
 
         # Set G to all chests
-        G = [chest for area in self._aux_data for room in area.rooms for chest in room.chests]
+        G = [chest for area in self.areas.values() for room in area.rooms for chest in room.chests]
 
         # Set I to all chest contents (i.e. every item in the item pool) and shuffle it
         I = [chest.contents for chest in G]  # noqa: E741
@@ -157,28 +154,18 @@ class Logic:
             # should be added to avoid an infinite loop.
             if not len(I) or None not in {r.contents for r in candidates}:
                 break
-        return self.aux_data
-
-    @property
-    def aux_data(self) -> list[Area]:
-        return self._aux_data
+        return self.areas
 
     def _get_area(self, area_name: str) -> Area | None:
-        try:
-            return [area for area in self._aux_data if area.name == area_name][0]
-        except IndexError:
+        if area_name in self.areas:
+            return self.areas[area_name]
+        else:
             logging.error(f'Area {area_name} not found!')
             return None
 
     def _get_room(self, area_name: str, room_name: str) -> Room | None:
         try:
-            return [
-                room
-                for area in self._aux_data
-                for room in area.rooms
-                if area.name == area_name
-                if room.name == room_name
-            ][0]
+            return [room for room in self.areas[area_name].rooms if room.name == room_name][0]
         except IndexError:
             logging.error(f'{area_name}: Room {area_name}.{room_name} not found!')
             return None
@@ -305,10 +292,10 @@ class Logic:
                 if f'{area.name}.{room.name}' not in [f'{area.name}.{r.name}' for r in area.rooms]:
                     area.rooms.append(room)
 
-    def _parse_aux_data(self) -> list[Area]:
+    def _parse_aux_data(self) -> dict[str, Area]:
         aux_data_directory = Path(__file__).parent / 'logic'
 
-        areas: list[Area] = []
+        areas: dict[str, Area] = {}
         for file in aux_data_directory.rglob('*.json'):
             with open(file) as fd:
                 area = Area(**json.load(fd))
@@ -316,13 +303,11 @@ class Logic:
                 # It's possible for an Area to be spread across multiple files.
                 # To support this, check if this area exists first. If it does,
                 # add the new area's rooms to the existing area's rooms.
-                # Otherwise, add the new area to the list.
-                for existing_area in areas:
-                    if area.name == existing_area.name:
-                        existing_area.rooms.extend(area.rooms)
-                        break
+                # Otherwise, add the new area.
+                if area.name in areas:
+                    areas[area.name].rooms.extend(area.rooms)
                 else:
-                    areas.append(area)
+                    areas[area.name] = area
         return areas
 
     def _assumed_search(
