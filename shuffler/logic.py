@@ -18,7 +18,6 @@ ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text(
 
 
 class Logic:
-    nodes: list[Node]
     _aux_data: list[Area]
 
     def __init__(self) -> None:
