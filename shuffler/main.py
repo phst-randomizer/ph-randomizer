@@ -28,7 +28,7 @@ def shuffle(seed: str | None) -> list[Area]:
 
     logic.randomize_items()
 
-    return logic.aux_data
+    return list(logic.areas.values())
 
 
 @click.command()
