@@ -240,7 +240,14 @@ class Logic:
         return
 
     def _parse_logic(self, file_content: str) -> None:
-        """Parses .logic files into LogicalRooms."""
+        """
+        Parse .logic files.
+
+        First, the `parse_logic` function parses the .logic files into an intermediate
+        `ParsedLogic` object. Then, it annotates the list of aux `Rooms` with the nodes
+        from `ParsedLogic`.
+
+        """
 
         parsed_logic = parse_logic(file_content)
 
@@ -322,8 +329,6 @@ class Logic:
 
         Params:
             `starting_node`: The node to start at.
-            `nodes`: The nodes that make up the game's logic graph.
-            `aux_data`: Complete aux data for the game as a list of `Area`s.
             `inventory`: Current inventory.
             `flags`: Current flags that are set.
             `visited_nodes`: Nodes that have been visited already in this traversal.
