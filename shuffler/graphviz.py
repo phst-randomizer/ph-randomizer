@@ -19,7 +19,7 @@ def main():
 
     G = pgv.AGraph(strict=False, directed=True)
 
-    for area in logic.aux_data:
+    for area in logic.areas.values():
         for room in area.rooms:
             for node in room.nodes:
                 G.add_node(node.name)

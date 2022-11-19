@@ -13,6 +13,9 @@ class BaseCheck(BaseModel):
     name: str = Field(..., description='The name of the item check')
     contents: str = Field(..., description='The item that this check contains')
 
+    def __hash__(self) -> int:
+        return id(self)
+
     @validator('contents')
     def check_if_item_is_valid(cls, v: str) -> str:
         """
