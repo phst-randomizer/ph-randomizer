@@ -2,11 +2,13 @@ area FireTemple:
   room F1:
     node Entrance:
       door Outside
-      lock FireKey
       enemy Keese1
       enemy Keese2
       enemy Keese3
       enemy Keese4
+
+    node LockedDoorToTopRight:
+      lock LockedDoorToTopRight
 
     node Arena:
       chest KeesesSmallKey
@@ -22,7 +24,10 @@ area FireTemple:
     node StairsMiddle:
       door F2Middle
 
-    Entrance <-> TopRight: open FireKey
+    Entrance -> LockedDoorToTopRight
+    TopRight -> LockedDoorToTopRight
+    LockedDoorToTopRight -> Entrance: open LockedDoorToTopRight
+    LockedDoorToTopRight -> TopRight: open LockedDoorToTopRight
     TopRight <-> Switches: (item Boomerang | item Sword | item Bombs | item Bombchus)
     Entrance <-> StairsMiddle: flag FireMiddleDoor
 
@@ -97,7 +102,7 @@ area FireTemple:
       chest RatKey
 
     node LockedBottomRightDoor:
-      lock FireKey
+      lock LockedBottomRightDoor
       gain RedSwitch
       gain BlueSwitch
 
@@ -108,8 +113,8 @@ area FireTemple:
     BottomLeft <-> RatDefeat: defeated Rat
     BottomLeft -> LockedBottomRightDoor: ((item Hammer & setting HammerClip) | item Bombs | item Boomerang)
     StairsBottomRight -> LockedBottomRightDoor
-    LockedBottomRightDoor -> StairsBottomRight: open FireKey
-    LockedBottomRightDoor -> BottomLeft: (open FireKey & ((item Hammer & setting HammerClip) | item Bombs | item Boomerang | item Bombchus))
+    LockedBottomRightDoor -> StairsBottomRight: open LockedBottomRightDoor
+    LockedBottomRightDoor -> BottomLeft: (open LockedBottomRightDoor & ((item Hammer & setting HammerClip) | item Bombs | item Boomerang | item Bombchus))
 
   room F3:
     node RightSide:
@@ -121,7 +126,7 @@ area FireTemple:
     RightSide <-> Switches3214: (item Boomerang | item GrapplingHook)
 
     node LockedF3Door:
-      lock FireKey
+      lock LockedF3Door
 
     node BossKeyHoleHallway:
       enemy FireKeese4
@@ -135,8 +140,8 @@ area FireTemple:
 
     RightSide -> LockedF3Door
     BossKeyHoleHallway -> LockedF3Door
-    LockedF3Door -> RightSide: open FireKey
-    LockedF3Door -> BossKeyHoleHallway: open FireKey
+    LockedF3Door -> RightSide: open LockedF3Door
+    LockedF3Door -> BossKeyHoleHallway: open LockedF3Door
 
     node StairsBoss:
       door ToF4

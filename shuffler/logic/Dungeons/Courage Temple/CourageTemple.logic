@@ -9,7 +9,7 @@ area CourageTemple:
       chest BombableWallChest
 
     node LockedDoorToArena:
-      lock CourageKey
+      lock LockedDoorToArena
 
     node MoldormArena:
       enemy Moldorm1
@@ -22,8 +22,8 @@ area CourageTemple:
 
     Entrance -> LockedDoorToArena
     MoldormArena -> LockedDoorToArena: (defeated Moldorm1 & defeated Moldorm2)
-    LockedDoorToArena -> Entrance: open CourageKey
-    LockedDoorToArena -> MoldormArena: open CourageKey
+    LockedDoorToArena -> Entrance: open LockedDoorToArena
+    LockedDoorToArena -> MoldormArena: open LockedDoorToArena
 
     MoldormArena -> StairsAfterMoldorm: (defeated Moldorm1 & defeated Moldorm2)
     StairsAfterMoldorm -> MoldormArena: setting MirroredArenaDoors
@@ -51,7 +51,7 @@ area CourageTemple:
       chest PolsKey
 
     node LockedDoorToF2:
-      lock CourageKey
+      lock LockedDoorToF2
 
     node AfterLeftLockedDoor:
       door ToF2ElectricMaze
@@ -62,8 +62,8 @@ area CourageTemple:
 
     PolsVoiceArea -> LockedDoorToF2
     AfterLeftLockedDoor -> LockedDoorToF2
-    LockedDoorToArena -> PolsVoiceArea: open CourageKey
-    LockedDoorToArena -> AfterLeftLockedDoor: open CourageKey
+    LockedDoorToF2 -> PolsVoiceArea: open LockedDoorToF2
+    LockedDoorToF2 -> AfterLeftLockedDoor: open LockedDoorToF2
 
     node AfterSquareCrystal:
       door ToB1InvisibleMaze
@@ -116,7 +116,7 @@ area CourageTemple:
       chest PolsKeyTopRight
 
     node TopRightLockedDoor:
-      lock CourageKey
+      lock TopRightLockedDoor
 
     node StairsToF2EmptyRoom:
       door ToF2EmptyRoom
@@ -125,8 +125,8 @@ area CourageTemple:
 
     TopRight -> TopRightLockedDoor
     StairsToF2EmptyRoom -> TopRightLockedDoor
-    TopRightLockedDoor -> TopRight: open CourageKey
-    TopRightLockedDoor -> StairsToF2EmptyRoom: open CourageKey
+    TopRightLockedDoor -> TopRight: open TopRightLockedDoor
+    TopRightLockedDoor -> StairsToF2EmptyRoom: open TopRightLockedDoor
 
 
   room B1:

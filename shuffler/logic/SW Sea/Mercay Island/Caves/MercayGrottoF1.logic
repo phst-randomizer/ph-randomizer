@@ -27,17 +27,17 @@ area MercayGrotto:
       door North
 
     node LockedDoorDown:
-      lock MercayKey
+      lock LockedDoorDown
 
     node LockedDoorUp:
-      lock MercayKey
+      lock LockedDoorUp
 
     NorthDoor -> LockedDoorUp
     Upper -> LockedDoorUp
-    LockedDoorUp -> Upper: open MercayKey
-    LockedDoorUp -> NorthDoor: open MercayKey
+    LockedDoorUp -> Upper: open LockedDoorUp
+    LockedDoorUp -> NorthDoor: open LockedDoorUp
 
     Lower -> LockedDoorDown
     Upper -> LockedDoorDown
-    LockedDoorDown -> Upper: open MercayKey
-    LockedDoorDown -> Lower: open MercayKey
+    LockedDoorDown -> Upper: open LockedDoorDown
+    LockedDoorDown -> Lower: open LockedDoorDown
