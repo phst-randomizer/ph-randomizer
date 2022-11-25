@@ -3,6 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 from dataclasses import dataclass, field
 from enum import Enum, EnumMeta
+import itertools
 import json
 import logging
 from pathlib import Path
@@ -15,6 +16,22 @@ from shuffler._parser import parse_edge_constraint, parse_logic
 from shuffler.aux_models import Area, Check, Enemy, Exit, Room
 
 ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text())
+
+DUNGEON_STARTING_NODES: dict[str, set[str]] = {
+    'MercayGrotto': {'F1.Lower', 'F2.EastExit'},
+    'FireTemple': {'F1.Entrance'},
+    'CourageTemple': {'F1.Entrance'},
+    'WindTemple': {'F1.Entrance'},
+    'TempleOfTheOceanKing': {'F1.Lower'},
+    'MutohTemple': {'F1.Entrance'},
+    'IceTemple': {'F1.Entrance'},
+    'GoronTemple': {'F1.Entrance'},
+    'GhostShip': {'F1.Main'},
+}
+
+
+class AssumedFillFailed(Exception):
+    pass
 
 
 class Logic:
@@ -84,7 +101,115 @@ class Logic:
         for area in self.areas.values():
             for room in area.rooms:
                 for node in room.nodes:
-                    delattr(node, 'exits')
+                    node.exits = None  # type: ignore
+
+    @property
+    def starting_node(self) -> Node:
+        if 'Mercay' not in self.areas:
+            raise Exception('Nodes are not initialized yet.')
+        starting_node_name = 'Mercay.OutsideOshus.Outside'  # TODO: randomize this
+        return [
+            node
+            for room in self.areas['Mercay'].rooms
+            for node in room.nodes
+            if node.name == starting_node_name
+        ][0]
+
+    def _place_item(
+        self,
+        item_to_place: str,
+        candidates: set[Check] | None = None,
+        starting_nodes: list[Node] | None = None,
+    ):
+        """
+        Randomly place an item somewhere.
+
+        Params:
+            item_to_place: The item to place.
+            candidates: An optional list of candidate locations to place this item.
+            If not provided, every logically reachable location will
+            be considered.
+            starting_nodes: The node(s) that the player has initial access to. Useful when
+            randomizing "subgraphs" of the overall game in isolation, i.e. when placing
+            dungeon items first inside their own dungeons, without regard for the rest
+            of the game's locations.
+        """
+        # Determine all reachable logic nodes
+        reachable_nodes: set[Node] = set()
+        for starting_node in starting_nodes or []:
+            reachable_nodes.update(
+                self._assumed_search(
+                    starting_node or self.starting_node, deepcopy(self.items_left_to_place), set()
+                )
+            )
+        reachable_checks = {check for node in reachable_nodes for check in node.checks}
+
+        # Determine, out of the reachable checks, which ones still don't have an item
+        reachable_candidates: set[Check] = {
+            check for check in reachable_checks if check.contents is None
+        }
+
+        if candidates is not None:
+            # If a list of candidate locations was provided, filter out any reachable checks
+            # that aren't in that list.
+            reachable_candidates.intersection_update(candidates)
+
+        if not len(reachable_candidates):
+            raise AssumedFillFailed(f'Failed to place {item_to_place}!!! Ran out of locations.')
+
+        # Out of the remaining candidates, pick a random one and place the item in it.
+        random_index = random.randint(0, max(len(reachable_candidates) - 1, 0))
+        list(reachable_candidates)[random_index].contents = item_to_place
+
+    def place_keys(self) -> None:
+        """
+        Place all small keys randomly within their dungeons.
+        """
+        # Find all checks that a key *may* be placed in.
+        # For non-keysanity, that means any check that is itself in an Area that contains
+        # at least one check with a small key in the vanilla game.
+        candidates = [
+            (area_name, check)
+            for area_name, area in self.areas.items()
+            for room in area.rooms
+            for check in room.chests
+        ]
+
+        # Iterate over items to find every small key that needs to be placed
+        for item in self.items_left_to_place:
+            if not item.startswith('small_key_'):
+                continue
+            area_name = item[len('small_key_') :]
+
+            # TODO: skip these areas for now, because they require the shuffler to support
+            # `state`/`gain`/`lose` etc. When those are implemented, remove this.
+            if area_name not in ('MercayGrotto',):  # 'FireTemple'):
+                logging.warning(f'Skipping {area_name}...')
+                continue
+
+            # Narrow down candidates for this particular key to only include checks in the
+            # area it's located in.
+            particular_candidates = {check for area, check in candidates if area == area_name}
+
+            # Get all possible entrance nodes for the current dungeon
+            starting_nodes: list[Node] = []
+            for starting_node in DUNGEON_STARTING_NODES[area_name]:
+                starting_room_name, starting_node_name = starting_node.split('.')
+                starting_nodes.append(
+                    [
+                        node
+                        for room in self.areas[area_name].rooms
+                        for node in room.nodes
+                        if room.name == starting_room_name
+                        if node.node == starting_node_name
+                    ][0]
+                )
+
+            self._place_item(
+                'small_key',
+                candidates=particular_candidates,
+                starting_nodes=starting_nodes,
+            )
 
     def randomize_items(self) -> list[Area]:
         """
@@ -94,67 +219,46 @@ class Logic:
         following paper:
         https://digitalcommons.lsu.edu/cgi/viewcontent.cgi?article=6325&context=gradschool_theses
         There are some deviations due to how our logic is structured, but it follows the same
-        general Assumed Fill algorithm described there; where possible, variable/function names
-        are identical to their counterparts in the pseudo-code in that paper.
+        general Assumed Fill algorithm described there.
         """
-        starting_node_name = 'Mercay.OutsideOshus.Outside'  # TODO: randomize this
-        starting_node = [
-            node
-            for room in self.areas['Mercay'].rooms
-            for node in room.nodes
-            if node.name == starting_node_name
-        ][0]
+        all_checks = [
+            (chest, area.name)
+            for area in self.areas.values()
+            for room in area.rooms
+            for chest in room.chests
+        ]
 
-        # Set G to all chests
-        G = [chest for area in self.areas.values() for room in area.rooms for chest in room.chests]
-
-        # Set I to all chest contents (i.e. every item in the item pool) and shuffle it
-        I = [chest.contents for chest in G]  # noqa: E741
-        random.shuffle(I)
-
-        # Make all item locations empty
-        for chest in G:
-            # Disable type-checking for this line.
-            # `contents` should normally never be `None`, but during the assumed fill it must be.
-            chest.contents = None  # type: ignore
-
-        I_prime: list[str] = []
+        all_checks_backup = deepcopy(all_checks)
 
         while True:
-            # Select a random item to place
-            i = I.pop()
+            # Set current inventory to all chest contents (i.e. every item
+            # in the item pool) and shuffle it
+            self.items_left_to_place = [
+                chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
+                for chest, area_name in all_checks
+            ]
+            random.shuffle(self.items_left_to_place)
 
-            # Determine all reachable logic nodes
-            R = self._assumed_search(starting_node, deepcopy(I), set(), set())
+            # Make all item locations empty
+            for chest, _ in all_checks:
+                # Disable type-checking for this line.
+                # `contents` should normally never be `None`, but during the assumed fill it must be
+                chest.contents = None  # type: ignore
 
-            # Determine which of these nodes contain items,
-            # and thus are candidates for item placement
-            candidates = [check for node in R for check in node.checks]
-
-            # Shuffle them
-            random.shuffle(candidates)
-
-            # Find an empty item location and place the item in it
-            for chest in candidates:
-                if chest.contents is None:
-                    chest.contents = i
-                    I_prime.append(i)
-                    break
-            else:
-                raise Exception(
-                    'Error: shuffler ran out of locations to place item.'
-                    f'Remaining items: {[i] + I} ({len([i] + I)})'
-                )
-
-            # TODO: these conditions should both become true at the same time, once shuffling
-            # is complete. If one is true but not the other, that indicates that either not
-            # all items were placed, or not every location received an item. However, until
-            # the aux data and logic are complete, this will not be true; once they are complete,
-            # this statement should be changed to an `and` instead of `or` and an explicit check
-            # should be added to avoid an infinite loop.
-            if not len(I) or None not in {r.contents for r in candidates}:
+            try:
+                self.place_keys()
+                ...  # TODO: shuffle rest of items before `break`
                 break
-        return self.areas
+            except AssumedFillFailed:
+                # TODO: is it possible for the assumed fill to fail if there are no bugs? idk.
+                # If it is, this try/except should be removed
+
+                # If the assumed fill fails, restore the original chest contents and start over
+                for (chest, _), (chest_backup, _) in zip(all_checks, all_checks_backup):
+                    chest.contents = chest_backup.contents
+                continue
+
+        return list(self.areas.values())
 
     def _get_area(self, area_name: str) -> Area | None:
         if area_name in self.areas:
@@ -223,6 +327,8 @@ class Logic:
                     node.exits.append(new_exit)
             case NodeDescriptor.FLAG.value:
                 node.flags.add(descriptor_value)
+            case NodeDescriptor.LOCK.value:
+                node.locks.add(descriptor_value)
             case NodeDescriptor.ENEMY.value:
                 try:
                     node.enemies.append(
@@ -317,12 +423,14 @@ class Logic:
                     areas[area.name] = area
         return areas
 
+    @classmethod
     def _assumed_search(
-        self,
+        cls,
         starting_node: Node,
         inventory: list[str],
         flags: set[str],
-        visited_nodes: set[Node],
+        keys: dict[str, int] | None = None,
+        visited_nodes: set[Node] | None = None,
     ) -> set[Node]:
         """
         Calculate the set of nodes reachable from the `starting_node` given the current inventory.
@@ -338,14 +446,23 @@ class Logic:
         """
         logging.debug(starting_node.name)
 
-        # For the current node, find all chests + "collect" their items and note every door so
-        # we can go through them later
+        if visited_nodes is None:
+            visited_nodes = set()
+
+        if keys is None:
+            keys = {dungeon: 0 for dungeon in DUNGEON_STARTING_NODES.keys()}
+
+        # For the current node, find all chests + "collect" their items
         for check in starting_node.checks:
             if check.contents and check.contents not in inventory:
                 inventory.append(check.contents)
                 # Reset visited nodes and rooms because we may now be able to reach
                 # nodes we couldn't before with this new item
                 visited_nodes.clear()
+
+                # If this is a small key, increment key count for the associated dungeon
+                if check.contents == 'small_key':
+                    keys[starting_node.area] += 1
 
         for flag in starting_node.flags:
             if flag not in flags:
@@ -356,20 +473,56 @@ class Logic:
 
         visited_nodes.add(starting_node)  # Acknowledge this node as "visited"
 
+        edges_that_require_keys: list[Edge] = []
+
         # Check which edges are traversable and do so if they are
         for edge in starting_node.edges:
             if edge.dest in visited_nodes:
                 continue
             if edge.is_traversable(inventory, flags):
                 logging.debug(f'{starting_node.name} -> {edge.dest.name}')
-                visited_nodes = visited_nodes.union(
-                    self._assumed_search(
-                        edge.dest,
-                        inventory,
-                        flags,
-                        visited_nodes,
+                # If the edge requires a key, but is otherwise traversable, save it to a list
+                # to be processed later
+                if edge.requires_key:
+                    edges_that_require_keys.append(edge)
+                # Otherwise, just traverse the edge
+                else:
+                    visited_nodes.update(
+                        cls._assumed_search(
+                            edge.dest,
+                            inventory,
+                            flags,
+                            keys,
+                            visited_nodes,
+                        )
                     )
-                )
+
+        # If there are any edges that require keys, but are otherwise traversable, traverse each
+        # while considering worse-case key usage
+        if len(edges_that_require_keys):
+            keys_to_use = min(len(edges_that_require_keys), keys[starting_node.area])
+            if keys_to_use > 0:
+                keys[starting_node.area] -= keys_to_use
+
+                # To determine what nodes can be reached given worst-case key usage, get
+                # the sets of nodes reachable for every possible way the keys can be used,
+                # then take the intersection of those sets.
+                accessible_nodes_intersection: set[Node] | None = None
+                for subset in itertools.combinations(edges_that_require_keys, keys_to_use):
+                    for edge in subset:
+                        accessible_nodes = cls._assumed_search(
+                            edge.dest,
+                            deepcopy(inventory),
+                            deepcopy(flags),
+                            deepcopy(keys),
+                            visited_nodes,
+                        )
+                        if accessible_nodes_intersection is None:
+                            accessible_nodes_intersection = accessible_nodes
+                        else:
+                            accessible_nodes_intersection.intersection_update(accessible_nodes)
+                if accessible_nodes_intersection is not None:
+                    visited_nodes.update(accessible_nodes_intersection)
         return visited_nodes
 
 
@@ -382,6 +535,7 @@ class Node:
     entrances: set[str] = field(default_factory=set)
     enemies: list[Enemy] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
+    locks: set[str] = field(default_factory=set)
 
     @property
     def area(self) -> str:
@@ -421,6 +575,29 @@ class Edge:
         else:
             self.constraints = constraints
 
+    def __repr__(self):
+        r = f'{self.src.node} -> {self.dest.node}'
+        if self.constraints:
+            r += f': {str(self.constraints)}'
+        return r
+
+    @property
+    def requires_key(self) -> bool:
+        """
+        Whether or not this edge requires a key to traverse, i.e. if it represents a locked door.
+        """
+
+        def _contains_open(constraints: list[str | list[str | list]]):
+            contains_open = False
+            for elem in constraints:
+                if isinstance(elem, list):
+                    contains_open = _contains_open(elem)
+                elif EdgeDescriptor.OPEN.value in elem:
+                    contains_open = True
+            return contains_open
+
+        return _contains_open(self.constraints) if self.constraints else False
+
     def is_traversable(self, current_inventory: list[str], current_flags: set[str]) -> bool:
         """
         Determine if this edge is traversable given the current player state.
@@ -431,7 +608,7 @@ class Edge:
 
             current_flags: A set of strings containing all `flags` that are logically set.
         """
-        if self.constraints is not None:
+        if self.constraints is not None and len(self.constraints):
             return self._is_traversable(
                 parsed_expr=self.constraints,
                 inventory=current_inventory,
@@ -522,6 +699,16 @@ class Edge:
                         f'enemy {value} not found!'
                     )
                     return False
+            case EdgeDescriptor.OPEN.value:
+                accessible_nodes = Logic._assumed_search(
+                    self.src,
+                    deepcopy(inventory),
+                    deepcopy(flags),
+                )
+                for node in accessible_nodes:
+                    if value in node.locks:
+                        return True
+                return False
             case other:
                 if other not in EdgeDescriptor:
                     raise Exception(f'Invalid edge descriptor "{other}"')
