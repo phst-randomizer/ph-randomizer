@@ -12,7 +12,9 @@
         "+(.pre-commit-config.yaml)"
       ],
       "automerge": true,
-      "schedule": ["after 9pm on friday"]
+      "schedule": [
+        "after 9pm on friday"
+      ]
     }
   ]
 }
