@@ -11,6 +11,7 @@ import random
 from typing import Any
 
 import inflection
+from ordered_set import OrderedSet
 
 from shuffler._parser import parse_edge_constraint, parse_logic
 from shuffler.aux_models import Area, Check, Enemy, Exit, Room
@@ -118,7 +119,7 @@ class Logic:
     def _place_item(
         self,
         item_to_place: str,
-        candidates: set[Check] | None = None,
+        candidates: OrderedSet[Check] | None = None,
         starting_nodes: list[Node] | None = None,
     ):
         """
@@ -135,19 +136,19 @@ class Logic:
             of the game's locations.
         """
         # Determine all reachable logic nodes
-        reachable_nodes: set[Node] = set()
+        reachable_nodes: OrderedSet[Node] = OrderedSet()
         for starting_node in starting_nodes or []:
             reachable_nodes.update(
                 self._assumed_search(
                     starting_node or self.starting_node, deepcopy(self.items_left_to_place), set()
                 )
             )
-        reachable_checks = {check for node in reachable_nodes for check in node.checks}
+        reachable_checks = OrderedSet(check for node in reachable_nodes for check in node.checks)
 
         # Determine, out of the reachable checks, which ones still don't have an item
-        reachable_candidates: set[Check] = {
+        reachable_candidates: OrderedSet[Check] = OrderedSet(
             check for check in reachable_checks if check.contents is None
-        }
+        )
 
         if candidates is not None:
             # If a list of candidate locations was provided, filter out any reachable checks
@@ -159,7 +160,7 @@ class Logic:
 
         # Out of the remaining candidates, pick a random one and place the item in it.
         random_index = random.randint(0, max(len(reachable_candidates) - 1, 0))
-        list(reachable_candidates)[random_index].contents = item_to_place
+        reachable_candidates[random_index].contents = item_to_place
 
     def place_keys(self) -> None:
         """
@@ -189,7 +190,9 @@ class Logic:
 
             # Narrow down candidates for this particular key to only include checks in the
             # area it's located in.
-            particular_candidates = {check for area, check in candidates if area == area_name}
+            particular_candidates = OrderedSet(
+                check for area, check in candidates if area == area_name
+            )
 
             # Get all possible entrance nodes for the current dungeon
             starting_nodes: list[Node] = []
@@ -430,8 +433,8 @@ class Logic:
         inventory: list[str],
         flags: set[str],
         keys: dict[str, int] | None = None,
-        visited_nodes: set[Node] | None = None,
-    ) -> set[Node]:
+        visited_nodes: OrderedSet[Node] | None = None,
+    ) -> OrderedSet[Node]:
         """
         Calculate the set of nodes reachable from the `starting_node` given the current inventory.
 
@@ -447,7 +450,7 @@ class Logic:
         logging.debug(starting_node.name)
 
         if visited_nodes is None:
-            visited_nodes = set()
+            visited_nodes = OrderedSet()
 
         if keys is None:
             keys = {dungeon: 0 for dungeon in DUNGEON_STARTING_NODES.keys()}
@@ -507,7 +510,7 @@ class Logic:
                 # To determine what nodes can be reached given worst-case key usage, get
                 # the sets of nodes reachable for every possible way the keys can be used,
                 # then take the intersection of those sets.
-                accessible_nodes_intersection: set[Node] | None = None
+                accessible_nodes_intersection: OrderedSet[Node] | None = None
                 for subset in itertools.combinations(edges_that_require_keys, keys_to_use):
                     for edge in subset:
                         accessible_nodes = cls._assumed_search(
