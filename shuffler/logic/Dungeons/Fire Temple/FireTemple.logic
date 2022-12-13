@@ -109,7 +109,7 @@ area FireTemple:
     node StairsBottomRight:
       door ToF3
 
-    BottomLeft <-> KeesesDefeat: (defeated FireKeese1 & defeated FireKeese21 & defeated FireKeese3)
+    BottomLeft <-> KeesesDefeat: (defeated FireKeese1 & defeated FireKeese2 & defeated FireKeese3)
     BottomLeft <-> RatDefeat: defeated Rat
     BottomLeft -> LockedBottomRightDoor: ((item Hammer & setting HammerClip) | item Bombs | item Boomerang)
     StairsBottomRight -> LockedBottomRightDoor

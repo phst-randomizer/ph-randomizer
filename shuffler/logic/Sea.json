@@ -204,6 +204,12 @@
           "name": "NE",
           "entrance": "NE.ToRightNW.RightNW"
         }
+      ],
+      "enemies": [
+        {
+          "name": "GiantEyePlant",
+          "type": "giant_eye_plant"
+        }
       ]
     },
     {
@@ -294,6 +300,12 @@
         {
           "name": "SW",
           "entrance": "SW.ToSE.SE"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "MassiveEye",
+          "type": "massive_eye"
         }
       ]
     },

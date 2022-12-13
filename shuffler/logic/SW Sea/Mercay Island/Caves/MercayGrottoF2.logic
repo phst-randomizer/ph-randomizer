@@ -30,4 +30,4 @@ area MercayGrotto:
     LockedDoor -> Main: open MercayKey
     LockedDoor -> EastExit: open MercayKey
 
-    Main <-> RatKey: defeated Rat
+    Main <-> RatKey: defeated KeyRat
