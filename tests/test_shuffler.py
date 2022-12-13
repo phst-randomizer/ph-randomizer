@@ -8,6 +8,7 @@ from shuffler.aux_models import Area
 from shuffler.logic import Edge, Node
 
 
+@pytest.mark.repeat(5)
 @pytest.mark.parametrize('seed', ['test', 'another_test', 'ANOTHER_TEST!!', 'this_is_a_real_seed'])
 def test_seeds(seed: str):
     """Test that running the shuffler with same seed multiple times produces identical aux data."""
