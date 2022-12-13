@@ -43,6 +43,8 @@
   "yook": "((item Sword | item Bow) & item Bombs) | item Hammer",
   "jolene": "item Sword",
   "winder": "flag Unkillable",
+  "gel": "item Sword | flag TODO",
+  "rat": "item Sword | flag TODO",
 
   "phantom": "item PhantomSword",
   "swift_phantom": "item PhantomSword",
