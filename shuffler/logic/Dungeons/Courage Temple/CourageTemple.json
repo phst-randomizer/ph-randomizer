@@ -106,6 +106,10 @@
         {
           "name": "PolsVoice",
           "type": "pols_voice"
+        },
+        {
+          "name": "PolsVoiceTopRight",
+          "type": "pols_voice"
         }
       ]
     },
@@ -213,6 +217,36 @@
         {
           "name": "ToF3",
           "entrance": "F3.Main.ToF2"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Octorok1",
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok2",
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok3",
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok4",
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok5",
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok6",
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok7",
+          "type": "octorok"
         }
       ]
     },
