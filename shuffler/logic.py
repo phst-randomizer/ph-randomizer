@@ -39,7 +39,7 @@ class Logic:
     areas: dict[str, Area]
 
     def __init__(self) -> None:
-        self.areas = self._parse_aux_data()
+        Logic.areas = self._parse_aux_data()
 
         logic_directory = Path(__file__).parent / 'logic'
 
@@ -738,20 +738,25 @@ class Edge:
             case EdgeDescriptor.STATE.value | EdgeDescriptor.LOSE.value:
                 return value in states
             case EdgeDescriptor.DEFEATED.value:
-                for enemy in self.src.enemies:
-                    if enemy.name != value:
-                        continue
-                    if enemy.type not in ENEMIES_MAPPING:
-                        raise Exception(f'{self.src.name}: invalid enemy type "{enemy.type}"')
-                    return self._is_traversable(
-                        parse_edge_constraint(ENEMIES_MAPPING[enemy.type]), inventory, flags, states
-                    )
-                else:
-                    logging.error(
-                        f'{self.src.name} (Edge "...{type} {value}..."): '
-                        f'enemy {value} not found!'
-                    )
-                    return False
+                for room in Logic.areas[self.src.area].rooms:
+                    if room.name == self.src.room:
+                        for enemy in room.enemies:
+                            if enemy.name != value:
+                                continue
+                            elif enemy.type not in ENEMIES_MAPPING:
+                                raise Exception(
+                                    f'{self.src.name}: invalid enemy type "{enemy.type}"'
+                                )
+                            return self._is_traversable(
+                                parse_edge_constraint(ENEMIES_MAPPING[enemy.type]),
+                                inventory,
+                                flags,
+                                states,
+                            )
+                logging.error(
+                    f'{self.src.name} (Edge "...{type} {value}..."): ' f'enemy {value} not found!'
+                )
+                return False
             case EdgeDescriptor.OPEN.value:
                 accessible_nodes = Logic._assumed_search(
                     self.src,
