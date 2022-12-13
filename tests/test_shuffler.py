@@ -77,4 +77,4 @@ def test_edge_parser(expression: str, inventory: list[str], flags: set[str], exp
     node2 = Node(name='test2')
     edge = Edge(node1, node2, expression)
     node1.edges.append(edge)
-    assert edge.is_traversable(inventory, flags) == expected_result
+    assert edge.is_traversable(inventory, flags, set()) == expected_result
