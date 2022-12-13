@@ -182,9 +182,10 @@ class Logic:
                 continue
             area_name = item[len('small_key_') :]
 
-            # TODO: skip these areas for now, because they require the shuffler to support
-            # `state`/`gain`/`lose` etc. When those are implemented, remove this.
-            if area_name not in ('MercayGrotto',):  # 'FireTemple'):
+            # TODO: skip these areas for now because the assumed fill fails for them,
+            # and it's unclear for now whether it's because of a bug in the shuffler
+            # or an error in the logic.
+            if area_name in ('MutohTemple', 'TempleOfTheOceanKing'):
                 logging.warning(f'Skipping {area_name}...')
                 continue
 
@@ -231,35 +232,22 @@ class Logic:
             for chest in room.chests
         ]
 
-        all_checks_backup = deepcopy(all_checks)
+        # Set current inventory to all chest contents (i.e. every item
+        # in the item pool) and shuffle it
+        self.items_left_to_place = [
+            chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
+            for chest, area_name in all_checks
+        ]
+        random.shuffle(self.items_left_to_place)
 
-        while True:
-            # Set current inventory to all chest contents (i.e. every item
-            # in the item pool) and shuffle it
-            self.items_left_to_place = [
-                chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
-                for chest, area_name in all_checks
-            ]
-            random.shuffle(self.items_left_to_place)
+        # Make all item locations empty
+        for chest, _ in all_checks:
+            # Disable type-checking for this line.
+            # `contents` should normally never be `None`, but during the assumed fill it must be
+            chest.contents = None  # type: ignore
 
-            # Make all item locations empty
-            for chest, _ in all_checks:
-                # Disable type-checking for this line.
-                # `contents` should normally never be `None`, but during the assumed fill it must be
-                chest.contents = None  # type: ignore
-
-            try:
-                self.place_keys()
-                ...  # TODO: shuffle rest of items before `break`
-                break
-            except AssumedFillFailed:
-                # TODO: is it possible for the assumed fill to fail if there are no bugs? idk.
-                # If it is, this try/except should be removed
-
-                # If the assumed fill fails, restore the original chest contents and start over
-                for (chest, _), (chest_backup, _) in zip(all_checks, all_checks_backup):
-                    chest.contents = chest_backup.contents
-                continue
+        self.place_keys()
+        ...  # TODO: shuffle rest of items before `break`
 
         return list(self.areas.values())
 
@@ -332,6 +320,8 @@ class Logic:
                 node.flags.add(descriptor_value)
             case NodeDescriptor.LOCK.value:
                 node.locks.add(descriptor_value)
+            case NodeDescriptor.GAIN.value:
+                node.states.add(descriptor_value)
             case NodeDescriptor.ENEMY.value:
                 try:
                     node.enemies.append(
@@ -432,6 +422,7 @@ class Logic:
         starting_node: Node,
         inventory: list[str],
         flags: set[str],
+        states: set[str] | None = None,
         keys: dict[str, int] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
     ) -> OrderedSet[Node]:
@@ -451,6 +442,9 @@ class Logic:
 
         if visited_nodes is None:
             visited_nodes = OrderedSet()
+
+        if states is None:
+            states = set()
 
         if keys is None:
             keys = {dungeon: 0 for dungeon in DUNGEON_STARTING_NODES.keys()}
@@ -474,6 +468,10 @@ class Logic:
                 # nodes we couldn't before with this new flag set
                 visited_nodes.clear()
 
+        for state in starting_node.states:
+            if state not in states:
+                states.add(state)
+
         visited_nodes.add(starting_node)  # Acknowledge this node as "visited"
 
         edges_that_require_keys: list[Edge] = []
@@ -482,7 +480,7 @@ class Logic:
         for edge in starting_node.edges:
             if edge.dest in visited_nodes:
                 continue
-            if edge.is_traversable(inventory, flags):
+            if edge.is_traversable(inventory, flags, states):
                 logging.debug(f'{starting_node.name} -> {edge.dest.name}')
                 # If the edge requires a key, but is otherwise traversable, save it to a list
                 # to be processed later
@@ -490,11 +488,18 @@ class Logic:
                     edges_that_require_keys.append(edge)
                 # Otherwise, just traverse the edge
                 else:
+                    # Remove states lost by traversing this edge
+                    new_states = {
+                        state
+                        for state in states
+                        if not edge.states_to_lose or state not in edge.states_to_lose
+                    }
                     visited_nodes.update(
                         cls._assumed_search(
                             edge.dest,
                             inventory,
                             flags,
+                            new_states,
                             keys,
                             visited_nodes,
                         )
@@ -513,10 +518,17 @@ class Logic:
                 accessible_nodes_intersection: OrderedSet[Node] | None = None
                 for subset in itertools.combinations(edges_that_require_keys, keys_to_use):
                     for edge in subset:
+                        # Remove states lost by traversing this edge
+                        new_states = {
+                            state
+                            for state in states
+                            if not edge.states_to_lose or state not in edge.states_to_lose
+                        }
                         accessible_nodes = cls._assumed_search(
                             edge.dest,
                             deepcopy(inventory),
                             deepcopy(flags),
+                            new_states,
                             deepcopy(keys),
                             visited_nodes,
                         )
@@ -539,6 +551,7 @@ class Node:
     enemies: list[Enemy] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
     locks: set[str] = field(default_factory=set)
+    states: set[str] = field(default_factory=set)
 
     @property
     def area(self) -> str:
@@ -564,10 +577,26 @@ class Edge:
     src: Node
     dest: Node
     constraints: list[str | list[str | list]] | None
+    states_to_lose: set[str] | None
 
     def __init__(self, src: Node, dest: Node, constraints: str | None = None) -> None:
         self.src = src
         self.dest = dest
+
+        def _get_states_to_lose(
+            constraints: list[str | list[str | list]],
+            states: set[str] | None = None,
+        ) -> set[str]:
+            if states is None:
+                states = set()
+            for i, elem in enumerate(constraints):
+                if isinstance(elem, list):
+                    return _get_states_to_lose(elem, states)
+                elif elem == EdgeDescriptor.LOSE.value:
+                    state_name = constraints[i + 1]
+                    assert isinstance(state_name, str)
+                    states.add(state_name)
+            return states
 
         logging.debug(f'Evaluating "{constraints}"...')
 
@@ -575,8 +604,12 @@ class Edge:
         if constraints is not None:
             self.constraints = parse_edge_constraint(constraints)
             assert len(self.constraints), f'Failed to parsed edge "{constraints}"'
+            self.states_to_lose = _get_states_to_lose(self.constraints)
+            if not len(self.states_to_lose):
+                self.states_to_lose = None
         else:
             self.constraints = constraints
+            self.states_to_lose = None
 
     def __repr__(self):
         r = f'{self.src.node} -> {self.dest.node}'
@@ -601,7 +634,12 @@ class Edge:
 
         return _contains_open(self.constraints) if self.constraints else False
 
-    def is_traversable(self, current_inventory: list[str], current_flags: set[str]) -> bool:
+    def is_traversable(
+        self,
+        current_inventory: list[str],
+        current_flags: set[str],
+        current_states: set[str],
+    ) -> bool:
         """
         Determine if this edge is traversable given the current player state.
 
@@ -616,6 +654,7 @@ class Edge:
                 parsed_expr=self.constraints,
                 inventory=current_inventory,
                 flags=current_flags,
+                states=current_states,
             )
         return True
 
@@ -627,6 +666,7 @@ class Edge:
         parsed_expr: list[str | list[str | Any]],
         inventory: list[str],
         flags: set[str],
+        states: set[str],
         result=True,
     ) -> bool:
         current_op = None  # variable to track current logical operation (AND or OR), if applicable
@@ -640,6 +680,7 @@ class Edge:
                     parsed_expr=sub_expression,
                     inventory=inventory,
                     flags=flags,
+                    states=states,
                     result=result,
                 )
             else:
@@ -649,7 +690,9 @@ class Edge:
                 expr_value = parsed_expr.pop(0)
                 assert isinstance(expr_value, str)
 
-                current_result = self._evaluate_constraint(expr_type, expr_value, inventory, flags)
+                current_result = self._evaluate_constraint(
+                    expr_type, expr_value, inventory, flags, states
+                )
 
             # Apply any pending logical operations
             if current_op == '&':
@@ -666,7 +709,12 @@ class Edge:
         return result
 
     def _evaluate_constraint(
-        self, type: str, value: str, inventory: list[str], flags: set[str]
+        self,
+        type: str,
+        value: str,
+        inventory: list[str],
+        flags: set[str],
+        states: set[str],
     ) -> bool:
         """
         Given an edge constraint "type value", determines if the edge is traversable
@@ -687,6 +735,8 @@ class Edge:
             case EdgeDescriptor.FLAG.value:
                 # Translate item name from PascalCase to snake_case
                 return inflection.underscore(value) in flags
+            case EdgeDescriptor.STATE.value | EdgeDescriptor.LOSE.value:
+                return value in states
             case EdgeDescriptor.DEFEATED.value:
                 for enemy in self.src.enemies:
                     if enemy.name != value:
@@ -694,7 +744,7 @@ class Edge:
                     if enemy.type not in ENEMIES_MAPPING:
                         raise Exception(f'{self.src.name}: invalid enemy type "{enemy.type}"')
                     return self._is_traversable(
-                        parse_edge_constraint(ENEMIES_MAPPING[enemy.type]), inventory, flags
+                        parse_edge_constraint(ENEMIES_MAPPING[enemy.type]), inventory, flags, states
                     )
                 else:
                     logging.error(
