@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from copy import deepcopy
 from dataclasses import dataclass, field
 from enum import Enum, EnumMeta
@@ -28,6 +29,17 @@ DUNGEON_STARTING_NODES: dict[str, set[str]] = {
     'IceTemple': {'F1.Entrance'},
     'GoronTemple': {'F1.Entrance'},
     'GhostShip': {'F1.Main'},
+}
+
+DUNGEON_REWARD_CHECKS: dict[str, str] = {
+    'BlaazBossRoom.Main.SpiritOfPower': 'power_spirit',
+    'CyclokBossRoom.Main.SpiritOfWisdom': 'wisdom_spirit',
+    'CraykBossRoom.Main.SpiritOfCourage': 'courage_spirit',
+    # TODO: these are currently "disconnected" from the rest of the logic graph due to some aux
+    # data not being complete. Once it's complete, these entries should be uncommented.
+    # 'GoronTemple.CrimsonineRoom.Crimsonine': 'crimsonine',
+    # 'IceTemple.AzurineRoom.Azurine': 'azurine',
+    # 'MutohTemple.B4.Aquanine': 'aquanine',
 }
 
 
@@ -135,12 +147,30 @@ class Logic:
             dungeon items first inside their own dungeons, without regard for the rest
             of the game's locations.
         """
+
+        # Remove this item from list of items left to be placed
+        self.items_left_to_place.pop(self.items_left_to_place.index(item_to_place))
+
+        # Small keys are (for now) all the same item, no matter what dungeon they are for.
+        if item_to_place.startswith('small_key_'):
+            item_to_place = 'small_key'
+
+        # Populate keys dict for current inventory
+        keys: dict[str, int] = defaultdict(int)
+        for item in self.items_left_to_place:
+            if item.startswith('small_key_'):
+                keys[item[len('small_key_') :]] += 1
+
         # Determine all reachable logic nodes
         reachable_nodes: OrderedSet[Node] = OrderedSet()
-        for starting_node in starting_nodes or []:
+        for starting_node in starting_nodes or [self.starting_node]:
             reachable_nodes.update(
                 self._assumed_search(
-                    starting_node or self.starting_node, deepcopy(self.items_left_to_place), set()
+                    starting_node,
+                    deepcopy(self.items_left_to_place),
+                    set(),
+                    set(),
+                    keys,
                 )
             )
         reachable_checks = OrderedSet(check for node in reachable_nodes for check in node.checks)
@@ -161,6 +191,23 @@ class Logic:
         # Out of the remaining candidates, pick a random one and place the item in it.
         random_index = random.randint(0, max(len(reachable_candidates) - 1, 0))
         reachable_candidates[random_index].contents = item_to_place
+
+    def place_dungeon_rewards(self) -> None:
+        # Find all checks that a dungeon reward *may* be placed in.
+        # TODO: for now, just allow dungeon items to be shuffled amongst themselves.
+        # In the future, we'll have an optional setting that allows dungeon rewards
+        # to be placed anywhere.
+        candidates = OrderedSet(
+            check
+            for area in self.areas.values()
+            for room in area.rooms
+            for check in room.chests
+            if '.'.join([area.name, room.name, check.name]) in DUNGEON_REWARD_CHECKS.keys()
+        )
+
+        for item in self.items_left_to_place:
+            if item in DUNGEON_REWARD_CHECKS.values():
+                self._place_item(item, candidates)
 
     def place_keys(self) -> None:
         """
@@ -210,7 +257,7 @@ class Logic:
                 )
 
             self._place_item(
-                'small_key',
+                item,
                 candidates=particular_candidates,
                 starting_nodes=starting_nodes,
             )
@@ -246,8 +293,9 @@ class Logic:
             # `contents` should normally never be `None`, but during the assumed fill it must be
             chest.contents = None  # type: ignore
 
+        self.place_dungeon_rewards()
         self.place_keys()
-        ...  # TODO: shuffle rest of items before `break`
+        ...  # TODO: shuffle rest of items
 
         return list(self.areas.values())
 
@@ -730,6 +778,9 @@ class Edge:
         """
         match type:
             case EdgeDescriptor.ITEM.value:
+                # Special case: "Sword" means either OshusSword or PhantomSword.
+                if value == 'Sword':
+                    value = 'OshusSword'
                 # Translate item name from PascalCase to snake_case
                 return inflection.underscore(value) in inventory
             case EdgeDescriptor.FLAG.value:
