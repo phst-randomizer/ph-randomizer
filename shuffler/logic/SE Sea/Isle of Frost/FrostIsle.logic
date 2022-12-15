@@ -133,7 +133,7 @@ area FrostIsle:
 
     node Dungeon:
       door ToDungeon
-      exit DungeonBlueWarp
+      entrance DungeonBlueWarp
 
     Main -> LeftLedge: item GrapplingHook
     LeftLedge -> Main
