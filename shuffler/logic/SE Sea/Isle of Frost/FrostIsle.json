@@ -7,13 +7,17 @@
       "chests": [
         {
           "name": "LedgeChest",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
         },
         {
           "name": "BigGreenRupee",
-          "type": "",
-          "contents": ""
+          "type": "dig_spot",
+          "contents": "big_green_rupee",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         }
       ],
       "exits": [
@@ -23,23 +27,23 @@
         },
         {
           "name": "SmartAnoukiHouse",
-          "entrance": ""
+          "entrance": "AnoukiRedCauldronHouse.Main.Exit"
         },
         {
           "name": "SensitiveAnoukiHouse",
-          "entrance": ""
+          "entrance": "AnoukiBrownCauldronHouse.Main.Exit"
         },
         {
           "name": "ChiefHouse",
-          "entrance": ""
+          "entrance": "AnoukiChiefHouse.Main.Exit"
         },
         {
           "name": "ToNorth",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.ToSouth"
         },
         {
           "name": "ToCave",
-          "entrance": ""
+          "entrance": "IceCave.Main.Left"
         }
       ]
     },
@@ -49,7 +53,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "Port.Main.ChiefHouse"
         }
       ]
     },
@@ -59,7 +63,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "Port.Main.SmartAnoukiHouse"
         }
       ]
     },
@@ -69,7 +73,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "Port.Main.SensitiveAnoukiHouse"
         }
       ]
     },
@@ -78,58 +82,68 @@
       "chests": [
         {
           "name": "BigGoldRupee",
-          "type": "",
-          "contents": ""
+          "type": "dig_spot",
+          "contents": "big_gold_rupee",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "DoboSign",
-          "type": "",
-          "contents": ""
+          "type": "dig_spot",
+          "contents": "big_green_rupee",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "FofoSign",
-          "type": "",
-          "contents": ""
+          "type": "dig_spot",
+          "contents": "big_green_rupee",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "GossipStoneHint",
-          "type": "",
-          "contents": ""
+          "type": "dig_spot",
+          "contents": "big_red_rupee",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         },
         {
           "name": "BottomLeftIsland",
-          "type": "",
-          "contents": ""
+          "type": "dig_spot",
+          "contents": "treasure_map_nw_3",
+          "zmb_actor_index": -1,
+          "zmb_file_path": "TODO"
         }
       ],
       "exits": [
         {
           "name": "ToSouth",
-          "entrance": ""
+          "entrance": "Port.Main.ToNorth"
         },
         {
           "name": "GumoHouse",
-          "entrance": ""
+          "entrance": "GumoHouse.Main.Exit"
         },
         {
           "name": "ArooHouse",
-          "entrance": ""
+          "entrance": "ArooHouse.Main.Exit"
         },
         {
           "name": "MazoHouse",
-          "entrance": ""
+          "entrance": "MazoHouse.Main.Exit"
         },
         {
           "name": "DoboHouse",
-          "entrance": ""
+          "entrance": "DoboHouse.Main.Exit"
         },
         {
           "name": "KumuHouse",
-          "entrance": ""
+          "entrance": "KumuHouse.Main.Exit"
         },
         {
           "name": "FofoHouse",
-          "entrance": ""
+          "entrance": "FofoHouse.Main.Exit"
         }
       ]
     },
@@ -139,7 +153,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.GumoHouse"
         }
       ]
     },
@@ -149,7 +163,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.ArooHouse"
         }
       ]
     },
@@ -159,7 +173,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.MazoHouse"
         }
       ]
     },
@@ -169,7 +183,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.DoboHouse"
         }
       ]
     },
@@ -179,7 +193,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.KumuHouse"
         }
       ]
     },
@@ -189,7 +203,7 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": ""
+          "entrance": "AnoukiVillage.AnoukiEstates.FofoHouse"
         }
       ]
     },
@@ -199,11 +213,11 @@
       "exits": [
         {
           "name": "Left",
-          "entrance": ""
+          "entrance": "Port.ToCave.ToCave"
         },
         {
           "name": "Right",
-          "entrance": ""
+          "entrance": "GreatIceField.Main.ToCave"
         }
       ]
     },
@@ -212,67 +226,75 @@
       "chests": [
         {
           "name": "DropDown",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "power_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
         },
         {
           "name": "DoubleLeft",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
         },
         {
           "name": "DoubleRight",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
         },
         {
           "name": "RightHigher",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "big_green_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": -1
         }
       ],
       "exits": [
         {
           "name": "ToCave",
-          "entrance": ""
+          "entrance": "IceCave.Main.Right"
         },
         {
           "name": "ToNorthLedgeRight",
-          "entrance": ""
+          "entrance": "DungeonEntrance.RightLedge.ToSouthLedgeRight"
         },
         {
           "name": "ToNorthLedgeLeft",
-          "entrance": ""
+          "entrance": "DungeonEntrance.LeftLedge.ToSouthLedgeLeft"
         },
         {
           "name": "ToNorth",
-          "entrance": ""
+          "entrance": "DungeonEntrance.Main.ToSouth"
         }
       ],
       "enemies": [
         {
           "name": "Yook1",
-          "type": ""
+          "type": "yook"
         },
         {
           "name": "Yook2",
-          "type": ""
+          "type": "yook"
         },
         {
           "name": "Yook3",
-          "type": ""
+          "type": "yook"
         },
         {
           "name": "Yook4",
-          "type": ""
+          "type": "yook"
         },
         {
           "name": "Yook5",
-          "type": ""
+          "type": "yook"
         },
         {
           "name": "Yook6",
-          "type": ""
+          "type": "yook"
         }
       ]
     },
@@ -282,25 +304,25 @@
       "exits": [
         {
           "name": "ToSouth",
-          "entrance": ""
+          "entrance": "GreatIceField.DefeatAllYooks.ToNorth"
         },
         {
           "name": "ToSouthLedgeRight",
-          "entrance": ""
+          "entrance": "GreatIceField.RightLedge.ToNorthLedgeRight"
         },
         {
           "name": "ToSouthLedgeLeft",
-          "entrance": ""
+          "entrance": "GreatIceField.LeftLedge.ToNorthLedgeLeft"
         },
         {
           "name": "ToDungeon",
-          "entrance": ""
+          "entrance": "IceTemple.F1.Entrance.Exit"
         }
       ],
       "enemies": [
         {
           "name": "Yook",
-          "type": ""
+          "type": "yook"
         }
       ]
     }
