@@ -33,7 +33,7 @@
         },
         {
           "name": "AfterBoss",
-          "entrance": "GustIsle.UpperIsland.TempleFront.AfterBoss"
+          "entrance": "Gust.UpperIsland.TempleEntrance.AfterBoss"
         }
       ],
       "name": "Main",

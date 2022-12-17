@@ -16,7 +16,7 @@
       "exits": [
         {
           "name": "Entrance",
-          "entrance": "GustIsle.AfterCave.WindTempleEntrance.WindTemple"
+          "entrance": "Gust.UpperIsland.TempleEntrance.ToWindTemple"
         },
         {
           "name": "ToB1BeforeArena",

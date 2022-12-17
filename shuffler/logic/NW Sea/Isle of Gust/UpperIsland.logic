@@ -5,7 +5,7 @@ area Gust:
 
     node TempleEntrance:
       door ToWindTemple
-      exit AfterBoss
+      entrance AfterBoss
 
     node TempleFrontLedge:
       door ToLowerLedgeRight
