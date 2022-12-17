@@ -78,71 +78,71 @@
       "enemies": [
         {
           "name": "MiniBlinLeft1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinLeft2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinLeft3",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinLeft4",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinRight1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinRight2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinRight3",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinRight4",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearBombable1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearBombable2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearBombable3",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearBombable4",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearCave1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearCave2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearCave3",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearCave4",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlinNearCave5",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "RedChuChu1",
@@ -190,27 +190,27 @@
         },
         {
           "name": "MiniBlin1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlin2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlin3",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlin4",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlin5",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniBlin6",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "RedChuChu7",

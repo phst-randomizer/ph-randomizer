@@ -33,51 +33,51 @@
       "enemies": [
         {
           "name": "MiniblinLeft1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinLeft2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena3",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena4",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena5",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena6",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena7",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena8",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena9",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "MiniblinArena10",
-          "type": "mini_blin"
+          "type": "miniblin"
         }
       ]
     }

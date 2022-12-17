@@ -53,15 +53,15 @@
         },
         {
           "name": "EnemyR1",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "EnemyR2",
-          "type": "mini_blin"
+          "type": "miniblin"
         },
         {
           "name": "EnemyR3",
-          "type": "mini_blin"
+          "type": "miniblin"
         }
       ]
     }
