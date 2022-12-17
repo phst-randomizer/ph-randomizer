@@ -28,7 +28,7 @@ area Molida:
       enemy YellowChuChu1
       enemy YellowChuChu2
       enemy YellowChuChu3
-      exit HoleNearTree
+      entrance HoleNearTree
       chest NearFogMap
       hint BookToRomano
 
@@ -36,7 +36,7 @@ area Molida:
       door ExitUpLeft
 
     node ChestLedgeLeft:
-      exit HoleToChest
+      entrance HoleToChest
       chest ChestAfterHole
 
     ChestLedgeLeft -> AfterSunDoor

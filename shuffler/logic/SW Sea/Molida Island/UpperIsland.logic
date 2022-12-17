@@ -7,7 +7,7 @@ area Molida:
       door ToLowerIsland
 
     node Hole:
-      entrance HoleToChest
+      exit HoleToChest
 
     node TempleFront:
       door ToCaveSystemLeft

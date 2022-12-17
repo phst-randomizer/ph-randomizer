@@ -10,7 +10,7 @@ area Molida:
       chest RedGirl
 
     node Hole:
-      entrance HoleToCave
+      exit HoleToCave
 
     node Ledge:
       door ToUpperIsland
