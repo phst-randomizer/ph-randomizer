@@ -58,7 +58,7 @@ def test_aux_data_validation(filename: str):
         ('item Bombchus | item Bombs', ['bombs', 'boomerang', 'cannon'], {}, True),
         ('item Bombchus | item Bombs', ['bombchus', 'boomerang', 'cannon'], {}, True),
         ('item Bombchus | item Bombs', ['boomerang', 'cannon', 'sword'], {}, False),
-        ('item Bombchus | item Bombs | item Sword', ['boomerang', 'cannon', 'sword'], {}, True),
+        ('item Bombchus | item Bombs | item Sword', ['boomerang', 'cannon', 'oshus_sword'], {}, True),  # noqa: E501
         # Test more complex nested expressions
         ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['bombs'], {}, False),  # noqa: E501
         ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'bombs'], {}, True),  # noqa: E501
@@ -68,7 +68,7 @@ def test_aux_data_validation(filename: str):
         ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'grappling_hook', 'bow'], {}, True),  # noqa: E501
         # Test expression with a lot of redundant parentheses, which shouldn't affect results
         # other than additional performance overhead.
-        ('(((((item Sword | ((item Shield)))))))', ['sword'], {}, True),
+        ('(((((item Sword | ((item Shield)))))))', ['oshus_sword'], {}, True),
         # fmt: on
     ],
 )
