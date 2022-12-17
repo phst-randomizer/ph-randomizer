@@ -182,7 +182,7 @@
         },
         {
           "name": "GustPort",
-          "entrance": "GustIsle.LowerIsland.BeforeCave.Boat"
+          "entrance": "Gust.LowerIsland.BeforeCave.Boat"
         },
         {
           "name": "BannanPort",
