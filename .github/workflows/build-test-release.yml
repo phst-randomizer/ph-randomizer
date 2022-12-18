@@ -42,20 +42,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Run basic syntax check
-      - name: Get the CI tool
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: Ibot02/tmcr-newlogic-ci
-          tag: "v1.0"
-          filename: "tmcr-newlogic-ci"
-          tarBall: false
-          zipBall: false
+      - name: Fetch TMCR logic syntax checker
+        run: |
+          download_url=$(curl -fsSL https://api.github.com/repos/Ibot02/tmcr-newlogic-ci/releases/latest | jq -r '.assets[] | select(.name == "tmcr-newlogic-ci") | .browser_download_url')
+          wget -O ./tmcr-newlogic-ci "$download_url"
+          chmod +x ./tmcr-newlogic-ci
 
-      - name: Make it executable
-        run: chmod +x "$GITHUB_WORKSPACE/tmcr-newlogic-ci"
-
-      - name: Run the CI tool
+      - name: Run the TMCR logic syntax checker
         run: |
           shopt -s globstar
           failed=0
