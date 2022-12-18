@@ -331,19 +331,6 @@ jobs:
           repository: Alcaro/Flips
           path: Flips
 
-      - name: Get latest commit hash from Flips repo
-        id: flips-hash
-        run: echo "flips_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-        working-directory: Flips
-
-      - name: Cache Flips executable
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-flips
-        with:
-          path: Flips/*
-          key: ${{ env.cache-name }}-${{ steps.flips-hash.outputs.flips_hash }}-${{ runner.os }}
-
       - name: Compile Flips tool
         run: |
           mingw32-make CFLAGS=-O2
