@@ -42,6 +42,31 @@ DUNGEON_REWARD_CHECKS: dict[str, str] = {
     # 'MutohTemple.B4.Aquanine': 'aquanine',
 }
 
+IMPORTANT_ITEMS: set[str] = {
+    'oshus_sword',
+    'wooden_shield',
+    'bombs',
+    'bow',
+    'boomerang',
+    'shovel',
+    'bombchus',
+    'sw_sea_chart',
+    'nw_sea_chart',
+    'se_sea_chart',
+    'ne_sea_chart',
+    'hammer',
+    'grappling_hook',
+    'fishing_rod',
+    'cannon',
+    'sun_key',
+    'king_key',
+    'regal_necklace',
+    'salvage_arm',
+    'cyclone_slate',
+    'phantom_hourglass',
+    'phantom_sword',
+}
+
 
 class AssumedFillFailed(Exception):
     pass
@@ -190,6 +215,11 @@ class Logic:
         random_index = random.randint(0, max(len(reachable_candidates) - 1, 0))
         reachable_candidates[random_index].contents = item_to_place
 
+    def place_important_items(self) -> None:
+        for item in self.items_left_to_place:
+            if item in IMPORTANT_ITEMS:
+                self._place_item(item)
+
     def place_dungeon_rewards(self) -> None:
         # Find all checks that a dungeon reward *may* be placed in.
         # TODO: for now, just allow dungeon items to be shuffled amongst themselves.
@@ -293,6 +323,7 @@ class Logic:
 
         self.place_dungeon_rewards()
         self.place_keys()
+        self.place_important_items()
         ...  # TODO: shuffle rest of items
 
         return list(self.areas.values())
