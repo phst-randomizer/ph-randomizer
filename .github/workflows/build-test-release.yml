@@ -75,7 +75,7 @@ jobs:
 
       - name: Get cache key
         id: shuffler-cache-key
-        run: echo "::set-output name=key::$(git rev-parse HEAD)"
+        run: echo "key=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
         shell: bash
         working-directory: rando-shuffler
 
@@ -248,14 +248,12 @@ jobs:
 
       - name: Get filename of rom
         id: rom-filename
-        shell: bash
-        run: |
-          echo "::set-output name=filename::$(ls *.nds)"
+        run: echo "rom_filename=$(ls *.nds)" >> $GITHUB_OUTPUT
         working-directory: base
 
       - name: Get current commit hash
         id: commit-hash
-        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+        run: echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         id: buildx
@@ -269,8 +267,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            PH_ROM_PATH=${{ steps.rom-filename.outputs.filename }}
-            VERSION_STRING=${{ steps.commit-hash.outputs.hash }}
+            PH_ROM_PATH=${{ steps.rom-filename.outputs.rom_filename }}
+            VERSION_STRING=${{ steps.commit-hash.outputs.commit_hash }}
           outputs: |
             base/out
 
@@ -342,13 +340,11 @@ jobs:
 
       - name: Get latest commit hash from Flips repo
         id: flips-hash
-        run: |
-          echo "::set-output name=flips_hash::$(git rev-parse --short HEAD)"
+        run: echo "flips_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         working-directory: Flips
 
       - name: Cache Flips executable
         uses: actions/cache@v3
-        id: flips-cache
         env:
           cache-name: cache-flips
         with:
@@ -427,7 +423,7 @@ jobs:
 
       - name: Get current commit hash
         id: commit-hash
-        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+        run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v3
         with:
@@ -453,11 +449,11 @@ jobs:
 
       - name: Get current commit hash
         id: commit-hash
-        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+        run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Get version string
         id: version-string
-        run: echo "::set-output name=version::$(git describe --tags)"
+        run: echo "version=$(git describe --tags)" >> $GITHUB_OUTPUT
 
       - name: Download built executables
         uses: actions/download-artifact@v3
