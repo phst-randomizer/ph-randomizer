@@ -216,9 +216,13 @@ class Logic:
         reachable_candidates[random_index].contents = item_to_place
 
     def place_important_items(self) -> None:
+        items_to_place: list[str] = []
         for item in self.items_left_to_place:
             if item in IMPORTANT_ITEMS:
-                self._place_item(item)
+                items_to_place.append(item)
+
+        for item in items_to_place:
+            self._place_item(item)
 
     def place_dungeon_rewards(self) -> None:
         # Find all checks that a dungeon reward *may* be placed in.
@@ -233,9 +237,14 @@ class Logic:
             if '.'.join([area.name, room.name, check.name]) in DUNGEON_REWARD_CHECKS.keys()
         )
 
+        items_to_place: list[str] = []
+
         for item in self.items_left_to_place:
             if item in DUNGEON_REWARD_CHECKS.values():
-                self._place_item(item, candidates)
+                items_to_place.append(item)
+
+        for item in items_to_place:
+            self._place_item(item, candidates)
 
     def place_keys(self) -> None:
         """
@@ -251,6 +260,8 @@ class Logic:
             for check in room.chests
         ]
 
+        items_to_place: list[str] = []
+
         # Iterate over items to find every small key that needs to be placed
         for item in self.items_left_to_place:
             if not item.startswith('small_key_'):
@@ -264,6 +275,9 @@ class Logic:
                 logging.warning(f'Skipping {area_name}...')
                 continue
 
+            items_to_place.append(item)
+
+        for item in items_to_place:
             # Narrow down candidates for this particular key to only include checks in the
             # area it's located in.
             particular_candidates = OrderedSet(
