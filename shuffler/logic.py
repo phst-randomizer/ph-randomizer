@@ -168,8 +168,6 @@ class Logic:
                 self._assumed_search(
                     starting_node,
                     deepcopy(self.items_left_to_place),
-                    set(),
-                    set(),
                     keys,
                 )
             )
@@ -469,9 +467,9 @@ class Logic:
         cls,
         starting_node: Node,
         inventory: list[str],
-        flags: set[str],
-        states: set[str] | None = None,
         keys: dict[str, int] | None = None,
+        flags: set[str] | None = None,
+        states: set[str] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
     ) -> OrderedSet[Node]:
         """
@@ -480,7 +478,9 @@ class Logic:
         Params:
             `starting_node`: The node to start at.
             `inventory`: Current inventory.
+            `keys`: Current small keys held for each dungeon.
             `flags`: Current flags that are set.
+            `states`: Current logical states that have been "gained".
             `visited_nodes`: Nodes that have been visited already in this traversal.
 
         Returns:
@@ -493,6 +493,9 @@ class Logic:
 
         if states is None:
             states = set()
+
+        if flags is None:
+            flags = set()
 
         if keys is None:
             keys = {dungeon: 0 for dungeon in DUNGEON_STARTING_NODES.keys()}
@@ -546,9 +549,9 @@ class Logic:
                         cls._assumed_search(
                             edge.dest,
                             inventory,
+                            keys,
                             flags,
                             new_states,
-                            keys,
                             visited_nodes,
                         )
                     )
@@ -575,9 +578,9 @@ class Logic:
                         accessible_nodes = cls._assumed_search(
                             edge.dest,
                             deepcopy(inventory),
+                            deepcopy(keys),
                             deepcopy(flags),
                             new_states,
-                            deepcopy(keys),
                             visited_nodes,
                         )
                         if accessible_nodes_intersection is None:
@@ -811,6 +814,7 @@ class Edge:
                 accessible_nodes = Logic._assumed_search(
                     self.src,
                     deepcopy(inventory),
+                    None,
                     deepcopy(flags),
                 )
                 for node in accessible_nodes:
