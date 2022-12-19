@@ -60,6 +60,8 @@ def patch(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSR
                         # phantoms or rats. This *might* be the same as
                         # freestanding; more research is needed
                         pass  # TODO: implement this
+                    case 'minigame_reward_chest':
+                        pass  # TODO: implement this
                     case other:
                         raise NotImplementedError(f'Unknown location type "{other}"')
 

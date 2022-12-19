@@ -303,6 +303,32 @@
         "zmb_actor_index"
       ]
     },
+    "MinigameRewardChest": {
+      "title": "MinigameRewardChest",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "The name of the item check",
+          "type": "string"
+        },
+        "contents": {
+          "title": "Contents",
+          "description": "The item that this check contains",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "default": "minigame_reward_chest",
+          "const": "minigame_reward_chest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "contents"
+      ]
+    },
     "Exit": {
       "title": "Exit",
       "type": "object",
@@ -383,6 +409,9 @@
               },
               {
                 "$ref": "#/definitions/DigSpot"
+              },
+              {
+                "$ref": "#/definitions/MinigameRewardChest"
               }
             ]
           }
