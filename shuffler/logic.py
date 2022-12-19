@@ -376,7 +376,7 @@ class Logic:
                         [enemy for enemy in room.enemies if enemy.name == descriptor_value][0]
                     )
                 except IndexError:
-                    logging.error(
+                    raise Exception(
                         f'{node.area}.{room.name}: '
                         f'{descriptor_type} "{descriptor_value}" not found in aux data.'
                     )
@@ -804,10 +804,9 @@ class Edge:
                                 flags,
                                 states,
                             )
-                logging.error(
+                raise Exception(
                     f'{self.src.name} (Edge "...{type} {value}..."): ' f'enemy {value} not found!'
                 )
-                return False
             case EdgeDescriptor.OPEN.value:
                 accessible_nodes = Logic._assumed_search(
                     self.src,

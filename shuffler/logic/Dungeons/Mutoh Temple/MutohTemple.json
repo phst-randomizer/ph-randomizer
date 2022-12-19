@@ -98,6 +98,32 @@
           "name": "ToF3",
           "entrance": "F3.Stairs.ToF2"
         }
+      ],
+      "enemies": [
+        {
+          "name": "RupeeLikeGreen1",
+          "type": "green_rupee_like"
+        },
+        {
+          "name": "RupeeLikeGreen2",
+          "type": "green_rupee_like"
+        },
+        {
+          "name": "RupeeLikeGreen3",
+          "type": "green_rupee_like"
+        },
+        {
+          "name": "Terrorpin1",
+          "type": "terrorpin"
+        },
+        {
+          "name": "Terrorpin2",
+          "type": "terrorpin"
+        },
+        {
+          "name": "Terrorpin3",
+          "type": "terrorpin"
+        }
       ]
     },
     {
@@ -115,6 +141,20 @@
         {
           "name": "ToF2",
           "entrance": "F2.Bottom.ToF3"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "StalfosWarrior1",
+          "type": "stalfos_warrior"
+        },
+        {
+          "name": "StalfosWarrior2",
+          "type": "stalfos_warrior"
+        },
+        {
+          "name": "RupeeLikeGreen",
+          "type": "green_rupee_like"
         }
       ]
     },
@@ -180,19 +220,23 @@
       "enemies": [
         {
           "name": "StalfosWarrior1",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarrior2",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarriorArena1",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarriorArena2",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
+        },
+        {
+          "name": "StalfosWarriorMiddle",
+          "type": "stalfos_warrior"
         }
       ]
     },
@@ -238,6 +282,36 @@
         {
           "name": "ToB3",
           "entrance": "B3.Stairs.ToB2"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Stalfos1",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos2",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos3",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos4",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos5",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos6",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos7",
+          "type": "stalfos"
         }
       ]
     },

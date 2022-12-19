@@ -103,6 +103,14 @@
         {
           "name": "PirateBlin8",
           "type": "pirate_blin"
+        },
+        {
+          "name": "Stalfos1",
+          "type": "stalfos"
+        },
+        {
+          "name": "Stalfos2",
+          "type": "stalfos"
         }
       ]
     }
