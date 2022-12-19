@@ -193,6 +193,10 @@
         {
           "name": "StalfosWarriorArena2",
           "type": "red_stalfos"
+        },
+        {
+          "name": "StalfosWarriorMiddle",
+          "type": "red_stalfos"
         }
       ]
     },
