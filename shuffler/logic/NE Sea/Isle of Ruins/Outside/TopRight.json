@@ -116,6 +116,14 @@
         {
           "name": "Stalfos5",
           "type": "stalfos"
+        },
+        {
+          "name": "Geozard1",
+          "type": "geozard"
+        },
+        {
+          "name": "Geozard2",
+          "type": "geozard"
         }
       ]
     }
