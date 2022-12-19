@@ -83,8 +83,21 @@ class DigSpot(SalvageTreasure):
     type = Field('dig_spot', const=True)
 
 
+class MinigameRewardChest(BaseCheck):
+    type = Field('minigame_reward_chest', const=True)
+    # TODO: what other fields are needed?
+
+
 Check: TypeAlias = (
-    Chest | Event | IslandShop | Tree | Freestanding | OnEnemy | SalvageTreasure | DigSpot
+    Chest
+    | Event
+    | IslandShop
+    | Tree
+    | Freestanding
+    | OnEnemy
+    | SalvageTreasure
+    | DigSpot
+    | MinigameRewardChest
 )
 
 
