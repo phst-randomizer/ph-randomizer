@@ -180,23 +180,23 @@
       "enemies": [
         {
           "name": "StalfosWarrior1",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarrior2",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarriorArena1",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarriorArena2",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         },
         {
           "name": "StalfosWarriorMiddle",
-          "type": "red_stalfos"
+          "type": "stalfos_warrior"
         }
       ]
     },
