@@ -224,6 +224,12 @@ class Logic:
         for item in items_to_place:
             self._place_item(item)
 
+    def place_remaining_items(self) -> None:
+        for item in self.items_left_to_place:
+            self._place_item(item)
+
+        self.items_left_to_place.clear()
+
     def place_dungeon_rewards(self) -> None:
         # Find all checks that a dungeon reward *may* be placed in.
         # TODO: for now, just allow dungeon items to be shuffled amongst themselves.
@@ -339,14 +345,19 @@ class Logic:
                 chest.contents = None  # type: ignore
 
             try:
+                logging.info('Placing dungeon rewards...')
                 self.place_dungeon_rewards()
+                logging.info('Placing dungeon keys...')
                 self.place_keys()
+                logging.info('Placing important items ...')
                 self.place_important_items()
+                logging.info('Placing any remaining items...')
+                self.place_remaining_items()
                 ...  # TODO: shuffle rest of items
                 break
             except AssumedFillFailed:
                 # If the assumed fill fails, restore the original chest contents and start over
-                logging.debug('Assumed fill failed! Trying again...')
+                logging.info('Assumed fill failed! Trying again...')
                 for (chest, _), (chest_backup, _) in zip(all_checks, all_checks_backup):
                     chest.contents = chest_backup.contents
                 continue
