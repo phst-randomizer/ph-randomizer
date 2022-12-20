@@ -321,24 +321,35 @@ class Logic:
             for chest in room.chests
         ]
 
-        # Set current inventory to all chest contents (i.e. every item
-        # in the item pool) and shuffle it
-        self.items_left_to_place = [
-            chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
-            for chest, area_name in all_checks
-        ]
-        random.shuffle(self.items_left_to_place)
+        all_checks_backup = deepcopy(all_checks)
 
-        # Make all item locations empty
-        for chest, _ in all_checks:
-            # Disable type-checking for this line.
-            # `contents` should normally never be `None`, but during the assumed fill it must be
-            chest.contents = None  # type: ignore
+        while True:
+            # Set current inventory to all chest contents (i.e. every item
+            # in the item pool) and shuffle it
+            self.items_left_to_place = [
+                chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
+                for chest, area_name in all_checks
+            ]
+            random.shuffle(self.items_left_to_place)
 
-        self.place_dungeon_rewards()
-        self.place_keys()
-        self.place_important_items()
-        ...  # TODO: shuffle rest of items
+            # Make all item locations empty
+            for chest, _ in all_checks:
+                # Disable type-checking for this line.
+                # `contents` should normally never be `None`, but during the assumed fill it must be
+                chest.contents = None  # type: ignore
+
+            try:
+                self.place_dungeon_rewards()
+                self.place_keys()
+                self.place_important_items()
+                ...  # TODO: shuffle rest of items
+                break
+            except AssumedFillFailed:
+                # If the assumed fill fails, restore the original chest contents and start over
+                logging.debug('Assumed fill failed! Trying again...')
+                for (chest, _), (chest_backup, _) in zip(all_checks, all_checks_backup):
+                    chest.contents = chest_backup.contents
+                continue
 
         return list(self.areas.values())
 
