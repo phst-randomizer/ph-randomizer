@@ -139,9 +139,7 @@ class Logic:
                 for src_node in room.nodes:
                     for exit in src_node.exits:
                         if not len(exit.entrance):
-                            # TODO: make this throw an actual error once aux data is complete
-                            logging.error(f'exit "{exit.name}" has no "link".')
-                            continue
+                            raise Exception(f'exit "{exit.name}" has no "link".')
                         if exit.entrance.split('.')[0] not in self.areas:
                             logging.error(
                                 f'entrance "{exit.entrance}" not found '
@@ -395,8 +393,7 @@ class Logic:
         try:
             return [room for room in self.areas[area_name].rooms if room.name == room_name][0]
         except IndexError:
-            logging.error(f'{area_name}: Room {area_name}.{room_name} not found!')
-            return None
+            raise Exception(f'{area_name}: Room {area_name}.{room_name} not found!')
 
     def _add_descriptor_to_node(
         self,
