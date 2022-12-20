@@ -8,3 +8,7 @@ area RuinsIsle:
 
     node LeftDoor:
       door ToMazeUpper
+
+    RightDoor -> Arena
+    Arena -> RightDoor: defeated Geozard
+    LeftDoor <-> Arena: defeated Geozard
