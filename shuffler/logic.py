@@ -9,6 +9,7 @@ import json
 import logging
 from pathlib import Path
 import random
+import sys
 from typing import Any
 
 import inflection
@@ -66,6 +67,23 @@ IMPORTANT_ITEMS: set[str] = {
     'phantom_hourglass',
     'phantom_sword',
 }
+
+
+class RecursionLimit:
+    """
+    Context manager that increases max recursion depth to a given value, and then decreases it
+    back to the original value upon exit.
+    """
+
+    def __init__(self, limit):
+        self.limit = limit
+
+    def __enter__(self):
+        self.old_limit = sys.getrecursionlimit()
+        sys.setrecursionlimit(self.limit)
+
+    def __exit__(self, *args, **kwargs):
+        sys.setrecursionlimit(self.old_limit)
 
 
 class AssumedFillFailed(Exception):
@@ -345,15 +363,17 @@ class Logic:
                 chest.contents = None  # type: ignore
 
             try:
-                logging.info('Placing dungeon rewards...')
-                self.place_dungeon_rewards()
-                logging.info('Placing dungeon keys...')
-                self.place_keys()
-                logging.info('Placing important items ...')
-                self.place_important_items()
-                logging.info('Placing any remaining items...')
-                self.place_remaining_items()
-                ...  # TODO: shuffle rest of items
+                # TODO: consider rewriting _assumed_search function with iteration instead of
+                # recursion to avoid having to increase the max recursion depth here.
+                with RecursionLimit(5000):
+                    logging.info('Placing dungeon rewards...')
+                    self.place_dungeon_rewards()
+                    logging.info('Placing dungeon keys...')
+                    self.place_keys()
+                    logging.info('Placing important items ...')
+                    self.place_important_items()
+                    logging.info('Placing any remaining items...')
+                    self.place_remaining_items()
                 break
             except AssumedFillFailed:
                 # If the assumed fill fails, restore the original chest contents and start over
