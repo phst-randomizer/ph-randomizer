@@ -67,8 +67,8 @@ area MutohTemple:
 
     TopLeft -> TopLeftArena: (state WaterUp & lose WaterDown)
     TopLeftStairs -> TopLeftArena
-    TopLeftArena -> TopLeft: (state WaterUp & lose WaterDown & defeated RedStalfosArena1 & defeated RedStalfosArena2)
-    TopLeftArena -> TopLeftStairs: (defeated RedStalfosArena1 & defeated RedStalfosArena2)
+    TopLeftArena -> TopLeft: (state WaterUp & lose WaterDown & defeated StalfosWarriorArena1 & defeated StalfosWarriorArena2)
+    TopLeftArena -> TopLeftStairs: (defeated StalfosWarriorArena1 & defeated StalfosWarriorArena2)
 
 
     node StairsToB2Leftmost:
@@ -214,7 +214,7 @@ area MutohTemple:
     node Reward:
       chest Hammer
 
-    Stairs <-> Reward: (defeated RedStalfos1 & defeated RedStalfos2 & defeated RupeeLikeGreen)
+    Stairs <-> Reward: (defeated StalfosWarrior1 & defeated StalfosWarrior1 & defeated RupeeLikeGreen)
 
 
   room B2:
