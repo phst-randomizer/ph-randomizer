@@ -171,6 +171,9 @@ class Area(BaseModel):
         ..., description='All of the rooms inside this area', min_items=1, unique_items=True
     )
 
+    def json(self, *args, **kwargs) -> str:
+        return super().json(*args, exclude={'rooms': {'__all__': {'nodes', '_nodes'}}}, **kwargs)
+
 
 if __name__ == '__main__':
     json_schema = Area.schema_json(indent=2)
