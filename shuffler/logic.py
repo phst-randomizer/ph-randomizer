@@ -282,7 +282,7 @@ class Logic:
             for check in room.chests
         ]
 
-        items_to_place: list[str] = []
+        items_to_place: list[tuple[str, str]] = []
 
         # Iterate over items to find every small key that needs to be placed
         for item in self.items_left_to_place:
@@ -297,9 +297,9 @@ class Logic:
                 logging.warning(f'Skipping {area_name}...')
                 continue
 
-            items_to_place.append(item)
+            items_to_place.append((item, area_name))
 
-        for item in items_to_place:
+        for item, area_name in items_to_place:
             # Narrow down candidates for this particular key to only include checks in the
             # area it's located in.
             particular_candidates = OrderedSet(
@@ -351,6 +351,8 @@ class Logic:
             self.items_left_to_place = [
                 chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
                 for chest, area_name in all_checks
+                # TODO: remove the following conditional once MutohTemple/TotOK work correctly
+                if area_name not in ('MutohTemple', 'TempleOfTheOceanKing')
             ]
             random.shuffle(self.items_left_to_place)
 
