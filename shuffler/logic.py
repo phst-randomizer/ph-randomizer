@@ -9,6 +9,7 @@ import json
 import logging
 from pathlib import Path
 import random
+import sys
 from typing import Any
 
 import inflection
@@ -41,6 +42,48 @@ DUNGEON_REWARD_CHECKS: dict[str, str] = {
     # 'IceTemple.AzurineRoom.Azurine': 'azurine',
     # 'MutohTemple.B4.Aquanine': 'aquanine',
 }
+
+IMPORTANT_ITEMS: set[str] = {
+    'oshus_sword',
+    'wooden_shield',
+    'bombs',
+    'bow',
+    'boomerang',
+    'shovel',
+    'bombchus',
+    'sw_sea_chart',
+    'nw_sea_chart',
+    'se_sea_chart',
+    'ne_sea_chart',
+    'hammer',
+    'grappling_hook',
+    'fishing_rod',
+    'cannon',
+    'sun_key',
+    'king_key',
+    'regal_necklace',
+    'salvage_arm',
+    'cyclone_slate',
+    'phantom_hourglass',
+    'phantom_sword',
+}
+
+
+class RecursionLimit:
+    """
+    Context manager that increases max recursion depth to a given value, and then decreases it
+    back to the original value upon exit.
+    """
+
+    def __init__(self, limit):
+        self.limit = limit
+
+    def __enter__(self):
+        self.old_limit = sys.getrecursionlimit()
+        sys.setrecursionlimit(self.limit)
+
+    def __exit__(self, *args, **kwargs):
+        sys.setrecursionlimit(self.old_limit)
 
 
 class AssumedFillFailed(Exception):
@@ -96,9 +139,7 @@ class Logic:
                 for src_node in room.nodes:
                     for exit in src_node.exits:
                         if not len(exit.entrance):
-                            # TODO: make this throw an actual error once aux data is complete
-                            logging.error(f'exit "{exit.name}" has no "link".')
-                            continue
+                            raise Exception(f'exit "{exit.name}" has no "link".')
                         if exit.entrance.split('.')[0] not in self.areas:
                             logging.error(
                                 f'entrance "{exit.entrance}" not found '
@@ -190,6 +231,21 @@ class Logic:
         random_index = random.randint(0, max(len(reachable_candidates) - 1, 0))
         reachable_candidates[random_index].contents = item_to_place
 
+    def place_important_items(self) -> None:
+        items_to_place: list[str] = []
+        for item in self.items_left_to_place:
+            if item in IMPORTANT_ITEMS:
+                items_to_place.append(item)
+
+        for item in items_to_place:
+            self._place_item(item)
+
+    def place_remaining_items(self) -> None:
+        for item in self.items_left_to_place:
+            self._place_item(item)
+
+        self.items_left_to_place.clear()
+
     def place_dungeon_rewards(self) -> None:
         # Find all checks that a dungeon reward *may* be placed in.
         # TODO: for now, just allow dungeon items to be shuffled amongst themselves.
@@ -203,9 +259,14 @@ class Logic:
             if '.'.join([area.name, room.name, check.name]) in DUNGEON_REWARD_CHECKS.keys()
         )
 
+        items_to_place: list[str] = []
+
         for item in self.items_left_to_place:
             if item in DUNGEON_REWARD_CHECKS.values():
-                self._place_item(item, candidates)
+                items_to_place.append(item)
+
+        for item in items_to_place:
+            self._place_item(item, candidates)
 
     def place_keys(self) -> None:
         """
@@ -221,6 +282,8 @@ class Logic:
             for check in room.chests
         ]
 
+        items_to_place: list[tuple[str, str]] = []
+
         # Iterate over items to find every small key that needs to be placed
         for item in self.items_left_to_place:
             if not item.startswith('small_key_'):
@@ -234,6 +297,9 @@ class Logic:
                 logging.warning(f'Skipping {area_name}...')
                 continue
 
+            items_to_place.append((item, area_name))
+
+        for item, area_name in items_to_place:
             # Narrow down candidates for this particular key to only include checks in the
             # area it's located in.
             particular_candidates = OrderedSet(
@@ -277,23 +343,44 @@ class Logic:
             for chest in room.chests
         ]
 
-        # Set current inventory to all chest contents (i.e. every item
-        # in the item pool) and shuffle it
-        self.items_left_to_place = [
-            chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
-            for chest, area_name in all_checks
-        ]
-        random.shuffle(self.items_left_to_place)
+        all_checks_backup = deepcopy(all_checks)
 
-        # Make all item locations empty
-        for chest, _ in all_checks:
-            # Disable type-checking for this line.
-            # `contents` should normally never be `None`, but during the assumed fill it must be
-            chest.contents = None  # type: ignore
+        while True:
+            # Set current inventory to all chest contents (i.e. every item
+            # in the item pool) and shuffle it
+            self.items_left_to_place = [
+                chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
+                for chest, area_name in all_checks
+                # TODO: remove the following conditional once MutohTemple/TotOK work correctly
+                if area_name not in ('MutohTemple', 'TempleOfTheOceanKing')
+            ]
+            random.shuffle(self.items_left_to_place)
 
-        self.place_dungeon_rewards()
-        self.place_keys()
-        ...  # TODO: shuffle rest of items
+            # Make all item locations empty
+            for chest, _ in all_checks:
+                # Disable type-checking for this line.
+                # `contents` should normally never be `None`, but during the assumed fill it must be
+                chest.contents = None  # type: ignore
+
+            try:
+                # TODO: consider rewriting _assumed_search function with iteration instead of
+                # recursion to avoid having to increase the max recursion depth here.
+                with RecursionLimit(5000):
+                    logging.info('Placing dungeon rewards...')
+                    self.place_dungeon_rewards()
+                    logging.info('Placing dungeon keys...')
+                    self.place_keys()
+                    logging.info('Placing important items ...')
+                    self.place_important_items()
+                    logging.info('Placing any remaining items...')
+                    self.place_remaining_items()
+                break
+            except AssumedFillFailed:
+                # If the assumed fill fails, restore the original chest contents and start over
+                logging.info('Assumed fill failed! Trying again...')
+                for (chest, _), (chest_backup, _) in zip(all_checks, all_checks_backup):
+                    chest.contents = chest_backup.contents
+                continue
 
         return list(self.areas.values())
 
@@ -308,8 +395,7 @@ class Logic:
         try:
             return [room for room in self.areas[area_name].rooms if room.name == room_name][0]
         except IndexError:
-            logging.error(f'{area_name}: Room {area_name}.{room_name} not found!')
-            return None
+            raise Exception(f'{area_name}: Room {area_name}.{room_name} not found!')
 
     def _add_descriptor_to_node(
         self,
