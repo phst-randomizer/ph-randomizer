@@ -1,11 +1,7 @@
-from io import BytesIO
 import json
-import os
+import logging
 from pathlib import Path
 import sys
-
-from ndspy import rom
-from vidua import bps
 
 from patcher._items import ITEMS
 from patcher.location_types import (
@@ -26,20 +22,6 @@ def is_frozen() -> bool:
     or if it's a bundled PyInstaller executable.
     """
     return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
-
-
-def apply_base_patch(input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
-    """Apply the base patch to `input_rom`."""
-    base_patch_path = Path(
-        Path(sys._MEIPASS) / 'patch.bps'  # type: ignore
-        if is_frozen()
-        else os.environ.get(
-            'BASE_PATCH_PATH', Path(__file__).parent.parent / 'base' / 'out' / 'patch.bps'
-        )
-    )
-    with open(base_patch_path, 'rb') as patch_file:
-        patched_rom = bps.patch(source=BytesIO(input_rom.save()), bps_patch=patch_file)
-    return rom.NintendoDSRom(data=patched_rom.read())
 
 
 def load_aux_data(directory: Path) -> list[Area]:
@@ -72,6 +54,9 @@ def patch_tree(tree: Tree):
 
 
 def patch_event(event: Event):
+    if event.bmg_file_path.lower() == 'todo':  # TODO: remove
+        logging.warning(f'{event.name}: bmg_file_path not set')
+        return
     location = EventLocation(
         instruction_index=event.bmg_instruction_index, file_path=event.bmg_file_path
     )
@@ -99,6 +84,9 @@ def patch_salvage_treasure(salvage_treasure: SalvageTreasure):
 
 
 def patch_dig_spot_treasure(dig_spot: DigSpot):
+    if dig_spot.zmb_file_path.lower() == 'todo':  # TODO: remove
+        logging.warning(f'{dig_spot.name}: zmb_file_path not set')
+        return
     location = DigSpotLocation(
         actor_index=dig_spot.zmb_actor_index, file_path=dig_spot.zmb_file_path
     )
