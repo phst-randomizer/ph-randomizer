@@ -196,6 +196,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu, macos, windows]
+    defaults:
+      run:
+        shell: bash
     runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
@@ -373,6 +376,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu, macos, windows]
+    defaults:
+      run:
+        shell: bash
     runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
