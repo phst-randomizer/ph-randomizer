@@ -40,7 +40,7 @@ RUN apt-get install -y python3-pip python3-pil
 RUN pip3 install click ndspy==4.0.0
 # Add needed source files to the docker build
 ADD misc/* /app/
-ADD src/* /app/src/
+ADD code/* /app/code/
 ADD Makefile /app
 # Create base patch
 ARG PH_ROM_PATH

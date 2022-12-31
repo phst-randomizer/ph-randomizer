@@ -12,10 +12,10 @@
             .fill 0xA, 0x0 ; bitmap for randomizer settings
 
             .arm
-            .importobj "src/faster_boat.o"
-            .importobj "src/fixed_random_treasure_in_shop.o"
-            .importobj "src/progressive_sword_check.o"
-            .importobj "src/rando_settings.o"
+            .importobj "code/faster_boat.o"
+            .importobj "code/fixed_random_treasure_in_shop.o"
+            .importobj "code/progressive_sword_check.o"
+            .importobj "code/rando_settings.o"
             .include "_island_shop_files.asm"
         .endarea
 
@@ -23,8 +23,8 @@
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
             .arm
-            .importobj "src/set_initial_flags.o"
-            .importobj "src/spawn_custom_freestanding_item.o"
+            .importobj "code/set_initial_flags.o"
+            .importobj "code/spawn_custom_freestanding_item.o"
 
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
@@ -134,7 +134,7 @@
     .arm
     .org 0x213b0e8
         .area 0x74, 0xFF
-            .importobj "src/extend_RUPY_npc.o"
+            .importobj "code/extend_RUPY_npc.o"
         .endarea
 
     .org 0x213a108

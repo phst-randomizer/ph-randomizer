@@ -10,7 +10,7 @@ from .conftest import DesmumeEmulator
 RANDO_SETTINGS_BITMAP_ADDR = int(
     re.findall(
         r'#define RANDO_SETTINGS_BITMAP_ADDR (.+)',
-        (Path(__file__).parents[2] / 'base' / 'src' / 'rando_settings.h').read_text(),
+        (Path(__file__).parents[2] / 'base' / 'code' / 'rando_settings.h').read_text(),
     )[0],
     16,
 )

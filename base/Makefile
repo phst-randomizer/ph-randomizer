@@ -12,7 +12,7 @@ include $(DEVKITARM)/base_tools
 CFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Wall -Os
 
 # C source file directory
-SRC_DIR=src
+SRC_DIR=code
 # Directory to save compiled files to
 DEST_DIR=build
 SRC=$(wildcard $(SRC_DIR)/*.c)
@@ -46,16 +46,16 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 
 	# Decompress BLZ-compressed binaries
 	ndspy_codeCompression decompress arm9_original.bin arm9_original.bin
-	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+	for file in $$(cat code/main.asm | grep -oP "overlay_(\d+).bin"); do \
 		ndspy_codeCompression decompress overlay/$$file overlay/$$file; \
 	done
 
 	# Patch the binaries with our custom code
-	./armips src/main.asm
+	./armips code/main.asm
 
 	# Recompress the binaries
 	ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin
-	for file in $$(cat src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+	for file in $$(cat code/main.asm | grep -oP "overlay_(\d+).bin"); do \
 		ndspy_codeCompression compress overlay/$$file overlay/$$file; \
 	done
 
@@ -66,7 +66,7 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 	# Update y9.bin to account for new sizes of overlays
 	mv fixy9.exe overlay/
 	mv y9.bin overlay/
-	cd overlay && for file in $$(cat ../src/main.asm | grep -oP "overlay_(\d+).bin"); do \
+	cd overlay && for file in $$(cat ../code/main.asm | grep -oP "overlay_(\d+).bin"); do \
 		echo $$file; \
 		/opt/wine-stable/bin/wine fixy9.exe y9.bin $$file; \
 	done
