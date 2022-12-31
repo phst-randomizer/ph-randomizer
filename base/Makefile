@@ -20,6 +20,7 @@ OBJ=$(SRC:.c=.o)
 ASM=$(SRC:.c=.asm)
 
 INPUT_NDS_FILE=$(PH_ROM_PATH)
+PREPATCHED_NDS_FILE=prepatched.nds
 OUTPUT_NDS_FILE=out.nds
 OUTPUT_BPS_FILE=patch.bps
 
@@ -31,13 +32,15 @@ $(OUTPUT_BPS_FILE): $(INPUT_NDS_FILE) $(OUTPUT_NDS_FILE)
 
 $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin header.bin
 	./ndstool -c out.nds -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin
-	python3 title_screen.py -i --input out.nds --output out.nds --image title_screen.bmp --version_string $(VERSION_STRING)
 
-data: $(INPUT_NDS_FILE)
-	./ndstool -x $(INPUT_NDS_FILE) -d data/
+$(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
+	python3 data_patcher.py --input-rom $(INPUT_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
 
-arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
-	./ndstool -x $(INPUT_NDS_FILE) -9 arm9.bin -y overlay/
+data: $(PREPATCHED_NDS_FILE)
+	./ndstool -x $(PREPATCHED_NDS_FILE) -d data/
+
+arm9.bin overlay: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
+	./ndstool -x $(PREPATCHED_NDS_FILE) -9 arm9.bin -y overlay/
 
 	# Split arm9.bin into two files - uncompressed and compressed parts
 	dd bs=1 skip=0 count=16384 if=arm9.bin of=arm9_header.bin
@@ -72,20 +75,20 @@ arm9.bin overlay: $(INPUT_NDS_FILE) $(OBJ) y9.bin
 	done
 	mv overlay/y9.bin .
 
-arm7.bin: $(INPUT_NDS_FILE)
-	./ndstool -x $(INPUT_NDS_FILE) -7 arm7.bin
+arm7.bin: $(PREPATCHED_NDS_FILE)
+	./ndstool -x $(PREPATCHED_NDS_FILE) -7 arm7.bin
 
-y9.bin: $(INPUT_NDS_FILE)
-	./ndstool -x $(INPUT_NDS_FILE) -y9 y9.bin
+y9.bin: $(PREPATCHED_NDS_FILE)
+	./ndstool -x $(PREPATCHED_NDS_FILE) -y9 y9.bin
 
-y7.bin: $(INPUT_NDS_FILE)
-	./ndstool -x $(INPUT_NDS_FILE) -y7 y7.bin
+y7.bin: $(PREPATCHED_NDS_FILE)
+	./ndstool -x $(PREPATCHED_NDS_FILE) -y7 y7.bin
 
-banner.bin: $(INPUT_NDS_FILE)
-	./ndstool -x $(INPUT_NDS_FILE) -t banner.bin
+banner.bin: $(PREPATCHED_NDS_FILE)
+	./ndstool -x $(PREPATCHED_NDS_FILE) -t banner.bin
 
-header.bin: $(INPUT_NDS_FILE)
-	./ndstool -x $(INPUT_NDS_FILE) -h header.bin
+header.bin: $(PREPATCHED_NDS_FILE)
+	./ndstool -x $(PREPATCHED_NDS_FILE) -h header.bin
 
 # Same as `all`, but also includes readable .asm file
 debug: $(OBJ) $(ASM)
