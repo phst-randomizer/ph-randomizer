@@ -125,7 +125,6 @@ dmypy.json
 .pyre/
 
 # NDS files
-data/
 overlay/
 *.bin
 *.nds
