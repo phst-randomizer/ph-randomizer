@@ -3,6 +3,7 @@
 .erroronwarning on
 
 .include "ph.asm"
+.include "_data.asm"
 
 .open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
