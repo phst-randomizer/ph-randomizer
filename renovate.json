@@ -9,7 +9,8 @@
   "packageRules": [
     {
       "matchPaths": [
-        "+(.pre-commit-config.yaml)"
+        "+(.pre-commit-config.yaml)",
+        "+(setup.cfg)"
       ],
       "automerge": true,
       "schedule": [
