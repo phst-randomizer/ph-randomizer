@@ -36,11 +36,8 @@ $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin head
 $(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
 	python3 data_patcher.py --input-rom $(INPUT_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
 
-data: $(PREPATCHED_NDS_FILE)
-	./ndstool -x $(PREPATCHED_NDS_FILE) -d data/
-
-arm9.bin overlay: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
-	./ndstool -x $(PREPATCHED_NDS_FILE) -9 arm9.bin -y overlay/
+arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
+	./ndstool -x $(PREPATCHED_NDS_FILE) -9 arm9.bin -y overlay/ -d data/
 
 	# Split arm9.bin into two files - uncompressed and compressed parts
 	dd bs=1 skip=0 count=16384 if=arm9.bin of=arm9_header.bin
