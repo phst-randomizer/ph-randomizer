@@ -43,10 +43,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Fetch TMCR logic syntax checker
-        run: |
-          download_url=$(curl --retry 5 --fail -fsSL https://api.github.com/repos/Ibot02/tmcr-newlogic-ci/releases/latest | jq -r '.assets[] | select(.name == "tmcr-newlogic-ci") | .browser_download_url')
-          wget -O ./tmcr-newlogic-ci "$download_url"
-          chmod +x ./tmcr-newlogic-ci
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: 'Ibot02/tmcr-newlogic-ci'
+          version: 'tags/v1.0'
 
       - name: Run the TMCR logic syntax checker
         run: |
