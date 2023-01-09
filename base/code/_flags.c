@@ -25,6 +25,14 @@ Flag flags[] = {
 
     /* Isle of Ember */
     {0x8, 0x10, NO_SETTING}, // Arrived at Isle of Ember for first time
+    {0x24, 0x1, NO_SETTING}, // Called out to Astrid after killing monsters in her basement
+    {0x8, 0x1, NO_SETTING},  // Talked to Astrid after calling her with mic.
+    {0x7, 0x80, NO_SETTING}, // Talked to Kayo's ghost
+    {0x8, 0x8, NO_SETTING},  // Entered Astrid's basement after talking to Kayo
+    {0x8, 0x20, NO_SETTING}, // After saving Astrid and agreeing to get your fortune told
+                             // TODO: do we need this set?
+    {0x8, 0x4, NO_SETTING},  // After getting fortune told by Astrid
+                             // TODO: do we need this set?
 
     /* Uncharted Island */
     {0x26, 0x10, NO_SETTING}, // uncharted island bridge is extended
