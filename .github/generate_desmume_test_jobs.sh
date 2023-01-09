@@ -8,7 +8,6 @@ declare -a moduleArr
 
 # Iterate over pytest output, appending each .py test file to the array
 while IFS= read -r line; do
-    module=
     moduleArr+=("$(basename $(echo "$line" | cut -d ":" -f 1))")
 done <<< "$test_modules"
 
