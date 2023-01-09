@@ -14,4 +14,5 @@ Flag flags[] = {
     {0x18, 0x2, NO_SETTING},                       // TALKED_TO_OSHUS_FIRST_TIME
     {0x2c, 0x1, NO_SETTING},  // saw broken mercay bridge for first time
     {0x26, 0x10, NO_SETTING}, // uncharted island bridge is extended
+    {0x2, 0x4, NO_SETTING},   // SS Linebeck admirer cutscene
 };
