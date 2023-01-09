@@ -1,11 +1,47 @@
+from __future__ import annotations
+
 from desmume.controls import keymask
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME, DeSmuME_SDL_Window
+
+
+def _set_flag_callback(address: int, emu_instance: DesmumeEmulator):
+    r0 = emu_instance.emu.memory.register_arm9.r0
+    r1 = emu_instance.emu.memory.register_arm9.r1
+    r2 = emu_instance.emu.memory.register_arm9.r2
+
+    if not bool(r2):
+        return
+
+    binary = bin(1 << (r1 & 0x1F))[2:]
+
+    while len(binary) != 32:
+        binary = f'0{binary}'
+
+    group = 3
+    for i in range(0, len(binary), 8):
+        byte = binary[i : i + 8]
+        if '1' in byte:
+            offset = ((r1 >> 5) * 4) + group
+            bit = 2 ** list(reversed(byte)).index('1')
+            break
+
+        group -= 1
+
+    msg = f'Setting flag @ {hex(r0 + offset)} (offset = {hex(offset)}, bit = {hex(bit)})'
+
+    print(msg)
+
+
+desmume_callbacks = ((0x209773C, _set_flag_callback),)
 
 
 class DesmumeEmulator:
     def __init__(self, py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window]):
         self.emu = py_desmume_instance[0]
         self.window = py_desmume_instance[1]
+
+        for addr, cb in desmume_callbacks:
+            self.emu.memory.register_exec(addr, lambda addr, _: _set_flag_callback(addr, self))
 
     def open_rom(self, rom_path: str):
         self.frame = 0
@@ -90,7 +126,7 @@ def start_first_file(desmume_emulator: DesmumeEmulator):
 
     # Click "Adventure"
     desmume_emulator.touch_input((130, 70), 0)
-    desmume_emulator.wait(200)
+    desmume_emulator.wait(400)
 
 
 def get_current_rupee_count(desmume: DesmumeEmulator):
