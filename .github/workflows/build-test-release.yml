@@ -52,6 +52,7 @@ jobs:
       - name: Run the TMCR logic syntax checker
         run: |
           shopt -s globstar
+          chmod +x ./tmcr-newlogic-ci
           failed=0
           for file in **/*.logic; do
             ./tmcr-newlogic-ci "$file" || failed=1
