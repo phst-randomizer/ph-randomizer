@@ -31,8 +31,7 @@ void set_initial_flags(uint32_t base_flag_address) {
       break;
     }
 
-    if (f->setting_offset == -1 ||
-        setting_is_enabled((uint8_t)f->setting_offset, f->setting_bit)) {
+    if (f->setting_offset == -1 || setting_is_enabled((uint8_t)f->setting_offset, f->setting_bit)) {
       set_flag(base_flag_address + f->flag_offset, f->flag_bit);
     }
 
