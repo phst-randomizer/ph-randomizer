@@ -132,17 +132,17 @@ class Logic:
                             for entrance in node.entrances:
                                 if entrance == dest_node_entrance:
                                     return node
-            raise Exception(f'Entrance "{dest_node_entrance}" not found')
+            raise Exception(f'Entrance {dest_node_entrance!r} not found')
 
         for area in self.areas.values():
             for room in area.rooms:
                 for src_node in room.nodes:
                     for exit in src_node.exits:
                         if not len(exit.entrance):
-                            raise Exception(f'exit "{exit.name}" has no "link".')
+                            raise Exception(f'exit {exit.name!r} has no "link".')
                         if exit.entrance.split('.')[0] not in self.areas:
                             logging.error(
-                                f'entrance "{exit.entrance}" not found '
+                                f'entrance {exit.entrance!r} not found '
                                 '(no aux data exists for that area)'
                             )
                             continue
@@ -415,7 +415,7 @@ class Logic:
                 except IndexError:
                     raise Exception(
                         f'{node.area}.{room.name}: '
-                        f'{descriptor_type} "{descriptor_value}" not found in aux data.'
+                        f'{descriptor_type} {descriptor_value!r} not found in aux data.'
                     )
             case (
                 NodeDescriptor.ENTRANCE.value
@@ -426,7 +426,7 @@ class Logic:
                     if descriptor_value in node.entrances:
                         raise Exception(
                             f'{node.area}.{node.room}: '
-                            f'entrance "{descriptor_value}" defined more than once'
+                            f'entrance {descriptor_value!r} defined more than once'
                         )
                     node.entrances.add(f'{node.name}.{descriptor_value}')
                 if descriptor_type in (NodeDescriptor.DOOR.value, NodeDescriptor.EXIT.value):
@@ -435,17 +435,17 @@ class Logic:
                     except IndexError:
                         raise Exception(
                             f'{node.area}.{node.room}: '
-                            f'{descriptor_type} "{descriptor_value}" not found in aux data.'
+                            f'{descriptor_type} {descriptor_value!r} not found in aux data.'
                         )
                     if new_exit.entrance.count('.') == 2:
                         new_exit.entrance = f'{node.area}.{new_exit.entrance}'
                     if new_exit.entrance.count('.') != 3:
                         # TODO: remove once aux data is complete
                         if not len(new_exit.entrance) or new_exit.entrance.lower() == 'todo':
-                            logging.error(f'{node.name}: exit "{new_exit.name} has no link.')
+                            logging.error(f'{node.name}: exit {new_exit.name!r} has no link.')
                             return
                         raise Exception(
-                            f'{node.area}.{room.name}: ' f'Invalid exit link "{new_exit.entrance}"'
+                            f'{node.area}.{room.name}: ' f'Invalid exit link {new_exit.entrance!r}'
                         )
                     node.exits.append(new_exit)
             case NodeDescriptor.FLAG.value:
@@ -462,12 +462,12 @@ class Logic:
                 except IndexError:
                     raise Exception(
                         f'{node.area}.{room.name}: '
-                        f'{descriptor_type} "{descriptor_value}" not found in aux data.'
+                        f'{descriptor_type} {descriptor_value!r} not found in aux data.'
                     )
             case other:
                 if other not in NodeDescriptor:
-                    raise Exception(f'{node.area}.{room.name}: Unknown node descriptor "{other}"')
-                logging.warning(f'Node descriptor "{other}" not implemented yet.')
+                    raise Exception(f'{node.area}.{room.name}: Unknown node descriptor {other!r}')
+                logging.warning(f'Node descriptor {other!r} not implemented yet.')
         return
 
     def _parse_logic(self, file_content: str) -> None:
@@ -735,12 +735,12 @@ class Edge:
                     states.add(state_name)
             return states
 
-        logging.debug(f'Evaluating "{constraints}"...')
+        logging.debug(f'Evaluating {constraints!r}...')
 
         # Parse edge constraint string
         if constraints is not None:
             self.constraints = parse_edge_constraint(constraints)
-            assert len(self.constraints), f'Failed to parsed edge "{constraints}"'
+            assert len(self.constraints), f'Failed to parsed edge {constraints!r}'
             self.states_to_lose = _get_states_to_lose(self.constraints)
             if not len(self.states_to_lose):
                 self.states_to_lose = None
@@ -885,7 +885,7 @@ class Edge:
                                 continue
                             elif enemy.type not in ENEMIES_MAPPING:
                                 raise Exception(
-                                    f'{self.src.name}: invalid enemy type "{enemy.type}"'
+                                    f'{self.src.name}: invalid enemy type {enemy.type!r}'
                                 )
                             return self._is_traversable(
                                 parse_edge_constraint(ENEMIES_MAPPING[enemy.type]),
@@ -909,8 +909,8 @@ class Edge:
                 return False
             case other:
                 if other not in EdgeDescriptor:
-                    raise Exception(f'Invalid edge descriptor "{other}"')
-                logging.warning(f'Edge descriptor "{other}" not implemented yet.')
+                    raise Exception(f'Invalid edge descriptor {other!r}')
+                logging.warning(f'Edge descriptor {other!r} not implemented yet.')
                 return False
 
 
