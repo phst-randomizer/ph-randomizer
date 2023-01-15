@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from pathlib import Path
 
 from PIL import Image, ImageDraw
@@ -12,13 +10,13 @@ TITLE_SCREEN_BMP_PATH = Path(__file__).parent / 'title_screen.bmp'
 class AutoList(list):
     """List that automatically extends when given an index greater than its length."""
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, value) -> None:
         if index >= len(self):
             self.extend([None] * (index + 1 - len(self)))
         list.__setitem__(self, index, value)
 
 
-def extract_title_screen(rom: NintendoDSRom) -> None:
+def extract_title_screen(rom: NintendoDSRom) -> Image.Image:
     """Extracts the title screen graphic from the given rom and saves it as `title_screen.png`"""
     narc_file = narc.NARC(lz10.decompress(rom.getFileByName('English/Menu/Tex2D/title.bin')))
     image_data: bytes = narc_file.getFileByName('title.ntft')
@@ -34,18 +32,16 @@ def extract_title_screen(rom: NintendoDSRom) -> None:
 
     img.save(TITLE_SCREEN_BMP_PATH, compress_level=0)
 
+    return img
+
 
 def insert_title_screen(
     input_rom: NintendoDSRom,
     version_string: str | None = None,
-    output_rom_path: str | None = None,
-) -> None:
+) -> NintendoDSRom:
     """Inserts `title_screen.bmp` into the ROM as the title screen."""
     narc_file = narc.NARC(lz10.decompress(input_rom.getFileByName('English/Menu/Tex2D/title.bin')))
     img = Image.open(TITLE_SCREEN_BMP_PATH).convert('RGB')
-
-    if output_rom_path is None:
-        output_rom_path = str(Path(__file__).parent / 'out.nds')
 
     if version_string:
         draw = ImageDraw.Draw(img)
@@ -83,4 +79,5 @@ def insert_title_screen(
         'title.ntfp', color.savePalette([(r // 8, g // 8, b // 8, 0) for (r, g, b) in palette_data])
     )
     input_rom.setFileByName('English/Menu/Tex2D/title.bin', lz10.compress(narc_file.save()))
-    input_rom.saveToFile(output_rom_path)
+
+    return input_rom
