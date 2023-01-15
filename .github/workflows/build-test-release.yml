@@ -262,8 +262,8 @@ jobs:
         with:
           context: base/
           push: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
           build-args: |
             PH_ROM_PATH=${{ steps.rom-filename.outputs.rom_filename }}
             VERSION_STRING=${{ steps.commit-hash.outputs.commit_hash }}
