@@ -20,7 +20,8 @@ RUN git clone https://github.com/Alcaro/Flips.git
 RUN chmod +x Flips/make.sh
 RUN cd Flips && ./make.sh
 
-FROM devkitpro/devkitarm:latest as build
+# Build base patch
+FROM python:3.11 as build
 WORKDIR /app
 # Copy compiled armips, ndstool, and flips binaries from previous stages
 COPY --from=compile_armips /armips/armips /app
@@ -28,6 +29,8 @@ COPY --from=compile_ndstool /ndstool/ndstool /app
 COPY --from=compile_flips /Flips/flips /app
 # Install gcc + software-properties-common (the latter so we can use `apt-add-repository`)
 RUN apt-get update && apt-get install -y gcc software-properties-common
+# Install ARM gcc toolchain
+RUN apt-get install -y gcc-arm-none-eabi
 # Download fixy9 utility for updating y9.bin after making changes to overlays
 RUN wget -O fixy9.exe https://github.com/StraDaMa/Legend-of-Zelda-Phantom-Hourglass-D-Pad-Patch/raw/master/fixy9.exe
 # Install wine
@@ -36,8 +39,8 @@ RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
 RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/
 RUN apt-get update && apt-get install -y winehq-stable
 # Install python dependencies
-RUN apt-get install -y python3-pip python3-pil
-RUN pip3 install click ndspy==4.0.0
+ADD requirements.txt /app/
+RUN pip install -r requirements.txt
 # Add needed source files to the docker build
 ADD data/* /app/
 ADD code/* /app/code/
