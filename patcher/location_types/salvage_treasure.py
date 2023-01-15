@@ -48,7 +48,7 @@ class SalvageTreasureLocation(Location):
         zmb_actor: Actor = self.zmb_file.actors[self.actor_index]
         assert (
             zmb_actor.type == 'SLAR'
-        ), f"Error: {self.__class__.__name__} with invalid actor type '{zmb_actor.type}'"
+        ), f'Error: {self.__class__.__name__} with invalid actor type {zmb_actor.type!r}'
         # Set most significant bit due to the workaround in the base patch to randomize
         # these kind of items.
         zmb_actor.unk0C = value | 0x8000

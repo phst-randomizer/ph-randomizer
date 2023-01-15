@@ -82,7 +82,7 @@ def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Ninte
                     case 'minigame_reward_chest':
                         pass  # TODO: implement this
                     case other:
-                        raise NotImplementedError(f'Unknown location type "{other}"')
+                        raise NotImplementedError(f'Unknown location type {other!r}')
 
     # Write changes to the in-memory ROM
     Location.save_all()

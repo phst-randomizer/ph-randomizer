@@ -48,7 +48,7 @@ class DigSpotLocation(Location):
         zmb_actor: Actor = self.zmb_file.actors[self.actor_index]
         assert (
             zmb_actor.type == 'DGTG'
-        ), f"Error: DigSpotLocation with invalid actor type '{zmb_actor.type}'"
+        ), f'Error: DigSpotLocation with invalid actor type {zmb_actor.type!r}'
         zmb_actor.unk0C = value
         DigSpotLocation._zmb_filename_mapping[self._zmb_filepath] = self.zmb_file
 
