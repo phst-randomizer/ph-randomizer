@@ -1,20 +1,13 @@
-.PHONY: all clean debug
+.PHONY: all debug
 
-# Make sure devkitARM is installed
-ifeq ($(strip $(DEVKITARM)),)
-	$(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>devkitARM")
-endif
-
-# Include devkitARM tool definitions
-include $(DEVKITARM)/base_tools
+# Set ARM compiler
+CC=arm-none-eabi-gcc
 
 # Set up compilation flags
 CFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Wall -Os
 
 # C source file directory
 SRC_DIR=code
-# Directory to save compiled files to
-DEST_DIR=build
 SRC=$(wildcard $(SRC_DIR)/*.c)
 OBJ=$(SRC:.c=.o)
 ASM=$(SRC:.c=.asm)
@@ -97,9 +90,5 @@ debug: $(OBJ) $(ASM)
 # Compile C source file to object file
 %.o: %.c
 	$(CC) $(CFLAGS) -c "$<" -o "$@"
-
-# Clean up
-clean:
-	rm -f $(DEST_DIR)/*
 
 all: $(OUTPUT_BPS_FILE)
