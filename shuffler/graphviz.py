@@ -34,7 +34,7 @@ def main():
             G.draw(str(graph_dir / f'{graph_viz_layout}.png'))
         except OSError:
             print(
-                f"Couldn't generate graph viz using program \"{graph_viz_layout}\".",
+                f"Couldn't generate graph viz using program {graph_viz_layout!r}.",
                 file=sys.stderr,
             )
 
