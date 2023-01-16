@@ -42,10 +42,21 @@ def _patch_mercay_town_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
+def _patch_totok_lobby_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
+    """Disable all cutscenes that play in ToTOK lobby."""
+    with edit_zmb(rom, 'Map/dngn_main_f/map00.bin', 'zmb/dngn_main_f_00.zmb') as zmb_file:
+        ncma_actors = [actor for actor in zmb_file.actors if actor.type == 'NCMA']
+        assert len(ncma_actors) == 4
+        for actor in ncma_actors:
+            zmb_file.actors.remove(actor)
+
+    return rom
+
+
 def patch_actors(rom: NintendoDSRom) -> NintendoDSRom:
     """Applies all patches to NPCA actor section of ZMBs."""
     _patch_mercay_earthquake(rom)
     _patch_mercay_town_cutscenes(rom)
-    ...  # Other patches go here
+    _patch_totok_lobby_cutscenes(rom)
 
     return rom
