@@ -224,8 +224,16 @@ jobs:
 
 
   generate-base-patch:
-    name: Run patching toolchain and create base patch
+    name: Build base patch [${{ matrix.rom_variant }}]
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rom_variant: US
+            google_drive_url_secret: PH_US_GOOGLE_DRIVE_ID
+          - rom_variant: US (D-Pad Patch)
+            google_drive_url_secret: PH_US_DPAD_GOOGLE_DRIVE_ID
     steps:
       - uses: actions/checkout@v3
 
@@ -241,12 +249,17 @@ jobs:
       - name: Fetch PH rom
         run: |
           pip install gdown
-          gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          gdown ${{ secrets[matrix.google_drive_url_secret] }}
         working-directory: base
 
       - name: Get filename of rom
         id: rom-filename
         run: echo "rom_filename=$(ls *.nds)" >> $GITHUB_OUTPUT
+        working-directory: base
+
+      - name: Get checksum of ROM
+        id: rom-checksum
+        run: echo "checksum=$(sha256sum '${{ steps.rom-filename.outputs.rom_filename }}' | awk '{ print $1 }')" >> $GITHUB_OUTPUT
         working-directory: base
 
       - name: Get current commit hash
@@ -270,10 +283,11 @@ jobs:
           outputs: |
             base/out
 
-      - uses: actions/upload-artifact@v3
+      - name: Save base patch as an artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: patch.bps
-          path: base/out/patch.bps
+          name: ${{ steps.rom-checksum.outputs.checksum }}.bps
+          path: base/out/${{ steps.rom-checksum.outputs.checksum }}.bps
 
       - name: Cleanup
         if: always()
@@ -307,17 +321,19 @@ jobs:
     - name: Upgrade pip
       run: python -m pip install --upgrade pip
 
-    - name: Install test dependencies
-      run: pip install -e .[test]
+    - name: Install dependencies
+      run: |
+        pip install -e .[test]
+        pip install PyYAML
 
     - name: Get list of tests to run in separate jobs
       id: set-test-matrix
       run: |
-        chmod +x .github/generate_desmume_test_jobs.sh
-        echo "matrix=$(.github/generate_desmume_test_jobs.sh)" >> $GITHUB_OUTPUT
+        python .github/generate_desmume_test_jobs.py
+        echo "matrix=$(cat .github/matrix.json)" >> $GITHUB_OUTPUT
 
   test-desmume:
-    name: Run base patch tests
+    name: Run base patch tests [${{ matrix.module }}] (${{ matrix.rom_variant }})
     needs:
       - generate-base-patch
       - generate-base-patch-test-jobs
@@ -336,10 +352,6 @@ jobs:
         with:
           # Also retrieve previous commit so we can check if there are relevant changes
           fetch-depth: 2
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: patch.bps
 
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
@@ -367,11 +379,24 @@ jobs:
       - name: Fetch PH rom
         run: |
           pip install gdown
-          gdown ${{ secrets.PH_GOOGLE_DRIVE_ID }}
+          gdown ${{ secrets[matrix.google_drive_url_secret] }}
+
+      - name: Get filename of rom
+        id: rom-filename
+        run: echo "filename=$(ls *.nds)" >> $GITHUB_OUTPUT
+
+      - name: Get checksum of ROM
+        id: rom-checksum
+        run: echo "checksum=$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+
+      - name: Download base patch from previous workflow
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
       - name: Patch the rom
         run: |
-          ./Flips/flips.exe --apply patch.bps $(ls *.nds) out.nds
+          ./Flips/flips.exe --apply ${{ steps.rom-checksum.outputs.checksum }}.bps $(ls *.nds) out.nds
 
       - name: Install tox
         run: pip install tox
@@ -414,11 +439,13 @@ jobs:
       - name: Install pyinstaller
         run: pip install -U pyinstaller
 
-      - name: Download base patch
+      - name: Download base patches
         uses: actions/download-artifact@v3
-        with:
-          name: patch.bps
-          path: base/out/patch.bps
+
+      - name: Move all patch files into the same directory so pyinstaller can find them
+        run: |
+          mkdir -p base/out
+          mv ./**/*.bps base/out
 
       - name: Build randomizer executable
         run: pyinstaller randomizer.spec
