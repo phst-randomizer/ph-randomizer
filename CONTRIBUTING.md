@@ -6,7 +6,7 @@ Note, this document is very much a work-in-progress.
 
 Official releases of the randomizer are distributed as single executable files; these are created using [PyInstaller](https://pyinstaller.org). While convenient for end users to run, developers will likely want to run the randomizer from source. To do this:
 
-1. Install the version of [Python](https://www.python.org/downloads/) specified in `.python-version` (Python 3.11 at the time of this writing)
+1. Install the version of [Python](https://www.python.org/downloads/) specified in [`.python-version`](https://github.com/phst-randomizer/ph-randomizer/blob/main/.python-version) (Python 3.11 at the time of this writing)
 2. Create a virtualenv using whatever tool you prefer
 3. Run `pip install -e .` from the root of the repository.
    - It's also recommended to run the following pip install commands if setting up a development environment:
