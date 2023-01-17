@@ -94,7 +94,7 @@ def start_first_file(desmume_emulator: DeSmuMEWrapper):
 
 
 def get_current_rupee_count(desmume: DeSmuMEWrapper):
-    return int.from_bytes(desmume.emu.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], 'little')
+    return int.from_bytes(desmume.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], 'little')
 
 
 # Screen coordinates for each item when the "Items" menu is open
