@@ -6,14 +6,14 @@ import pytest
 from patcher.location_types import IslandShopLocation
 from patcher.location_types.island_shop import GD_MODELS
 
-from .desmume_utils import DesmumeEmulator, get_current_rupee_count, start_first_file
+from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 
 
 @pytest.fixture(
     params=[val for val in GD_MODELS.keys() if GD_MODELS[val]],
     ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val],
 )
-def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
+def island_shop_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     rom_path = str(tmp_path / f'{tmp_path.name}.nds')
 
     IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
@@ -29,12 +29,12 @@ def island_shop_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, requ
 
     IslandShopLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open_rom(rom_path)
+    desmume_emulator.open(rom_path)
 
     return desmume_emulator
 
 
-def test_custom_shop_items(island_shop_test_emu: DesmumeEmulator):
+def test_custom_shop_items(island_shop_test_emu: DeSmuMEWrapper):
     start_first_file(island_shop_test_emu)
 
     island_shop_test_emu.wait(100)

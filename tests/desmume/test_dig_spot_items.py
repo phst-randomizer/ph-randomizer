@@ -8,7 +8,7 @@ import pytest
 from patcher.location_types import DigSpotLocation
 from patcher.location_types.island_shop import GD_MODELS
 
-from .conftest import ITEM_MEMORY_ADDRESSES, DesmumeEmulator, ItemMemoryAddressType
+from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper, ItemMemoryAddressType
 from .desmume_utils import equip_item, start_first_file, use_equipped_item
 
 
@@ -16,7 +16,7 @@ from .desmume_utils import equip_item, start_first_file, use_equipped_item
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
+def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     """Generate and run a rom with a custom dig/shovel spot item set."""
     rom_path = str(tmp_path / f'{tmp_path.name}.nds')
 
@@ -27,17 +27,17 @@ def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request
 
     DigSpotLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open_rom(rom_path)
+    desmume_emulator.open(rom_path)
 
     return desmume_emulator
 
 
-def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
+def test_custom_dig_spot_items(dig_spot_test_emu: DeSmuMEWrapper):
     item_id = int(os.environ['PYTEST_CURRENT_TEST'].split('[')[1].split('-')[0], 16)
 
     start_first_file(dig_spot_test_emu)
 
-    original_value = dig_spot_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+    original_value = dig_spot_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
 
     match ITEM_MEMORY_ADDRESSES[item_id][2]:
         case ItemMemoryAddressType.FLAG:
@@ -46,12 +46,10 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
                 != ITEM_MEMORY_ADDRESSES[item_id][1]
             )
         case ItemMemoryAddressType.COUNTER_8_BIT:
-            original_value = dig_spot_test_emu.emu.memory.unsigned[
-                ITEM_MEMORY_ADDRESSES[item_id][0]
-            ]
+            original_value = dig_spot_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
         case ItemMemoryAddressType.COUNTER_16_BIT:
             original_value = int.from_bytes(
-                dig_spot_test_emu.emu.memory.unsigned[
+                dig_spot_test_emu.memory.unsigned[
                     ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                 ],
                 'little',
@@ -88,20 +86,20 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DesmumeEmulator):
     match ITEM_MEMORY_ADDRESSES[item_id][2]:
         case ItemMemoryAddressType.FLAG:
             assert (
-                dig_spot_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+                dig_spot_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
                 & ITEM_MEMORY_ADDRESSES[item_id][1]
                 == ITEM_MEMORY_ADDRESSES[item_id][1]
             )
         case ItemMemoryAddressType.COUNTER_8_BIT:
             assert (
-                dig_spot_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+                dig_spot_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
                 - ITEM_MEMORY_ADDRESSES[item_id][1]
                 == original_value
             )
         case ItemMemoryAddressType.COUNTER_16_BIT:
             assert (
                 int.from_bytes(
-                    dig_spot_test_emu.emu.memory.unsigned[
+                    dig_spot_test_emu.memory.unsigned[
                         ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                     ],
                     'little',

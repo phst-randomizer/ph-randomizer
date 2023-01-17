@@ -5,7 +5,7 @@ from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 import pytest
 
-from .conftest import DesmumeEmulator
+from .conftest import DeSmuMEWrapper
 
 RANDO_SETTINGS_BITMAP_ADDR = int(
     re.findall(
@@ -19,7 +19,7 @@ RANDO_SETTINGS_BITMAP_ADDR = int(
 @pytest.mark.parametrize(
     'bridge_repaired', [True, False], ids=['Bridge repaired from start', 'Bridge broken from start']
 )
-def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool):
+def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool):
     """Ensure all flags are set properly + all rando settings work."""
     for i in range(2):
         base_rom_emu.wait(500)
@@ -51,9 +51,9 @@ def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool
             # that appears when there is no save data on the card.
             # Do not remove them.
             base_rom_emu.wait(400)
-            base_rom_emu.emu.reset()
+            base_rom_emu.reset()
 
-    base_rom_emu.emu.memory.unsigned[RANDO_SETTINGS_BITMAP_ADDR] |= int(bridge_repaired)
+    base_rom_emu.memory.unsigned[RANDO_SETTINGS_BITMAP_ADDR] |= int(bridge_repaired)
 
     # Touch file
     base_rom_emu.touch_input((130, 70), 0)
@@ -110,8 +110,8 @@ def test_flags_and_settings(base_rom_emu: DesmumeEmulator, bridge_repaired: bool
     ########################################
 
     # Mercay bridge repaired
-    assert (base_rom_emu.emu.memory.unsigned[0x021B553C + 0x2] & 0x2 == 0x2) is bridge_repaired
+    assert (base_rom_emu.memory.unsigned[0x021B553C + 0x2] & 0x2 == 0x2) is bridge_repaired
     # Talked to Oshus for first time
-    assert base_rom_emu.emu.memory.unsigned[0x021B553C + 0x18] & 0x2 == 0x2
+    assert base_rom_emu.memory.unsigned[0x021B553C + 0x18] & 0x2 == 0x2
     # Saw broken bridge for first time
-    assert base_rom_emu.emu.memory.unsigned[0x021B553C + 0x2C] & 0x1 == 0x1
+    assert base_rom_emu.memory.unsigned[0x021B553C + 0x2C] & 0x1 == 0x1

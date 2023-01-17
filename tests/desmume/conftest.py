@@ -5,26 +5,20 @@ import shutil
 import sys
 from time import sleep
 
-from desmume.emulator import DeSmuME, DeSmuME_SDL_Window
 import pytest
 
-from .desmume_utils import DesmumeEmulator
+from .desmume_utils import DeSmuMEWrapper
 
 
 @pytest.fixture(scope='session')
 def py_desmume_instance():
-    desmume_emulator = DeSmuME()
-    sdl_window = desmume_emulator.create_sdl_window()
-
-    yield desmume_emulator, sdl_window
-
-    # Cleanup desmume processes
-    sdl_window.destroy()
+    desmume_emulator = DeSmuMEWrapper()
+    yield desmume_emulator
     desmume_emulator.destroy()
 
 
 @pytest.fixture
-def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tmp_path: Path):
+def desmume_emulator(py_desmume_instance: DeSmuMEWrapper, tmp_path: Path):
     base_rom_path = Path(os.environ['PH_ROM_PATH'])
     python_version = sys.version_info
 
@@ -66,15 +60,13 @@ def desmume_emulator(py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window], tm
                 # and try again.
                 sleep(10)
 
-    desmume_emulator = DesmumeEmulator(py_desmume_instance=py_desmume_instance)
-
-    return desmume_emulator
+    return py_desmume_instance
 
 
 @pytest.fixture
-def base_rom_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator):
+def base_rom_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper):
     temp_rom_path = tmp_path / f'{tmp_path.name}.nds'
-    desmume_emulator.open_rom(str(temp_rom_path))
+    desmume_emulator.open(str(temp_rom_path))
     return desmume_emulator
 
 
