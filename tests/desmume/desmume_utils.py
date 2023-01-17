@@ -1,19 +1,19 @@
 from desmume.controls import keymask
-from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME, DeSmuME_SDL_Window
+from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME
 
 
-class DesmumeEmulator:
-    def __init__(self, py_desmume_instance: tuple[DeSmuME, DeSmuME_SDL_Window]):
-        self.emu = py_desmume_instance[0]
-        self.window = py_desmume_instance[1]
+class DeSmuMEWrapper(DeSmuME):
+    def __init__(self):
+        super().__init__()
+        self.window = self.create_sdl_window()
 
-    def open_rom(self, rom_path: str):
+    def open(self, rom_path: str):
+        super().open(rom_path)
         self.frame = 0
-        self.emu.open(rom_path)
         self._next_frame()
 
     def _next_frame(self):
-        self.emu.cycle()
+        self.cycle()
         self.frame += 1
         if self.window is not None:
             self.window.draw()
@@ -36,10 +36,10 @@ class DesmumeEmulator:
         if isinstance(buttons, int):
             buttons = [buttons]
         for button in buttons:
-            self.emu.input.keypad_add_key(keymask(button))
+            self.input.keypad_add_key(keymask(button))
         self.wait(frames + 1)
         for button in buttons:
-            self.emu.input.keypad_rm_key(keymask(button))
+            self.input.keypad_rm_key(keymask(button))
         self.wait(2)
 
     def touch_input(self, position: tuple[int, int], frames: int = 1):
@@ -52,12 +52,12 @@ class DesmumeEmulator:
         """
         x, y = position
         self._next_frame()
-        self.emu.input.touch_set_pos(x, y)
+        self.input.touch_set_pos(x, y)
         self.wait(frames + 1)
-        self.emu.input.touch_release()
+        self.input.touch_release()
 
 
-def start_first_file(desmume_emulator: DesmumeEmulator):
+def start_first_file(desmume_emulator: DeSmuMEWrapper):
     """From game boot, goes through the title screen and starts the first save."""
     desmume_emulator.wait(500)
 
@@ -93,29 +93,29 @@ def start_first_file(desmume_emulator: DesmumeEmulator):
     desmume_emulator.wait(200)
 
 
-def get_current_rupee_count(desmume: DesmumeEmulator):
-    return int.from_bytes(desmume.emu.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], 'little')
+def get_current_rupee_count(desmume: DeSmuMEWrapper):
+    return int.from_bytes(desmume.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], 'little')
 
 
 # Screen coordinates for each item when the "Items" menu is open
 ITEMS_MENU_COORDINATES = {'shovel': (225, 175)}
 
 
-def open_items_menu(desmume: DesmumeEmulator):
+def open_items_menu(desmume: DeSmuMEWrapper):
     desmume.touch_input((SCREEN_WIDTH - 5, SCREEN_HEIGHT - 5), 5)
     desmume.wait(20)
 
 
-def select_item_from_items_menu(desmume: DesmumeEmulator, item: str):
+def select_item_from_items_menu(desmume: DeSmuMEWrapper, item: str):
     desmume.touch_input(ITEMS_MENU_COORDINATES[item], 5)
     desmume.wait(20)
 
 
-def equip_item(desmume: DesmumeEmulator, item: str):
+def equip_item(desmume: DeSmuMEWrapper, item: str):
     open_items_menu(desmume)
     select_item_from_items_menu(desmume, item)
 
 
-def use_equipped_item(desmume: DesmumeEmulator):
+def use_equipped_item(desmume: DeSmuMEWrapper):
     desmume.touch_input((SCREEN_WIDTH, 0), 5)
     desmume.wait(20)

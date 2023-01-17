@@ -8,7 +8,7 @@ import pytest
 from patcher.location_types import MapObjectLocation
 from patcher.location_types.island_shop import GD_MODELS
 
-from .conftest import ITEM_MEMORY_ADDRESSES, DesmumeEmulator, ItemMemoryAddressType
+from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper, ItemMemoryAddressType
 from .desmume_utils import start_first_file
 
 
@@ -16,7 +16,7 @@ from .desmume_utils import start_first_file
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def chest_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
+def chest_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     """Generate and run a rom with a custom chest item set."""
     rom_path = str(tmp_path / f'{tmp_path.name}.nds')
 
@@ -27,26 +27,26 @@ def chest_test_emu(tmp_path: Path, desmume_emulator: DesmumeEmulator, request):
 
     MapObjectLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open_rom(rom_path)
+    desmume_emulator.open(rom_path)
 
     return desmume_emulator
 
 
-def test_custom_chest_items(chest_test_emu: DesmumeEmulator):
+def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper):
     item_id = int(os.environ['PYTEST_CURRENT_TEST'].split('[')[1].split('-')[0], 16)
 
     start_first_file(chest_test_emu)
 
-    original_value = chest_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+    original_value = chest_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
     if ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.FLAG:
         assert (
             original_value & ITEM_MEMORY_ADDRESSES[item_id][1] != ITEM_MEMORY_ADDRESSES[item_id][1]
         )
     elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_8_BIT:
-        original_value = chest_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+        original_value = chest_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
     elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         original_value = int.from_bytes(
-            chest_test_emu.emu.memory.unsigned[
+            chest_test_emu.memory.unsigned[
                 ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
             ],
             'little',
@@ -55,9 +55,9 @@ def test_custom_chest_items(chest_test_emu: DesmumeEmulator):
         raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item_id][2]} not a valid item type.')
 
     # Walk up to chest
-    chest_test_emu.emu.input.touch_set_pos(SCREEN_WIDTH // 2, 0)
+    chest_test_emu.input.touch_set_pos(SCREEN_WIDTH // 2, 0)
     chest_test_emu.wait(320)
-    chest_test_emu.emu.input.touch_release()
+    chest_test_emu.input.touch_release()
     chest_test_emu.wait(10)
 
     # Open chest
@@ -80,20 +80,20 @@ def test_custom_chest_items(chest_test_emu: DesmumeEmulator):
     # Make sure correct item was retrieved.
     if ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.FLAG:
         assert (
-            chest_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+            chest_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
             & ITEM_MEMORY_ADDRESSES[item_id][1]
             == ITEM_MEMORY_ADDRESSES[item_id][1]
         )
     elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_8_BIT:
         assert (
-            chest_test_emu.emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
+            chest_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
             - ITEM_MEMORY_ADDRESSES[item_id][1]
             == original_value
         )
     elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         assert (
             int.from_bytes(
-                chest_test_emu.emu.memory.unsigned[
+                chest_test_emu.memory.unsigned[
                     ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
                 ],
                 'little',
