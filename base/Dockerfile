@@ -50,7 +50,9 @@ ARG PH_ROM_PATH
 ARG VERSION_STRING
 ADD $PH_ROM_PATH /app
 RUN make
+# Name base patch using its source ROM's SHA-256 so that we can tell what ROM it's for.
+RUN export sha256=$(sha256sum $PH_ROM_PATH | awk '{ print $1 }'); mv patch.bps $sha256.bps
 
 # Export base patch to host
 FROM scratch
-COPY --from=build /app/patch.bps /
+COPY --from=build /app/*.bps /
