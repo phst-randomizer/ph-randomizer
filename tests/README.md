@@ -28,8 +28,8 @@ These tests are run in a seperate way from the "regular", non-desmume based test
 
 ### Writing tests
 
-All desmume-based tests should be in `test_desmume.py` (although fixtures added for it can be added to `conftest.py`).
+All desmume-based tests should be in the `tests/desmume` directory
 
 #### Using existing save data
 
-It is sometimes desirable to load a battery save prior to running a test. For each pytest function, the testing environment will look for a .dsv file in the `/tests/test_data` (relative to root of repository) directory with the same name as the test. For example, for a test function `test_boot_new_game(...)`, placing a battery save file named `test_boot_new_game.dsv` into the previously mentioned directory will cause DeSmuME to load that dsv prior to that test running.
+It is sometimes desirable to load a battery save prior to running a test. For each pytest function, the testing environment will look for a .dsv file in the `/tests/desmume/test_data` (relative to root of repository) directory with the same name as the test. For example, for a test function `test_boot_new_game(...)`, placing a battery save file named `test_boot_new_game.dsv` into the previously mentioned directory will cause DeSmuME to load that dsv prior to that test running.
