@@ -270,6 +270,8 @@ jobs:
           outputs: |
             base/out
 
+      - run: ls base/out
+
       - uses: actions/upload-artifact@v3
         with:
           name: patch.bps
