@@ -1,7 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from pathlib import Path
+
 
 block_cipher = None
+
+SHUFFLER_ROOT_DIR = Path('shuffler/')
 
 
 a = Analysis(
@@ -9,9 +13,18 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        # Bundle logic, aux data, and base patch files inside executable
-        ('shuffler/logic/', 'logic'),
-        ('base/out/patch.bps', '.'),
+        # Bundle logic and aux data
+        (
+            str(file.relative_to(SHUFFLER_ROOT_DIR.parent)),
+            str(file.relative_to(SHUFFLER_ROOT_DIR.parent).parent),
+        )
+        for file in list(SHUFFLER_ROOT_DIR.rglob('*.logic'))
+        + list(SHUFFLER_ROOT_DIR.rglob('*.json'))
+        if not str(file).startswith('.')
+    ]
+    + [
+        # Bundle base patches
+        ('base/out/*.bps', 'base/out/'),
     ],
     hiddenimports=[],
     hookspath=[],
