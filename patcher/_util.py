@@ -1,7 +1,6 @@
 import json
 import logging
 from pathlib import Path
-import sys
 
 from patcher._items import ITEMS
 from patcher.location_types import (
@@ -12,16 +11,6 @@ from patcher.location_types import (
     SalvageTreasureLocation,
 )
 from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, SalvageTreasure, Tree
-
-
-def is_frozen() -> bool:
-    """
-    Whether or not the app is being executed as part of a script or a frozen executable.
-
-    This can be used to determine if the app is running as a regular python script,
-    or if it's a bundled PyInstaller executable.
-    """
-    return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
 
 def load_aux_data(directory: Path) -> list[Area]:

@@ -1,6 +1,6 @@
+import hashlib
 from io import BytesIO
 import logging
-import os
 from pathlib import Path
 
 import click
@@ -23,13 +23,20 @@ from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, Salvage
 
 def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     """Apply the base patch to `input_rom`."""
-    base_patch_path = Path(
-        os.environ.get(
-            'BASE_PATCH_PATH', Path(__file__).parent.parent / 'base' / 'out' / 'patch.bps'
-        )
-    )
+    # Calculate sha256 of provided ROM
+    sha256_calculator = hashlib.sha256()
+    sha256_calculator.update(input_rom_data)
+    sha256 = sha256_calculator.hexdigest()
+
+    # Get the path to the base patch for the given ROM, erroring out of it doesn't exist
+    base_patch_path = Path(__file__).parents[1] / 'base' / 'out' / f'{sha256}.bps'
+    if not base_patch_path.exists():
+        raise Exception(f'Invalid ROM! No base patch found for a ROM with sha256 of {sha256}.')
+
+    # Apply the base patch to the ROM
     with open(base_patch_path, 'rb') as patch_file:
         patched_rom = bps.patch(source=BytesIO(input_rom_data), bps_patch=patch_file)
+
     return rom.NintendoDSRom(data=patched_rom.read())
 
 
