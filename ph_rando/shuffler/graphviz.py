@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys
 
-from shuffler.logic import Logic
+from ph_rando.shuffler.logic import Logic
 
 try:
     import pygraphviz as pgv

@@ -5,8 +5,8 @@ import sys
 
 import click
 
-from shuffler.aux_models import Area
-from shuffler.logic import Logic
+from ph_rando.shuffler.aux_models import Area
+from ph_rando.shuffler.logic import Logic
 
 
 def shuffle(seed: str | None) -> list[Area]:

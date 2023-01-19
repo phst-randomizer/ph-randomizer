@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, TypeAlias, Union
 from pydantic import BaseModel, Extra, Field, validator
 
 if TYPE_CHECKING:
-    from shuffler.logic import Node
+    from ph_rando.shuffler.logic import Node
 
 
 class BaseCheck(BaseModel):
@@ -28,7 +28,7 @@ class BaseCheck(BaseModel):
         https://github.com/pydantic/pydantic/issues/3809 and reports type errors all over the
         place if it's used. If this is ever fixed, it should be changed.
         """
-        from patcher._items import ITEMS
+        from ph_rando.patcher._items import ITEMS
 
         # TODO: Use the following assertion instead once all aux data chest contents is complete.
         # assert v in ITEMS

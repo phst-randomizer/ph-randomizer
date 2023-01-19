@@ -2,15 +2,24 @@ import json
 import logging
 from pathlib import Path
 
-from patcher._items import ITEMS
-from patcher.location_types import (
+from ph_rando.shuffler.aux_models import (
+    Area,
+    Chest,
+    DigSpot,
+    Event,
+    IslandShop,
+    SalvageTreasure,
+    Tree,
+)
+
+from ._items import ITEMS
+from .location_types import (
     DigSpotLocation,
     EventLocation,
     IslandShopLocation,
     MapObjectLocation,
     SalvageTreasureLocation,
 )
-from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, SalvageTreasure, Tree
 
 
 def load_aux_data(directory: Path) -> list[Area]:

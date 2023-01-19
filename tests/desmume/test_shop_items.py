@@ -3,8 +3,8 @@ from pathlib import Path
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from patcher.location_types import IslandShopLocation
-from patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher.location_types import IslandShopLocation
+from ph_rando.patcher.location_types.island_shop import GD_MODELS
 
 from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 

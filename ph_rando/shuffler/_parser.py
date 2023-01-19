@@ -44,7 +44,7 @@ class ParsedLogic(BaseModel):
 
 
 def parse_edge_constraint(constraint: str) -> list[str | list[str | list]]:
-    from shuffler.logic import EdgeDescriptor
+    from ph_rando.shuffler.logic import EdgeDescriptor
 
     edge_item = None
     for edge_descriptor in EdgeDescriptor:
@@ -64,7 +64,7 @@ def parse_edge_constraint(constraint: str) -> list[str | list[str | list]]:
 
 
 def parse_logic(logic_file_contents: str) -> ParsedLogic:
-    from shuffler.logic import NodeDescriptor
+    from ph_rando.shuffler.logic import NodeDescriptor
 
     edge_parser = (
         pp.Word(pp.alphanums)('source_node')
