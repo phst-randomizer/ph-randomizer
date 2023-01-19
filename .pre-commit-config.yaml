@@ -40,6 +40,7 @@ repos:
           - --py39-plus
           - --keep-runtime-typing
           - --py310-plus
+          - --py311-plus
 
   - repo: https://github.com/PyCQA/autoflake
     rev: v1.4
