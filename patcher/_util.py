@@ -15,8 +15,7 @@ from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, Salvage
 
 def load_aux_data(directory: Path) -> list[Area]:
     aux_data: list[Area] = []
-    aux_files = list(directory.rglob('*.json'))
-    for file in aux_files:
+    for file in directory.rglob('*.json'):
         with open(file) as fd:
             aux_data.append(Area(**json.load(fd)))
     return aux_data
