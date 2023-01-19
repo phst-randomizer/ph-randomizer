@@ -23,7 +23,7 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Install dependencies
-        run: pip install -e .[test,types]
+        run: pip install -r requirements_dev.txt
 
       - name: Install pre-commit and tox
         run: pip install pre-commit tox
@@ -133,7 +133,7 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -r requirements.txt
 
       - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
         run: |
@@ -186,7 +186,7 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -r requirements.txt
 
       - name: Run the shuffler
         run: python ph_rando/shuffler/main.py -o --
@@ -322,9 +322,7 @@ jobs:
       run: python -m pip install --upgrade pip
 
     - name: Install dependencies
-      run: |
-        pip install -e .[test]
-        pip install PyYAML
+      run: pip install -r requirements_dev.txt
 
     - name: Get list of tests to run in separate jobs
       id: set-test-matrix
@@ -434,7 +432,7 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Install randomizer dependencies
-        run: pip install -e .
+        run: pip install -r requirements.txt
 
       - name: Install pyinstaller
         run: pip install -U pyinstaller
