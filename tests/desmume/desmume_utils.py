@@ -12,6 +12,10 @@ class DeSmuMEWrapper(DeSmuME):
         self.frame = 0
         self._next_frame()
 
+    def destroy(self):
+        self.window.destroy()
+        return super().destroy()
+
     def _next_frame(self):
         self.cycle()
         self.frame += 1
