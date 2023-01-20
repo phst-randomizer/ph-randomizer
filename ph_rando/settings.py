@@ -8,7 +8,6 @@ class Setting(BaseModel):
     description: str | None
     flag: bool | None
     options: list[str] | None
-    default: bool | str
 
     @validator('options')
     def ensure_values_or_flag(cls, v: list[str] | None, values: dict):
@@ -19,14 +18,6 @@ class Setting(BaseModel):
                 f'Invalid setting {values["name"]} - has both'
                 '"options" or "flag", only one allowed.'
             )
-        return v
-
-    @validator('default')
-    def validate_default(cls, v: bool | str, values: dict):
-        if (isinstance(v, bool) and not values.get('flag')) or (
-            isinstance(v, str) and values.get('flag')
-        ):
-            raise ValueError(f'Invalid default {v!r} for setting.')
         return v
 
 

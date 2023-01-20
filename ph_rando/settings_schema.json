@@ -36,22 +36,10 @@
           "items": {
             "type": "string"
           }
-        },
-        "default": {
-          "title": "Default",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "string"
-            }
-          ]
         }
       },
       "required": [
-        "name",
-        "default"
+        "name"
       ]
     }
   }

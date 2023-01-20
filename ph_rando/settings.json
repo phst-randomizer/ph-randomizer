@@ -4,18 +4,15 @@
     {
       "name": "MercayBridgeRepairedFromStart",
       "description": "Whether or not the bridge on Mercay is repaired at the start of the game.",
-      "flag": true,
-      "default": true
+      "flag": true
     },
     {
       "name": "HammerClip",
-      "flag": true,
-      "default": false
+      "flag": true
     },
     {
       "name": "BoomerangClip",
-      "flag": true,
-      "default": false
+      "flag": true
     },
     {
       "name": "SwordMode",
@@ -23,8 +20,7 @@
         "start_with_sword",
         "randomized_sword",
         "swordless"
-      ],
-      "default": "start_with_sword"
+      ]
     }
   ]
 }

@@ -20,7 +20,6 @@ def click_setting_options(function: Callable):
             is_flag=bool(setting.flag),
             type=click.Choice(setting.options) if setting.options else bool,
             help=setting.description,
-            default=setting.default,
         )(function)
 
     return function
