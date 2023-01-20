@@ -1,3 +1,3 @@
-from .main import apply_base_patch, patch_items
+from .main import apply_base_patch, apply_settings_patches, patch_items
 
-__all__ = ['patch_items', 'apply_base_patch']
+__all__ = ['patch_items', 'apply_base_patch', 'apply_settings_patches']
