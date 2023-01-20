@@ -11,12 +11,12 @@ from ph_rando.shuffler.logic import Edge, Logic, Node
 
 @pytest.mark.repeat(3)
 @pytest.mark.parametrize('seed', ['test', 'another_test', 'ANOTHER_TEST!!'])
-def test_seeds(seed: str):
+def test_seeds(seed: str, settings):
     """Test that running the shuffler with same seed multiple times produces identical aux data."""
 
-    first = shuffle(seed)
-    second = shuffle(seed)
-    third = shuffle(seed)
+    first = shuffle(seed, settings)
+    second = shuffle(seed, settings)
+    third = shuffle(seed, settings)
     assert first == second == third
 
 
@@ -97,8 +97,8 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
     assert edge.is_traversable([], set(), set()) == expected_result
 
 
-def test_graph_connectedness() -> None:
-    logic = Logic()
+def test_graph_connectedness(settings) -> None:
+    logic = Logic(settings=settings)
     logic.connect_rooms()
 
     # Compute list of tuples of each check its area.
