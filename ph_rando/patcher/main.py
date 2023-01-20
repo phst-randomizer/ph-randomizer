@@ -7,6 +7,7 @@ import click
 from ndspy import rom
 from vidua import bps
 
+from ph_rando.common import click_setting_options
 from ph_rando.shuffler.aux_models import (
     Area,
     Chest,
@@ -124,7 +125,10 @@ def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Ninte
 @click.option(
     '-o', '--output-rom-path', default=None, type=str, help='Path to save patched ROM to.'
 )
-def patcher_cli(aux_data_directory: Path, input_rom_path: Path, output_rom_path: str | None):
+@click_setting_options
+def patcher_cli(
+    aux_data_directory: Path, input_rom_path: Path, output_rom_path: str | None, **settings
+):
     new_aux_data = load_aux_data(aux_data_directory)
 
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
