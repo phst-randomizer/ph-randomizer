@@ -7,8 +7,18 @@ import click
 from ndspy import rom
 from vidua import bps
 
-from patcher._items import ITEMS
-from patcher._util import (
+from ph_rando.shuffler.aux_models import (
+    Area,
+    Chest,
+    DigSpot,
+    Event,
+    IslandShop,
+    SalvageTreasure,
+    Tree,
+)
+
+from ._items import ITEMS
+from ._util import (
     load_aux_data,
     patch_chest,
     patch_dig_spot_treasure,
@@ -17,8 +27,7 @@ from patcher._util import (
     patch_salvage_treasure,
     patch_tree,
 )
-from patcher.location_types import Location
-from shuffler.aux_models import Area, Chest, DigSpot, Event, IslandShop, SalvageTreasure, Tree
+from .location_types import Location
 
 
 def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:

@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from shuffler import shuffle
-from shuffler.aux_models import Area
-from shuffler.logic import Edge, Logic, Node
+from ph_rando.shuffler import shuffle
+from ph_rando.shuffler.aux_models import Area
+from ph_rando.shuffler.logic import Edge, Logic, Node
 
 
 @pytest.mark.repeat(3)

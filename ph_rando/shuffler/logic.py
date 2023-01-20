@@ -15,8 +15,8 @@ from typing import Any
 import inflection
 from ordered_set import OrderedSet
 
-from shuffler._parser import parse_edge_constraint, parse_logic
-from shuffler.aux_models import Area, Check, Enemy, Exit, Room
+from ph_rando.shuffler._parser import parse_edge_constraint, parse_logic
+from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
 
 ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text())
 

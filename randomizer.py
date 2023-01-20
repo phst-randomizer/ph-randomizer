@@ -2,8 +2,8 @@ from pathlib import Path
 
 import click
 
-from patcher import apply_base_patch, patch_items
-from shuffler import shuffle
+from ph_rando.patcher import apply_base_patch, patch_items
+from ph_rando.shuffler import shuffle
 
 # TODO: this is an example script for how to call the patcher/shuffler.
 # At some point this will be fleshed out into a full CLI (and eventually

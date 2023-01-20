@@ -5,8 +5,8 @@ from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from patcher.location_types import DigSpotLocation
-from patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher.location_types import DigSpotLocation
+from ph_rando.patcher.location_types.island_shop import GD_MODELS
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper, ItemMemoryAddressType
 from .desmume_utils import equip_item, start_first_file, use_equipped_item

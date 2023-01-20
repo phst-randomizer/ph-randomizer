@@ -5,8 +5,8 @@ from desmume.emulator import SCREEN_HEIGHT
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from patcher.location_types import SalvageTreasureLocation
-from patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher.location_types import SalvageTreasureLocation
+from ph_rando.patcher.location_types.island_shop import GD_MODELS
 from tests.desmume.desmume_utils import DeSmuMEWrapper, start_first_file
 
 from .conftest import ITEM_MEMORY_ADDRESSES, ItemMemoryAddressType

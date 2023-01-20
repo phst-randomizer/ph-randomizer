@@ -5,8 +5,8 @@ from desmume.emulator import SCREEN_WIDTH
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from patcher.location_types import MapObjectLocation
-from patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher.location_types import MapObjectLocation
+from ph_rando.patcher.location_types.island_shop import GD_MODELS
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper, ItemMemoryAddressType
 from .desmume_utils import start_first_file

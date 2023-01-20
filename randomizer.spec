@@ -5,7 +5,7 @@ from pathlib import Path
 
 block_cipher = None
 
-SHUFFLER_ROOT_DIR = Path('shuffler/')
+SHUFFLER_ROOT_DIR = Path('ph_rando/shuffler/')
 
 
 a = Analysis(
@@ -15,8 +15,8 @@ a = Analysis(
     datas=[
         # Bundle logic and aux data
         (
-            str(file.relative_to(SHUFFLER_ROOT_DIR.parent)),
-            str(file.relative_to(SHUFFLER_ROOT_DIR.parent).parent),
+            str(file.relative_to(SHUFFLER_ROOT_DIR.parents[1])),
+            str(file.relative_to(SHUFFLER_ROOT_DIR.parents[1]).parent),
         )
         for file in list(SHUFFLER_ROOT_DIR.rglob('*.logic'))
         + list(SHUFFLER_ROOT_DIR.rglob('*.json'))

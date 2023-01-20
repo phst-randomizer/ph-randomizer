@@ -137,7 +137,7 @@ jobs:
 
       - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
         run: |
-          python shuffler/aux_models.py
+          python ph_rando/shuffler/aux_models.py
           git diff --exit-code
           if [ $? -ne 0 ]
           then
@@ -147,7 +147,7 @@ jobs:
       - name: Run JSON Schema validation on aux data
         uses: walbo/validate-json@v1.1.0
         with:
-          files: shuffler/logic/**/*.json
+          files: ph_rando/shuffler/logic/**/*.json
 
       - name: Run pydantic validation on aux data
         run: |
@@ -155,7 +155,7 @@ jobs:
           import json, sys
           from pathlib import Path
           from pydantic import ValidationError
-          from shuffler.aux_models import Area
+          from ph_rando.shuffler.aux_models import Area
           failed = False
           for file in (Path.cwd() / 'shuffler' / 'logic').rglob('*.json'):
             with open(file) as f:
@@ -189,7 +189,7 @@ jobs:
         run: pip install -e .
 
       - name: Run the shuffler
-        run: python shuffler/main.py -o --
+        run: python ph_rando/shuffler/main.py -o --
 
   tests:
     name: Run tests
