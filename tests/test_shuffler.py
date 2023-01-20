@@ -81,6 +81,22 @@ def test_edge_parser(expression: str, inventory: list[str], flags: set[str], exp
     assert edge.is_traversable(inventory, flags, set()) == expected_result
 
 
+@pytest.mark.parametrize(
+    'expression,settings,expected_result',
+    [
+        ('setting NoPuzzleSolution', {'NoPuzzleSolution': False}, False),
+        ('setting NoPuzzleSolution', {'NoPuzzleSolution': True}, True),
+    ],
+)
+def test_settings(expression: str, settings: dict[str, bool | str], expected_result: bool):
+    Logic.settings = settings
+    node1 = Node(name='test1')
+    node2 = Node(name='test2')
+    edge = Edge(node1, node2, expression)
+    node1.edges.append(edge)
+    assert edge.is_traversable([], set(), set()) == expected_result
+
+
 def test_graph_connectedness() -> None:
     logic = Logic()
     logic.connect_rooms()
