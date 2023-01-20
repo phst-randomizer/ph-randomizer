@@ -92,9 +92,11 @@ class AssumedFillFailed(Exception):
 
 class Logic:
     areas: dict[str, Area]
+    settings: dict[str, str | bool]
 
-    def __init__(self) -> None:
+    def __init__(self, settings: dict[str, str | bool]) -> None:
         Logic.areas = self._parse_aux_data()
+        Logic.settings = {inflection.camelize(k): v for k, v in settings.items()}
 
         logic_directory = Path(__file__).parent / 'logic'
 
@@ -907,6 +909,14 @@ class Edge:
                     if value in node.locks:
                         return True
                 return False
+            case EdgeDescriptor.SETTING.value:
+                if value not in Logic.settings:
+                    raise Exception(f'Invalid setting {value}, not found in settings.json.')
+                setting_is_set = Logic.settings[value]
+                assert isinstance(
+                    setting_is_set, bool
+                ), f'Setting {value} must have `flag=true` to be used in logic.'
+                return setting_is_set
             case other:
                 if other not in EdgeDescriptor:
                     raise Exception(f'Invalid edge descriptor {other!r}')

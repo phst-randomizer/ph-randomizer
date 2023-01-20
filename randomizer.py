@@ -28,9 +28,9 @@ from ph_rando.shuffler import shuffle
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the randomizer.')
 @click_setting_options
-def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None, **kwargs):
+def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None, **settings):
     # Run the shuffler
-    shuffled_aux_data = shuffle(seed)
+    shuffled_aux_data = shuffle(seed, settings)
 
     # Apply the base ROM patch
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
