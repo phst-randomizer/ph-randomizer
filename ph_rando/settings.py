@@ -5,6 +5,7 @@ from pydantic import BaseModel, validator
 
 class Setting(BaseModel):
     name: str
+    description: str | None
     flag: bool | None
     options: list[str] | None
     default: bool | str

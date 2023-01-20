@@ -3,6 +3,7 @@
   "settings": [
     {
       "name": "MercayBridgeRepairedFromStart",
+      "description": "Whether or not the bridge on Mercay is repaired at the start of the game.",
       "flag": true,
       "default": true
     },

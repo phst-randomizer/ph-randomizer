@@ -22,6 +22,10 @@
           "title": "Name",
           "type": "string"
         },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
         "flag": {
           "title": "Flag",
           "type": "boolean"
