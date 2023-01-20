@@ -157,7 +157,7 @@ jobs:
           from pydantic import ValidationError
           from ph_rando.shuffler.aux_models import Area
           failed = False
-          for file in (Path.cwd() / 'shuffler' / 'logic').rglob('*.json'):
+          for file in (Path.cwd() / 'ph_rando' / 'shuffler' / 'logic').rglob('*.json'):
             with open(file) as f:
               try:
                 Area(**json.load(f))
