@@ -1,12 +1,29 @@
 import hashlib
 from io import BytesIO
+import json
 import logging
 from pathlib import Path
+import re
 
 import click
+import inflection
 from ndspy import rom
+from ndspy.codeCompression import compress, decompress
 from vidua import bps
 
+from ph_rando.common import click_setting_options
+from ph_rando.patcher._items import ITEMS
+from ph_rando.patcher._util import (
+    load_aux_data,
+    patch_chest,
+    patch_dig_spot_treasure,
+    patch_event,
+    patch_island_shop,
+    patch_salvage_treasure,
+    patch_tree,
+)
+from ph_rando.patcher.location_types import Location
+from ph_rando.settings import Settings
 from ph_rando.shuffler.aux_models import (
     Area,
     Chest,
@@ -17,17 +34,7 @@ from ph_rando.shuffler.aux_models import (
     Tree,
 )
 
-from ._items import ITEMS
-from ._util import (
-    load_aux_data,
-    patch_chest,
-    patch_dig_spot_treasure,
-    patch_event,
-    patch_island_shop,
-    patch_salvage_treasure,
-    patch_tree,
-)
-from .location_types import Location
+logging.basicConfig(level=logging.DEBUG)
 
 
 def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
@@ -38,7 +45,7 @@ def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     sha256 = sha256_calculator.hexdigest()
 
     # Get the path to the base patch for the given ROM, erroring out of it doesn't exist
-    base_patch_path = Path(__file__).parents[1] / 'base' / 'out' / f'{sha256}.bps'
+    base_patch_path = Path(__file__).parents[2] / 'base' / 'out' / f'{sha256}.bps'
     if not base_patch_path.exists():
         raise Exception(f'Invalid ROM! No base patch found for a ROM with sha256 of {sha256}.')
 
@@ -106,6 +113,42 @@ def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Ninte
     return Location.ROM
 
 
+def apply_settings_patches(
+    base_patched_rom: rom.NintendoDSRom, settings: dict[str, bool | str]
+) -> rom.NintendoDSRom:
+    with open(Path(__file__).parents[1] / 'settings.json') as fd:
+        all_settings = Settings(**json.load(fd)).settings
+
+    base_flags_addr = 0x58180  # address specified by .fill directive in main.asm
+    flags_header_file = (
+        Path(__file__).parents[2] / 'base' / 'code' / 'rando_settings.h'
+    ).read_text()
+    arm9_bin: bytearray = decompress(base_patched_rom.arm9)
+
+    for setting in all_settings:
+        setting_value = settings[inflection.underscore(setting.name)]
+        logging.debug(f'Setting {setting.name!r} set to {setting_value!r}.')
+
+        if isinstance(setting_value, bool) and not setting_value:
+            continue
+        elif isinstance(setting_value, bool):
+            setting_name_header = inflection.underscore(setting.name[2:]).upper()
+            matches = re.findall(rf'#define {setting_name_header} (.+), (.+)', flags_header_file)
+
+            if not len(matches):
+                continue
+
+            assert len(matches) == 1
+            flag_offset, flag_bit = matches[0]
+            arm9_bin[base_flags_addr + int(flag_offset, 16)] |= int(flag_bit, 16)
+        else:
+            # TODO: implement string-based settings here
+            pass
+
+    base_patched_rom.arm9 = compress(arm9_bin, isArm9=True)
+    return base_patched_rom
+
+
 @click.command()
 @click.option(
     '-a',
@@ -124,10 +167,15 @@ def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Ninte
 @click.option(
     '-o', '--output-rom-path', default=None, type=str, help='Path to save patched ROM to.'
 )
-def patcher_cli(aux_data_directory: Path, input_rom_path: Path, output_rom_path: str | None):
+@click_setting_options
+def patcher_cli(
+    aux_data_directory: Path, input_rom_path: Path, output_rom_path: str | None, **settings
+):
     new_aux_data = load_aux_data(aux_data_directory)
 
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
+
+    patched_rom = apply_settings_patches(patched_rom, settings)
 
     patched_rom = patch_items(new_aux_data, patched_rom)
 

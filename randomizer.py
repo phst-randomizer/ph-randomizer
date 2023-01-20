@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 
+from ph_rando.common import click_setting_options
 from ph_rando.patcher import apply_base_patch, patch_items
 from ph_rando.shuffler import shuffle
 
@@ -26,9 +27,10 @@ from ph_rando.shuffler import shuffle
     help='Path to save randomized ROM to.',
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the randomizer.')
-def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None):
+@click_setting_options
+def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None, **settings):
     # Run the shuffler
-    shuffled_aux_data = shuffle(seed)
+    shuffled_aux_data = shuffle(seed, settings)
 
     # Apply the base ROM patch
     patched_rom = apply_base_patch(input_rom_path.read_bytes())

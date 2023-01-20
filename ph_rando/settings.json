@@ -1,0 +1,36 @@
+{
+  "$schema": "./settings_schema.json",
+  "settings": [
+    {
+      "name": "MercayBridgeRepairedFromStart",
+      "description": "Whether or not the bridge on Mercay is repaired at the start of the game.",
+      "flag": true
+    },
+    {
+      "name": "HammerClip",
+      "flag": true
+    },
+    {
+      "name": "BoomerangClip",
+      "flag": true
+    },
+    {
+      "name": "NoPuzzleSolution",
+      "description": "For puzzles, don't logically require that player has access to corresponding hints.",
+      "flag": true
+    },
+    {
+      "name": "MirroredArenaDoors",
+      "description": "TODO: write this description",
+      "flag": true
+    },
+    {
+      "name": "SwordMode",
+      "options": [
+        "start_with_sword",
+        "randomized_sword",
+        "swordless"
+      ]
+    }
+  ]
+}

@@ -5,11 +5,12 @@ import sys
 
 import click
 
+from ph_rando.common import click_setting_options
 from ph_rando.shuffler.aux_models import Area
 from ph_rando.shuffler.logic import Logic
 
 
-def shuffle(seed: str | None) -> list[Area]:
+def shuffle(seed: str | None, settings: dict[str, bool | str]) -> list[Area]:
     """
     Parses aux data and logic, shuffles the aux data, and returns it.
 
@@ -22,7 +23,7 @@ def shuffle(seed: str | None) -> list[Area]:
     if seed is not None:
         random.seed(seed)
 
-    logic = Logic()
+    logic = Logic(settings=settings)
 
     logic.connect_rooms()
 
@@ -49,10 +50,11 @@ def shuffle(seed: str | None) -> list[Area]:
     ),
     default='INFO',
 )
-def shuffler_cli(seed: str | None, output: str | None, log_level: str):
+@click_setting_options
+def shuffler_cli(seed: str | None, output: str | None, log_level: str, **settings):
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
-    results = shuffle(seed)
+    results = shuffle(seed, settings)
 
     if output == '--':
         for area in results:

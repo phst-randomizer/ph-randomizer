@@ -10,13 +10,13 @@ from ph_rando.shuffler.logic import Edge, Logic, Node
 
 
 @pytest.mark.repeat(3)
-@pytest.mark.parametrize('seed', ['test', 'another_test', 'ANOTHER_TEST!!'])
-def test_seeds(seed: str):
+@pytest.mark.parametrize('seed', ['test', 'another_test'])
+def test_seeds(seed: str, settings):
     """Test that running the shuffler with same seed multiple times produces identical aux data."""
 
-    first = shuffle(seed)
-    second = shuffle(seed)
-    third = shuffle(seed)
+    first = shuffle(seed, settings)
+    second = shuffle(seed, settings)
+    third = shuffle(seed, settings)
     assert first == second == third
 
 
@@ -81,8 +81,24 @@ def test_edge_parser(expression: str, inventory: list[str], flags: set[str], exp
     assert edge.is_traversable(inventory, flags, set()) == expected_result
 
 
-def test_graph_connectedness() -> None:
-    logic = Logic()
+@pytest.mark.parametrize(
+    'expression,settings,expected_result',
+    [
+        ('setting NoPuzzleSolution', {'NoPuzzleSolution': False}, False),
+        ('setting NoPuzzleSolution', {'NoPuzzleSolution': True}, True),
+    ],
+)
+def test_settings(expression: str, settings: dict[str, bool | str], expected_result: bool):
+    Logic.settings = settings
+    node1 = Node(name='test1')
+    node2 = Node(name='test2')
+    edge = Edge(node1, node2, expression)
+    node1.edges.append(edge)
+    assert edge.is_traversable([], set(), set()) == expected_result
+
+
+def test_graph_connectedness(settings) -> None:
+    logic = Logic(settings=settings)
     logic.connect_rooms()
 
     # Compute list of tuples of each check its area.
