@@ -1,4 +1,5 @@
 {
+  "$schema": "./settings_schema.json",
   "settings": [
     {
       "name": "MercayBridgeRepairedFromStart",

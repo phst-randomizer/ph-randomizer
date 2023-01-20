@@ -1,0 +1,54 @@
+{
+  "title": "Settings",
+  "type": "object",
+  "properties": {
+    "settings": {
+      "title": "Settings",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Setting"
+      }
+    }
+  },
+  "required": [
+    "settings"
+  ],
+  "definitions": {
+    "Setting": {
+      "title": "Setting",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "flag": {
+          "title": "Flag",
+          "type": "boolean"
+        },
+        "options": {
+          "title": "Options",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "default": {
+          "title": "Default",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "default"
+      ]
+    }
+  }
+}

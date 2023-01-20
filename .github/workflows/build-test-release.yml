@@ -169,6 +169,57 @@ jobs:
             exit(1)
           HEREDOC
 
+  check-randomizer-settings:
+    name: Validate randomizer settings
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: '.python-version'
+          check-latest: true
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
+        run: |
+          python ph_rando/settings.py
+          git diff --exit-code
+          if [ $? -ne 0 ]
+          then
+            exit 1
+          fi
+
+      - name: Run JSON Schema validation on aux data
+        uses: walbo/validate-json@v1.1.0
+        with:
+          files: ph_rando/settings.json
+
+      - name: Run pydantic validation on settings json
+        run: |
+          python <<HEREDOC
+          import json, sys
+          from pathlib import Path
+          from pydantic import ValidationError
+          from ph_rando.settings import Settings
+          failed = False
+          with open(Path.cwd() / 'ph_rando' / 'settings.json') as f:
+            try:
+              Settings(**json.load(f))
+            except ValidationError as e:
+              failed = True
+              print(file.relative_to(Path.cwd()), file=sys.stderr, end='\n')
+              print(e, file=sys.stderr, end='\n\n\n')
+          if failed:
+            exit(1)
+          HEREDOC
+
   run-shuffler:
     name: Run the shuffler against logic and aux data
     needs: [check-logic, check-aux-data]
