@@ -10,7 +10,6 @@ import logging
 from pathlib import Path
 import random
 import sys
-from typing import Any
 
 import inflection
 from ordered_set import OrderedSet
@@ -799,10 +798,7 @@ class Edge:
 
     def _is_traversable(
         self,
-        # TODO: technically this is a recursive type. But, mypy doesn't support them currently
-        # (ref: https://github.com/python/mypy/issues/731), so we're limited to this for now.
-        # If recursive types are ever supported, this should be updated accordingly.
-        parsed_expr: list[str | list[str | Any]],
+        parsed_expr: list[str | list[str | list]],
         inventory: list[str],
         flags: set[str],
         states: set[str],
