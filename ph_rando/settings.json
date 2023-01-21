@@ -2,6 +2,24 @@
   "$schema": "./settings_schema.json",
   "settings": [
     {
+      "name": "DigSpots",
+      "description": "Include shovel dig spots in location pool for randomized items.",
+      "flag": true
+    },
+    {
+      "name": "SalvageArmTreasures",
+      "description": "Include salvage arm treasures in location pool for randomized items.",
+      "flag": true
+    },
+    {
+      "name": "DungeonRewardMode",
+      "description": "Whether dungeon rewards should be randomized only amongst themselves, or in the general item pool.",
+      "options": [
+        "shuffle_amongst_themselves",
+        "shuffle_with_rest_of_items"
+      ]
+    },
+    {
       "name": "MercayBridgeRepairedFromStart",
       "description": "Whether or not the bridge on Mercay is repaired at the start of the game.",
       "flag": true
@@ -30,6 +48,14 @@
         "start_with_sword",
         "randomized_sword",
         "swordless"
+      ]
+    },
+    {
+      "name": "PhantomHourglassMode",
+      "options": [
+        "start_with_phantom_hourglass",
+        "vanilla_location_phantom_hourglass",
+        "randomized_phantom_hourglass"
       ]
     }
   ]
