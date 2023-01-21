@@ -69,7 +69,7 @@ class RandomizerUi(QWidget):
         groupbox.setLayout(hbox)
 
         for i, setting in enumerate(settings):
-            if i % 2 == 0:
+            if i % 6 == 0:
                 current_widget = QWidget()
                 vbox = QVBoxLayout()
                 current_widget.setLayout(vbox)
