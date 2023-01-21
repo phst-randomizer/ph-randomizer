@@ -16,8 +16,8 @@
           "name": "WindmillChest",
           "contents": "treasure_map_sw_3",
           "type": "chest",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/isle_wind/map01.bin/zmb/isle_wind_01.zmb",
+          "zmb_mapobject_index": 111
         }
       ],
       "exits": [
