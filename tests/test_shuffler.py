@@ -20,14 +20,15 @@ def test_seeds(seed: str, settings):
     assert first == second == third
 
 
-@pytest.mark.parametrize(
-    'filename',
-    [str(file) for file in (Path(__file__).parent.parent / 'shuffler' / 'logic').rglob('*.json')],
-)
-def test_aux_data_validation(filename: str):
+def test_aux_data_validation():
     """Run every aux data json through validation."""
-    with open(filename) as fd:
-        Area(**json.load(fd))
+    aux_data_files = list(
+        (Path(__file__).parents[1] / 'ph_rando' / 'shuffler' / 'logic').rglob('*.json')
+    )
+    assert len(aux_data_files) > 0
+    for filename in aux_data_files:
+        with open(filename) as fd:
+            Area(**json.load(fd))
 
 
 @pytest.mark.parametrize(
