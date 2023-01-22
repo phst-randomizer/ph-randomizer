@@ -85,8 +85,8 @@
           "name": "RupeeLikeChest",
           "type": "chest",
           "contents": "random_treasure",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map01.bin/zmb/dngn_wisdom_01.zmb",
+          "zmb_mapobject_index": 56
         }
       ],
       "exits": [
@@ -133,8 +133,8 @@
           "name": "Hammer",
           "type": "chest",
           "contents": "hammer",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map02.bin/zmb/dngn_wisdom_02.zmb",
+          "zmb_mapobject_index": 2
         }
       ],
       "exits": [
@@ -165,22 +165,22 @@
           "name": "Middle",
           "type": "chest",
           "contents": "big_green_rupee",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
+          "zmb_mapobject_index": 196
         },
         {
           "name": "MiddleHammer",
           "type": "chest",
           "contents": "small_key",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
+          "zmb_mapobject_index": 262
         },
         {
           "name": "BigChest",
           "type": "chest",
           "contents": "boss_key",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
+          "zmb_mapobject_index": 28
         }
       ],
       "exits": [
@@ -247,15 +247,15 @@
           "name": "Middle",
           "type": "chest",
           "contents": "small_key",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
+          "zmb_mapobject_index": 34
         },
         {
           "name": "Bottom",
           "type": "chest",
           "contents": "courage_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
+          "zmb_mapobject_index": 54
         }
       ],
       "exits": [
@@ -341,7 +341,7 @@
           "type": "chest",
           "contents": "aquanine",
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": -1
         }
       ],
       "exits": [
