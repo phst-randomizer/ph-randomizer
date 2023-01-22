@@ -86,7 +86,12 @@ class RandomizerUi(QWidget):
                 internal_widget.setToolTip(setting.description)
 
 
-app = QApplication(sys.argv)
-screen = RandomizerUi()
-screen.show()
-sys.exit(app.exec())
+def main():
+    app = QApplication(sys.argv)
+    screen = RandomizerUi()
+    screen.show()
+    sys.exit(app.exec())
+
+
+if __name__ == '__main__':
+    main()
