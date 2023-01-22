@@ -1,5 +1,3 @@
-import json
-from pathlib import Path
 import sys
 
 from PySide6.QtWidgets import (
@@ -17,10 +15,7 @@ from PySide6.QtWidgets import (
 )
 import inflection
 
-from ph_rando.settings import Settings
-
-with open(Path(__file__).parents[1] / 'settings.json') as f:
-    settings = Settings(**json.load(f)).settings
+from ph_rando.common import RANDOMIZER_SETTINGS
 
 
 class RandomizerUi(QWidget):
@@ -68,7 +63,7 @@ class RandomizerUi(QWidget):
         hbox = QHBoxLayout()
         groupbox.setLayout(hbox)
 
-        for i, setting in enumerate(settings):
+        for i, setting in enumerate(RANDOMIZER_SETTINGS):
             if i % 6 == 0:
                 current_widget = QWidget()
                 vbox = QVBoxLayout()

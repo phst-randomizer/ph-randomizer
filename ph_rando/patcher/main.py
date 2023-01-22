@@ -1,6 +1,5 @@
 import hashlib
 from io import BytesIO
-import json
 import logging
 from pathlib import Path
 import re
@@ -11,7 +10,7 @@ from ndspy import rom
 from ndspy.codeCompression import compress, decompress
 from vidua import bps
 
-from ph_rando.common import click_setting_options
+from ph_rando.common import RANDOMIZER_SETTINGS, click_setting_options
 from ph_rando.patcher._items import ITEMS
 from ph_rando.patcher._util import (
     load_aux_data,
@@ -23,7 +22,6 @@ from ph_rando.patcher._util import (
     patch_tree,
 )
 from ph_rando.patcher.location_types import Location
-from ph_rando.settings import Settings
 from ph_rando.shuffler.aux_models import (
     Area,
     Chest,
@@ -116,16 +114,13 @@ def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Ninte
 def apply_settings_patches(
     base_patched_rom: rom.NintendoDSRom, settings: dict[str, bool | str]
 ) -> rom.NintendoDSRom:
-    with open(Path(__file__).parents[1] / 'settings.json') as fd:
-        all_settings = Settings(**json.load(fd)).settings
-
     base_flags_addr = 0x58180  # address specified by .fill directive in main.asm
     flags_header_file = (
         Path(__file__).parents[2] / 'base' / 'code' / 'rando_settings.h'
     ).read_text()
     arm9_bin: bytearray = decompress(base_patched_rom.arm9)
 
-    for setting in all_settings:
+    for setting in RANDOMIZER_SETTINGS:
         setting_value = settings[inflection.underscore(setting.name)]
         logging.debug(f'Setting {setting.name!r} set to {setting_value!r}.')
 

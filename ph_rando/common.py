@@ -7,13 +7,14 @@ import inflection
 
 from ph_rando.settings import Settings
 
+RANDOMIZER_SETTINGS = Settings(
+    **json.loads((Path(__file__).parent / 'settings.json').read_text())
+).settings
+
 
 def click_setting_options(function: Callable):
     """Generate `click` CLI options for each randomizer setting."""
-    with open(Path(__file__).parent / 'settings.json') as fd:
-        settings = Settings(**json.load(fd)).settings
-
-    for setting in settings:
+    for setting in RANDOMIZER_SETTINGS:
         cli_arg = f'--{inflection.dasherize(inflection.underscore(setting.name))}'
         function = click.option(
             cli_arg,

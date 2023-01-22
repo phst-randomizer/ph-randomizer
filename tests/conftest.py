@@ -1,14 +1,9 @@
-import json
-from pathlib import Path
-
 import pytest
 
-from ph_rando.settings import Settings
+from ph_rando.common import RANDOMIZER_SETTINGS
 
 
 # TODO: overhaul this fixture, maybe parametrize for all possible setting combinations
 @pytest.fixture
 def settings():
-    with open(Path(__file__).parents[1] / 'ph_rando' / 'settings.json') as fd:
-        settings = Settings(**json.load(fd)).settings
-    return {setting.name: True for setting in settings}
+    return {setting.name: True for setting in RANDOMIZER_SETTINGS}
