@@ -12,7 +12,7 @@ Official releases of the randomizer are distributed as single executable files; 
    - It's also recommended to run the following pip install commands if setting up a development environment:
      - `pip install -e .[test]` - installs dependencies needed to run automated tests
      - `pip install -e .[types]` - installs dependencies needed to run type-checking, as well as provide IDE auto-complete for IDE's that support mypy
-4. Run `randomizer.py`. Alternatively, to run the shuffler or patcher in isolation, run `ph_rando/shuffler/main.py` or `ph_rando/patcher/main.py`, respectively.
+4. Run `randomizer.py`. Alternatively, to run the shuffler or patcher in isolation, run `ph_rando_shuffler` or `ph_rando_patcher` inside the virtualenv you created above..
 
 ## Code style/formatting guidelines
 
