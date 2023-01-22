@@ -12,6 +12,11 @@
       "flag": true
     },
     {
+      "name": "ShopItems",
+      "description": "Include island shops and Beedle shops in location pool for randomized items.",
+      "flag": true
+    },
+    {
       "name": "DungeonRewardMode",
       "description": "Whether dungeon rewards should be randomized only amongst themselves, or in the general item pool.",
       "options": [
