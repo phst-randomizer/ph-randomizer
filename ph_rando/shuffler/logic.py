@@ -4,6 +4,7 @@ from collections import defaultdict
 from copy import deepcopy
 from dataclasses import dataclass, field
 from enum import Enum, EnumMeta
+from functools import cached_property
 import itertools
 import json
 import logging
@@ -15,7 +16,16 @@ import inflection
 from ordered_set import OrderedSet
 
 from ph_rando.shuffler._parser import parse_edge_constraint, parse_logic
-from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
+from ph_rando.shuffler.aux_models import (
+    Area,
+    Check,
+    DigSpot,
+    Enemy,
+    Exit,
+    IslandShop,
+    Room,
+    SalvageTreasure,
+)
 
 ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text())
 
@@ -170,10 +180,37 @@ class Logic:
             if node.name == starting_node_name
         ][0]
 
+    @cached_property
+    def invalid_progression_checks(self) -> OrderedSet[Check]:
+        """
+        Returns the ordered set of checks that progression items should *not* be placed in,
+        based on the settings the user selects. For example, this method will return all
+        dig spot checks and all salvage arm treasure checks if the user doesn't choose to
+        include those as valid locations for progression items.
+        """
+        excluded_checks: OrderedSet[Check] = OrderedSet()
+        for setting, cls in {
+            'ShopItems': IslandShop,
+            'SalvageArmTreasures': SalvageTreasure,
+            'DigSpots': DigSpot,
+        }.items():
+            if not self.settings[setting]:
+                excluded_checks.update(
+                    OrderedSet(
+                        check
+                        for area in self.areas.values()
+                        for room in area.rooms
+                        for check in room.chests
+                        if type(check) == cls
+                    )
+                )
+        return excluded_checks
+
     def _place_item(
         self,
         item_to_place: str,
         candidates: OrderedSet[Check] | None = None,
+        exclude: OrderedSet[Check] | None = None,
         starting_nodes: list[Node] | None = None,
     ):
         """
@@ -182,8 +219,10 @@ class Logic:
         Params:
             item_to_place: The item to place.
             candidates: An optional list of candidate locations to place this item.
-            If not provided, every logically reachable location will
-            be considered.
+            If not provided, every logically reachable location not specified in `exclude`
+            will be considered.
+            exclude: An optional list of candidate locations that this item must *not* be
+            placed in.
             starting_nodes: The node(s) that the player has initial access to. Useful when
             randomizing "subgraphs" of the overall game in isolation, i.e. when placing
             dungeon items first inside their own dungeons, without regard for the rest
@@ -222,8 +261,12 @@ class Logic:
 
         if candidates is not None:
             # If a list of candidate locations was provided, filter out any reachable checks
-            # that aren't in that list.
+            # that *aren't* in that list.
             reachable_candidates.intersection_update(candidates)
+        if exclude is not None:
+            # If a list of candidate locations was provided, filter out any reachable checks
+            # that *are* in that list.
+            reachable_candidates.difference_update(exclude)
 
         if not len(reachable_candidates):
             raise AssumedFillFailed(f'Failed to place {item_to_place}!!! Ran out of locations.')
@@ -239,7 +282,7 @@ class Logic:
                 items_to_place.append(item)
 
         for item in items_to_place:
-            self._place_item(item)
+            self._place_item(item, exclude=self.invalid_progression_checks)
 
     def place_remaining_items(self) -> None:
         for item in self.items_left_to_place:
@@ -267,7 +310,7 @@ class Logic:
                 items_to_place.append(item)
 
         for item in items_to_place:
-            self._place_item(item, candidates)
+            self._place_item(item, candidates, exclude=self.invalid_progression_checks)
 
     def place_keys(self) -> None:
         """
@@ -325,6 +368,7 @@ class Logic:
                 item,
                 candidates=particular_candidates,
                 starting_nodes=starting_nodes,
+                exclude=self.invalid_progression_checks,
             )
 
     def randomize_items(self) -> list[Area]:
