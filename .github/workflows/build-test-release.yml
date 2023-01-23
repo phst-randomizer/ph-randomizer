@@ -19,8 +19,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Install dependencies
         run: pip install -e .[test,types]
@@ -129,8 +129,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Install dependencies
         run: pip install -e .
@@ -181,8 +181,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Install dependencies
         run: pip install -e .
@@ -233,8 +233,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Install dependencies
         run: pip install -e .
@@ -262,8 +262,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Install tox
         run: pip install tox
@@ -294,8 +294,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Fetch PH rom
         run: |
@@ -369,8 +369,8 @@ jobs:
         python-version-file: '.python-version'
         check-latest: true
 
-    - name: Upgrade pip
-      run: python -m pip install --upgrade pip
+    - name: Upgrade `pip` and install `wheel`
+      run: python -m pip install --upgrade pip wheel
 
     - name: Install dependencies
       run: |
@@ -424,8 +424,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Fetch PH rom
         run: |
@@ -481,8 +481,8 @@ jobs:
           python-version-file: '.python-version'
           check-latest: true
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
 
       - name: Install randomizer dependencies
         run: pip install -e .
