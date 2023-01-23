@@ -19,7 +19,7 @@ from ph_rando.common import RANDOMIZER_SETTINGS
 
 
 class RandomizerUi(QWidget):
-    def __init__(self):
+    def __init__(self) -> None:
         QWidget.__init__(self)
 
         self.setWindowTitle('Phantom Hourglass Randomizer')
@@ -29,7 +29,7 @@ class RandomizerUi(QWidget):
         self.render_file_open_ui()
         self.render_settings()
 
-    def render_file_open_ui(self):
+    def render_file_open_ui(self) -> None:
         layout = self.layout()
         groupbox = QGroupBox('ROM Selection')
         layout.addWidget(groupbox)
@@ -56,7 +56,7 @@ class RandomizerUi(QWidget):
         hbox.addWidget(seed)
         hbox.addWidget(gen_seed_button)
 
-    def render_settings(self):
+    def render_settings(self) -> None:
         groupbox = QGroupBox('Randomizer Settings')
         self.layout().addWidget(groupbox)
 
@@ -86,7 +86,7 @@ class RandomizerUi(QWidget):
                 internal_widget.setToolTip(setting.description)
 
 
-def main():
+def main() -> None:
     app = QApplication(sys.argv)
     screen = RandomizerUi()
     screen.show()
