@@ -499,7 +499,7 @@ jobs:
           mv ./**/*.bps base/out
 
       - name: Build randomizer executable
-        run: pyinstaller randomizer.spec
+        run: pyinstaller ph_rando.spec
 
       - name: Get current commit hash
         id: commit-hash
