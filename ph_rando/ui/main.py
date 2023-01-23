@@ -76,6 +76,10 @@ class RandomizerUi(QWidget):
             if setting.flag:
                 internal_hbox.addWidget(QCheckBox(inflection.titleize(setting.name)))
             else:
+                assert (
+                    setting.options is not None
+                ), f'setting.options is None for setting {setting.name!r}'
+                assert len(setting.options) > 0, f'No options provided for setting {setting.name!r}'
                 comboxbox_label = QLabel(inflection.titleize(setting.name))
                 comboxbox = QComboBox()
                 comboxbox.addItems([inflection.titleize(s) for s in setting.options])
