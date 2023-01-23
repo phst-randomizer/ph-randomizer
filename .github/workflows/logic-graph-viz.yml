@@ -18,7 +18,7 @@ jobs:
 
       - name: Install pygraphviz
         run: |
-          sudo apt-get install -y graphviz graphviz-dev
+          sudo apt-get update && sudo apt-get install -y graphviz graphviz-dev
           pip install pygraphviz
 
       - name: Install randomizer dependencies
