@@ -7,16 +7,16 @@
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "TODO",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "big_red_rupee",
+          "zmb_file_path": "Map/dngn_main/map15.bin/zmb/dngn_main_15.zmb",
+          "zmb_mapobject_index": 15
         },
         {
           "name": "EyeKiller",
           "type": "chest",
           "contents": "random_treasure",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map15.bin/zmb/dngn_main_15.zmb",
+          "zmb_mapobject_index": 80
         }
       ],
       "exits": [

@@ -6,8 +6,8 @@ area TempleOfTheOceanKing:
       enemy BluePhantom
       enemy PhantomEyeLeft
       enemy PhantomEyeRight
-      chest LeftPowerGem
-      chest RightPowerGem
+      chest LeftForceGem
+      chest RightForceGem
 
     node RightSafe:
       door ToB11Right
@@ -21,7 +21,7 @@ area TempleOfTheOceanKing:
 
 
     node RightSwitch:
-      chest SafeSwitch
+      chest RightSwitch
 
     RightSafe -> RightSwitch: item Hammer
     Main -> RightSwitch: (item Hammer & setting HammerClip)
@@ -29,7 +29,7 @@ area TempleOfTheOceanKing:
 
 
     node PhantomGem:
-      chest PhantomPowerGem
+      chest PhantomForceGem
 
     Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | item Bombs | item Bombchus | item Sword)
 

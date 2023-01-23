@@ -8,8 +8,8 @@
           "name": "SeaChart",
           "type": "chest",
           "contents": "se_sea_chart",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map13.bin/zmb/dngn_main_13.zmb",
+          "zmb_mapobject_index": 1
         }
       ],
       "exits": [

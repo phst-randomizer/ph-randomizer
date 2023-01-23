@@ -13,22 +13,22 @@
           "name": "PhantomKiller",
           "type": "chest",
           "contents": "big_green_rupee",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
+          "zmb_mapobject_index": 23
         },
         {
           "name": "EyeKiller",
           "type": "chest",
           "contents": "big_green_rupee",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
+          "zmb_mapobject_index": 31
         },
         {
           "name": "ChestAfterHammer",
           "type": "chest",
           "contents": "treasure_map_ne_7",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
+          "zmb_mapobject_index": 28
         }
       ],
       "exits": [

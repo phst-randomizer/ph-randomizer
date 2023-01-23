@@ -8,15 +8,15 @@
           "name": "VoidChest",
           "type": "chest",
           "contents": "courage_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map11.bin/zmb/dngn_main_11.zmb",
+          "zmb_mapobject_index": 5
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "TODO",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "random_ship_part",
+          "zmb_file_path": "Map/dngn_main/map11.bin/zmb/dngn_main_11.zmb",
+          "zmb_mapobject_index": 4
         }
       ],
       "exits": [

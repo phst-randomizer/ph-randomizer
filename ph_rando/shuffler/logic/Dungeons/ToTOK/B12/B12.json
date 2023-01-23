@@ -7,51 +7,42 @@
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "TODO",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "big_gold_rupee",
+          "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
+          "zmb_mapobject_index": 10
         },
         {
           "name": "WizzrobeKiller",
           "type": "chest",
-          "contents": "ship_part",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "random_ship_part",
+          "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
+          "zmb_mapobject_index": 31
         },
         {
           "name": "RightSwitch",
           "type": "chest",
           "contents": "treasure_map_ne_8",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
+          "zmb_mapobject_index": 30
         },
         {
-          "name": "LeftPowerGem",
+          "name": "LeftForceGem",
           "type": "chest",
-          "contents": "power_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "force_gem",
+          "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
+          "zmb_mapobject_index": 8
         },
         {
-          "name": "RightPowerGem",
+          "name": "RightForceGem",
           "type": "chest",
-          "contents": "power_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "force_gem",
+          "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
+          "zmb_mapobject_index": 9
         },
         {
-          "name": "SafeSwitch",
-          "type": "chest",
-          "contents": "TODO",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
-        },
-        {
-          "name": "PhantomPowerGem",
+          "name": "PhantomForceGem",
           "type": "on_enemy",
-          "contents": "power_gem",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "force_gem"
         }
       ],
       "exits": [
