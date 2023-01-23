@@ -25,7 +25,7 @@ jobs:
         run: pip install -e .
 
       - name: Generate graph PNGs
-        run: python shuffler/graphviz.py
+        run: python ph_rando/shuffler/graphviz.py
 
       - name: Upload PNGs
         uses: actions/upload-artifact@v3
