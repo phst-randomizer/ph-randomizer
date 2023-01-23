@@ -6,10 +6,6 @@ from ph_rando.common import click_setting_options
 from ph_rando.patcher import apply_base_patch, apply_settings_patches, patch_items
 from ph_rando.shuffler import shuffle
 
-# TODO: this is an example script for how to call the patcher/shuffler.
-# At some point this will be fleshed out into a full CLI (and eventually
-# GUI) to run the full randomizer.
-
 
 @click.command()
 @click.option(
@@ -28,7 +24,7 @@ from ph_rando.shuffler import shuffle
 )
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the randomizer.')
 @click_setting_options
-def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None, **settings):
+def randomizer_cli(input_rom_path: Path, output_rom_path: Path, seed: str | None, **settings):
     # Run the shuffler
     shuffled_aux_data = shuffle(seed, settings)
 
@@ -47,4 +43,4 @@ def randomizer(input_rom_path: Path, output_rom_path: Path, seed: str | None, **
 
 
 if __name__ == '__main__':
-    randomizer()
+    randomizer_cli()

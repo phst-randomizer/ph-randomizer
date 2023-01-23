@@ -9,7 +9,7 @@ SHUFFLER_ROOT_DIR = Path('ph_rando/shuffler/')
 
 
 a = Analysis(
-    ['randomizer.py'],
+    ['ph_rando/ui/main.py'],
     pathex=[],
     binaries=[],
     datas=[
@@ -25,6 +25,10 @@ a = Analysis(
     + [
         # Bundle base patches
         ('base/out/*.bps', 'base/out/'),
+        # Bundle settings header file (needed by patcher)
+        ('base/code/rando_settings.h', 'base/code/'),
+        # Bundle settings.json
+        ('ph_rando/settings.json', 'ph_rando/'),
     ],
     hiddenimports=[],
     hookspath=[],
