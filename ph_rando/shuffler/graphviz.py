@@ -13,7 +13,7 @@ except ModuleNotFoundError:
 
 
 def main():
-    logic = Logic()
+    logic = Logic(settings={})
 
     logic.connect_rooms()
 
