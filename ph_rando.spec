@@ -49,7 +49,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='randomizer',
+    name='ph_rando',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
