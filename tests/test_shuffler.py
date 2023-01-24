@@ -83,6 +83,23 @@ def test_edge_parser(expression: str, inventory: list[str], flags: set[str], exp
 
 
 @pytest.mark.parametrize(
+    ('expression', 'result'),
+    [
+        ('open Door1', True),
+        ('item Item1', False),
+        ('item Item1 & (open Door1 | item Item2)', True),
+        ('open Door1 & (flag Flag1 | item Item1)', True),
+    ],
+)
+def test_edge_contains_open_descriptor(expression: str, result: bool) -> None:
+    """Test behavior of Edge.requires_key property."""
+    node1 = Node(name='test1')
+    node2 = Node(name='test2')
+    edge = Edge(node1, node2, expression)
+    assert edge.requires_key == result
+
+
+@pytest.mark.parametrize(
     'expression,settings,expected_result',
     [
         ('setting NoPuzzleSolution', {'NoPuzzleSolution': False}, False),
