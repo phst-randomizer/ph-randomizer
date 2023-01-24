@@ -811,7 +811,7 @@ class Edge:
                 if isinstance(elem, list):
                     contains_open = _contains_open(elem)
                 elif EdgeDescriptor.OPEN.value in elem:
-                    contains_open = True
+                    return True
             return contains_open
 
         return _contains_open(self.constraints) if self.constraints else False
