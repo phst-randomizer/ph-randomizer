@@ -49,7 +49,7 @@ DUNGEON_REWARD_CHECKS: dict[str, str] = {
     # data not being complete. Once it's complete, these entries should be uncommented.
     # 'GoronTemple.CrimsonineRoom.Crimsonine': 'crimsonine',
     # 'IceTemple.AzurineRoom.Azurine': 'azurine',
-    # 'MutohTemple.B4.Aquanine': 'aquanine',
+    'MutohTemple.B4.Aquanine': 'aquanine',
 }
 
 IMPORTANT_ITEMS: set[str] = {
@@ -337,7 +337,7 @@ class Logic:
             # TODO: skip these areas for now because the assumed fill fails for them,
             # and it's unclear for now whether it's because of a bug in the shuffler
             # or an error in the logic.
-            if area_name in ('MutohTemple', 'TempleOfTheOceanKing'):
+            if area_name in ('TempleOfTheOceanKing',):
                 logging.warning(f'Skipping {area_name}...')
                 continue
 
@@ -397,7 +397,7 @@ class Logic:
                 chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
                 for chest, area_name in all_checks
                 # TODO: remove the following conditional once MutohTemple/TotOK work correctly
-                if area_name not in ('MutohTemple', 'TempleOfTheOceanKing')
+                if area_name not in ('TempleOfTheOceanKing',)
             ]
             random.shuffle(self.items_left_to_place)
 
@@ -411,13 +411,21 @@ class Logic:
                 # TODO: consider rewriting _assumed_search function with iteration instead of
                 # recursion to avoid having to increase the max recursion depth here.
                 with RecursionLimit(5000):
-                    logging.info('Placing dungeon rewards...')
+                    logging.info(
+                        f'Placing dungeon rewards... ({len(self.items_left_to_place)} remaining)'
+                    )
                     self.place_dungeon_rewards()
-                    logging.info('Placing dungeon keys...')
+                    logging.info(
+                        f'Placing dungeon keys... ({len(self.items_left_to_place)} remaining)'
+                    )
                     self.place_keys()
-                    logging.info('Placing important items ...')
+                    logging.info(
+                        f'Placing important items ... ({len(self.items_left_to_place)} remaining)'
+                    )
                     self.place_important_items()
-                    logging.info('Placing any remaining items...')
+                    logging.info(
+                        f'Placing remaining items... ({len(self.items_left_to_place)} remaining)'
+                    )
                     self.place_remaining_items()
                 break
             except AssumedFillFailed:
