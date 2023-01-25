@@ -87,7 +87,7 @@ area Ember:
     node Defeat
 
     node Astrid:
-      flag Astrid
+      flag AstridFreed
 
     Arena <-> Defeat: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6)
     Defeat -> Astrid: (flag Kayo & (setting NoPuzzleSolution | (flag SeenTopTorch & flag SeenKayoTorch)))
