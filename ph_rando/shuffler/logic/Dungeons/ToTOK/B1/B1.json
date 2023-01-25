@@ -27,7 +27,7 @@
       "exits": [
         {
           "name": "ToF1",
-          "entrance": "TempleOfTheOceanKingLobby.Main.Main.Entrance"
+          "entrance": "TempleOfTheOceanKing.F1.Downstairs.ToB1"
         },
         {
           "name": "ToB2",

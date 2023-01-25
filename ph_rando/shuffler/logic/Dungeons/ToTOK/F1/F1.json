@@ -3,6 +3,7 @@
   "name": "TempleOfTheOceanKing",
   "rooms": [
     {
+      "name": "F1",
       "chests": [
         {
           "name": "EmptyChest",
@@ -22,14 +23,13 @@
       "exits": [
         {
           "name": "Exit",
-          "entrance": "Mercay.PathToToTOK.Main.ToTOK"
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.Entrance"
         },
         {
           "name": "ToB1",
-          "entrance": "TempleOfTheOceanKingLobby.Main.Main.Outside"
+          "entrance": "TempleOfTheOceanKing.B1.Lower.ToF1"
         }
-      ],
-      "name": "F1"
+      ]
     }
   ]
 }
