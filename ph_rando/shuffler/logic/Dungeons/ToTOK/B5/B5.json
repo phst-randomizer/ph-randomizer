@@ -37,19 +37,19 @@
       "enemies": [
         {
           "name": "EnemyL1",
-          "type": "yellow_chuchu"
+          "type": "yellow_chu_chu"
         },
         {
           "name": "EnemyL2",
-          "type": "yellow_chuchu"
+          "type": "yellow_chu_chu"
         },
         {
           "name": "EnemyL3",
-          "type": "yellow_chuchu"
+          "type": "yellow_chu_chu"
         },
         {
           "name": "EnemyL4",
-          "type": "yellow_chuchu"
+          "type": "yellow_chu_chu"
         },
         {
           "name": "EnemyR1",
