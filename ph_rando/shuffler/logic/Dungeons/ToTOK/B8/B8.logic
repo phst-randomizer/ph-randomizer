@@ -10,7 +10,7 @@ area TempleOfTheOceanKing:
     node PhantomDefeat:
       chest PhantomKiller
 
-    Main -> PhantomDefeat: (defeated RedPhantomLeft & defeated RedPhantomRight & defeated BluePhantom)
+    Main -> PhantomDefeat: (defeated SwiftPhantomLeft & defeated SwiftPhantomRight & defeated BluePhantom)
 
     node TopRightLedge:
       door ToB7TopRight

@@ -26,7 +26,7 @@ area TempleOfTheOceanKing:
     node DefeatPhantom:
       chest PhantomKiller
 
-    Main -> DefeatPhantom: (((item Sword | item Boomerang) & item Bow) | defeated RedPhantom)
+    Main -> DefeatPhantom: (((item Sword | item Boomerang) & item Bow) | defeated SwiftPhantom)
 
     node PhantomCrystal:
       chest SquareCrystal

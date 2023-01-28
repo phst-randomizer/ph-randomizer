@@ -31,4 +31,4 @@ area TempleOfTheOceanKing:
     node DefeatPhantom:
       chest PhantomKiller
 
-    Left <-> DefeatPhantom: (defeated RedPhantomRight & defeated RedPhantomLeft)
+    Left <-> DefeatPhantom: (defeated SwiftPhantomRight & defeated SwiftPhantomLeft)

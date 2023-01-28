@@ -57,4 +57,4 @@ area TempleOfTheOceanKing:
       chest PhantomKiller
 
     Main -> DefeatWizzrobes: (defeated WizzrobeLeft & defeated WizzrobeRight)
-    Main -> DefeatPhantoms: (defeated GoldPhantom & defeated RedPhantom & defeated BluePhantom)
+    Main -> DefeatPhantoms: (defeated GoldPhantom & defeated SwiftPhantom & defeated BluePhantom)
