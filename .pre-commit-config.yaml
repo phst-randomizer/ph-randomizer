@@ -33,13 +33,6 @@ repos:
     hooks:
       - id: pyupgrade
         args:
-          - --py3-plus
-          - --py36-plus
-          - --py37-plus
-          - --py38-plus
-          - --py39-plus
-          - --keep-runtime-typing
-          - --py310-plus
           - --py311-plus
 
   - repo: https://github.com/PyCQA/autoflake
