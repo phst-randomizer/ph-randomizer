@@ -397,7 +397,7 @@ class Logic:
                 chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
                 for chest, area_name in all_checks
                 # TODO: remove the following conditional once MutohTemple/TotOK work correctly
-                if area_name not in ('TempleOfTheOceanKing',)
+                # if area_name not in ('TempleOfTheOceanKing',)
             ]
             random.shuffle(self.items_left_to_place)
 
@@ -431,6 +431,7 @@ class Logic:
             except AssumedFillFailed:
                 # If the assumed fill fails, restore the original chest contents and start over
                 logging.info('Assumed fill failed! Trying again...')
+                exit(1)  # TODO: remove
                 for (chest, _), (chest_backup, _) in zip(all_checks, all_checks_backup):
                     chest.contents = chest_backup.contents
                 continue
@@ -609,6 +610,7 @@ class Logic:
         keys: dict[str, int] | None = None,
         flags: set[str] | None = None,
         states: set[str] | None = None,
+        ignored_nodes: set[Node] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
     ) -> OrderedSet[Node]:
         """
@@ -626,6 +628,7 @@ class Logic:
             The set of nodes that is reachable given the current inventory.
         """
         logging.debug(starting_node.name)
+        # print(starting_node.name)
 
         if visited_nodes is None:
             visited_nodes = OrderedSet()
@@ -670,7 +673,15 @@ class Logic:
         for edge in starting_node.edges:
             if edge.dest in visited_nodes:
                 continue
-            if edge.is_traversable(inventory, flags, states):
+            if ignored_nodes is not None and edge.dest in ignored_nodes:
+                continue
+            if edge.is_traversable(
+                current_inventory=inventory,
+                current_flags=flags,
+                current_keys=keys,
+                current_states=states,
+                ignored_nodes=ignored_nodes,
+            ):
                 logging.debug(f'{starting_node.name} -> {edge.dest.name}')
                 # If the edge requires a key, but is otherwise traversable, save it to a list
                 # to be processed later
@@ -691,6 +702,7 @@ class Logic:
                             keys,
                             flags,
                             new_states,
+                            ignored_nodes,
                             visited_nodes,
                         )
                     )
@@ -720,6 +732,7 @@ class Logic:
                             deepcopy(keys),
                             deepcopy(flags),
                             new_states,
+                            ignored_nodes,
                             visited_nodes,
                         )
                         if accessible_nodes_intersection is None:
@@ -802,7 +815,7 @@ class Edge:
             self.states_to_lose = None
 
     def __repr__(self):
-        r = f'{self.src.node} -> {self.dest.node}'
+        r = f'{self.src.name} -> {self.dest.name}'
         if self.constraints:
             r += f': {str(self.constraints)}'
         return r
@@ -827,33 +840,43 @@ class Edge:
     def is_traversable(
         self,
         current_inventory: list[str],
-        current_flags: set[str],
-        current_states: set[str],
+        current_flags: set[str] | None = None,
+        current_keys: dict[str, int] | None = None,
+        current_states: set[str] | None = None,
+        ignored_nodes: set[Node] | None = None,
     ) -> bool:
         """
         Determine if this edge is traversable given the current player state.
 
         Params:
             current_inventory: A list of strings representing the "current inventory", i.e. all
-            items currently accessible given the current shuffled state.
-
+                               items currently accessible given the current shuffled state.
             current_flags: A set of strings containing all `flags` that are logically set.
+            current_states: A set of strings containing all `states` that are logically set.
+            ignored_nodes: Nodes to ignore when a assumed search is needed. Can be used to avoid
+                           an infinite recursion where is_traversable calls _assumed_search which
+                           calls is_traversable which calls _assumed_search, etc.
+
         """
         if self.constraints is not None and len(self.constraints):
             return self._is_traversable(
                 parsed_expr=self.constraints,
-                inventory=current_inventory,
-                flags=current_flags,
-                states=current_states,
+                current_inventory=current_inventory,
+                current_flags=current_flags,
+                current_states=current_states,
+                current_keys=current_keys,
+                ignored_nodes=ignored_nodes,
             )
         return True
 
     def _is_traversable(
         self,
         parsed_expr: list[str | list[str | list]],
-        inventory: list[str],
-        flags: set[str],
-        states: set[str],
+        current_inventory: list[str],
+        current_flags: set[str] | None = None,
+        current_keys: dict[str, int] | None = None,
+        current_states: set[str] | None = None,
+        ignored_nodes: set[Node] | None = None,
         result=True,
     ) -> bool:
         current_op = None  # variable to track current logical operation (AND or OR), if applicable
@@ -861,24 +884,35 @@ class Edge:
         while len(parsed_expr):
             # If the complex expression contains another complex expression, recursively evaluate it
             if isinstance(parsed_expr[0], list):
-                sub_expression = parsed_expr.pop(0)
+                sub_expression = parsed_expr[0]
+                parsed_expr = parsed_expr[1:]
                 assert isinstance(sub_expression, list)
                 current_result = self._is_traversable(
-                    parsed_expr=sub_expression,
-                    inventory=inventory,
-                    flags=flags,
-                    states=states,
-                    result=result,
+                    sub_expression,
+                    current_inventory,
+                    current_flags,
+                    current_keys,
+                    current_states,
+                    ignored_nodes,
+                    result,
                 )
             else:
                 # Extract type and value (e.g., 'item' and 'Bombs')
-                expr_type = parsed_expr.pop(0)
+                expr_type = parsed_expr[0]
                 assert isinstance(expr_type, str)
-                expr_value = parsed_expr.pop(0)
+                expr_value = parsed_expr[1]
                 assert isinstance(expr_value, str)
 
+                parsed_expr = parsed_expr[2:]
+
                 current_result = self._evaluate_constraint(
-                    expr_type, expr_value, inventory, flags, states
+                    expr_type,
+                    expr_value,
+                    current_inventory,
+                    current_flags,
+                    current_keys,
+                    current_states,
+                    ignored_nodes,
                 )
 
             # Apply any pending logical operations
@@ -891,7 +925,8 @@ class Edge:
 
             # Queue up a logical AND or OR for the next expression if needed
             if len(parsed_expr) and parsed_expr[0] in ('&', '|'):
-                current_op = parsed_expr.pop(0)
+                current_op = parsed_expr[0]
+                parsed_expr = parsed_expr[1:]
 
         return result
 
@@ -899,9 +934,11 @@ class Edge:
         self,
         type: str,
         value: str,
-        inventory: list[str],
-        flags: set[str],
-        states: set[str],
+        current_inventory: list[str],
+        current_flags: set[str] | None = None,
+        current_keys: dict[str, int] | None = None,
+        current_states: set[str] | None = None,
+        ignored_nodes: set[Node] | None = None,
     ) -> bool:
         """
         Given an edge constraint "type value", determines if the edge is traversable
@@ -921,12 +958,11 @@ class Edge:
                 if value == 'Sword':
                     value = 'OshusSword'
                 # Translate item name from PascalCase to snake_case
-                return inflection.underscore(value) in inventory
+                return inflection.underscore(value) in current_inventory
             case EdgeDescriptor.FLAG.value:
-                # Translate item name from PascalCase to snake_case
-                return inflection.underscore(value) in flags
+                return current_flags is not None and value in current_flags
             case EdgeDescriptor.STATE.value | EdgeDescriptor.LOSE.value:
-                return value in states
+                return current_states is not None and value in current_states
             case EdgeDescriptor.DEFEATED.value:
                 for room in Logic.areas[self.src.area].rooms:
                     if room.name == self.src.room:
@@ -939,9 +975,13 @@ class Edge:
                                 )
                             return self._is_traversable(
                                 parse_edge_constraint(ENEMIES_MAPPING[enemy.type]),
-                                inventory,
-                                flags,
-                                states,
+                                current_inventory,
+                                current_flags,
+                                current_keys,
+                                current_states,
+                                ignored_nodes=ignored_nodes.union({self.dest})
+                                if ignored_nodes
+                                else {self.dest},
                             )
                 raise Exception(
                     f'{self.src.name} (Edge "...{type} {value}..."): ' f'enemy {value} not found!'
@@ -949,9 +989,13 @@ class Edge:
             case EdgeDescriptor.OPEN.value:
                 accessible_nodes = Logic._assumed_search(
                     self.src,
-                    deepcopy(inventory),
-                    None,
-                    deepcopy(flags),
+                    deepcopy(current_inventory),
+                    deepcopy(current_keys),
+                    deepcopy(current_flags),
+                    deepcopy(current_states),
+                    ignored_nodes=ignored_nodes.union({self.dest})
+                    if ignored_nodes
+                    else {self.dest},
                 )
                 for node in accessible_nodes:
                     if value in node.locks:
