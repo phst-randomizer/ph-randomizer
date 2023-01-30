@@ -27,7 +27,7 @@
         },
         {
           "name": "ToLowerIsland",
-          "entrance": "Main.Town.Ledge.ToUpperIsland"
+          "entrance": "Molida.Town.Ledge.ToUpperIsland"
         },
         {
           "name": "ToCaveSystemLeft",
