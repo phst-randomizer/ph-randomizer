@@ -608,6 +608,7 @@ class Logic:
         starting_node: Node,
         inventory: list[str],
         keys: dict[str, int] | None = None,
+        unlocked_doors: set[str] | None = None,
         flags: set[str] | None = None,
         states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
@@ -628,7 +629,6 @@ class Logic:
             The set of nodes that is reachable given the current inventory.
         """
         logging.debug(starting_node.name)
-        # print(starting_node.name)
 
         if visited_nodes is None:
             visited_nodes = OrderedSet()
@@ -641,6 +641,9 @@ class Logic:
 
         if keys is None:
             keys = {dungeon: 0 for dungeon in DUNGEON_STARTING_NODES.keys()}
+
+        if unlocked_doors is None:
+            unlocked_doors = set()
 
         # For the current node, find all chests + "collect" their items
         for check in starting_node.checks:
@@ -683,9 +686,9 @@ class Logic:
                 ignored_nodes=ignored_nodes,
             ):
                 logging.debug(f'{starting_node.name} -> {edge.dest.name}')
-                # If the edge requires a key, but is otherwise traversable, save it to a list
-                # to be processed later
-                if edge.requires_key:
+                # If the edge requires a key and hasn't been unlocked yet, but is otherwise
+                # traversable, save it to a list to be processed later
+                if str(edge) not in unlocked_doors and edge.requires_key:
                     edges_that_require_keys.append(edge)
                 # Otherwise, just traverse the edge
                 else:
@@ -700,6 +703,7 @@ class Logic:
                             edge.dest,
                             inventory,
                             keys,
+                            unlocked_doors,
                             flags,
                             new_states,
                             ignored_nodes,
@@ -720,6 +724,10 @@ class Logic:
                 accessible_nodes_intersection: OrderedSet[Node] | None = None
                 for subset in itertools.combinations(edges_that_require_keys, keys_to_use):
                     for edge in subset:
+                        unlocked_doors.add(str(edge))
+                        for back_edge in edge.src.edges:
+                            if back_edge.src == edge.src:
+                                unlocked_doors.add(str(back_edge))
                         # Remove states lost by traversing this edge
                         new_states = {
                             state
@@ -730,6 +738,7 @@ class Logic:
                             edge.dest,
                             deepcopy(inventory),
                             deepcopy(keys),
+                            deepcopy(unlocked_doors),
                             deepcopy(flags),
                             new_states,
                             ignored_nodes,
@@ -842,6 +851,7 @@ class Edge:
         current_inventory: list[str],
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
+        current_unlocked_doors: set[str] | None = None,
         current_states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
     ) -> bool:
@@ -865,6 +875,7 @@ class Edge:
                 current_flags=current_flags,
                 current_states=current_states,
                 current_keys=current_keys,
+                current_unlocked_doors=current_unlocked_doors,
                 ignored_nodes=ignored_nodes,
             )
         return True
@@ -875,12 +886,12 @@ class Edge:
         current_inventory: list[str],
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
+        current_unlocked_doors: set[str] | None = None,
         current_states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
         result=True,
     ) -> bool:
         current_op = None  # variable to track current logical operation (AND or OR), if applicable
-
         while len(parsed_expr):
             # If the complex expression contains another complex expression, recursively evaluate it
             if isinstance(parsed_expr[0], list):
@@ -892,6 +903,7 @@ class Edge:
                     current_inventory,
                     current_flags,
                     current_keys,
+                    current_unlocked_doors,
                     current_states,
                     ignored_nodes,
                     result,
@@ -911,6 +923,7 @@ class Edge:
                     current_inventory,
                     current_flags,
                     current_keys,
+                    current_unlocked_doors,
                     current_states,
                     ignored_nodes,
                 )
@@ -937,6 +950,7 @@ class Edge:
         current_inventory: list[str],
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
+        current_unlocked_doors: set[str] | None = None,
         current_states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
     ) -> bool:
@@ -961,8 +975,10 @@ class Edge:
                 return inflection.underscore(value) in current_inventory
             case EdgeDescriptor.FLAG.value:
                 return current_flags is not None and value in current_flags
-            case EdgeDescriptor.STATE.value | EdgeDescriptor.LOSE.value:
+            case EdgeDescriptor.STATE.value:
                 return current_states is not None and value in current_states
+            case EdgeDescriptor.LOSE.value:
+                return True
             case EdgeDescriptor.DEFEATED.value:
                 for room in Logic.areas[self.src.area].rooms:
                     if room.name == self.src.room:
@@ -991,6 +1007,7 @@ class Edge:
                     self.src,
                     deepcopy(current_inventory),
                     deepcopy(current_keys),
+                    deepcopy(current_unlocked_doors),
                     deepcopy(current_flags),
                     deepcopy(current_states),
                     ignored_nodes=ignored_nodes.union({self.dest})
