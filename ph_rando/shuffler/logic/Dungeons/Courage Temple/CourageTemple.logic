@@ -223,7 +223,7 @@ area CourageTemple:
       door ToF3
 
     EmptyRoom <-> BossKeyChest: (item Bow & (flag KnowCourageTempleOrder | setting NoPuzzleSolution))
-    EmptyRoom <-> StairsToF3: (item CourageBossKey & (flag KnowCourageTempleOrder | setting NoPuzzleSolution))
+    EmptyRoom <-> StairsToF3: (item BossKey & (flag KnowCourageTempleOrder | setting NoPuzzleSolution))
 
 
   room F3:
