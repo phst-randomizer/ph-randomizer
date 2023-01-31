@@ -741,8 +741,8 @@ class Logic:
                             deepcopy(unlocked_doors),
                             deepcopy(flags),
                             new_states,
-                            ignored_nodes,
-                            visited_nodes,
+                            ignored_nodes=set(visited_nodes).union(ignored_nodes or set()),
+                            visited_nodes=visited_nodes,
                         )
                         if accessible_nodes_intersection is None:
                             accessible_nodes_intersection = accessible_nodes
