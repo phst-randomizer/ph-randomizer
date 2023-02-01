@@ -16,10 +16,16 @@ area TempleOfTheOceanKing:
     node BombchuChest:
       chest BombchuPath
 
+    node DownstairsLockedDoor:
+      lock DownstairsLockedDoor
+
     node Downstairs:
       door ToB3
 
-    Upper -> Downstairs: open ToTOKKey
+    Upper -> DownstairsLockedDoor
+    Lower -> DownstairsLockedDoor
+    DownstairsLockedDoor -> Upper: open DownstairsLockedDoor
+    DownstairsLockedDoor -> Lower: open DownstairsLockedDoor
 
     Upper -> Lower: (item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu)
     Lower -> Upper
