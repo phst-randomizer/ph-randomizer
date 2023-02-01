@@ -246,7 +246,7 @@ class Logic:
         reachable_nodes: OrderedSet[Node] = OrderedSet()
         for starting_node in starting_nodes or [self.starting_node]:
             reachable_nodes.update(
-                self._assumed_search(
+                self.assumed_search(
                     starting_node,
                     deepcopy(self.items_left_to_place),
                     keys,
@@ -274,6 +274,17 @@ class Logic:
         # Out of the remaining candidates, pick a random one and place the item in it.
         random_index = random.randint(0, max(len(reachable_candidates) - 1, 0))
         reachable_candidates[random_index].contents = item_to_place
+
+        node = [
+            node
+            for node in reachable_nodes
+            for check in node.checks
+            if check == reachable_candidates[random_index]
+        ][0]
+        logging.info(
+            f'Placed {item_to_place} at {node.name} '
+            f'(chest {reachable_candidates[random_index].name})'
+        )
 
     def place_important_items(self) -> None:
         items_to_place: list[str] = []
@@ -505,7 +516,8 @@ class Logic:
             case NodeDescriptor.FLAG.value:
                 node.flags.add(descriptor_value)
             case NodeDescriptor.LOCK.value:
-                node.locks.add(descriptor_value)
+                assert not node.lock, f'Node {node} already has a locked door associated with it.'
+                node.lock = descriptor_value
             case NodeDescriptor.GAIN.value:
                 node.states.add(descriptor_value)
             case NodeDescriptor.ENEMY.value:
@@ -603,17 +615,69 @@ class Logic:
         return areas
 
     @classmethod
+    def assumed_search(
+        cls,
+        starting_node: Node,
+        inventory: list[str],
+        keys: dict[str, int] | None = None,
+        unlocked_doors: set[Node] | None = None,
+        flags: set[str] | None = None,
+        states: set[str] | None = None,
+        ignored_nodes: set[Node] | None = None,
+        visited_nodes: OrderedSet[Node] | None = None,
+    ):
+        while True:
+            (
+                visited_nodes_first,
+                inventory,
+                keys,
+                unlocked_doors,
+                flags,
+                states,
+                new_ignored_nodes,
+            ) = cls._assumed_search(
+                starting_node,
+                inventory,
+                keys,
+                unlocked_doors,
+                flags,
+                states,
+                ignored_nodes,
+                visited_nodes,
+            )
+            (
+                visited_nodes_second,
+                inventory,
+                keys,
+                unlocked_doors,
+                flags,
+                states,
+                new_ignored_nodes,
+            ) = cls._assumed_search(
+                starting_node,
+                inventory,
+                keys,
+                unlocked_doors,
+                flags,
+                states,
+                ignored_nodes,
+                visited_nodes,
+            )
+            if visited_nodes_second == visited_nodes_first:
+                return visited_nodes_first
+
+    @classmethod
     def _assumed_search(
         cls,
         starting_node: Node,
         inventory: list[str],
         keys: dict[str, int] | None = None,
-        unlocked_doors: set[str] | None = None,
+        unlocked_doors: set[Node] | None = None,
         flags: set[str] | None = None,
         states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
-    ) -> OrderedSet[Node]:
+    ):
         """
         Calculate the set of nodes reachable from the `starting_node` given the current inventory.
 
@@ -645,24 +709,21 @@ class Logic:
         if unlocked_doors is None:
             unlocked_doors = set()
 
+        if ignored_nodes is None:
+            ignored_nodes = set()
+
         # For the current node, find all chests + "collect" their items
         for check in starting_node.checks:
             if check.contents and check.contents not in inventory:
                 inventory.append(check.contents)
-                # Reset visited nodes and rooms because we may now be able to reach
-                # nodes we couldn't before with this new item
-                visited_nodes.clear()
 
-                # If this is a small key, increment key count for the associated dungeon
-                if check.contents == 'small_key':
-                    keys[starting_node.area] += 1
+            # If this is a small key, increment key count for the associated dungeon
+            if check.contents == 'small_key':
+                keys[starting_node.area] += 1
 
         for flag in starting_node.flags:
             if flag not in flags:
                 flags.add(flag)
-                # Reset visited nodes and rooms because we may now be able to reach
-                # nodes we couldn't before with this new flag set
-                visited_nodes.clear()
 
         for state in starting_node.states:
             if state not in states:
@@ -676,19 +737,21 @@ class Logic:
         for edge in starting_node.edges:
             if edge.dest in visited_nodes:
                 continue
-            if ignored_nodes is not None and edge.dest in ignored_nodes:
+            if edge.dest in ignored_nodes:
                 continue
             if edge.is_traversable(
                 current_inventory=inventory,
                 current_flags=flags,
                 current_keys=keys,
+                current_unlocked_doors=unlocked_doors,
                 current_states=states,
+                visited_nodes=visited_nodes,
                 ignored_nodes=ignored_nodes,
             ):
                 logging.debug(f'{starting_node.name} -> {edge.dest.name}')
                 # If the edge requires a key and hasn't been unlocked yet, but is otherwise
                 # traversable, save it to a list to be processed later
-                if str(edge) not in unlocked_doors and edge.requires_key:
+                if edge.src not in unlocked_doors and edge.requires_key:
                     edges_that_require_keys.append(edge)
                 # Otherwise, just traverse the edge
                 else:
@@ -708,49 +771,116 @@ class Logic:
                             new_states,
                             ignored_nodes,
                             visited_nodes,
-                        )
+                        )[0]
                     )
 
         # If there are any edges that require keys, but are otherwise traversable, traverse each
         # while considering worse-case key usage
         if len(edges_that_require_keys):
-            keys_to_use = min(len(edges_that_require_keys), keys[starting_node.area])
+            key_doors = {edge.locked_door for edge in edges_that_require_keys}
+            keys_to_use = min(len(key_doors), keys[starting_node.area])
             if keys_to_use > 0:
-                keys[starting_node.area] -= keys_to_use
-
                 # To determine what nodes can be reached given worst-case key usage, get
                 # the sets of nodes reachable for every possible way the keys can be used,
                 # then take the intersection of those sets.
                 accessible_nodes_intersection: OrderedSet[Node] | None = None
-                for subset in itertools.combinations(edges_that_require_keys, keys_to_use):
-                    for edge in subset:
-                        unlocked_doors.add(str(edge))
-                        for back_edge in edge.src.edges:
-                            if back_edge.src == edge.src:
-                                unlocked_doors.add(str(back_edge))
-                        # Remove states lost by traversing this edge
-                        new_states = {
-                            state
-                            for state in states
-                            if not edge.states_to_lose or state not in edge.states_to_lose
-                        }
-                        accessible_nodes = cls._assumed_search(
-                            edge.dest,
-                            deepcopy(inventory),
-                            deepcopy(keys),
-                            deepcopy(unlocked_doors),
-                            deepcopy(flags),
-                            new_states,
-                            ignored_nodes=set(visited_nodes).union(ignored_nodes or set()),
-                            visited_nodes=visited_nodes,
-                        )
-                        if accessible_nodes_intersection is None:
-                            accessible_nodes_intersection = accessible_nodes
-                        else:
-                            accessible_nodes_intersection.intersection_update(accessible_nodes)
-                if accessible_nodes_intersection is not None:
-                    visited_nodes.update(accessible_nodes_intersection)
-        return visited_nodes
+                for subset in itertools.combinations(key_doors, keys_to_use):
+                    for node in subset:
+                        assert node
+                        for edge in node.edges:
+                            if edge.dest in visited_nodes:
+                                continue
+                            # To avoid retracing our steps, ignore any already-visited nodes in the
+                            # recursive assumed search (in addition to the existing ignored_nodes)
+                            new_ignored_nodes = ignored_nodes.union(set(visited_nodes))
+
+                            # "Lose" any states that are required per `lose` descriptors on
+                            # this edge
+                            new_states = {
+                                state
+                                for state in states
+                                if not edge.states_to_lose or state not in edge.states_to_lose
+                            }
+
+                            # Don't modify the original `keys` dict yet; we're still not sure if
+                            # this key door will be one of the ones unlocked.
+                            new_keys = deepcopy(keys)
+                            new_keys[starting_node.area] -= 1  # Use the key
+
+                            # Add the current door to unlocked doors. Again, don't modify
+                            # the original for the same reasons as above.
+                            new_unlocked_doors = deepcopy(unlocked_doors)
+                            if edge.locked_door:
+                                new_unlocked_doors.add(edge.locked_door)
+
+                            accessible_nodes = cls._assumed_search(
+                                edge.dest,
+                                deepcopy(inventory),
+                                new_keys,
+                                new_unlocked_doors,
+                                deepcopy(flags),
+                                new_states,
+                                ignored_nodes=new_ignored_nodes,
+                                visited_nodes=visited_nodes,
+                            )[0]
+                            if accessible_nodes_intersection is None:
+                                accessible_nodes_intersection = accessible_nodes
+                            else:
+                                accessible_nodes_intersection.intersection_update(accessible_nodes)
+
+                # Assert not None to satisfy type-checker
+                assert accessible_nodes_intersection is not None
+
+                # Mark the newly accessible nodes as visited
+                visited_nodes.update(accessible_nodes_intersection)
+
+                # Figure out what doors we ended up unlocking, and record them as unlocked
+                for node in visited_nodes:
+                    assert isinstance(node, Node)
+                    for edge in node.edges:
+                        if edge.requires_key and edge.locked_door not in unlocked_doors:
+                            assert edge.locked_door is not None, edge
+                            unlocked = True
+                            for e in edge.locked_door.edges:
+                                if e.requires_key and e.dest not in accessible_nodes_intersection:
+                                    unlocked = False
+                            if unlocked:
+                                if keys[starting_node.area] > 0:
+                                    keys[starting_node.area] -= 1
+                                unlocked_doors.add(edge.locked_door)
+
+                # Collect all checks from newly accessible nodes
+                for node in accessible_nodes_intersection:
+                    assert isinstance(node, Node)
+                    for check in node.checks:
+                        if check.contents:
+                            if check.contents not in inventory:
+                                inventory.append(check.contents)
+                            # Reset visited nodes and rooms because we may now be able to reach
+                            # nodes we couldn't before with this new item
+                            # visited_nodes.clear()
+
+                            # If this is a small key, increment key count for the associated dungeon
+                            if check.contents == 'small_key':
+                                keys[node.area] += 1
+
+                    for flag in node.flags:
+                        if flag not in flags:
+                            flags.add(flag)
+
+                    for state in node.states:
+                        if state not in states:
+                            states.add(state)
+
+        return (
+            visited_nodes,
+            inventory,
+            keys,
+            unlocked_doors,
+            flags,
+            states,
+            ignored_nodes,
+        )
 
 
 @dataclass
@@ -762,7 +892,7 @@ class Node:
     entrances: set[str] = field(default_factory=set)
     enemies: list[Enemy] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
-    locks: set[str] = field(default_factory=set)
+    lock: str = field(default_factory=str)
     states: set[str] = field(default_factory=set)
 
     @property
@@ -790,25 +920,31 @@ class Edge:
     dest: Node
     constraints: list[str | list[str | list]] | None
     states_to_lose: set[str] | None
+    locked_door: Node | None
 
     def __init__(self, src: Node, dest: Node, constraints: str | None = None) -> None:
         self.src = src
         self.dest = dest
 
-        def _get_states_to_lose(
+        def _get_descriptors(
             constraints: list[str | list[str | list]],
-            states: set[str] | None = None,
+            descriptor: str,
+            values: set[str] | None = None,
         ) -> set[str]:
-            if states is None:
-                states = set()
+            if values is None:
+                values = set()
             for i, elem in enumerate(constraints):
                 if isinstance(elem, list):
-                    return _get_states_to_lose(elem, states)
-                elif elem == EdgeDescriptor.LOSE.value:
-                    state_name = constraints[i + 1]
-                    assert isinstance(state_name, str)
-                    states.add(state_name)
-            return states
+                    return _get_descriptors(elem, descriptor, values)
+                elif elem == descriptor:
+                    name = constraints[i + 1]
+                    assert isinstance(name, str)
+                    values.add(name)
+            return values
+
+        self.constraints = None
+        self.states_to_lose = None
+        self.locked_door = None
 
         logging.debug(f'Evaluating {constraints!r}...')
 
@@ -816,12 +952,20 @@ class Edge:
         if constraints is not None:
             self.constraints = parse_edge_constraint(constraints)
             assert len(self.constraints), f'Failed to parsed edge {constraints!r}'
-            self.states_to_lose = _get_states_to_lose(self.constraints)
+            self.states_to_lose = _get_descriptors(self.constraints, EdgeDescriptor.LOSE.value)
             if not len(self.states_to_lose):
                 self.states_to_lose = None
-        else:
-            self.constraints = constraints
-            self.states_to_lose = None
+            locks = _get_descriptors(self.constraints, EdgeDescriptor.OPEN.value)
+            for lock_name in locks:
+                for area in Logic.areas.values():
+                    if area.name != self.src.area:
+                        continue
+                    for room in area.rooms:
+                        if room.name != self.src.room:
+                            continue
+                        for node in room.nodes:
+                            if node.lock == lock_name:
+                                self.locked_door = node
 
     def __repr__(self):
         r = f'{self.src.name} -> {self.dest.name}'
@@ -829,7 +973,42 @@ class Edge:
             r += f': {str(self.constraints)}'
         return r
 
-    @property
+    @cached_property
+    def required_items(self) -> list[str]:
+        def _get_required_items(
+            constraints: list[str | list[str | list]], required_items: list[str]
+        ):
+            for i, elem in enumerate(constraints):
+                if isinstance(elem, list):
+                    _get_required_items(elem, required_items)
+                elif EdgeDescriptor.ITEM.value == elem:
+                    required_items.append(inflection.underscore(constraints[i + 1]))  # type: ignore
+
+        items: list[str] = []
+        if self.constraints:
+            _get_required_items(self.constraints, items)
+        return items
+
+    def __hash__(self) -> int:
+        return id(self)
+
+    @cached_property
+    def required_flags(self) -> list[str]:
+        def _get_required_items(
+            constraints: list[str | list[str | list]], required_flags: list[str]
+        ):
+            for i, elem in enumerate(constraints):
+                if isinstance(elem, list):
+                    _get_required_items(elem, required_flags)
+                elif EdgeDescriptor.FLAG.value == elem:
+                    required_flags.append(constraints[i + 1])  # type: ignore
+
+        flags: list[str] = []
+        if self.constraints:
+            _get_required_items(self.constraints, flags)
+        return flags
+
+    @cached_property
     def requires_key(self) -> bool:
         """
         Whether or not this edge requires a key to traverse, i.e. if it represents a locked door.
@@ -851,8 +1030,9 @@ class Edge:
         current_inventory: list[str],
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
-        current_unlocked_doors: set[str] | None = None,
+        current_unlocked_doors: set[Node] | None = None,
         current_states: set[str] | None = None,
+        visited_nodes: OrderedSet[Node] | None = None,
         ignored_nodes: set[Node] | None = None,
     ) -> bool:
         """
@@ -876,6 +1056,7 @@ class Edge:
                 current_states=current_states,
                 current_keys=current_keys,
                 current_unlocked_doors=current_unlocked_doors,
+                visited_nodes=visited_nodes,
                 ignored_nodes=ignored_nodes,
             )
         return True
@@ -886,8 +1067,9 @@ class Edge:
         current_inventory: list[str],
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
-        current_unlocked_doors: set[str] | None = None,
+        current_unlocked_doors: set[Node] | None = None,
         current_states: set[str] | None = None,
+        visited_nodes: OrderedSet[Node] | None = None,
         ignored_nodes: set[Node] | None = None,
         result=True,
     ) -> bool:
@@ -905,6 +1087,7 @@ class Edge:
                     current_keys,
                     current_unlocked_doors,
                     current_states,
+                    visited_nodes,
                     ignored_nodes,
                     result,
                 )
@@ -925,6 +1108,7 @@ class Edge:
                     current_keys,
                     current_unlocked_doors,
                     current_states,
+                    visited_nodes,
                     ignored_nodes,
                 )
 
@@ -950,8 +1134,9 @@ class Edge:
         current_inventory: list[str],
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
-        current_unlocked_doors: set[str] | None = None,
+        current_unlocked_doors: set[Node] | None = None,
         current_states: set[str] | None = None,
+        visited_nodes: OrderedSet[Node] | None = None,
         ignored_nodes: set[Node] | None = None,
     ) -> bool:
         """
@@ -994,6 +1179,7 @@ class Edge:
                                 current_inventory,
                                 current_flags,
                                 current_keys,
+                                current_unlocked_doors,
                                 current_states,
                                 ignored_nodes=ignored_nodes.union({self.dest})
                                 if ignored_nodes
@@ -1003,19 +1189,28 @@ class Edge:
                     f'{self.src.name} (Edge "...{type} {value}..."): ' f'enemy {value} not found!'
                 )
             case EdgeDescriptor.OPEN.value:
-                accessible_nodes = Logic._assumed_search(
-                    self.src,
-                    deepcopy(current_inventory),
-                    deepcopy(current_keys),
-                    deepcopy(current_unlocked_doors),
-                    deepcopy(current_flags),
-                    deepcopy(current_states),
-                    ignored_nodes=ignored_nodes.union({self.dest})
-                    if ignored_nodes
-                    else {self.dest},
+                # Check if the node that the `lock` is on has already been visited.
+                # This is a small optimization to avoid making a recursive call to
+                # `_assumed_search()` if it can be avoided.
+                if visited_nodes:
+                    for node in visited_nodes:
+                        if value == node.lock:
+                            return True
+                # It's possible that the node containing the referenced `lock` *is* accessible,
+                # but we haven't visited it yet. So, now we try an assumed search starting at
+                # the source of the current edge.
+                new_ignored_nodes = (
+                    ignored_nodes.union({self.dest}) if ignored_nodes else {self.dest}
                 )
+                accessible_nodes = Logic._assumed_search(
+                    starting_node=self.src,
+                    inventory=deepcopy(current_inventory),
+                    flags=deepcopy(current_flags),
+                    states=deepcopy(current_states),
+                    ignored_nodes=new_ignored_nodes,
+                )[0]
                 for node in accessible_nodes:
-                    if value in node.locks:
+                    if value == node.lock:
                         return True
                 return False
             case EdgeDescriptor.SETTING.value:
