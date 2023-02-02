@@ -1,4 +1,5 @@
 import sys
+from typing import NoReturn
 
 from PySide6.QtWidgets import (
     QApplication,
@@ -20,7 +21,7 @@ from ph_rando.common import RANDOMIZER_SETTINGS
 
 class RandomizerUi(QWidget):
     def __init__(self) -> None:
-        QWidget.__init__(self)
+        super().__init__()
 
         self.setWindowTitle('Phantom Hourglass Randomizer')
         layout = QFormLayout()
@@ -101,7 +102,7 @@ class RandomizerUi(QWidget):
         hbox.addWidget(randomize_btn)
 
 
-def render_ui() -> None:
+def render_ui() -> NoReturn:
     app = QApplication(sys.argv)
     screen = RandomizerUi()
     screen.show()
