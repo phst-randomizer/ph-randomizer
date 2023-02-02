@@ -79,7 +79,7 @@ def test_edge_parser(expression: str, inventory: list[str], flags: set[str], exp
     node2 = Node(name='test2')
     edge = Edge(node1, node2, expression)
     node1.edges.append(edge)
-    assert edge.is_traversable(inventory, flags, set()) == expected_result
+    assert edge.is_traversable(inventory, flags) == expected_result
 
 
 @pytest.mark.parametrize(
@@ -112,7 +112,7 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
     node2 = Node(name='test2')
     edge = Edge(node1, node2, expression)
     node1.edges.append(edge)
-    assert edge.is_traversable([], set(), set()) == expected_result
+    assert edge.is_traversable([]) == expected_result
 
 
 def test_graph_connectedness(settings) -> None:

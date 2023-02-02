@@ -146,7 +146,7 @@ area FireTemple:
     node StairsBoss:
       door ToF4
 
-    BossKeyHoleHallway <-> StairsBoss: item FireBossKey
+    BossKeyHoleHallway <-> StairsBoss: item BossKey
 
     node TopChest:
       chest BossKeyChest
