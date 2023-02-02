@@ -21,7 +21,7 @@
         {
           "name": "RightSwitch",
           "type": "chest",
-          "contents": "treasure_map_ne_8",
+          "contents": "treasure_map_ne8",
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
           "zmb_mapobject_index": 30
         },

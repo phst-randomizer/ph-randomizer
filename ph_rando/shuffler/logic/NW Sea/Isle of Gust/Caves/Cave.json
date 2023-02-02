@@ -15,7 +15,7 @@
         {
           "name": "EnemyClearChest",
           "type": "chest",
-          "contents": "treasure_map_nw_4",
+          "contents": "treasure_map_nw4",
           "zmb_file_path": "Map/isle_wind/map11.bin/zmb/isle_wind_11.zmb",
           "zmb_mapobject_index": 10
         }

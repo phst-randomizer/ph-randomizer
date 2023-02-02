@@ -15,7 +15,7 @@
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "treasure_map_se_8",
+          "contents": "treasure_map_se8",
           "zmb_file_path": "Map/dngn_main/map06.bin/zmb/dngn_main_06.zmb",
           "zmb_mapobject_index": 12
         }

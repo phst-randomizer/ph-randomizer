@@ -15,7 +15,7 @@
         {
           "name": "NearFogMap",
           "type": "chest",
-          "contents": "treasure_map_sw_4",
+          "contents": "treasure_map_sw4",
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
           "zmb_mapobject_index": 22
         },

@@ -15,7 +15,7 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "treasure_map_sw_6",
+          "contents": "treasure_map_sw6",
           "zmb_actor_index": 6,
           "zmb_file_path": "Map/isle_wizard/map00.bin/zmb/isle_wizard_00.zmb"
         }

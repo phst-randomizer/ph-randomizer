@@ -111,7 +111,7 @@
         {
           "name": "BottomLeftIsland",
           "type": "dig_spot",
-          "contents": "treasure_map_nw_3",
+          "contents": "treasure_map_nw3",
           "zmb_actor_index": 10,
           "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
         }

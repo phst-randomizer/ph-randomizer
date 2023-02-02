@@ -56,13 +56,13 @@ area Sea:
     Molida <-> West: (item SWSeaChart & defeated GiantEyePlant)
     SpiritIsle <-> West: item SWSeaChart
     Boat <-> West: item SWSeaChart
-    East <-> Treasure1: (item SalvageArm & item TreasureMap1)
-    East <-> Treasure2: (item SalvageArm & item TreasureMap2)
-    East <-> Treasure3: (item SalvageArm & item TreasureMap3)
-    East <-> Treasure4: (item SalvageArm & item TreasureMap4)
-    West <-> Treasure5: (item SalvageArm & item TreasureMap5)
-    West <-> Treasure6: (item SalvageArm & item TreasureMap6)
-    West <-> Treasure7: (item SalvageArm & item TreasureMap7)
+    East <-> Treasure1: (item SalvageArm & item TreasureMapSW1)
+    East <-> Treasure2: (item SalvageArm & item TreasureMapSW2)
+    East <-> Treasure3: (item SalvageArm & item TreasureMapSW3)
+    East <-> Treasure4: (item SalvageArm & item TreasureMapSW4)
+    West <-> Treasure5: (item SalvageArm & item TreasureMapSW5)
+    West <-> Treasure6: (item SalvageArm & item TreasureMapSW6)
+    West <-> Treasure7: (item SalvageArm & item TreasureMapSW7)
     East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See ./Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
 
   room NW:
@@ -110,14 +110,14 @@ area Sea:
     Zauz <-> Main: item NWSeaChart
     Gust <-> Main: item NWSeaChart
     Bannan <-> Main: (item NWSeaChart & defeated GiantEyePlant)
-    Main <-> Treasure1: (item SalvageArm & item TreasureMap1)
-    Main <-> Treasure2: (item SalvageArm & item TreasureMap2)
-    Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
-    Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
-    Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
-    Main <-> Treasure6: (item SalvageArm & item TreasureMap6)
-    ToNE <-> Treasure7: (item SalvageArm & item TreasureMap7)
-    ToNE <-> Treasure8: (item SalvageArm & item TreasureMap8)
+    Main <-> Treasure1: (item SalvageArm & item TreasureMapNW1)
+    Main <-> Treasure2: (item SalvageArm & item TreasureMapNW2)
+    Main <-> Treasure3: (item SalvageArm & item TreasureMapNW3)
+    Main <-> Treasure4: (item SalvageArm & item TreasureMapNW4)
+    Main <-> Treasure5: (item SalvageArm & item TreasureMapNW5)
+    Main <-> Treasure6: (item SalvageArm & item TreasureMapNW6)
+    ToNE <-> Treasure7: (item SalvageArm & item TreasureMapNW7)
+    ToNE <-> Treasure8: (item SalvageArm & item TreasureMapNW8)
 
   room SE:
     node Main:
@@ -161,14 +161,14 @@ area Sea:
     Goron <-> Main: (item SESeaChart & defeated MassiveEye)
     Frost <-> Main: (item SESeaChart & item Cannon)
     Harrow <-> Main: item SESeaChart
-    Main <-> Treasure1: (item SalvageArm & item TreasureMap1)
-    Main <-> Treasure2: (item SalvageArm & item TreasureMap2)
-    Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
-    Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
-    Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
-    Main <-> Treasure6: (item SalvageArm & item TreasureMap6)
-    Main <-> Treasure7: (item SalvageArm & item TreasureMap7)
-    Main <-> Treasure8: (item SalvageArm & item TreasureMap8)
+    Main <-> Treasure1: (item SalvageArm & item TreasureMapSE1)
+    Main <-> Treasure2: (item SalvageArm & item TreasureMapSE2)
+    Main <-> Treasure3: (item SalvageArm & item TreasureMapSE3)
+    Main <-> Treasure4: (item SalvageArm & item TreasureMapSE4)
+    Main <-> Treasure5: (item SalvageArm & item TreasureMapSE5)
+    Main <-> Treasure6: (item SalvageArm & item TreasureMapSE6)
+    Main <-> Treasure7: (item SalvageArm & item TreasureMapSE7)
+    Main <-> Treasure8: (item SalvageArm & item TreasureMapSE8)
 
   room NE:
     node Main:
@@ -212,14 +212,14 @@ area Sea:
     DeadIsle <-> Main: item NESeaChart
     Boat <-> Main: item NESeaChart
     Beedle <-> Main: item NESeaChart
-    RuinsIsle <-> Treasure1: (item SalvageArm & item TreasureMap1 & item NESeaChart)
-    RuinsIsle <-> Treasure2: (item SalvageArm & item TreasureMap2 & item NESeaChart)
-    Main <-> Treasure3: (item SalvageArm & item TreasureMap3)
-    Main <-> Treasure4: (item SalvageArm & item TreasureMap4)
-    Main <-> Treasure5: (item SalvageArm & item TreasureMap5)
-    Main <-> Treasure6: (item SalvageArm & item TreasureMap6)
-    Main <-> Treasure7: (item SalvageArm & item TreasureMap7)
-    Main <-> Treasure8: (item SalvageArm & item TreasureMap8)
+    RuinsIsle <-> Treasure1: (item SalvageArm & item TreasureMapNE1 & item NESeaChart)
+    RuinsIsle <-> Treasure2: (item SalvageArm & item TreasureMapNE2 & item NESeaChart)
+    Main <-> Treasure3: (item SalvageArm & item TreasureMapNE3)
+    Main <-> Treasure4: (item SalvageArm & item TreasureMapNE4)
+    Main <-> Treasure5: (item SalvageArm & item TreasureMapNE5)
+    Main <-> Treasure6: (item SalvageArm & item TreasureMapNE6)
+    Main <-> Treasure7: (item SalvageArm & item TreasureMapNE7)
+    Main <-> Treasure8: (item SalvageArm & item TreasureMapNE8)
 
   # BOATS
   room RegularBeedleBoat:

@@ -15,7 +15,7 @@
         {
           "name": "NormalChest",
           "type": "chest",
-          "contents": "treasure_map_ne_4",
+          "contents": "treasure_map_ne4",
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
           "zmb_mapobject_index": 34
         },

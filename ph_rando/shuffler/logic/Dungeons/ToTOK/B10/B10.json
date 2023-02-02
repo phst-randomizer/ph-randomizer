@@ -26,7 +26,7 @@
         {
           "name": "ChestAfterHammer",
           "type": "chest",
-          "contents": "treasure_map_ne_7",
+          "contents": "treasure_map_ne7",
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
           "zmb_mapobject_index": 28
         }

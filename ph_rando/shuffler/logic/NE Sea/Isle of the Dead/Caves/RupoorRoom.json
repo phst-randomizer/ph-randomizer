@@ -8,7 +8,7 @@
         {
           "name": "RupoorChest1",
           "type": "chest",
-          "contents": "treasure_map_ne_1",
+          "contents": "treasure_map_ne1",
           "zmb_file_path": "Map/isle_myou/map02.bin/zmb/isle_myou_02.zmb",
           "zmb_mapobject_index": 2
         },
