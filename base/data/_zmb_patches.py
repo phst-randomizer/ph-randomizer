@@ -53,10 +53,36 @@ def _patch_totok_lobby_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
-def patch_actors(rom: NintendoDSRom) -> NintendoDSRom:
-    """Applies all patches to NPCA actor section of ZMBs."""
+def _add_chest_for_phantom_hourglass(rom: NintendoDSRom) -> NintendoDSRom:
+    """
+    Add a chest in front of the pedestal that you normally get the phantom hourglass from.
+    This serves as a replacement for the phantom hourglass pedestal as an item location.
+    """
+    with edit_zmb(rom, 'Map/dngn_main_f/map00.bin', 'zmb/dngn_main_f_00.zmb') as zmb_file:
+        chest = zmb.MapObject(game=common.Game.PhantomHourglass)
+        chest.x = 33
+        chest.y = 12
+        chest.rotation = 0
+        chest.unk08 = 0x3  # TODO: set to sword for now. Change this to phantom hourglass.
+        chest.unk0A = 0
+        chest.unk0C = 0
+        chest.unk10 = 1
+        chest.unk11 = 1
+        chest.unk12 = 0
+        chest.unk13 = 0
+        chest.scriptID = 0
+        chest.unk1A = 0
+        chest.unk1B = 0
+        chest.type = 10
+        zmb_file.mapObjects.append(chest)
+    return rom
+
+
+def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
+    """Applies all patches to ZMB files."""
     _patch_mercay_earthquake(rom)
     _patch_mercay_town_cutscenes(rom)
     _patch_totok_lobby_cutscenes(rom)
+    _add_chest_for_phantom_hourglass(rom)
 
     return rom
