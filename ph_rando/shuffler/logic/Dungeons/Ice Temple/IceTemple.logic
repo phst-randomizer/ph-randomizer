@@ -154,7 +154,7 @@ area IceTemple:
 
     AboveBombableWalls -> BeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & lose SwitchRed & state SwitchBlue)
 
-    BeforeBossKey <-> AfterBossKey: item IceTempleBossKey
+    BeforeBossKey <-> AfterBossKey: item BossKey
 
   room B2:
     node Stairs:
