@@ -53,8 +53,8 @@ def _patch_totok_lobby_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
-def patch_actors(rom: NintendoDSRom) -> NintendoDSRom:
-    """Applies all patches to NPCA actor section of ZMBs."""
+def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
+    """Applies all patches to ZMB files."""
     _patch_mercay_earthquake(rom)
     _patch_mercay_town_cutscenes(rom)
     _patch_totok_lobby_cutscenes(rom)
