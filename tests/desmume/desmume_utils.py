@@ -4,6 +4,9 @@ from contextlib import contextmanager
 from desmume.controls import keymask
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME
 
+from ph_rando.patcher._items import ITEMS
+from ph_rando.shuffler.aux_models import Area
+
 
 class DeSmuMEWrapper(DeSmuME):
     def __init__(self):
@@ -129,52 +132,68 @@ def use_equipped_item(desmume: DeSmuMEWrapper):
 
 
 @contextmanager
-def assert_item_is_picked_up(item_id: int, emu_instance: DeSmuMEWrapper) -> Generator:
+def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> Generator:
     from .conftest import ITEM_MEMORY_ADDRESSES, ItemMemoryAddressType
 
+    if isinstance(item, str):
+        item = ITEMS[item]
+
     # Get original value (before item is retrieved)
-    original_value = emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-    if ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.FLAG:
-        assert (
-            original_value & ITEM_MEMORY_ADDRESSES[item_id][1] != ITEM_MEMORY_ADDRESSES[item_id][1]
-        )
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_8_BIT:
-        original_value = emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_16_BIT:
+    original_value = emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
+    if ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.FLAG:
+        assert original_value & ITEM_MEMORY_ADDRESSES[item][1] != ITEM_MEMORY_ADDRESSES[item][1]
+    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
+        original_value = emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
+    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         original_value = int.from_bytes(
             emu_instance.memory.unsigned[
-                ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
+                ITEM_MEMORY_ADDRESSES[item][0] : ITEM_MEMORY_ADDRESSES[item][0] + 2
             ],
             'little',
         )
     else:
-        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item_id][2]} not a valid item type.')
+        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item][2]} not a valid item type.')
 
     yield
 
     # Make sure correct item was retrieved.
-    if ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.FLAG:
+    if ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.FLAG:
         assert (
-            emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-            & ITEM_MEMORY_ADDRESSES[item_id][1]
-            == ITEM_MEMORY_ADDRESSES[item_id][1]
+            emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
+            & ITEM_MEMORY_ADDRESSES[item][1]
+            == ITEM_MEMORY_ADDRESSES[item][1]
         )
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_8_BIT:
+    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
         assert (
-            emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-            - ITEM_MEMORY_ADDRESSES[item_id][1]
+            emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
+            - ITEM_MEMORY_ADDRESSES[item][1]
             == original_value
         )
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_16_BIT:
+    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         assert (
             int.from_bytes(
                 emu_instance.memory.unsigned[
-                    ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
+                    ITEM_MEMORY_ADDRESSES[item][0] : ITEM_MEMORY_ADDRESSES[item][0] + 2
                 ],
                 'little',
             )
-            - ITEM_MEMORY_ADDRESSES[item_id][1]
+            - ITEM_MEMORY_ADDRESSES[item][1]
             == original_value
         )
     else:
-        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item_id][2]} not a valid item type.')
+        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item][2]} not a valid item type.')
+
+
+def get_check_contents(
+    aux_data: list[Area],
+    area_name: str,
+    room_name: str,
+    chest_name: str,
+) -> str:
+    return [
+        chest.contents
+        for area in aux_data
+        for room in area.rooms
+        for chest in room.chests
+        if (area.name, room.name, chest.name) == (area_name, room_name, chest_name)
+    ][0]
