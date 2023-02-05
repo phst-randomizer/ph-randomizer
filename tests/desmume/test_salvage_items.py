@@ -7,19 +7,17 @@ import pytest
 
 from ph_rando.patcher.location_types import SalvageTreasureLocation
 from ph_rando.patcher.location_types.island_shop import GD_MODELS
-from tests.desmume.desmume_utils import DeSmuMEWrapper, start_first_file
+from tests.desmume.desmume_utils import DeSmuMEWrapper, assert_item_is_picked_up, start_first_file
 
-from .conftest import ITEM_MEMORY_ADDRESSES, ItemMemoryAddressType
+from .conftest import ITEM_MEMORY_ADDRESSES
 
 
 @pytest.fixture(
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def salvage_item_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
+def salvage_item_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     """Generate and run a rom with a custom salvage item set."""
-    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
-
     SalvageTreasureLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
     # Set all SW sea salvage items to the current item parameter
@@ -35,7 +33,7 @@ def salvage_item_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, requ
     SalvageTreasureLocation.save_all()
     SalvageTreasureLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open(rom_path)
+    desmume_emulator.open(str(rom_path))
 
     return desmume_emulator
 
@@ -92,65 +90,19 @@ def test_custom_salvage_items(salvage_item_test_emu: DeSmuMEWrapper):
     # Wait until the chest *just* about to exit the water
     salvage_item_test_emu.wait(2300)
 
-    # Calculate the current "value" of the item we're expecting, so that it can be compared
-    # later after we open the chest. Note that this is postponed until now to deal with the
-    # salvage arm potentially picking up rupees and messing with the count.
-    original_value = salvage_item_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-    if ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.FLAG:
-        assert (
-            original_value & ITEM_MEMORY_ADDRESSES[item_id][1] != ITEM_MEMORY_ADDRESSES[item_id][1]
-        )
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_8_BIT:
-        original_value = salvage_item_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_16_BIT:
-        original_value = int.from_bytes(
-            salvage_item_test_emu.memory.unsigned[
-                ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
-            ],
-            'little',
-        )
-    else:
-        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item_id][2]} not a valid item type.')
+    with assert_item_is_picked_up(item_id, salvage_item_test_emu):
+        # Wait for the chest to be pulled out of the water and opened by Link
+        salvage_item_test_emu.wait(1050)
 
-    # Wait for the chest to be pulled out of the water and opened by Link
-    salvage_item_test_emu.wait(1050)
+        salvage_item_test_emu.input.touch_release()
 
-    salvage_item_test_emu.input.touch_release()
-
-    # Click through the "Got new item" text.
-    salvage_item_test_emu.wait(200)
-    salvage_item_test_emu.input.touch_set_pos(0, 0)
-    salvage_item_test_emu.wait(2)
-    salvage_item_test_emu.input.touch_release()
-    salvage_item_test_emu.wait(200)
-    salvage_item_test_emu.input.touch_set_pos(0, 0)
-    salvage_item_test_emu.wait(2)
-    salvage_item_test_emu.input.touch_release()
-    salvage_item_test_emu.wait(200)
-
-    # Make sure correct item was retrieved.
-    if ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.FLAG:
-        assert (
-            salvage_item_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-            & ITEM_MEMORY_ADDRESSES[item_id][1]
-            == ITEM_MEMORY_ADDRESSES[item_id][1]
-        )
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_8_BIT:
-        assert (
-            salvage_item_test_emu.memory.unsigned[ITEM_MEMORY_ADDRESSES[item_id][0]]
-            - ITEM_MEMORY_ADDRESSES[item_id][1]
-            == original_value
-        )
-    elif ITEM_MEMORY_ADDRESSES[item_id][2] == ItemMemoryAddressType.COUNTER_16_BIT:
-        assert (
-            int.from_bytes(
-                salvage_item_test_emu.memory.unsigned[
-                    ITEM_MEMORY_ADDRESSES[item_id][0] : ITEM_MEMORY_ADDRESSES[item_id][0] + 2
-                ],
-                'little',
-            )
-            - ITEM_MEMORY_ADDRESSES[item_id][1]
-            == original_value
-        )
-    else:
-        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item_id][2]} not a valid item type.')
+        # Click through the "Got new item" text.
+        salvage_item_test_emu.wait(200)
+        salvage_item_test_emu.input.touch_set_pos(0, 0)
+        salvage_item_test_emu.wait(2)
+        salvage_item_test_emu.input.touch_release()
+        salvage_item_test_emu.wait(200)
+        salvage_item_test_emu.input.touch_set_pos(0, 0)
+        salvage_item_test_emu.wait(2)
+        salvage_item_test_emu.input.touch_release()
+        salvage_item_test_emu.wait(200)

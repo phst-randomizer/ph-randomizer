@@ -13,9 +13,7 @@ from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_
     params=[val for val in GD_MODELS.keys() if GD_MODELS[val]],
     ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val],
 )
-def island_shop_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
-    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
-
+def island_shop_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
     locations = [
@@ -29,7 +27,7 @@ def island_shop_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, reque
 
     IslandShopLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open(rom_path)
+    desmume_emulator.open(str(rom_path))
 
     return desmume_emulator
 
