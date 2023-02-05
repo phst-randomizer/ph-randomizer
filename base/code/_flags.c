@@ -21,7 +21,9 @@ Flag flags[] = {
     {0x9, 0x40, NO_SETTING},                       // Linebeck escapes ToTOK after hitting switch
     {0x1c, 0x4, NO_SETTING},                       // Linebeck introduction CS (after rescuing him)
     {0x1, 0x2, NO_SETTING},                        // Got the SW sea chart
-    {0x9, 0x80, NO_SETTING}, // Discovered Linebeck left ToTOK after getting SW Sea Chart
+    {0x9, 0x80, NO_SETTING},  // Discovered Linebeck left ToTOK after getting SW Sea Chart
+    {0x1f, 0x40, NO_SETTING}, // Rocks fell in Oshus's neighbor's yard (in vanilla, player gets a
+                              // rupee if they pick them up)
 
     /* Isle of Ember */
     {0x8, 0x10, NO_SETTING}, // Arrived at Isle of Ember for first time
