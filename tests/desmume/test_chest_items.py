@@ -16,10 +16,8 @@ from .desmume_utils import start_first_file
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def chest_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
+def chest_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     """Generate and run a rom with a custom chest item set."""
-    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
-
     MapObjectLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
     MapObjectLocation(1, 'Map/isle_main/map19.bin/zmb/isle_main_19.zmb').set_location(request.param)
@@ -27,7 +25,7 @@ def chest_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
 
     MapObjectLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open(rom_path)
+    desmume_emulator.open(str(rom_path))
 
     return desmume_emulator
 

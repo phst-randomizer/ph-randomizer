@@ -16,10 +16,8 @@ from .conftest import ITEM_MEMORY_ADDRESSES, ItemMemoryAddressType
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def salvage_item_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
+def salvage_item_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     """Generate and run a rom with a custom salvage item set."""
-    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
-
     SalvageTreasureLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
     # Set all SW sea salvage items to the current item parameter
@@ -35,7 +33,7 @@ def salvage_item_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, requ
     SalvageTreasureLocation.save_all()
     SalvageTreasureLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open(rom_path)
+    desmume_emulator.open(str(rom_path))
 
     return desmume_emulator
 

@@ -16,10 +16,8 @@ from .desmume_utils import equip_item, start_first_file, use_equipped_item
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request):
+def dig_spot_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
     """Generate and run a rom with a custom dig/shovel spot item set."""
-    rom_path = str(tmp_path / f'{tmp_path.name}.nds')
-
     DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
 
     DigSpotLocation(5, 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb').set_location(request.param)
@@ -27,7 +25,7 @@ def dig_spot_test_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper, request)
 
     DigSpotLocation.ROM.saveToFile(rom_path)
 
-    desmume_emulator.open(rom_path)
+    desmume_emulator.open(str(rom_path))
 
     return desmume_emulator
 

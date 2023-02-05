@@ -404,20 +404,6 @@ jobs:
           # Also retrieve previous commit so we can check if there are relevant changes
           fetch-depth: 2
 
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-
-      - name: Clone Flips repo
-        uses: actions/checkout@v3
-        with:
-          repository: Alcaro/Flips
-          path: Flips
-
-      - name: Compile Flips tool
-        run: |
-          mingw32-make CFLAGS=-O2
-        working-directory: Flips
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -445,9 +431,10 @@ jobs:
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
-      - name: Patch the rom
+      - name: Move base patch to directory expected by patcher
         run: |
-          ./Flips/flips.exe --apply ${{ steps.rom-checksum.outputs.checksum }}.bps $(ls *.nds) out.nds
+          mkdir -p base/out
+          mv ${{ steps.rom-checksum.outputs.checksum }}.bps base/out/${{ steps.rom-checksum.outputs.checksum }}.bps
 
       - name: Install tox
         run: pip install tox
@@ -455,7 +442,7 @@ jobs:
       - name: Run tests
         run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume -- -k "${{ matrix.module }}"
         env:
-          PH_ROM_PATH: out.nds
+          PH_ROM_PATH: ${{ steps.rom-filename.outputs.filename }}
 
       - name: Cleanup
         run: rm -rf *.nds

@@ -7,18 +7,20 @@ from time import sleep
 
 import pytest
 
+from ph_rando.patcher import apply_base_patch
+
 from .desmume_utils import DeSmuMEWrapper
 
 
 @pytest.fixture(scope='session')
-def py_desmume_instance():
+def desmume_emulator():
     desmume_emulator = DeSmuMEWrapper()
     yield desmume_emulator
     desmume_emulator.destroy()
 
 
 @pytest.fixture
-def desmume_emulator(py_desmume_instance: DeSmuMEWrapper, tmp_path: Path):
+def rom_path(tmp_path: Path) -> Path:
     base_rom_path = Path(os.environ['PH_ROM_PATH'])
     python_version = sys.version_info
 
@@ -60,13 +62,15 @@ def desmume_emulator(py_desmume_instance: DeSmuMEWrapper, tmp_path: Path):
                 # and try again.
                 sleep(10)
 
-    return py_desmume_instance
+    # Apply base patches to ROM
+    apply_base_patch(temp_rom_path.read_bytes()).saveToFile(temp_rom_path)
+
+    return temp_rom_path
 
 
 @pytest.fixture
-def base_rom_emu(tmp_path: Path, desmume_emulator: DeSmuMEWrapper):
-    temp_rom_path = tmp_path / f'{tmp_path.name}.nds'
-    desmume_emulator.open(str(temp_rom_path))
+def base_rom_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper):
+    desmume_emulator.open(str(rom_path))
     return desmume_emulator
 
 
