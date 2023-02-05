@@ -1,8 +1,10 @@
 from collections.abc import Generator
 from contextlib import contextmanager
 
+import cv2
 from desmume.controls import keymask
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME
+import numpy as np
 
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler.aux_models import Area
@@ -12,6 +14,7 @@ class DeSmuMEWrapper(DeSmuME):
     def __init__(self):
         super().__init__()
         self.window = self.create_sdl_window()
+        self.video = None
 
     def open(self, rom_path: str):
         super().open(rom_path)
@@ -27,6 +30,9 @@ class DeSmuMEWrapper(DeSmuME):
         self.frame += 1
         if self.window is not None:
             self.window.draw()
+            if self.video is not None:
+                img = self.screenshot()
+                self.video.write(cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR))
             self.window.process_input()
 
     def wait(self, frames: int):

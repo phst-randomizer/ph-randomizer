@@ -5,6 +5,7 @@ import shutil
 import sys
 from time import sleep
 
+import cv2
 import pytest
 
 from ph_rando.patcher import apply_base_patch
@@ -12,11 +13,49 @@ from ph_rando.patcher import apply_base_patch
 from .desmume_utils import DeSmuMEWrapper
 
 
+@pytest.fixture(autouse=True)
+def test_teardown(rom_path: Path, request):
+    tests_failed_before = request.session.testsfailed
+    yield
+
+    video_recording_directory = os.environ.get('PY_DESMUME_VIDEO_RECORDING_DIR')
+    if not video_recording_directory:
+        return
+
+    video_path = Path(video_recording_directory) / f'{rom_path.name}.mp4'
+
+    # If the test didn't fail, just delete the recording
+    if tests_failed_before == request.session.testsfailed:
+        video_path.unlink(missing_ok=True)
+        return
+
+    for file in video_path.parent.iterdir():
+        if file.is_dir() or not file.suffix == '.mp4':
+            continue
+        if file.resolve() != video_path.resolve():
+            file.unlink()
+
+
 @pytest.fixture(scope='session')
-def desmume_emulator():
+def desmume_instance():
     desmume_emulator = DeSmuMEWrapper()
     yield desmume_emulator
     desmume_emulator.destroy()
+
+
+@pytest.fixture
+def desmume_emulator(desmume_instance: DeSmuMEWrapper, rom_path: Path) -> DeSmuMEWrapper:
+    video_recording_directory = os.environ.get('PY_DESMUME_VIDEO_RECORDING_DIR')
+    if video_recording_directory:
+        video_path = Path(video_recording_directory) / f'{rom_path.name}.mp4'
+        video_path.parent.mkdir(parents=True, exist_ok=True)
+        desmume_instance.video = cv2.VideoWriter(
+            str(video_path), cv2.VideoWriter_fourcc(*'avc1'), 60, (256, 384)
+        )
+    else:
+        desmume_instance.video = None
+
+    return desmume_instance
 
 
 @pytest.fixture
