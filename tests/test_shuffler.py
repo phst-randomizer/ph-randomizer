@@ -47,8 +47,8 @@ def test_aux_data_validation():
         ('item Boomerang | item Bombs', ['boomerang', 'sword'], {}, True),
         ('item Boomerang | item Bombs', ['bombs'], {}, True),
         ('item Boomerang | item Bombs', ['sword'], {}, False),
-        ('item Boomerang | flag BridgeRepaired', ['bombs'], {'bridge_repaired'}, True),
-        ('item Boomerang | flag BridgeRepaired', [], {'bridge_repaired'}, True),
+        ('item Boomerang | flag BridgeRepaired', ['bombs'], {'BridgeRepaired'}, True),
+        ('item Boomerang | flag BridgeRepaired', [], {'BridgeRepaired'}, True),
         ('item Boomerang | flag BridgeRepaired', ['bombs'], {}, False),
         # Test nested expressions
         ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs', 'bombchus'], {}, True),  # noqa: E501
@@ -93,6 +93,7 @@ def test_edge_parser(expression: str, inventory: list[str], flags: set[str], exp
 )
 def test_edge_contains_open_descriptor(expression: str, result: bool) -> None:
     """Test behavior of Edge.requires_key property."""
+    Logic(settings={})
     node1 = Node(name='test1')
     node2 = Node(name='test2')
     edge = Edge(node1, node2, expression)
@@ -141,7 +142,7 @@ def test_graph_connectedness(settings) -> None:
         if item.startswith('small_key_'):
             keys[item[len('small_key_') :]] += 1
 
-    reachable_nodes = logic._assumed_search(
+    reachable_nodes = logic.assumed_search(
         logic.starting_node,
         inventory,
         keys,
