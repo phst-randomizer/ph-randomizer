@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from copy import deepcopy
+from copy import copy, deepcopy
 from dataclasses import dataclass, field
 from enum import Enum, EnumMeta
 from functools import cached_property
@@ -248,7 +248,7 @@ class Logic:
             reachable_nodes.update(
                 self.assumed_search(
                     starting_node,
-                    deepcopy(self.items_left_to_place),
+                    copy(self.items_left_to_place),
                     keys,
                 )
             )
@@ -804,21 +804,21 @@ class Logic:
 
                             # Don't modify the original `keys` dict yet; we're still not sure if
                             # this key door will be one of the ones unlocked.
-                            new_keys = deepcopy(keys)
+                            new_keys = copy(keys)
                             new_keys[starting_node.area] -= 1  # Use the key
 
                             # Add the current door to unlocked doors. Again, don't modify
                             # the original for the same reasons as above.
-                            new_unlocked_doors = deepcopy(unlocked_doors)
+                            new_unlocked_doors = copy(unlocked_doors)
                             if edge.locked_door:
                                 new_unlocked_doors.add(edge.locked_door)
 
                             accessible_nodes = cls._assumed_search(
                                 edge.dest,
-                                deepcopy(inventory),
+                                copy(inventory),
                                 new_keys,
                                 new_unlocked_doors,
-                                deepcopy(flags),
+                                copy(flags),
                                 new_states,
                                 ignored_nodes=new_ignored_nodes,
                                 visited_nodes=visited_nodes,
@@ -1204,9 +1204,9 @@ class Edge:
                 )
                 accessible_nodes = Logic._assumed_search(
                     starting_node=self.src,
-                    inventory=deepcopy(current_inventory),
-                    flags=deepcopy(current_flags),
-                    states=deepcopy(current_states),
+                    inventory=copy(current_inventory),
+                    flags=copy(current_flags),
+                    states=copy(current_states),
                     ignored_nodes=new_ignored_nodes,
                 )[0]
                 for node in accessible_nodes:
