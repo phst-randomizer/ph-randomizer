@@ -443,6 +443,14 @@ jobs:
         run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume -- -k "${{ matrix.module }}"
         env:
           PH_ROM_PATH: ${{ steps.rom-filename.outputs.filename }}
+          PY_DESMUME_VIDEO_RECORDING_DIR: recordings/
+
+      - name: Save recordings of failed tests as artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_recordings_${{ matrix.module }}_${{ matrix.rom_variant }}
+          path: recordings/
 
       - name: Cleanup
         run: rm -rf *.nds

@@ -12,6 +12,7 @@ profile = "black"
 
 [[tool.mypy.overrides]]
 module = [
+    'cv2.*',
     'desmume.*',
     'ndspy.*',
     'vidua.*',

@@ -42,6 +42,17 @@ def _patch_mercay_town_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
+def _patch_mercay_outside_oshus_house_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
+    """Disables cutscenes on area outside Oshus's house."""
+    with edit_zmb(rom, 'Map/isle_main/map00.bin', 'zmb/isle_main_00.zmb') as zmb_file:
+        ciela_outside_oshus_house_cs = zmb_file.actors[8]
+        assert ciela_outside_oshus_house_cs.type == 'NMSG'
+        assert ciela_outside_oshus_house_cs.x == 608
+        assert ciela_outside_oshus_house_cs.y == 112
+        zmb_file.actors.remove(ciela_outside_oshus_house_cs)
+    return rom
+
+
 def _patch_totok_lobby_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
     """Disable all cutscenes that play in ToTOK lobby."""
     with edit_zmb(rom, 'Map/dngn_main_f/map00.bin', 'zmb/dngn_main_f_00.zmb') as zmb_file:
@@ -81,6 +92,7 @@ def _add_chest_for_phantom_hourglass(rom: NintendoDSRom) -> NintendoDSRom:
 def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
     """Applies all patches to ZMB files."""
     _patch_mercay_earthquake(rom)
+    _patch_mercay_outside_oshus_house_cutscenes(rom)
     _patch_mercay_town_cutscenes(rom)
     _patch_totok_lobby_cutscenes(rom)
     _add_chest_for_phantom_hourglass(rom)
