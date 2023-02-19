@@ -36,6 +36,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "supported": {
+          "title": "Supported",
+          "default": true,
+          "type": "boolean"
         }
       },
       "required": [

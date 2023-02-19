@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, Field, validator
 
 
 class Setting(BaseModel):
@@ -8,6 +8,7 @@ class Setting(BaseModel):
     description: str | None
     flag: bool | None
     options: list[str] | None
+    supported: bool = Field(default=True)
 
     @validator('options')
     def ensure_values_or_flag(cls, v: list[str] | None, values: dict):
