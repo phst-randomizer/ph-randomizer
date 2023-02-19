@@ -10,7 +10,6 @@ import json
 import logging
 from pathlib import Path
 import random
-import sys
 
 import inflection
 from ordered_set import OrderedSet
@@ -76,23 +75,6 @@ IMPORTANT_ITEMS: set[str] = {
     'phantom_hourglass',
     'phantom_sword',
 }
-
-
-class RecursionLimit:
-    """
-    Context manager that increases max recursion depth to a given value, and then decreases it
-    back to the original value upon exit.
-    """
-
-    def __init__(self, limit):
-        self.limit = limit
-
-    def __enter__(self):
-        self.old_limit = sys.getrecursionlimit()
-        sys.setrecursionlimit(self.limit)
-
-    def __exit__(self, *args, **kwargs):
-        sys.setrecursionlimit(self.old_limit)
 
 
 class AssumedFillFailed(Exception):
@@ -419,25 +401,20 @@ class Logic:
                 chest.contents = None  # type: ignore
 
             try:
-                # TODO: consider rewriting _assumed_search function with iteration instead of
-                # recursion to avoid having to increase the max recursion depth here.
-                with RecursionLimit(5000):
-                    logging.info(
-                        f'Placing dungeon rewards... ({len(self.items_left_to_place)} remaining)'
-                    )
-                    self.place_dungeon_rewards()
-                    logging.info(
-                        f'Placing dungeon keys... ({len(self.items_left_to_place)} remaining)'
-                    )
-                    self.place_keys()
-                    logging.info(
-                        f'Placing important items ... ({len(self.items_left_to_place)} remaining)'
-                    )
-                    self.place_important_items()
-                    logging.info(
-                        f'Placing remaining items... ({len(self.items_left_to_place)} remaining)'
-                    )
-                    self.place_remaining_items()
+                logging.info(
+                    f'Placing dungeon rewards... ({len(self.items_left_to_place)} remaining)'
+                )
+                self.place_dungeon_rewards()
+                logging.info(f'Placing dungeon keys... ({len(self.items_left_to_place)} remaining)')
+                self.place_keys()
+                logging.info(
+                    f'Placing important items ... ({len(self.items_left_to_place)} remaining)'
+                )
+                self.place_important_items()
+                logging.info(
+                    f'Placing remaining items... ({len(self.items_left_to_place)} remaining)'
+                )
+                self.place_remaining_items()
                 break
             except AssumedFillFailed:
                 # If the assumed fill fails, restore the original chest contents and start over
