@@ -41,6 +41,17 @@
           "title": "Supported",
           "default": true,
           "type": "boolean"
+        },
+        "default": {
+          "title": "Default",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            }
+          ]
         }
       },
       "required": [
