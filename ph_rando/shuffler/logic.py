@@ -24,6 +24,7 @@ from ph_rando.shuffler.aux_models import (
     IslandShop,
     Room,
     SalvageTreasure,
+    Tree,
 )
 
 ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text())
@@ -175,6 +176,7 @@ class Logic:
             'ShopItems': IslandShop,
             'SalvageArmTreasures': SalvageTreasure,
             'DigSpots': DigSpot,
+            'TreeDrops': Tree,
         }.items():
             if not self.settings[setting]:
                 excluded_checks.update(
