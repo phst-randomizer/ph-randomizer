@@ -4,7 +4,8 @@
     {
       "name": "DigSpots",
       "description": "Include shovel dig spots in location pool for randomized items.",
-      "flag": true
+      "flag": true,
+      "supported": false
     },
     {
       "name": "SalvageArmTreasures",
@@ -14,7 +15,15 @@
     {
       "name": "ShopItems",
       "description": "Include island shops and Beedle shops in location pool for randomized items.",
-      "flag": true
+      "flag": true,
+      "supported": false
+    },
+    {
+      "name": "TreeDrops",
+      "description": "Include tree drops in location pool for randomized items",
+      "flag": true,
+      "supported": false,
+      "default": true
     },
     {
       "name": "DungeonRewardMode",
@@ -45,7 +54,8 @@
     {
       "name": "MirroredArenaDoors",
       "description": "TODO: write this description",
-      "flag": true
+      "flag": true,
+      "supported": false
     },
     {
       "name": "SwordMode",
@@ -53,7 +63,9 @@
         "start_with_sword",
         "randomized_sword",
         "swordless"
-      ]
+      ],
+      "default": "start_with_sword",
+      "supported": false
     },
     {
       "name": "PhantomHourglassMode",
@@ -61,7 +73,9 @@
         "start_with_phantom_hourglass",
         "vanilla_location_phantom_hourglass",
         "randomized_phantom_hourglass"
-      ]
+      ],
+      "default": "start_with_phantom_hourglass",
+      "supported": false
     }
   ]
 }

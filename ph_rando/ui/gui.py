@@ -76,7 +76,9 @@ class RandomizerUi(QWidget):
             internal_hbox = QHBoxLayout()
             internal_widget.setLayout(internal_hbox)
             if setting.flag:
-                internal_hbox.addWidget(QCheckBox(inflection.titleize(setting.name)))
+                chbox = QCheckBox(inflection.titleize(setting.name))
+                chbox.setEnabled(setting.supported)
+                internal_hbox.addWidget(chbox)
             else:
                 assert (
                     setting.options is not None
@@ -85,6 +87,7 @@ class RandomizerUi(QWidget):
                 comboxbox_label = QLabel(inflection.titleize(setting.name))
                 comboxbox = QComboBox()
                 comboxbox.addItems([inflection.titleize(s) for s in setting.options])
+                comboxbox.setEnabled(setting.supported)
                 internal_hbox.addWidget(comboxbox)
                 internal_hbox.addWidget(comboxbox_label)
             vbox.addWidget(internal_widget)
