@@ -89,11 +89,23 @@ def _add_chest_for_phantom_hourglass(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
+def _patch_mercay_north_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
+    """
+    Disable all cutscenes that play in north Mercay area (front of ToTOK + chu area above Oshus)
+    """
+    with edit_zmb(rom, 'Map/isle_main/map01.bin', 'zmb/isle_main_01.zmb') as zmb_file:
+        nmsg_actors = [actor for actor in zmb_file.actors if actor.type == 'NMSG']
+        assert len(nmsg_actors) == 4
+        for actor in nmsg_actors:
+            zmb_file.actors.remove(actor)
+
+
 def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
     """Applies all patches to ZMB files."""
     _patch_mercay_earthquake(rom)
     _patch_mercay_outside_oshus_house_cutscenes(rom)
     _patch_mercay_town_cutscenes(rom)
+    _patch_mercay_north_cutscenes(rom)
     _patch_totok_lobby_cutscenes(rom)
     _add_chest_for_phantom_hourglass(rom)
 

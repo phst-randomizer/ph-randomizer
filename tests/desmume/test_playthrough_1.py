@@ -5,7 +5,12 @@ from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 from ph_rando.shuffler.aux_models import Area
 
 from .conftest import DeSmuMEWrapper
-from .desmume_utils import assert_item_is_picked_up, get_check_contents, start_first_file
+from .desmume_utils import (
+    assert_item_is_picked_up,
+    get_check_contents,
+    prevent_actor_spawn,
+    start_first_file,
+)
 
 save_state = Path(__file__).parent / 'test_state.dsv'
 
@@ -106,3 +111,17 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: list[Area]):
     base_rom_emu.touch_input((0, 0), 2)
     base_rom_emu.wait(150)
     base_rom_emu.touch_input((0, 0), 2)
+
+    # Walk up to chu chu area
+    base_rom_emu.wait(20)
+    base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 70)
+    base_rom_emu.savestate.save_file(str(save_state))
+    base_rom_emu.wait(10)
+    with prevent_actor_spawn(base_rom_emu, 'CHUC'):
+        base_rom_emu.touch_input((SCREEN_WIDTH // 2, 0), 120)
+        base_rom_emu.wait(100)
+
+    base_rom_emu.touch_input((SCREEN_WIDTH // 4, 0), 140)
+    base_rom_emu.touch_input((SCREEN_WIDTH, 0), 50)
+    base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT), 50)
+    base_rom_emu.wait(40)

@@ -1,5 +1,6 @@
 from collections.abc import Generator
 from contextlib import contextmanager
+import struct
 
 import cv2
 from desmume.controls import keymask
@@ -114,7 +115,7 @@ def get_current_rupee_count(desmume: DeSmuMEWrapper):
 
 
 # Screen coordinates for each item when the "Items" menu is open
-ITEMS_MENU_COORDINATES = {'shovel': (225, 175)}
+ITEMS_MENU_COORDINATES = {'shovel': (225, 175), 'bombs': (98, 178)}
 
 
 def open_items_menu(desmume: DeSmuMEWrapper):
@@ -203,3 +204,29 @@ def get_check_contents(
         for chest in room.chests
         if (area.name, room.name, chest.name) == (area_name, room_name, chest_name)
     ][0]
+
+
+@contextmanager
+def prevent_actor_spawn(
+    emu_instance: DeSmuMEWrapper,
+    actors: list[str] | str,
+    replacement: str = 'RUPY',
+):
+    """
+    Prevents one or more actors from spawning while this context manager is active.
+    """
+    if isinstance(actors, str):
+        actors = [actors]
+
+    def cancel_spawn(addr: int, size: int):
+        npc_id = emu_instance.memory.register_arm9.r1
+        npc = struct.Struct('>I').pack(npc_id).decode()
+        if npc in actors:
+            emu_instance.memory.register_arm9.r1 = int.from_bytes(replacement.encode(), 'little')
+
+    emu_instance.memory.register_exec(0x20C3FE8, cancel_spawn)
+
+    yield
+
+    # Clear callback on context manager exit
+    emu_instance.memory.register_exec(0x20C3FE8, None)
