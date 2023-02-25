@@ -96,3 +96,5 @@ ITEMS: dict[str, int] = {
     'spirit_wisdom_lv2': -1,
     'spirit_courage_lv2': -1,
 }
+
+ITEMS_REVERSED = {v: k for k, v in ITEMS.items()}
