@@ -76,8 +76,11 @@ repos:
     rev: 0.21.0
     hooks:
       - id: check-jsonschema
-        files: ^shuffler/logic/.*\.json$
-        args: ["--schemafile", "shuffler/aux_schema.json"]
+        files: ^ph_rando/shuffler/logic/.*\.json$
+        args: ["--schemafile", "ph_rando/shuffler/aux_schema.json"]
+      - id: check-jsonschema
+        files: ph_rando/settings.json
+        args: ["--schemafile", "ph_rando/settings_schema.json"]
       - id: check-github-workflows
 
   - repo: https://github.com/asottile/setup-cfg-fmt
