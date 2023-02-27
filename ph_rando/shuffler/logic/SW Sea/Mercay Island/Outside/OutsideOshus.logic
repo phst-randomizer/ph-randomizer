@@ -2,6 +2,7 @@ area Mercay:
   room OutsideOshus:
     node Outside:
       chest PickUpRock
+      chest TreeDigSpot
       door North
       door OshussHouse
       door RockHouse
