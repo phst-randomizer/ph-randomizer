@@ -12,7 +12,7 @@ area GoronIsland:
 
     node Ledge:
       door ToEastLedge
-    
+
     node EnemyLedge:
       enemy YellowChuChu1
       enemy YellowChuChu2
