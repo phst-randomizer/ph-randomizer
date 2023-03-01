@@ -1,0 +1,6 @@
+area GoronIsland:
+  room GoronChiefHouse:
+    node Main:
+      door Outside
+      chest WidsomGem
+      chest GoronTitle

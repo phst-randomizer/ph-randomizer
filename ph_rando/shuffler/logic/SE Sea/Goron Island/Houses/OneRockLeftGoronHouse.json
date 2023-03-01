@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GoronIsland",
+  "rooms": [
+    {
+      "name": "OneRockLeftGoronHouse",
+      "exits": [
+        {
+          "name": "Outside",
+          "entrance": "GoronIsland.LowerLeft.Port.RightmostHouse"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+area GoronIsland:
+  room LowerRight:
+    node Main:
+      door ToWest
+      door ToWestLedge
+      door LeftmostHouse
+      door CoastHouse
+      door ChiefHouse
+      door ToNorth
+
+    node DigSpot:
+      chest NearChiefHouse
+
+    Main <-> DigSpot: item Shovel

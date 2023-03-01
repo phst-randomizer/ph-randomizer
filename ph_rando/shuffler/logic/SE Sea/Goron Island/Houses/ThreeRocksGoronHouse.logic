@@ -1,0 +1,4 @@
+area GoronIsland:
+  room ThreeRocksGoronHouse:
+    node Main:
+      door Outside

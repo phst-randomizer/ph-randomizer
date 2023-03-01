@@ -1,0 +1,23 @@
+area GoronIsland:
+  room UpperLeft:
+    node BombRefill:
+      door ToEastLowest
+
+    node Main:
+      door ToEastUppest
+      door ToEastLower
+      enemy LikeLike
+
+    node ChestArea:
+      door ToEastUpper
+      chest MazeChest
+
+    node Dungeon:
+      door GoronTemple
+
+    node Shortcut:
+      door ToSouth
+
+    Main -> Dungeon: defeated LikeLike
+    Dungeon -> Shortcut
+    Shortcut -> Dungeon: (setting HammerReach & item Hammer)

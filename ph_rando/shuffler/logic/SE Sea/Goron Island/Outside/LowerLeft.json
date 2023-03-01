@@ -1,0 +1,67 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GoronIsland",
+  "rooms": [
+    {
+      "name": "LowerLeft",
+      "chests": [
+        {
+          "name": "TreasureMap",
+          "type": "event",
+          "contents": "treasure_map_se_5",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "Boat",
+          "entrance": "Sea.SE.Goron.GoronPort"
+        },
+        {
+          "name": "LowerHouse",
+          "entrance": "GoronIsland.NoRockGoronHouse.Main.Outside"
+        },
+        {
+          "name": "ToNorth",
+          "entrance": "GoronIsland.UpperLeft.Shortcut.ToSouth"
+        },
+        {
+          "name": "Shop",
+          "entrance": "GoronIsland.GoronShop.Main.Outside"
+        },
+        {
+          "name": "LeftmostHouse",
+          "entrance": "GoronIsland.ThreeRocksGoronHouse.Main.Outside"
+        },
+        {
+          "name": "RightmostHouse",
+          "entrance": "GoronIsland.OneRockleftGoronHouse.Main.Outside"
+        },
+        {
+          "name": "ToEast",
+          "entrance": "GoronIsland.LowerRight.Main.ToWest"
+        },
+        {
+          "name": "ToEastLedge",
+          "entrance": "GoronIsland.LowerRight.Main.ToWestLedge"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "YellowChuChu1",
+          "type": "yellow_chu_chu"
+        },
+        {
+          "name": "YellowChuChu2",
+          "type": "yellow_chu_chu"
+        },
+        {
+          "name": "YellowChuChu3",
+          "type": "yellow_chu_chu"
+        }
+      ]
+    }
+  ]
+}
+    

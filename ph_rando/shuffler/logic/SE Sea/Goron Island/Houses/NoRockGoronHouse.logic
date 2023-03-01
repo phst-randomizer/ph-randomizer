@@ -1,0 +1,4 @@
+area GoronIsland:
+  room NoRockGoronHouse:
+    node Main:
+      door Outside

@@ -1,0 +1,6 @@
+area GoronIsland:
+  room GoronShop:
+    node Main:
+      door Outside
+      chest BombchuBagUpgrade
+      chest RandomTreasure
