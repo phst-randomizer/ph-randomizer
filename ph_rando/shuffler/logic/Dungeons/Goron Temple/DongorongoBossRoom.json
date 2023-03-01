@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "DongorongoBossRoom",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "Sand",
+          "type": "event",
+          "contents": "sand_2m",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        },
+        {
+          "name": "HeartContainer",
+          "type": "chest",
+          "contents": "heart_container",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToDungeon",
+          "entrance": "GoronTemple.B4.Main.ToBoss"
+        },
+        {
+          "name": "ToCrimsonineRoom",
+          "entrance": "GoronTemple.CrimsonineRoom.Main.ToBoss"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Dongorongo",
+          "type": "dongorongo"
+        }
+      ]
+    }
+  ]
+}
