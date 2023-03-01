@@ -37,6 +37,7 @@ ITEMS: dict[str, int] = {
     'wisdom_gem': 0x2E,
     'courage_gem': 0x2F,
     'common_treasure': 0x30,  # TODO: randomize this at run-time
+    'ghost_key': 0x38,
     'regal_necklace': 0x3C,
     'salvage_arm': 0x3D,
     # 'treasure_map_sw1': 0x4B, # TODO: clarify how SW treasure map ids work considering Sun Key
