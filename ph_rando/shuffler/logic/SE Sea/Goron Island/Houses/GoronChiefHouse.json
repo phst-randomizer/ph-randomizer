@@ -18,6 +18,13 @@
           "contents": "goron_title",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
+        },
+        {
+          "name": "BigRedRupee",
+          "type": "event",
+          "contents": "big_red_rupee",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
         }
       ],
       "exits": [

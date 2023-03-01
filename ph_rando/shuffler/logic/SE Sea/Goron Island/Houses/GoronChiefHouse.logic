@@ -4,3 +4,8 @@ area GoronIsland:
       door Outside
       chest WidsomGem
       chest GoronTitle
+
+    node AfterTemple:
+      chest BigRedRupee
+
+    Main <-> AfterTemple: flag GoronTempleBeaten

@@ -14,6 +14,7 @@ area GoronIsland:
 
     node Dungeon:
       door GoronTemple
+      exit BlueWarpExit
 
     node Shortcut:
       door ToSouth
