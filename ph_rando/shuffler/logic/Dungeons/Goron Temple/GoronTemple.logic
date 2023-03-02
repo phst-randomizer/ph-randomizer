@@ -37,7 +37,7 @@ area GoronTemple:
     Arena -> AfterArena: (defeated ArmosArenaRight & defeated ArmosArenaLeft)
     AfterArena -> Entrance
     AfterArena <-> BowTarget: item Bow
-    AfterArena -> BombableWalls: item Bombs | item Bombchu
+    AfterArena -> BombableWalls: (item Bombs | item Bombchu)
     BombableWalls -> AfterArena
 
     B1Shortcut -> Entrance: (item Bombchu | (setting HammerClip & item Hammer))

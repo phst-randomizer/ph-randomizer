@@ -14,5 +14,5 @@ area NyaveBoat:
     node TradingSequence:
       chest WoodHeart
 
-  Main <-> EnemiesDefeated: (defeated PirateBlin1 & defeated PirateBlin2 & defeated PirateBlin3 & defeated PirateBlin4 & defeated Geozard)
-  EnemiesDefeated <-> TradingSequence: item GuardNotebook
+    Main <-> EnemiesDefeated: (defeated PirateBlin1 & defeated PirateBlin2 & defeated PirateBlin3 & defeated PirateBlin4 & defeated Geozard)
+    EnemiesDefeated <-> TradingSequence: item GuardNotebook
