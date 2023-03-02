@@ -1,4 +1,4 @@
-area Boat:
+area HoHoBoat:
   room Main:
     node Main:
       door Exit
