@@ -2,7 +2,7 @@ area GoronIsland:
   room GoronChiefHouse:
     node Main:
       door Outside
-      chest WidsomGem
+      chest WisdomGem
       chest GoronTitle
 
     node AfterTemple:
