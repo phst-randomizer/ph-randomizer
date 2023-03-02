@@ -47,6 +47,12 @@
       "flag": true
     },
     {
+      "name": "HammerReach",
+      "flag": true,
+      "default": false,
+      "description": "Require abusing rolling, etc to shift camera for hammer use."
+    },
+    {
       "name": "NoPuzzleSolution",
       "description": "For puzzles, don't logically require that player has access to corresponding hints.",
       "flag": true

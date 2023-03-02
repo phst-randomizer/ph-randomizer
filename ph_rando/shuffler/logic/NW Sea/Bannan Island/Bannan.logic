@@ -53,4 +53,12 @@ area Bannan:
     node FoundMermaid:
       chest FishingRodFromOldMan
 
-    Main <-> FoundMermaid: flag MermaidVisible
+    node DeliveredLetter:
+      chest WisdomGem
+
+    node TradingSequence:
+      chest TradingSequenceEnd
+
+    Main <-> FoundMermaid: (flag MermaidVisible & item Boomerang)
+    FoundMermaid <-> DeliveredLetter: item JolenesLetter
+    Main <-> TradingSequence: flag FinishedTradingSequence

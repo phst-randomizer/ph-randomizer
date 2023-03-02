@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "SSWayfarer",
+  "rooms": [
+    {
+      "name": "Main",
+      "exits": [
+        {
+          "name": "Exit",
+          "entrance": "Sea.SE.LeftBoat.BoardLeftBoat"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ area SpiritIsle:
     node Power2: chest Power2
 
     node Wisdom1: chest Wisdom1
-    node Wisdom2: chest Widsom2
+    node Wisdom2: chest Wisdom2
 
     node Courage1: chest Courage1
     node Courage2: chest Courage2

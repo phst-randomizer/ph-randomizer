@@ -1,0 +1,14 @@
+area RedLionShip:
+  room Main:
+    node Boat:
+      door Exit
+
+    node Fight:
+      chest Hundred
+      chest TwoHundred
+
+    node TradingSequence:
+      chest Kaleidoscope
+
+    Boat <-> Fight: item Sword
+    Boat <-> TradingSequence: item HeroNewClothes

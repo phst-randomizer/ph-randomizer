@@ -1,0 +1,10 @@
+area GoronIsland:
+  room GoronChiefHouse:
+    node Main:
+      door Outside
+      chest WisdomGem
+
+    node AfterTemple:
+      chest BigRedRupee
+
+    Main <-> AfterTemple: flag GoronTempleBeaten

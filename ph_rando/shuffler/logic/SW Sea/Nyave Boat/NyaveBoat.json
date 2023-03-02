@@ -1,14 +1,51 @@
 {
   "$schema": "../../../aux_schema.json",
-  "name": "Sea",
+  "name": "NyaveBoat",
   "rooms": [
     {
-      "name": "NyaveBoat",
-      "chests": [],
+      "name": "Main",
+      "chests": [
+        {
+          "name": "Gift",
+          "type": "event",
+          "contents": "big_green_rupee",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        },
+        {
+          "name": "WoodHeart",
+          "type": "event",
+          "contents": "wood_heart",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        }
+      ],
       "exits": [
         {
           "name": "Exit",
           "entrance": "Sea.SW.Boat.BoardBoat"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "PirateBlin1",
+          "type": "pirate_miniblin"
+        },
+        {
+          "name": "PirateBlin2",
+          "type": "pirate_miniblin"
+        },
+        {
+          "name": "PirateBlin3",
+          "type": "pirate_miniblin"
+        },
+        {
+          "name": "PirateBlin4",
+          "type": "pirate_miniblin"
+        },
+        {
+          "name": "Geozard",
+          "type": "geozard"
         }
       ]
     }

@@ -1,0 +1,31 @@
+area GoronIsland:
+  room UpperRight:
+    node Rightmost:
+      enemy BlueChu1
+      enemy BlueChu2
+      enemy RockChu1
+      enemy RockChu2
+      door ToSouth
+
+    node Leftmost:
+      door ToWestUpper
+      door ToWestLowest
+      flag GoronMazeSwitch
+
+    node LeftmostAfterBomb:
+      door ToWestUppest
+
+    node ChestAfterBombchu:
+      chest BombchuChest
+
+    node BeforeChestArea:
+      door ToWestLower
+
+    node ChestArea:
+      chest ChestBehindSpikes
+
+    Rightmost -> Leftmost: (item Bomb | item Bombchu)
+    Leftmost -> Rightmost
+    LeftmostAfterBomb -> Leftmost: (item Bomb | item Bombchu)
+
+    BeforeChestArea <-> ChestArea: flag GoronMazeSwitch
