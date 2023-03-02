@@ -37,8 +37,11 @@ ITEMS: dict[str, int] = {
     'wisdom_gem': 0x2E,
     'courage_gem': 0x2F,
     'common_treasure': 0x30,  # TODO: randomize this at run-time
+    'goron_amber': 0x34,
     'regal_necklace': 0x3C,
     'salvage_arm': 0x3D,
+    'hero_new_clothes': 0x3E,
+    'kaleidoscope': 0x3F,
     # 'treasure_map_sw1': 0x4B, # TODO: clarify how SW treasure map ids work considering Sun Key
     'treasure_map_sw1': 0x4C,
     'treasure_map_sw2': 0x4D,
@@ -71,6 +74,7 @@ ITEMS: dict[str, int] = {
     'treasure_map_ne6': 0x68,
     'treasure_map_ne7': 0x69,
     'treasure_map_ne8': 0x6A,
+    'swordsmans_scroll': 0x71,
     'crimsonine': 0x72,
     'azurine': 0x73,
     'aquanine': 0x74,
