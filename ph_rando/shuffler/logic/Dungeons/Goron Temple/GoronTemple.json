@@ -115,7 +115,7 @@
         },
         {
           "name": "ToF1Shortcut",
-          "entrance": "GoronTemple.F1.ToB1Shortcut.ToB1Shortcut"
+          "entrance": "GoronTemple.F1.B1Shortcut.ToB1Shortcut"
         },
         {
           "name": "ToB2",

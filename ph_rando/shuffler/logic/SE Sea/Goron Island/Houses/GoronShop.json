@@ -23,7 +23,7 @@
       "exits": [
         {
           "name": "Outside",
-          "entrance": "GoronIsland.LowerLeft.Port.GoronShop"
+          "entrance": "GoronIsland.LowerLeft.Port.Shop"
         }
       ]
     }

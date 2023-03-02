@@ -20,7 +20,7 @@
         },
         {
           "name": "ToWestLedge",
-          "entrance": "GoronIsland.LowerLeft.Port.ToEastLedge"
+          "entrance": "GoronIsland.LowerLeft.Ledge.ToEastLedge"
         },
         {
           "name": "LeftmostHouse",
