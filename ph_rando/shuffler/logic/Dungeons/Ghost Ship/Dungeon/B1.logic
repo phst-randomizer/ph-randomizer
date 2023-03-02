@@ -37,7 +37,7 @@ area GhostShip:
       enemy SkulltulaTopRight
 
     Top <-> TopRight: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
-    
+
     node TrianglePedestal:
       gain TrianglePedestalSet
 
@@ -60,8 +60,8 @@ area GhostShip:
       gain PurpleCubusFollowing
       door ToB2
 
-    Right <-> AfterPurpleCubusSwitch # hit the switch with a pot 
-    
+    Right <-> AfterPurpleCubusSwitch # hit the switch with a pot
+
     node RoundPedestal:
       gain RoundPedestalSet
 
@@ -81,7 +81,7 @@ area GhostShip:
 
     node GreenCubusBrought:
       flag GreenCubusSaved
-      
+
     SistersGathering <-> GreenCubusBrought: state GreenCubusFollowing
 
     node CubusSistersSaved:

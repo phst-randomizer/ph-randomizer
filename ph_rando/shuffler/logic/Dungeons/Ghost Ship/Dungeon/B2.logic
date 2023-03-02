@@ -28,4 +28,4 @@ area GhostShip:
 
     Bottom -> Top
     Top <-> AfterSwitch # take a pot
-    AfterSwitch -> Bottom 
+    AfterSwitch -> Bottom

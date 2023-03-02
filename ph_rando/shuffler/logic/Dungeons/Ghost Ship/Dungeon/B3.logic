@@ -5,7 +5,7 @@ area GhostShip:
       door ToB2
       enemy SkulltulaBottom
       enemy PoeBottom
-      
+
     node Arena:
       enemy SkulltulaArena1
       enemy SkulltulaArena2
@@ -32,7 +32,7 @@ area GhostShip:
 
     node AfterLevers:
       flag PlatePressed
-    
+
     Bottom <-> Levers: flag LeverOrder24513 | setting NoPuzzleSolution
     Top -> AfterLevers: setting HammerClip | flag LeversPulled
 
