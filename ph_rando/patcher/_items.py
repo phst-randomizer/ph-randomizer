@@ -42,6 +42,9 @@ ITEMS: dict[str, int] = {
     'salvage_arm': 0x3D,
     'hero_new_clothes': 0x3E,
     'kaleidoscope': 0x3F,
+    'guard_notebook': 0x40,
+    'prize_postcard': 0x42,
+    'wood_heart': 0x43,
     # 'treasure_map_sw1': 0x4B, # TODO: clarify how SW treasure map ids work considering Sun Key
     'treasure_map_sw1': 0x4C,
     'treasure_map_sw2': 0x4D,
