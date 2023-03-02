@@ -2,7 +2,7 @@ area GoronTemple:
   room F1:
     node Entrance:
       door Entrance
-      exit BlueWarpExit
+      entrance BlueWarpShortcut
       enemy BlueChuBeforeBeamos
       enemy BlueChuAfterBeamos
       enemy ArmosLower
@@ -170,9 +170,10 @@ area GoronTemple:
     node Main:
       door ToB3
       door ToBoss
+      exit BlueWarpShortcut
 
   room CrimsonineRoom:
     node Main:
       door ToBoss
       chest Crimsonine
-      entrance BlueWarp
+      exit BlueWarp

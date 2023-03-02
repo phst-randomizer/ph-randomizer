@@ -357,8 +357,8 @@
           "entrance": "DongorongoBossRoom.Main.Fight.ToDungeon"
         },
         {
-          "name": "BlueWarp",
-          "entrance": "GoronTemple.F1.Entrance.BlueWarpExit"
+          "name": "BlueWarpShortcut",
+          "entrance": "GoronTemple.F1.Entrance.BlueWarpShortcut"
         }
       ]
     },
