@@ -42,7 +42,7 @@ area GhostShip:
       gain TrianglePedestalSet
 
     TopRight -> TrianglePedestal: (state TriangleCrystal & lose TriangleCrystal)
-    TriangleCrystal -> TopRight
+    TrianglePedestal -> TopRight
 
     node Right:
       enemy PoeRight
