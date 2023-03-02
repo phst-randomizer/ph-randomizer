@@ -5,8 +5,9 @@ from desmume.emulator import SCREEN_WIDTH
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from ph_rando.patcher.location_types import MapObjectLocation
-from ph_rando.patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher._items import ITEMS_REVERSED
+from ph_rando.patcher.main import GD_MODELS, _patch_zmb_map_objects
+from ph_rando.shuffler.aux_models import Area, Chest
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, start_first_file
@@ -16,14 +17,23 @@ from .desmume_utils import assert_item_is_picked_up, start_first_file
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def chest_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
+def chest_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request, aux_data: list[Area]):
     """Generate and run a rom with a custom chest item set."""
-    MapObjectLocation.ROM = NintendoDSRom.fromFile(rom_path)
+    rom = NintendoDSRom.fromFile(rom_path)
+    chests = [
+        chest
+        for area in aux_data
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) == Chest
+        and chest.zmb_file_path == 'Map/isle_main/map19.bin/zmb/isle_main_19.zmb'
+    ]
+    for chest in chests:
+        chest.contents = ITEMS_REVERSED[request.param]
 
-    MapObjectLocation(1, 'Map/isle_main/map19.bin/zmb/isle_main_19.zmb').set_location(request.param)
-    MapObjectLocation.save_all()
+    _patch_zmb_map_objects(aux_data, rom)
 
-    MapObjectLocation.ROM.saveToFile(rom_path)
+    rom.saveToFile(rom_path)
 
     desmume_emulator.open(str(rom_path))
 

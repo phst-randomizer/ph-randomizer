@@ -3,29 +3,35 @@ from pathlib import Path
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from ph_rando.patcher.location_types import IslandShopLocation
-from ph_rando.patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher._items import ITEMS_REVERSED
+from ph_rando.patcher._util import GD_MODELS
+from ph_rando.patcher.main import _patch_shop_items
+from ph_rando.shuffler.aux_models import Area, IslandShop
 
 from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 
 
 @pytest.fixture(
-    params=[val for val in GD_MODELS.keys() if GD_MODELS[val]],
-    ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val],
+    params=[val for val in GD_MODELS.keys() if GD_MODELS[val] and val in ITEMS_REVERSED],
+    ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val and val in ITEMS_REVERSED],
 )
-def island_shop_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
-    IslandShopLocation.ROM = NintendoDSRom.fromFile(rom_path)
-
-    locations = [
-        IslandShopLocation(31, 0x217ECB4 - 0x217BCE0),  # shield in mercay shop
-        IslandShopLocation(31, 0x217EC68 - 0x217BCE0),  # power gem in mercay shop
-        IslandShopLocation(31, 0x217EC34 - 0x217BCE0),  # treasure item in mercay shop
+def island_shop_test_emu(
+    rom_path: Path, desmume_emulator: DeSmuMEWrapper, request, aux_data: list[Area]
+):
+    rom = NintendoDSRom.fromFile(rom_path)
+    chests = [
+        chest
+        for area in aux_data
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) == IslandShop
     ]
+    for chest in chests:
+        chest.contents = ITEMS_REVERSED[request.param]
 
-    for location in locations:
-        location.set_location(request.param)
+    _patch_shop_items(aux_data, rom)
 
-    IslandShopLocation.ROM.saveToFile(rom_path)
+    rom.saveToFile(rom_path)
 
     desmume_emulator.open(str(rom_path))
 
