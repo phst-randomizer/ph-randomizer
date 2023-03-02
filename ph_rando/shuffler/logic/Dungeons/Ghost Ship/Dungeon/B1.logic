@@ -24,7 +24,7 @@ area GhostShip:
     LeftArena -> Bottom: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
     LeftArena <-> SistersGathering: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
     LeftArena -> TopLeft: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
-    TopLeft -> LeftArena: (setting MirroredArenaDoors | (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
+    TopLeft -> LeftArena: ((setting MirroredArenaDoors | (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight)))
 
     node Top:
       enemy PoeTop
