@@ -4,7 +4,19 @@ area HarrowIsland:
       door Boat
       mail Mailbox
 
-    node Minigame:
-      chest TreasureMap
+    node Minigame
+
+    node HaveSESeaChart:
+      chest TreasureMap1
+      chest TreasureMap2
+
+    node HaveNESeaChart:
+      chest TreasureMap3
+      chest TreasureMap4
 
     Port <-> Minigame: item Shovel
+
+    # TODO: verify that these are actually the requirements
+    # to dig up these treasures
+    Minigame <-> HaveSESeaChart: item SESeaChart
+    Minigame <-> HaveNESeaChart: item NESeaChart

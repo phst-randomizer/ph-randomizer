@@ -6,7 +6,22 @@
       "name": "Main",
       "chests": [
         {
-          "name": "TreasureMap",
+          "name": "TreasureMap1",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "TreasureMap2",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "TreasureMap3",
+          "type": "",
+          "contents": ""
+        },
+        {
+          "name": "TreasureMap4",
           "type": "",
           "contents": ""
         }
