@@ -23,6 +23,12 @@
           "name": "BlueWarp",
           "entrance": "GhostShip.B1.CubusSistersSaved.BlueWarp"
         }
+      ],
+      "enemies": [
+        {
+          "name": "CubusSisters",
+          "type": "cubus_sisters"
+        }
       ]
     }
   ]
