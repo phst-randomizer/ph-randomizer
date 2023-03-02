@@ -6,6 +6,7 @@ area ManOfSmilesBoat:
       enemy Octorok2
       enemy Octorok3
       enemy Octorok4
+      enemy Octorok5
       enemy Geozard
 
     node ManOfSmiles:

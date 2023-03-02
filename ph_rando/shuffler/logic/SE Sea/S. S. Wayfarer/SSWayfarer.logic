@@ -1,0 +1,9 @@
+area SSWayfarer:
+  room Main:
+    node Boat:
+      door Exit
+
+    node TradingSequence:
+      flag FinishedTradingSequence
+
+    Boat <-> TradingSequence: item WoodHeart

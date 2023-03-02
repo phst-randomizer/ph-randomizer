@@ -7,13 +7,17 @@
       "chests": [
         {
           "name": "NormalThing",
-          "type": "",
-          "contents": ""
+          "type": "event",
+          "contents": "treasure_map_ne_6",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
         },
         {
           "name": "MysteriousThing",
-          "type": "",
-          "contents": ""
+          "type": "event",
+          "contents": "hero_new_clothes",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
         }
       ],
       "exits": [
@@ -25,23 +29,27 @@
       "enemies": [
         {
           "name": "Octorok1",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok2",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok3",
-          "type": ""
+          "type": "octorok"
         },
         {
           "name": "Octorok4",
-          "type": ""
+          "type": "octorok"
+        },
+        {
+          "name": "Octorok5",
+          "type": "octorok"
         },
         {
           "name": "Geozard",
-          "type": ""
+          "type": "geozard"
         }
       ]
     }

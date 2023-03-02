@@ -63,7 +63,7 @@ area Sea:
     West <-> Treasure5: (item SalvageArm & item TreasureMapSW5)
     West <-> Treasure6: (item SalvageArm & item TreasureMapSW6)
     West <-> Treasure7: (item SalvageArm & item TreasureMapSW7)
-    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See ./Dungeons/ToTOK/TempleOfTheOceanKingB6SunMapRoom.logic
+    East <-> SunKey: (item SalvageArm & flag SunKeyMark) #See ./Dungeons/ToTOK/B6SunMapRoom/B6SunMapRoom.logic
 
   room NW:
     node Main:
@@ -89,6 +89,9 @@ area Sea:
     node Treasure5: chest Treasure5
     node Treasure6: chest Treasure6
 
+    node Boat:
+      door BoardBoat # Prince of Red Lions
+
     node Fog:
       door GhostShip
 
@@ -110,6 +113,7 @@ area Sea:
     Zauz <-> Main: item NWSeaChart
     Gust <-> Main: item NWSeaChart
     Bannan <-> Main: (item NWSeaChart & defeated GiantEyePlant)
+    Boat <-> Main: item NWSeaChart
     Main <-> Treasure1: (item SalvageArm & item TreasureMapNW1)
     Main <-> Treasure2: (item SalvageArm & item TreasureMapNW2)
     Main <-> Treasure3: (item SalvageArm & item TreasureMapNW3)
@@ -137,8 +141,11 @@ area Sea:
     node Goron:
       door GoronPort
 
-    node Boat:
-      door BoardBoat
+    node RightBoat:
+      door BoardRightBoat # Ho Ho Tribe
+
+    node LeftBoat:
+      door BoardLeftBoat # S. S. Wayfarer
 
     node Treasure1: chest Treasure1
     node Treasure2: chest Treasure2
@@ -161,6 +168,8 @@ area Sea:
     Goron <-> Main: (item SESeaChart & defeated MassiveEye)
     Frost <-> Main: (item SESeaChart & item Cannon)
     Harrow <-> Main: item SESeaChart
+    RightBoat <-> Main: item SESeaChart
+    LeftBoat <-> Main: (item SESeaChart & flag FoundMermaid) # See ./NW/Bannan Island/Bannan.logic
     Main <-> Treasure1: (item SalvageArm & item TreasureMapSE1)
     Main <-> Treasure2: (item SalvageArm & item TreasureMapSE2)
     Main <-> Treasure3: (item SalvageArm & item TreasureMapSE3)
@@ -188,7 +197,7 @@ area Sea:
     node Treasure8: chest Treasure8
 
     node Boat:
-      door BoardBoat
+      door BoardBoat # Man of Smiles
 
     node Beedle:
       door MaskedBeedle
