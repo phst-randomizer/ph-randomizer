@@ -8,7 +8,7 @@
         {
           "name": "BombchuChest",
           "type": "chest",
-          "contents": "treasure_map_sw_2",
+          "contents": "treasure_map_sw2",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
