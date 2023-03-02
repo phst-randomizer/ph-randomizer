@@ -3,7 +3,6 @@ area GoronIsland:
     node Main:
       door Outside
       chest WisdomGem
-      chest GoronTitle
 
     node AfterTemple:
       chest BigRedRupee
