@@ -3,7 +3,7 @@
   "name": "NyaveBoat",
   "rooms": [
     {
-      "name": "main",
+      "name": "Main",
       "chests": [
         {
           "name": "Gift",
