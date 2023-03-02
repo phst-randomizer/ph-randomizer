@@ -189,6 +189,10 @@
           "entrance": "Bannan.OutsideLeft.Main.Boat"
         },
         {
+          "name": "BoardBoat",
+          "entrance": "RedLionShip.Main.Boat.Exit"
+        },
+        {
           "name": "GhostShip",
           "entrance": "GhostShip.F1.Main.Boat"
         },

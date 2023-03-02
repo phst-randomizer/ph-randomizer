@@ -1,0 +1,9 @@
+area Boat:
+  room Main:
+    node Main:
+      door Exit
+
+    node TradingSequence:
+      chest GuardNotebook
+    
+    Main <-> TradingSequence: item Kaleidoscope

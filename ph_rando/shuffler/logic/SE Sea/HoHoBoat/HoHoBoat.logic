@@ -1,5 +1,0 @@
-area Boat:
-  room Main:
-    node Main:
-      door Exit
-      chest TradingSequence
