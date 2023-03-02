@@ -8,7 +8,7 @@
         {
           "name": "AfterSwitch",
           "type": "chest",
-          "contents": "treasure_map_se_7",
+          "contents": "treasure_map_se7",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
@@ -96,7 +96,7 @@
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "bombchu",
+          "contents": "bombchus",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
@@ -186,7 +186,7 @@
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "boss_key_goron",
+          "contents": "boss_key",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }
