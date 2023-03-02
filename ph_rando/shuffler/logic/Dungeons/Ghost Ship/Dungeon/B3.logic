@@ -1,0 +1,42 @@
+area GhostShip:
+  room B3:
+    node Bottom:
+      hint GossipStone
+      door ToB2
+      enemy SkulltulaBottom
+      enemy PoeBottom
+      
+    node Arena:
+      enemy SkulltulaArena1
+      enemy SkulltulaArena2
+      enemy SkulltulaArena3
+      enemy SkulltulaArena4
+      enemy SkulltulaArena5
+
+    node Top:
+      enemy ReaplingAfterSwitch
+      enemy SkulltulaTop1
+      enemy SkulltulaTop2
+      enemy SkulltulaTop3
+      enemy SkulltulaTop4
+      chest TopLeftChest # purple potion
+      flag LeverOrder24513
+
+    Bottom -> Arena
+    Arena -> Bottom: (defeated SkulltulaArena1 & defeated SkulltulaArena2 & defeated SkulltulaArena3 & defeated SkulltulaArena4 & defeated SkulltulaArena5)
+    Arena -> Top: (defeated SkulltulaArena1 & defeated SkulltulaArena2 & defeated SkulltulaArena3 & defeated SkulltulaArena4 & defeated SkulltulaArena5)
+    Top -> Arena: setting MirroredArenaDoors
+
+    node Levers:
+      flag LeversPulled
+
+    node AfterLevers:
+      flag PlatePressed
+    
+    Bottom <-> Levers: flag LeverOrder24513 | setting NoPuzzleSolution
+    Top -> AfterLevers: setting HammerClip | flag LeversPulled
+
+    node GreenCubus:
+      gain GreenCubusFollowing
+
+    Top <-> GreenCubus: flag PlatePressed

@@ -1,0 +1,5 @@
+area GhostShip:
+  room F1:
+    node Main:
+      door Boat
+      door ToB1

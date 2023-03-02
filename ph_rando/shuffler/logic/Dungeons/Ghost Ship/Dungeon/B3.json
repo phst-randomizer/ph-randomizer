@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GhostShip",
+  "rooms": [
+    {
+      "name": "B3",
+      "chests": [
+        {
+          "name": "TopLeftChest",
+          "type": "chest",
+          "contents": "purple_potion",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToB2",
+          "entrance": "GhostShip.B1.AfterPurpleCubusSwitch.ToB2"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "SkulltulaBottom",
+          "type": "skulltula"
+        },
+        {
+          "name": "PoeBottom",
+          "type": "poe"
+        },
+        {
+          "name": "SkulltulaArena1",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaArena2",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaArena3",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaArena4",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaArena5",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaTop1",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaTop2",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaTop3",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaTop4",
+          "type": "skulltula"
+        },
+        {
+          "name": "ReaplingAfterSwitch",
+          "type": "reapling"
+        }
+      ]
+    }
+  ]
+}

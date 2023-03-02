@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GhostShip",
+  "rooms": [
+    {
+      "name": "F1",
+      "exits": [
+        {
+          "name": "Boat",
+          "entrance": "Sea.NW.Fog.GhostShip"
+        },
+        {
+          "name": "ToB1",
+          "entrance": "GhostShip.B1.Bottom.ToF1"
+        }
+      ]
+    }
+  ]
+}

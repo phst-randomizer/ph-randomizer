@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "CubusSistersBossRoom",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "GhostKey",
+          "type": "freestanding",
+          "contents": "ghost_key"
+        },
+        {
+          "name": "HeartContainer",
+          "type": "chest",
+          "contents": "heart_container",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "BlueWarp",
+          "entrance": "GhostShip.B1.CubusSistersSaved.BlueWarp"
+        }
+      ]
+    }
+  ]
+}

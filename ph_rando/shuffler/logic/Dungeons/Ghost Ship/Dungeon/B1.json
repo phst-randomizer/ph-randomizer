@@ -1,0 +1,117 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GhostShip",
+  "rooms": [
+    {
+      "name": "B1",
+      "chests": [
+        {
+          "name": "AfterPit",
+          "type": "chest",
+          "contents": "common_treasure",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "NearPurpleCubus",
+          "type": "chest",
+          "contents": "triangle_crystal",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToF1",
+          "entrance": "GhostShip.F1.Main.ToB1"
+        },
+        {
+          "name": "ToB2",
+          "entrance": "GhostShip.B2.Main.ToB1"
+        },
+        {
+          "name": "BlueWarp",
+          "entrance": "CubusSistersBossRoom.Main.Fight.BlueWarp"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "RatBottom1",
+          "type": "rat"
+        },
+        {
+          "name": "RatBottom2",
+          "type": "rat"
+        },
+        {
+          "name": "SkulltulaBottom1",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaBottom2",
+          "type": "skulltula"
+        },
+        {
+          "name": "PoeArena1",
+          "type": "poe"
+        },
+        {
+          "name": "PoeArena2",
+          "type": "poe"
+        },
+        {
+          "name": "PoeArena3",
+          "type": "poe"
+        },
+        {
+          "name": "SkulltulaTopLeft",
+          "type": "skulltula"
+        },
+        {
+          "name": "PoeTop",
+          "type": "poe"
+        },
+        {
+          "name": "SkulltulaTop1",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaTop2",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaTopRight",
+          "type": "skulltula"
+        },
+        {
+          "name": "PoeRight",
+          "type": "poe"
+        },
+        {
+          "name": "SkulltulaRight1",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaRight2",
+          "type": "skulltula"
+        },
+        {
+          "name": "SkulltulaRight3",
+          "type": "skulltula"
+        },
+        {
+          "name": "RatRight1",
+          "type": "rat"
+        },
+        {
+          "name": "RatRight2",
+          "type": "rat"
+        },
+        {
+          "name": "RatRight3",
+          "type": "rat"
+        }
+      ]
+    }
+  ]
+}

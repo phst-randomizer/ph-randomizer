@@ -1,0 +1,90 @@
+area GhostShip:
+  room B1:
+    node Bottom:
+      door ToF1
+      enemy RatBottom1
+      enemy RatBottom2
+      enemy SkulltulaBottom1
+      enemy SkulltulaBottom2
+      chest AfterPit
+      hint GossipStone
+
+    node LeftArena:
+      enemy PoeArena1
+      enemy PoeArena2
+      enemy PoeArena3
+
+    node SistersGathering:
+      flag RedSisterSaved
+
+    node TopLeft:
+      enemy SkulltulaTopLeft
+
+    Bottom -> LeftArena
+    LeftArena -> Bottom: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
+    LeftArena <-> SistersGathering: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
+    LeftArena -> TopLeft: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
+    TopLeft -> LeftArena: (setting MirroredArenaDoors | (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
+
+    node Top:
+      enemy PoeTop
+      enemy SkulltulaTop1
+      enemy SkulltulaTop2
+
+    TopLeft <-> Top: (item Boomerang | item GrapplingHook | item Bomb | item Hammer) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopLeft))
+
+    node TopRight:
+      enemy SkulltulaTopRight
+
+    Top <-> TopRight: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
+    
+    node TrianglePedestal:
+      gain TrianglePedestalSet
+
+    TopRight -> TrianglePedestal: (state TriangleCrystal & lose TriangleCrystal)
+    TriangleCrystal -> TopRight
+
+    node Right:
+      enemy PoeRight
+      enemy SkulltulaRight1
+      enemy SkulltulaRight2
+      enemy SkulltulaRight3
+      enemy RatRight1
+      enemy RatRight2
+      enemy RatRight3
+      chest NearPurpleCubus
+
+    TopRight <-> Right: (lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | state TrianglePedestalSet
+
+    node AfterPurpleCubusSwitch:
+      gain PurpleCubusFollowing
+      door ToB2
+
+    Right <-> AfterPurpleCubusSwitch # hit the switch with a pot 
+    
+    node RoundPedestal:
+      gain RoundPedestalSet
+
+    Right -> RoundPedestal: (state RoundCrystal & lose RoundCrystal)
+    RoundPedestal -> Right
+    Right <-> Bottom: state RoundPedestalSet
+
+    node PurpleCubusBrought:
+      flag PurpleCubusSaved
+
+    SistersGathering <-> PurpleCubusBrought: state PurpleCubusFollowing
+
+    node YellowCubusBrought:
+      flag YellowCubusSaved
+
+    SistersGathering <-> YellowCubusBrought: state YellowCubusFollowing
+
+    node GreenCubusBrought:
+      flag GreenCubusSaved
+      
+    SistersGathering <-> GreenCubusBrought: state GreenCubusFollowing
+
+    node CubusSistersSaved:
+      door BlueWarp
+
+    SistersGathering <-> CubusSistersSaved: (flag PurpleCubusSaved & flag YellowCubusSaved & flag GreenCubusSaved)

@@ -1,0 +1,31 @@
+area GhostShip:
+  room B2:
+    node Bottom:
+      door ToB1
+      enemy SkulltulaBottom1
+      enemy SkulltulaBottom2
+      enemy SkulltulaBottom3
+      enemy SkulltulaBottom4
+
+    node Top:
+      hint GossipStone
+      enemy Reapling
+      gain YellowCubusFollowing
+      enemy SkulltulaTop1
+      enemy SkulltulaTop2
+      enemy SkulltulaTop3
+      enemy SkulltulaTop4
+
+    node AfterSwitch:
+      chest Left # rupoor
+      chest Right # yellow potion
+      chest Middle # round crystal
+      enemy ReaplingAfterChest
+      door ToB3
+
+    node AfterGhostKey:
+      flag StoneTetra
+
+    Bottom -> Top
+    Top <-> AfterSwitch # take a pot
+    AfterSwitch -> Bottom 

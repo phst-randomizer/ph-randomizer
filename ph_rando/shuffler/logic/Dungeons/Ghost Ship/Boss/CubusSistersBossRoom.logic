@@ -1,0 +1,11 @@
+area CubusSistersBossRoom:
+  room Main:
+    node Fight:
+      enemy CubusSisters
+      door BlueWarp
+
+    node CubusSistersDefeated:
+      chest GhostKey
+      chest HeartContainer
+
+    Fight <-> CubusSistersDefeated: defeated CubusSisters
