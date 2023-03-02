@@ -5,5 +5,5 @@ area Boat:
 
     node TradingSequence:
       chest GuardNotebook
-    
+
     Main <-> TradingSequence: item Kaleidoscope
