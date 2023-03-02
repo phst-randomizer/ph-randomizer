@@ -1,0 +1,26 @@
+area GoronIsland:
+  room LowerLeft:
+    node Port:
+      mail Mailbox
+      door Boat
+      door LowerHouse
+      door ToNorth
+      door Shop
+      door LeftmostHouse
+      door RightmostHouse
+      door ToEast
+
+    node Ledge:
+      door ToEastLedge
+
+    node EnemyLedge:
+      enemy YellowChuChu1
+      enemy YellowChuChu2
+      enemy YellowChuChu3
+
+    node EnemyDefeated:
+      chest TreasureMap # SE 5
+
+    Ledge -> Port
+    Ledge <-> EnemyLedge: (item Shovel & (item Bow | item Hammer))
+    EnemyLedge <-> EnemyDefeated: (defeated YellowChuChu1 & defeated YellowChuChu2 & defeated YellowChuChu3)

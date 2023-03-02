@@ -2,6 +2,7 @@ area GoronTemple:
   room F1:
     node Entrance:
       door Entrance
+      entrance BlueWarpShortcut
       enemy BlueChuBeforeBeamos
       enemy BlueChuAfterBeamos
       enemy ArmosLower
@@ -16,6 +17,8 @@ area GoronTemple:
 
     node AfterArena:
       enemy BlueChu
+
+    node BombableWalls:
       door RightBombableWall
       door LeftBombableWall
 
@@ -24,6 +27,7 @@ area GoronTemple:
 
     node B1Shortcut:
       door ToB1Shortcut
+      enemy ShortcutBlueChu
 
     Entrance -> TopRight: item Shovel
     TopRight -> Entrance
@@ -33,6 +37,8 @@ area GoronTemple:
     Arena -> AfterArena: (defeated ArmosArenaRight & defeated ArmosArenaLeft)
     AfterArena -> Entrance
     AfterArena <-> BowTarget: item Bow
+    AfterArena -> BombableWalls: (item Bombs | item Bombchu)
+    BombableWalls -> AfterArena
 
     B1Shortcut -> Entrance: (item Bombchu | (setting HammerClip & item Hammer))
 
@@ -132,6 +138,7 @@ area GoronTemple:
 
   room B3:
     node BottomLeft:
+      door ToB2Left
       enemy Miniblin1
       enemy Miniblin2
       enemy Miniblin3
@@ -157,14 +164,16 @@ area GoronTemple:
     BottomLeft <-> BlinChest: (defeated Miniblin1 & defeated Miniblin2 & defeated Miniblin3 & defeated Miniblin4 & defeated Miniblin5 & defeated Miniblin6)
     BottomLeft -> ArmosRoom: (item Bombchu | (setting HammerClip & item Hammer))
     ArmosRoom -> BossKeyLock: (defeated Armos1 & defeated Armos2 & defeated Armos3 & defeated Armos4)
-    BossKeyLock <-> AfterBossKey: item BossKey
+    BossKeyLock <-> AfterBossKey: item BossKeyGoron
 
   room B4:
     node Main:
       door ToB3
       door ToBoss
+      exit BlueWarpShortcut
 
   room CrimsonineRoom:
     node Main:
       door ToBoss
       chest Crimsonine
+      exit BlueWarp

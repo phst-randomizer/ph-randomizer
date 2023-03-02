@@ -7,79 +7,86 @@
       "chests": [
         {
           "name": "AfterSwitch",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "treasure_map_se7",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         },
         {
           "name": "EyeShot",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "exits": [
         {
           "name": "Entrance",
-          "entrance": ""
+          "entrance": "GoronIsland.UpperLeft.Dungeon.GoronTemple"
         },
         {
           "name": "RightBombableWall",
-          "entrance": ""
+          "entrance": "GoronTemple.BombableF1.RightSide.RightDoor"
         },
         {
           "name": "LeftBombableWall",
-          "entrance": ""
+          "entrance": "GoronTemple.BombableF1.LeftSide.LeftDoor"
         },
         {
           "name": "ToB1Shortcut",
-          "entrance": ""
+          "entrance": "GoronTemple.B1.LeftStaircase.ToF1Shortcut"
         }
       ],
       "enemies": [
         {
           "name": "BlueChuBeforeBeamos",
-          "type": ""
+          "type": "blue_chu_chu"
         },
         {
           "name": "BlueChuAfterBeamos",
-          "type": ""
+          "type": "blue_chu_chu"
         },
         {
           "name": "ArmosLower",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "ArmosUpper",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "ArmosArenaRight",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "ArmosArenaLeft",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "BlueChu",
-          "type": ""
+          "type": "blue_chu_chu"
+        },
+        {
+          "name": "ShortcutBlueChu",
+          "type": "blue_chu_chu"
         }
       ]
     },
     {
       "name": "BombableF1",
-      "chests": [],
       "exits": [
         {
           "name": "LeftDoor",
-          "entrance": ""
+          "entrance": "GoronTemple.F1.BombableWalls.LeftBombableWall"
         },
         {
           "name": "RightDoor",
-          "entrance": ""
+          "entrance": "GoronTemple.F1.BombableWalls.RightBombableWall"
         },
         {
           "name": "ToB1",
-          "entrance": ""
+          "entrance": "GoronTemple.B1.TopLeftArena.ToBombableF1"
         }
       ]
     },
@@ -88,77 +95,81 @@
       "chests": [
         {
           "name": "BigChest",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "bombchus",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         },
         {
           "name": "EyeSlugSlayer",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "goron_amber",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "exits": [
         {
           "name": "ToBombableF1",
-          "entrance": ""
+          "entrance": "GoronTemple.BombableF1.RightSide.ToB1"
         },
         {
           "name": "ToF1Shortcut",
-          "entrance": ""
+          "entrance": "GoronTemple.F1.B1Shortcut.ToB1Shortcut"
         },
         {
           "name": "ToB2",
-          "entrance": ""
+          "entrance": "GoronTemple.B2.BottomLeft.ToB1"
         }
       ],
       "enemies": [
         {
           "name": "BeamosRight",
-          "type": ""
+          "type": "beamos"
         },
         {
           "name": "BeamosLeft",
-          "type": ""
+          "type": "beamos"
         },
         {
           "name": "FireBubble1",
-          "type": ""
+          "type": "fire_bubble"
         },
         {
           "name": "FireBubble2",
-          "type": ""
+          "type": "fire_bubble"
         },
         {
           "name": "Hinox",
-          "type": ""
+          "type": "hinox"
         },
         {
           "name": "LikeLike1",
-          "type": ""
+          "type": "like_like"
         },
         {
           "name": "LikeLike2",
-          "type": ""
+          "type": "like_like"
         },
         {
           "name": "EyeSlug1",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug2",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug3",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug4",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug5",
-          "type": ""
+          "type": "eye_slug"
         }
       ]
     },
@@ -167,93 +178,97 @@
       "chests": [
         {
           "name": "EyeSlugSlayer",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "goron_amber",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         },
         {
           "name": "BossKey",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "boss_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "exits": [
         {
           "name": "ToB1",
-          "entrance": ""
+          "entrance": "GoronTemple.B1.LeftStaircase.ToB2"
         },
         {
           "name": "ToB3",
-          "entrance": ""
+          "entrance": "GoronTemple.B3.BottomLeft.ToB2Left"
         },
         {
           "name": "ToB3BossKey",
-          "entrance": ""
+          "entrance": "GoronTemple.B3.BossKeyLock.ToB2Right"
         }
       ],
       "enemies": [
         {
           "name": "LikeLike",
-          "type": ""
+          "type": "like_like"
         },
         {
           "name": "RockChu1",
-          "type": ""
+          "type": "rock_chu_chu"
         },
         {
           "name": "RockChu2",
-          "type": ""
+          "type": "rock_chu_chu"
         },
         {
           "name": "Hinox1",
-          "type": ""
+          "type": "hinox"
         },
         {
           "name": "Hinox2",
-          "type": ""
+          "type": "hinox"
         },
         {
           "name": "BlueChu1",
-          "type": ""
+          "type": "blue_chu_chu"
         },
         {
           "name": "BlueChu2",
-          "type": ""
+          "type": "blue_chu_chu"
         },
         {
           "name": "Gel1",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "Gel2",
-          "type": ""
+          "type": "gel"
         },
         {
           "name": "EyeSlug1",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug2",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug3",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug4",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug5",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug6",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug7",
-          "type": ""
+          "type": "eye_slug"
         },
         {
           "name": "EyeSlug8",
@@ -266,60 +281,66 @@
       "chests": [
         {
           "name": "MiniblinSlayer",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "exits": [
         {
           "name": "ToB2Right",
-          "entrance": ""
+          "entrance": "GoronTemple.B2.BottomStaircase.ToB3BossKey"
+        },
+        {
+          "name": "ToB2Left",
+          "entrance": "GoronTemple.B2.MiddleLeft.ToB3"
         },
         {
           "name": "ToB4",
-          "entrance": ""
+          "entrance": "GoronTemple.B4.Main.ToB3"
         }
       ],
       "enemies": [
         {
           "name": "Miniblin1",
-          "type": ""
+          "type": "miniblin"
         },
         {
           "name": "Miniblin2",
-          "type": ""
+          "type": "miniblin"
         },
         {
           "name": "Miniblin3",
-          "type": ""
+          "type": "miniblin"
         },
         {
           "name": "Miniblin4",
-          "type": ""
+          "type": "miniblin"
         },
         {
           "name": "Miniblin5",
-          "type": ""
+          "type": "miniblin"
         },
         {
           "name": "Miniblin6",
-          "type": ""
+          "type": "miniblin"
         },
         {
           "name": "Armos1",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "Armos2",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "Armos3",
-          "type": ""
+          "type": "armos"
         },
         {
           "name": "Armos4",
-          "type": ""
+          "type": "armos"
         }
       ]
     },
@@ -329,11 +350,15 @@
       "exits": [
         {
           "name": "ToB3",
-          "entrance": ""
+          "entrance": "GoronTemple.B3.AfterBossKey.ToB4"
         },
         {
           "name": "ToBoss",
-          "entrance": ""
+          "entrance": "DongorongoBossRoom.Main.Fight.ToDungeon"
+        },
+        {
+          "name": "BlueWarpShortcut",
+          "entrance": "GoronTemple.F1.Entrance.BlueWarpShortcut"
         }
       ]
     },
@@ -342,14 +367,20 @@
       "chests": [
         {
           "name": "Crimsonine",
-          "type": "",
-          "contents": ""
+          "type": "chest",
+          "contents": "crimsonine",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
         }
       ],
       "exits": [
         {
           "name": "ToBoss",
-          "entrance": ""
+          "entrance": "DongorongoBossRoom.Main.BossDefeat.ToCrimsonineRoom"
+        },
+        {
+          "name": "BlueWarp",
+          "entrance": "GoronIsland.UpperLeft.Dungeon.BlueWarpExit"
         }
       ]
     }

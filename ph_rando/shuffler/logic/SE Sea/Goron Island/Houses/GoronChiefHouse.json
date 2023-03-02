@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GoronIsland",
+  "rooms": [
+    {
+      "name": "GoronChiefHouse",
+      "chests": [
+        {
+          "name": "WisdomGem",
+          "type": "event",
+          "contents": "wisdom_gem",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        },
+        {
+          "name": "BigRedRupee",
+          "type": "event",
+          "contents": "big_red_rupee",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "Outside",
+          "entrance": "GoronIsland.LowerRight.Main.ChiefHouse"
+        }
+      ]
+    }
+  ]
+}

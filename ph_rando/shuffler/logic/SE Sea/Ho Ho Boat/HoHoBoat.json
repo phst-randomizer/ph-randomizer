@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "HoHoBoat",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "GuardNotebook",
+          "type": "event",
+          "contents": "guard_notebook",
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "Exit",
+          "entrance": "Sea.SE.RightBoat.BoardRightBoat"
+        }
+      ]
+    }
+  ]
+}

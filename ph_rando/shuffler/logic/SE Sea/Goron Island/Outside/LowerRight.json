@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "GoronIsland",
+  "rooms": [
+    {
+      "name": "LowerRight",
+      "chests": [
+        {
+          "name": "NearChiefHouse",
+          "type": "dig_spot",
+          "contents": "small_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_actor_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToWest",
+          "entrance": "GoronIsland.LowerLeft.Port.ToEast"
+        },
+        {
+          "name": "ToWestLedge",
+          "entrance": "GoronIsland.LowerLeft.Ledge.ToEastLedge"
+        },
+        {
+          "name": "LeftmostHouse",
+          "entrance": "GoronIsland.OneRockRightGoronHouse.Main.Outside"
+        },
+        {
+          "name": "CoastHouse",
+          "entrance": "GoronIsland.TwoRocksGoronHouse.Main.Outside"
+        },
+        {
+          "name": "ChiefHouse",
+          "entrance": "GoronIsland.GoronChiefHouse.Main.Outside"
+        },
+        {
+          "name": "ToNorth",
+          "entrance": "GoronIsland.UpperRight.Rightmost.ToSouth"
+        }
+      ]
+    }
+  ]
+}
