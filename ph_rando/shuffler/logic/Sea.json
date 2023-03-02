@@ -294,8 +294,12 @@
           "entrance": "GoronIsland.LowerLeft.Port.Boat"
         },
         {
-          "name": "BoardBoat",
+          "name": "BoardRightBoat",
           "entrance": "HoHoBoat.Main.Main.Exit"
+        },
+        {
+          "name": "BoardLeftBoat",
+          "entrance": "SSWayfarer.Main.Boat.Exit"
         },
         {
           "name": "NE",
