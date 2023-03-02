@@ -5,8 +5,10 @@ from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 from ndspy.rom import NintendoDSRom
 import pytest
 
-from ph_rando.patcher.location_types import DigSpotLocation
-from ph_rando.patcher.location_types.island_shop import GD_MODELS
+from ph_rando.patcher._items import ITEMS_REVERSED
+from ph_rando.patcher._util import GD_MODELS
+from ph_rando.patcher.main import _patch_zmb_actors
+from ph_rando.shuffler.aux_models import Area, DigSpot
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, equip_item, start_first_file, use_equipped_item
@@ -16,14 +18,25 @@ from .desmume_utils import assert_item_is_picked_up, equip_item, start_first_fil
     params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
 )
-def dig_spot_test_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper, request):
+def dig_spot_test_emu(
+    rom_path: Path, desmume_emulator: DeSmuMEWrapper, request, aux_data: list[Area]
+):
     """Generate and run a rom with a custom dig/shovel spot item set."""
-    DigSpotLocation.ROM = NintendoDSRom.fromFile(rom_path)
+    rom = NintendoDSRom.fromFile(rom_path)
+    chests = [
+        chest
+        for area in aux_data
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) == DigSpot
+        and chest.zmb_file_path == 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb'
+    ]
+    for chest in chests:
+        chest.contents = ITEMS_REVERSED[request.param]
 
-    DigSpotLocation(5, 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb').set_location(request.param)
-    DigSpotLocation.save_all()
+    _patch_zmb_actors(aux_data, rom)
 
-    DigSpotLocation.ROM.saveToFile(rom_path)
+    rom.saveToFile(rom_path)
 
     desmume_emulator.open(str(rom_path))
 
