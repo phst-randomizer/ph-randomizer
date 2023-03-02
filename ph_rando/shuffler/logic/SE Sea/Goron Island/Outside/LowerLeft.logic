@@ -23,4 +23,4 @@ area GoronIsland:
 
     Ledge -> Port
     Ledge <-> EnemyLedge: (item Shovel & (item Bow | item Hammer))
-    EnemyLedge <-> EnemyDefeated: defeated YellowChuChu1 & defeated YellowChuChu2 & defeated YellowChuChu3
+    EnemyLedge <-> EnemyDefeated: (defeated YellowChuChu1 & defeated YellowChuChu2 & defeated YellowChuChu3)
