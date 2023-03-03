@@ -27,7 +27,7 @@
         },
         {
           "name": "ToB2",
-          "entrance": "GhostShip.B2.Main.ToB1"
+          "entrance": "GhostShip.B2.Bottom.ToB1"
         },
         {
           "name": "BlueWarp",
