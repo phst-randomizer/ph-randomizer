@@ -243,12 +243,13 @@ jobs:
         run: python ph_rando/shuffler/main.py -o --
 
   tests:
-    name: Run tests
+    name: Run tests [${{ matrix.test-module }}]
     needs: [check-logic, check-aux-data]
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu, macos, windows]
+        test-module: [test_shuffler.py, test_logic.py]
     defaults:
       run:
         shell: bash
@@ -269,7 +270,7 @@ jobs:
         run: pip install tox
 
       - name: Run tests
-        run: tox -e test
+        run: tox -e test -- -k ${{ matrix.test-module }}
         env:
           SYSTEM_VERSION_COMPAT: 0
 
