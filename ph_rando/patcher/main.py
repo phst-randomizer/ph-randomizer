@@ -24,8 +24,6 @@ from ph_rando.shuffler.aux_models import (
     Tree,
 )
 
-logging.basicConfig(level=logging.DEBUG)
-
 
 def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     """Apply the base patch to `input_rom`."""
@@ -272,10 +270,25 @@ def apply_settings_patches(
 @click.option(
     '-o', '--output-rom-path', default=None, type=str, help='Path to save patched ROM to.'
 )
+@click.option(
+    '-l',
+    '--log-level',
+    type=click.Choice(
+        list(logging.getLevelNamesMapping().keys()),
+        case_sensitive=False,
+    ),
+    default='INFO',
+)
 @click_setting_options
 def patcher_cli(
-    aux_data_directory: Path, input_rom_path: Path, output_rom_path: str | None, **settings
+    aux_data_directory: Path,
+    input_rom_path: Path,
+    output_rom_path: str | None,
+    log_level: str,
+    **settings,
 ):
+    logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
+
     new_aux_data = load_aux_data(aux_data_directory)
 
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
