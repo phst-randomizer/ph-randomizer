@@ -1,3 +1,4 @@
+from collections import defaultdict
 import json
 from pathlib import Path
 
@@ -115,45 +116,44 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
     assert edge.is_traversable([]) == expected_result
 
 
-# TODO: restore this test after verifying it actually works
-# def test_graph_connectedness(settings) -> None:
-#     logic = Logic(settings=settings)
-#     logic.connect_rooms()
+def test_graph_connectedness(settings) -> None:
+    logic = Logic(settings=settings)
+    logic.connect_rooms()
 
-#     # Compute list of tuples of each check its area.
-#     all_checks = [
-#         (chest, area.name)
-#         for area in logic.areas.values()
-#         for room in area.rooms
-#         for chest in room.chests
-#     ]
+    # Compute list of tuples of each check its area.
+    all_checks = [
+        (chest, area.name)
+        for area in logic.areas.values()
+        for room in area.rooms
+        for chest in room.chests
+    ]
 
-#     # Put every item in the game in the current inventory, appending the area name to each
-#     # small_key so we know which key goes to which area.
-#     inventory = [
-#         chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
-#         for chest, area_name in all_checks
-#     ]
+    # Put every item in the game in the current inventory, appending the area name to each
+    # small_key so we know which key goes to which area.
+    inventory = [
+        chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
+        for chest, area_name in all_checks
+    ]
 
-#     # Populate the `keys` dict for the assumed search function with all of
-#     # the small keys in the inventory.
-#     keys: dict[str, int] = defaultdict(int)
-#     for item in inventory:
-#         if item.startswith('small_key_'):
-#             keys[item[len('small_key_') :]] += 1
+    # Populate the `keys` dict for the assumed search function with all of
+    # the small keys in the inventory.
+    keys: dict[str, int] = defaultdict(int)
+    for item in inventory:
+        if item.startswith('small_key_'):
+            keys[item[len('small_key_') :]] += 1
 
-#     reachable_nodes = logic.assumed_search(
-#         logic.starting_node,
-#         inventory,
-#         keys,
-#     )
+    reachable_nodes = logic.assumed_search(
+        logic.starting_node,
+        inventory,
+        keys,
+    )
 
-#     # Create set consisting of all areas reported as reachable by the assumed search
-#     reachable_areas = {node.area for node in reachable_nodes}
+    # Create set consisting of all areas reported as reachable by the assumed search
+    reachable_areas = {node.area for node in reachable_nodes}
 
-#     # Create set consisting of all areas in the logic
-#     all_areas = {area.name for area in logic.areas.values()}
+    # Create set consisting of all areas in the logic
+    all_areas = {area.name for area in logic.areas.values()}
 
-#     assert reachable_areas == all_areas
+    assert reachable_areas == all_areas
 
-#     # TODO: assert that rooms + nodes are identical too
+    # TODO: assert that rooms + nodes are identical too

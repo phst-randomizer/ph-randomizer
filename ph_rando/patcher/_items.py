@@ -92,6 +92,7 @@ ITEMS: dict[str, int] = {
     'small_rupoor': 0x81,
     'big_rupoor': 0x82,
     'random_ship_part2': 0x85,  # TODO: what is this, and how does it relate to other ship parts?
+    'random_treasure2': 0x86,  # TODO: what is this, and how does it relate to other treasures?
     # TODO: update these when their ids are known
     'phantom_hourglass': -1,
     'phantom_sword': -1,

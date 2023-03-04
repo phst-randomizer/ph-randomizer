@@ -9,15 +9,15 @@
           "name": "AfterSwitch",
           "type": "chest",
           "contents": "treasure_map_se7",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_power/map00.bin/zmb/dngn_power_00.zmb",
+          "zmb_mapobject_index": 18
         },
         {
           "name": "EyeShot",
           "type": "chest",
           "contents": "small_red_rupee",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_power/map00.bin/zmb/dngn_power_00.zmb",
+          "zmb_mapobject_index": 16
         }
       ],
       "exits": [
@@ -97,15 +97,15 @@
           "name": "BigChest",
           "type": "chest",
           "contents": "bombchus",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_power/map01.bin/zmb/dngn_power_01.zmb",
+          "zmb_mapobject_index": 20
         },
         {
           "name": "EyeSlugSlayer",
           "type": "chest",
-          "contents": "goron_amber",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "random_treasure2",
+          "zmb_file_path": "Map/dngn_power/map01.bin/zmb/dngn_power_01.zmb",
+          "zmb_mapobject_index": 31
         }
       ],
       "exits": [
@@ -179,16 +179,16 @@
         {
           "name": "EyeSlugSlayer",
           "type": "chest",
-          "contents": "goron_amber",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "random_treasure2",
+          "zmb_file_path": "Map/dngn_power/map02.bin/zmb/dngn_power_02.zmb",
+          "zmb_mapobject_index": 31
         },
         {
           "name": "BossKey",
           "type": "chest",
           "contents": "boss_key",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_power/map02.bin/zmb/dngn_power_02.zmb",
+          "zmb_mapobject_index": 3
         }
       ],
       "exits": [
@@ -283,8 +283,8 @@
           "name": "MiniblinSlayer",
           "type": "chest",
           "contents": "small_red_rupee",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_power/map03.bin/zmb/dngn_power_03.zmb",
+          "zmb_mapobject_index": 32
         }
       ],
       "exits": [
@@ -369,7 +369,7 @@
           "name": "Crimsonine",
           "type": "chest",
           "contents": "crimsonine",
-          "zmb_file_path": "TODO",
+          "zmb_file_path": "Map/dngn_power/map10.bin/zmb/dngn_power_10.zmb",
           "zmb_mapobject_index": 0
         }
       ],

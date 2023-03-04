@@ -9,22 +9,22 @@
           "name": "Left",
           "type": "chest",
           "contents": "small_rupoor",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_ghost/map01.bin/zmb/dngn_ghost_01.zmb",
+          "zmb_mapobject_index": 14
         },
         {
           "name": "Right",
           "type": "chest",
           "contents": "yellow_potion",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_ghost/map01.bin/zmb/dngn_ghost_01.zmb",
+          "zmb_mapobject_index": 43
         },
         {
           "name": "Middle",
           "type": "chest",
           "contents": "round_crystal",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_ghost/map01.bin/zmb/dngn_ghost_01.zmb",
+          "zmb_mapobject_index": 48
         }
       ],
       "exits": [
