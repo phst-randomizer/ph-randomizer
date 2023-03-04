@@ -1,0 +1,50 @@
+area IceTemple:
+  room B2:
+    node Stairs:
+      door ToB1
+      enemy StagBeetle1
+
+    node Arena:
+      enemy WhiteYook
+      enemy Gel
+
+    node AfterArena:
+      enemy IceKeese1
+      enemy IceKeese2
+      enemy IceBubble1
+
+    node BossKeyChest:
+      chest BossKey
+
+    node Middle:
+      enemy StagBeetle2
+      enemy StagBeetle3
+      enemy RockChu
+      lock IceTempleKey
+
+    node Top:
+      chest Bounce
+
+    node TopRight:
+      enemy BrownYook
+      enemy ArenaIceKeese1
+      enemy ArenaIceKeese2
+
+    node TopRightClear:
+      chest DefeatThemAll
+
+    node Right:
+      enemy IceBubble2
+      enemy StagBeetle4
+
+    Stairs <-> Arena: item GrapplingHook
+    Arena <-> AfterArena: (defeated Gel & defeated WhiteYook)
+
+    AfterArena <-> Middle: (item Sword | item Boomerang)
+
+    Middle <-> Top: item Bow
+    Middle <-> TopRight: open IceTempleKey
+    TopRight <-> TopRightClear: (defeated BrownYook & defeated ArenaIceKeese1 & defeated ArenaIceKeese2)
+
+    TopRightClear <-> Right
+    Right <-> BossKeyChest

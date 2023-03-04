@@ -1,0 +1,45 @@
+area IceTemple:
+  room F3:
+    node RightSide:
+      door ToF2Right
+
+    node Main:
+      chest TopRightChest
+      enemy StagBeetleLower1
+      enemy StagBeetleLower2
+      enemy StagBeetleLower3
+      enemy StagBeetleLower4
+      enemy StagBeetleUpper
+      enemy IceKeese1
+      enemy IceKeese2
+      enemy IceKeese3
+      enemy IceBubble1
+      enemy IceBubble2
+
+    node Switch:
+      gain SwitchRed
+      gain SwitchBlue
+
+    node AfterBlue:
+      chest ChestAfterBlue
+
+    node After4Switches:
+      chest FreestandingKey
+
+    node DoorToF2:
+      lock IceTempleKey
+
+    node StairsLeft:
+      door ToF2Left
+
+    RightSide <-> Main: (item GrapplingHook | item Boomerang | item Bow | (item Sword & item CourageSpiritLV1))
+
+    Main <-> Switch: item Bomb
+
+    Main <-> AfterBlue: (lose SwitchBlue & state SwitchRed)
+    Main <-> After4Switches: (lose SwitchBlue & state SwitchRed & item Boomerang)
+
+    Main -> DoorToF2
+    StairsLeft -> DoorToF2
+    DoorToF2 -> Main: open IceTempleKey
+    DoorToF2 -> StairsLeft: open IceTempleKey

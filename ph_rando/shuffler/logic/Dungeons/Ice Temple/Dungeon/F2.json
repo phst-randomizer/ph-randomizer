@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "IceTemple",
+  "rooms": [
+    {
+      "name": "F2",
+      "chests": [
+        {
+          "name": "YookSlayer",
+          "type": "chest",
+          "contents": "grappling_hook",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToF1Right",
+          "entrance": "IceTemple.F1.RightStairs.ToF2Right"
+        },
+        {
+          "name": "ToF3Right",
+          "entrance": "IceTemple.F3.RightSide.ToF2Right"
+        },
+        {
+          "name": "ToF1Left",
+          "entrance": "IceTemple.F1.TopLeft.ToF2Left"
+        },
+        {
+          "name": "ToF3Left",
+          "entrance": "IceTemple.F3.StairsLeft.ToF2Left"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "BrownYook",
+          "type": "yook"
+        },
+        {
+          "name": "WhiteYook",
+          "type": "yook"
+        }
+      ]
+    }
+  ]
+}

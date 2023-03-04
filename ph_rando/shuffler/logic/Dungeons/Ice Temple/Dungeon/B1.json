@@ -1,0 +1,72 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "IceTemple",
+  "rooms": [
+    {
+      "name": "B1",
+      "chests": [
+        {
+          "name": "ChestAfterBombableWallPlate",
+          "type": "chest",
+          "contents": "big_red_rupee",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "PullRedLever",
+          "type": "chest",
+          "contents": "small_key",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        },
+        {
+          "name": "AfterLockedDoor",
+          "type": "chest",
+          "contents": "wisdom_gem",
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToF1",
+          "entrance": "IceTemple.F1.DownLeftStairs.ToB1"
+        },
+        {
+          "name": "ToB2",
+          "entrance": "IceTemple.B2.Stairs.ToB1"
+        },
+        {
+          "name": "ToBoss",
+          "entrance": "GleeokBossRoom.Main.Fight.ToDungeon"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "StagBeetle1",
+          "type": "stag_beetle"
+        },
+        {
+          "name": "StagBeetle2",
+          "type": "stag_beetle"
+        },
+        {
+          "name": "IceKeese1",
+          "type": "ice_keese"
+        },
+        {
+          "name": "IceKeese2",
+          "type": "ice_keese"
+        },
+        {
+          "name": "IceKeese3",
+          "type": "ice_keese"
+        },
+        {
+          "name": "IceKeese4",
+          "type": "ice_keese"
+        }
+      ]
+    }
+  ]
+}

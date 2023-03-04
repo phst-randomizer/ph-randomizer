@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "IceTemple",
+  "rooms": [
+    {
+      "name": "F1",
+      "exits": [
+        {
+          "name": "Exit",
+          "entrance": "FrostIsle.DungeonEntrance.Dungeon.ToDungeon"
+        },
+        {
+          "name": "ToF2Right",
+          "entrance": "IceTemple.F2.RightSide.ToF1Right"
+        },
+        {
+          "name": "ToB1",
+          "entrance": "IceTemple.B1.StairsToF1.ToF1"
+        },
+        {
+          "name": "ToF2Left",
+          "entrance": "IceTemple.F2.LeftStairs.ToF1Left"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "BlueChu",
+          "type": "blue_chu_chu"
+        },
+        {
+          "name": "StagBeetleUpper1",
+          "type": "stag_beetle"
+        },
+        {
+          "name": "StagBeetleUpper2",
+          "type": "stag_beetle"
+        },
+        {
+          "name": "StagBeetleUpper3",
+          "type": "stag_beetle"
+        },
+        {
+          "name": "Gel",
+          "type": "gel"
+        },
+        {
+          "name": "StagBeetleLower",
+          "type": "stag_beetle"
+        }
+      ]
+    }
+  ]
+}

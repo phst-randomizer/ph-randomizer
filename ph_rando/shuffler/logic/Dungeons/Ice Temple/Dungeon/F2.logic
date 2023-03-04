@@ -1,0 +1,19 @@
+area IceTemple:
+  room F2:
+    node RightSide:
+      door ToF1Right
+      door ToF3Right
+
+    node Arena:
+      door ToF3Left
+      enemy BrownYook
+      enemy WhiteYook
+
+    node ArenaClear:
+      chest YookSlayer
+
+    node LeftStairs:
+      door ToF1Left
+
+    Arena <-> ArenaClear: (defeated WhiteYook & defeated BrownYook)
+    Arena -> LeftStairs: (item GrapplingHook & defeated WhiteYook & defeated BrownYook)

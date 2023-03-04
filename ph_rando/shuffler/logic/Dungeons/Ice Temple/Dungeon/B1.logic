@@ -1,0 +1,49 @@
+area IceTemple:
+  room B1:
+    node StairsToF1:
+      door ToF1
+
+    node LeftSide
+
+    node BelowBombableWalls:
+      chest ChestAfterBombableWallPlate
+
+    node AboveBombableWalls
+
+    node RightSide:
+      chest PullRedLever
+      lock IceTempleKey
+      enemy StagBeetle1
+      enemy StagBeetle2
+
+    node TopRight:
+      chest AfterLockedDoor
+      gain SwitchRed
+      gain SwitchBlue
+
+    node BeforeBossKey:
+      door ToB2
+      enemy IceKeese1
+      enemy IceKeese2
+      enemy IceKeese3
+      enemy IceKeese4
+
+    node AfterBossKey:
+      door ToBoss
+
+    StairsToF1 <-> LeftSide: (lose SwitchBlue & state SwitchRed)
+
+    LeftSide -> BelowBombableWalls: (((item Bomb | item Bombchu) & item GrapplingHook) | (setting HammerClip & item Hammer))
+    BelowBombableWalls -> LeftSide
+
+    BelowBombableWalls <-> AboveBombableWalls: (item Bomb | item Bombchu)
+
+    AboveBombableWalls <-> RightSide: item GrapplingHook
+
+    RightSide -> TopRight: (open IceTempleKey & lose SwitchBlue & state SwitchRed)
+
+    TopRight -> RightSide: ((lose SwitchBlue & state SwitchRed) | (item Bow | item Boomerang | item Bomb | item Bombchu | (item Sword & item CourageSpiritLV1)))
+
+    AboveBombableWalls -> BeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & lose SwitchRed & state SwitchBlue)
+
+    BeforeBossKey <-> AfterBossKey: item BossKey

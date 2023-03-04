@@ -1,0 +1,6 @@
+area IceTemple:
+  room AzurineRoom:
+    node Main:
+      door ToBoss
+      chest Azurine
+      exit BlueWarp

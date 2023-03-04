@@ -1,0 +1,50 @@
+area IceTemple:
+  room F1:
+    node Entrance:
+      door Exit
+
+    node Switch:
+      gain SwitchRed    # Switch is Red => Red is UP
+      gain SwitchBlue   # Switch is Blue => Blue is UP
+
+    node MiddlePassage
+
+    node UpperRightSide:
+      enemy BlueChu
+
+    node LowerRightSide
+
+    node RightStairs:
+      door ToF2Right
+
+    Entrance <-> MiddlePassage: (lose SwitchRed & state SwitchBlue)
+    MiddlePassage <-> UpperRightSide: (lose SwitchBlue & state SwitchRed)
+    UpperRightSide <-> LowerRightSide: (lose SwitchBlue & state SwitchRed)
+    UpperRightSide <-> RightStairs: (lose SwitchRed & state SwitchBlue)
+
+    LowerRightSide -> Entrance
+    Entrance -> LowerRightSide: (setting HammerClip & item Hammer)
+
+    Entrance -> Switch
+    MiddlePassage -> Switch: (lose SwitchRed & state SwitchBlue & (item Boomerang | item Bombs | item Bombchu))
+    UpperRightSide -> Switch: (lose SwitchBlue & state SwitchRed & (item Bombs | item Bombchu))
+
+    node TopLeft:
+      door ToF2Left
+      enemy StagBeetleUpper1
+      enemy StagBeetleUpper2
+      enemy StagBeetleUpper3
+      enemy Gel
+
+    node LeftSide:
+      enemy StagBeetleLower
+
+    node DownLeftStairs:
+      door ToB1
+
+    TopLeft -> LeftSide: item GrapplingHook
+
+    LeftSide -> Entrance
+    Entrance -> LeftSide: (setting HammerClip & item Hammer)
+
+    LeftSide -> DownLeftStairs: item GrapplingHook
