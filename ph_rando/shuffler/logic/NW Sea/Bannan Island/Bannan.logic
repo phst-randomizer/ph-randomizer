@@ -52,6 +52,7 @@ area Bannan:
 
     node FoundMermaid:
       chest FishingRodFromOldMan
+      flag FoundMermaid
 
     node DeliveredLetter:
       chest WisdomGem
