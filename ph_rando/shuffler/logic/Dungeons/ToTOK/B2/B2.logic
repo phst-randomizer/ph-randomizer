@@ -13,7 +13,6 @@ area TempleOfTheOceanKing:
       enemy PatrollingPhantom
 
     Upper <-> Lower: (item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu)
-    Lower -> Upper
 
     node MiddleSwitch:
       gain RedSwitch
