@@ -246,8 +246,6 @@ area MutohTemple:
 
     node TopRight:
       door ToB1TopRight
-
-    node RangedStalfos:
       enemy Stalfos1
       enemy Stalfos2
       enemy Stalfos3

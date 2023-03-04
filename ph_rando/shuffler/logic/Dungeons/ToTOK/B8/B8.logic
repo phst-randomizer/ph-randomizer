@@ -10,7 +10,7 @@ area TempleOfTheOceanKing:
     node PhantomDefeat:
       chest PhantomKiller
 
-    Main -> PhantomDefeat: (defeated SwiftPhantomLeft & defeated SwiftPhantomRight & defeated BluePhantom)
+    Main <-> PhantomDefeat: (defeated SwiftPhantomLeft & defeated SwiftPhantomRight & defeated BluePhantom)
 
     node TopRightLedge:
       door ToB7TopRight
@@ -23,9 +23,11 @@ area TempleOfTheOceanKing:
     node TriangleCrystalPedestal:
       gain TrianglePedestalB8
 
-    Main -> RoundCrystalPedestal: (state RoundCrystal & lose RoundCrystal)
+    Main -> RoundCrystalPedestal: state RoundCrystal
+    RoundCrystalPedestal -> Main: lose RoundCrystal
 
-    Main -> TriangleCrystalPedestal: ((item Bombs | item Bombchus) & state TriangleCrystal & lose TriangleCrystal)
+    Main -> TriangleCrystalPedestal: ((item Bombs | item Bombchus) & state TriangleCrystal)
+    TriangleCrystalPedestal -> Main: lose TriangleCrystal
 
     node TopLeft:
       flag WindDraft
@@ -41,3 +43,4 @@ area TempleOfTheOceanKing:
     TopLeft -> Main
     Main -> TopRightDoor: ((item Hammer & setting HammerClip) | item Bombchus | (state TrianglePedestalB8))
     TopRightDoor -> Main: state TrianglePedestalB8
+    Main <-> AfterTriangleCrystal: state TrianglePedestalB8

@@ -10,13 +10,11 @@ area RuinsIsle:
       enemy Stalfos
       door ToWestTop
       door ToDoylanPyramid
-
-    node RangedStalfos:
-      enemy Stalfos1
-      enemy Stalfos2
-      enemy Stalfos3
-      enemy Stalfos4
-      enemy Stalfos5
+      enemy RangedStalfos1
+      enemy RangedStalfos2
+      enemy RangedStalfos3
+      enemy RangedStalfos4
+      enemy RangedStalfos5
 
     FromWest -> Main
 

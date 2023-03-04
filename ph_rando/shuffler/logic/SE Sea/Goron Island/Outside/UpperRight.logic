@@ -27,5 +27,6 @@ area GoronIsland:
     Rightmost -> Leftmost: (item Bomb | item Bombchu)
     Leftmost -> Rightmost
     LeftmostAfterBomb -> Leftmost: (item Bomb | item Bombchu)
+    Rightmost <-> ChestAfterBombchu:  (item Bomb | item Bombchu)
 
     BeforeChestArea <-> ChestArea: flag GoronMazeSwitch

@@ -4,17 +4,30 @@ area TempleOfTheOceanKing:
       door ToB1
       enemy StationaryPhantom
 
+    node SummonKey:
+      flag KeySpawned
+
+    Upper <-> SummonKey: (item Sword | item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu | item GrapplingHook)
+
     node Lower:
       enemy PatrollingPhantom
 
-    node KeyArea:
+    Upper <-> Lower: (item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu)
+    Lower -> Upper
+
+    node MiddleSwitch:
+      gain RedSwitch
+      gain BlueSwitch
+
+    Lower <-> MiddleSwitch: lose BlueSwitch
+    Upper <-> MiddleSwitch: lose RedSwitch
+
+    node KeyArea
+    node FreestandingKey:
       chest Key
 
-    node AllDefeatChest:
-      chest Killer
-
-    node BombchuChest:
-      chest BombchuPath
+    Lower <-> KeyArea: (item Boomerang)
+    KeyArea <-> FreestandingKey: flag KeySpawned
 
     node DownstairsLockedDoor:
       lock DownstairsLockedDoor
@@ -23,12 +36,16 @@ area TempleOfTheOceanKing:
       door ToB3
 
     Upper -> DownstairsLockedDoor
-    Lower -> DownstairsLockedDoor
+    Downstairs -> DownstairsLockedDoor
     DownstairsLockedDoor -> Upper: open DownstairsLockedDoor
-    DownstairsLockedDoor -> Lower: open DownstairsLockedDoor
+    DownstairsLockedDoor -> Downstairs: open DownstairsLockedDoor
 
-    Upper -> Lower: (item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu)
-    Lower -> Upper
+    node AllDefeatChest:
+      chest Killer
 
     Lower <-> AllDefeatChest: (defeated StationaryPhantom & defeated PatrollingPhantom)
+
+    node BombchuChest:
+      chest BombchuPath
+
     Lower <-> BombchuChest: item Bombchus

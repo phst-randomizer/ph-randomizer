@@ -11,11 +11,11 @@ area GoronTemple:
     node TopRight:
       chest AfterSwitch
 
-    node Arena:
+    node TopArena:
       enemy ArmosArenaRight
       enemy ArmosArenaLeft
 
-    node AfterArena:
+    node AfterTopArena:
       enemy BlueChu
 
     node BombableWalls:
@@ -32,13 +32,13 @@ area GoronTemple:
     Entrance -> TopRight: item Shovel
     TopRight -> Entrance
 
-    TopRight -> Arena
-    Arena -> Entrance
-    Arena -> AfterArena: (defeated ArmosArenaRight & defeated ArmosArenaLeft)
-    AfterArena -> Entrance
-    AfterArena <-> BowTarget: item Bow
-    AfterArena -> BombableWalls: (item Bombs | item Bombchu)
-    BombableWalls -> AfterArena
+    TopRight -> TopArena
+    TopArena -> Entrance
+    TopArena -> AfterTopArena: (defeated ArmosArenaRight & defeated ArmosArenaLeft)
+    AfterTopArena -> Entrance
+    AfterTopArena <-> BowTarget: item Bow
+    AfterTopArena -> BombableWalls: (item Bombs | item Bombchu)
+    BombableWalls -> AfterTopArena
 
     B1Shortcut -> Entrance: (item Bombchu | (setting HammerClip & item Hammer))
 
@@ -102,10 +102,12 @@ area GoronTemple:
 
     node BottomStaircase:
       door ToB3BossKey
+
+    node BottomArena:
       enemy Hinox1
       enemy Hinox2
 
-    node AfterHinox:
+    node AfterBottomArena:
       enemy BlueChu1
       enemy BlueChu2
       enemy Gel1
@@ -131,9 +133,14 @@ area GoronTemple:
     BottomStaircase -> BottomLeft
     BottomLeft -> BottomStaircase: ((setting HammerReach & item Hammer) | (setting BombchuCameraLock & item Bombchu & item Hammer))
 
-    AfterHinox <-> TopLeft: (item Bombchu | item Bomb | item Boomerang)
+    BottomStaircase -> BottomArena
+    AfterBottomArena -> BottomArena: setting MirroredArenaDoors
+    BottomArena -> BottomStaircase: (defeated Hinox1 & defeated Hinox2)
+    BottomArena -> AfterBottomArena: (defeated Hinox1 & defeated Hinox2)
+
+    AfterBottomArena <-> TopLeft: (item Bombchu | item Bomb | item Boomerang)
     TopLeft <-> KillEyeSlug: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & defeated EyeSlug6 & defeated EyeSlug7 & defeated EyeSlug8)
-    AfterHinox <-> BossKeyChest: item Bombchu
+    AfterBottomArena <-> BossKeyChest: item Bombchu
 
 
   room B3:
