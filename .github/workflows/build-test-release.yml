@@ -243,7 +243,7 @@ jobs:
         run: python ph_rando/shuffler/main.py -o --
 
   tests:
-    name: Run tests [${{ matrix.test-module }}]
+    name: Run tests [${{ matrix.test-module }}, ${{ matrix.os }}]
     needs: [check-logic, check-aux-data]
     strategy:
       fail-fast: false
