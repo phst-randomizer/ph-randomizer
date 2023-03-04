@@ -45,10 +45,8 @@ DUNGEON_REWARD_CHECKS: dict[str, str] = {
     'BlaazBossRoom.Main.SpiritOfPower': 'power_spirit',
     'CyclokBossRoom.Main.SpiritOfWisdom': 'wisdom_spirit',
     'CraykBossRoom.Main.SpiritOfCourage': 'courage_spirit',
-    # TODO: these are currently "disconnected" from the rest of the logic graph due to some aux
-    # data not being complete. Once it's complete, these entries should be uncommented.
-    # 'GoronTemple.CrimsonineRoom.Crimsonine': 'crimsonine',
-    # 'IceTemple.AzurineRoom.Azurine': 'azurine',
+    'GoronTemple.CrimsonineRoom.Crimsonine': 'crimsonine',
+    'IceTemple.AzurineRoom.Azurine': 'azurine',
     'MutohTemple.B4.Aquanine': 'aquanine',
 }
 
