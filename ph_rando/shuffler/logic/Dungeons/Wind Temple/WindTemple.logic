@@ -2,6 +2,7 @@ area WindTemple:
   room F1:
     node Entrance:
       door Entrance
+      entrance BlueWarpShortcut
 
     node Arena:
       enemy Rope1
@@ -152,4 +153,5 @@ area WindTemple:
   room BeforeBoss:
     node Main:
       door ToF1
+      exit BlueWarpShortcut
       door ToBoss

@@ -2,3 +2,5 @@ area TempleOfTheOceanKing:
   room BridgeRoom:
     node Main:
       door ToB13
+      exit BlueWarp
+      door ToFinalBoss

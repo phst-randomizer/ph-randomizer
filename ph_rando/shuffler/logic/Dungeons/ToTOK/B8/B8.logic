@@ -18,10 +18,10 @@ area TempleOfTheOceanKing:
     TopRightLedge -> Main
 
     node RoundCrystalPedestal:
-      gain RoundPedestalB8
+      gain RoundPedestalTotOKB8
 
     node TriangleCrystalPedestal:
-      gain TrianglePedestalB8
+      gain TrianglePedestalTotOKB8
 
     Main -> RoundCrystalPedestal: state RoundCrystal
     RoundCrystalPedestal -> Main: lose RoundCrystal
@@ -39,8 +39,10 @@ area TempleOfTheOceanKing:
     node TopRightDoor:
       door ToB9Right
 
-    Main -> TopLeft: (flag WindDraft | state RoundPedestalB8)
+    Main -> TopLeft: (flag WindDraft | state RoundPedestalTotOKB8)
     TopLeft -> Main
-    Main -> TopRightDoor: ((item Hammer & setting HammerClip) | item Bombchus | (state TrianglePedestalB8))
-    TopRightDoor -> Main: state TrianglePedestalB8
-    Main <-> AfterTriangleCrystal: state TrianglePedestalB8
+
+    Main <-> AfterTriangleCrystal: state TrianglePedestalTotOKB8
+
+    Main -> TopRightDoor: ((item Hammer & setting HammerClip) | item Bombchus | (state TrianglePedestalTotOKB8))
+    TopRightDoor -> Main: state TrianglePedestalTotOKB8

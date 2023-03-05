@@ -1,0 +1,17 @@
+area FinalBoss:
+  room Main:       
+    node Bellum:
+      door ToBridgeRoom
+      enemy Bellum
+
+    node GhostShip:
+      enemy GhostShip
+
+    node BellumBeck:
+      enemy BellumBeck
+
+    node Victory
+
+    Bellum <-> GhostShip: defeated Bellum
+    GhostShip <-> BellumBeck: defeated GhostShip
+    BellumBeck <-> Victory: defeated BellumBeck   

@@ -8,6 +8,14 @@
         {
           "name": "ToB13",
           "entrance": "B13.DefeatPhantom.ToBridgeRoom"
+        },
+        {
+          "name": "BlueWarp",
+          "entrance": "TempleOfTheOceanKingLobby.Main.Main.BridgeRoomBlueWarp"
+        },
+        {
+          "name": "ToFinalBoss",
+          "entrance": "FinalBoss.Main.Bellum.ToBridgeRoom"
         }
       ],
       "name": "BridgeRoom"

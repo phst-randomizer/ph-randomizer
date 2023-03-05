@@ -12,11 +12,12 @@ area TempleOfTheOceanKing:
       door ToB8Left
 
     node SquareCrystalPedestal:
-      gain SquarePedestalStairway
+      gain SquarePedestalTotOKStairway
 
-    Main -> SquareCrystalPedestal: (state SquareCrystal & lose SquareCrystal)
+    Main -> SquareCrystalPedestal: state SquareCrystal
+    SquareCrystalPedestal -> Main: lose SquareCrystal
 
-    Main <-> TopLeft: state SquarePedestalStairway
+    Main <-> TopLeft: state SquarePedestalTotOKStairway
 
     node DefeatWizzrobe:
       chest WizzrobeKiller
@@ -38,11 +39,12 @@ area TempleOfTheOceanKing:
       door ToB9ChartRoom
 
     node ThreePedestals:
-      gain PedestalAllSet
+      gain PedestalTotOKAllSet
 
     node ThreePedestalsGoodOrder:
-      gain PedestalAllSetB10
+      gain PedestalTotOKAllSetB10
 
-    Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal & lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
-    ThreePedestals <-> ThreePedestalsGoodOrder: flag KnowCourageTempleOrder
-    Main <-> ToChartRoom: state PedestalAllSet
+    Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal)
+    ThreePedestals -> Main: (lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
+    ThreePedestals <-> ThreePedestalsGoodOrder: (flag KnowCourageTempleOrder | setting NoPuzzleSolution)
+    Main <-> ToChartRoom: state PedestalTotOKAllSet

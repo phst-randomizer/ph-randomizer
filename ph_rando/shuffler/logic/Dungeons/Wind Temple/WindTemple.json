@@ -204,6 +204,10 @@
         {
           "name": "ToBoss",
           "entrance": "CyclokBossRoom.Main.Fight.ToDungeon"
+        },
+        {
+          "name": "BlueWarpShortcut",
+          "entrance": "F1.Entrance.BlueWarpShortcut"
         }
       ]
     }

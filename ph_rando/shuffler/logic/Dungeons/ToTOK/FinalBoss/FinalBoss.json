@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../aux_schema.json",
+  "name": "FinalBoss",
+  "rooms": [
+    {
+      "name": "Main",
+      "exits": [
+        {
+          "name": "ToBridgeRoom",
+          "entrance": "TempleOfTheOceanKing.BridgeRoom.Main.ToFinalBoss"
+        }
+      ],
+      "enemies": [
+        {
+          "name": "Bellum",
+          "type": "bellum"
+        },
+        {
+          "name": "GhostShip",
+          "type": "ghost_ship"
+        },
+        {
+          "name": "BellumBeck",
+          "type": "bellumbeck"
+        }
+      ]
+    }
+  ]
+}

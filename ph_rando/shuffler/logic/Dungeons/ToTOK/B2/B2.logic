@@ -15,11 +15,11 @@ area TempleOfTheOceanKing:
     Upper <-> Lower: (item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu)
 
     node MiddleSwitch:
-      gain RedSwitch
-      gain BlueSwitch
+      gain SwitchRed
+      gain SwitchBlue
 
-    Lower <-> MiddleSwitch: lose BlueSwitch
-    Upper <-> MiddleSwitch: lose RedSwitch
+    Upper <-> MiddleSwitch: (state SwitchBlue & lose SwitchRed)
+    Lower <-> MiddleSwitch: (state SwitchRed & lose SwitchBlue)
 
     node KeyArea
     node FreestandingKey:

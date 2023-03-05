@@ -37,7 +37,7 @@ area CourageTemple:
       flag PolsDoorOpen
       flag KnowCourageTempleOrder
 
-    PolsVoiceStairs <-> PolsVoiceArea: (state BlueSwitch & lose RedSwitch)
+    PolsVoiceStairs <-> PolsVoiceArea: (state SwitchBlue & lose SwitchRed)
     # We can't go through if the current state is red, so crossing that point loses the possibility of the switch being red, but still needs the blue state to pass (in case it was already lost before)
 
     node PolsBombableWall:
@@ -69,12 +69,12 @@ area CourageTemple:
       door ToB1InvisibleMaze
 
     node PolsSquarePedestal:
-      gain SquarePedestalPolsVoice
+      gain SquarePedestalCouragePolsVoice
     # Placed the Crystal on the pedestal
 
     PolsVoiceArea <-> PolsSquarePedestal: (state SquareCrystal & lose SquareCrystal)
     # Can't put the crystal on the pedestal if we don't have it, and after placing it, we don't have it anymore
-    PolsVoiceArea <-> AfterSquareCrystal: state SquarePedestalPolsVoice
+    PolsVoiceArea <-> AfterSquareCrystal: state SquarePedestalCouragePolsVoice
     # The crystal has to be placed on that pedestal to go through
 
 
@@ -86,7 +86,7 @@ area CourageTemple:
     node EyeTargetDoor:
       flag BottomLeftDoor
 
-    LeftmostStairsF1 <-> BottomLeft: (state RedSwitch & lose BlueSwitch)
+    LeftmostStairsF1 <-> BottomLeft: (state SwitchRed & lose SwitchBlue)
 
     BottomLeft <-> EyeTargetDoor: item Bow
     BottomLeft <-> PolsVoiceArea: flag BottomLeftDoor
@@ -95,10 +95,10 @@ area CourageTemple:
       door ToF2Octorok
 
     node LeftSquarePedestal:
-      gain SquarePedestalBottomLeft
+      gain SquarePedestalCourageBottomLeft
 
     BottomLeft <-> LeftSquarePedestal: (state SquarePedestal & lose SquarePedestal)
-    BottomLeft <-> StairsToF2Octorok: state SquarePedestalBottomLeft
+    BottomLeft <-> StairsToF2Octorok: state SquarePedestalCourageBottomLeft
 
 
     node BottomRightArea:
@@ -135,8 +135,8 @@ area CourageTemple:
       door ToF1PolsVoice
 
     node ColorSwitchBottom: # Leaving this point, we can be at any of the two state
-      gain BlueSwitch
-      gain RedSwitch
+      gain SwitchBlue
+      gain SwitchRed
 
     MiddleMovingPlatform <-> ColorSwitchBottom: (item Bow | item Boomerang | item Hammer)
 
@@ -151,8 +151,8 @@ area CourageTemple:
       door ToF1Leftmost
 
     node ColorSwitchLeft:
-      gain BlueSwitch
-      gain RedSwitch
+      gain SwitchBlue
+      gain SwitchRed
 
     LeftmostStairsB1 <-> ColorSwitchLeft: item Bow
     MiddleMovingPlatform -> AfterInvisibleMaze: (item GrapplingHook & flag InvisibleMazePath)
@@ -171,8 +171,8 @@ area CourageTemple:
       chest EyeTarget
 
     node ColorSwitchRight:
-      gain BlueSwitch
-      gain RedSwitch
+      gain SwitchBlue
+      gain SwitchRed
 
     AfterTorches <-> Target: (item Bow & item Boomerang)
     AfterTorches <-> ColorSwitchRight: (item Bow & item Boomerang)
@@ -180,7 +180,7 @@ area CourageTemple:
     node StairsToF1TopRight:
       door ToF1TopRight
 
-    AfterTorches <-> StairsToF1TopRight: (state BlueSwitch & lose RedSwitch)
+    AfterTorches <-> StairsToF1TopRight: (state SwitchBlue & lose SwitchRed)
 
 
   room F2:

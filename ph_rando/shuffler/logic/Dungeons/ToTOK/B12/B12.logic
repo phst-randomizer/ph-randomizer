@@ -37,7 +37,7 @@ area TempleOfTheOceanKing:
     node AfterTriforce:
       door ToB13
 
-    Main -> AfterTriforce: (state ForceGem1 & state ForceGem2 & state ForceGem3)
+    Main <-> AfterTriforce: (state Gem1B12 & state Gem2B12 & state Gem3B12)
 
 
     node FirstWizzrobe:
@@ -46,8 +46,8 @@ area TempleOfTheOceanKing:
     node SecondWizzrobe:
       enemy WizzrobeRight
 
-    Main -> FirstWizzrobe: (state ForceGem1 | state ForceGem2 | state ForceGem3)
-    Main -> SecondWizzrobe: ((state ForceGem1 & state ForceGem2) | (state ForceGem2 & state ForceGem3) | (state ForceGem3 & state ForceGem1))
+    Main <-> FirstWizzrobe: (state Gem1B12 | state Gem2B12 | state Gem3B12)
+    Main <-> SecondWizzrobe: ((state Gem1B12 & state Gem2B12) | (state Gem2B12 & state Gem3B12) | (state Gem3B12 & state Gem1B12))
 
 
     node DefeatWizzrobes:
@@ -56,5 +56,5 @@ area TempleOfTheOceanKing:
     node DefeatPhantoms:
       chest PhantomKiller
 
-    Main -> DefeatWizzrobes: (defeated WizzrobeLeft & defeated WizzrobeRight)
-    Main -> DefeatPhantoms: (defeated GoldPhantom & defeated SwiftPhantom & defeated BluePhantom)
+    Main <-> DefeatWizzrobes: (defeated WizzrobeLeft & defeated WizzrobeRight)
+    Main <-> DefeatPhantoms: (defeated GoldPhantom & defeated SwiftPhantom & defeated BluePhantom)

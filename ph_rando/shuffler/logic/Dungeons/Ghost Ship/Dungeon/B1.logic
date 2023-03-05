@@ -39,7 +39,7 @@ area GhostShip:
     Top <-> TopRight: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
 
     node TrianglePedestal:
-      gain TrianglePedestalSet
+      gain TrianglePedestalGhostSet
 
     TopRight -> TrianglePedestal: (state TriangleCrystal & lose TriangleCrystal)
     TrianglePedestal -> TopRight
@@ -54,7 +54,7 @@ area GhostShip:
       enemy RatRight3
       chest NearPurpleCubus
 
-    TopRight <-> Right: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | state TrianglePedestalSet)
+    TopRight <-> Right: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | state TrianglePedestalGhostSet)
 
     node AfterPurpleCubusSwitch:
       gain PurpleCubusFollowing
@@ -63,11 +63,11 @@ area GhostShip:
     Right <-> AfterPurpleCubusSwitch # hit the switch with a pot
 
     node RoundPedestal:
-      gain RoundPedestalSet
+      gain RoundPedestalGhostSet
 
     Right -> RoundPedestal: (state RoundCrystal & lose RoundCrystal)
     RoundPedestal -> Right
-    Right <-> Bottom: state RoundPedestalSet
+    Right <-> Bottom: state RoundPedestalGhostSet
 
     node PurpleCubusBrought:
       flag PurpleCubusSaved

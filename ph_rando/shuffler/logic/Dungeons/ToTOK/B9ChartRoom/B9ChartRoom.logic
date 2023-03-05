@@ -9,4 +9,4 @@ area TempleOfTheOceanKing:
     node RightOrder:
       door ToB10
 
-    Main <-> RightOrder: (flag PedestalAllSetB10 | setting NoPuzzleSolution)
+    Main <-> RightOrder: flag PedestalTotOKAllSetB10

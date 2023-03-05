@@ -35,11 +35,11 @@ area FireTemple:
       door ToF2TopLeft
 
     node TopLeftColorSwitch:
-      gain BlueSwitch
+      gain SwitchBlue
 
     node TopLeftColorSwitchHammerClip:
-      gain BlueSwitch
-      gain RedSwitch
+      gain SwitchBlue
+      gain SwitchRed
 
     node MiddleLeft
 
@@ -52,7 +52,7 @@ area FireTemple:
 
     TopLeft <-> TopLeftColorSwitch: (item Boomerang | item Bombchus | item Bombs)
     TopLeft <-> TopLeftColorSwitchHammerClip: (item Hammer & setting HammerClip)
-    TopLeft <-> MiddleLeft: (state BlueSwitch & lose RedSwitch)
+    TopLeft <-> MiddleLeft: (state SwitchBlue & lose SwitchRed)
     MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
 
     StairsBottomLeft -> BottomLeftArena
@@ -65,8 +65,8 @@ area FireTemple:
       door ToF1Middle
       enemy RedChuChu
       enemy YellowChuChu1
-      gain BlueSwitch
-      gain RedSwitch
+      gain SwitchBlue
+      gain SwitchRed
 
     node Arena:
       enemy YellowChuChu2
@@ -76,7 +76,7 @@ area FireTemple:
       enemy Gel4
       enemy Gel5
 
-    TopRightStairs <-> Arena: (state BlueSwitch & lose RedSwitch)
+    TopRightStairs <-> Arena: (state SwitchBlue & lose SwitchRed)
 
     node ArenaReward:
       chest BoomerangChest
@@ -103,8 +103,8 @@ area FireTemple:
 
     node LockedBottomRightDoor:
       lock LockedBottomRightDoor
-      gain RedSwitch
-      gain BlueSwitch
+      gain SwitchRed
+      gain SwitchBlue
 
     node StairsBottomRight:
       door ToF3
