@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections import defaultdict
 from copy import copy, deepcopy
 from dataclasses import dataclass, field
-from enum import Enum, EnumMeta
 from functools import cached_property
 import itertools
 import json
@@ -14,6 +13,7 @@ import random
 import inflection
 from ordered_set import OrderedSet
 
+from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
 from ph_rando.shuffler._parser import parse_edge_constraint, parse_logic
 from ph_rando.shuffler.aux_models import (
     Area,
@@ -1203,36 +1203,3 @@ class Edge:
                     raise Exception(f'Invalid edge descriptor {other!r}')
                 logging.warning(f'Edge descriptor {other!r} not implemented yet.')
                 return False
-
-
-class MetaEnum(EnumMeta):
-    def __contains__(cls, item):
-        try:
-            cls(item)
-        except ValueError:
-            return False
-        return True
-
-
-class NodeDescriptor(Enum, metaclass=MetaEnum):
-    CHEST = 'chest'
-    FLAG = 'flag'
-    DOOR = 'door'
-    ENTRANCE = 'entrance'
-    EXIT = 'exit'
-    MAIL = 'mail'
-    HINT = 'hint'
-    ENEMY = 'enemy'
-    LOCK = 'lock'
-    GAIN = 'gain'
-    SHOP = 'shop'
-
-
-class EdgeDescriptor(Enum, metaclass=MetaEnum):
-    ITEM = 'item'
-    FLAG = 'flag'
-    OPEN = 'open'
-    DEFEATED = 'defeated'
-    SETTING = 'setting'
-    STATE = 'state'
-    LOSE = 'lose'
