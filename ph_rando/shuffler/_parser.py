@@ -7,7 +7,7 @@ import pyparsing as pp
 class LogicEdge(BaseModel):
     source_node: str
     destination_node: str
-    direction: Literal['->'] | Literal['<->']
+    direction: Literal['->', '<->']
     constraints: str | None
 
 
