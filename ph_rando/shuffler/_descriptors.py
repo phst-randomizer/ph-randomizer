@@ -32,3 +32,4 @@ class EdgeDescriptor(Enum, metaclass=MetaEnum):
     SETTING = 'setting'
     STATE = 'state'
     LOSE = 'lose'
+    MACRO = 'macro'

@@ -28,6 +28,7 @@ from ph_rando.shuffler.aux_models import (
 )
 
 ENEMIES_MAPPING = json.loads((Path(__file__).parent / 'enemies.json').read_text())
+LOGIC_MACROS = json.loads((Path(__file__).parent / 'macros.json').read_text())
 
 DUNGEON_STARTING_NODES: dict[str, set[str]] = {
     'MercayGrotto': {'F1.Lower', 'F2.EastExit'},
@@ -1198,6 +1199,20 @@ class Edge:
                     setting_is_set, bool
                 ), f'Setting {value} must have `flag=true` to be used in logic.'
                 return setting_is_set
+            case EdgeDescriptor.MACRO.value:
+                if value not in LOGIC_MACROS:
+                    raise Exception(f'Invalid macro "{value}", not found in macros.json!')
+                return self._is_traversable(
+                    parse_edge_constraint(LOGIC_MACROS[value]),
+                    current_inventory,
+                    current_flags,
+                    current_keys,
+                    current_unlocked_doors,
+                    current_states,
+                    ignored_nodes=ignored_nodes.union({self.dest})
+                    if ignored_nodes
+                    else {self.dest},
+                )
             case other:
                 if other not in EdgeDescriptor:
                     raise Exception(f'Invalid edge descriptor {other!r}')
