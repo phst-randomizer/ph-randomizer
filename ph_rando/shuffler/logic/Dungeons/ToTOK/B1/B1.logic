@@ -21,7 +21,7 @@ area TempleOfTheOceanKing:
 
     Lower -> Downstairs: open ToTOKKey
 
-    Lower <-> Upper: (item Bombs | item Bombchus | item GrapplingHook | item Boomerang)
+    Lower <-> Upper: (macro Bombs | item GrapplingHook | item Boomerang)
 
     Lower <-> AllDefeatChest: (defeated RightPhantom & defeated LeftPhantom)
     Lower <-> EyeChest: (item GrapplingHook & item Bow)

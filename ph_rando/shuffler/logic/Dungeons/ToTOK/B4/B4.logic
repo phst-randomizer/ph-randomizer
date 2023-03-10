@@ -37,7 +37,7 @@ area TempleOfTheOceanKing:
 
     Bottom <-> BottomDoor: open BottomDoor
 
-    Bottom <-> SpikeArea: ((setting HammerClip & item Hammer) | (setting BoomerangClip & item Boomerang) | item Bombs | item Bombchu)
+    Bottom <-> SpikeArea: (macro HammerClip | macro BoomerangClip | macro Bombs)
 
     Bottom <-> PhantomsDefeated: (defeated SpawnedPhantom & defeated Phantom)
     TopRight <-> EyesDefeated: (defeated RightPhantomEye & defeated LeftPhantomEye & defeated TopPhantomEye)

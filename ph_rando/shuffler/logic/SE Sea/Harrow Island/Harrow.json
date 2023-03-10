@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../aux_schema.json",
+  "name": "HarrowIsland",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "TreasureMap1",
+          "type": "dig_spot",
+          "contents": "treasure_map_se1",
+          "zmb_file_path": "TODO",
+          "zmb_actor_index": 0
+        },
+        {
+          "name": "TreasureMap2",
+          "type": "dig_spot",
+          "contents": "treasure_map_se2",
+          "zmb_file_path": "TODO",
+          "zmb_actor_index": 0
+        },
+        {
+          "name": "TreasureMap3",
+          "type": "dig_spot",
+          "contents": "treasure_map_ne2",
+          "zmb_file_path": "TODO",
+          "zmb_actor_index": 0
+        },
+        {
+          "name": "TreasureMap4",
+          "type": "dig_spot",
+          "contents": "treasure_map_ne3",
+          "zmb_file_path": "TODO",
+          "zmb_actor_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "Boat",
+          "entrance": "Sea.SE.Harrow.HarrowPort"
+        }
+      ]
+    }
+  ]
+}

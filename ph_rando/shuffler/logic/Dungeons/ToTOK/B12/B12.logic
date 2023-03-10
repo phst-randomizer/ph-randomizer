@@ -24,14 +24,14 @@ area TempleOfTheOceanKing:
       chest RightSwitch
 
     RightSafe -> RightSwitch: item Hammer
-    Main -> RightSwitch: (item Hammer & setting HammerClip)
+    Main -> RightSwitch: macro HammerClip
     RightSwitch -> Main
 
 
     node PhantomGem:
       chest PhantomForceGem
 
-    Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | item Bombs | item Bombchus | item Sword)
+    Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | macro Bombs | item Sword)
 
 
     node AfterTriforce:

@@ -24,9 +24,9 @@ area GoronIsland:
     node ChestArea:
       chest ChestBehindSpikes
 
-    Rightmost -> Leftmost: (item Bomb | item Bombchu)
+    Rightmost -> Leftmost: macro Bombs
     Leftmost -> Rightmost
-    LeftmostAfterBomb -> Leftmost: (item Bomb | item Bombchu)
-    Rightmost <-> ChestAfterBombchu:  (item Bomb | item Bombchu)
+    LeftmostAfterBomb -> Leftmost: macro Bombs
+    Rightmost <-> ChestAfterBombchu:  macro Bombs
 
     BeforeChestArea <-> ChestArea: flag GoronMazeSwitch

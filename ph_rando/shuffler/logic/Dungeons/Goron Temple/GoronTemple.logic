@@ -37,10 +37,10 @@ area GoronTemple:
     TopArena -> AfterTopArena: (defeated ArmosArenaRight & defeated ArmosArenaLeft)
     AfterTopArena -> Entrance
     AfterTopArena <-> BowTarget: item Bow
-    AfterTopArena -> BombableWalls: (item Bombs | item Bombchu)
+    AfterTopArena -> BombableWalls: macro Bombs
     BombableWalls -> AfterTopArena
 
-    B1Shortcut -> Entrance: (item Bombchu | (setting HammerClip & item Hammer))
+    B1Shortcut -> Entrance: (item Bombchu | macro HammerClip)
 
   room BombableF1:
     node LeftSide:
@@ -88,7 +88,7 @@ area GoronTemple:
     LeftMain <-> BottomLeft: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
 
     BottomLeft <-> EyeSlugChest: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5)
-    BottomLeft -> LeftStaircase: ((setting HammerClip & item Hammer) | (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & item Bombchu))
+    BottomLeft -> LeftStaircase: (macro HammerClip | (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & item Bombchu))
 
   room B2:
     node BottomLeft:
@@ -129,9 +129,9 @@ area GoronTemple:
     node BossKeyChest:
       chest BossKey
 
-    BottomLeft -> MiddleLeft: (item Bombchu | (setting HammerClip & item Hammer))
+    BottomLeft -> MiddleLeft: (item Bombchu | macro HammerClip)
     BottomStaircase -> BottomLeft
-    BottomLeft -> BottomStaircase: ((setting HammerReach & item Hammer) | (setting BombchuCameraLock & item Bombchu & item Hammer))
+    BottomLeft -> BottomStaircase: (macro HammerReach | macro BombchuCameraLock)
 
     BottomStaircase -> BottomArena
     AfterBottomArena -> BottomArena: setting MirroredArenaDoors
@@ -169,7 +169,7 @@ area GoronTemple:
       door ToB4
 
     BottomLeft <-> BlinChest: (defeated Miniblin1 & defeated Miniblin2 & defeated Miniblin3 & defeated Miniblin4 & defeated Miniblin5 & defeated Miniblin6)
-    BottomLeft -> ArmosRoom: (item Bombchu | (setting HammerClip & item Hammer))
+    BottomLeft -> ArmosRoom: (item Bombchu | macro HammerClip)
     ArmosRoom -> BossKeyLock: (defeated Armos1 & defeated Armos2 & defeated Armos3 & defeated Armos4)
     BossKeyLock <-> AfterBossKey: item BossKeyGoron
 

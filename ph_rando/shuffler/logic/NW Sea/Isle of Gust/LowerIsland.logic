@@ -37,7 +37,7 @@ area Gust:
       chest DigSpot3
 
     BeforeCave <-> DigSpotsStart: item Shovel
-    BeforeCave -> BombableWall: (item Bombs | item Bombchus)
+    BeforeCave -> BombableWall: macro Bombs
     BombableWall -> BeforeCave
 
 

@@ -7,12 +7,12 @@ area TempleOfTheOceanKing:
     node SummonKey:
       flag KeySpawned
 
-    Upper <-> SummonKey: (item Sword | item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu | item GrapplingHook)
+    Upper <-> SummonKey: (item Sword | item Boomerang | item Bow | item Hammer | macro Bombs | item GrapplingHook)
 
     node Lower:
       enemy PatrollingPhantom
 
-    Upper <-> Lower: (item Boomerang | item Bow | item Hammer | item Bombs | item Bombchu)
+    Upper <-> Lower: (item Boomerang | item Bow | item Hammer | macro Bombs)
 
     node MiddleSwitch:
       gain SwitchRed
@@ -25,7 +25,7 @@ area TempleOfTheOceanKing:
     node FreestandingKey:
       chest Key
 
-    Lower <-> KeyArea: (item Boomerang)
+    Lower <-> KeyArea: item Boomerang
     KeyArea <-> FreestandingKey: flag KeySpawned
 
     node DownstairsLockedDoor:

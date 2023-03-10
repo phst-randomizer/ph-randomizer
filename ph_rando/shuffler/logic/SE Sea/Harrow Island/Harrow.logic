@@ -18,5 +18,5 @@ area HarrowIsland:
 
     # TODO: verify that these are actually the requirements
     # to dig up these treasures
-    Minigame <-> HaveSESeaChart: item SESeaChart
+    Minigame <-> HaveSESeaChart: flag IceTempleBeaten
     Minigame <-> HaveNESeaChart: item NESeaChart

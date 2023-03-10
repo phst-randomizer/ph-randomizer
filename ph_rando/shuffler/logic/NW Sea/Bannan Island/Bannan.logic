@@ -44,7 +44,7 @@ area Bannan:
     node RightSide:
       door OutsideRight
 
-    LeftSide <-> RightSide: (item Bombs | item Bombchus)
+    LeftSide <-> RightSide: macro Bombs
 
   room WayfarerHouse:
     node Main:

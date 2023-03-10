@@ -8,4 +8,4 @@ area Mercay:
       door Grotto
 
     BombableWall -> Main
-    Main -> BombableWall: (item Bombs | item Bombchus)
+    Main -> BombableWall: macro Bombs

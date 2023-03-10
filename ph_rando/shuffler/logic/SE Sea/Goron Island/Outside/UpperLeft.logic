@@ -21,4 +21,4 @@ area GoronIsland:
 
     Main -> Dungeon: defeated LikeLike
     Dungeon -> Shortcut
-    Shortcut -> Dungeon: (setting HammerReach & item Hammer)
+    Shortcut -> Dungeon: macro HammerReach

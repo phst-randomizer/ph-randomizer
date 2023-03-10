@@ -28,7 +28,7 @@ area FireTemple:
     TopRight -> LockedDoorToTopRight
     LockedDoorToTopRight -> Entrance: open LockedDoorToTopRight
     LockedDoorToTopRight -> TopRight: open LockedDoorToTopRight
-    TopRight <-> Switches: (item Boomerang | item Sword | item Bombs | item Bombchus)
+    TopRight <-> Switches: (item Boomerang | item Sword | macro Bombs)
     Entrance <-> StairsMiddle: flag FireMiddleDoor
 
     node TopLeft:
@@ -50,10 +50,10 @@ area FireTemple:
     node StairsBottomLeft:
       door ToF2BottomLeft
 
-    TopLeft <-> TopLeftColorSwitch: (item Boomerang | item Bombchus | item Bombs)
-    TopLeft <-> TopLeftColorSwitchHammerClip: (item Hammer & setting HammerClip)
+    TopLeft <-> TopLeftColorSwitch: (item Boomerang | macro Bombs)
+    TopLeft <-> TopLeftColorSwitchHammerClip: macro HammerClip
     TopLeft <-> MiddleLeft: (state SwitchBlue & lose SwitchRed)
-    MiddleLeft -> Entrance: (item Boomerang | (item Hammer & setting HammerClip))
+    MiddleLeft -> Entrance: (item Boomerang | macro HammerClip)
 
     StairsBottomLeft -> BottomLeftArena
     MiddleLeft -> BottomLeftArena
@@ -111,10 +111,10 @@ area FireTemple:
 
     BottomLeft <-> KeesesDefeat: (defeated FireKeese1 & defeated FireKeese2 & defeated FireKeese3)
     BottomLeft <-> RatDefeat: defeated Rat
-    BottomLeft -> LockedBottomRightDoor: ((item Hammer & setting HammerClip) | item Bombs | item Boomerang)
+    BottomLeft -> LockedBottomRightDoor: (macro HammerClip | item Bombs | item Boomerang)
     StairsBottomRight -> LockedBottomRightDoor
     LockedBottomRightDoor -> StairsBottomRight: open LockedBottomRightDoor
-    LockedBottomRightDoor -> BottomLeft: (open LockedBottomRightDoor & ((item Hammer & setting HammerClip) | item Bombs | item Boomerang | item Bombchus))
+    LockedBottomRightDoor -> BottomLeft: (open LockedBottomRightDoor & (macro HammerClip | item Bombs | item Boomerang | item Bombchus))
 
   room F3:
     node RightSide:

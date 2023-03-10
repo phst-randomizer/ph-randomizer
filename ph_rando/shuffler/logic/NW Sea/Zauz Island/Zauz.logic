@@ -8,7 +8,7 @@ area Zauz:
     node DigSpot:
       chest DigSpot
 
-    Main -> DigSpot: (item Shovel)
+    Main -> DigSpot: item Shovel
     DigSpot -> Main
 
   room ZauzHouse:

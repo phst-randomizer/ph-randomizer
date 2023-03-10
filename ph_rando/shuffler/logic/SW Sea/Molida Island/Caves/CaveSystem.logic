@@ -46,4 +46,4 @@ area Molida:
     MainLower -> LedgeRight: item GrapplingHook
     Arena -> DoorAfterArena: defeated Geozard
     MainUp -> MainLower
-    MainLower -> MainUp: (item Bombs | item Bombchus)
+    MainLower -> MainUp: macro Bombs

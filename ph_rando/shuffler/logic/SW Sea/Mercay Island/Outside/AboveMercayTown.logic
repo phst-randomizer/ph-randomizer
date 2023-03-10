@@ -22,5 +22,5 @@ area Mercay:
       chest AboveEntrance
 
     Island -> Main
-    Main -> HiddenBombableWall: (item Bombs | item Bombchus)
+    Main -> HiddenBombableWall: macro Bombs
     Ledge -> Main

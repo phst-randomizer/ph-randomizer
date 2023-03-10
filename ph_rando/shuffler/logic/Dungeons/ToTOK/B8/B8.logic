@@ -26,7 +26,7 @@ area TempleOfTheOceanKing:
     Main -> RoundCrystalPedestal: state RoundCrystal
     RoundCrystalPedestal -> Main: lose RoundCrystal
 
-    Main -> TriangleCrystalPedestal: ((item Bombs | item Bombchus) & state TriangleCrystal)
+    Main -> TriangleCrystalPedestal: (macro Bombs & state TriangleCrystal)
     TriangleCrystalPedestal -> Main: lose TriangleCrystal
 
     node TopLeft:
@@ -44,5 +44,5 @@ area TempleOfTheOceanKing:
 
     Main <-> AfterTriangleCrystal: state TrianglePedestalTotOKB8
 
-    Main -> TopRightDoor: ((item Hammer & setting HammerClip) | item Bombchus | (state TrianglePedestalTotOKB8))
+    Main -> TopRightDoor: (macro HammerClip | item Bombchus | (state TrianglePedestalTotOKB8))
     TopRightDoor -> Main: state TrianglePedestalTotOKB8

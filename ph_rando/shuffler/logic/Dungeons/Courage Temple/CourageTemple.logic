@@ -18,7 +18,7 @@ area CourageTemple:
     node StairsAfterMoldorm:
       door ToB1Arena
 
-    Entrance <-> BehindBombableWall: (item Bombs | item Bombchus)
+    Entrance <-> BehindBombableWall: macro Bombs
 
     Entrance -> LockedDoorToArena
     MoldormArena -> LockedDoorToArena: (defeated Moldorm1 & defeated Moldorm2)
@@ -45,7 +45,7 @@ area CourageTemple:
       chest PolsRight
       flag InvisibleMazePath
 
-    PolsVoiceArea <-> PolsBombableWall: (item Bombs | item Bombchus)
+    PolsVoiceArea <-> PolsBombableWall: macro Bombs
 
     node PolsVoiceKill:
       chest PolsKey
@@ -210,7 +210,7 @@ area CourageTemple:
       door ToF1SpikeTraps
 
     Octoroks -> ChestAfterEyes: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6 & defeated Octorok7 & item Bow)
-    Octoroks -> StairsAfterSpikeTraps: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6 & defeated Octorok7 & (item Bombs | item Bombchus))
+    Octoroks -> StairsAfterSpikeTraps: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6 & defeated Octorok7 & macro Bombs)
 
 
     node EmptyRoom:
@@ -235,4 +235,4 @@ area CourageTemple:
     node ChestBehindWall:
       chest Hidden
 
-    Main <-> ChestBehindWall: (item Bombs | item Bombchus)
+    Main <-> ChestBehindWall: macro Bombs

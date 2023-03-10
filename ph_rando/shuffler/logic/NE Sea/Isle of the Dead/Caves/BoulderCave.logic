@@ -13,5 +13,5 @@ area DeadIsle:
     node BombableWall:
       door BombableDoor
 
-    Main -> BombableWall: (item Bombs | item Bombchus)
+    Main -> BombableWall: macro Bombs
     BombableWall -> Main

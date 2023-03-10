@@ -34,7 +34,7 @@ area GhostShip:
       flag PlatePressed
 
     Bottom <-> Levers: (flag LeverOrder24513 | setting NoPuzzleSolution)
-    Top -> AfterLevers: (setting HammerClip | flag LeversPulled)
+    Top -> AfterLevers: (macro HammerClip | flag LeversPulled)
 
     node GreenCubus:
       gain GreenCubusFollowing

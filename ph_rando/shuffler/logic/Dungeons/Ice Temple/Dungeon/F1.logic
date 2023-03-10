@@ -23,11 +23,11 @@ area IceTemple:
     UpperRightSide <-> RightStairs: (lose SwitchRed & state SwitchBlue)
 
     LowerRightSide -> Entrance
-    Entrance -> LowerRightSide: (setting HammerClip & item Hammer)
+    Entrance -> LowerRightSide: macro HammerClip
 
     Entrance -> Switch
-    MiddlePassage -> Switch: (lose SwitchRed & state SwitchBlue & (item Boomerang | item Bombs | item Bombchu))
-    UpperRightSide -> Switch: (lose SwitchBlue & state SwitchRed & (item Bombs | item Bombchu))
+    MiddlePassage -> Switch: (lose SwitchRed & state SwitchBlue & (item Boomerang | macro Bombs))
+    UpperRightSide -> Switch: (lose SwitchBlue & state SwitchRed & macro Bombs)
 
     node TopLeft:
       door ToF2Left
@@ -45,6 +45,6 @@ area IceTemple:
     TopLeft -> LeftSide: item GrapplingHook
 
     LeftSide -> Entrance
-    Entrance -> LeftSide: (setting HammerClip & item Hammer)
+    Entrance -> LeftSide: macro HammerClip
 
     LeftSide -> DownLeftStairs: item GrapplingHook

@@ -33,10 +33,10 @@ area IceTemple:
 
     StairsToF1 <-> LeftSide: (lose SwitchBlue & state SwitchRed)
 
-    LeftSide -> BelowBombableWalls: (((item Bomb | item Bombchu) & item GrapplingHook) | (setting HammerClip & item Hammer))
+    LeftSide -> BelowBombableWalls: ((macro Bombs & item GrapplingHook) | macro HammerClip)
     BelowBombableWalls -> LeftSide
 
-    BelowBombableWalls <-> AboveBombableWalls: (item Bomb | item Bombchu)
+    BelowBombableWalls <-> AboveBombableWalls: macro Bombs
 
     AboveBombableWalls <-> RightSide: item GrapplingHook
 

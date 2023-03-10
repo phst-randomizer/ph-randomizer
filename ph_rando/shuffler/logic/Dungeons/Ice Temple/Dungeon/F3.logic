@@ -34,7 +34,7 @@ area IceTemple:
 
     RightSide <-> Main: (item GrapplingHook | item Boomerang | item Bow | (item Sword & item CourageSpiritLV1))
 
-    Main <-> Switch: item Bomb
+    Main <-> Switch: item Bombs
 
     Main <-> AfterBlue: (lose SwitchBlue & state SwitchRed)
     Main <-> After4Switches: (lose SwitchBlue & state SwitchRed & item Boomerang)

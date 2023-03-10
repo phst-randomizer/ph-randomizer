@@ -30,7 +30,7 @@ area WindTemple:
     node BossKeyChest:
       chest BossKey
 
-    MiddleRight <-> TopRight: (item Bombs | item Bombchus)
+    MiddleRight <-> TopRight: macro Bombs
     TopRight -> BossKeyChest: (item Sword | item Bombs) # you can use two bombs here. TODO: can two bombchus be used?
     BossKeyChest -> BossKeyHoleRoom
 
@@ -83,7 +83,7 @@ area WindTemple:
       door ToF1MiddleRightStairs
 
     TopLeft -> TopMiddle
-    TopMiddle <-> TopRight: (item Bombs | item Bombchus)
+    TopMiddle <-> TopRight: macro Bombs
 
 
   room B2:
@@ -103,10 +103,10 @@ area WindTemple:
       door ToB2TopRoomHiddenArea
 
     BottomRight -> Center
-    Center -> BottomRight: (item Bombs | item Bombchus)
+    Center -> BottomRight: macro Bombs
     Center -> BottomLeftStairs: item Shovel
     Center -> TopDoor: item Shovel
-    Center -> TopBombWall: (item Bombs | item Bombchus)
+    Center -> TopBombWall: macro Bombs
     TopBombWall -> Center
 
     node TopRightLockedDoor:
@@ -123,7 +123,7 @@ area WindTemple:
     node LeftBombWall:
       door ToB2LeftRoom
 
-    Center -> LeftBombWall: (item Bombs | item Bombchus)
+    Center -> LeftBombWall: macro Bombs
     LeftBombWall -> Center
 
   room B2TopRoom:
@@ -138,7 +138,7 @@ area WindTemple:
       door ToB2MainBombWall
 
     Main -> Stairs
-    Stairs -> Main: (item Bombs | item Bombchus)
+    Stairs -> Main: macro Bombs
 
   room B2LeftRoom:
     node Bottom:
