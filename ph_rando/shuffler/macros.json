@@ -1,3 +1,11 @@
 {
-  "HitSwitch": "item Sword | item Boomerang"
+  "Bombs": "item Bomb | item Bombchu | state BombFlower",
+  "SwordBeam": "item Sword & item CourageSpiritLv1",
+
+  "HitSwitch": "item Sword | item Boomerang | item Bow | item GrapplingHook | item Bomb | item Bombchu | state BombFlower",
+
+  "HammerClip": "setting HammerClip & item Hammer",
+  "HammerReach": "setting HammerReach & item Hammer",
+  "BoomerangClip": "setting BoomerangClip & item Boomerang",
+  "BombchuCameraLock": "settings BombchuCameraLock & item Bombchu & item Hammer"
 }
