@@ -496,8 +496,6 @@ class Logic:
             case NodeDescriptor.LOCK.value:
                 assert not node.lock, f'Node {node} already has a locked door associated with it.'
                 node.lock = descriptor_value
-            case NodeDescriptor.GAIN.value:
-                node.states.add(descriptor_value)
             case NodeDescriptor.ENEMY.value:
                 try:
                     node.enemies.append(
@@ -600,7 +598,6 @@ class Logic:
         keys: dict[str, int] | None = None,
         unlocked_doors: set[Node] | None = None,
         flags: set[str] | None = None,
-        states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
     ):
@@ -611,7 +608,6 @@ class Logic:
                 keys,
                 unlocked_doors,
                 flags,
-                states,
                 new_ignored_nodes,
             ) = cls._assumed_search(
                 starting_node,
@@ -619,7 +615,6 @@ class Logic:
                 keys,
                 unlocked_doors,
                 flags,
-                states,
                 ignored_nodes,
                 visited_nodes,
             )
@@ -629,7 +624,6 @@ class Logic:
                 keys,
                 unlocked_doors,
                 flags,
-                states,
                 new_ignored_nodes,
             ) = cls._assumed_search(
                 starting_node,
@@ -637,7 +631,6 @@ class Logic:
                 keys,
                 unlocked_doors,
                 flags,
-                states,
                 ignored_nodes,
                 visited_nodes,
             )
@@ -652,7 +645,6 @@ class Logic:
         keys: dict[str, int] | None = None,
         unlocked_doors: set[Node] | None = None,
         flags: set[str] | None = None,
-        states: set[str] | None = None,
         ignored_nodes: set[Node] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
     ):
@@ -664,7 +656,6 @@ class Logic:
             `inventory`: Current inventory.
             `keys`: Current small keys held for each dungeon.
             `flags`: Current flags that are set.
-            `states`: Current logical states that have been "gained".
             `visited_nodes`: Nodes that have been visited already in this traversal.
 
         Returns:
@@ -674,9 +665,6 @@ class Logic:
 
         if visited_nodes is None:
             visited_nodes = OrderedSet()
-
-        if states is None:
-            states = set()
 
         if flags is None:
             flags = set()
@@ -703,10 +691,6 @@ class Logic:
             if flag not in flags:
                 flags.add(flag)
 
-        for state in starting_node.states:
-            if state not in states:
-                states.add(state)
-
         visited_nodes.add(starting_node)  # Acknowledge this node as "visited"
 
         edges_that_require_keys: list[Edge] = []
@@ -722,7 +706,6 @@ class Logic:
                 current_flags=flags,
                 current_keys=keys,
                 current_unlocked_doors=unlocked_doors,
-                current_states=states,
                 visited_nodes=visited_nodes,
                 ignored_nodes=ignored_nodes,
             ):
@@ -733,12 +716,6 @@ class Logic:
                     edges_that_require_keys.append(edge)
                 # Otherwise, just traverse the edge
                 else:
-                    # Remove states lost by traversing this edge
-                    new_states = {
-                        state
-                        for state in states
-                        if not edge.states_to_lose or state not in edge.states_to_lose
-                    }
                     visited_nodes.update(
                         cls._assumed_search(
                             edge.dest,
@@ -746,7 +723,6 @@ class Logic:
                             keys,
                             unlocked_doors,
                             flags,
-                            new_states,
                             ignored_nodes,
                             visited_nodes,
                         )[0]
@@ -772,14 +748,6 @@ class Logic:
                             # recursive assumed search (in addition to the existing ignored_nodes)
                             new_ignored_nodes = ignored_nodes.union(set(visited_nodes))
 
-                            # "Lose" any states that are required per `lose` descriptors on
-                            # this edge
-                            new_states = {
-                                state
-                                for state in states
-                                if not edge.states_to_lose or state not in edge.states_to_lose
-                            }
-
                             # Don't modify the original `keys` dict yet; we're still not sure if
                             # this key door will be one of the ones unlocked.
                             new_keys = copy(keys)
@@ -797,7 +765,6 @@ class Logic:
                                 new_keys,
                                 new_unlocked_doors,
                                 copy(flags),
-                                new_states,
                                 ignored_nodes=new_ignored_nodes,
                                 visited_nodes=visited_nodes,
                             )[0]
@@ -846,17 +813,12 @@ class Logic:
                         if flag not in flags:
                             flags.add(flag)
 
-                    for state in node.states:
-                        if state not in states:
-                            states.add(state)
-
         return (
             visited_nodes,
             inventory,
             keys,
             unlocked_doors,
             flags,
-            states,
             ignored_nodes,
         )
 
@@ -871,7 +833,6 @@ class Node:
     enemies: list[Enemy] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
     lock: str = field(default_factory=str)
-    states: set[str] = field(default_factory=set)
 
     @property
     def area(self) -> str:
@@ -897,7 +858,6 @@ class Edge:
     src: Node
     dest: Node
     constraints: list[str | list[str | list]] | None
-    states_to_lose: set[str] | None
     locked_door: Node | None
 
     def __init__(self, src: Node, dest: Node, constraints: str | None = None) -> None:
@@ -921,7 +881,6 @@ class Edge:
             return values
 
         self.constraints = None
-        self.states_to_lose = None
         self.locked_door = None
 
         logging.debug(f'Evaluating {constraints!r}...')
@@ -930,9 +889,6 @@ class Edge:
         if constraints is not None:
             self.constraints = parse_edge_constraint(constraints)
             assert len(self.constraints), f'Failed to parsed edge {constraints!r}'
-            self.states_to_lose = _get_descriptors(self.constraints, EdgeDescriptor.LOSE.value)
-            if not len(self.states_to_lose):
-                self.states_to_lose = None
             locks = _get_descriptors(self.constraints, EdgeDescriptor.OPEN.value)
             for lock_name in locks:
                 for area in Logic.areas.values():
@@ -1009,7 +965,6 @@ class Edge:
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
         current_unlocked_doors: set[Node] | None = None,
-        current_states: set[str] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
         ignored_nodes: set[Node] | None = None,
     ) -> bool:
@@ -1020,7 +975,6 @@ class Edge:
             current_inventory: A list of strings representing the "current inventory", i.e. all
                                items currently accessible given the current shuffled state.
             current_flags: A set of strings containing all `flags` that are logically set.
-            current_states: A set of strings containing all `states` that are logically set.
             ignored_nodes: Nodes to ignore when a assumed search is needed. Can be used to avoid
                            an infinite recursion where is_traversable calls _assumed_search which
                            calls is_traversable which calls _assumed_search, etc.
@@ -1031,7 +985,6 @@ class Edge:
                 parsed_expr=self.constraints,
                 current_inventory=current_inventory,
                 current_flags=current_flags,
-                current_states=current_states,
                 current_keys=current_keys,
                 current_unlocked_doors=current_unlocked_doors,
                 visited_nodes=visited_nodes,
@@ -1046,7 +999,6 @@ class Edge:
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
         current_unlocked_doors: set[Node] | None = None,
-        current_states: set[str] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
         ignored_nodes: set[Node] | None = None,
         result=True,
@@ -1064,7 +1016,6 @@ class Edge:
                     current_flags,
                     current_keys,
                     current_unlocked_doors,
-                    current_states,
                     visited_nodes,
                     ignored_nodes,
                     result,
@@ -1085,7 +1036,6 @@ class Edge:
                     current_flags,
                     current_keys,
                     current_unlocked_doors,
-                    current_states,
                     visited_nodes,
                     ignored_nodes,
                 )
@@ -1113,7 +1063,6 @@ class Edge:
         current_flags: set[str] | None = None,
         current_keys: dict[str, int] | None = None,
         current_unlocked_doors: set[Node] | None = None,
-        current_states: set[str] | None = None,
         visited_nodes: OrderedSet[Node] | None = None,
         ignored_nodes: set[Node] | None = None,
     ) -> bool:
@@ -1138,10 +1087,6 @@ class Edge:
                 return inflection.underscore(value) in current_inventory
             case EdgeDescriptor.FLAG.value:
                 return current_flags is not None and value in current_flags
-            case EdgeDescriptor.STATE.value:
-                return current_states is not None and value in current_states
-            case EdgeDescriptor.LOSE.value:
-                return True
             case EdgeDescriptor.DEFEATED.value:
                 for room in Logic.areas[self.src.area].rooms:
                     if room.name == self.src.room:
@@ -1158,7 +1103,6 @@ class Edge:
                                 current_flags,
                                 current_keys,
                                 current_unlocked_doors,
-                                current_states,
                                 ignored_nodes=ignored_nodes.union({self.dest})
                                 if ignored_nodes
                                 else {self.dest},
@@ -1184,7 +1128,6 @@ class Edge:
                     starting_node=self.src,
                     inventory=copy(current_inventory),
                     flags=copy(current_flags),
-                    states=copy(current_states),
                     ignored_nodes=new_ignored_nodes,
                 )[0]
                 for node in accessible_nodes:
@@ -1208,11 +1151,15 @@ class Edge:
                     current_flags,
                     current_keys,
                     current_unlocked_doors,
-                    current_states,
                     ignored_nodes=ignored_nodes.union({self.dest})
                     if ignored_nodes
                     else {self.dest},
                 )
+            # TODO: implement these
+            case EdgeDescriptor.STATE.value:
+                return True
+            case EdgeDescriptor.LOSE.value:
+                return True
             case other:
                 if other not in EdgeDescriptor:
                     raise Exception(f'Invalid edge descriptor {other!r}')
