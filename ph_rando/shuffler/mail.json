@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Salvatore",
+    "contents": "wisdom_gem",
+    "requirements": "item SunKey & flag CanPlaySalvatoreMinigame"
+  },
+  {
+    "name": "Romanos",
+    "contents": "random_ship_part",
+    "requirements": "item CourageSpirit"
+  },
+  {
+    "name": "Jolene",
+    "contents": "jolenes_letter",
+    "requirements": "item CourageSpirit"
+  },
+  {
+    "name": "Joanne",
+    "contents": "random_ship_part",
+    "requirements": "item JolenesLetter & flag FoundMermaid"
+  }
+]
