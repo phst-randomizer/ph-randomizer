@@ -28,6 +28,12 @@ jobs:
       - name: Install pre-commit and tox
         run: pip install pre-commit tox
 
+      - name: Cache pre-commit hooks
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit/
+          key: pre-commit-cache|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
+
       - name: Run pre-commit checks
         run: pre-commit run --all-files --verbose
 
