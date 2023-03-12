@@ -14,7 +14,7 @@ import inflection
 from ordered_set import OrderedSet
 
 from ph_rando.shuffler._descriptors import EdgeDescriptor
-from ph_rando.shuffler._parser import annotate_logic, parse_edge_constraint
+from ph_rando.shuffler._parser import annotate_logic, parse_aux_data, parse_edge_constraint
 from ph_rando.shuffler.aux_models import (
     Area,
     Check,
@@ -86,7 +86,7 @@ class Logic:
     settings: dict[str, str | bool]
 
     def __init__(self, settings: dict[str, str | bool]) -> None:
-        Logic.areas = self._parse_aux_data()
+        Logic.areas = parse_aux_data()
         Logic.settings = {inflection.camelize(k): v for k, v in settings.items()}
 
         annotate_logic(Logic.areas.values(), Path(__file__).parent / 'logic')
@@ -427,24 +427,6 @@ class Logic:
             return [room for room in self.areas[area_name].rooms if room.name == room_name][0]
         except IndexError:
             raise Exception(f'{area_name}: Room {area_name}.{room_name} not found!')
-
-    def _parse_aux_data(self) -> dict[str, Area]:
-        aux_data_directory = Path(__file__).parent / 'logic'
-
-        areas: dict[str, Area] = {}
-        for file in aux_data_directory.rglob('*.json'):
-            with open(file) as fd:
-                area = Area(**json.load(fd))
-
-                # It's possible for an Area to be spread across multiple files.
-                # To support this, check if this area exists first. If it does,
-                # add the new area's rooms to the existing area's rooms.
-                # Otherwise, add the new area.
-                if area.name in areas:
-                    areas[area.name].rooms.extend(area.rooms)
-                else:
-                    areas[area.name] = area
-        return areas
 
     @classmethod
     def assumed_search(

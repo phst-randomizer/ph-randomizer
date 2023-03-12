@@ -1,4 +1,5 @@
 from collections.abc import Iterable
+import json
 import logging
 from pathlib import Path
 from typing import Literal
@@ -271,3 +272,23 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                         )
                 if f'{area.name}.{room.name}' not in [f'{area.name}.{r.name}' for r in area.rooms]:
                     area.rooms.append(room)
+
+
+def parse_aux_data(aux_data_directory: Path | None = None) -> dict[str, Area]:
+    if aux_data_directory is None:
+        aux_data_directory = Path(__file__).parent / 'logic'
+
+    areas: dict[str, Area] = {}
+    for file in aux_data_directory.rglob('*.json'):
+        with open(file) as fd:
+            area = Area(**json.load(fd))
+
+            # It's possible for an Area to be spread across multiple files.
+            # To support this, check if this area exists first. If it does,
+            # add the new area's rooms to the existing area's rooms.
+            # Otherwise, add the new area.
+            if area.name in areas:
+                areas[area.name].rooms.extend(area.rooms)
+            else:
+                areas[area.name] = area
+    return areas
