@@ -13,8 +13,8 @@ import random
 import inflection
 from ordered_set import OrderedSet
 
-from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
-from ph_rando.shuffler._parser import parse_edge_constraint, parse_logic
+from ph_rando.shuffler._descriptors import EdgeDescriptor
+from ph_rando.shuffler._parser import annotate_logic, parse_edge_constraint
 from ph_rando.shuffler.aux_models import (
     Area,
     Check,
@@ -89,19 +89,7 @@ class Logic:
         Logic.areas = self._parse_aux_data()
         Logic.settings = {inflection.camelize(k): v for k, v in settings.items()}
 
-        logic_directory = Path(__file__).parent / 'logic'
-
-        for file in logic_directory.rglob('*.logic'):
-            lines: list[str] = []
-            with open(file) as fd:
-                for line in fd.readlines():
-                    line = line.strip()  # strip off leading and trailing whitespace
-                    if '#' in line:
-                        line = line[: line.index('#')]  # remove any comments
-                    if line:
-                        lines.append(line)
-            file_contents = '\n'.join(lines)
-            self._parse_logic(file_contents)
+        annotate_logic(Logic.areas.values(), Path(__file__).parent / 'logic')
 
     def connect_rooms(self) -> None:
         """
@@ -439,138 +427,6 @@ class Logic:
             return [room for room in self.areas[area_name].rooms if room.name == room_name][0]
         except IndexError:
             raise Exception(f'{area_name}: Room {area_name}.{room_name} not found!')
-
-    def _add_descriptor_to_node(
-        self,
-        node: Node,
-        descriptor_type: str,
-        descriptor_value: str,
-    ) -> None:
-        room = self._get_room(node.area, node.room)
-        if not room:
-            return
-        match descriptor_type:
-            case NodeDescriptor.CHEST.value:
-                try:
-                    node.checks.append(
-                        [check for check in room.chests if check.name == descriptor_value][0]
-                    )
-                except IndexError:
-                    raise Exception(
-                        f'{node.area}.{room.name}: '
-                        f'{descriptor_type} {descriptor_value!r} not found in aux data.'
-                    )
-            case (
-                NodeDescriptor.ENTRANCE.value
-                | NodeDescriptor.EXIT.value
-                | NodeDescriptor.DOOR.value
-            ):
-                if descriptor_type in (NodeDescriptor.DOOR.value, NodeDescriptor.ENTRANCE.value):
-                    if descriptor_value in node.entrances:
-                        raise Exception(
-                            f'{node.area}.{node.room}: '
-                            f'entrance {descriptor_value!r} defined more than once'
-                        )
-                    node.entrances.add(f'{node.name}.{descriptor_value}')
-                if descriptor_type in (NodeDescriptor.DOOR.value, NodeDescriptor.EXIT.value):
-                    try:
-                        new_exit = [exit for exit in room.exits if exit.name == descriptor_value][0]
-                    except IndexError:
-                        raise Exception(
-                            f'{node.area}.{node.room}: '
-                            f'{descriptor_type} {descriptor_value!r} not found in aux data.'
-                        )
-                    if new_exit.entrance.count('.') == 2:
-                        new_exit.entrance = f'{node.area}.{new_exit.entrance}'
-                    if new_exit.entrance.count('.') != 3:
-                        # TODO: remove once aux data is complete
-                        if not len(new_exit.entrance) or new_exit.entrance.lower() == 'todo':
-                            logging.error(f'{node.name}: exit {new_exit.name!r} has no link.')
-                            return
-                        raise Exception(
-                            f'{node.area}.{room.name}: ' f'Invalid exit link {new_exit.entrance!r}'
-                        )
-                    node.exits.append(new_exit)
-            case NodeDescriptor.FLAG.value:
-                node.flags.add(descriptor_value)
-            case NodeDescriptor.LOCK.value:
-                assert not node.lock, f'Node {node} already has a locked door associated with it.'
-                node.lock = descriptor_value
-            case NodeDescriptor.ENEMY.value:
-                try:
-                    node.enemies.append(
-                        [enemy for enemy in room.enemies if enemy.name == descriptor_value][0]
-                    )
-                except IndexError:
-                    raise Exception(
-                        f'{node.area}.{room.name}: '
-                        f'{descriptor_type} {descriptor_value!r} not found in aux data.'
-                    )
-            case other:
-                if other not in NodeDescriptor:
-                    raise Exception(f'{node.area}.{room.name}: Unknown node descriptor {other!r}')
-                logging.warning(f'Node descriptor {other!r} not implemented yet.')
-        return
-
-    def _parse_logic(self, file_content: str) -> None:
-        """
-        Parse .logic files.
-
-        First, the `parse_logic` function parses the .logic files into an intermediate
-        `ParsedLogic` object. Then, it annotates the list of aux `Rooms` with the nodes
-        from `ParsedLogic`.
-
-        """
-
-        parsed_logic = parse_logic(file_content)
-
-        for logic_area in parsed_logic.areas:
-            area = self._get_area(logic_area.name)
-            if not area:  # TODO: remove when logic/aux is complete
-                continue
-            for logic_room in logic_area.rooms:
-                room = self._get_room(logic_area.name, logic_room.name)
-                if not room:  # TODO: remove when logic/aux is complete
-                    continue
-                for logic_node in logic_room.nodes:
-                    full_node_name = '.'.join([logic_area.name, logic_room.name, logic_node.name])
-                    node = Node(full_node_name)
-                    for descriptor in logic_node.descriptors or []:
-                        self._add_descriptor_to_node(node, descriptor.type, descriptor.value)
-                    room.nodes.append(node)
-                for edge in logic_room.edges:
-                    for node1 in room.nodes:
-                        if node1.node == edge.source_node:
-                            for node2 in room.nodes:
-                                if node2.node == edge.destination_node:
-                                    node1.edges.append(
-                                        Edge(
-                                            src=node1,
-                                            dest=node2,
-                                            constraints=edge.constraints,
-                                        )
-                                    )
-                                    if edge.direction == '<->':
-                                        node2.edges.append(
-                                            Edge(
-                                                src=node2,
-                                                dest=node1,
-                                                constraints=edge.constraints,
-                                            )
-                                        )
-                                    break
-                            else:
-                                raise Exception(
-                                    f'{area.name}.{room.name}: '
-                                    f"node {edge.destination_node} doesn't exist"
-                                )
-                            break
-                    else:
-                        raise Exception(
-                            f'{area.name}.{room.name}: ' f"node {edge.source_node} doesn't exist"
-                        )
-                if f'{area.name}.{room.name}' not in [f'{area.name}.{r.name}' for r in area.rooms]:
-                    area.rooms.append(room)
 
     def _parse_aux_data(self) -> dict[str, Area]:
         aux_data_directory = Path(__file__).parent / 'logic'
