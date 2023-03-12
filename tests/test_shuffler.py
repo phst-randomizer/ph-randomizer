@@ -1,7 +1,13 @@
+from pathlib import Path
+
 import pytest
 
+from ph_rando.shuffler._parser import annotate_logic
+
 # from ph_rando.shuffler import shuffle
-from ph_rando.shuffler.logic import Edge, Logic, Node
+from ph_rando.shuffler.logic import Edge, Logic, Node, parse_aux_data
+
+TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
 # TODO: re-enable once shuffler actually works
 # @pytest.mark.repeat(3)
@@ -98,3 +104,46 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
     edge = Edge(node1, node2, expression)
     node1.edges.append(edge)
     assert edge.is_traversable([]) == expected_result
+
+
+@pytest.mark.parametrize(
+    'test_data_name,starting_node_name,target_nodes_names',
+    [
+        (
+            'basic',
+            'TestArea.TestRoom.Node1',
+            ['TestArea.TestRoom.Node2'],
+        ),
+    ],
+)
+def test_graph_traversal(
+    test_data_name: str,
+    starting_node_name: str,
+    target_nodes_names: list[str],
+) -> None:
+    current_test_dir = TEST_DATA_DIR / test_data_name
+
+    areas = parse_aux_data(current_test_dir).values()
+    annotate_logic(areas, current_test_dir)
+
+    starting_node = [
+        node
+        for area in areas
+        for room in area.rooms
+        for node in room.nodes
+        if node.name == starting_node_name
+    ][0]
+    target_nodes = [
+        node
+        for area in areas
+        for room in area.rooms
+        for node in room.nodes
+        if node.name in target_nodes_names
+    ]
+
+    reachable_nodes = Logic.assumed_search(
+        starting_node=starting_node,
+        inventory=[],
+    )
+
+    assert all(node in reachable_nodes for node in target_nodes)

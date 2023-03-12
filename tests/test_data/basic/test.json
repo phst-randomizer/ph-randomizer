@@ -1,0 +1,32 @@
+{
+  "name": "TestArea",
+  "rooms": [
+    {
+      "name": "TestRoom",
+      "chests": [
+        {
+          "name": "Chest1",
+          "type": "chest",
+          "contents": "boomerang",
+          "zmb_file_path": "test",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToRoom2",
+          "entrance": "TestRoom2.End.Entrance"
+        }
+      ]
+    },
+    {
+      "name": "TestRoom2",
+      "exits": [
+        {
+          "name": "ToRoom1",
+          "entrance": "TestRoom.Node2.ToRoom2"
+        }
+      ]
+    }
+  ]
+}
