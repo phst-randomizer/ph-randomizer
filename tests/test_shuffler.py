@@ -107,19 +107,21 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
 
 
 @pytest.mark.parametrize(
-    'test_data_name,starting_node_name,target_nodes_names',
+    'test_data_name,starting_node_name,accessible_nodes_names,non_accessible_nodes_names',
     [
         (
             'basic',
             'TestArea.TestRoom.Node1',
             ['TestArea.TestRoom.Node2'],
+            ['TestArea.TestRoom.NotAccessible'],
         ),
     ],
 )
 def test_graph_traversal(
     test_data_name: str,
     starting_node_name: str,
-    target_nodes_names: list[str],
+    accessible_nodes_names: list[str],
+    non_accessible_nodes_names: list[str],
 ) -> None:
     current_test_dir = TEST_DATA_DIR / test_data_name
 
@@ -133,12 +135,19 @@ def test_graph_traversal(
         for node in room.nodes
         if node.name == starting_node_name
     ][0]
-    target_nodes = [
+    accessible_nodes = [
         node
         for area in areas
         for room in area.rooms
         for node in room.nodes
-        if node.name in target_nodes_names
+        if node.name in accessible_nodes_names
+    ]
+    non_accessible_nodes = [
+        node
+        for area in areas
+        for room in area.rooms
+        for node in room.nodes
+        if node.name in non_accessible_nodes_names
     ]
 
     reachable_nodes = Logic.assumed_search(
@@ -146,4 +155,5 @@ def test_graph_traversal(
         inventory=[],
     )
 
-    assert all(node in reachable_nodes for node in target_nodes)
+    assert all(node in reachable_nodes for node in accessible_nodes)
+    assert all(node not in reachable_nodes for node in non_accessible_nodes)
