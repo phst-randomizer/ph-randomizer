@@ -29,6 +29,7 @@ area Bannan:
     node Main:
       chest CannonMiniGameBombBag
       door BannanGrottoEntrance
+      flag CanPlaySalvatoreMinigame
 
     node Island:
       chest DigSpot
