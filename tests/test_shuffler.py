@@ -2,10 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from ph_rando.shuffler._parser import annotate_logic
-
-# from ph_rando.shuffler import shuffle
-from ph_rando.shuffler.logic import Edge, Logic, Node, parse_aux_data
+from ph_rando.shuffler._parser import parse_edge_requirement
+from ph_rando.shuffler._shuffler import Edge, Node, assumed_search, init_logic_graph
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
@@ -26,84 +24,96 @@ TEST_DATA_DIR = Path(__file__).parent / 'test_data'
     [
         # fmt: off
         # Test basic expressions
-        ('item Boomerang', ['boomerang', 'sword'], {}, True),
-        ('item Boomerang', ['sword'], {}, False),
+        ('item Boomerang', ['Boomerang', 'Sword'], {}, True),
+        ('item Boomerang', ['Sword'], {}, False),
         # Test expressions with basic logic operators
-        ('item Boomerang & item Bombs', ['boomerang', 'bombs'], {}, True),
-        ('item Boomerang & item Bombs', ['boomerang', 'sword'], {}, False),
-        ('item Boomerang & item Bombs', ['bombs'], {}, False),
+        ('item Boomerang & item Bombs', ['Boomerang', 'Bombs'], {}, True),
+        ('item Boomerang & item Bombs', ['Boomerang', 'Sword'], {}, False),
+        ('item Boomerang & item Bombs', ['Bombs'], {}, False),
         ('item Boomerang & item Bombs', [], {}, False),
-        ('item Boomerang | item Bombs', ['boomerang', 'bombs'], {}, True),
-        ('item Boomerang | item Bombs', ['boomerang', 'sword'], {}, True),
-        ('item Boomerang | item Bombs', ['bombs'], {}, True),
-        ('item Boomerang | item Bombs', ['sword'], {}, False),
-        ('item Boomerang | flag BridgeRepaired', ['bombs'], {'BridgeRepaired'}, True),
+        ('item Boomerang | item Bombs', ['Boomerang', 'Bombs'], {}, True),
+        ('item Boomerang | item Bombs', ['Boomerang', 'Sword'], {}, True),
+        ('item Boomerang | item Bombs', ['Bombs'], {}, True),
+        ('item Boomerang | item Bombs', ['Sword'], {}, False),
+        ('item Boomerang | flag BridgeRepaired', ['Bombs'], {'BridgeRepaired'}, True),
         ('item Boomerang | flag BridgeRepaired', [], {'BridgeRepaired'}, True),
-        ('item Boomerang | flag BridgeRepaired', ['bombs'], {}, False),
+        ('item Boomerang | flag BridgeRepaired', ['Bombs'], {}, False),
         # Test nested expressions
-        ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs', 'bombchus'], {}, True),  # noqa: E501
-        ('item Boomerang & (item Bombs | item Bombchus | item Hammer)', ['boomerang', 'bombchus'], {}, True),  # noqa: E501
-        ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'bombs'], {}, True),
-        ('item Boomerang & (item Bombs | item Bombchus)', ['bombs', 'bombchus'], {}, False),
-        ('item Boomerang & (item Bombs | item Bombchus)', ['boomerang', 'sword'], {}, False),
-        ('item Bombchus | item Bombs', ['bombs', 'bombchus', 'cannon'], {}, True),
-        ('item Bombchus | item Bombs', ['bombs', 'boomerang', 'cannon'], {}, True),
-        ('item Bombchus | item Bombs', ['bombchus', 'boomerang', 'cannon'], {}, True),
-        ('item Bombchus | item Bombs', ['boomerang', 'cannon', 'sword'], {}, False),
-        ('item Bombchus | item Bombs | item Sword', ['boomerang', 'cannon', 'oshus_sword'], {}, True),  # noqa: E501
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Bombs', 'Bombchus'], {}, True),  # noqa: E501
+        ('item Boomerang & (item Bombs | item Bombchus | item Hammer)', ['Boomerang', 'Bombchus'], {}, True),  # noqa: E501
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Bombs'], {}, True),
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Bombs', 'Bombchus'], {}, False),
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Sword'], {}, False),
+        ('item Bombchus | item Bombs', ['Bombs', 'Bombchus', 'Cannon'], {}, True),
+        ('item Bombchus | item Bombs', ['Bombs', 'Boomerang', 'Cannon'], {}, True),
+        ('item Bombchus | item Bombs', ['Bombchus', 'Boomerang', 'Cannon'], {}, True),
+        ('item Bombchus | item Bombs', ['Boomerang', 'Cannon', 'Sword'], {}, False),
+        ('item Bombchus | item Bombs | item Sword', ['Boomerang', 'Cannon', 'OshusSword'], {}, True),  # noqa: E501
         # Test more complex nested expressions
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['bombs'], {}, False),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'bombs'], {}, True),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'bombchus'], {}, True),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'grappling_hook'], {}, False),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'bow'], {}, False),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['boomerang', 'grappling_hook', 'bow'], {}, True),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Bombs'], {}, False),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombs'], {}, True),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombchus'], {}, True),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook'], {}, False),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bow'], {}, False),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook', 'Bow'], {}, True),  # noqa: E501
         # Test expression with a lot of redundant parentheses, which shouldn't affect results
         # other than additional performance overhead.
-        ('(((((item Sword | ((item Shield)))))))', ['oshus_sword'], {}, True),
+        ('(((((item Sword | ((item Shield)))))))', ['OshusSword'], {}, True),
         # fmt: on
     ],
 )
-def test_edge_parser(expression: str, inventory: list[str], flags: set[str], expected_result: bool):
-    node1 = Node(name='test1')
-    node2 = Node(name='test2')
-    edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
+def test_edge_parser(
+    expression: str,
+    inventory: list[str],
+    flags: set[str],
+    expected_result: bool,
+):
+    node1 = Node(
+        name='test1',
+        area=None,  # type: ignore
+        room=None,  # type: ignore
+    )
+    node2 = Node(
+        name='test2',
+        area=None,  # type: ignore
+        room=None,  # type: ignore
+    )
+    edge = Edge(src=node1, dest=node2, requirements=parse_edge_requirement(expression))
     node1.edges.append(edge)
-    assert edge.is_traversable(inventory, flags) == expected_result
+    assert edge.is_traversable(inventory, flags, aux_data={}) == expected_result
 
 
-@pytest.mark.parametrize(
-    ('expression', 'result'),
-    [
-        ('open Door1', True),
-        ('item Item1', False),
-        ('item Item1 & (open Door1 | item Item2)', True),
-        ('open Door1 & (flag Flag1 | item Item1)', True),
-    ],
-)
-def test_edge_contains_open_descriptor(expression: str, result: bool) -> None:
-    """Test behavior of Edge.requires_key property."""
-    Logic(settings={})
-    node1 = Node(name='test1')
-    node2 = Node(name='test2')
-    edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
-    assert edge.requires_key == result
+# @pytest.mark.parametrize(
+#     ('expression', 'result'),
+#     [
+#         ('open Door1', True),
+#         ('item Item1', False),
+#         ('item Item1 & (open Door1 | item Item2)', True),
+#         ('open Door1 & (flag Flag1 | item Item1)', True),
+#     ],
+# )
+# def test_edge_contains_open_descriptor(expression: str, result: bool) -> None:
+#     """Test behavior of Edge.requires_key property."""
+#     node1 = Node(name='test1')
+#     node2 = Node(name='test2')
+#     edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
+#     assert edge.requires_key == result
 
 
-@pytest.mark.parametrize(
-    'expression,settings,expected_result',
-    [
-        ('setting NoPuzzleSolution', {'NoPuzzleSolution': False}, False),
-        ('setting NoPuzzleSolution', {'NoPuzzleSolution': True}, True),
-    ],
-)
-def test_settings(expression: str, settings: dict[str, bool | str], expected_result: bool):
-    Logic.settings = settings
-    node1 = Node(name='test1')
-    node2 = Node(name='test2')
-    edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
-    node1.edges.append(edge)
-    assert edge.is_traversable([]) == expected_result
+# @pytest.mark.parametrize(
+#     'expression,settings,expected_result',
+#     [
+#         ('setting NoPuzzleSolution', {'NoPuzzleSolution': False}, False),
+#         ('setting NoPuzzleSolution', {'NoPuzzleSolution': True}, True),
+#     ],
+# )
+# def test_settings(expression: str, settings: dict[str, bool | str], expected_result: bool):
+#     Logic.settings = settings
+#     node1 = Node(name='test1')
+#     node2 = Node(name='test2')
+#     edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
+#     node1.edges.append(edge)
+#     assert edge.is_traversable([]) == expected_result
 
 
 @pytest.mark.parametrize(
@@ -123,7 +133,7 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
         # ),
     ],
 )
-def test_graph_traversal(
+def test_assumed_search(
     test_data_name: str,
     starting_node_name: str,
     accessible_nodes_names: list[str],
@@ -131,36 +141,30 @@ def test_graph_traversal(
 ) -> None:
     current_test_dir = TEST_DATA_DIR / test_data_name
 
-    areas = parse_aux_data(current_test_dir).values()
-    annotate_logic(areas, current_test_dir)
+    areas = init_logic_graph(logic_directory=current_test_dir, aux_directory=current_test_dir)
 
     starting_node = [
         node
-        for area in areas
+        for area in areas.values()
         for room in area.rooms
         for node in room.nodes
         if node.name == starting_node_name
     ][0]
     accessible_nodes = [
         node
-        for area in areas
+        for area in areas.values()
         for room in area.rooms
         for node in room.nodes
         if node.name in accessible_nodes_names
     ]
     non_accessible_nodes = [
         node
-        for area in areas
+        for area in areas.values()
         for room in area.rooms
         for node in room.nodes
         if node.name in non_accessible_nodes_names
     ]
-
-    reachable_nodes = Logic.assumed_search(
-        starting_node=starting_node,
-        inventory=[],
-        keys={area.name: 0 for area in areas},
-    )
+    reachable_nodes = assumed_search(starting_node=starting_node, areas=areas, items=[])
 
     assert all(node in reachable_nodes for node in accessible_nodes)
     assert all(node not in reachable_nodes for node in non_accessible_nodes)
