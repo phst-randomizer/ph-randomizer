@@ -1,82 +1,297 @@
+from __future__ import annotations
+
 from collections.abc import Iterable
+from dataclasses import dataclass, field
+from functools import cache
 import json
 import logging
 from pathlib import Path
-from typing import Literal
+import re
+from typing import TYPE_CHECKING, Literal
+
+if TYPE_CHECKING:
+    from pyparsing import ParserElement
 
 from pydantic import BaseModel
 import pyparsing as pp
 
-from ph_rando.shuffler.aux_models import Area
+from ph_rando.patcher._items import ITEMS
+from ph_rando.shuffler._constants import ENEMIES_MAPPING, LOGIC_MACROS
+from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
+from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
+
+logger = logging.getLogger(__name__)
 
 
-class LogicEdge(BaseModel):
+@dataclass
+class Node:
+    name: str
+    area: Area
+    room: Room
+    checks: list[Check] = field(default_factory=list)
+    edges: list[Edge] = field(default_factory=list)
+    exits: list[Exit] = field(default_factory=list)
+    entrances: set[str] = field(default_factory=set)
+    enemies: list[Enemy] = field(default_factory=list)
+    flags: set[str] = field(default_factory=set)
+    lock: str = field(default_factory=str)
+    states: set[str] = field(default_factory=set)
+
+    def __hash__(self) -> int:
+        return hash(self.name)
+
+    def __eq__(self, __o: object) -> bool:
+        if isinstance(__o, Node):
+            return __o.name == self.name
+        raise Exception('Invalid comparison')
+
+
+@dataclass
+class Edge:
+    src: Node
+    dest: Node
+    requirements: list[str | list[str | list]] | None
+
+    def __repr__(self) -> str:
+        return f'{self.src.name} -> {self.dest.name}'
+
+    def is_traversable(self, items: list[str], flags: set[str], aux_data: dict[str, Area]) -> bool:
+        """
+        Determine if this edge is traversable given the current player state.
+
+        Params:
+            items: A list of strings representing the "current inventory", i.e. all
+                               items currently accessible given the current shuffled state.
+            flags: A set of strings containing all `flags` that are logically set.
+
+        """
+        if self.requirements is not None and len(self.requirements):
+            return requirements_met(
+                parsed_expr=self.requirements,
+                items=items,
+                flags=flags,
+                aux_data=aux_data,
+                edge_instance=self,
+            )
+        return True
+
+    @classmethod
+    @cache
+    def get_edge_parser(cls) -> ParserElement:
+        """
+        Return a `pyparsing.ParserElement` parser that parses edge requirements into
+        a usable format.
+
+        Creating this object is relatively expensive, so we cache it to ensure that
+        it's only created once.
+        """
+        edge_item = None
+        for edge_descriptor in EdgeDescriptor:
+            if edge_item is None:
+                edge_item = pp.Keyword(edge_descriptor.value)
+            else:
+                edge_item |= pp.Keyword(edge_descriptor.value)
+        edge_item += pp.Word(pp.alphanums + '[]')  # type: ignore
+        return pp.infix_notation(
+            edge_item,  # type: ignore
+            [
+                (pp.Literal('&'), 2, pp.opAssoc.LEFT),
+                (pp.Literal('|'), 2, pp.opAssoc.LEFT),
+            ],
+        )
+
+
+def requirements_met(
+    parsed_expr: list[str | list[str | list]],
+    items: list[str],
+    flags: set[str],
+    aux_data: dict[str, Area],
+    edge_instance: Edge | None = None,
+    result=True,
+) -> bool:
+    current_op = None  # variable to track current logical operation (AND or OR), if applicable
+    while len(parsed_expr):
+        # If the complex expression contains another complex expression, recursively evaluate it
+        if isinstance(parsed_expr[0], list):
+            sub_expression = parsed_expr[0]
+            parsed_expr = parsed_expr[1:]
+            assert isinstance(sub_expression, list)
+            current_result = requirements_met(
+                sub_expression,
+                items,
+                flags,
+                aux_data,
+                edge_instance,
+                result,
+            )
+        else:
+            # Extract type and value (e.g., 'item' and 'Bombs')
+            expr_type = parsed_expr[0]
+            assert isinstance(expr_type, str)
+            expr_value = parsed_expr[1]
+            assert isinstance(expr_value, str)
+
+            parsed_expr = parsed_expr[2:]
+
+            current_result = evaluate_requirement(
+                type=expr_type,
+                value=expr_value,
+                items=items,
+                flags=flags,
+                aux_data=aux_data,
+                edge_instance=edge_instance,
+            )
+
+        # Apply any pending logical operations
+        if current_op == '&':
+            result &= current_result
+        elif current_op == '|':
+            result |= current_result
+        else:
+            result = current_result
+
+        # Queue up a logical AND or OR for the next expression if needed
+        if len(parsed_expr) and parsed_expr[0] in ('&', '|'):
+            current_op = parsed_expr[0]
+            parsed_expr = parsed_expr[1:]
+
+    return result
+
+
+def evaluate_requirement(
+    type: str,
+    value: str,
+    items: list[str],
+    flags: set[str],
+    aux_data: dict[str, Area],
+    edge_instance: Edge | None = None,
+) -> bool:
+    """
+    Given a single edge requirement in the form "type value", determines if the edge is traversable
+    given the current game state (items, set flags, etc).
+
+    Params:
+        type: The type of edge requirement, e.g. "item", "flag", etc.
+
+        value: The value of the edge requirement, e.g. "Bombs", "BridgeRepaired", etc.
+
+        items: A list of strings representing the "current inventory", i.e. all
+        items currently accessible given the current shuffled state.
+    """
+    match type:
+        case EdgeDescriptor.ITEM.value:
+            # Special case: "Sword" means either OshusSword or PhantomSword.
+            # TODO: remove this, once the semantics around progressive sword logic are
+            # sorted out.
+            if value == 'Sword':
+                value = 'OshusSword'
+
+            # If a certain number of this item is required, check that.
+            # Otherwise, just check if we have one of this item.
+            count_descriptor = re.match(r'(.+)\[(\d+)\]', value)
+            if count_descriptor is not None:
+                item_name, item_count = count_descriptor.groups()
+                return items.count(item_name) == item_count
+            elif value not in ITEMS:
+                raise Exception(f'Invalid item "{value}"')
+            else:
+                return value in items
+        case EdgeDescriptor.FLAG.value:
+            return flags is not None and value in flags
+        case EdgeDescriptor.DEFEATED.value:
+            if edge_instance is None:
+                raise Exception(
+                    "Can't evaluate requirement of type 'defeated' with 'edge_instance' of None!!"
+                )
+            for enemy in edge_instance.src.room.enemies:
+                if enemy.name != value:
+                    continue
+                elif enemy.type not in ENEMIES_MAPPING:
+                    raise Exception(f'{edge_instance.src.name}: invalid enemy type {enemy.type!r}')
+                return requirements_met(
+                    parse_edge_requirement(ENEMIES_MAPPING[enemy.type]),
+                    items,
+                    flags,
+                    aux_data,
+                )
+            raise Exception(
+                f'{edge_instance.src.name} (Edge "...{type} {value}..."): '
+                f'enemy {value} not found!'
+            )
+        case EdgeDescriptor.MACRO.value:
+            if value not in LOGIC_MACROS:
+                raise Exception(f'Invalid macro "{value}", not found in macros.json!')
+            return requirements_met(
+                parse_edge_requirement(LOGIC_MACROS[value]),
+                items,
+                flags,
+                aux_data,
+            )
+        case other:
+            if other not in EdgeDescriptor:
+                raise Exception(f'Invalid edge descriptor {other!r}')
+            logger.debug(f'Edge descriptor {other!r} not implemented yet.')
+            return True
+
+
+@cache
+def parse_edge_requirement(requirement: str) -> list[str | list[str | list]]:
+    """
+    Parse an edge requirement into a recursive list of strings for further processing
+    by the Edge._evaluate_requirement() method.
+    """
+    parser = Edge.get_edge_parser()
+    return parser.parse_string(requirement).as_list()  # type: ignore
+
+
+# Helper classes for parsing dict outputted by pyparsing.
+class _LogicEdge(BaseModel):
     source_node: str
     destination_node: str
     direction: Literal['->', '<->']
-    constraints: str | None
+    requirements: str | None
 
 
-class LogicNodeDescriptor(BaseModel):
+class _LogicNodeDescriptor(BaseModel):
     type: str
     value: str
 
 
-class LogicNode(BaseModel):
+class _LogicNode(BaseModel):
     name: str
-    descriptors: list[LogicNodeDescriptor] | None
+    descriptors: list[_LogicNodeDescriptor] | None
 
 
-class LogicRoom(BaseModel):
+class _LogicRoom(BaseModel):
     name: str
-    nodes_and_edges: list[LogicNode | LogicEdge]
+    nodes_and_edges: list[_LogicNode | _LogicEdge]
 
     @property
     def nodes(self):
-        return [n for n in self.nodes_and_edges if isinstance(n, LogicNode)]
+        return [n for n in self.nodes_and_edges if isinstance(n, _LogicNode)]
 
     @property
     def edges(self):
-        return [e for e in self.nodes_and_edges if isinstance(e, LogicEdge)]
+        return [e for e in self.nodes_and_edges if isinstance(e, _LogicEdge)]
 
 
-class LogicArea(BaseModel):
+class _LogicArea(BaseModel):
     name: str
-    rooms: list[LogicRoom]
+    rooms: list[_LogicRoom]
 
 
-class ParsedLogic(BaseModel):
-    areas: list[LogicArea]
+class _ParsedLogic(BaseModel):
+    areas: list[_LogicArea]
 
 
-def parse_edge_constraint(constraint: str) -> list[str | list[str | list]]:
-    from ph_rando.shuffler._descriptors import EdgeDescriptor
-
-    edge_item = None
-    for edge_descriptor in EdgeDescriptor:
-        if edge_item is None:
-            edge_item = pp.Keyword(edge_descriptor.value)
-        else:
-            edge_item |= pp.Keyword(edge_descriptor.value)
-    edge_item += pp.Word(pp.alphanums)  # type: ignore
-    edge_constraint = pp.infix_notation(
-        edge_item,  # type: ignore
-        [
-            (pp.Literal('&'), 2, pp.opAssoc.LEFT),
-            (pp.Literal('|'), 2, pp.opAssoc.LEFT),
-        ],
-    )
-    return edge_constraint.parse_string(constraint).as_list()  # type: ignore
-
-
-def _parse_logic_file(logic_file_contents: str) -> ParsedLogic:
+def _parse_logic_file(logic_file_contents: str) -> _ParsedLogic:
     from ph_rando.shuffler._descriptors import NodeDescriptor
 
     edge_parser = (
         pp.Word(pp.alphanums)('source_node')
         + pp.one_of(['->', '<->'])('direction')
         + pp.Word(pp.alphanums)('destination_node')
-        + pp.Optional(pp.Literal(':').suppress() + pp.SkipTo(pp.LineEnd())('constraints'))
+        + pp.Optional(pp.Literal(':').suppress() + pp.SkipTo(pp.LineEnd())('requirements'))
     )
 
     node_item = None
@@ -113,10 +328,10 @@ def _parse_logic_file(logic_file_contents: str) -> ParsedLogic:
 
     parsed = logic_parser.parse_string(logic_file_contents).as_dict()
 
-    return ParsedLogic(**parsed)
+    return _ParsedLogic(**parsed)
 
 
-def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
+def annotate_logic(aux_data: Iterable[Area], logic_directory: Path | None = None) -> None:
     """
     Parse .logic files and annotate the given aux data with them.
 
@@ -124,9 +339,10 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
     `ParsedLogic` object. Then, it annotates the list of aux `Rooms` with the nodes
     from `ParsedLogic`.
     """
+    from ph_rando.shuffler._shuffler import Edge, Node
 
-    from ph_rando.shuffler._descriptors import NodeDescriptor
-    from ph_rando.shuffler.logic import Edge, Node
+    if logic_directory is None:
+        logic_directory = Path(__file__).parent / 'logic'
 
     for file in logic_directory.rglob('*.logic'):
         lines: list[str] = []
@@ -144,15 +360,11 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
 
         for logic_area in parsed_logic.areas:
             area = [area for area in aux_data if area.name == logic_area.name][0]
-            if not area:  # TODO: remove when logic/aux is complete
-                continue
             for logic_room in logic_area.rooms:
                 room = [room for room in area.rooms if room.name == logic_room.name][0]
-                if not room:  # TODO: remove when logic/aux is complete
-                    continue
                 for logic_node in logic_room.nodes:
                     full_node_name = '.'.join([logic_area.name, logic_room.name, logic_node.name])
-                    node = Node(full_node_name)
+                    node = Node(name=full_node_name, area=area, room=room)
                     for descriptor in logic_node.descriptors or []:
                         match descriptor.type:
                             case NodeDescriptor.CHEST.value:
@@ -166,7 +378,7 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                     )
                                 except IndexError:
                                     raise Exception(
-                                        f'{node.area}.{room.name}: '
+                                        f'{node.area.name}.{room.name}: '
                                         f'{descriptor.type} {descriptor.value!r} '
                                         'not found in aux data.'
                                     )
@@ -181,7 +393,7 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                 ):
                                     if descriptor.value in node.entrances:
                                         raise Exception(
-                                            f'{node.area}.{node.room}: '
+                                            f'{node.area.name}.{node.room.name}: '
                                             f'entrance {descriptor.value!r} defined more than once'
                                         )
                                     node.entrances.add(f'{node.name}.{descriptor.value}')
@@ -197,15 +409,15 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                         ][0]
                                     except IndexError:
                                         raise Exception(
-                                            f'{node.area}.{node.room}: '
+                                            f'{node.area.name}.{node.room.name}: '
                                             f'{descriptor.type} {descriptor.value!r} '
                                             'not found in aux data.'
                                         )
                                     if new_exit.entrance.count('.') == 2:
-                                        new_exit.entrance = f'{node.area}.{new_exit.entrance}'
+                                        new_exit.entrance = f'{node.area.name}.{new_exit.entrance}'
                                     if new_exit.entrance.count('.') != 3:
                                         raise Exception(
-                                            f'{node.area}.{room.name}: '
+                                            f'{node.area.name}.{room.name}: '
                                             f'Invalid exit link {new_exit.entrance!r}'
                                         )
                                     node.exits.append(new_exit)
@@ -227,29 +439,30 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                     )
                                 except IndexError:
                                     raise Exception(
-                                        f'{node.area}.{room.name}: '
+                                        f'{node.area.name}.{room.name}: '
                                         f'{descriptor.type} {descriptor.value!r} '
                                         'not found in aux data.'
                                     )
                             case other:
                                 if other not in NodeDescriptor:
                                     raise Exception(
-                                        f'{node.area}.{room.name}: Unknown '
+                                        f'{node.area.name}.{room.name}: Unknown '
                                         f'node descriptor {other!r}'
                                     )
-                                logging.warning(f'Node descriptor {other!r} not implemented yet.')
+                                logger.warning(f'Node descriptor {other!r} not implemented yet.')
                     room.nodes.append(node)
                 for edge in logic_room.edges:
                     for node1 in room.nodes:
-                        if node1.node == edge.source_node:
+                        if node1.name.split('.')[2] == edge.source_node:
                             for node2 in room.nodes:
-                                if node2.node == edge.destination_node:
+                                if node2.name.split('.')[2] == edge.destination_node:
                                     node1.edges.append(
                                         Edge(
                                             src=node1,
                                             dest=node2,
-                                            areas=aux_data,
-                                            constraints=edge.constraints,
+                                            requirements=parse_edge_requirement(edge.requirements)
+                                            if edge.requirements
+                                            else None,
                                         )
                                     )
                                     if edge.direction == '<->':
@@ -257,8 +470,11 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                             Edge(
                                                 src=node2,
                                                 dest=node1,
-                                                areas=aux_data,
-                                                constraints=edge.constraints,
+                                                requirements=parse_edge_requirement(
+                                                    edge.requirements
+                                                )
+                                                if edge.requirements
+                                                else None,
                                             )
                                         )
                                     break

@@ -24,6 +24,8 @@ from ph_rando.shuffler.aux_models import (
     Tree,
 )
 
+logger = logging.getLogger(__name__)
+
 
 def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     """Apply the base patch to `input_rom`."""
@@ -60,7 +62,7 @@ def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom):
     with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
         for chest in chests:
             if chest.zmb_file_path.lower() == 'todo':
-                logging.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
+                logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
             zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = ITEMS[
                 chest.contents
@@ -93,7 +95,7 @@ def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom):
     with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
         for chest in all_chests:
             if chest.zmb_file_path.lower() == 'todo':
-                logging.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
+                logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
             zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = ITEMS[
                 chest.contents
@@ -123,7 +125,7 @@ def _patch_shop_items(aux_data: list[Area], input_rom: rom.NintendoDSRom):
         try:  # TODO: remove this try/catch when all offsets are set correctly in aux data
             overlay_offset = int(shop_item.overlay_offset, base=16)
         except ValueError:
-            logging.warning(
+            logger.warning(
                 f'Invalid overlay offset "{shop_item.overlay_offset}" for {shop_item.name}.'
             )
             continue
@@ -226,7 +228,7 @@ def apply_settings_patches(
 
     for setting in RANDOMIZER_SETTINGS:
         setting_value = settings[inflection.underscore(setting.name)]
-        logging.debug(f'Setting {setting.name!r} set to {setting_value!r}.')
+        logger.debug(f'Setting {setting.name!r} set to {setting_value!r}.')
 
         if isinstance(setting_value, bool) and not setting_value:
             continue

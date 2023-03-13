@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, TypeAlias, Union
+from typing import TYPE_CHECKING, Literal, TypeAlias, Union
 
 from pydantic import BaseModel, Extra, Field, validator
 
 if TYPE_CHECKING:
-    from ph_rando.shuffler.logic import Node
+    from ph_rando.shuffler._shuffler import Node
 
 
 class BaseCheck(BaseModel):
@@ -38,17 +38,21 @@ class BaseCheck(BaseModel):
 
 
 class Chest(BaseCheck):
-    type = Field('chest', const=True)
+    type: Literal['chest']
     zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
     zmb_mapobject_index: int = Field(..., description='Index of the chest in the defined zmb file')
 
 
-class Tree(Chest):
-    type = Field('tree', const=True)
+class Tree(BaseCheck):
+    type: Literal['tree']
+    zmb_file_path: str = Field(..., description='File path to the zmb the tree is on')
+    zmb_mapobject_index: int = Field(
+        ..., description='Index of the tree object in the defined zmb file'
+    )
 
 
 class Event(BaseCheck):
-    type = Field('event', const=True)
+    type: Literal['event']
     bmg_file_path: str = Field(..., description='File path to the bmg the instruction is on')
     bmg_instruction_index: int = Field(
         ..., description='Index of the instruction in the defined bmg file'
@@ -56,31 +60,35 @@ class Event(BaseCheck):
 
 
 class IslandShop(BaseCheck):
-    type = Field('island_shop', const=True)
+    type: Literal['island_shop']
     overlay: int = Field(..., description='The code overlay this shop item is on')
     overlay_offset: str = Field(..., description='Hex offset from overlay to the shop item')
 
 
 class Freestanding(BaseCheck):
-    type = Field('freestanding', const=True)
+    type: Literal['freestanding']
     # TODO: add other fields that are needed
 
 
 class OnEnemy(BaseCheck):
-    type = Field('on_enemy', const=True)
+    type: Literal['on_enemy']
     # TODO: what other fields are needed? Can this be replaced by Freestanding?
 
 
 class SalvageTreasure(BaseCheck):
-    type = Field('salvage_treasure', const=True)
+    type: Literal['salvage_treasure']
     zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
     zmb_actor_index: int = Field(
         ..., description='Index of the chest in the NPCA section of the zmb file'
     )
 
 
-class DigSpot(SalvageTreasure):
-    type = Field('dig_spot', const=True)
+class DigSpot(BaseCheck):
+    type: Literal['dig_spot']
+    zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
+    zmb_actor_index: int = Field(
+        ..., description='Index of the chest in the NPCA section of the zmb file'
+    )
 
 
 class MinigameRewardChest(BaseCheck):
