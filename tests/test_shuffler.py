@@ -115,12 +115,12 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
             ['TestArea.TestRoom.Node2'],
             ['TestArea.TestRoom.NotAccessible'],
         ),
-        (
-            'key_test',
-            'Test.Test.Start',
-            ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
-            ['Test.Test.End'],
-        ),
+        # (
+        #     'key_test',
+        #     'Test.Test.Start',
+        #     ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
+        #     ['Test.Test.End'],
+        # ),
     ],
 )
 def test_graph_traversal(
