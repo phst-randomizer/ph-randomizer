@@ -24,7 +24,7 @@
       "exits": [
         {
           "name": "ToTest",
-          "entrance": "Test.Test.ToTest2"
+          "entrance": "Test.End.ToTest2"
         }
       ]
     }

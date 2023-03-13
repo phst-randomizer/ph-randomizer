@@ -10,7 +10,7 @@ area Test:
       lock LockedDoor2
 
     node End:
-      exit ToTest2
+      door ToTest2
 
     Start -> LockedDoor1
     Start -> LockedDoor2

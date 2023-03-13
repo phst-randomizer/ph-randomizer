@@ -15,7 +15,7 @@
       "exits": [
         {
           "name": "ToRoom2",
-          "entrance": "TestRoom2.End.Entrance"
+          "entrance": "TestRoom2.End.ToRoom1"
         }
       ]
     },
