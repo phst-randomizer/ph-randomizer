@@ -1,0 +1,22 @@
+area Test:
+  room Test:
+    node Start:
+      chest KeyChest
+
+    node LockedDoor1:
+      lock LockedDoor1
+
+    node LockedDoor2:
+      lock LockedDoor2
+
+    node End:
+      exit ToTest2
+
+    Start -> LockedDoor1
+    Start -> LockedDoor2
+    LockedDoor1 -> End: open LockedDoor1
+    LockedDoor2 -> End: open LockedDoor2
+
+  room Test2:
+    node Test:
+      door ToTest

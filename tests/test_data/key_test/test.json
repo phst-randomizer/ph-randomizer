@@ -1,0 +1,32 @@
+{
+  "name": "Test",
+  "rooms": [
+    {
+      "name": "Test",
+      "chests": [
+        {
+          "name": "KeyChest",
+          "type": "chest",
+          "contents": "small_key",
+          "zmb_file_path": "test",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToTest2",
+          "entrance": "Test2.Test.ToTest"
+        }
+      ]
+    },
+    {
+      "name": "Test2",
+      "exits": [
+        {
+          "name": "ToTest",
+          "entrance": "Test.Test.ToTest2"
+        }
+      ]
+    }
+  ]
+}

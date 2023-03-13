@@ -115,6 +115,12 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
             ['TestArea.TestRoom.Node2'],
             ['TestArea.TestRoom.NotAccessible'],
         ),
+        (
+            'key_test',
+            'Test.Test.Start',
+            ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
+            ['Test.Test.End'],
+        ),
     ],
 )
 def test_graph_traversal(
@@ -153,6 +159,7 @@ def test_graph_traversal(
     reachable_nodes = Logic.assumed_search(
         starting_node=starting_node,
         inventory=[],
+        keys={area.name: 0 for area in areas},
     )
 
     assert all(node in reachable_nodes for node in accessible_nodes)
