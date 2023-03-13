@@ -4,13 +4,8 @@ area TestArea:
       chest Chest1
       mail Mail1
 
-    node Node2:
-      door ToRoom2
+    node Node2
 
     node NotAccessible
 
     Node1 -> Node2: item Boomerang
-
-  room TestRoom2:
-    node End:
-      door ToRoom1
