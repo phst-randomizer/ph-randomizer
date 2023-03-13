@@ -419,7 +419,7 @@
         "exits": {
           "title": "Exits",
           "description": "All `exits` in this room that lead to an `entrance` in another room",
-          "minItems": 1,
+          "default": [],
           "uniqueItems": true,
           "type": "array",
           "items": {
@@ -438,8 +438,7 @@
         }
       },
       "required": [
-        "name",
-        "exits"
+        "name"
       ]
     }
   }
