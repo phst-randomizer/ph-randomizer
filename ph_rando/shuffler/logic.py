@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Iterable
 from copy import copy, deepcopy
 from dataclasses import dataclass, field
 from functools import cached_property
@@ -128,7 +129,11 @@ class Logic:
                             )
                             continue
                         src_node.edges.append(
-                            Edge(src=src_node, dest=_get_dest_node(exit.entrance))
+                            Edge(
+                                src=src_node,
+                                dest=_get_dest_node(exit.entrance),
+                                areas=self.areas.values(),
+                            )
                         )
         # Delete all exits from nodes. At this point they no longer have any
         # meaning, and any attempt to access them would likely be a bug.
@@ -698,7 +703,13 @@ class Edge:
     constraints: list[str | list[str | list]] | None
     locked_door: Node | None
 
-    def __init__(self, src: Node, dest: Node, constraints: str | None = None) -> None:
+    def __init__(
+        self,
+        src: Node,
+        dest: Node,
+        areas: Iterable[Area],
+        constraints: str | None = None,
+    ) -> None:
         self.src = src
         self.dest = dest
 
@@ -729,7 +740,7 @@ class Edge:
             assert len(self.constraints), f'Failed to parsed edge {constraints!r}'
             locks = _get_descriptors(self.constraints, EdgeDescriptor.OPEN.value)
             for lock_name in locks:
-                for area in Logic.areas.values():
+                for area in areas:
                     if area.name != self.src.area:
                         continue
                     for room in area.rooms:

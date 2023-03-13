@@ -248,6 +248,7 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                         Edge(
                                             src=node1,
                                             dest=node2,
+                                            areas=aux_data,
                                             constraints=edge.constraints,
                                         )
                                     )
@@ -256,6 +257,7 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path) -> None:
                                             Edge(
                                                 src=node2,
                                                 dest=node1,
+                                                areas=aux_data,
                                                 constraints=edge.constraints,
                                             )
                                         )
