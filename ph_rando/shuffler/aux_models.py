@@ -142,9 +142,8 @@ class Room(BaseModel):
         unique_items=True,
     )
     exits: list[Exit] = Field(
-        ...,
+        [],
         description='All `exits` in this room that lead to an `entrance` in another room',
-        min_items=1,
         unique_items=True,
     )
     enemies: list[Enemy] = Field(
