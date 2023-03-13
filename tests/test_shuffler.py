@@ -67,7 +67,7 @@ TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 def test_edge_parser(expression: str, inventory: list[str], flags: set[str], expected_result: bool):
     node1 = Node(name='test1')
     node2 = Node(name='test2')
-    edge = Edge(node1, node2, expression)
+    edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
     node1.edges.append(edge)
     assert edge.is_traversable(inventory, flags) == expected_result
 
@@ -86,7 +86,7 @@ def test_edge_contains_open_descriptor(expression: str, result: bool) -> None:
     Logic(settings={})
     node1 = Node(name='test1')
     node2 = Node(name='test2')
-    edge = Edge(node1, node2, expression)
+    edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
     assert edge.requires_key == result
 
 
@@ -101,7 +101,7 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
     Logic.settings = settings
     node1 = Node(name='test1')
     node2 = Node(name='test2')
-    edge = Edge(node1, node2, expression)
+    edge = Edge(src=node1, dest=node2, constraints=expression, areas=[])
     node1.edges.append(edge)
     assert edge.is_traversable([]) == expected_result
 
