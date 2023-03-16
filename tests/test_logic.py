@@ -58,17 +58,12 @@ def test_graph_connectedness() -> None:
     assert reachable_rooms == all_rooms
 
     # # Create set consisting of all nods reported as reachable by the assumed search
-    # reachable_nodes = {f'{node.area}.{node.room}.{node.node}' for node in reachable_nodes}
+    reachable_nodes = {node.name for node in reachable_nodes}
 
-    # # Create set consisting of all nodes in the logic
-    # all_nodes = {
-    #     f'{area.name}.{room.name}.{node.node}'
-    #     for area in logic.areas.values()
-    #     for room in area.rooms
-    #     for node in room.nodes
-    # }
+    # Create set consisting of all nodes in the logic
+    all_nodes = {node.name for area in areas.values() for room in area.rooms for node in room.nodes}
 
-    # assert reachable_nodes == all_nodes
+    assert reachable_nodes == all_nodes
 
 
 def test_aux_data_validation():
