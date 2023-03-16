@@ -39,6 +39,9 @@ ITEMS: dict[str, int] = {
     'CommonTreasure': 0x30,  # TODO: randomize this at run-time
     'GoronAmber': 0x34,
     'GhostKey': 0x38,
+    'FreebieCard': 0x39,
+    'ComplimentCard': 0x3A,
+    'ComplimentaryCard': 0x3B,
     'RegalNecklace': 0x3C,
     'SalvageArm': 0x3D,
     'HeroNewClothes': 0x3E,

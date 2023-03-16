@@ -6,7 +6,15 @@ import random
 
 from ordered_set import OrderedSet
 
-from ph_rando.shuffler._parser import Edge, Node, annotate_logic, parse_aux_data
+from ph_rando.shuffler._constants import get_mail_items
+from ph_rando.shuffler._parser import (
+    Edge,
+    Node,
+    annotate_logic,
+    parse_aux_data,
+    parse_edge_requirement,
+    requirements_met,
+)
 from ph_rando.shuffler.aux_models import Area, Check
 
 logger = logging.getLogger(__name__)
@@ -112,6 +120,7 @@ def assumed_search(
     visited_checks: set[Check] = set()
     flags: set[str] = set()
     items = copy(items)  # make copy of items so we don't mutate the original list
+    mail_items = get_mail_items()
 
     while True:
         reachable_nodes = search(starting_node, areas, items, flags)
@@ -131,6 +140,24 @@ def assumed_search(
                 if flag not in flags:
                     flags.add(flag)
                     found_new_items = True
+
+            # If this node contains a mailbox, check if any mail items
+            # are collectable and collect them.
+            if node.mailbox:
+                collectable_mail_items = [
+                    item
+                    for item in mail_items
+                    if requirements_met(
+                        parse_edge_requirement(item.requirements),
+                        items,
+                        flags,
+                        areas,
+                    )
+                ]
+                for item in collectable_mail_items:
+                    items.append(item.contents)
+                    found_new_items = True
+                    mail_items.remove(item)
 
         if not found_new_items:
             break

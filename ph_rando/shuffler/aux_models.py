@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING, Literal, TypeAlias, Union
 
-from pydantic import BaseModel, Extra, Field, validator
+from pydantic import BaseModel, Extra, Field, parse_file_as, validator
 
 if TYPE_CHECKING:
     from ph_rando.shuffler._shuffler import Node
@@ -180,6 +180,14 @@ class Area(BaseModel):
 
     def json(self, *args, **kwargs) -> str:
         return super().json(*args, exclude={'rooms': {'__all__': {'nodes', '_nodes'}}}, **kwargs)
+
+
+class Mail(BaseCheck):
+    requirements: str
+
+    @classmethod
+    def list_from_file(cls, file: Path) -> list[Mail]:
+        return parse_file_as(list[Mail], file)
 
 
 if __name__ == '__main__':

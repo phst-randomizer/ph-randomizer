@@ -36,6 +36,7 @@ class Node:
     flags: set[str] = field(default_factory=set)
     lock: str = field(default_factory=str)
     states: set[str] = field(default_factory=set)
+    mailbox: bool = False
 
     def __hash__(self) -> int:
         return hash(self.name)
@@ -443,6 +444,13 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path | None = None
                                         f'{descriptor.type} {descriptor.value!r} '
                                         'not found in aux data.'
                                     )
+                            case NodeDescriptor.MAIL.value:
+                                if node.mailbox:
+                                    raise Exception(
+                                        f'node {node.name} contains more '
+                                        'than one `mail` descriptor'
+                                    )
+                                node.mailbox = True
                             case other:
                                 if other not in NodeDescriptor:
                                     raise Exception(
