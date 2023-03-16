@@ -5,7 +5,7 @@ area IceTemple:
       enemy StagBeetle1
 
     node Arena:
-      state BombFlower
+      gain BombFlower
       enemy WhiteYook
       enemy Gel
 
