@@ -190,10 +190,6 @@ def _patch_bmg_events(aux_data: list[Area], input_rom: rom.NintendoDSRom):
 
     with open_bmg_files(bmg_file_paths, input_rom) as bmg_files:
         for chest in chests:
-            if 'todo' in (chest.bmg_file_path.lower(), chest.contents.lower()):
-                logging.warning(f'Skipping {chest.name}, bmg path and/or contents is "TODO"')
-                continue
-
             bmg_instructions = bmg_files[chest.bmg_file_path].instructions
             bmg_instructions[chest.bmg_instruction_index] = (
                 bmg_instructions[chest.bmg_instruction_index][:4]
