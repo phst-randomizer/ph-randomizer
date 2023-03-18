@@ -37,7 +37,7 @@
         {
           "name": "ZauzPhantomSword",
           "type": "event",
-          "contents": "TODO",
+          "contents": "phantom_sword_blade",
           "bmg_file_path": "English/Message/sennin.bmg",
           "bmg_instruction_index": -1
         }

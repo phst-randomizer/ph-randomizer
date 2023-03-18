@@ -97,6 +97,7 @@ ITEMS: dict[str, int] = {
     # TODO: update these when their ids are known
     'phantom_hourglass': -1,
     'phantom_sword': -1,
+    'phantom_sword_blade': -1,
     'sand_2m': -1,
     'power_spirit': -1,
     'wisdom_spirit': -1,
