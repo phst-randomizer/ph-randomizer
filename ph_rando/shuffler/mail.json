@@ -7,16 +7,51 @@
   {
     "name": "Romanos",
     "contents": "random_ship_part",
-    "requirements": "item CourageSpirit"
+    "requirements": "flag CourageTempleBeaten"
   },
   {
     "name": "Jolene",
     "contents": "jolenes_letter",
-    "requirements": "item CourageSpirit"
+    "requirements": "flag CourageTempleBeaten"
   },
   {
     "name": "Joanne",
     "contents": "random_ship_part",
     "requirements": "item JolenesLetter & flag FoundMermaid"
+  },
+  {
+    "name": "Linebeck",
+    "contents": "random_ship_part",
+    "requirements": "flag StoneTetra"
+  },
+  {
+    "name": "Gongoron",
+    "contents": "courage_gem",
+    "requirements": "flag GoronTempleBeaten"
+  },
+  {
+    "name": "Postmaster",
+    "contents": "wisdom_gem",
+    "requirements": "flag IceTempleBeaten"
+  },
+  {
+    "name": "Aroo",
+    "contents": "power_gem",
+    "requirements": "flag MutohTempleBeaten"
+  },
+  {
+    "name": "Beedle1",
+    "contents": "freebie_card",
+    "requirements": "flag CanAccessBeedle"
+  },
+  {
+    "name": "Beedle2",
+    "contents": "compliment_card",
+    "requirements": "flag CanAccessBeedle"
+  },
+  {
+    "name": "Beedle3",
+    "contents": "complimentary_card",
+    "requirements": "flag CanAccessBeedle"
   }
 ]
