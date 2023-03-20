@@ -6,4 +6,4 @@ area Mercay:
     node PhantomSword:
       chest PhantomSword
 
-    Main -> PhantomSword: (item PhantomBlade & item PhantomHourglass)
+    Main -> PhantomSword: (item PhantomSwordBlade & item PhantomHourglass)
