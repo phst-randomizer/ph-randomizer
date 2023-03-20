@@ -7,7 +7,7 @@
       "chests": [
         {
           "name": "PhantomSword",
-          "contents": "phantom_sword",
+          "contents": "PhantomSword",
           "type": "event",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": -1

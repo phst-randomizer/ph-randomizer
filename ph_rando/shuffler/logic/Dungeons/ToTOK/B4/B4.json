@@ -8,19 +8,19 @@
         {
           "name": "FreestandingKey",
           "type": "freestanding",
-          "contents": "small_key"
+          "contents": "SmallKey"
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "random_treasure",
+          "contents": "RandomTreasure",
           "zmb_file_path": "Map/dngn_main/map05.bin/zmb/dngn_main_05.zmb",
           "zmb_mapobject_index": 4
         },
         {
           "name": "EyeKiller",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/dngn_main/map05.bin/zmb/dngn_main_05.zmb",
           "zmb_mapobject_index": 3
         }

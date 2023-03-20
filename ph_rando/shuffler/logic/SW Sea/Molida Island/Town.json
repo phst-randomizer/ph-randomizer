@@ -8,7 +8,7 @@
         {
           "name": "RedGirl",
           "type": "event",
-          "contents": "treasure_map_se3",
+          "contents": "TreasureMapSE3",
           "bmg_file_path": "English/Message/brave.bmg",
           "bmg_instruction_index": 42
         }

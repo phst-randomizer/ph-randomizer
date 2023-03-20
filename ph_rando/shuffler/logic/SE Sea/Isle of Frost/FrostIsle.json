@@ -8,14 +8,14 @@
         {
           "name": "LedgeChest",
           "type": "chest",
-          "contents": "wisdom_gem",
+          "contents": "WisdomGem",
           "zmb_file_path": "Map/isle_water/map00.bin/zmb/isle_water_00.zmb",
           "zmb_mapobject_index": 10
         },
         {
           "name": "BigGreenRupee",
           "type": "dig_spot",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_actor_index": 2,
           "zmb_file_path": "Map/isle_water/map00.bin/zmb/isle_water_00.zmb"
         }
@@ -83,35 +83,35 @@
         {
           "name": "BigGoldRupee",
           "type": "dig_spot",
-          "contents": "big_gold_rupee",
+          "contents": "BigGoldRupee",
           "zmb_actor_index": 9,
           "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
         },
         {
           "name": "DoboSign",
           "type": "dig_spot",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_actor_index": 3,
           "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
         },
         {
           "name": "FofoSign",
           "type": "dig_spot",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_actor_index": 5,
           "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
         },
         {
           "name": "GossipStoneHint",
           "type": "dig_spot",
-          "contents": "big_red_rupee",
+          "contents": "BigRedRupee",
           "zmb_actor_index": 8,
           "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
         },
         {
           "name": "BottomLeftIsland",
           "type": "dig_spot",
-          "contents": "treasure_map_nw3",
+          "contents": "TreasureMapNW3",
           "zmb_actor_index": 10,
           "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
         }
@@ -227,28 +227,28 @@
         {
           "name": "DropDown",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
           "zmb_mapobject_index": 3
         },
         {
           "name": "DoubleLeft",
           "type": "chest",
-          "contents": "small_red_rupee",
+          "contents": "SmallRedRupee",
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
           "zmb_mapobject_index": 5
         },
         {
           "name": "DoubleRight",
           "type": "chest",
-          "contents": "small_red_rupee",
+          "contents": "SmallRedRupee",
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
           "zmb_mapobject_index": 6
         },
         {
           "name": "RightHigher",
           "type": "chest",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
           "zmb_mapobject_index": 24
         }

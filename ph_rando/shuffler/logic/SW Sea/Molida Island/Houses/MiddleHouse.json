@@ -8,7 +8,7 @@
         {
           "name": "TreasureChest",
           "type": "chest",
-          "contents": "random_treasure",
+          "contents": "RandomTreasure",
           "zmb_file_path": "Map/isle_pluck/map13.bin/zmb/isle_pluck_13.zmb",
           "zmb_mapobject_index": 2
         }

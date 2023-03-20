@@ -8,7 +8,7 @@
         {
           "name": "KingKey",
           "type": "chest",
-          "contents": "king_key",
+          "contents": "KingKey",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

@@ -7,42 +7,42 @@
         {
           "name": "Power1",
           "type": "chest",
-          "contents": "spirit_power_lv1",
+          "contents": "SpiritPowerLv1",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "Power2",
           "type": "chest",
-          "contents": "spirit_power_lv2",
+          "contents": "SpiritPowerLv2",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "Wisdom1",
           "type": "chest",
-          "contents": "spirit_wisdom_lv1",
+          "contents": "SpiritWisdomLv1",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "Wisdom2",
           "type": "chest",
-          "contents": "spirit_wisdom_lv2",
+          "contents": "SpiritWisdomLv2",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "Courage1",
           "type": "chest",
-          "contents": "spirit_courage_lv1",
+          "contents": "SpiritCourageLv1",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "Courage2",
           "type": "chest",
-          "contents": "spirit_courage_lv2",
+          "contents": "SpiritCourageLv2",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }
@@ -60,14 +60,14 @@
         {
           "name": "LeftSide",
           "type": "chest",
-          "contents": "courage_gem",
+          "contents": "CourageGem",
           "zmb_file_path": "Map/isle_shrine/map00.bin/zmb/isle_shrine_00.zmb",
           "zmb_mapobject_index": 138
         },
         {
           "name": "AfterJumps",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/isle_shrine/map00.bin/zmb/isle_shrine_00.zmb",
           "zmb_mapobject_index": 105
         }

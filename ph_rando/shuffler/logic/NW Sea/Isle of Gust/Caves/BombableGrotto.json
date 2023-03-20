@@ -8,7 +8,7 @@
         {
           "name": "GrottoChest",
           "type": "chest",
-          "contents": "courage_gem",
+          "contents": "CourageGem",
           "zmb_file_path": "Map/isle_wind/map10.bin/zmb/isle_wind_10.zmb",
           "zmb_mapobject_index": 9
         }

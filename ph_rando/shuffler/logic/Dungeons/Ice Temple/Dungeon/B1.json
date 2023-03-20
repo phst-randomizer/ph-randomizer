@@ -8,21 +8,21 @@
         {
           "name": "ChestAfterBombableWallPlate",
           "type": "chest",
-          "contents": "big_red_rupee",
+          "contents": "BigRedRupee",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "PullRedLever",
           "type": "chest",
-          "contents": "small_key",
+          "contents": "SmallKey",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "AfterLockedDoor",
           "type": "chest",
-          "contents": "wisdom_gem",
+          "contents": "WisdomGem",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

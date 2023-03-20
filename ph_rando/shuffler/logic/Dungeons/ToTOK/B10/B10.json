@@ -6,27 +6,27 @@
       "chests": [
         {
           "name": "PhantomKey",
-          "contents": "small_key",
+          "contents": "SmallKey",
           "type": "on_enemy"
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
           "zmb_mapobject_index": 23
         },
         {
           "name": "EyeKiller",
           "type": "chest",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
           "zmb_mapobject_index": 31
         },
         {
           "name": "ChestAfterHammer",
           "type": "chest",
-          "contents": "treasure_map_ne7",
+          "contents": "TreasureMapNE7",
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
           "zmb_mapobject_index": 28
         }

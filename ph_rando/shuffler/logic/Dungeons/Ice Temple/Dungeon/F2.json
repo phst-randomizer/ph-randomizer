@@ -8,7 +8,7 @@
         {
           "name": "YookSlayer",
           "type": "chest",
-          "contents": "grappling_hook",
+          "contents": "GrapplingHook",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

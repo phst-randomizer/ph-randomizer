@@ -8,14 +8,14 @@
         {
           "name": "AfterSwitch",
           "type": "chest",
-          "contents": "red_potion",
+          "contents": "RedPotion",
           "zmb_file_path": "Map/dngn_main/map06.bin/zmb/dngn_main_06.zmb",
           "zmb_mapobject_index": 11
         },
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "treasure_map_se8",
+          "contents": "TreasureMapSE8",
           "zmb_file_path": "Map/dngn_main/map06.bin/zmb/dngn_main_06.zmb",
           "zmb_mapobject_index": 12
         }

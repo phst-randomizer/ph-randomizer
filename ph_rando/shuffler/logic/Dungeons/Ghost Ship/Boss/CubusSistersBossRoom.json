@@ -8,12 +8,12 @@
         {
           "name": "GhostKey",
           "type": "freestanding",
-          "contents": "ghost_key"
+          "contents": "GhostKey"
         },
         {
           "name": "HeartContainer",
           "type": "chest",
-          "contents": "heart_container",
+          "contents": "HeartContainer",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

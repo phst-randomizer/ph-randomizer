@@ -8,7 +8,7 @@
         {
           "name": "TreasureMap",
           "type": "event",
-          "contents": "treasure_map_se5",
+          "contents": "TreasureMapSE5",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         }

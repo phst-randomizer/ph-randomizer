@@ -8,14 +8,14 @@
         {
           "name": "KeesesSmallKey",
           "type": "chest",
-          "contents": "small_key",
+          "contents": "SmallKey",
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
           "zmb_mapobject_index": 26
         },
         {
           "name": "ChestNearLavaPit",
           "type": "chest",
-          "contents": "small_red_rupee",
+          "contents": "SmallRedRupee",
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
           "zmb_mapobject_index": 68
         }
@@ -71,21 +71,21 @@
         {
           "name": "BoomerangChest",
           "type": "chest",
-          "contents": "boomerang",
+          "contents": "Boomerang",
           "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
           "zmb_mapobject_index": 7
         },
         {
           "name": "AfterKeeses",
           "type": "chest",
-          "contents": "small_red_rupee",
+          "contents": "SmallRedRupee",
           "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
           "zmb_mapobject_index": 74
         },
         {
           "name": "RatKey",
           "type": "on_enemy",
-          "contents": "small_key"
+          "contents": "SmallKey"
         }
       ],
       "exits": [
@@ -163,12 +163,12 @@
         {
           "name": "SwitchesSmallKey",
           "type": "freestanding",
-          "contents": "small_key"
+          "contents": "SmallKey"
         },
         {
           "name": "BossKeyChest",
           "type": "chest",
-          "contents": "boss_key",
+          "contents": "BossKey",
           "zmb_file_path": "Map/dngn_flame/map02.bin/zmb/dngn_flame_02.zmb",
           "zmb_mapobject_index": 15
         }

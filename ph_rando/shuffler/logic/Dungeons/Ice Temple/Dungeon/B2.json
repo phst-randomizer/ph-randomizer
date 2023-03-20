@@ -8,21 +8,21 @@
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "boss_key",
+          "contents": "BossKey",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "Bounce",
           "type": "chest",
-          "contents": "small_key",
+          "contents": "SmallKey",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "DefeatThemAll",
           "type": "chest",
-          "contents": "big_red_rupee",
+          "contents": "BigRedRupee",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

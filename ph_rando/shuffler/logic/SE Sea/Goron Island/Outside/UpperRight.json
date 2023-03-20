@@ -8,14 +8,14 @@
         {
           "name": "BombchuChest",
           "type": "chest",
-          "contents": "treasure_map_sw2",
+          "contents": "TreasureMapSW2",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "ChestBehindSpikes",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

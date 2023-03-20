@@ -8,7 +8,7 @@
         {
           "name": "NearChiefHouse",
           "type": "dig_spot",
-          "contents": "small_red_rupee",
+          "contents": "SmallRedRupee",
           "zmb_file_path": "TODO",
           "zmb_actor_index": 0
         }

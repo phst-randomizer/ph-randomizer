@@ -1,57 +1,57 @@
 [
   {
     "name": "Salvatore",
-    "contents": "wisdom_gem",
+    "contents": "WisdomGem",
     "requirements": "item SunKey & flag CanPlaySalvatoreMinigame"
   },
   {
     "name": "Romanos",
-    "contents": "random_ship_part",
+    "contents": "RandomShipPart",
     "requirements": "flag CourageTempleBeaten"
   },
   {
     "name": "Jolene",
-    "contents": "jolenes_letter",
+    "contents": "JolenesLetter",
     "requirements": "flag CourageTempleBeaten"
   },
   {
     "name": "Joanne",
-    "contents": "random_ship_part",
+    "contents": "RandomShipPart",
     "requirements": "item JolenesLetter & flag FoundMermaid"
   },
   {
     "name": "Linebeck",
-    "contents": "random_ship_part",
+    "contents": "RandomShipPart",
     "requirements": "flag StoneTetra"
   },
   {
     "name": "Gongoron",
-    "contents": "courage_gem",
+    "contents": "CourageGem",
     "requirements": "flag GoronTempleBeaten"
   },
   {
     "name": "Postmaster",
-    "contents": "wisdom_gem",
+    "contents": "WisdomGem",
     "requirements": "flag IceTempleBeaten"
   },
   {
     "name": "Aroo",
-    "contents": "power_gem",
+    "contents": "PowerGem",
     "requirements": "flag MutohTempleBeaten"
   },
   {
     "name": "Beedle1",
-    "contents": "freebie_card",
+    "contents": "FreebieCard",
     "requirements": "flag CanAccessBeedle"
   },
   {
     "name": "Beedle2",
-    "contents": "compliment_card",
+    "contents": "ComplimentCard",
     "requirements": "flag CanAccessBeedle"
   },
   {
     "name": "Beedle3",
-    "contents": "complimentary_card",
+    "contents": "ComplimentaryCard",
     "requirements": "flag CanAccessBeedle"
   }
 ]

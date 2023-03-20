@@ -8,40 +8,40 @@
         {
           "name": "AfterSpikeTraps",
           "type": "chest",
-          "contents": "small_key",
+          "contents": "SmallKey",
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 105
         },
         {
           "name": "BombableWallChest",
           "type": "chest",
-          "contents": "random_treasure",
+          "contents": "RandomTreasure",
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 77
         },
         {
           "name": "PolsLeft",
           "type": "chest",
-          "contents": "random_ship_part",
+          "contents": "RandomShipPart",
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 84
         },
         {
           "name": "PolsRight",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 95
         },
         {
           "name": "PolsKey",
           "type": "on_enemy",
-          "contents": "small_key"
+          "contents": "SmallKey"
         },
         {
           "name": "PolsKeyTopRight",
           "type": "on_enemy",
-          "contents": "small_key"
+          "contents": "SmallKey"
         }
       ],
       "exits": [
@@ -119,21 +119,21 @@
         {
           "name": "BowChest",
           "type": "chest",
-          "contents": "bow",
+          "contents": "Bow",
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
           "zmb_mapobject_index": 22
         },
         {
           "name": "IslandChest",
           "type": "chest",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
           "zmb_mapobject_index": 110
         },
         {
           "name": "EyeTarget",
           "type": "chest",
-          "contents": "wisdom_gem",
+          "contents": "WisdomGem",
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
           "zmb_mapobject_index": 95
         }
@@ -171,28 +171,28 @@
         {
           "name": "AfterUDRL",
           "type": "chest",
-          "contents": "square_crystal",
+          "contents": "SquareCrystal",
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 5
         },
         {
           "name": "TwoEyes",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 84
         },
         {
           "name": "SpikeTraps",
           "type": "chest",
-          "contents": "random_treasure",
+          "contents": "RandomTreasure",
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 100
         },
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "boss_key",
+          "contents": "BossKey",
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 76
         }
@@ -256,7 +256,7 @@
         {
           "name": "Hidden",
           "type": "chest",
-          "contents": "courage_gem",
+          "contents": "CourageGem",
           "zmb_file_path": "Map/dngn_pluck/map03.bin/zmb/dngn_pluck_03.zmb",
           "zmb_mapobject_index": 10
         }

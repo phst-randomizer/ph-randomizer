@@ -8,7 +8,7 @@
         {
           "name": "RupeeChest",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/isle_myou/map04.bin/zmb/isle_myou_04.zmb",
           "zmb_mapobject_index": 11
         }

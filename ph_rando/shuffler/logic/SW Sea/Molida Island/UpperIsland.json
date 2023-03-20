@@ -8,14 +8,14 @@
         {
           "name": "IslandChest",
           "type": "chest",
-          "contents": "courage_gem",
+          "contents": "CourageGem",
           "zmb_file_path": "Map/isle_pluck/map01.bin/zmb/isle_pluck_01.zmb",
           "zmb_mapobject_index": 122
         },
         {
           "name": "Cliff",
           "type": "chest",
-          "contents": "random_treasure",
+          "contents": "RandomTreasure",
           "zmb_file_path": "Map/isle_pluck/map01.bin/zmb/isle_pluck_01.zmb",
           "zmb_mapobject_index": 135
         }

@@ -7,14 +7,14 @@
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "big_red_rupee",
+          "contents": "BigRedRupee",
           "zmb_file_path": "Map/dngn_main/map15.bin/zmb/dngn_main_15.zmb",
           "zmb_mapobject_index": 15
         },
         {
           "name": "EyeKiller",
           "type": "chest",
-          "contents": "random_treasure",
+          "contents": "RandomTreasure",
           "zmb_file_path": "Map/dngn_main/map15.bin/zmb/dngn_main_15.zmb",
           "zmb_mapobject_index": 80
         }

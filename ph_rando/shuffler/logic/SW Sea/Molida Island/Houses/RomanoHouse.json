@@ -8,7 +8,7 @@
         {
           "name": "ShootingGallery",
           "type": "event",
-          "contents": "quiver_upgrade",
+          "contents": "QuiverUpgrade",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         }

@@ -8,14 +8,14 @@
         {
           "name": "BombchuBagUpgrade",
           "type": "island_shop",
-          "contents": "bombchu_bag_upgrade",
+          "contents": "BombchuBagUpgrade",
           "overlay": 0,
           "overlay_offset": "TODO"
         },
         {
           "name": "RandomTreasure",
           "type": "island_shop",
-          "contents": "common_treasure",
+          "contents": "CommonTreasure",
           "overlay": 0,
           "overlay_offset": "TODO"
         }

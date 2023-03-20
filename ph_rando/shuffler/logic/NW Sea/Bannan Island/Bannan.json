@@ -8,14 +8,14 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "treasure_map_sw5",
+          "contents": "TreasureMapSW5",
           "zmb_actor_index": 4,
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
         },
         {
           "name": "IslandChest",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 111
         }
@@ -83,28 +83,28 @@
         {
           "name": "CannonMiniGameBombBag",
           "type": "event",
-          "contents": "bomb_bag_upgrade",
+          "contents": "BombBagUpgrade",
           "bmg_file_path": "todo",
           "bmg_instruction_index": -1
         },
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "treasure_map_se4",
+          "contents": "TreasureMapSE4",
           "zmb_actor_index": 5,
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
         },
         {
           "name": "LeftIslandChest",
           "type": "chest",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 86
         },
         {
           "name": "RightIslandChest",
           "type": "chest",
-          "contents": "courage_gem",
+          "contents": "CourageGem",
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 87
         }
@@ -136,21 +136,21 @@
         {
           "name": "FishingRodFromOldMan",
           "type": "event",
-          "contents": "fishing_rod",
+          "contents": "FishingRod",
           "bmg_instruction_index": 87,
           "bmg_file_path": "English/Message/hidari.bmg"
         },
         {
           "name": "WisdomGem",
           "type": "event",
-          "contents": "wisdom_gem",
+          "contents": "WisdomGem",
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         },
         {
           "name": "TradingSequenceEnd",
           "type": "chest",
-          "contents": "swordsmans_scroll",
+          "contents": "SwordsmansScroll",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

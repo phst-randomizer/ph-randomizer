@@ -8,7 +8,7 @@
         {
           "name": "TopLeftChest",
           "type": "chest",
-          "contents": "purple_potion",
+          "contents": "PurplePotion",
           "zmb_file_path": "Map/dngn_ghost/map02.bin/zmb/dngn_ghost_02.zmb",
           "zmb_mapobject_index": 1
         }

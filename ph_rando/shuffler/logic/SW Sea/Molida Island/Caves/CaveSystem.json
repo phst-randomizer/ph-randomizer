@@ -8,21 +8,21 @@
         {
           "name": "LedgeChest",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
           "zmb_mapobject_index": 20
         },
         {
           "name": "NearFogMap",
           "type": "chest",
-          "contents": "treasure_map_sw4",
+          "contents": "TreasureMapSW4",
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
           "zmb_mapobject_index": 22
         },
         {
           "name": "ChestAfterHole",
           "type": "chest",
-          "contents": "wisdom_gem",
+          "contents": "WisdomGem",
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
           "zmb_mapobject_index": 21
         }

@@ -8,7 +8,7 @@
         {
           "name": "BridgeChest",
           "type": "chest",
-          "contents": "courage_gem",
+          "contents": "CourageGem",
           "zmb_file_path": "Map/isle_main/map18.bin/zmb/isle_main_18.zmb",
           "zmb_mapobject_index": 4
         }

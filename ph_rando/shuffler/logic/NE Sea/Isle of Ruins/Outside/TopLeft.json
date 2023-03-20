@@ -8,7 +8,7 @@
         {
           "name": "Underwater",
           "type": "chest",
-          "contents": "power_gem",
+          "contents": "PowerGem",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

@@ -7,42 +7,42 @@
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "big_gold_rupee",
+          "contents": "BigGoldRupee",
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
           "zmb_mapobject_index": 10
         },
         {
           "name": "WizzrobeKiller",
           "type": "chest",
-          "contents": "random_ship_part",
+          "contents": "RandomShipPart",
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
           "zmb_mapobject_index": 31
         },
         {
           "name": "RightSwitch",
           "type": "chest",
-          "contents": "treasure_map_ne8",
+          "contents": "TreasureMapNE8",
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
           "zmb_mapobject_index": 30
         },
         {
           "name": "LeftForceGem",
           "type": "chest",
-          "contents": "force_gem",
+          "contents": "ForceGem",
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
           "zmb_mapobject_index": 8
         },
         {
           "name": "RightForceGem",
           "type": "chest",
-          "contents": "force_gem",
+          "contents": "ForceGem",
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
           "zmb_mapobject_index": 9
         },
         {
           "name": "PhantomForceGem",
           "type": "on_enemy",
-          "contents": "force_gem"
+          "contents": "ForceGem"
         }
       ],
       "exits": [

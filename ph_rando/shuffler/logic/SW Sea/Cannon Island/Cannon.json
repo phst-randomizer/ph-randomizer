@@ -8,14 +8,14 @@
         {
           "name": "BeeChest",
           "type": "chest",
-          "contents": "treasure_map_sw7",
+          "contents": "TreasureMapSW7",
           "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
           "zmb_mapobject_index": 183
         },
         {
           "name": "NearRocks",
           "type": "chest",
-          "contents": "small_red_rupee",
+          "contents": "SmallRedRupee",
           "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
           "zmb_mapobject_index": 185
         }
@@ -62,14 +62,14 @@
         {
           "name": "Cannon",
           "type": "event",
-          "contents": "cannon",
+          "contents": "Cannon",
           "bmg_file_path": "English/Message/torii.bmg",
           "bmg_instruction_index": 35
         },
         {
           "name": "SalvageArm",
           "type": "event",
-          "contents": "salvage_arm",
+          "contents": "SalvageArm",
           "bmg_file_path": "English/Message/torii.bmg",
           "bmg_instruction_index": 73
         }

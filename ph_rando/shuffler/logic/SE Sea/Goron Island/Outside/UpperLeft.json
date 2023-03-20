@@ -8,7 +8,7 @@
         {
           "name": "MazeChest",
           "type": "chest",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

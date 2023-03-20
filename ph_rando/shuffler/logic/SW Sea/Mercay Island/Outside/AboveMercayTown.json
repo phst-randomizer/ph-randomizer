@@ -34,14 +34,14 @@
         {
           "name": "RollIntoTree",
           "type": "tree",
-          "contents": "big_green_rupee",
+          "contents": "BigGreenRupee",
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
           "zmb_mapobject_index": 25
         },
         {
           "name": "AboveEntrance",
           "type": "chest",
-          "contents": "wisdom_gem",
+          "contents": "WisdomGem",
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
           "zmb_mapobject_index": 54
         }
