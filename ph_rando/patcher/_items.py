@@ -2,7 +2,7 @@ ITEMS: dict[str, int] = {
     'SmallKey': 0x1,
     'SmallGreenRupee': 0x2,
     'OshusSword': 0x3,
-    'WoodenShield': 0x4,
+    'Shield': 0x4,
     'ForceGem': 0x6,  # TODO: difference between this and 0x1C?
     'Bombs': 0x7,
     'Bow': 0x8,

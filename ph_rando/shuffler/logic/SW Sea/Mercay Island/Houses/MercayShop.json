@@ -8,7 +8,7 @@
         {
           "name": "WoodenShield",
           "type": "island_shop",
-          "contents": "WoodenShield",
+          "contents": "Shield",
           "overlay": 31,
           "overlay_offset": "0x2fd4"
         },
