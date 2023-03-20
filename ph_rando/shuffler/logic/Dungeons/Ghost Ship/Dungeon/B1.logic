@@ -31,7 +31,7 @@ area GhostShip:
       enemy SkulltulaTop1
       enemy SkulltulaTop2
 
-    TopLeft <-> Top: ((item Boomerang | item GrapplingHook | item Bomb | item Hammer) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopLeft)))
+    TopLeft <-> Top: ((item Boomerang | item GrapplingHook | item Bombs | item Hammer) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopLeft)))
 
     node TopRight:
       enemy SkulltulaTopRight

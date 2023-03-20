@@ -40,7 +40,7 @@ area GoronTemple:
     AfterTopArena -> BombableWalls: macro Bombs
     BombableWalls -> AfterTopArena
 
-    B1Shortcut -> Entrance: (item Bombchu | macro HammerClip)
+    B1Shortcut -> Entrance: (item Bombchus | macro HammerClip)
 
   room BombableF1:
     node LeftSide:
@@ -129,7 +129,7 @@ area GoronTemple:
     node BossKeyChest:
       chest BossKey
 
-    BottomLeft -> MiddleLeft: (item Bombchu | macro HammerClip)
+    BottomLeft -> MiddleLeft: (item Bombchus | macro HammerClip)
     BottomStaircase -> BottomLeft
     BottomLeft -> BottomStaircase: (macro HammerReach | macro BombchuCameraLock)
 
@@ -138,9 +138,9 @@ area GoronTemple:
     BottomArena -> BottomStaircase: (defeated Hinox1 & defeated Hinox2)
     BottomArena -> AfterBottomArena: (defeated Hinox1 & defeated Hinox2)
 
-    AfterBottomArena <-> TopLeft: (item Bombchu | item Bomb | item Boomerang)
+    AfterBottomArena <-> TopLeft: (item Bombchus | item Bombs | item Boomerang)
     TopLeft <-> KillEyeSlug: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & defeated EyeSlug6 & defeated EyeSlug7 & defeated EyeSlug8)
-    AfterBottomArena <-> BossKeyChest: item Bombchu
+    AfterBottomArena <-> BossKeyChest: item Bombchus
 
 
   room B3:
@@ -169,7 +169,7 @@ area GoronTemple:
       door ToB4
 
     BottomLeft <-> BlinChest: (defeated Miniblin1 & defeated Miniblin2 & defeated Miniblin3 & defeated Miniblin4 & defeated Miniblin5 & defeated Miniblin6)
-    BottomLeft -> ArmosRoom: (item Bombchu | macro HammerClip)
+    BottomLeft -> ArmosRoom: (item Bombchus | macro HammerClip)
     ArmosRoom -> BossKeyLock: (defeated Armos1 & defeated Armos2 & defeated Armos3 & defeated Armos4)
     BossKeyLock <-> AfterBossKey: item BossKey
 
