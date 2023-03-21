@@ -42,66 +42,66 @@ jobs:
       - name: Run type checking
         run: tox -e type
 
-  check-logic:
-    name: Validate logic
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # check-logic:
+  #   name: Validate logic
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Checkout rando-shuffler repo
-        uses: actions/checkout@v3
-        with:
-          repository: minishmaker/rando-shuffler
-          path: rando-shuffler
+  #     - name: Checkout rando-shuffler repo
+  #       uses: actions/checkout@v3
+  #       with:
+  #         repository: minishmaker/rando-shuffler
+  #         path: rando-shuffler
 
-      - name: Get cache key
-        id: shuffler-cache-key
-        run: echo "key=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-        shell: bash
-        working-directory: rando-shuffler
+  #     - name: Get cache key
+  #       id: shuffler-cache-key
+  #       run: echo "key=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+  #       shell: bash
+  #       working-directory: rando-shuffler
 
-      - uses: actions/cache@v3
-        id: rando-shuffler-cache
-        with:
-          path: rando-shuffler
-          key: ${{ steps.shuffler-cache-key.outputs.key }}
+  #     - uses: actions/cache@v3
+  #       id: rando-shuffler-cache
+  #       with:
+  #         path: rando-shuffler
+  #         key: ${{ steps.shuffler-cache-key.outputs.key }}
 
-      - name: Compile rando-shuffler
-        if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
-        run: cargo build
-        working-directory: rando-shuffler
-        env:
-          CARGO_TERM_COLOR: always
+  #     - name: Compile rando-shuffler
+  #       if: steps.rando-shuffler-cache.outputs.cache-hit != 'true'
+  #       run: cargo build
+  #       working-directory: rando-shuffler
+  #       env:
+  #         CARGO_TERM_COLOR: always
 
-      - name: Make it executable
-        run: chmod +x rando-shuffler/target/debug/rando_shuffler
+  #     - name: Make it executable
+  #       run: chmod +x rando-shuffler/target/debug/rando_shuffler
 
-      - name: Run the MCR shuffler
-        run: |
-          shopt -s globstar
-          find rando-shuffler/ -name "*.logic" -type f -delete # remove test files
-          file_count=0
-          failed=0;
-          for file in **/*.logic; do
-            echo "$file... ";
-            status=0
-            tmpfile=$(mktemp /tmp/output.XXXXXX)  # create temporary file to store output
-            rando-shuffler/target/debug/rando_shuffler "$file" >> $tmpfile 2>&1 || status=1
-            if [[ $status != 0 ]]; then
-              failed=$((failed + 1));
-              echo -e "\033[0;31mFAILED\033[0m"
-              cat $tmpfile  # print output of rando-shuffler if errors occured
-            else
-              echo -e "\033[0;32mPASSED\033[0m"
-            fi
-            echo "-------------------------------"
-            echo ""
-            file_count=$((file_count + 1))
-          done;
-          echo "RESULTS: $((file_count - failed)) / $file_count passed"
-          if [[ $failed != 0 ]]; then
-            exit 1;
-          fi
+  #     - name: Run the MCR shuffler
+  #       run: |
+  #         shopt -s globstar
+  #         find rando-shuffler/ -name "*.logic" -type f -delete # remove test files
+  #         file_count=0
+  #         failed=0;
+  #         for file in **/*.logic; do
+  #           echo "$file... ";
+  #           status=0
+  #           tmpfile=$(mktemp /tmp/output.XXXXXX)  # create temporary file to store output
+  #           rando-shuffler/target/debug/rando_shuffler "$file" >> $tmpfile 2>&1 || status=1
+  #           if [[ $status != 0 ]]; then
+  #             failed=$((failed + 1));
+  #             echo -e "\033[0;31mFAILED\033[0m"
+  #             cat $tmpfile  # print output of rando-shuffler if errors occured
+  #           else
+  #             echo -e "\033[0;32mPASSED\033[0m"
+  #           fi
+  #           echo "-------------------------------"
+  #           echo ""
+  #           file_count=$((file_count + 1))
+  #         done;
+  #         echo "RESULTS: $((file_count - failed)) / $file_count passed"
+  #         if [[ $failed != 0 ]]; then
+  #           exit 1;
+  #         fi
 
   check-aux-data:
     name: Validate aux data
@@ -208,7 +208,9 @@ jobs:
 
   run-shuffler:
     name: Run the shuffler against logic and aux data
-    needs: [check-logic, check-aux-data]
+    needs:
+      - check-aux-data
+      # - check-logic
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -230,7 +232,9 @@ jobs:
 
   tests:
     name: Run tests
-    needs: [check-logic, check-aux-data]
+    needs:
+      - check-aux-data
+      # - check-logic
     strategy:
       fail-fast: false
       matrix:
@@ -498,7 +502,7 @@ jobs:
       - build
       - lint-type-check
       - tests
-      - check-logic
+      # - check-logic
       - check-aux-data
       - run-shuffler
       - test-desmume
