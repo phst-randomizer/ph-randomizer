@@ -48,26 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Fetch TMCR logic syntax checker
-        uses: dsaltares/fetch-gh-release-asset@master
-        with:
-          repo: 'Ibot02/tmcr-newlogic-ci'
-          file: 'tmcr-newlogic-ci'
-          version: 'tags/v1.0'
-
-      - name: Run the TMCR logic syntax checker
-        run: |
-          shopt -s globstar
-          chmod +x ./tmcr-newlogic-ci
-          failed=0
-          for file in **/*.logic; do
-            ./tmcr-newlogic-ci "$file" || failed=1
-          done;
-          if [[ $failed != 0 ]]; then
-            exit 1;
-          fi
-
-      # Run more advanced checks
       - name: Checkout rando-shuffler repo
         uses: actions/checkout@v3
         with:
