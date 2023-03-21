@@ -32,7 +32,7 @@ area IceTemple:
     node StairsLeft:
       door ToF2Left
 
-    RightSide <-> Main: (item GrapplingHook | item Boomerang | item Bow | (item Sword & item CourageSpiritLV1))
+    RightSide <-> Main: (item GrapplingHook | item Boomerang | item Bow | (item Sword & item CourageSpiritLv1))
 
     Main <-> Switch: item Bombs
 
