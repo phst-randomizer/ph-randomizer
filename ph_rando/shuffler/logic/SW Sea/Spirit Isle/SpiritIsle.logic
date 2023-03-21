@@ -11,13 +11,13 @@ area SpiritIsle:
     node Courage1: chest Courage1
     node Courage2: chest Courage2
 
-    Main -> Power1: item PowerGem10
-    Main -> Wisdom1: item WisdomGem10
-    Main -> Courage1: item CourageGem10
+    Main -> Power1: item PowerGem[10]
+    Main -> Wisdom1: item WisdomGem[10]
+    Main -> Courage1: item CourageGem[10]
 
-    Power1 -> Power2: item PowerGem20
-    Wisdom1 -> Wisdom2: item WisdomGem20
-    Courage1 -> Courage2: item CourageGem20
+    Power1 -> Power2: item PowerGem[20]
+    Wisdom1 -> Wisdom2: item WisdomGem[20]
+    Courage1 -> Courage2: item CourageGem[20]
 
   room Outside:
     node Main:
