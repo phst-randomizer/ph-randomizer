@@ -7,7 +7,7 @@
         {
           "name": "KeyChest",
           "type": "chest",
-          "contents": "small_key",
+          "contents": "SmallKey",
           "zmb_file_path": "test",
           "zmb_mapobject_index": 0
         }

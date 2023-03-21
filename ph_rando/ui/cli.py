@@ -26,7 +26,7 @@ from ph_rando.shuffler import shuffle
 @click_setting_options
 def randomizer_cli(input_rom_path: Path, output_rom_path: Path, seed: str | None, **settings):
     # Run the shuffler
-    shuffled_aux_data = shuffle(seed, settings)
+    shuffled_aux_data = shuffle(seed)
 
     # Apply the base ROM patch
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
