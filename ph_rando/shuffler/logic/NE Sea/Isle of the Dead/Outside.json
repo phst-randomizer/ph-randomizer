@@ -47,7 +47,7 @@
         },
         {
           "name": "Stairs",
-          "entrance": "PhantomCorridor.Brant.Exit"
+          "entrance": "PhantomCorridor.Brant.Brant"
         }
       ],
       "enemies": [
