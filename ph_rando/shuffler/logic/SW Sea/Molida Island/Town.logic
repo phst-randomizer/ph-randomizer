@@ -15,5 +15,9 @@ area Molida:
     node Ledge:
       door ToUpperIsland
 
+    node EasternIsland:
+      chest DigSpot
+
     Main -> Hole: (item Shovel & flag SeenUpperStone)
     Ledge -> Main
+    Main -> EasternIsland: (item Shovel & item GrapplingHook)
