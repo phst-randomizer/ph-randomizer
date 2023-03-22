@@ -137,7 +137,15 @@
     },
     {
       "name": "AstridBasement",
-      "chests": [],
+      "chests": [
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "TreasureMapNW8",
+          "zmb_file_path": "Map/isle_flame/map01.bin/zmb/isle_flame_01.zmb",
+          "zmb_actor_index": 29
+        }
+      ],
       "exits": [
         {
           "name": "Stairs",

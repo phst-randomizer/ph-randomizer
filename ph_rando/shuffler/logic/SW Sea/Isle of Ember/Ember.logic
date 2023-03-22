@@ -83,6 +83,7 @@ area Ember:
       enemy Octorok4
       enemy Octorok5
       enemy Octorok6
+      chest DigSpot
 
     node Defeat
 
