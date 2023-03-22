@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys
 
-from ph_rando.shuffler.logic import Logic
+from ph_rando.shuffler._shuffler import init_logic_graph
 
 try:
     import pygraphviz as pgv
@@ -13,13 +13,11 @@ except ModuleNotFoundError:
 
 
 def main():
-    logic = Logic(settings={})
-
-    logic.connect_rooms()
+    areas = init_logic_graph()
 
     G = pgv.AGraph(strict=False, directed=True)
 
-    for area in logic.areas.values():
+    for area in areas.values():
         for room in area.rooms:
             for node in room.nodes:
                 G.add_node(node.name)
