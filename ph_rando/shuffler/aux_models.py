@@ -162,6 +162,19 @@ class Room(BaseModel):
         unique_items=True,
     )
 
+    @validator('chests', 'exits', 'enemies')
+    def name_uniqueness_check(cls, v: list[Check | Exit | Enemy]) -> list[Check | Exit | Enemy]:
+        names_set = {item.name for item in v}
+        if len(names_set) != len(v):
+            from collections import defaultdict
+
+            name_buckets: defaultdict[str, int] = defaultdict(int)
+            for item in v:
+                name_buckets[item.name] += 1
+                if name_buckets[item.name] > 1:
+                    raise ValueError(f'{type(item)} {item.name}: names must be unique!')
+        return v
+
     # Note: pydantic ignores instance variables beginning with an underscore,
     # so we use that here. Nodes are not parsed by pydantic; they are populated
     # when the .logic files are parsed, i.e. after the initial aux data parsing.
