@@ -20,6 +20,7 @@ area Mercay:
     node Island:
       door IslandGrotto
       chest AboveEntrance
+      chest Freedle
 
     Island -> Main
     Main -> HiddenBombableWall: macro Bombs
