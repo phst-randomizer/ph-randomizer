@@ -20,6 +20,10 @@ module = [
 ]
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "ph_rando.*"
+disallow_untyped_defs = true
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"

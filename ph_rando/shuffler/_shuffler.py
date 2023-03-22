@@ -55,7 +55,7 @@ IMPORTANT_ITEMS: set[str] = {
 
 
 def _connect_rooms(areas: dict[str, Area]) -> None:
-    def _get_dest_node(dest_node_entrance: str):
+    def _get_dest_node(dest_node_entrance: str) -> Node:
         dest_node_split = dest_node_entrance.split('.')
 
         area_name = dest_node_split[0]

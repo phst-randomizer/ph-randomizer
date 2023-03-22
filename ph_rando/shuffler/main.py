@@ -47,7 +47,12 @@ def shuffle(seed: str | None) -> list[Area]:
     default='INFO',
 )
 @click_setting_options
-def shuffler_cli(seed: str | None, output: str | None, log_level: str, **settings):
+def shuffler_cli(
+    seed: str | None,
+    output: str | None,
+    log_level: str,
+    **settings: bool | str,
+) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
     results = shuffle(seed)

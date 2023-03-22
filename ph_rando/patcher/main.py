@@ -46,7 +46,7 @@ def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     return rom.NintendoDSRom(data=patched_rom.read())
 
 
-def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom):
+def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
     chests = [
         chest
         for area in aux_data
@@ -69,7 +69,7 @@ def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom):
             ]
 
 
-def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom):
+def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
     salvage_treasures = {
         chest
         for area in aux_data
@@ -104,7 +104,7 @@ def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom):
                 zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
 
 
-def _patch_shop_items(aux_data: list[Area], input_rom: rom.NintendoDSRom):
+def _patch_shop_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
     items = {
         chest
         for area in aux_data
@@ -177,7 +177,7 @@ def _patch_shop_items(aux_data: list[Area], input_rom: rom.NintendoDSRom):
         input_rom.arm9 = arm9_executable
 
 
-def _patch_bmg_events(aux_data: list[Area], input_rom: rom.NintendoDSRom):
+def _patch_bmg_events(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
     chests = [
         chest
         for area in aux_data
@@ -283,8 +283,8 @@ def patcher_cli(
     input_rom_path: Path,
     output_rom_path: str | None,
     log_level: str,
-    **settings,
-):
+    **settings: bool | str,
+) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
     new_aux_data = load_aux_data(aux_data_directory)

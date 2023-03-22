@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Literal, TypeAlias, Union
+from typing import TYPE_CHECKING, Any, Literal, TypeAlias, Union
 
 from pydantic import BaseModel, Extra, Field, parse_file_as, validator
 
 if TYPE_CHECKING:
+    from pydantic.main import ModelMetaclass
+
     from ph_rando.shuffler._shuffler import Node
 
 
@@ -109,14 +111,14 @@ Check: TypeAlias = (
 )
 
 
-def validate_check_type():
+def validate_check_type() -> None:
     """
     Ensure that the `Check` type alias includes all of the subclasses of `BaseCheck`.
     """
 
-    def get_all_subclasses(cls):
+    def get_all_subclasses(cls: ModelMetaclass) -> list[ModelMetaclass]:
         """Recursively fetch all descendents of a class."""
-        all_subclasses = []
+        all_subclasses: list[ModelMetaclass] = []
         for subclass in cls.__subclasses__():
             all_subclasses.extend([subclass] + get_all_subclasses(subclass))
         return all_subclasses
@@ -178,7 +180,7 @@ class Area(BaseModel):
         ..., description='All of the rooms inside this area', min_items=1, unique_items=True
     )
 
-    def json(self, *args, **kwargs) -> str:
+    def json(self, *args: Any, **kwargs: Any) -> str:
         return super().json(*args, exclude={'rooms': {'__all__': {'nodes', '_nodes'}}}, **kwargs)
 
 
