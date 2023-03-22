@@ -175,6 +175,21 @@ class Room(BaseModel):
                     raise ValueError(f'{type(item)} {item.name}: names must be unique!')
         return v
 
+    @validator('exits')
+    def entrance_uniqueness_check(cls, v: list[Exit]) -> list[Exit]:
+        entrances_set = {item.entrance for item in v}
+        if len(entrances_set) != len(v):
+            from collections import defaultdict
+
+            entrance_buckets: defaultdict[str, int] = defaultdict(int)
+            for item in v:
+                entrance_buckets[item.entrance] += 1
+                if entrance_buckets[item.entrance] > 1:
+                    raise ValueError(
+                        f'Exit {item.name} contains more than one entrance {item.entrance}'
+                    )
+        return v
+
     # Note: pydantic ignores instance variables beginning with an underscore,
     # so we use that here. Nodes are not parsed by pydantic; they are populated
     # when the .logic files are parsed, i.e. after the initial aux data parsing.
