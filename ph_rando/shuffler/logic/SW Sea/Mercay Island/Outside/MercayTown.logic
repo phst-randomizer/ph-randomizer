@@ -12,6 +12,9 @@ area Mercay:
       door NorthMain
       mail Mailbox
       chest Cucco
+      # NPC that stands on dock will sell you a treasure map for
+      # 50 rupees after clearing ToTOK 3
+      chest TreasureMapNPC
 
     node Ledge:
       door NorthLedge
