@@ -1,10 +1,11 @@
 from enum import Enum, EnumMeta
+from typing import Any
 
 
 class MetaEnum(EnumMeta):
-    def __contains__(cls, item):
+    def __contains__(self: type[Any], item: object) -> bool:
         try:
-            cls(item)
+            self(item)
         except ValueError:
             return False
         return True

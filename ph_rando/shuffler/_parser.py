@@ -108,7 +108,7 @@ def requirements_met(
     flags: set[str],
     aux_data: dict[str, Area],
     edge_instance: Edge | None = None,
-    result=True,
+    result: bool = True,
 ) -> bool:
     current_op = None  # variable to track current logical operation (AND or OR), if applicable
     while len(parsed_expr):
@@ -268,11 +268,11 @@ class _LogicRoom(BaseModel):
     nodes_and_edges: list[_LogicNode | _LogicEdge]
 
     @property
-    def nodes(self):
+    def nodes(self) -> list[_LogicNode]:
         return [n for n in self.nodes_and_edges if isinstance(n, _LogicNode)]
 
     @property
-    def edges(self):
+    def edges(self) -> list[_LogicEdge]:
         return [e for e in self.nodes_and_edges if isinstance(e, _LogicEdge)]
 
 

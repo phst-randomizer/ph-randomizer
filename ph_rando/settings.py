@@ -12,7 +12,7 @@ class Setting(BaseModel):
     default: bool | str | None
 
     @validator('default')
-    def validate_default_value(cls, v: bool | str | None, values: dict):
+    def validate_default_value(cls, v: bool | str | None, values: dict) -> bool | str | None:
         # If default isn't provided, that's fine
         if v is None:
             return v
@@ -35,7 +35,7 @@ class Setting(BaseModel):
         return v
 
     @validator('options')
-    def ensure_values_or_flag(cls, v: list[str] | None, values: dict):
+    def ensure_values_or_flag(cls, v: list[str] | None, values: dict) -> list[str] | None:
         if not ('options' in values or 'flag' in values):
             raise ValueError(f'Invalid setting {values["name"]} - require "options" or "flag".')
         if 'options' in values and 'flag' in values:
