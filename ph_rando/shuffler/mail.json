@@ -53,6 +53,5 @@
     "name": "Beedle3",
     "contents": "ComplimentaryCard",
     "requirements": "flag CanAccessBeedle"
-  },
-  {}
+  }
 ]
