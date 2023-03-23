@@ -50,6 +50,7 @@ area Ember:
       door LeftMiddleBottom
 
     node TempleFront:
+      chest DigSpot
       door EmberTemple
       door LeftHigherBottom
       door LeftHigherTop
