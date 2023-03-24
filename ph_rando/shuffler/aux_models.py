@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal, TypeAlias, Union
+from typing import TYPE_CHECKING, Annotated, Any, Literal, TypeAlias, Union
 
 from pydantic import BaseModel, Extra, Field, parse_file_as, validator
 
@@ -146,7 +146,7 @@ class Room(BaseModel):
         extra = Extra.allow
 
     name: str = Field(..., description='The name of the room')
-    chests: list[Check] = Field(
+    chests: list[Annotated[Check, Field(discriminator='type')]] = Field(
         [],
         description='Item checks that can be made in this room',
         unique_items=True,
