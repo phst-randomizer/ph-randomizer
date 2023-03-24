@@ -8,9 +8,9 @@ area EdgeDirectionsTest:
     node Node2
     Start -> Node2
     Node2 -> Start
-    
+
     node Node3
     Start -> Node3
-    
+
     node Node4
     Node4 -> Start

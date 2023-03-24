@@ -150,7 +150,8 @@ def test_edge_parser(
         # (
         #     'state_test',
         #     'StateTest.Test.Start',
-        #     ['StateTest.Test.Node1', 'StateTest.Test.Node2', 'StateTest.Test.Node3', 'StateTest.Test.Node4', 'StateTest.Test.Node6', 'StateTest.Test.Node8'],
+        #     ['StateTest.Test.Node1', 'StateTest.Test.Node2', 'StateTest.Test.Node3',
+        #      'StateTest.Test.Node4', 'StateTest.Test.Node6', 'StateTest.Test.Node8'],
         #     ['StateTest.Test.Node5', 'StateTest.Test.Node7']
         # ),
     ],

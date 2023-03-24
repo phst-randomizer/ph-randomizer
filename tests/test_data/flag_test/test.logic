@@ -11,7 +11,7 @@ area FlagTest:
 
     node Node3:
       flag Flag3
-    
+
     node Node4:
       flag Flag4
 

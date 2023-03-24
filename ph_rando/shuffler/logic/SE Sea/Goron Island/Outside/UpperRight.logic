@@ -26,7 +26,7 @@ area GoronIsland:
 
     Rightmost -> Leftmost: macro Bombs
     Leftmost -> Rightmost
-    LeftmostAfterBomb -> Leftmost: macro Bombs
+    LeftmostAfterBomb <-> Leftmost: macro Bombs
     Rightmost <-> ChestAfterBombchu:  macro Bombs
 
     BeforeChestArea <-> ChestArea: flag GoronMazeSwitch
