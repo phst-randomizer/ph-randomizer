@@ -363,7 +363,10 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path | None = None
         parsed_logic = _parse_logic_file(file_contents)
 
         for logic_area in parsed_logic.areas:
-            area = [area for area in aux_data if area.name == logic_area.name][0]
+            _areas = [area for area in aux_data if area.name == logic_area.name]
+            assert len(_areas), f'Area {logic_area.name} not found!'
+            assert len(_areas) == 1, f'Multiple areas with name "{logic_area.name}" found!'
+            area = _areas[0]
             for logic_room in logic_area.rooms:
                 room = [room for room in area.rooms if room.name == logic_room.name][0]
                 for logic_node in logic_room.nodes:

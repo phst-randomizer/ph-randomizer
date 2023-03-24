@@ -166,13 +166,17 @@ def test_assumed_search(
 
     areas = init_logic_graph(logic_directory=current_test_dir, aux_directory=current_test_dir)
 
-    starting_node = [
+    _nodes = [
         node
         for area in areas.values()
         for room in area.rooms
         for node in room.nodes
         if node.name == starting_node_name
-    ][0]
+    ]
+    assert len(_nodes) > 0, f'Invalid starting node {starting_node_name}'
+    assert len(_nodes) == 1, f'Multiple nodes with name "{starting_node_name}" found'
+    starting_node = _nodes[0]
+
     accessible_nodes = [
         node
         for area in areas.values()
