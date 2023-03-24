@@ -120,8 +120,8 @@ def test_edge_parser(
     'test_data_name,starting_node_name,accessible_nodes_names,non_accessible_nodes_names',
     [
         (
-            'basic',
-            'TestArea.TestRoom.Node1',
+            'chest_content',
+            'ChestContentTest.Test.Node1',
             ['TestArea.TestRoom.Node2'],
             ['TestArea.TestRoom.NotAccessible'],
         ),
