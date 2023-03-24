@@ -1,0 +1,21 @@
+area FlagTest:
+  room Test:
+    node Start:
+      flag FlagStart
+
+    node Node1:
+      flag Flag1
+
+    node Node2:
+      flag Flag2
+
+    node Node3:
+      flag Flag3
+    
+    node Node4:
+      flag Flag4
+
+    Start <-> Node1 # Has access to Flag1
+    Start -> Node2: flag FlagStart # Has access to Flag2
+    Start <-> Node3: flag Flag2 # Should have access, even if Node2 -> Start doesn't exist, as flags should stay after save and quitting
+    Node3 -> Node4: flag Flag1 & flag Flag4 # Missing Flag4, innaccessible

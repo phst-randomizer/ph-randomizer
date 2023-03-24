@@ -1,0 +1,29 @@
+area StateTest:
+  room Test:
+    node Start
+
+    node Node1:
+      gain State
+    Start <-> Node1
+
+    node Node2 # no State
+    Node1 -> Node2: lose State
+
+    node Node3 # both
+    Node1 -> Node3: state State
+
+    node Node4 # no State
+    Node2 -> Node4
+    Node3 -> Node4: lose State
+
+    node Node5 # innaccessible
+    Node2 -> Node5: state State
+
+    node Node6 # no State
+    Node3 -> Node6: state State & lose State
+
+    node Node7 # innaccessible
+    Node3 -> Node7: lose State & state State
+
+    node Node8 # Should be accessible as no dependency on State
+    Node2 -> Node8: lose State

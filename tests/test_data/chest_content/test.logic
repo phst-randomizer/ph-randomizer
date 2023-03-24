@@ -1,5 +1,5 @@
-area TestArea:
-  room TestRoom:
+area ChestContentTest:
+  room Test:
     node Node1:
       chest Chest1
       mail Mail1

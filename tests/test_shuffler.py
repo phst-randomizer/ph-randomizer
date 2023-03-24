@@ -121,6 +121,28 @@ def test_settings(expression: str, settings: dict[str, bool | str], expected_res
         #     ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
         #     ['Test.Test.End'],
         # ),
+        (
+            'edge_directions_test',
+            'EdgeDirectionsTest.Test.Start',
+            [
+                'EdgeDirectionsTest.Test.Node1',
+                'EdgeDirectionsTest.Test.Node2',
+                'EdgeDirectionsTest.Test.3',
+            ],
+            ['EdgeDirectionsTest.Test.Node4'],
+        ),
+        (
+            'flag_test',
+            'FlagTest.Test.Start',
+            ['FlagTest.Test.Node1', 'FlagTest.Test.Node2', 'FlagTest.Test.Node3'],
+            ['FlagTest.Test.Node4'],
+        ),
+        # (
+        #     'state_test',
+        #     'StateTest.Test.Start',
+        #     ['StateTest.Test.Node1', 'StateTest.Test.Node2', 'StateTest.Test.Node3', 'StateTest.Test.Node4', 'StateTest.Test.Node6', 'StateTest.Test.Node8'],
+        #     ['StateTest.Test.Node5', 'StateTest.Test.Node7']
+        # ),
     ],
 )
 def test_graph_traversal(
