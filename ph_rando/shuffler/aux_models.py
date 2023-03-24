@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, TypeAlias, Union
+from typing import TYPE_CHECKING, Any, Literal, TypeAlias, Union
 
-from pydantic import BaseModel, Extra, Field, validator
+from pydantic import BaseModel, Extra, Field, parse_file_as, validator
 
 if TYPE_CHECKING:
-    from ph_rando.shuffler.logic import Node
+    from pydantic.main import ModelMetaclass
+
+    from ph_rando.shuffler._shuffler import Node
 
 
 class BaseCheck(BaseModel):
@@ -38,17 +40,21 @@ class BaseCheck(BaseModel):
 
 
 class Chest(BaseCheck):
-    type = Field('chest', const=True)
+    type: Literal['chest']
     zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
     zmb_mapobject_index: int = Field(..., description='Index of the chest in the defined zmb file')
 
 
-class Tree(Chest):
-    type = Field('tree', const=True)
+class Tree(BaseCheck):
+    type: Literal['tree']
+    zmb_file_path: str = Field(..., description='File path to the zmb the tree is on')
+    zmb_mapobject_index: int = Field(
+        ..., description='Index of the tree object in the defined zmb file'
+    )
 
 
 class Event(BaseCheck):
-    type = Field('event', const=True)
+    type: Literal['event']
     bmg_file_path: str = Field(..., description='File path to the bmg the instruction is on')
     bmg_instruction_index: int = Field(
         ..., description='Index of the instruction in the defined bmg file'
@@ -56,31 +62,35 @@ class Event(BaseCheck):
 
 
 class IslandShop(BaseCheck):
-    type = Field('island_shop', const=True)
+    type: Literal['island_shop']
     overlay: int = Field(..., description='The code overlay this shop item is on')
     overlay_offset: str = Field(..., description='Hex offset from overlay to the shop item')
 
 
 class Freestanding(BaseCheck):
-    type = Field('freestanding', const=True)
+    type: Literal['freestanding']
     # TODO: add other fields that are needed
 
 
 class OnEnemy(BaseCheck):
-    type = Field('on_enemy', const=True)
+    type: Literal['on_enemy']
     # TODO: what other fields are needed? Can this be replaced by Freestanding?
 
 
 class SalvageTreasure(BaseCheck):
-    type = Field('salvage_treasure', const=True)
+    type: Literal['salvage_treasure']
     zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
     zmb_actor_index: int = Field(
         ..., description='Index of the chest in the NPCA section of the zmb file'
     )
 
 
-class DigSpot(SalvageTreasure):
-    type = Field('dig_spot', const=True)
+class DigSpot(BaseCheck):
+    type: Literal['dig_spot']
+    zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
+    zmb_actor_index: int = Field(
+        ..., description='Index of the chest in the NPCA section of the zmb file'
+    )
 
 
 class MinigameRewardChest(BaseCheck):
@@ -101,14 +111,14 @@ Check: TypeAlias = (
 )
 
 
-def validate_check_type():
+def validate_check_type() -> None:
     """
     Ensure that the `Check` type alias includes all of the subclasses of `BaseCheck`.
     """
 
-    def get_all_subclasses(cls):
+    def get_all_subclasses(cls: ModelMetaclass) -> list[ModelMetaclass]:
         """Recursively fetch all descendents of a class."""
-        all_subclasses = []
+        all_subclasses: list[ModelMetaclass] = []
         for subclass in cls.__subclasses__():
             all_subclasses.extend([subclass] + get_all_subclasses(subclass))
         return all_subclasses
@@ -152,6 +162,34 @@ class Room(BaseModel):
         unique_items=True,
     )
 
+    @validator('chests', 'exits', 'enemies')
+    def name_uniqueness_check(cls, v: list[Check | Exit | Enemy]) -> list[Check | Exit | Enemy]:
+        names_set = {item.name for item in v}
+        if len(names_set) != len(v):
+            from collections import defaultdict
+
+            name_buckets: defaultdict[str, int] = defaultdict(int)
+            for item in v:
+                name_buckets[item.name] += 1
+                if name_buckets[item.name] > 1:
+                    raise ValueError(f'{type(item)} {item.name}: names must be unique!')
+        return v
+
+    @validator('exits')
+    def entrance_uniqueness_check(cls, v: list[Exit]) -> list[Exit]:
+        entrances_set = {item.entrance for item in v}
+        if len(entrances_set) != len(v):
+            from collections import defaultdict
+
+            entrance_buckets: defaultdict[str, int] = defaultdict(int)
+            for item in v:
+                entrance_buckets[item.entrance] += 1
+                if entrance_buckets[item.entrance] > 1:
+                    raise ValueError(
+                        f'Exit {item.name} contains more than one entrance {item.entrance}'
+                    )
+        return v
+
     # Note: pydantic ignores instance variables beginning with an underscore,
     # so we use that here. Nodes are not parsed by pydantic; they are populated
     # when the .logic files are parsed, i.e. after the initial aux data parsing.
@@ -170,8 +208,16 @@ class Area(BaseModel):
         ..., description='All of the rooms inside this area', min_items=1, unique_items=True
     )
 
-    def json(self, *args, **kwargs) -> str:
+    def json(self, *args: Any, **kwargs: Any) -> str:
         return super().json(*args, exclude={'rooms': {'__all__': {'nodes', '_nodes'}}}, **kwargs)
+
+
+class Mail(BaseCheck):
+    requirements: str
+
+    @classmethod
+    def list_from_file(cls, file: Path) -> list[Mail]:
+        return parse_file_as(list[Mail], file)
 
 
 if __name__ == '__main__':

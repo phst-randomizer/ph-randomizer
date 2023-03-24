@@ -13,7 +13,15 @@ area TempleOfTheOceanKing:
       flag RightFire
 
     node TopRightDoor:
+      lock TopRightDoor
+
+    node TopRightStairs:
       door ToB8TopRight
+
+    TopRight -> TopRightDoor: open TopRightDoor
+    TopRightDoor -> TopRight
+    TopRightStairs -> TopRightDoor: open TopRightDoor
+    TopRightDoor -> TopRightStairs
 
     node RightPhantom:
       enemy SwiftPhantomRight

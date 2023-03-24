@@ -32,7 +32,7 @@
         },
         {
           "name": "ToF2Left",
-          "entrance": "IceTemple.F2.RightSide.ToF3Right"
+          "entrance": "IceTemple.F2.Arena.ToF3Left"
         }
       ],
       "enemies": [

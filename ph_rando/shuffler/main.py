@@ -6,11 +6,11 @@ import sys
 import click
 
 from ph_rando.common import click_setting_options
+from ph_rando.shuffler._shuffler import assumed_fill, init_logic_graph
 from ph_rando.shuffler.aux_models import Area
-from ph_rando.shuffler.logic import Logic
 
 
-def shuffle(seed: str | None, settings: dict[str, bool | str]) -> list[Area]:
+def shuffle(seed: str | None) -> list[Area]:
     """
     Parses aux data and logic, shuffles the aux data, and returns it.
 
@@ -23,13 +23,9 @@ def shuffle(seed: str | None, settings: dict[str, bool | str]) -> list[Area]:
     if seed is not None:
         random.seed(seed)
 
-    logic = Logic(settings=settings)
+    areas = init_logic_graph()
 
-    logic.connect_rooms()
-
-    logic.randomize_items()
-
-    return list(logic.areas.values())
+    return assumed_fill(areas)
 
 
 @click.command()
@@ -51,10 +47,15 @@ def shuffle(seed: str | None, settings: dict[str, bool | str]) -> list[Area]:
     default='INFO',
 )
 @click_setting_options
-def shuffler_cli(seed: str | None, output: str | None, log_level: str, **settings):
+def shuffler_cli(
+    seed: str | None,
+    output: str | None,
+    log_level: str,
+    **settings: bool | str,
+) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
-    results = shuffle(seed, settings)
+    results = shuffle(seed)
 
     if output == '--':
         for area in results:

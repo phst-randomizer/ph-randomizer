@@ -30,7 +30,7 @@
         },
         {
           "name": "ToB7TopRight",
-          "entrance": "B7.TopRightDoor.ToB8TopRight"
+          "entrance": "B7.TopRightStairs.ToB8TopRight"
         },
         {
           "name": "ToB9Left",

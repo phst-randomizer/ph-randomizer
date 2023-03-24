@@ -73,7 +73,15 @@
     },
     {
       "name": "EmberRight",
-      "chests": [],
+      "chests": [
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "TreasureMapNW8",
+          "zmb_actor_index": 29,
+          "zmb_file_path": "Map/isle_flame/map01.bin/zmb/isle_flame_01.zmb"
+        }
+      ],
       "exits": [
         {
           "name": "LeftLowerToppest",
@@ -137,7 +145,15 @@
     },
     {
       "name": "AstridBasement",
-      "chests": [],
+      "chests": [
+        {
+          "name": "DigSpot",
+          "type": "dig_spot",
+          "contents": "TreasureMapNW6",
+          "zmb_file_path": "Map/isle_flame/map20.bin/zmb/isle_flame_20.zmb",
+          "zmb_actor_index": 17
+        }
+      ],
       "exits": [
         {
           "name": "Stairs",

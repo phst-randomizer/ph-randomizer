@@ -30,12 +30,12 @@
     "requirements": "flag GoronTempleBeaten"
   },
   {
-    "name": "Postmaster",
+    "name": "Aroo",
     "contents": "WisdomGem",
     "requirements": "flag IceTempleBeaten"
   },
   {
-    "name": "Aroo",
+    "name": "Mutoh",
     "contents": "PowerGem",
     "requirements": "flag MutohTempleBeaten"
   },

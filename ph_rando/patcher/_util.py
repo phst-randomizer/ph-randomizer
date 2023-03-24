@@ -1,4 +1,4 @@
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
 from contextlib import contextmanager
 import json
 from pathlib import Path
@@ -159,7 +159,10 @@ def load_aux_data(directory: Path) -> list[Area]:
 
 
 @contextmanager
-def open_bmg_files(bmg_file_paths: Iterable[str], input_rom: rom.NintendoDSRom):
+def open_bmg_files(
+    bmg_file_paths: Iterable[str],
+    input_rom: rom.NintendoDSRom,
+) -> Iterator[dict[str, bmg.BMG]]:
     bmg_file_map: dict[str, bmg.BMG] = {}
 
     bmg_file_map = {
@@ -173,7 +176,10 @@ def open_bmg_files(bmg_file_paths: Iterable[str], input_rom: rom.NintendoDSRom):
 
 
 @contextmanager
-def open_zmb_files(zmb_file_paths: Iterable[str], input_rom: rom.NintendoDSRom):
+def open_zmb_files(
+    zmb_file_paths: Iterable[str],
+    input_rom: rom.NintendoDSRom,
+) -> Iterator[dict[str, ZMB]]:
     zmb_file_map: dict[str, ZMB] = {}
 
     for path in zmb_file_paths:

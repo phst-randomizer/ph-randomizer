@@ -2,70 +2,75 @@ from collections import defaultdict
 import json
 from pathlib import Path
 
+from ph_rando.shuffler._shuffler import assumed_search, init_logic_graph
 from ph_rando.shuffler.aux_models import Area
-from ph_rando.shuffler.logic import Logic
 
 
-def test_graph_connectedness(settings) -> None:
-    logic = Logic(settings=settings)
-    logic.connect_rooms()
+def test_graph_connectedness() -> None:
+    areas = init_logic_graph()
 
     # Compute list of tuples of each check its area.
     all_checks = [
         (chest, area.name)
-        for area in logic.areas.values()
+        for area in areas.values()
         for room in area.rooms
         for chest in room.chests
     ]
 
     # Put every item in the game in the current inventory, appending the area name to each
     # small_key so we know which key goes to which area.
-    inventory = [
-        chest.contents if chest.contents != 'small_key' else f'small_key_{area_name}'
+    items = [
+        chest.contents if chest.contents != 'SmallKey' else f'SmallKey_{area_name}'
         for chest, area_name in all_checks
     ]
 
     # Populate the `keys` dict for the assumed search function with all of
     # the small keys in the inventory.
     keys: dict[str, int] = defaultdict(int)
-    for item in inventory:
-        if item.startswith('small_key_'):
-            keys[item[len('small_key_') :]] += 1
+    for item in items:
+        if item.startswith('SmallKey_'):
+            keys[item[len('SmallKey_') :]] += 1
 
-    reachable_nodes = logic.assumed_search(
-        logic.starting_node,
-        inventory,
-        keys,
+    starting_node = [
+        node
+        for area in areas.values()
+        for room in area.rooms
+        for node in room.nodes
+        if node.name == 'Mercay.OutsideOshus.Outside'
+    ][0]
+
+    assumed_search_nodes = set(
+        assumed_search(
+            starting_node=starting_node,
+            areas=areas,
+            items=items,
+        )
     )
 
     # Create set consisting of all areas reported as reachable by the assumed search
-    reachable_areas = {node.area for node in reachable_nodes}
+    reachable_areas = {node.area.name for node in assumed_search_nodes}
 
     # Create set consisting of all areas in the logic
-    all_areas = {area.name for area in logic.areas.values()}
+    all_areas = {area.name for area in areas.values()}
 
     assert reachable_areas == all_areas
 
     # Create set consisting of all rooms reported as reachable by the assumed search
-    reachable_rooms = {f'{node.area}.{node.room}' for node in reachable_nodes}
+    reachable_rooms = {f'{node.area.name}.{node.room.name}' for node in assumed_search_nodes}
 
     # Create set consisting of all rooms in the logic
-    all_rooms = {f'{area.name}.{room.name}' for area in logic.areas.values() for room in area.rooms}
+    all_rooms = {f'{area.name}.{room.name}' for area in areas.values() for room in area.rooms}
 
     assert reachable_rooms == all_rooms
 
     # # Create set consisting of all nods reported as reachable by the assumed search
-    # reachable_nodes = {f'{node.area}.{node.room}.{node.node}' for node in reachable_nodes}
+    reachable_nodes = {node.name for node in assumed_search_nodes}
 
-    # # Create set consisting of all nodes in the logic
-    # all_nodes = {
-    #     f'{area.name}.{room.name}.{node.node}'
-    #     for area in logic.areas.values()
-    #     for room in area.rooms
-    #     for node in room.nodes
-    # }
+    # Create set consisting of all nodes in the logic
+    all_nodes = {node.name for area in areas.values() for room in area.rooms for node in room.nodes}
 
-    # assert reachable_nodes == all_nodes
+    print(sorted(all_nodes - reachable_nodes))
+    assert reachable_nodes == all_nodes
 
 
 def test_aux_data_validation():

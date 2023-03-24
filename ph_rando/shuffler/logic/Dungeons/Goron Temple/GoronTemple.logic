@@ -88,7 +88,7 @@ area GoronTemple:
     LeftMain <-> BottomLeft: (defeated Hinox & defeated LikeLike1 & defeated LikeLike2)
 
     BottomLeft <-> EyeSlugChest: (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5)
-    BottomLeft -> LeftStaircase: (macro HammerClip | (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & item Bombchu))
+    BottomLeft -> LeftStaircase: (macro HammerClip | (defeated EyeSlug1 & defeated EyeSlug2 & defeated EyeSlug3 & defeated EyeSlug4 & defeated EyeSlug5 & item Bombchus))
 
   room B2:
     node BottomLeft:

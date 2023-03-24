@@ -39,6 +39,9 @@ ITEMS: dict[str, int] = {
     'CommonTreasure': 0x30,  # TODO: randomize this at run-time
     'GoronAmber': 0x34,
     'GhostKey': 0x38,
+    'FreebieCard': 0x39,
+    'ComplimentCard': 0x3A,
+    'ComplimentaryCard': 0x3B,
     'RegalNecklace': 0x3C,
     'SalvageArm': 0x3D,
     'HeroNewClothes': 0x3E,
@@ -102,12 +105,12 @@ ITEMS: dict[str, int] = {
     'PowerSpirit': -1,
     'WisdomSpirit': -1,
     'CourageSpirit': -1,
-    'SpiritPowerLv1': -1,
-    'SpiritWisdomLv1': -1,
-    'SpiritCourageLv1': -1,
-    'SpiritPowerLv2': -1,
-    'SpiritWisdomLv2': -1,
-    'SpiritCourageLv2': -1,
+    'PowerSpiritLv1': -1,
+    'WisdomSpiritLv1': -1,
+    'CourageSpiritLv1': -1,
+    'PowerSpiritLv2': -1,
+    'WisdomSpiritLv2': -1,
+    'CourageSpiritLv2': -1,
 }
 
 ITEMS_REVERSED = {v: k for k, v in ITEMS.items()}
