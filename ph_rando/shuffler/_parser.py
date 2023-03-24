@@ -192,7 +192,10 @@ def evaluate_requirement(
             count_descriptor = re.match(r'(.+)\[(\d+)\]', value)
             if count_descriptor is not None:
                 item_name, item_count = count_descriptor.groups()
-                return items.count(item_name) == item_count
+                assert (
+                    item_count.isdigit()
+                ), f'Invalid requirement {value}, brackets must contain a valid number.'
+                return items.count(item_name) >= int(item_count)
             elif value not in ITEMS:
                 raise Exception(f'Invalid item "{value}"')
             else:
