@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -12,6 +13,17 @@ from ph_rando.settings import Settings
 
 if TYPE_CHECKING:
     from click.decorators import FC
+
+    from ph_rando.shuffler.aux_models import Area, Mail
+
+
+@dataclass
+class ShufflerAuxData:
+    areas: dict[str, Area]
+    mail: list[Mail]
+    enemy_requirements: dict[str, str]
+    requirement_macros: dict[str, str]
+
 
 RANDOMIZER_SETTINGS = Settings(
     **yaml.safe_load((Path(__file__).parent / 'settings.yaml').read_text())

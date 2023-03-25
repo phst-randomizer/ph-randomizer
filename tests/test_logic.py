@@ -7,7 +7,9 @@ from ph_rando.shuffler.aux_models import Area
 
 
 def test_graph_connectedness() -> None:
-    areas = init_logic_graph()
+    aux_data = init_logic_graph()
+
+    areas = aux_data.areas
 
     # Compute list of tuples of each check its area.
     all_checks = [
@@ -42,7 +44,7 @@ def test_graph_connectedness() -> None:
     assumed_search_nodes = set(
         assumed_search(
             starting_node=starting_node,
-            areas=areas,
+            aux_data=aux_data,
             items=items,
         )
     )

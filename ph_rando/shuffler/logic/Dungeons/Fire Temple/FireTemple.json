@@ -168,7 +168,7 @@
         {
           "name": "BossKeyChest",
           "type": "chest",
-          "contents": "BossKey",
+          "contents": "BossKeyFireTemple",
           "zmb_file_path": "Map/dngn_flame/map02.bin/zmb/dngn_flame_02.zmb",
           "zmb_mapobject_index": 15
         }

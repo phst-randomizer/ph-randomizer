@@ -13,11 +13,11 @@ except ModuleNotFoundError:
 
 
 def main():
-    areas = init_logic_graph()
+    aux_data = init_logic_graph()
 
     G = pgv.AGraph(strict=False, directed=True)
 
-    for area in areas.values():
+    for area in aux_data.areas.values():
         for room in area.rooms:
             for node in room.nodes:
                 G.add_node(node.name)

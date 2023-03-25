@@ -46,4 +46,4 @@ area IceTemple:
 
     AboveBombableWalls -> BeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & lose SwitchRed & state SwitchBlue)
 
-    BeforeBossKey <-> AfterBossKey: item BossKey
+    BeforeBossKey <-> AfterBossKey: item BossKeyIceTemple

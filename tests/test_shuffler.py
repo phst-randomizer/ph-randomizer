@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from ph_rando.common import ShufflerAuxData
 from ph_rando.shuffler._parser import parse_edge_requirement
 from ph_rando.shuffler._shuffler import Edge, Node, assumed_search, init_logic_graph
 
@@ -80,7 +81,10 @@ def test_edge_parser(
     )
     edge = Edge(src=node1, dest=node2, requirements=parse_edge_requirement(expression))
     node1.edges.append(edge)
-    assert edge.is_traversable(inventory, flags, aux_data={}) == expected_result
+    assert (
+        edge.is_traversable(inventory, flags, aux_data=ShufflerAuxData({}, [], {}, {}))
+        == expected_result
+    )
 
 
 # @pytest.mark.parametrize(
@@ -164,7 +168,9 @@ def test_assumed_search(
 ) -> None:
     current_test_dir = TEST_DATA_DIR / test_data_name
 
-    areas = init_logic_graph(logic_directory=current_test_dir, aux_directory=current_test_dir)
+    aux_data = init_logic_graph(areas_directory=current_test_dir)
+
+    areas = aux_data.areas
 
     _nodes = [
         node
@@ -191,7 +197,7 @@ def test_assumed_search(
         for node in room.nodes
         if node.name in non_accessible_nodes_names
     ]
-    reachable_nodes = assumed_search(starting_node=starting_node, areas=areas, items=[])
+    reachable_nodes = assumed_search(starting_node=starting_node, aux_data=aux_data, items=[])
 
     assert all(node in reachable_nodes for node in accessible_nodes)
     assert all(node not in reachable_nodes for node in non_accessible_nodes)

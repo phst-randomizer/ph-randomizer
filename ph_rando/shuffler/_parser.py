@@ -9,6 +9,8 @@ from pathlib import Path
 import re
 from typing import TYPE_CHECKING, Literal
 
+from ph_rando.common import ShufflerAuxData
+
 if TYPE_CHECKING:
     from pyparsing import ParserElement
 
@@ -16,9 +18,8 @@ from pydantic import BaseModel
 import pyparsing as pp
 
 from ph_rando.patcher._items import ITEMS
-from ph_rando.shuffler._constants import ENEMIES_MAPPING, LOGIC_MACROS
 from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
-from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
+from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Mail, Room
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +57,7 @@ class Edge:
     def __repr__(self) -> str:
         return f'{self.src.name} -> {self.dest.name}'
 
-    def is_traversable(self, items: list[str], flags: set[str], aux_data: dict[str, Area]) -> bool:
+    def is_traversable(self, items: list[str], flags: set[str], aux_data: ShufflerAuxData) -> bool:
         """
         Determine if this edge is traversable given the current player state.
 
@@ -106,7 +107,7 @@ def requirements_met(
     parsed_expr: list[str | list[str | list]],
     items: list[str],
     flags: set[str],
-    aux_data: dict[str, Area],
+    aux_data: ShufflerAuxData,
     edge_instance: Edge | None = None,
     result: bool = True,
 ) -> bool:
@@ -164,7 +165,7 @@ def evaluate_requirement(
     value: str,
     items: list[str],
     flags: set[str],
-    aux_data: dict[str, Area],
+    aux_data: ShufflerAuxData,
     edge_instance: Edge | None = None,
 ) -> bool:
     """
@@ -210,10 +211,10 @@ def evaluate_requirement(
             for enemy in edge_instance.src.room.enemies:
                 if enemy.name != value:
                     continue
-                elif enemy.type not in ENEMIES_MAPPING:
+                elif enemy.type not in aux_data.enemy_requirements:
                     raise Exception(f'{edge_instance.src.name}: invalid enemy type {enemy.type!r}')
                 return requirements_met(
-                    parse_edge_requirement(ENEMIES_MAPPING[enemy.type]),
+                    parse_edge_requirement(aux_data.enemy_requirements[enemy.type]),
                     items,
                     flags,
                     aux_data,
@@ -223,10 +224,10 @@ def evaluate_requirement(
                 f'enemy {value} not found!'
             )
         case EdgeDescriptor.MACRO.value:
-            if value not in LOGIC_MACROS:
+            if value not in aux_data.requirement_macros:
                 raise Exception(f'Invalid macro "{value}", not found in macros.json!')
             return requirements_met(
-                parse_edge_requirement(LOGIC_MACROS[value]),
+                parse_edge_requirement(aux_data.requirement_macros[value]),
                 items,
                 flags,
                 aux_data,
@@ -335,7 +336,7 @@ def _parse_logic_file(logic_file_contents: str) -> _ParsedLogic:
     return _ParsedLogic(**parsed)
 
 
-def annotate_logic(aux_data: Iterable[Area], logic_directory: Path | None = None) -> None:
+def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -> None:
     """
     Parse .logic files and annotate the given aux data with them.
 
@@ -363,7 +364,7 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path | None = None
         parsed_logic = _parse_logic_file(file_contents)
 
         for logic_area in parsed_logic.areas:
-            _areas = [area for area in aux_data if area.name == logic_area.name]
+            _areas = [area for area in areas if area.name == logic_area.name]
             assert len(_areas), f'Area {logic_area.name} not found!'
             assert len(_areas) == 1, f'Multiple areas with name "{logic_area.name}" found!'
             area = _areas[0]
@@ -506,12 +507,11 @@ def annotate_logic(aux_data: Iterable[Area], logic_directory: Path | None = None
                     area.rooms.append(room)
 
 
-def parse_aux_data(aux_data_directory: Path | None = None) -> dict[str, Area]:
-    if aux_data_directory is None:
-        aux_data_directory = Path(__file__).parent / 'logic'
-
+def parse_aux_data(
+    areas_directory: Path, mail_file: Path, enemy_mapping_file: Path, macros_file: Path
+) -> ShufflerAuxData:
     areas: dict[str, Area] = {}
-    for file in aux_data_directory.rglob('*.json'):
+    for file in areas_directory.rglob('*.json'):
         with open(file) as fd:
             area = Area(**json.load(fd))
 
@@ -523,4 +523,15 @@ def parse_aux_data(aux_data_directory: Path | None = None) -> dict[str, Area]:
                 areas[area.name].rooms.extend(area.rooms)
             else:
                 areas[area.name] = area
-    return areas
+
+    mail_items = [Mail(**item) for item in json.loads(mail_file.read_text())]
+
+    enemy_mapping = json.loads(enemy_mapping_file.read_text())
+    macros = json.loads(macros_file.read_text())
+
+    return ShufflerAuxData(
+        areas=areas,
+        mail=mail_items,
+        enemy_requirements=enemy_mapping,
+        requirement_macros=macros,
+    )

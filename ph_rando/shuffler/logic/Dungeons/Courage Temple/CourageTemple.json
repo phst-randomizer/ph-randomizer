@@ -192,7 +192,7 @@
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "BossKey",
+          "contents": "BossKeyCourageTemple",
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 76
         }

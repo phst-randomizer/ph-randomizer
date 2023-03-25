@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Any, Literal, TypeAlias, Union
 
-from pydantic import BaseModel, Extra, Field, parse_file_as, validator
+from pydantic import BaseModel, Extra, Field, validator
 
 if TYPE_CHECKING:
     from pydantic.main import ModelMetaclass
@@ -214,10 +214,6 @@ class Area(BaseModel):
 
 class Mail(BaseCheck):
     requirements: str
-
-    @classmethod
-    def list_from_file(cls, file: Path) -> list[Mail]:
-        return parse_file_as(list[Mail], file)
 
 
 if __name__ == '__main__':

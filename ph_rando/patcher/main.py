@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 import hashlib
 from io import BytesIO
 import logging
@@ -11,9 +12,9 @@ from ndspy import code, rom
 from ndspy.codeCompression import compress, decompress
 from vidua import bps
 
-from ph_rando.common import RANDOMIZER_SETTINGS, click_setting_options
+from ph_rando.common import RANDOMIZER_SETTINGS, ShufflerAuxData, click_setting_options
 from ph_rando.patcher._items import ITEMS
-from ph_rando.patcher._util import GD_MODELS, load_aux_data, open_bmg_files, open_zmb_files
+from ph_rando.patcher._util import GD_MODELS, open_bmg_files, open_zmb_files
 from ph_rando.shuffler.aux_models import (
     Area,
     Chest,
@@ -46,7 +47,7 @@ def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     return rom.NintendoDSRom(data=patched_rom.read())
 
 
-def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_zmb_map_objects(aux_data: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
     chests = [
         chest
         for area in aux_data
@@ -69,10 +70,10 @@ def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -
             ]
 
 
-def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_zmb_actors(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
     salvage_treasures = {
         chest
-        for area in aux_data
+        for area in areas
         for room in area.rooms
         for chest in room.chests
         if type(chest) == SalvageTreasure
@@ -80,7 +81,7 @@ def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> Non
 
     dig_spots = {
         chest
-        for area in aux_data
+        for area in areas
         for room in area.rooms
         for chest in room.chests
         if type(chest) == DigSpot
@@ -104,10 +105,10 @@ def _patch_zmb_actors(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> Non
                 zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
 
 
-def _patch_shop_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_shop_items(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
     items = {
         chest
-        for area in aux_data
+        for area in areas
         for room in area.rooms
         for chest in room.chests
         if type(chest) == IslandShop
@@ -177,10 +178,10 @@ def _patch_shop_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> Non
         input_rom.arm9 = arm9_executable
 
 
-def _patch_bmg_events(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_bmg_events(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
     chests = [
         chest
-        for area in aux_data
+        for area in areas
         for room in area.rooms
         for chest in room.chests
         if isinstance(chest, Event)
@@ -200,7 +201,7 @@ def _patch_bmg_events(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> Non
             )
 
 
-def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
+def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
     """
     Patches a ROM with the given aux data.
 
@@ -209,16 +210,17 @@ def patch_items(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> rom.Ninte
     ROM patch is also applied and should be located at the expected location (see apply_base_patch
     function for more details).
     """
-    _patch_zmb_map_objects(aux_data, input_rom)
-    _patch_zmb_actors(aux_data, input_rom)
-    _patch_shop_items(aux_data, input_rom)
-    _patch_bmg_events(aux_data, input_rom)
+    _patch_zmb_map_objects(aux_data.areas.values(), input_rom)
+    _patch_zmb_actors(aux_data.areas.values(), input_rom)
+    _patch_shop_items(aux_data.areas.values(), input_rom)
+    _patch_bmg_events(aux_data.areas.values(), input_rom)
 
     return input_rom
 
 
 def apply_settings_patches(
-    base_patched_rom: rom.NintendoDSRom, settings: dict[str, bool | str]
+    base_patched_rom: rom.NintendoDSRom,
+    settings: dict[str, bool | str],
 ) -> rom.NintendoDSRom:
     base_flags_addr = 0x58180  # address specified by .fill directive in main.asm
     flags_header_file = (
@@ -285,9 +287,16 @@ def patcher_cli(
     log_level: str,
     **settings: bool | str,
 ) -> None:
+    from ph_rando.shuffler._shuffler import parse_aux_data
+
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
-    new_aux_data = load_aux_data(aux_data_directory)
+    new_aux_data = parse_aux_data(
+        areas_directory=aux_data_directory,
+        mail_file=aux_data_directory.parent / 'mail.json',
+        enemy_mapping_file=Path(__file__).parents[1] / 'shuffler' / 'enemies.json',
+        macros_file=Path(__file__).parents[1] / 'shuffler' / 'macros.json',
+    )
 
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
 

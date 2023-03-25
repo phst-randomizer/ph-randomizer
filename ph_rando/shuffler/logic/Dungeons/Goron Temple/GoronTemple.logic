@@ -171,7 +171,7 @@ area GoronTemple:
     BottomLeft <-> BlinChest: (defeated Miniblin1 & defeated Miniblin2 & defeated Miniblin3 & defeated Miniblin4 & defeated Miniblin5 & defeated Miniblin6)
     BottomLeft -> ArmosRoom: (item Bombchus | macro HammerClip)
     ArmosRoom -> BossKeyLock: (defeated Armos1 & defeated Armos2 & defeated Armos3 & defeated Armos4)
-    BossKeyLock <-> AfterBossKey: item BossKey
+    BossKeyLock <-> AfterBossKey: item BossKeyGoronTemple
 
   room B4:
     node Main:

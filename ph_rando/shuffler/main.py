@@ -1,3 +1,4 @@
+import json
 import logging
 from pathlib import Path
 import random
@@ -5,12 +6,11 @@ import sys
 
 import click
 
-from ph_rando.common import click_setting_options
+from ph_rando.common import ShufflerAuxData, click_setting_options
 from ph_rando.shuffler._shuffler import assumed_fill, init_logic_graph
-from ph_rando.shuffler.aux_models import Area
 
 
-def shuffle(seed: str | None) -> list[Area]:
+def shuffle(seed: str | None) -> ShufflerAuxData:
     """
     Parses aux data and logic, shuffles the aux data, and returns it.
 
@@ -23,9 +23,9 @@ def shuffle(seed: str | None) -> list[Area]:
     if seed is not None:
         random.seed(seed)
 
-    areas = init_logic_graph()
+    aux_data = init_logic_graph()
 
-    return assumed_fill(areas)
+    return assumed_fill(aux_data)
 
 
 @click.command()
@@ -58,14 +58,18 @@ def shuffler_cli(
     results = shuffle(seed)
 
     if output == '--':
-        for area in results:
+        for area in results.areas.values():
             print(area.json(), file=sys.stdout)
+        for mail in results.mail:
+            print(mail.json(), file=sys.stdout)
     elif output is not None:
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
-        for area in results:
-            with open(output_path / f'{area.name}.json', 'w') as fd:
-                fd.write(area.json())
+        for area in results.areas.values():
+            (output_path / f'{area.name}.json').write_text(area.json())
+
+        mail_items = [item.dict() for item in results.mail]
+        (output_path / 'mail.json').write_text(json.dumps(mail_items))
 
 
 if __name__ == '__main__':
