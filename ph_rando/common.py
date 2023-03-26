@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-import json
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import click
 import inflection
+import yaml
 
 from ph_rando.settings import Settings
 
@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from click.decorators import FC
 
 RANDOMIZER_SETTINGS = Settings(
-    **json.loads((Path(__file__).parent / 'settings.json').read_text())
+    **yaml.safe_load((Path(__file__).parent / 'settings.yaml').read_text())
 ).settings
 
 
