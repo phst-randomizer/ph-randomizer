@@ -191,7 +191,7 @@ jobs:
           from pydantic import ValidationError
           from ph_rando.settings import Settings
           failed = False
-          with open(Path.cwd() / 'ph_rando' / 'settings.json') as f:
+          with open(Path.cwd() / 'ph_rando' / 'settings.yaml') as f:
             try:
               Settings(**yaml.safe_load(f))
             except ValidationError as e:
