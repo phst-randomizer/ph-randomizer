@@ -9,6 +9,7 @@ area TempleOfTheOceanKing:
       enemy SwiftPhantom
 
     node TopLeft:
+      chest TopLeftChest
       door ToB8Left
 
     node SquareCrystalPedestal:
