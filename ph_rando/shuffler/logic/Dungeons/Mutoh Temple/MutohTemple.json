@@ -178,7 +178,7 @@
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "BossKey",
+          "contents": "BossKeyMutohTemple",
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
           "zmb_mapobject_index": 28
         }

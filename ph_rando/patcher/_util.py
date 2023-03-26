@@ -1,13 +1,9 @@
 from collections.abc import Iterable, Iterator
 from contextlib import contextmanager
-import json
-from pathlib import Path
 
 from ndspy import bmg, lz10, narc, rom
 from zed.common import Game
 from zed.zmb import ZMB
-
-from ph_rando.shuffler.aux_models import Area
 
 GD_MODELS = {
     0x00: None,
@@ -148,14 +144,6 @@ GD_MODELS = {
     0x87: '',  # TODO: what to do for random ship part?
     # TODO: are there any more items?
 }
-
-
-def load_aux_data(directory: Path) -> list[Area]:
-    aux_data: list[Area] = []
-    for file in directory.rglob('*.json'):
-        with open(file) as fd:
-            aux_data.append(Area(**json.load(fd)))
-    return aux_data
 
 
 @contextmanager

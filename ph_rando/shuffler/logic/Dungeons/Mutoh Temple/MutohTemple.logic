@@ -239,8 +239,8 @@ area MutohTemple:
     node StairsBottomRight:
       door ToB1BottomRight
 
-    Bottom -> ToBoss: (item BossKey & item Hammer)
-    ToBoss -> Bottom: item BossKey
+    Bottom -> ToBoss: (item BossKeyMutohTemple & item Hammer)
+    ToBoss -> Bottom: item BossKeyMutohTemple
     Bottom -> StairsBottomRight: item Hammer
 
 

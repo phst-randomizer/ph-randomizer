@@ -8,7 +8,7 @@
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "BossKey",
+          "contents": "BossKeyIceTemple",
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },

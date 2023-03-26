@@ -186,7 +186,7 @@
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "BossKey",
+          "contents": "BossKeyGoronTemple",
           "zmb_file_path": "Map/dngn_power/map02.bin/zmb/dngn_power_02.zmb",
           "zmb_mapobject_index": 3
         }
