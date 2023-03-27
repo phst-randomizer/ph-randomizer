@@ -2,7 +2,7 @@ from pathlib import Path
 
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 
-from ph_rando.shuffler.aux_models import Area
+from ph_rando.common import ShufflerAuxData
 
 from .conftest import DeSmuMEWrapper
 from .desmume_utils import (
@@ -15,7 +15,7 @@ from .desmume_utils import (
 save_state = Path(__file__).parent / 'test_state.dsv'
 
 
-def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: list[Area]):
+def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
     start_first_file(base_rom_emu)
 
     # Enter oshus's house
@@ -76,7 +76,7 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: list[Area]):
     base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 20)
     base_rom_emu.wait(10)
 
-    item = get_check_contents(aux_data, 'Mercay', 'OutsideOshus', 'PickUpRock')
+    item = get_check_contents(aux_data.areas.values(), 'Mercay', 'OutsideOshus', 'PickUpRock')
     with assert_item_is_picked_up(item, base_rom_emu):
         # Click through his dialog
         base_rom_emu.touch_input((232, 64), 2)

@@ -1,4 +1,4 @@
-from collections.abc import Generator
+from collections.abc import Generator, Iterable
 from contextlib import contextmanager
 import struct
 
@@ -192,7 +192,7 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
 
 
 def get_check_contents(
-    aux_data: list[Area],
+    aux_data: Iterable[Area],
     area_name: str,
     room_name: str,
     chest_name: str,

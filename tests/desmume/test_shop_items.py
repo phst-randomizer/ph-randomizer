@@ -3,10 +3,11 @@ from pathlib import Path
 from ndspy.rom import NintendoDSRom
 import pytest
 
+from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS
 from ph_rando.patcher.main import _patch_shop_items
-from ph_rando.shuffler.aux_models import Area, IslandShop
+from ph_rando.shuffler.aux_models import IslandShop
 
 from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 
@@ -16,12 +17,15 @@ from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_
     ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val and val in ITEMS_REVERSED],
 )
 def island_shop_test_emu(
-    rom_path: Path, desmume_emulator: DeSmuMEWrapper, request, aux_data: list[Area]
+    rom_path: Path,
+    desmume_emulator: DeSmuMEWrapper,
+    request,
+    aux_data: ShufflerAuxData,
 ):
     rom = NintendoDSRom.fromFile(rom_path)
     chests = [
         chest
-        for area in aux_data
+        for area in aux_data.areas.values()
         for room in area.rooms
         for chest in room.chests
         if type(chest) == IslandShop
@@ -29,7 +33,7 @@ def island_shop_test_emu(
     for chest in chests:
         chest.contents = ITEMS_REVERSED[request.param]
 
-    _patch_shop_items(aux_data, rom)
+    _patch_shop_items(aux_data.areas.values(), rom)
 
     rom.saveToFile(rom_path)
 
