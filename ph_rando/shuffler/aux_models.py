@@ -94,7 +94,7 @@ class DigSpot(BaseCheck):
 
 
 class MinigameRewardChest(BaseCheck):
-    type = Field('minigame_reward_chest', const=True)
+    type: Literal['minigame_reward_chest']
     # TODO: what other fields are needed?
 
 

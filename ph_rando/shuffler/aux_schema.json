@@ -335,14 +335,16 @@
         },
         "type": {
           "title": "Type",
-          "default": "minigame_reward_chest",
-          "const": "minigame_reward_chest",
+          "enum": [
+            "minigame_reward_chest"
+          ],
           "type": "string"
         }
       },
       "required": [
         "name",
-        "contents"
+        "contents",
+        "type"
       ]
     },
     "Exit": {
