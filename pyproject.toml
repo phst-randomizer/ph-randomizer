@@ -15,7 +15,6 @@ module = [
     'cv2.*',
     'desmume.*',
     'ndspy.*',
-    'vidua.*',
     'zed.*',
 ]
 ignore_missing_imports = true
