@@ -1,4 +1,4 @@
-from collections import deque
+from collections import defaultdict, deque
 from copy import copy, deepcopy
 import logging
 from pathlib import Path
@@ -150,19 +150,62 @@ def search(
 
     queue: deque[Node] = deque([starting_node])
 
+    # Mapping to keep track of the state of `locks` (unlocked vs locked)
+    locks: dict[str, bool] = {}
+
     visited_nodes: set[Node] = {starting_node}
 
     while len(queue) > 0:
-        r = queue.popleft()
-        for edge in r.edges:
-            target = edge.dest
+        # Mapping to keep track of edges that contain an `open` descriptor, but are
+        # otherwise traversable
+        edges_with_locked_door: dict[str, list[Edge]] = defaultdict(list)
+        while len(queue) > 0:
+            r = queue.popleft()
+            for edge in r.edges:
+                target = edge.dest
 
-            requirements_met = edge.is_traversable(items, flags, aux_data)
+                requirements_met = edge.is_traversable(items, flags, aux_data)
 
-            if requirements_met and target not in visited_nodes:
-                queue.append(target)
-                visited_nodes.add(target)
-        reachable_nodes.add(r)
+                if requirements_met and target not in visited_nodes:
+                    if edge.locked_door:
+                        edges_with_locked_door[edge.src.area.name].append(edge)
+                    else:
+                        queue.append(target)
+                        visited_nodes.add(target)
+            reachable_nodes.add(r)
+
+        # Calculate key counts for each area
+        keys: dict[str, int] = defaultdict(int)
+        for item in items:
+            if item.startswith('SmallKey_'):
+                area_name = item[9:]
+                keys[area_name] += 1
+
+        # Record any newly-reachable locked doors
+        for node in reachable_nodes:
+            if not node.lock:
+                continue
+            full_lock_name = '.'.join([node.area.name, node.room.name, node.lock])
+            if full_lock_name in locks:
+                continue
+            locks[full_lock_name] = False
+
+        # Figure out which doors we can unlock, and mark
+        # them as "unlocked" + update key counts
+        for area_name, edges in edges_with_locked_door.items():
+            doors_to_unlock = {e.locked_door for e in edges}
+            if keys[area_name] >= len(doors_to_unlock):
+                keys[area_name] -= len(doors_to_unlock)
+                for door in doors_to_unlock:
+                    assert door is not None
+                    locks[door] = True
+
+        for edges in edges_with_locked_door.values():
+            for edge in edges:
+                assert edge.locked_door is not None
+                if locks.get(edge.locked_door):
+                    queue.append(edge.dest)
+                    visited_nodes.add(edge.dest)
 
     return reachable_nodes
 
@@ -190,7 +233,12 @@ def assumed_search(
         for node in reachable_nodes:
             for check in node.checks:
                 if check.contents and check not in completed_checks:
-                    items.append(check.contents)
+                    item_name = check.contents
+                    # If this is a small key, append the area name to it
+                    # so that we can tell what dungeon it goes to.
+                    if item_name == 'SmallKey':
+                        item_name += f'_{node.area.name}'
+                    items.append(item_name)
                     found_new_items = True
                     completed_checks.add(check)
             for flag in node.flags:
