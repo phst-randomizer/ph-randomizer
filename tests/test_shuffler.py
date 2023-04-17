@@ -129,12 +129,12 @@ def test_edge_parser(
             ['TestArea.TestRoom.Node2'],
             ['TestArea.TestRoom.NotAccessible'],
         ),
-        # (
-        #     'key_test',
-        #     'Test.Test.Start',
-        #     ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
-        #     ['Test.Test.End'],
-        # ),
+        (
+            'key_test',
+            'Test.Test.Start',
+            ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
+            ['Test.Test.End'],
+        ),
         (
             'edge_directions_test',
             'EdgeDirectionsTest.Test.Start',
