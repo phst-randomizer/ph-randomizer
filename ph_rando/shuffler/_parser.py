@@ -201,12 +201,6 @@ def evaluate_requirement(
     """
     match type:
         case EdgeDescriptor.ITEM.value:
-            # Special case: "Sword" means either OshusSword or PhantomSword.
-            # TODO: remove this, once the semantics around progressive sword logic are
-            # sorted out.
-            if value == 'Sword':
-                value = 'OshusSword'
-
             # If a certain number of this item is required, check that.
             # Otherwise, just check if we have one of this item.
             count_descriptor = re.match(r'(.+)\[(\d+)\]', value)
