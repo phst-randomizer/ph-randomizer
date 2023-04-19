@@ -1,7 +1,7 @@
 ITEMS: dict[str, int] = {
     'SmallKey': 0x1,
     'SmallGreenRupee': 0x2,
-    'OshusSword': 0x3,
+    'ProgressiveSword': 0x3,
     'Shield': 0x4,
     'ForceGem': 0x6,  # TODO: difference between this and 0x1C?
     'Bombs': 0x7,
@@ -104,8 +104,6 @@ ITEMS: dict[str, int] = {
     'RandomTreasure2': 0x86,  # TODO: what is this, and how does it relate to other treasures?
     # TODO: update these when their ids are known
     'PhantomHourglass': -1,
-    'PhantomSword': -1,
-    'PhantomSwordBlade': -1,
     'Sand2M': -1,
     'PowerSpirit': -1,
     'WisdomSpirit': -1,
