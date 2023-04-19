@@ -1,5 +1,5 @@
 [tool.black]
-exclude='\.eggs|\.git|\.mypy_cache|\.tox|\.venv|_build|buck-out|dist'
+exclude = '\.eggs|\.git|\.mypy_cache|\.tox|\.venv|_build|buck-out|dist'
 line-length = 100
 skip-string-normalization = true
 target-version = ["py311"]
@@ -22,12 +22,7 @@ disallow_untyped_defs = false
 # These third-party libraries don't expose type information,
 # so we tell mypy not to try to type-check our usage of them.
 [[tool.mypy.overrides]]
-module = [
-    'cv2.*',
-    'desmume.*',
-    'ndspy.*',
-    'zed.*',
-]
+module = ['cv2.*', 'desmume.*', 'ndspy.*', 'zed.*']
 ignore_missing_imports = true
 
 [build-system]
