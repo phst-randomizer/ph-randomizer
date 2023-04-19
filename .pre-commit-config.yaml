@@ -36,7 +36,7 @@ repos:
           - --py311-plus
 
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.1.0
+    rev: v2.1.1
     hooks:
       - id: autoflake
         args:
