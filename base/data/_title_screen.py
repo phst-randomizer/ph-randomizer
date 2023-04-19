@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 from PIL import Image, ImageDraw
 from ndspy import color, lz10, narc
@@ -10,7 +11,8 @@ TITLE_SCREEN_BMP_PATH = Path(__file__).parent / 'title_screen.bmp'
 class AutoList(list):
     """List that automatically extends when given an index greater than its length."""
 
-    def __setitem__(self, index, value) -> None:
+    def __setitem__(self, index: int | Any, value: Any) -> None:
+        assert isinstance(index, int)
         if index >= len(self):
             self.extend([None] * (index + 1 - len(self)))
         list.__setitem__(self, index, value)

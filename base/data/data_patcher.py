@@ -21,7 +21,7 @@ from ndspy.rom import NintendoDSRom
     required=True,
     help='Dest ROM',
 )
-def patcher(input_rom: Path, output_rom: Path):
+def patcher(input_rom: Path, output_rom: Path) -> None:
     rom = NintendoDSRom.fromFile(str(input_rom))
 
     insert_title_screen(rom)

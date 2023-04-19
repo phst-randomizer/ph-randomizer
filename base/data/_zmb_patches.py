@@ -1,3 +1,4 @@
+from collections.abc import Generator
 from contextlib import contextmanager
 
 from ndspy import lz10, narc
@@ -6,7 +7,7 @@ from zed import common, zmb
 
 
 @contextmanager
-def edit_zmb(rom: NintendoDSRom, narc_path: str, zmb_path: str):
+def edit_zmb(rom: NintendoDSRom, narc_path: str, zmb_path: str) -> Generator[zmb.ZMB, None, None]:
     narc_file = narc.NARC(lz10.decompress(rom.getFileByName(narc_path)))
     zmb_file = zmb.ZMB(common.Game.PhantomHourglass, narc_file.getFileByName(zmb_path))
     yield zmb_file
@@ -98,6 +99,7 @@ def _patch_mercay_north_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
         assert len(nmsg_actors) == 4
         for actor in nmsg_actors:
             zmb_file.actors.remove(actor)
+    return rom
 
 
 def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
