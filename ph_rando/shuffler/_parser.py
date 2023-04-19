@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 from dataclasses import dataclass, field
-from functools import cache
+from functools import cache, cached_property
 import json
 import logging
 from pathlib import Path
@@ -76,6 +76,25 @@ class Edge:
                 edge_instance=self,
             )
         return True
+
+    @cached_property
+    def locked_door(self) -> str | None:
+        """
+        Returns the name of the locked door this edge is associated with, if any.
+        """
+
+        def _contains_open(constraints: list[str | list[str | list]]) -> str | None:
+            contains_open = None
+            for elem in constraints:
+                if isinstance(elem, list):
+                    contains_open = _contains_open(elem)
+                elif EdgeDescriptor.OPEN.value == elem:
+                    lock_name = constraints[constraints.index(elem) + 1]
+                    assert isinstance(lock_name, str)
+                    return '.'.join([self.src.area.name, self.src.room.name, lock_name])
+            return contains_open
+
+        return _contains_open(self.requirements) if self.requirements else None
 
     @classmethod
     @cache
