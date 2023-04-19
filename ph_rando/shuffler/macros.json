@@ -1,8 +1,11 @@
 {
   "Bombs": "item Bombs | item Bombchus | state BombFlower",
-  "SwordBeam": "item Sword & item CourageSpiritLv1",
+  "Sword": "item ProgressiveSword[1]",
+  "PhantomSwordBlade": "item ProgressiveSword[2]",
+  "PhantomSword": "item ProgressiveSword[3]",
+  "SwordBeam": "macro Sword & item CourageSpiritLv1",
 
-  "HitSwitch": "item Sword | item Boomerang | item Bow | item GrapplingHook | item Bombs | item Bombchus | state BombFlower",
+  "HitSwitch": "macro Sword | item Boomerang | item Bow | item GrapplingHook | item Bombs | item Bombchus | state BombFlower",
 
   "HammerClip": "setting HammerClip & item Hammer",
   "HammerReach": "setting HammerReach & item Hammer",
