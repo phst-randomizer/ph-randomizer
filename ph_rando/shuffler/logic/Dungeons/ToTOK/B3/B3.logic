@@ -26,6 +26,6 @@ area TempleOfTheOceanKing:
 
     Main <-> KeyDoor: open ChestBehindDoor
     Main <-> EyeTarget: item Bow
-    Main <-> AllDefeatChest: (item PhantomSword & item GrapplingHook)
+    Main <-> AllDefeatChest: (macro PhantomSword & item GrapplingHook)
     Main <-> Ledge: item GrapplingHook
     Main -> DoorToChartRoom: (state Gem1B3 & state Gem2B3 & state Gem3B3)

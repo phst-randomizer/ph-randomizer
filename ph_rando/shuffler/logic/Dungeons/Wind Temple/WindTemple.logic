@@ -31,7 +31,7 @@ area WindTemple:
       chest BossKey
 
     MiddleRight <-> TopRight: macro Bombs
-    TopRight -> BossKeyChest: (item Sword | item Bombs) # you can use two bombs here. TODO: can two bombchus be used?
+    TopRight -> BossKeyChest: (macro Sword | item Bombs) # you can use two bombs here. TODO: can two bombchus be used?
     BossKeyChest -> BossKeyHoleRoom
 
   room B1:

@@ -28,7 +28,7 @@ area FireTemple:
     TopRight -> LockedDoorToTopRight
     LockedDoorToTopRight -> Entrance: open LockedDoorToTopRight
     LockedDoorToTopRight -> TopRight: open LockedDoorToTopRight
-    TopRight <-> Switches: (item Boomerang | item Sword | macro Bombs)
+    TopRight <-> Switches: (item Boomerang | macro Sword | macro Bombs)
     Entrance <-> StairsMiddle: flag FireMiddleDoor
 
     node TopLeft:

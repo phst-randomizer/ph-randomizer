@@ -19,6 +19,6 @@ area TempleOfTheOceanKing:
     node DefeatPhantom:
       door ToBridgeRoom
 
-    Main -> Gauntlet: item PhantomSword
+    Main -> Gauntlet: macro PhantomSword
     Gauntlet -> DefeatPhantom: (defeated BluePhantom1 & defeated BluePhantom2 & defeated BluePhantom3 & defeated SwiftPhantom1 & defeated SwiftPhantom2 & defeated SwiftPhantom3 & defeated GoldPhantom1 & defeated GoldPhantom2 & defeated GoldPhantom3)
     DefeatPhantom -> Main

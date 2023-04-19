@@ -28,13 +28,13 @@ area TempleOfTheOceanKing:
     node DefeatPhantom:
       chest PhantomKiller
 
-    Main -> DefeatPhantom: (((item Sword | item Boomerang) & item Bow) | defeated SwiftPhantom)
+    Main -> DefeatPhantom: (((macro Sword | item Boomerang) & item Bow) | defeated SwiftPhantom)
 
     node PhantomCrystal:
       chest SquareCrystal
 
     DefeatPhantom -> PhantomCrystal
-    Main -> PhantomCrystal: (item Bow | macro Bombs | item Sword | item GrapplingHook | item Hammer)
+    Main -> PhantomCrystal: (item Bow | macro Bombs | macro Sword | item GrapplingHook | item Hammer)
 
     node ToChartRoom:
       door ToB9ChartRoom

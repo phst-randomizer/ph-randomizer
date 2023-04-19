@@ -62,7 +62,7 @@ area MutohTemple:
       door ToB2TopLeft
 
     MiddleStairsF1 <-> TopLeft: (state WaterUp & lose WaterDown)
-    TopLeft <-> HitWaterSwitch: (open MutohKey & (item Sword | item Bow))
+    TopLeft <-> HitWaterSwitch: (open MutohKey & (macro Sword | item Bow))
 
 
     TopLeft -> TopLeftArena: (state WaterUp & lose WaterDown)

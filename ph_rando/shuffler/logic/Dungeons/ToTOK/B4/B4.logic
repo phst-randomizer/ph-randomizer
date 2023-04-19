@@ -29,8 +29,8 @@ area TempleOfTheOceanKing:
     node EyesDefeated:
       chest EyeKiller
 
-    TopRight -> Bottom: ((item Sword & item CourageSpiritLv1) | item Boomerang | item Bow | item Bombchus | item GrapplingHook | item Hammer)
-    Bottom -> TopRight: (item Sword | item Boomerang | item Bow | item Bombchus | item GrapplingHook | item Hammer)
+    TopRight -> Bottom: ((macro Sword & item CourageSpiritLv1) | item Boomerang | item Bow | item Bombchus | item GrapplingHook | item Hammer)
+    Bottom -> TopRight: (macro Sword | item Boomerang | item Bow | item Bombchus | item GrapplingHook | item Hammer)
 
     Bottom <-> KeyDoorTopLeft: item Bombchus
     KeyDoorTopLeft <-> TopLeftStaircase: open TopLeftDoor
