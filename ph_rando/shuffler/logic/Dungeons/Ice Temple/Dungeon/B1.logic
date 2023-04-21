@@ -42,7 +42,7 @@ area IceTemple:
 
     RightSide -> TopRight: (open IceTempleKey & lose SwitchBlue & state SwitchRed)
 
-    TopRight -> RightSide: ((lose SwitchBlue & state SwitchRed) | (item Bow | item Boomerang | item Bombs | item Bombchus | (item Sword & item CourageSpiritLv1)))
+    TopRight -> RightSide: ((lose SwitchBlue & state SwitchRed) | (item Bow | item Boomerang | item Bombs | item Bombchus | (macro Sword & item CourageSpiritLv1)))
 
     AboveBombableWalls -> BeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & lose SwitchRed & state SwitchBlue)
 

@@ -43,7 +43,7 @@ area IceTemple:
     Arena -> Stairs: (lose BombFlower & item GrapplingHook)
     Arena -> AfterArena: (lose BombFlower & defeated Gel & defeated WhiteYook)
 
-    AfterArena <-> Middle: (item Sword | item Boomerang)
+    AfterArena <-> Middle: (macro Sword | item Boomerang)
 
     Middle <-> Top: item Bow
     Middle <-> TopRight: open IceTempleKey

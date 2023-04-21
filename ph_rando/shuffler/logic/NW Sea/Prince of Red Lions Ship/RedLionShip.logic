@@ -10,5 +10,5 @@ area RedLionShip:
     node TradingSequence:
       chest Kaleidoscope
 
-    Boat <-> Fight: item Sword
+    Boat <-> Fight: macro Sword
     Boat <-> TradingSequence: item HeroNewClothes

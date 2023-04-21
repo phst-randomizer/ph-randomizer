@@ -26,10 +26,10 @@ area MazeIsland:
       chest SmallRedRupeeDigSpot2
       chest SmallRedRupeeDigSpot3
 
-    Port -> BeginnerReward: (item Bow & item Sword)
-    BeginnerReward -> NormalReward: (item Bow & item Sword)
-    NormalReward -> ExpertReward: (item Bow & item Sword & item GrapplingHook & item Boomerang)
+    Port -> BeginnerReward: (item Bow & macro Sword)
+    BeginnerReward -> NormalReward: (item Bow & macro Sword)
+    NormalReward -> ExpertReward: (item Bow & macro Sword & item GrapplingHook & item Boomerang)
 
-    Port -> BombableWall: (macro Bombs & item Sword)
+    Port -> BombableWall: (macro Bombs & macro Sword)
 
-    Port -> DigSpots: (item Bow & item Sword & item Shovel)
+    Port -> DigSpots: (item Bow & macro Sword & item Shovel)

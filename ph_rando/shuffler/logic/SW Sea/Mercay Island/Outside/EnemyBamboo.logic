@@ -10,4 +10,4 @@ area Mercay:
 
     node Grotto:
       door Grotto
-    South <-> Grotto: item Sword
+    South <-> Grotto: macro Sword

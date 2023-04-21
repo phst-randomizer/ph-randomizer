@@ -49,7 +49,7 @@ TEST_DATA_DIR = Path(__file__).parent / 'test_data'
         ('item Bombchus | item Bombs', ['Bombs', 'Boomerang', 'Cannon'], {}, True),
         ('item Bombchus | item Bombs', ['Bombchus', 'Boomerang', 'Cannon'], {}, True),
         ('item Bombchus | item Bombs', ['Boomerang', 'Cannon', 'Sword'], {}, False),
-        ('item Bombchus | item Bombs | item Sword', ['Boomerang', 'Cannon', 'OshusSword'], {}, True),  # noqa: E501
+        ('item Bombchus | item Bombs | item ProgressiveSword', ['Boomerang', 'Cannon', 'ProgressiveSword'], {}, True),  # noqa: E501
         # Test more complex nested expressions
         ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Bombs'], {}, False),  # noqa: E501
         ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombs'], {}, True),  # noqa: E501
@@ -59,7 +59,7 @@ TEST_DATA_DIR = Path(__file__).parent / 'test_data'
         ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook', 'Bow'], {}, True),  # noqa: E501
         # Test expression with a lot of redundant parentheses, which shouldn't affect results
         # other than additional performance overhead.
-        ('(((((item Sword | ((item Shield)))))))', ['OshusSword'], {}, True),
+        ('(((((item ProgressiveSword | ((item Shield)))))))', ['ProgressiveSword'], {}, True),
         # fmt: on
     ],
 )

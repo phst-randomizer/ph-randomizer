@@ -31,7 +31,7 @@ area TempleOfTheOceanKing:
     node PhantomGem:
       chest PhantomForceGem
 
-    Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | macro Bombs | item Sword)
+    Main -> PhantomGem: (item Bow | item Hammer | item Boomerang | macro Bombs | macro Sword)
 
 
     node AfterTriforce:

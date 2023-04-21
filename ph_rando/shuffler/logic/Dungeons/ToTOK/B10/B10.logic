@@ -27,13 +27,13 @@ area TempleOfTheOceanKing:
       flag LeftSpikes
 
     TopOuter -> Switch: item Bombchus
-    MiddleRing -> Switch: (item Sword | item Boomerang | macro Bombs | item Bow | item Hammer)
+    MiddleRing -> Switch: (macro Sword | item Boomerang | macro Bombs | item Bow | item Hammer)
 
 
     node Center:
       enemy PhantomEye3
 
-    MiddleRing -> Center: (item Sword | item Boomerang | macro Bombs | item Bow | item Hammer)
+    MiddleRing -> Center: (macro Sword | item Boomerang | macro Bombs | item Bow | item Hammer)
     Center -> MiddleRing
 
 
