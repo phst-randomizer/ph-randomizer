@@ -32,10 +32,7 @@ class BaseCheck(BaseModel):
         """
         from ph_rando.patcher._items import ITEMS
 
-        # TODO: Use the following assertion instead once all aux data chest contents is complete.
-        # assert v in ITEMS
-        assert v in ITEMS or not v or v.lower() == 'todo', f'Item {v!r} not valid.'
-
+        assert v in ITEMS
         return v
 
 
