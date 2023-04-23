@@ -101,6 +101,21 @@
 
                 pop pc
 
+            .arm
+            @progressive_sword_check:
+                ; If this item is a progressive sword (id 0x3),
+                ; branch to function that handles that.
+                ; Otherwise, continue as normal.
+                cmp r0, 0x3
+                bne @@end
+
+                push r1, r2, r3
+                bl progressive_sword_check
+                pop r1, r2, r3
+
+                @@end:
+                pop r3-r5, r15
+
         .pool
         .endarea
 .close
@@ -113,14 +128,11 @@
             b @init_flags
         .endarea
 
-    .thumb
-    .org 0x20ade1c
+    .arm
+    .org 0x2085848
         ; Overwrite code that gives the player the oshus sword to be progressive
-        .area 0xC, 0x00
-            ; Save scratch registers, since gcc doesn't do it
-            push r0, r1, r2, r3
-            bl progressive_sword_check
-            pop r0, r1, r2, r3
+        .area 0x4, 0x00
+            b @progressive_sword_check
         .endarea
 
     .thumb
