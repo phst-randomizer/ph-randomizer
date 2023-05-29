@@ -14,13 +14,12 @@ from ph_rando.settings import Settings
 if TYPE_CHECKING:
     from click.decorators import FC
 
-    from ph_rando.shuffler.aux_models import Area, Mail
+    from ph_rando.shuffler.aux_models import Area
 
 
 @dataclass
 class ShufflerAuxData:
     areas: dict[str, Area]
-    mail: list[Mail]
     enemy_requirements: dict[str, str]
     requirement_macros: dict[str, str]
 

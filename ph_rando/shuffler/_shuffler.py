@@ -1,20 +1,12 @@
 from collections import defaultdict, deque
 from copy import copy, deepcopy
 import logging
-from pathlib import Path
 import random
 
 from ordered_set import OrderedSet
 
 from ph_rando.common import ShufflerAuxData
-from ph_rando.shuffler._parser import (
-    Edge,
-    Node,
-    annotate_logic,
-    parse_aux_data,
-    parse_edge_requirement,
-    requirements_met,
-)
+from ph_rando.shuffler._parser import Edge, Node, annotate_logic, connect_mail_nodes, parse_aux_data
 from ph_rando.shuffler.aux_models import Area, Check, Mail
 
 logger = logging.getLogger(__name__)
@@ -244,22 +236,6 @@ def assumed_search(
                     flags.add(flag)
                     found_new_items = True
 
-            # If this node contains a mailbox, check if any mail items
-            # are collectable and collect them.
-            if node.mailbox:
-                for item in aux_data.mail:
-                    if item.contents is None or item in completed_checks:
-                        continue
-                    if requirements_met(
-                        parse_edge_requirement(item.requirements),
-                        items,
-                        flags,
-                        aux_data,
-                    ):
-                        items.append(item.contents)
-                        found_new_items = True
-                        completed_checks.add(item)
-
         if not found_new_items:
             break
 
@@ -284,23 +260,12 @@ def _place_item(
         # Figure out what nodes are accessible
         reachable_nodes = assumed_search(starting_node, aux_data, remaining_item_pool)
 
-        # Out of the accessible nodes, get all item checks that are still empty
-        can_access_mailbox = False
         for node in reachable_nodes:
-            if node.mailbox:
-                can_access_mailbox = True
             for check in node.checks:
                 if candidates is not None and check not in candidates:
                     continue
                 if check.contents is None:
                     reachable_null_checks[check] = node.name
-
-        if can_access_mailbox:
-            for mail in aux_data.mail:
-                if candidates is not None and mail not in candidates:
-                    continue
-                if mail.contents is None:
-                    reachable_null_checks[mail] = f'Mail.{mail.name}'
 
     else:
         for area in aux_data.areas.values():
@@ -309,10 +274,6 @@ def _place_item(
                     for check in node.checks:
                         if check.contents is None:
                             reachable_null_checks[check] = node.name
-
-        for mail in aux_data.mail:
-            if mail.contents is None:
-                reachable_null_checks[mail] = f'Mail.{mail.name}'
 
     locations = list(reachable_null_checks.keys())
     if len(locations) == 0:
@@ -434,9 +395,6 @@ def assumed_fill(
 
                     item_pool.append(item)
                     check.contents = None  # type: ignore
-        for mail_item in aux_data.mail:
-            item_pool.append(mail_item.contents)
-            mail_item.contents = None  # type: ignore
 
         # Shuffle the item pool
         random.shuffle(item_pool)
@@ -464,30 +422,13 @@ def assumed_fill(
     return aux_data
 
 
-def init_logic_graph(
-    areas_directory: Path | None = None,
-    mail_file: Path | None = None,
-    enemy_mapping_file: Path | None = None,
-    macros_file: Path | None = None,
-) -> ShufflerAuxData:
-    if areas_directory is None:
-        areas_directory = Path(__file__).parent / 'logic'
-    if mail_file is None:
-        mail_file = Path(__file__).parent / 'mail.json'
-    if enemy_mapping_file is None:
-        enemy_mapping_file = Path(__file__).parent / 'enemies.json'
-    if macros_file is None:
-        macros_file = Path(__file__).parent / 'macros.json'
+def init_logic_graph() -> ShufflerAuxData:
+    aux_data = parse_aux_data()
 
-    aux_data = parse_aux_data(
-        areas_directory=areas_directory,
-        mail_file=mail_file,
-        enemy_mapping_file=enemy_mapping_file,
-        macros_file=macros_file,
-    )
-
-    annotate_logic(areas=aux_data.areas.values(), logic_directory=areas_directory)
+    annotate_logic(areas=aux_data.areas.values())
 
     _connect_rooms(aux_data.areas)
+
+    connect_mail_nodes(aux_data.areas.values())
 
     return aux_data

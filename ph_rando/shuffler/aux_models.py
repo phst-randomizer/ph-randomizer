@@ -42,6 +42,11 @@ class Chest(BaseCheck):
     zmb_mapobject_index: int = Field(..., description='Index of the chest in the defined zmb file')
 
 
+class Mail(BaseCheck):
+    type: Literal['mail']
+    # TODO: what info is needed for patcher?
+
+
 class Tree(BaseCheck):
     type: Literal['tree']
     zmb_file_path: str = Field(..., description='File path to the zmb the tree is on')
@@ -105,6 +110,7 @@ Check: TypeAlias = (
     | SalvageTreasure
     | DigSpot
     | MinigameRewardChest
+    | Mail
 )
 
 
@@ -207,10 +213,6 @@ class Area(BaseModel):
 
     def json(self, *args: Any, **kwargs: Any) -> str:
         return super().json(*args, exclude={'rooms': {'__all__': {'nodes', '_nodes'}}}, **kwargs)
-
-
-class Mail(BaseCheck):
-    requirements: str
 
 
 if __name__ == '__main__':

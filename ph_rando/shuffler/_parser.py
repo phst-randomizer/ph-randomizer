@@ -19,9 +19,14 @@ import pyparsing as pp
 
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
-from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Mail, Room
+from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
 
 logger = logging.getLogger(__name__)
+
+# Name of node that represents the singleton "Mailbox" object.
+# In format <area>.<room>.<node_name>
+# TODO: make this a configurable setting in shuffler
+MAILBOX_NODE_NAME = 'Mail.Mail.Mail'
 
 
 @dataclass
@@ -467,8 +472,7 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                             case NodeDescriptor.MAIL.value:
                                 if node.mailbox:
                                     raise Exception(
-                                        f'node {node.name} contains more '
-                                        'than one `mail` descriptor'
+                                        f'Node "{node.name}" contains more than one mailbox!'
                                     )
                                 node.mailbox = True
                             case other:
@@ -520,9 +524,50 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                     area.rooms.append(room)
 
 
+def connect_mail_nodes(areas: Iterable[Area], mail_node_name: str = MAILBOX_NODE_NAME) -> None:
+    """Connect all nodes with a `mail` descriptor to the "Mail" node."""
+    mailbox_node: Node | None = None
+
+    # Find mailbox_node
+    found = False
+    for area in areas:
+        if found:
+            break
+        for room in area.rooms:
+            if found:
+                break
+            for node in room.nodes:
+                if found:
+                    break
+                if node.name == mail_node_name:
+                    mailbox_node = node
+                    found = True
+
+    if not found:
+        raise Exception(f'Mailbox node "{mail_node_name}" not found!')
+
+    assert mailbox_node is not None  # for type-checker
+
+    # Add edge between the mailbox node and each node that has a `mail` descriptor
+    for area in areas:
+        for room in area.rooms:
+            for node in room.nodes:
+                if node.mailbox:
+                    node.edges.append(Edge(src=node, dest=mailbox_node, requirements=None))
+
+
 def parse_aux_data(
-    areas_directory: Path, mail_file: Path, enemy_mapping_file: Path, macros_file: Path
+    areas_directory: Path | None = None,
+    enemy_mapping_file: Path | None = None,
+    macros_file: Path | None = None,
 ) -> ShufflerAuxData:
+    if areas_directory is None:
+        areas_directory = Path(__file__).parent / 'logic'
+    if enemy_mapping_file is None:
+        enemy_mapping_file = Path(__file__).parent / 'enemies.json'
+    if macros_file is None:
+        macros_file = Path(__file__).parent / 'macros.json'
+
     areas: dict[str, Area] = {}
     for file in areas_directory.rglob('*.json'):
         with open(file) as fd:
@@ -537,14 +582,11 @@ def parse_aux_data(
             else:
                 areas[area.name] = area
 
-    mail_items = [Mail(**item) for item in json.loads(mail_file.read_text())]
-
     enemy_mapping = json.loads(enemy_mapping_file.read_text())
     macros = json.loads(macros_file.read_text())
 
     return ShufflerAuxData(
         areas=areas,
-        mail=mail_items,
         enemy_requirements=enemy_mapping,
         requirement_macros=macros,
     )
