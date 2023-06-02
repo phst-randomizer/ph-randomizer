@@ -66,7 +66,7 @@ repos:
 
   # Validate aux data against schema
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.23.0
+    rev: 0.23.1
     hooks:
       - id: check-jsonschema
         files: ^ph_rando/shuffler/logic/.*\.json$
