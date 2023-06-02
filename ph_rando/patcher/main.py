@@ -293,7 +293,6 @@ def patcher_cli(
 
     new_aux_data = parse_aux_data(
         areas_directory=aux_data_directory,
-        mail_file=aux_data_directory.parent / 'mail.json',
         enemy_mapping_file=Path(__file__).parents[1] / 'shuffler' / 'enemies.json',
         macros_file=Path(__file__).parents[1] / 'shuffler' / 'macros.json',
     )

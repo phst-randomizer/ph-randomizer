@@ -1,0 +1,66 @@
+{
+  "$schema": "../aux_schema.json",
+  "name": "Mail",
+  "rooms": [
+    {
+      "name": "Mail",
+      "chests": [
+        {
+          "name": "Salvatore",
+          "type": "mail",
+          "contents": "WisdomGem"
+        },
+        {
+          "name": "Romanos",
+          "type": "mail",
+          "contents": "RandomShipPart"
+        },
+        {
+          "name": "Jolene",
+          "type": "mail",
+          "contents": "JolenesLetter"
+        },
+        {
+          "name": "Joanne",
+          "type": "mail",
+          "contents": "RandomShipPart"
+        },
+        {
+          "name": "Linebeck",
+          "type": "mail",
+          "contents": "RandomShipPart"
+        },
+        {
+          "name": "Gongoron",
+          "type": "mail",
+          "contents": "CourageGem"
+        },
+        {
+          "name": "Aroo",
+          "type": "mail",
+          "contents": "WisdomGem"
+        },
+        {
+          "name": "Mutoh",
+          "type": "mail",
+          "contents": "PowerGem"
+        },
+        {
+          "name": "Beedle1",
+          "type": "mail",
+          "contents": "FreebieCard"
+        },
+        {
+          "name": "Beedle2",
+          "type": "mail",
+          "contents": "ComplimentCard"
+        },
+        {
+          "name": "Beedle3",
+          "type": "mail",
+          "contents": "ComplimentaryCard"
+        }
+      ]
+    }
+  ]
+}

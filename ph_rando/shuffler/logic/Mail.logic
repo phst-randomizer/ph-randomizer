@@ -1,0 +1,51 @@
+# This file contains a fake area, room, and series of nodes/edges for each mailbox
+# in the game.
+
+area Mail:
+  room Mail:
+    node Mail
+
+    node Salvatore:
+      chest Salvatore
+
+    node Romanos:
+      chest Romanos
+
+    node Jolene:
+      chest Jolene
+
+    node Joanne:
+      chest Joanne
+
+    node Linebeck:
+      chest Linebeck
+
+    node Gongoron:
+      chest Gongoron
+
+    node Aroo:
+      chest Aroo
+
+    node Mutoh:
+      chest Mutoh
+
+    node Beedle1:
+      chest Beedle1
+
+    node Beedle2:
+      chest Beedle2
+
+    node Beedle3:
+      chest Beedle3
+
+    Mail <-> Salvatore: (item SunKey & flag CanPlaySalvatoreMinigame)
+    Mail <-> Romanos: flag CourageTempleBeaten
+    Mail <-> Jolene: flag CourageTempleBeaten
+    Mail <-> Joanne: (item JolenesLetter & flag FoundMermaid)
+    Mail <-> Linebeck: flag StoneTetra
+    Mail <-> Gongoron: flag GoronTempleBeaten
+    Mail <-> Aroo: flag IceTempleBeaten
+    Mail <-> Mutoh: flag MutohTempleBeaten
+    Mail <-> Beedle1: flag CanAccessBeedle
+    Mail <-> Beedle2: flag CanAccessBeedle
+    Mail <-> Beedle3: flag CanAccessBeedle

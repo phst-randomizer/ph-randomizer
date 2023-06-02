@@ -235,8 +235,10 @@ area Sea:
     node Main:
       door Exit
       shop RegularBeedle
+      flag CanAccessBeedle
 
   room MaskedBeedleBoat:
     node Main:
       door Exit
       shop MaskedBeedle
+      flag CanAccessBeedle

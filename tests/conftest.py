@@ -17,7 +17,6 @@ def aux_data() -> ShufflerAuxData:
     shuffler_dir = Path(__file__).parents[1] / 'ph_rando' / 'shuffler'
     return parse_aux_data(
         areas_directory=shuffler_dir / 'logic',
-        mail_file=shuffler_dir / 'mail.json',
         enemy_mapping_file=shuffler_dir / 'enemies.json',
         macros_file=shuffler_dir / 'macros.json',
     )

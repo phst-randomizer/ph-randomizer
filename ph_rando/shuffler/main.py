@@ -1,4 +1,3 @@
-import json
 import logging
 from pathlib import Path
 import random
@@ -60,16 +59,11 @@ def shuffler_cli(
     if output == '--':
         for area in results.areas.values():
             print(area.json(), file=sys.stdout)
-        for mail in results.mail:
-            print(mail.json(), file=sys.stdout)
     elif output is not None:
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
         for area in results.areas.values():
             (output_path / f'{area.name}.json').write_text(area.json())
-
-        mail_items = [item.dict() for item in results.mail]
-        (output_path / 'mail.json').write_text(json.dumps(mail_items))
 
 
 if __name__ == '__main__':

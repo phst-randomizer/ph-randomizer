@@ -3,8 +3,8 @@ from pathlib import Path
 import pytest
 
 from ph_rando.common import ShufflerAuxData
-from ph_rando.shuffler._parser import parse_edge_requirement
-from ph_rando.shuffler._shuffler import Edge, Node, assumed_search, init_logic_graph
+from ph_rando.shuffler._parser import annotate_logic, parse_aux_data, parse_edge_requirement
+from ph_rando.shuffler._shuffler import Edge, Node, _connect_rooms, assumed_search
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
@@ -82,7 +82,7 @@ def test_edge_parser(
     edge = Edge(src=node1, dest=node2, requirements=parse_edge_requirement(expression))
     node1.edges.append(edge)
     assert (
-        edge.is_traversable(inventory, flags, aux_data=ShufflerAuxData({}, [], {}, {}))
+        edge.is_traversable(inventory, flags, aux_data=ShufflerAuxData({}, {}, {}))
         == expected_result
     )
 
@@ -168,7 +168,9 @@ def test_assumed_search(
 ) -> None:
     current_test_dir = TEST_DATA_DIR / test_data_name
 
-    aux_data = init_logic_graph(areas_directory=current_test_dir)
+    aux_data = parse_aux_data(areas_directory=current_test_dir)
+    annotate_logic(areas=aux_data.areas.values(), logic_directory=current_test_dir)
+    _connect_rooms(aux_data.areas)
 
     areas = aux_data.areas
 
