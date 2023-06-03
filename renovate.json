@@ -14,7 +14,7 @@
       ],
       "automerge": true,
       "schedule": [
-        "after 9pm on friday"
+        "before 4am on the first day of the month"
       ]
     }
   ]
