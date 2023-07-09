@@ -37,7 +37,7 @@ RUN wget -O fixy9.exe https://github.com/StraDaMa/Legend-of-Zelda-Phantom-Hourgl
 RUN dpkg --add-architecture i386
 RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
 RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/
-RUN apt-get update && apt-get install -y winehq-stable
+RUN apt-get update && apt-get install -y wine
 # Install python dependencies
 ADD requirements.txt /app/
 RUN pip install -r requirements.txt

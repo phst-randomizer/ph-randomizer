@@ -61,7 +61,7 @@ arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	mv y9.bin overlay/
 	cd overlay && for file in $$(cat ../code/main.asm | grep -oP "overlay_(\d+).bin"); do \
 		echo $$file; \
-		/opt/wine-stable/bin/wine fixy9.exe y9.bin $$file; \
+		wine fixy9.exe y9.bin $$file; \
 	done
 	mv overlay/y9.bin .
 
