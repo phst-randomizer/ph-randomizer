@@ -57,13 +57,7 @@ arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	python3 -c "exec(\"\"\"\nimport struct\n\nwith open(\"arm9_compressed.bin\", \"rb\") as input_arm9, open(\n    \"arm9_header.bin\", \"rb\"\n) as input_header, open(\"arm9.bin\", \"wb\") as output_arm9:\n    data = input_header.read() + input_arm9.read()\n    data = data[:0xB78] + struct.pack(\"<I\", len(data) + 0x2000000) + data[0xB7C:]\n    output_arm9.write(data)\n\"\"\")"
 
 	# Update y9.bin to account for new sizes of overlays
-	mv fixy9.exe overlay/
-	mv y9.bin overlay/
-	cd overlay && for file in $$(cat ../code/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		echo $$file; \
-		wine fixy9.exe y9.bin $$file; \
-	done
-	mv overlay/y9.bin .
+	python3 fix_y9.py y9.bin overlay/
 
 arm7.bin: $(PREPATCHED_NDS_FILE)
 	./ndstool -x $(PREPATCHED_NDS_FILE) -7 arm7.bin
