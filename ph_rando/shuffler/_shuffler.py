@@ -7,7 +7,7 @@ from ordered_set import OrderedSet
 
 from ph_rando.common import ShufflerAuxData
 from ph_rando.shuffler._parser import Edge, Node, annotate_logic, connect_mail_nodes, parse_aux_data
-from ph_rando.shuffler.aux_models import Area, Check, Mail
+from ph_rando.shuffler.aux_models import Area, Check
 
 logger = logging.getLogger(__name__)
 
@@ -207,7 +207,7 @@ def assumed_search(
     area: str | None = None,
 ) -> OrderedSet[Node]:
     # Used to keep track of what checks/flags we've encountered
-    completed_checks: set[Check | Mail] = set()
+    completed_checks: set[Check] = set()
 
     flags: set[str] = set()
     items = copy(items)  # make copy of items so we don't mutate the original list
@@ -247,14 +247,14 @@ def _place_item(
     starting_node: Node,
     remaining_item_pool: list[str],
     aux_data: ShufflerAuxData,
-    candidates: OrderedSet[Check | Mail] | None = None,
+    candidates: OrderedSet[Check] | None = None,
     use_logic: bool = True,
 ) -> None:
     """
     Places the given item in a location. Set `use_logic` to False to ignore logic
     and place the item in a completely random empty location.
     """
-    reachable_null_checks: dict[Check | Mail, str] = {}
+    reachable_null_checks: dict[Check, str] = {}
 
     if use_logic:
         # Figure out what nodes are accessible
@@ -293,7 +293,7 @@ def _place_dungeon_rewards(
 ) -> None:
     dungeon_reward_pool = [item for item in item_pool if item in DUNGEON_REWARD_CHECKS.values()]
     for item in dungeon_reward_pool:
-        possible_checks: OrderedSet[Check | Mail] = OrderedSet(
+        possible_checks: OrderedSet[Check] = OrderedSet(
             [
                 check
                 for area in aux_data.areas.values()
@@ -315,7 +315,7 @@ def _place_boss_keys(
     """Place all boss keys in `item_pool`."""
     key_pool = [item for item in item_pool if item.startswith('BossKey')]
     for item in key_pool:
-        possible_checks: OrderedSet[Check | Mail] = OrderedSet(
+        possible_checks: OrderedSet[Check] = OrderedSet(
             [
                 check
                 for area in aux_data.areas.values()
@@ -337,7 +337,7 @@ def _place_small_keys(
     """Place all small keys in `item_pool`."""
     key_pool = [item for item in item_pool if item.startswith('SmallKey_')]
     for item in key_pool:
-        possible_checks: OrderedSet[Check | Mail] = OrderedSet(
+        possible_checks: OrderedSet[Check] = OrderedSet(
             [
                 check
                 for area in aux_data.areas.values()
