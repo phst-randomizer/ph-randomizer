@@ -31,19 +31,13 @@ COPY --from=compile_flips /Flips/flips /app
 RUN apt-get update && apt-get install -y gcc software-properties-common
 # Install ARM gcc toolchain
 RUN apt-get install -y gcc-arm-none-eabi
-# Download fixy9 utility for updating y9.bin after making changes to overlays
-RUN wget -O fixy9.exe https://github.com/StraDaMa/Legend-of-Zelda-Phantom-Hourglass-D-Pad-Patch/raw/master/fixy9.exe
-# Install wine
-RUN dpkg --add-architecture i386
-RUN wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
-RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/
-RUN apt-get update && apt-get install -y wine
 # Install python dependencies
 ADD requirements.txt /app/
 RUN pip install -r requirements.txt
 # Add needed source files to the docker build
 ADD data/* /app/
 ADD code/* /app/code/
+ADD fix_y9.py /app
 ADD Makefile /app
 # Create base patch
 ARG PH_ROM_PATH
