@@ -9,22 +9,22 @@
           "name": "BossKey",
           "type": "chest",
           "contents": "BossKeyIceTemple",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
+          "zmb_mapobject_index": 1
         },
         {
           "name": "Bounce",
           "type": "chest",
           "contents": "SmallKey",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
+          "zmb_mapobject_index": 26
         },
         {
           "name": "DefeatThemAll",
           "type": "chest",
-          "contents": "BigRedRupee",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "contents": "PurplePotion",
+          "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
+          "zmb_mapobject_index": 92
         }
       ],
       "exits": [

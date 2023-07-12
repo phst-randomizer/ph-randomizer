@@ -340,8 +340,8 @@
           "name": "Aquanine",
           "type": "chest",
           "contents": "Aquanine",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": -1
+          "zmb_file_path": "Map/dngn_wisdom/map06.bin/zmb/dngn_wisdom_06.zmb",
+          "zmb_mapobject_index": 2
         }
       ],
       "exits": [

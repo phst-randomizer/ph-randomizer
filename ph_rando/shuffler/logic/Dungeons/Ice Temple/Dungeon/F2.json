@@ -9,8 +9,8 @@
           "name": "YookSlayer",
           "type": "chest",
           "contents": "GrapplingHook",
-          "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "Map/dngn_water/map03.bin/zmb/dngn_water_03.zmb",
+          "zmb_mapobject_index": 3
         }
       ],
       "exits": [
