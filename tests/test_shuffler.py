@@ -4,7 +4,7 @@ import pytest
 
 from ph_rando.common import ShufflerAuxData
 from ph_rando.shuffler._parser import annotate_logic, parse_aux_data, parse_edge_requirement
-from ph_rando.shuffler._shuffler import Edge, Node, _connect_rooms, assumed_search
+from ph_rando.shuffler._shuffler import Edge, Node, assumed_search, connect_rooms
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
@@ -170,7 +170,7 @@ def test_assumed_search(
 
     aux_data = parse_aux_data(areas_directory=current_test_dir)
     annotate_logic(areas=aux_data.areas.values(), logic_directory=current_test_dir)
-    _connect_rooms(aux_data.areas)
+    connect_rooms(aux_data.areas)
 
     areas = aux_data.areas
 

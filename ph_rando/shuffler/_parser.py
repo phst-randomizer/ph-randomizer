@@ -524,6 +524,42 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                     area.rooms.append(room)
 
 
+def connect_rooms(areas: dict[str, Area]) -> None:
+    """
+    Replaces `entrance`/`exit`/`door` node descriptors with actual edges.
+
+    Any entrance randomization should take place *before* this
+    function is called.
+    """
+
+    def _get_dest_node(dest_node_entrance: str) -> Node:
+        dest_node_split = dest_node_entrance.split('.')
+
+        area_name = dest_node_split[0]
+        room_name = dest_node_split[1]
+
+        dest_node_name = '.'.join(dest_node_split[:-1])
+
+        for room in areas[area_name].rooms:
+            if room.name == room_name:
+                for node in room.nodes:
+                    if dest_node_name == node.name:
+                        for entrance in node.entrances:
+                            if entrance == dest_node_entrance:
+                                return node
+        raise Exception(f'Entrance {dest_node_entrance!r} not found')
+
+    for area in areas.values():
+        for room in area.rooms:
+            for src_node in room.nodes:
+                for exit in src_node.exits:
+                    if not len(exit.entrance):
+                        raise Exception(f'exit {exit.name!r} has no "link".')
+                    src_node.edges.append(
+                        Edge(src=src_node, dest=_get_dest_node(exit.entrance), requirements=None)
+                    )
+
+
 def connect_mail_nodes(areas: Iterable[Area], mail_node_name: str = MAILBOX_NODE_NAME) -> None:
     """Connect all nodes with a `mail` descriptor to the "Mail" node."""
     mailbox_node: Node | None = None
