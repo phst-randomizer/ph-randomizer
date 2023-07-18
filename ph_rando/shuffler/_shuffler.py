@@ -13,6 +13,7 @@ from ph_rando.shuffler._parser import (
     connect_mail_nodes,
     connect_rooms,
     parse_aux_data,
+    process_states,
 )
 from ph_rando.shuffler.aux_models import Check
 
@@ -406,6 +407,8 @@ def init_logic_graph() -> ShufflerAuxData:
     annotate_logic(areas=aux_data.areas.values())
 
     connect_rooms(aux_data.areas)
+
+    process_states(aux_data.areas.values())
 
     connect_mail_nodes(aux_data.areas.values())
 

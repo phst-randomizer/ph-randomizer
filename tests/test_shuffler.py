@@ -3,7 +3,12 @@ from pathlib import Path
 import pytest
 
 from ph_rando.common import ShufflerAuxData
-from ph_rando.shuffler._parser import annotate_logic, parse_aux_data, parse_edge_requirement
+from ph_rando.shuffler._parser import (
+    annotate_logic,
+    parse_aux_data,
+    parse_edge_requirement,
+    process_states,
+)
 from ph_rando.shuffler._shuffler import Edge, Node, assumed_search, connect_rooms
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
@@ -151,13 +156,19 @@ def test_edge_parser(
             ['FlagTest.Test.Node1', 'FlagTest.Test.Node2', 'FlagTest.Test.Node3'],
             ['FlagTest.Test.Node4'],
         ),
-        # (
-        #     'state_test',
-        #     'StateTest.Test.Start',
-        #     ['StateTest.Test.Node1', 'StateTest.Test.Node2', 'StateTest.Test.Node3',
-        #      'StateTest.Test.Node4', 'StateTest.Test.Node6', 'StateTest.Test.Node8'],
-        #     ['StateTest.Test.Node5', 'StateTest.Test.Node7']
-        # ),
+        (
+            'state_test',
+            'StateTest.Test.Start',
+            [
+                'StateTest.Test.Node1',
+                'StateTest.Test.Node2',
+                'StateTest.Test.Node3',
+                'StateTest.Test.Node4',
+                'StateTest.Test.Node6',
+                'StateTest.Test.Node8',
+            ],
+            ['StateTest.Test.Node5', 'StateTest.Test.Node7'],
+        ),
     ],
 )
 def test_assumed_search(
@@ -171,6 +182,7 @@ def test_assumed_search(
     aux_data = parse_aux_data(areas_directory=current_test_dir)
     annotate_logic(areas=aux_data.areas.values(), logic_directory=current_test_dir)
     connect_rooms(aux_data.areas)
+    process_states(aux_data.areas.values())
 
     areas = aux_data.areas
 
@@ -185,21 +197,9 @@ def test_assumed_search(
     assert len(_nodes) == 1, f'Multiple nodes with name "{starting_node_name}" found'
     starting_node = _nodes[0]
 
-    accessible_nodes = [
-        node
-        for area in areas.values()
-        for room in area.rooms
-        for node in room.nodes
-        if node.name in accessible_nodes_names
-    ]
-    non_accessible_nodes = [
-        node
-        for area in areas.values()
-        for room in area.rooms
-        for node in room.nodes
-        if node.name in non_accessible_nodes_names
-    ]
     reachable_nodes = assumed_search(starting_node=starting_node, aux_data=aux_data, items=[])
 
-    assert all(node in reachable_nodes for node in accessible_nodes)
-    assert all(node not in reachable_nodes for node in non_accessible_nodes)
+    reachable_nodes_names = [node.name for node in reachable_nodes]
+
+    assert all(node in reachable_nodes_names for node in accessible_nodes_names)
+    assert all(node not in reachable_nodes_names for node in non_accessible_nodes_names)

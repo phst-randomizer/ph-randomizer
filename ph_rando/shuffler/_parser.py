@@ -1,25 +1,27 @@
 from __future__ import annotations
 
+from collections import deque
 from collections.abc import Iterable
+from copy import copy
 from dataclasses import dataclass, field
 from functools import cache, cached_property
 import json
 import logging
 from pathlib import Path
 import re
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
 
-from ph_rando.common import ShufflerAuxData
-
-if TYPE_CHECKING:
-    from pyparsing import ParserElement
-
+from ordered_set import OrderedSet
 from pydantic import BaseModel
 import pyparsing as pp
 
+from ph_rando.common import ShufflerAuxData, timer
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
 from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
+
+if TYPE_CHECKING:
+    from pyparsing import ParserElement
 
 logger = logging.getLogger(__name__)
 
@@ -41,15 +43,89 @@ class Node:
     enemies: list[Enemy] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
     lock: str = field(default_factory=str)
-    states: set[str] = field(default_factory=set)
+    states_gained: set[str] = field(default_factory=set)
+    states_lost: set[str] = field(default_factory=set)
+    active_states: OrderedSet[str] = field(default_factory=OrderedSet)
     mailbox: bool = False
 
+    all: ClassVar[list[Node]] = []
+
+    def __post_init__(self) -> None:
+        self.all.append(self)
+
+    def unique_id(self) -> str:
+        if len(self.active_states) == 0:
+            return self.name + '/'
+        return self.name + '/' + '/'.join(self.active_states) + '/'
+
+    def bfs(self) -> dict[str, Node]:
+        bfs_queue: deque[Node] = deque([self])
+        visited: dict[str, Node] = {self.unique_id(): self}
+
+        while len(bfs_queue) > 0:
+            current = bfs_queue.popleft()
+            for edge in current.edges:
+                if edge.dest.unique_id() not in visited:
+                    bfs_queue.append(edge.dest)
+            visited[current.unique_id()] = current
+
+        return visited
+
+    def build_lose_subgraph(self, lose_state: str) -> None:
+        existing_nodes = Node.all
+
+        old_edges = self.edges
+        self.edges = []
+
+        for edge in old_edges:
+            dest_name = edge.dest.name
+
+            for node in existing_nodes:
+                if node.name == dest_name and node.active_states == self.active_states.difference(
+                    {lose_state}
+                ):
+                    inter_node = copy(node)
+                    Node.all.append(inter_node)
+                    inter_node.edges = []
+                    inter_node.name = f'{self.name}->{node.name}'
+                    inter_node.active_states = self.active_states.difference({lose_state})
+                    self.edges.append(Edge(src=self, dest=inter_node, requirements=None))
+                    inter_node.edges.append(
+                        Edge(src=inter_node, dest=node, requirements=edge.requirements)
+                    )
+
+    def build_gain_subgraph(self, gain_state: str) -> None:
+        existing_nodes = self.bfs()
+
+        new_nodes: dict[str, Node] = {}
+        for node in existing_nodes.values():
+            new_node = copy(node)
+            Node.all.append(new_node)
+            new_nodes[new_node.unique_id()] = new_node
+            new_node.active_states = new_node.active_states.union({gain_state})
+            new_node.room.nodes.append(new_node)
+
+        for node in new_nodes.values():
+            new_edges: list[Edge] = []
+            for edge in node.edges:
+                dest_name = edge.dest.unique_id()
+                new_edges.append(
+                    Edge(
+                        src=node,
+                        dest=new_nodes[dest_name],
+                        requirements=edge.requirements,
+                    )
+                )
+            node.edges = new_edges
+        starting_node_prime = new_nodes[self.unique_id()]
+        self.edges.append(Edge(src=self, dest=starting_node_prime, requirements=None))
+
     def __hash__(self) -> int:
-        return hash(self.name)
+        return id(self)
 
     def __eq__(self, __o: object) -> bool:
         if isinstance(__o, Node):
-            return __o.name == self.name
+            return id(self) == id(__o)
         raise Exception('Invalid comparison')
 
 
@@ -60,7 +136,7 @@ class Edge:
     requirements: list[str | list[str | list]] | None
 
     def __repr__(self) -> str:
-        return f'{self.src.name} -> {self.dest.name}'
+        return f'{self.src.unique_id()} -> {self.dest.unique_id()}'
 
     def is_traversable(self, items: list[str], flags: set[str], aux_data: ShufflerAuxData) -> bool:
         """
@@ -252,6 +328,12 @@ def evaluate_requirement(
                 aux_data,
                 edge_instance,
             )
+        case EdgeDescriptor.STATE.value:
+            if edge_instance is None:
+                raise Exception(
+                    "Can't evaluate requirement of type 'state' with 'edge_instance' of None!!"
+                )
+            return value in edge_instance.src.active_states
         case other:
             if other not in EdgeDescriptor:
                 raise Exception(f'Invalid edge descriptor {other!r}')
@@ -477,6 +559,10 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                         f'Node "{node.name}" contains more than one mailbox!'
                                     )
                                 node.mailbox = True
+                            case NodeDescriptor.GAIN.value:
+                                node.states_gained.add(descriptor.value)
+                            case NodeDescriptor.LOSE.value:
+                                node.states_lost.add(descriptor.value)
                             case other:
                                 if other not in NodeDescriptor:
                                     raise Exception(
@@ -628,3 +714,21 @@ def parse_aux_data(
         enemy_requirements=enemy_mapping,
         requirement_macros=macros,
     )
+
+
+def process_states(areas: Iterable[Area]) -> None:
+    nodes = [node for area in areas for room in area.rooms for node in room.nodes]
+    for node in nodes:
+        for state in node.states_gained:
+            logger.debug(f'Processing state gains for state "{state}", node "{node.name}"...')
+            with timer() as time:
+                node.build_gain_subgraph(state)
+            logger.debug(f'Done. Took {time():.4f} seconds.\n')
+
+    nodes = [node for area in areas for room in area.rooms for node in room.nodes]
+    for node in nodes:
+        for state in node.states_lost:
+            logger.debug(f'\tProcessing state loses for state "{state}", node "{node.name}"...')
+            with timer() as time:
+                node.build_lose_subgraph(state)
+            logger.debug(f'\tDone. Took {time():.4f} seconds.\n')

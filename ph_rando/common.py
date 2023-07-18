@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Generator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING
+from time import perf_counter
+from typing import TYPE_CHECKING, Any
 
 import click
 import inflection
@@ -48,3 +50,9 @@ def click_setting_options(function: Callable) -> Callable[[FC], FC]:
         )(function)
 
     return function
+
+
+@contextmanager
+def timer() -> Generator[Callable[[], float], Any, None]:
+    start = perf_counter()
+    yield lambda: perf_counter() - start
