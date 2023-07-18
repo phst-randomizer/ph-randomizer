@@ -9,17 +9,16 @@ from pathlib import Path
 import re
 from typing import TYPE_CHECKING, Literal
 
-from ph_rando.common import ShufflerAuxData
-
-if TYPE_CHECKING:
-    from pyparsing import ParserElement
-
 from pydantic import BaseModel
 import pyparsing as pp
 
+from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler._descriptors import EdgeDescriptor, NodeDescriptor
 from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
+
+if TYPE_CHECKING:
+    from pyparsing import ParserElement
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +40,8 @@ class Node:
     enemies: list[Enemy] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
     lock: str = field(default_factory=str)
-    states: set[str] = field(default_factory=set)
+    states_gained: set[str] = field(default_factory=set)
+    states_lost: set[str] = field(default_factory=set)
     mailbox: bool = False
 
     def __hash__(self) -> int:
@@ -62,7 +62,13 @@ class Edge:
     def __repr__(self) -> str:
         return f'{self.src.name} -> {self.dest.name}'
 
-    def is_traversable(self, items: list[str], flags: set[str], aux_data: ShufflerAuxData) -> bool:
+    def is_traversable(
+        self,
+        items: list[str],
+        flags: set[str],
+        states: set[str],
+        aux_data: ShufflerAuxData,
+    ) -> bool:
         """
         Determine if this edge is traversable given the current player state.
 
@@ -77,6 +83,7 @@ class Edge:
                 parsed_expr=self.requirements,
                 items=items,
                 flags=flags,
+                states=states,
                 aux_data=aux_data,
                 edge_instance=self,
             )
@@ -131,6 +138,7 @@ def requirements_met(
     parsed_expr: list[str | list[str | list]],
     items: list[str],
     flags: set[str],
+    states: set[str],
     aux_data: ShufflerAuxData,
     edge_instance: Edge | None = None,
     result: bool = True,
@@ -146,6 +154,7 @@ def requirements_met(
                 sub_expression,
                 items,
                 flags,
+                states,
                 aux_data,
                 edge_instance,
                 result,
@@ -164,6 +173,7 @@ def requirements_met(
                 value=expr_value,
                 items=items,
                 flags=flags,
+                states=states,
                 aux_data=aux_data,
                 edge_instance=edge_instance,
             )
@@ -189,6 +199,7 @@ def evaluate_requirement(
     value: str,
     items: list[str],
     flags: set[str],
+    states: set[str],
     aux_data: ShufflerAuxData,
     edge_instance: Edge | None = None,
 ) -> bool:
@@ -221,6 +232,8 @@ def evaluate_requirement(
                 return value in items
         case EdgeDescriptor.FLAG.value:
             return flags is not None and value in flags
+        case EdgeDescriptor.STATE.value:
+            return value in states
         case EdgeDescriptor.DEFEATED.value:
             if edge_instance is None:
                 raise Exception(
@@ -235,6 +248,7 @@ def evaluate_requirement(
                     parse_edge_requirement(aux_data.enemy_requirements[enemy.type]),
                     items,
                     flags,
+                    states,
                     aux_data,
                     edge_instance,
                 )
@@ -249,6 +263,7 @@ def evaluate_requirement(
                 parse_edge_requirement(aux_data.requirement_macros[value]),
                 items,
                 flags,
+                states,
                 aux_data,
                 edge_instance,
             )
@@ -477,6 +492,10 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                         f'Node "{node.name}" contains more than one mailbox!'
                                     )
                                 node.mailbox = True
+                            case NodeDescriptor.GAIN.value:
+                                node.states_gained.add(descriptor.value)
+                            case NodeDescriptor.LOSE.value:
+                                node.states_lost.add(descriptor.value)
                             case other:
                                 if other not in NodeDescriptor:
                                     raise Exception(

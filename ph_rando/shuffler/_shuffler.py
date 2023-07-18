@@ -113,6 +113,7 @@ def search(
     aux_data: ShufflerAuxData,
     items: list[str],
     flags: set[str],
+    states: set[str],
 ) -> OrderedSet[Node]:
     reachable_nodes: OrderedSet[Node] = OrderedSet()
 
@@ -132,7 +133,7 @@ def search(
             for edge in r.edges:
                 target = edge.dest
 
-                requirements_met = edge.is_traversable(items, flags, aux_data)
+                requirements_met = edge.is_traversable(items, flags, states, aux_data)
 
                 if requirements_met and target not in visited_nodes:
                     if edge.locked_door:
@@ -188,10 +189,11 @@ def assumed_search(
     completed_checks: set[Check] = set()
 
     flags: set[str] = set()
+    states: set[str] = set()
     items = copy(items)  # make copy of items so we don't mutate the original list
 
     while True:
-        reachable_nodes = search(starting_node, aux_data, items, flags)
+        reachable_nodes = search(starting_node, aux_data, items, flags, states)
         if area is not None:
             reachable_nodes = OrderedSet(
                 [node for node in reachable_nodes if node.area.name == area]
@@ -213,6 +215,11 @@ def assumed_search(
                 if flag not in flags:
                     flags.add(flag)
                     found_new_items = True
+            for state in node.states_gained:
+                states.add(state)
+            for state in node.states_lost:
+                if state in states:
+                    states.remove(state)
 
         if not found_new_items:
             break
