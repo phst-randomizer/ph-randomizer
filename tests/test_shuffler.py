@@ -126,8 +126,8 @@ def test_edge_parser(
         (
             'chest_content',
             'ChestContentTest.Test.Node1',
-            ['TestArea.TestRoom.Node2'],
-            ['TestArea.TestRoom.NotAccessible'],
+            ['ChestContentTest.Test.Node2'],
+            ['ChestContentTest.Test.NotAccessible'],
         ),
         (
             'key_test',
@@ -141,7 +141,7 @@ def test_edge_parser(
             [
                 'EdgeDirectionsTest.Test.Node1',
                 'EdgeDirectionsTest.Test.Node2',
-                'EdgeDirectionsTest.Test.3',
+                'EdgeDirectionsTest.Test.Node3',
             ],
             ['EdgeDirectionsTest.Test.Node4'],
         ),
