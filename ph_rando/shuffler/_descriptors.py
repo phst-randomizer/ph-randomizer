@@ -22,6 +22,7 @@ class NodeDescriptor(Enum, metaclass=MetaEnum):
     ENEMY = 'enemy'
     LOCK = 'lock'
     GAIN = 'gain'
+    LOSE = 'lose'
     SHOP = 'shop'
 
 
@@ -32,5 +33,4 @@ class EdgeDescriptor(Enum, metaclass=MetaEnum):
     DEFEATED = 'defeated'
     SETTING = 'setting'
     STATE = 'state'
-    LOSE = 'lose'
     MACRO = 'macro'
