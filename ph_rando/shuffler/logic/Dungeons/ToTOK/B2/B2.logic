@@ -18,8 +18,17 @@ area TempleOfTheOceanKing:
       gain SwitchRed
       gain SwitchBlue
 
-    Upper <-> MiddleSwitch: (state SwitchBlue & lose SwitchRed)
-    Lower <-> MiddleSwitch: (state SwitchRed & lose SwitchBlue)
+    node UpperToMiddleSwitch:
+      lose SwitchRed
+
+    node LowerToMiddleSwitch:
+      lose SwitchBlue
+
+    Upper <-> UpperToMiddleSwitch: state SwitchBlue
+    UpperToMiddleSwitch <-> MiddleSwitch: state SwitchBlue
+
+    Lower <-> LowerToMiddleSwitch: state SwitchRed
+    LowerToMiddleSwitch <-> MiddleSwitch: state SwitchRed
 
     node KeyArea
     node FreestandingKey:
