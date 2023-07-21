@@ -41,14 +41,20 @@ area MutohTemple:
     node BottomStairsF1:
       door ToF1Bottom
 
-    Up <-> BottomStairsF1: (state WaterUp & lose WaterDown)
+    node UpToBottomStairsF1:
+      lose WaterDown
 
+    Up <-> UpToBottomStairsF1: state WaterUp
+    UpToBottomStairsF1 <-> BottomStairsF1: state WaterUp
 
     node MiddleStairsF1:
       door ToF1Middle
 
     node TopLeft:
       lock MutohKey
+
+    node MiddleStairsF1ToTopLeft:
+      lose WaterDown
 
     node HitWaterSwitch:
       gain WaterUp
@@ -58,16 +64,26 @@ area MutohTemple:
       enemy StalfosWarriorArena1
       enemy StalfosWarriorArena2
 
+    node TopLeftToTopLeftArena:
+      lose WaterDown
+
+    node TopLeftArenaToTopLeft:
+      lose WaterDown
+
     node TopLeftStairs:
       door ToB2TopLeft
 
-    MiddleStairsF1 <-> TopLeft: (state WaterUp & lose WaterDown)
+    MiddleStairsF1 <-> MiddleStairsF1ToTopLeft: state WaterUp
+    MiddleStairsF1ToTopLeft <-> TopLeft: state WaterUp
     TopLeft <-> HitWaterSwitch: (open MutohKey & (macro Sword | item Bow))
 
+    TopLeft -> TopLeftToTopLeftArena: state WaterUp
+    TopLeftToTopLeftArena -> TopLeftArena
 
-    TopLeft -> TopLeftArena: (state WaterUp & lose WaterDown)
     TopLeftStairs -> TopLeftArena
-    TopLeftArena -> TopLeft: (state WaterUp & lose WaterDown & defeated StalfosWarriorArena1 & defeated StalfosWarriorArena2)
+    TopLeftArena -> TopLeftArenaToTopLeft: (state WaterUp & defeated StalfosWarriorArena1 & defeated StalfosWarriorArena2)
+
+    TopLeftArenaToTopLeft -> TopLeft
     TopLeftArena -> TopLeftStairs: (defeated StalfosWarriorArena1 & defeated StalfosWarriorArena2)
 
 
@@ -80,8 +96,17 @@ area MutohTemple:
 
     node LeftUnderwater
 
-    TopLeft -> LeftUnderwater: (state WaterDown & lose WaterUp)
-    MiddleStairsF1 -> LeftUnderwater: (state WaterDown & lose WaterUp)
+    node TopLeftToLeftUnderwater:
+      lose WaterUp
+
+    node MiddleStairsF1ToLeftUnderwater:
+      lose WaterUp
+
+    TopLeft -> TopLeftToLeftUnderwater: state WaterDown
+    TopLeftToLeftUnderwater -> LeftUnderwater
+
+    MiddleStairsF1 -> MiddleStairsF1ToLeftUnderwater: state WaterDown
+    MiddleStairsF1ToLeftUnderwater -> LeftUnderwater
 
 
     node MiddleLeft
@@ -112,10 +137,26 @@ area MutohTemple:
 
     node WaterSwitchShooting # spot to shoot the switch, and climb back up to
 
-    MiddleLeft <-> BottomLeft: (state WaterUp & lose WaterDown)
+    node MiddleLeftToBottomLeft:
+      lose WaterDown
+
+    node BottomLeftToWaterSwitchShooting:
+      lose WaterDown
+
+    node BottomLeftToLeftUnderwater:
+      lose WaterUp
+
+    MiddleLeft <-> MiddleLeftToBottomLeft: state WaterUp
+    MiddleLeftToBottomLeft <-> BottomLeft: state WaterUp
+
     BottomLeft <-> XOPuzzle: item Hammer
-    BottomLeft <-> WaterSwitchShooting: (state WaterUp & lose WaterDown)
-    BottomLeft -> LeftUnderwater: (state WaterDown & lose WaterUp)
+
+    BottomLeft <-> MiddleLeftToBottomLeft: state WaterUp
+    MiddleLeftToBottomLeft <-> WaterSwitchShooting: state WaterUp
+
+    BottomLeft -> BottomLeftToLeftUnderwater: state WaterDown
+    BottomLeftToLeftUnderwater -> LeftUnderwater
+
     BottomLeft <-> MiddleWaterSwitchD: item Bow
 
     WaterSwitchShooting <-> MiddleWaterSwitchR: (item Bow & flag DoorMiddleWaterSwitch)
@@ -125,8 +166,17 @@ area MutohTemple:
     node BottomUnderwater:
       door ToB2BottomLeft
 
-    BottomLeft -> BottomUnderwater: (state WaterDown & lose WaterUp)
-    WaterSwitchShooting -> BottomUnderwater: (state WaterDown & lose WaterUp)
+    node BottomLeftToBottomUnderwater:
+      lose WaterUp
+
+    node WaterSwitchShootingToBottomUnderwater:
+      lose WaterUp
+
+    BottomLeft -> BottomLeftToBottomUnderwater: state WaterDown
+    BottomLeftToBottomUnderwater -> BottomUnderwater
+
+    WaterSwitchShooting -> WaterSwitchShootingToBottomUnderwater: state WaterDown
+    WaterSwitchShootingToBottomUnderwater -> BottomUnderwater
 
     BottomUnderwater -> WaterSwitchShooting: item Hammer
 
@@ -140,14 +190,24 @@ area MutohTemple:
       gain WaterUp
       gain WaterDown
 
+    node BottomRightToBottomRightUnderwater:
+      lose WaterUp
+
     node BottomRightPuzzle:
       flag BottomRightDoor
 
+    node BottomRightToBottomRightPuzzle:
+      lose WaterDown
+
     BottomRightUnderwater -> BottomRight: item Hammer
-    BottomRight -> BottomRightUnderwater: (state WaterDown & lose WaterUp)
+
+    BottomRight -> BottomRightToBottomRightUnderwater: state WaterDown
+    BottomRightToBottomRightUnderwater -> BottomRightUnderwater
 
     BottomRight <-> BottomRightWaterSwitch: (item Bow & item Boomerang)
-    BottomRight <-> BottomRightPuzzle: (state WaterUp & lose WaterDown)
+
+    BottomRight <-> BottomRightToBottomRightPuzzle: state WaterUp
+    BottomRightToBottomRightPuzzle <-> BottomRightPuzzle: state WaterUp
 
 
     node MiddleUnderwater:
@@ -157,7 +217,12 @@ area MutohTemple:
     node MiddleUnderwaterHammer:
       chest MiddleHammer # small key
 
-    BottomRight -> MiddleUnderwater: (flag BottomRightDoor & state WaterDown & lose WaterUp)
+    node BottomRightToMiddleUnderwater:
+      lose WaterUp
+
+    BottomRight -> BottomRightToMiddleUnderwater: (flag BottomRightDoor & state WaterDown)
+    BottomRightToMiddleUnderwater -> MiddleUnderwater
+
     MiddleUnderwater -> LeftUnderwater
     MiddleUnderwater -> MiddleUnderwaterHammer: item Hammer
     MiddleUnderwaterHammer -> MiddleUnderwater
@@ -166,10 +231,15 @@ area MutohTemple:
     node TopRightLockedDoor:
       lock MutohKey
 
+    node UpToTopRightLockedDoor:
+      lose WaterUp
+
     node TopRightUnderwater:
       door ToB2TopRight
 
-    Up -> TopRightLockedDoor: (state WaterDown & lose WaterUp)
+    Up -> UpToTopRightLockedDoor: state WaterDown
+    UpToTopRightLockedDoor -> TopRightLockedDoor
+
     TopRightLockedDoor -> Up: (item Hammer & open MutohKey)
     TopRightUnderwater -> TopRightLockedDoor
     TopRightLockedDoor -> TopRightUnderwater: open MutohKey
