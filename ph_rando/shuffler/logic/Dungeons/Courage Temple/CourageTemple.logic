@@ -32,12 +32,16 @@ area CourageTemple:
     node PolsVoiceStairs:
       door ToB1PolsVoice
 
+    node PolsVoiceStairsToArena:
+      lose SwitchRed
+
     node PolsVoiceArea:
       enemy PolsVoice
       flag PolsDoorOpen
       flag KnowCourageTempleOrder
 
-    PolsVoiceStairs <-> PolsVoiceArea: (state SwitchBlue & lose SwitchRed)
+    PolsVoiceStairs <-> PolsVoiceStairsToArena: state SwitchBlue
+    PolsVoiceStairsToArena <-> PolsVoiceArea: state SwitchBlue
     # We can't go through if the current state is red, so crossing that point loses the possibility of the switch being red, but still needs the blue state to pass (in case it was already lost before)
 
     node PolsBombableWall:
@@ -72,7 +76,11 @@ area CourageTemple:
       gain SquarePedestalCouragePolsVoice
     # Placed the Crystal on the pedestal
 
-    PolsVoiceArea <-> PolsSquarePedestal: (state SquareCrystal & lose SquareCrystal)
+    node PolsVoiceAreaToSquarePedestal:
+      lose SquareCrystal
+
+    PolsVoiceArea <-> PolsVoiceAreaToSquarePedestal: state SquareCrystal
+    PolsVoiceAreaToSquarePedestal <-> PolsSquarePedestal: state SquareCrystal
     # Can't put the crystal on the pedestal if we don't have it, and after placing it, we don't have it anymore
     PolsVoiceArea <-> AfterSquareCrystal: state SquarePedestalCouragePolsVoice
     # The crystal has to be placed on that pedestal to go through
@@ -83,10 +91,14 @@ area CourageTemple:
 
     node BottomLeft
 
+    node LeftmostStairsF1ToBottomLeft:
+      lose SwitchBlue
+
     node EyeTargetDoor:
       flag BottomLeftDoor
 
-    LeftmostStairsF1 <-> BottomLeft: (state SwitchRed & lose SwitchBlue)
+    LeftmostStairsF1 <-> LeftmostStairsF1ToBottomLeft: state SwitchRed
+    LeftmostStairsF1ToBottomLeft <-> BottomLeft: state SwitchRed
 
     BottomLeft <-> EyeTargetDoor: item Bow
     BottomLeft <-> PolsVoiceArea: flag BottomLeftDoor
@@ -97,7 +109,11 @@ area CourageTemple:
     node LeftSquarePedestal:
       gain SquarePedestalCourageBottomLeft
 
-    BottomLeft <-> LeftSquarePedestal: (state SquarePedestal & lose SquarePedestal)
+    node BottomLeftToLeftSquarePedestal:
+      lose SquarePedestal
+
+    BottomLeft <-> BottomLeftToLeftSquarePedestal: state SquarePedestal
+    BottomLeftToLeftSquarePedestal <-> LeftSquarePedestal: state SquarePedestal
     BottomLeft <-> StairsToF2Octorok: state SquarePedestalCourageBottomLeft
 
 
@@ -180,7 +196,11 @@ area CourageTemple:
     node StairsToF1TopRight:
       door ToF1TopRight
 
-    AfterTorches <-> StairsToF1TopRight: (state SwitchBlue & lose SwitchRed)
+    node AfterTorchesToStairsF1TopRight:
+      lose SwitchRed
+
+    AfterTorches <-> AfterTorchesToStairsF1TopRight: state SwitchBlue
+    AfterTorchesToStairsF1TopRight <-> StairsToF1TopRight: state SwitchBlue
 
 
   room F2:

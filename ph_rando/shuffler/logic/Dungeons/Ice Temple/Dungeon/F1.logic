@@ -9,25 +9,54 @@ area IceTemple:
 
     node MiddlePassage
 
+    node EntranceToMiddlePassage:
+      lose SwitchRed
+
     node UpperRightSide:
       enemy BlueChu
 
+    node MiddlePassageToUpperRightSide:
+      lose SwitchBlue
+
     node LowerRightSide
+
+    node UpperRightSideToLowerRightSide:
+      lose SwitchBlue
 
     node RightStairs:
       door ToF2Right
 
-    Entrance <-> MiddlePassage: (lose SwitchRed & state SwitchBlue)
-    MiddlePassage <-> UpperRightSide: (lose SwitchBlue & state SwitchRed)
-    UpperRightSide <-> LowerRightSide: (lose SwitchBlue & state SwitchRed)
-    UpperRightSide <-> RightStairs: (lose SwitchRed & state SwitchBlue)
+    node UpperRightSideToRightStairs:
+      lose SwitchRed
+
+    node MiddlePassageToSwitch:
+      lose SwitchRed
+
+    node UpperRightSideToSwitch:
+      lose SwitchBlue
+
+    Entrance <-> EntranceToMiddlePassage: state SwitchBlue
+    EntranceToMiddlePassage <-> MiddlePassage: state SwitchBlue
+
+    MiddlePassage <-> MiddlePassageToUpperRightSide: state SwitchRed
+    MiddlePassageToUpperRightSide <-> UpperRightSide: state SwitchRed
+
+    UpperRightSide <-> UpperRightSideToLowerRightSide: state SwitchRed
+    UpperRightSideToLowerRightSide <-> LowerRightSide: state SwitchRed
+
+    UpperRightSide <-> UpperRightSideToRightStairs: state SwitchBlue
+    UpperRightSideToRightStairs <-> RightStairs: state SwitchBlue
 
     LowerRightSide -> Entrance
     Entrance -> LowerRightSide: macro HammerClip
 
     Entrance -> Switch
-    MiddlePassage -> Switch: (lose SwitchRed & state SwitchBlue & (item Boomerang | macro Bombs))
-    UpperRightSide -> Switch: (lose SwitchBlue & state SwitchRed & macro Bombs)
+
+    MiddlePassage -> MiddlePassageToSwitch: (state SwitchBlue & (item Boomerang | macro Bombs))
+    MiddlePassageToSwitch -> Switch
+
+    UpperRightSide -> UpperRightSideToSwitch: (state SwitchRed & macro Bombs)
+    UpperRightSideToSwitch -> Switch
 
     node TopLeft:
       door ToF2Left

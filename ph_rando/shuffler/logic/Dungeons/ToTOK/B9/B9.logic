@@ -15,8 +15,12 @@ area TempleOfTheOceanKing:
     node SquareCrystalPedestal:
       gain SquarePedestalTotOKStairway
 
+    node SquareCrystalPedestalToMain:
+      lose SquareCrystal
+
     Main -> SquareCrystalPedestal: state SquareCrystal
-    SquareCrystalPedestal -> Main: lose SquareCrystal
+    SquareCrystalPedestal -> SquareCrystalPedestalToMain
+    SquareCrystalPedestalToMain -> Main
 
     Main <-> TopLeft: state SquarePedestalTotOKStairway
 
@@ -45,7 +49,14 @@ area TempleOfTheOceanKing:
     node ThreePedestalsGoodOrder:
       gain PedestalTotOKAllSetB10
 
+    node ThreePedestalsToMain:
+      lose SquareCrystal
+      lose RoundCrystal
+      lose TriangleCrystal
+
     Main -> ThreePedestals: (state SquareCrystal & state RoundCrystal & state TriangleCrystal)
-    ThreePedestals -> Main: (lose SquareCrystal & lose RoundCrystal & lose TriangleCrystal)
+    ThreePedestals -> ThreePedestalsToMain
+    ThreePedestalsToMain -> Main
+
     ThreePedestals <-> ThreePedestalsGoodOrder: (flag KnowCourageTempleOrder | setting NoPuzzleSolution)
     Main <-> ToChartRoom: state PedestalTotOKAllSet
