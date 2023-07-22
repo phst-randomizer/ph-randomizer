@@ -5,10 +5,16 @@ area IceTemple:
 
     node LeftSide
 
+    node StairsF1ToLeftSide:
+      lose SwitchBlue
+
     node BelowBombableWalls:
       chest ChestAfterBombableWallPlate
 
     node AboveBombableWalls
+
+    node AboveBombableWallsToBeforeBossKey:
+      lose SwitchRed
 
     node RightSide:
       chest PullRedLever
@@ -16,10 +22,16 @@ area IceTemple:
       enemy StagBeetle1
       enemy StagBeetle2
 
+    node RightSideToTopRight:
+      lose SwitchBlue
+
     node TopRight:
       chest AfterLockedDoor
       gain SwitchRed
       gain SwitchBlue
+
+    node TopRightToRightSideLose:
+      lose SwitchBlue
 
     node BeforeBossKey:
       door ToB2
@@ -31,7 +43,8 @@ area IceTemple:
     node AfterBossKey:
       door ToBoss
 
-    StairsToF1 <-> LeftSide: (lose SwitchBlue & state SwitchRed)
+    StairsToF1 <-> StairsF1ToLeftSide: state SwitchRed
+    StairsF1ToLeftSide <-> LeftSide: state SwitchRed
 
     LeftSide -> BelowBombableWalls: ((macro Bombs & item GrapplingHook) | macro HammerClip)
     BelowBombableWalls -> LeftSide
@@ -40,10 +53,16 @@ area IceTemple:
 
     AboveBombableWalls <-> RightSide: item GrapplingHook
 
-    RightSide -> TopRight: (open IceTempleKey & lose SwitchBlue & state SwitchRed)
+    RightSide -> RightSideToTopRight: (open IceTempleKey & state SwitchRed)
+    RightSideToTopRight -> TopRight
 
-    TopRight -> RightSide: ((lose SwitchBlue & state SwitchRed) | (item Bow | item Boomerang | item Bombs | item Bombchus | (macro Sword & item CourageSpiritLv1)))
+    # Option one - red switch
+    TopRight -> TopRightToRightSideLose: state SwitchRed
+    TopRightToRightSideLose -> RightSide
+    # Option two - without red switch, if player has right items
+    TopRight -> RightSide: (item Bow | item Boomerang | item Bombs | item Bombchus | (macro Sword & item CourageSpiritLv1))
 
-    AboveBombableWalls -> BeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & lose SwitchRed & state SwitchBlue)
+    AboveBombableWalls -> AboveBombableWallsToBeforeBossKey: (item Boomerang & item Bow & item GrapplingHook & state SwitchBlue)
+    AboveBombableWallsToBeforeBossKey -> BeforeBossKey
 
     BeforeBossKey <-> AfterBossKey: item BossKeyIceTemple

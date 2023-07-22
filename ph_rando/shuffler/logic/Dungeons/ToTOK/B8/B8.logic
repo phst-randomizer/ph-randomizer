@@ -20,14 +20,22 @@ area TempleOfTheOceanKing:
     node RoundCrystalPedestal:
       gain RoundPedestalTotOKB8
 
+    node RoundCrystalPedestalToMain:
+      lose RoundCrystal
+
     node TriangleCrystalPedestal:
       gain TrianglePedestalTotOKB8
 
+    node TriangleCrystalPedestalToMain:
+      lose TriangleCrystal
+
     Main -> RoundCrystalPedestal: state RoundCrystal
-    RoundCrystalPedestal -> Main: lose RoundCrystal
+    RoundCrystalPedestal -> RoundCrystalPedestalToMain
+    RoundCrystalPedestalToMain -> Main
 
     Main -> TriangleCrystalPedestal: (macro Bombs & state TriangleCrystal)
-    TriangleCrystalPedestal -> Main: lose TriangleCrystal
+    TriangleCrystalPedestal -> TriangleCrystalPedestalToMain
+    TriangleCrystalPedestalToMain -> Main
 
     node TopLeft:
       flag WindDraft

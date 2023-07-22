@@ -23,8 +23,14 @@ area IceTemple:
     node AfterBlue:
       chest ChestAfterBlue
 
+    node MainToAfterBlue:
+      lose SwitchBlue
+
     node After4Switches:
       chest FreestandingKey
+
+    node MainToAfter4Switches:
+      lose SwitchBlue
 
     node DoorToF2:
       lock IceTempleKey
@@ -36,8 +42,10 @@ area IceTemple:
 
     Main <-> Switch: item Bombs
 
-    Main <-> AfterBlue: (lose SwitchBlue & state SwitchRed)
-    Main <-> After4Switches: (lose SwitchBlue & state SwitchRed & item Boomerang)
+    Main <-> MainToAfterBlue: state SwitchRed
+    MainToAfterBlue <-> AfterBlue: state SwitchRed
+    Main <-> MainToAfter4Switches: (state SwitchRed & item Boomerang)
+    MainToAfter4Switches <-> After4Switches: (state SwitchRed & item Boomerang)
 
     Main -> DoorToF2
     StairsLeft -> DoorToF2
