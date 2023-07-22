@@ -236,6 +236,7 @@ def evaluate_requirement(
                     items,
                     flags,
                     aux_data,
+                    edge_instance,
                 )
             raise Exception(
                 f'{edge_instance.src.name} (Edge "...{type} {value}..."): '
@@ -249,6 +250,7 @@ def evaluate_requirement(
                 items,
                 flags,
                 aux_data,
+                edge_instance,
             )
         case other:
             if other not in EdgeDescriptor:
