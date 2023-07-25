@@ -231,7 +231,9 @@ def evaluate_requirement(
             else:
                 return value in items
         case EdgeDescriptor.FLAG.value:
-            return flags is not None and value in flags
+            return value in flags
+        case EdgeDescriptor.OPEN.value:
+            return True  # We process these later during the assumed fill.
         case EdgeDescriptor.STATE.value:
             return value in states
         case EdgeDescriptor.DEFEATED.value:
