@@ -1,7 +1,10 @@
 from collections import defaultdict
 import json
 from pathlib import Path
+from pprint import pprint
 
+from ph_rando.shuffler._descriptors import EdgeDescriptor
+from ph_rando.shuffler._parser import Edge, parse_edge_requirement
 from ph_rando.shuffler._shuffler import assumed_search, init_logic_graph
 from ph_rando.shuffler.aux_models import Area
 
@@ -93,3 +96,49 @@ def test_aux_data_validation():
     for filename in aux_data_files:
         with open(filename) as fd:
             Area(**json.load(fd))
+
+
+def _get_required_states(edge: Edge, macros: dict[str, str]) -> set[str]:
+    """Return the states that an edge requires, if any"""
+
+    def _contains_state(
+        constraints: list[str | list[str | list]], states: set[str] | None = None
+    ) -> set[str]:
+        if states is None:
+            states = set()
+        for elem in constraints:
+            if isinstance(elem, list):
+                states.update(_contains_state(elem, states))
+            elif EdgeDescriptor.STATE.value == elem:
+                state_name = constraints[constraints.index(elem) + 1]
+                assert isinstance(state_name, str)
+                states.add(state_name)
+            elif EdgeDescriptor.MACRO.value == elem:
+                macro_name = constraints[constraints.index(elem) + 1]
+                assert isinstance(macro_name, str)
+                states.update(_contains_state(parse_edge_requirement(macros[macro_name]), states))
+        return states
+
+    return _contains_state(edge.requirements) if edge.requirements else set()
+
+
+def test_ensure_states_exist() -> None:
+    aux_data = init_logic_graph()
+
+    states_required: set[str] = set()
+    states_gained: set[str] = set()
+    states_lost: set[str] = set()
+    for area in aux_data.areas.values():
+        for room in area.rooms:
+            for node in room.nodes:
+                for edge in node.edges:
+                    states_required.update(_get_required_states(edge, aux_data.requirement_macros))
+                states_gained.update(node.states_gained)
+                states_lost.update(node.states_lost)
+
+    if states_required != states_gained:
+        print('The following states are required by edges but are never gained:')
+        pprint(states_required.difference(states_gained))
+
+    assert states_required == states_gained
+    assert states_lost.issubset(states_gained)
