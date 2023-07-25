@@ -20,28 +20,57 @@ area GhostShip:
     node TopLeft:
       enemy SkulltulaTopLeft
 
+    node TopLeftToLeftArenaLoseFollower:
+      lose PurpleCubusFollowing
+      lose YellowCubusFollowing
+      lose GreenCubusFollowing
+
     Bottom -> LeftArena
     LeftArena -> Bottom: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
     LeftArena <-> SistersGathering: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
     LeftArena -> TopLeft: (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)
-    TopLeft -> LeftArena: ((setting MirroredArenaDoors | (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight)))
+
+    # Two possible requirements - either defeat skulltulas, or lose a follower
+    TopLeft -> LeftArena: ((setting MirroredArenaDoors | (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3)) & (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
+    TopLeft -> TopLeftToLeftArenaLoseFollower: (setting MirroredArenaDoors | (defeated PoeArena1 & defeated PoeArena2 & defeated PoeArena3))
+    TopLeftToLeftArenaLoseFollower -> LeftArena
 
     node Top:
       enemy PoeTop
       enemy SkulltulaTop1
       enemy SkulltulaTop2
 
-    TopLeft <-> Top: ((item Boomerang | item GrapplingHook | item Bombs | item Hammer) & ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopLeft)))
+    node TopLeftToTopLoseFollower:
+      lose PurpleCubusFollowing
+      lose YellowCubusFollowing
+      lose GreenCubusFollowing
+
+    # Two possible requirements - either defeat skulltulas, or lose a follower
+    TopLeft <-> Top: ((item Boomerang | item GrapplingHook | item Bombs | item Hammer) & (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopLeft))
+    TopLeft <-> TopLeftToTopLoseFollower: (item Boomerang | item GrapplingHook | item Bombs | item Hammer)
+    TopLeftToTopLoseFollower <-> Top
 
     node TopRight:
       enemy SkulltulaTopRight
 
-    Top <-> TopRight: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight))
+    node TopToTopRightLoseFollower:
+      lose PurpleCubusFollowing
+      lose YellowCubusFollowing
+      lose GreenCubusFollowing
+
+    # Two possible requirements - either defeat skulltulas, or lose a follower
+    Top <-> TopRight: (defeated SkulltulaTop1 & defeated SkulltulaTop2 & defeated SkulltulaTopRight)
+    Top <-> TopToTopRightLoseFollower
+    TopToTopRightLoseFollower <-> TopRight
 
     node TrianglePedestal:
       gain TrianglePedestalGhostSet
 
-    TopRight -> TrianglePedestal: (state TriangleCrystal & lose TriangleCrystal)
+    node TopRightToTrianglePedestal:
+      lose TriangleCrystal
+
+    TopRight -> TopRightToTrianglePedestal: state TriangleCrystal
+    TopRightToTrianglePedestal -> TrianglePedestal
     TrianglePedestal -> TopRight
 
     node Right:
@@ -54,7 +83,14 @@ area GhostShip:
       enemy RatRight3
       chest NearPurpleCubus
 
-    TopRight <-> Right: ((lose PurpleCubusFollowing & lose YellowCubusFollowing & lose GreenCubusFollowing) | state TrianglePedestalGhostSet)
+    node TopRightToRightLoseFollower:
+      lose PurpleCubusFollowing
+      lose YellowCubusFollowing
+      lose GreenCubusFollowing
+
+    TopRight <-> Right: state TrianglePedestalGhostSet
+    TopRight <-> TopRightToRightLoseFollower
+    TopRightToRightLoseFollower <-> Right
 
     node AfterPurpleCubusSwitch:
       gain PurpleCubusFollowing
@@ -65,7 +101,11 @@ area GhostShip:
     node RoundPedestal:
       gain RoundPedestalGhostSet
 
-    Right -> RoundPedestal: (state RoundCrystal & lose RoundCrystal)
+    node RightToRoundPedestal:
+      lose RoundCrystal
+
+    Right -> RightToRoundPedestal: state RoundCrystal
+    RightToRoundPedestal -> RoundPedestal
     RoundPedestal -> Right
     Right <-> Bottom: state RoundPedestalGhostSet
 

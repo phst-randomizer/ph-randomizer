@@ -4,26 +4,51 @@ area StateTest:
 
     node Node1:
       gain State
-    Start <-> Node1
+    Start -> Node1
+
+    node Node12:
+      lose State
 
     node Node2 # no State
-    Node1 -> Node2: lose State
+
+    Node1 -> Node12
+    Node12 -> Node2
 
     node Node3 # both
     Node1 -> Node3: state State
 
+    node Node34:
+      lose State
+
     node Node4 # no State
-    Node2 -> Node4
-    Node3 -> Node4: lose State
+
+    Node2 -> Node34
+    Node3 -> Node34
+    Node34 -> Node4
 
     node Node5 # innaccessible
     Node2 -> Node5: state State
 
+    node Node36:
+      lose State
+
     node Node6 # no State
-    Node3 -> Node6: state State & lose State
+
+    Node3 -> Node36: state State
+    Node36 -> Node6
 
     node Node7 # innaccessible
-    Node3 -> Node7: lose State & state State
+
+    node Node37:
+      lose State
+
+    Node3 -> Node37
+    Node37 -> Node7: state State
 
     node Node8 # Should be accessible as no dependency on State
-    Node2 -> Node8: lose State
+
+    node Node28:
+      lose State
+
+    Node2 -> Node28
+    Node28 -> Node8

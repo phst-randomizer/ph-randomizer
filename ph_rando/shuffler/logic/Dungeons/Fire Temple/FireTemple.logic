@@ -43,6 +43,9 @@ area FireTemple:
 
     node MiddleLeft
 
+    node TopLeftToMiddleLeft:
+      lose SwitchRed
+
     node BottomLeftArena:
       enemy Bubble1
       enemy Bubble2
@@ -52,7 +55,10 @@ area FireTemple:
 
     TopLeft <-> TopLeftColorSwitch: (item Boomerang | macro Bombs)
     TopLeft <-> TopLeftColorSwitchHammerClip: macro HammerClip
-    TopLeft <-> MiddleLeft: (state SwitchBlue & lose SwitchRed)
+
+    TopLeft <-> TopLeftToMiddleLeft: state SwitchBlue
+    TopLeftToMiddleLeft <-> MiddleLeft: state SwitchBlue
+
     MiddleLeft -> Entrance: (item Boomerang | macro HammerClip)
 
     StairsBottomLeft -> BottomLeftArena
@@ -76,7 +82,11 @@ area FireTemple:
       enemy Gel4
       enemy Gel5
 
-    TopRightStairs <-> Arena: (state SwitchBlue & lose SwitchRed)
+    node ToArena:
+      lose SwitchRed
+
+    TopRightStairs <-> ToArena: state SwitchBlue
+    ToArena <-> Arena: state SwitchBlue
 
     node ArenaReward:
       chest BoomerangChest

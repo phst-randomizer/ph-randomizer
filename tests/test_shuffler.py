@@ -21,45 +21,48 @@ TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
 
 @pytest.mark.parametrize(
-    'expression,inventory,flags,expected_result',
+    'expression,inventory,flags,states,expected_result',
     [
         # fmt: off
         # Test basic expressions
-        ('item Boomerang', ['Boomerang', 'Sword'], {}, True),
-        ('item Boomerang', ['Sword'], {}, False),
+        ('item Boomerang', ['Boomerang', 'Sword'], {}, {}, True),
+        ('item Boomerang', ['Sword'], {}, {}, False),
         # Test expressions with basic logic operators
-        ('item Boomerang & item Bombs', ['Boomerang', 'Bombs'], {}, True),
-        ('item Boomerang & item Bombs', ['Boomerang', 'Sword'], {}, False),
-        ('item Boomerang & item Bombs', ['Bombs'], {}, False),
-        ('item Boomerang & item Bombs', [], {}, False),
-        ('item Boomerang | item Bombs', ['Boomerang', 'Bombs'], {}, True),
-        ('item Boomerang | item Bombs', ['Boomerang', 'Sword'], {}, True),
-        ('item Boomerang | item Bombs', ['Bombs'], {}, True),
-        ('item Boomerang | item Bombs', ['Sword'], {}, False),
-        ('item Boomerang | flag BridgeRepaired', ['Bombs'], {'BridgeRepaired'}, True),
-        ('item Boomerang | flag BridgeRepaired', [], {'BridgeRepaired'}, True),
-        ('item Boomerang | flag BridgeRepaired', ['Bombs'], {}, False),
+        ('item Boomerang & item Bombs', ['Boomerang', 'Bombs'], {}, {}, True),
+        ('item Boomerang & item Bombs', ['Boomerang', 'Sword'], {}, {}, False),
+        ('item Boomerang & item Bombs', ['Bombs'], {}, {}, False),
+        ('item Boomerang & item Bombs', [], {}, {}, False),
+        ('item Boomerang | item Bombs', ['Boomerang', 'Bombs'], {}, {}, True),
+        ('item Boomerang | item Bombs', ['Boomerang', 'Sword'], {}, {}, True),
+        ('item Boomerang | item Bombs', ['Bombs'], {}, {}, True),
+        ('item Boomerang | item Bombs', ['Sword'], {}, {}, False),
+        ('item Boomerang | flag BridgeRepaired', ['Bombs'], {'BridgeRepaired'}, {}, True),
+        ('item Boomerang | flag BridgeRepaired', [], {'BridgeRepaired'}, {}, True),
+        ('item Boomerang | flag BridgeRepaired', ['Bombs'], {}, {}, False),
         # Test nested expressions
-        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Bombs', 'Bombchus'], {}, True),  # noqa: E501
-        ('item Boomerang & (item Bombs | item Bombchus | item Hammer)', ['Boomerang', 'Bombchus'], {}, True),  # noqa: E501
-        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Bombs'], {}, True),
-        ('item Boomerang & (item Bombs | item Bombchus)', ['Bombs', 'Bombchus'], {}, False),
-        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Sword'], {}, False),
-        ('item Bombchus | item Bombs', ['Bombs', 'Bombchus', 'Cannon'], {}, True),
-        ('item Bombchus | item Bombs', ['Bombs', 'Boomerang', 'Cannon'], {}, True),
-        ('item Bombchus | item Bombs', ['Bombchus', 'Boomerang', 'Cannon'], {}, True),
-        ('item Bombchus | item Bombs', ['Boomerang', 'Cannon', 'Sword'], {}, False),
-        ('item Bombchus | item Bombs | item ProgressiveSword', ['Boomerang', 'Cannon', 'ProgressiveSword'], {}, True),  # noqa: E501
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Bombs', 'Bombchus'], {}, {}, True),  # noqa: E501
+        ('item Boomerang & (item Bombs | item Bombchus | item Hammer)', ['Boomerang', 'Bombchus'], {}, {}, True),  # noqa: E501
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Bombs'], {}, {}, True),
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Bombs', 'Bombchus'], {}, {}, False),
+        ('item Boomerang & (item Bombs | item Bombchus)', ['Boomerang', 'Sword'], {}, {}, False),
+        ('item Bombchus | item Bombs', ['Bombs', 'Bombchus', 'Cannon'], {}, {}, True),
+        ('item Bombchus | item Bombs', ['Bombs', 'Boomerang', 'Cannon'], {}, {}, True),
+        ('item Bombchus | item Bombs', ['Bombchus', 'Boomerang', 'Cannon'], {}, {}, True),
+        ('item Bombchus | item Bombs', ['Boomerang', 'Cannon', 'Sword'], {}, {}, False),
+        ('item Bombchus | item Bombs | item ProgressiveSword', ['Boomerang', 'Cannon', 'ProgressiveSword'], {}, {}, True),  # noqa: E501
         # Test more complex nested expressions
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Bombs'], {}, False),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombs'], {}, True),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombchus'], {}, True),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook'], {}, False),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bow'], {}, False),  # noqa: E501
-        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook', 'Bow'], {}, True),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Bombs'], {}, {}, False),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombs'], {}, {}, True),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bombchus'], {}, {}, True),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook'], {}, {}, False),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'Bow'], {}, {}, False),  # noqa: E501
+        ('item Boomerang & ((item Bombs | item Bombchus) | (item GrapplingHook & item Bow))', ['Boomerang', 'GrapplingHook', 'Bow'], {}, {}, True),  # noqa: E501
         # Test expression with a lot of redundant parentheses, which shouldn't affect results
         # other than additional performance overhead.
-        ('(((((item ProgressiveSword | ((item Shield)))))))', ['ProgressiveSword'], {}, True),
+        ('(((((item ProgressiveSword | ((item Shield)))))))', ['ProgressiveSword'], {}, {}, True),
+        # Test state
+        ('state Test', [], {}, {'Test'}, True),
+        ('state Test', [], {}, {}, False),
         # fmt: on
     ],
 )
@@ -67,6 +70,7 @@ def test_edge_parser(
     expression: str,
     inventory: list[str],
     flags: set[str],
+    states: set[str],
     expected_result: bool,
 ):
     node1 = Node(
@@ -82,7 +86,7 @@ def test_edge_parser(
     edge = Edge(src=node1, dest=node2, requirements=parse_edge_requirement(expression))
     node1.edges.append(edge)
     assert (
-        edge.is_traversable(inventory, flags, aux_data=ShufflerAuxData({}, {}, {}))
+        edge.is_traversable(inventory, flags, states, aux_data=ShufflerAuxData({}, {}, {}))
         == expected_result
     )
 
@@ -154,9 +158,15 @@ def test_edge_parser(
         # (
         #     'state_test',
         #     'StateTest.Test.Start',
-        #     ['StateTest.Test.Node1', 'StateTest.Test.Node2', 'StateTest.Test.Node3',
-        #      'StateTest.Test.Node4', 'StateTest.Test.Node6', 'StateTest.Test.Node8'],
-        #     ['StateTest.Test.Node5', 'StateTest.Test.Node7']
+        #     [
+        #         'StateTest.Test.Node1',
+        #         'StateTest.Test.Node2',
+        #         'StateTest.Test.Node3',
+        #         'StateTest.Test.Node4',
+        #         'StateTest.Test.Node6',
+        #         'StateTest.Test.Node8',
+        #     ],
+        #     ['StateTest.Test.Node5', 'StateTest.Test.Node7'],
         # ),
     ],
 )
@@ -185,21 +195,9 @@ def test_assumed_search(
     assert len(_nodes) == 1, f'Multiple nodes with name "{starting_node_name}" found'
     starting_node = _nodes[0]
 
-    accessible_nodes = [
-        node
-        for area in areas.values()
-        for room in area.rooms
-        for node in room.nodes
-        if node.name in accessible_nodes_names
-    ]
-    non_accessible_nodes = [
-        node
-        for area in areas.values()
-        for room in area.rooms
-        for node in room.nodes
-        if node.name in non_accessible_nodes_names
-    ]
     reachable_nodes = assumed_search(starting_node=starting_node, aux_data=aux_data, items=[])
 
-    assert all(node in reachable_nodes for node in accessible_nodes)
-    assert all(node not in reachable_nodes for node in non_accessible_nodes)
+    reachable_nodes_names = [node.name for node in reachable_nodes]
+
+    assert all(node in reachable_nodes_names for node in accessible_nodes_names)
+    assert all(node not in reachable_nodes_names for node in non_accessible_nodes_names)

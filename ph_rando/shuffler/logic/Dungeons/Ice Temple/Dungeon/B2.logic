@@ -38,10 +38,20 @@ area IceTemple:
       enemy IceBubble2
       enemy StagBeetle4
 
+    node ArenaToStairs:
+      lose BombFlower
+
+    node ArenaToAfterArena:
+      lose BombFlower
+
     Stairs -> Arena
     AfterArena -> Arena: setting MirroredArenaDoors
-    Arena -> Stairs: (lose BombFlower & item GrapplingHook)
-    Arena -> AfterArena: (lose BombFlower & defeated Gel & defeated WhiteYook)
+
+    Arena -> ArenaToStairs: item GrapplingHook
+    ArenaToStairs -> Stairs
+
+    Arena -> ArenaToAfterArena: (defeated Gel & defeated WhiteYook)
+    ArenaToAfterArena -> AfterArena
 
     AfterArena <-> Middle: (macro Sword | item Boomerang)
 
