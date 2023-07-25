@@ -7,8 +7,8 @@ on:
       - "*"
   pull_request:
 jobs:
-  lint-type-check:
-    name: Lint and type check code
+  lint:
+    name: Linting/style checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,11 +22,8 @@ jobs:
       - name: Upgrade `pip` and install `wheel`
         run: python -m pip install --upgrade pip wheel
 
-      - name: Install dependencies
-        run: pip install -e .[test,types]
-
-      - name: Install pre-commit and tox
-        run: pip install pre-commit tox
+      - name: Install pre-commit
+        run: pip install pre-commit
 
       - name: Cache pre-commit hooks
         uses: actions/cache@v3
@@ -37,8 +34,24 @@ jobs:
       - name: Run pre-commit checks
         run: pre-commit run --all-files --verbose
 
-      # The mypy pre-commit hook doesn't support disabling `--ignore-missing-imports`, so
-      # we re-run it here without that option.
+  type-check:
+    name: Type-checking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: '.python-version'
+          check-latest: true
+
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
+
+      - name: Install tox
+        run: pip install tox
+
       - name: Run type checking
         run: tox -e type
 
@@ -496,7 +509,8 @@ jobs:
     # Require all tests to pass before a release is possible
     needs:
       - build
-      - lint-type-check
+      - lint
+      - type-check
       - tests
       # - check-logic
       - check-aux-data
