@@ -41,6 +41,15 @@ def test_graph_connectedness() -> None:
         if node.name == 'Mercay.OutsideOshus.Outside'
     ][0]
 
+    # Remove all state "lose" descriptors, since they aren't the same per run
+    states: set[str] = set()
+    for area in areas.values():
+        for room in area.rooms:
+            for node in room.nodes:
+                node.states_lost = set()
+                states.update(node.states_gained)
+    starting_node.states_gained = states
+
     assumed_search_nodes = set(
         assumed_search(
             starting_node=starting_node,
