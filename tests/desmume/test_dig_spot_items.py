@@ -9,7 +9,7 @@ from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS
 from ph_rando.patcher.main import _patch_zmb_actors
-from ph_rando.shuffler.aux_models import DigSpot
+from ph_rando.shuffler.aux_models import DigSpot, Item
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, equip_item, start_first_file, use_equipped_item
@@ -36,7 +36,7 @@ def dig_spot_test_emu(
         and chest.zmb_file_path == 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb'
     ]
     for chest in chests:
-        chest.contents = ITEMS_REVERSED[request.param]
+        chest.contents = Item(name=ITEMS_REVERSED[request.param], states=set())
 
     _patch_zmb_actors(aux_data.areas.values(), rom)
 
