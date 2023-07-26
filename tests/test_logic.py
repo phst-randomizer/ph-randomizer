@@ -136,6 +136,8 @@ def test_ensure_states_exist() -> None:
                     states_required.update(_get_required_states(edge, aux_data.requirement_macros))
                 states_gained.update(node.states_gained)
                 states_lost.update(node.states_lost)
+            for chest in room.chests:
+                states_gained.update(chest.contents.states)
 
     if states_required != states_gained:
         print('The following states are required by edges but are never gained:')
