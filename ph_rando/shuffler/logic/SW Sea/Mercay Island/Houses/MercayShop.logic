@@ -4,5 +4,9 @@ area Mercay:
       door Outside
       chest WoodenShield
       chest PowerGem
-      chest QuiverUpgrade
       # chest RandomTreasure
+
+    node StartSellingQuiver:
+      chest QuiverUpgrade
+
+    Main -> StartSellingQuiver: flag CourageTempleBeaten
