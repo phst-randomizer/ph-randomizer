@@ -7,14 +7,18 @@
         {
           "name": "VoidChest",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/dngn_main/map11.bin/zmb/dngn_main_11.zmb",
           "zmb_mapobject_index": 5
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "RandomShipPart",
+          "contents": {
+            "name": "RandomShipPart"
+          },
           "zmb_file_path": "Map/dngn_main/map11.bin/zmb/dngn_main_11.zmb",
           "zmb_mapobject_index": 4
         }

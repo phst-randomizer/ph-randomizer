@@ -8,19 +8,25 @@
         {
           "name": "Key",
           "type": "freestanding",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         },
         {
           "name": "Killer",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_main/map02.bin/zmb/dngn_main_02.zmb",
           "zmb_mapobject_index": 14
         },
         {
           "name": "BombchuPath",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "Map/dngn_main/map02.bin/zmb/dngn_main_02.zmb",
           "zmb_mapobject_index": 13
         }

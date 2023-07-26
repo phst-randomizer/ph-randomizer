@@ -8,7 +8,9 @@
         {
           "name": "CaveGem",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

@@ -8,14 +8,18 @@
         {
           "name": "EyeChest",
           "type": "chest",
-          "contents": "TreasureMapNW2",
+          "contents": {
+            "name": "TreasureMapNW2"
+          },
           "zmb_file_path": "Map/dngn_main/map07.bin/zmb/dngn_main_07.zmb",
           "zmb_mapobject_index": 2
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_main/map07.bin/zmb/dngn_main_07.zmb",
           "zmb_mapobject_index": 3
         }

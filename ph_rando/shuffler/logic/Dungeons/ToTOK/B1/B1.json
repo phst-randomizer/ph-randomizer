@@ -7,19 +7,25 @@
         {
           "name": "Key",
           "type": "freestanding",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         },
         {
           "name": "Killer",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_main/map01.bin/zmb/dngn_main_01.zmb",
           "zmb_mapobject_index": 8
         },
         {
           "name": "EyeTarget",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/dngn_main/map01.bin/zmb/dngn_main_01.zmb",
           "zmb_mapobject_index": 7
         }

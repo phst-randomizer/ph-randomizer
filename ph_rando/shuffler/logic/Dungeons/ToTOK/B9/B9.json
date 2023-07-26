@@ -7,28 +7,42 @@
         {
           "name": "TopLeftChest",
           "type": "chest",
-          "contents": "TriangleCrystal",
+          "contents": {
+            "name": "TriangleCrystal",
+            "states": [
+              "TriangleCrystal"
+            ]
+          },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
           "zmb_mapobject_index": 28
         },
         {
           "name": "WizzrobeKiller",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
           "zmb_mapobject_index": 29
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "RandomShipPart",
+          "contents": {
+            "name": "RandomShipPart"
+          },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
           "zmb_mapobject_index": 30
         },
         {
           "name": "SquareCrystal",
           "type": "on_enemy",
-          "contents": "SquareCrystal"
+          "contents": {
+            "name": "SquareCrystal",
+            "states": [
+              "SquareCrystal"
+            ]
+          }
         }
       ],
       "exits": [

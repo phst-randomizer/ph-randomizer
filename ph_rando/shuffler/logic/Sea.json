@@ -8,56 +8,72 @@
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": "SandOfHours",
+          "contents": {
+            "name": "SandOfHours"
+          },
           "zmb_actor_index": 18,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 23,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 24,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": "SandOfHours",
+          "contents": {
+            "name": "SandOfHours"
+          },
           "zmb_actor_index": 25,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "SunKey",
           "type": "salvage_treasure",
-          "contents": "SunKey",
+          "contents": {
+            "name": "SunKey"
+          },
           "zmb_actor_index": 17,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 26,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 27,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 28,
           "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
         }
@@ -117,56 +133,72 @@
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": "CommonTreasure",
+          "contents": {
+            "name": "CommonTreasure"
+          },
           "zmb_actor_index": 22,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": "SandOfHours",
+          "contents": {
+            "name": "SandOfHours"
+          },
           "zmb_actor_index": 23,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 24,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 25,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 26,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 27,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 28,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         },
         {
           "name": "Treasure8",
           "type": "salvage_treasure",
-          "contents": "SandOfHours",
+          "contents": {
+            "name": "SandOfHours"
+          },
           "zmb_actor_index": 29,
           "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
         }
@@ -222,56 +254,72 @@
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 14,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 15,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 16,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 17,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 18,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 19,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 20,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         },
         {
           "name": "Treasure8",
           "type": "salvage_treasure",
-          "contents": "SandOfHours",
+          "contents": {
+            "name": "SandOfHours"
+          },
           "zmb_actor_index": 21,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
         }
@@ -323,56 +371,72 @@
         {
           "name": "Treasure1",
           "type": "salvage_treasure",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_actor_index": 12,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure2",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 13,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure3",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 14,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure4",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 15,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure5",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 16,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure6",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 17,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure7",
           "type": "salvage_treasure",
-          "contents": "ShipPart",
+          "contents": {
+            "name": "ShipPart"
+          },
           "zmb_actor_index": 18,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         },
         {
           "name": "Treasure8",
           "type": "salvage_treasure",
-          "contents": "BigGoldRupee",
+          "contents": {
+            "name": "BigGoldRupee"
+          },
           "zmb_actor_index": 19,
           "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
         }

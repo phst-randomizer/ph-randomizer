@@ -8,12 +8,16 @@
         {
           "name": "GhostKey",
           "type": "freestanding",
-          "contents": "GhostKey"
+          "contents": {
+            "name": "GhostKey"
+          }
         },
         {
           "name": "HeartContainer",
           "type": "chest",
-          "contents": "HeartContainer",
+          "contents": {
+            "name": "HeartContainer"
+          },
           "zmb_file_path": "Map/boss_ghost/map00.bin/zmb/boss_ghost_00.zmb",
           "zmb_mapobject_index": 0
         }

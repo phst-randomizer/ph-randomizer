@@ -84,7 +84,9 @@
         {
           "name": "RupeeLikeChest",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map01.bin/zmb/dngn_wisdom_01.zmb",
           "zmb_mapobject_index": 56
         }
@@ -132,7 +134,9 @@
         {
           "name": "Hammer",
           "type": "chest",
-          "contents": "Hammer",
+          "contents": {
+            "name": "Hammer"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map02.bin/zmb/dngn_wisdom_02.zmb",
           "zmb_mapobject_index": 2
         }
@@ -164,21 +168,27 @@
         {
           "name": "Middle",
           "type": "chest",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
           "zmb_mapobject_index": 196
         },
         {
           "name": "MiddleHammer",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
           "zmb_mapobject_index": 262
         },
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "BossKeyMutohTemple",
+          "contents": {
+            "name": "BossKeyMutohTemple"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
           "zmb_mapobject_index": 28
         }
@@ -246,14 +256,18 @@
         {
           "name": "Middle",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
           "zmb_mapobject_index": 34
         },
         {
           "name": "Bottom",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
           "zmb_mapobject_index": 54
         }
@@ -339,7 +353,9 @@
         {
           "name": "Aquanine",
           "type": "chest",
-          "contents": "Aquanine",
+          "contents": {
+            "name": "Aquanine"
+          },
           "zmb_file_path": "Map/dngn_wisdom/map06.bin/zmb/dngn_wisdom_06.zmb",
           "zmb_mapobject_index": 2
         }

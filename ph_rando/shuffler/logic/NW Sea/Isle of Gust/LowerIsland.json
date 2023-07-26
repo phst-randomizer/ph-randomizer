@@ -7,35 +7,45 @@
       "chests": [
         {
           "name": "DigSpot1",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
           "zmb_actor_index": 41
         },
         {
           "name": "DigSpot2",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
           "zmb_actor_index": 42
         },
         {
           "name": "DigSpot3",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
           "zmb_actor_index": 43
         },
         {
           "name": "DigSpot4",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
           "zmb_actor_index": 50
         },
         {
           "name": "OnLedge",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "type": "chest",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
           "zmb_mapobject_index": 156

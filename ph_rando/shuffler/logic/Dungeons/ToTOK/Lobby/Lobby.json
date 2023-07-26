@@ -7,7 +7,9 @@
         {
           "name": "Hourglass",
           "type": "chest",
-          "contents": "PhantomHourglass",
+          "contents": {
+            "name": "PhantomHourglass"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

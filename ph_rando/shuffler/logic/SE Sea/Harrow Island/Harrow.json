@@ -8,28 +8,36 @@
         {
           "name": "TreasureMap1",
           "type": "dig_spot",
-          "contents": "TreasureMapSE1",
+          "contents": {
+            "name": "TreasureMapSE1"
+          },
           "zmb_file_path": "TODO",
           "zmb_actor_index": 0
         },
         {
           "name": "TreasureMap2",
           "type": "dig_spot",
-          "contents": "TreasureMapSE2",
+          "contents": {
+            "name": "TreasureMapSE2"
+          },
           "zmb_file_path": "TODO",
           "zmb_actor_index": 0
         },
         {
           "name": "TreasureMap3",
           "type": "dig_spot",
-          "contents": "TreasureMapNE2",
+          "contents": {
+            "name": "TreasureMapNE2"
+          },
           "zmb_file_path": "TODO",
           "zmb_actor_index": 0
         },
         {
           "name": "TreasureMap4",
           "type": "dig_spot",
-          "contents": "TreasureMapNE3",
+          "contents": {
+            "name": "TreasureMapNE3"
+          },
           "zmb_file_path": "TODO",
           "zmb_actor_index": 0
         }

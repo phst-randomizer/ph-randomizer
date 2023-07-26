@@ -8,7 +8,9 @@
         {
           "name": "SmallKey",
           "type": "on_enemy",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": -1
         }

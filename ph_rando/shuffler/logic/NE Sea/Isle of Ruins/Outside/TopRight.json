@@ -8,28 +8,36 @@
         {
           "name": "Underwater",
           "type": "chest",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "LedgeChest",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "NearDoylanPyramid",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         },
         {
           "name": "NearMutohPyramid",
           "type": "chest",
-          "contents": "BigRedRupee",
+          "contents": {
+            "name": "BigRedRupee"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": 0
         }

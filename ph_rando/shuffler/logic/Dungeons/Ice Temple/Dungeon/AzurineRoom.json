@@ -8,7 +8,9 @@
         {
           "name": "Azurine",
           "type": "chest",
-          "contents": "Azurine",
+          "contents": {
+            "name": "Azurine"
+          },
           "zmb_file_path": "Map/dngn_water/map06.bin/zmb/dngn_water_06.zmb",
           "zmb_mapobject_index": 1
         }

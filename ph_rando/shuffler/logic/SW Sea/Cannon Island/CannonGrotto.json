@@ -8,7 +8,9 @@
         {
           "name": "AfterWall",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_torii/map00.bin/zmb/dngn_torii_00.zmb",
           "zmb_mapobject_index": 32
         }

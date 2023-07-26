@@ -8,57 +8,79 @@
         {
           "name": "Salvatore",
           "type": "mail",
-          "contents": "WisdomGem"
+          "contents": {
+            "name": "WisdomGem"
+          }
         },
         {
           "name": "Romanos",
           "type": "mail",
-          "contents": "RandomShipPart"
+          "contents": {
+            "name": "RandomShipPart"
+          }
         },
         {
           "name": "Jolene",
           "type": "mail",
-          "contents": "JolenesLetter"
+          "contents": {
+            "name": "JolenesLetter"
+          }
         },
         {
           "name": "Joanne",
           "type": "mail",
-          "contents": "RandomShipPart"
+          "contents": {
+            "name": "RandomShipPart"
+          }
         },
         {
           "name": "Linebeck",
           "type": "mail",
-          "contents": "RandomShipPart"
+          "contents": {
+            "name": "RandomShipPart"
+          }
         },
         {
           "name": "Gongoron",
           "type": "mail",
-          "contents": "CourageGem"
+          "contents": {
+            "name": "CourageGem"
+          }
         },
         {
           "name": "Aroo",
           "type": "mail",
-          "contents": "WisdomGem"
+          "contents": {
+            "name": "WisdomGem"
+          }
         },
         {
           "name": "Mutoh",
           "type": "mail",
-          "contents": "PowerGem"
+          "contents": {
+            "name": "PowerGem"
+          }
         },
         {
           "name": "Beedle1",
           "type": "mail",
-          "contents": "FreebieCard"
+          "contents": {
+            "name": "FreebieCard"
+          }
         },
         {
           "name": "Beedle2",
           "type": "mail",
-          "contents": "ComplimentCard"
+          "contents": {
+            "name": "ComplimentCard"
+          }
         },
         {
           "name": "Beedle3",
           "type": "mail",
-          "contents": "ComplimentaryCard"
+          "contents": {
+            "name": "ComplimentaryCard"
+          }
         }
       ]
     }

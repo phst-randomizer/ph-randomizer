@@ -8,14 +8,18 @@
         {
           "name": "EmptyChest",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_main/map00.bin/zmb/dngn_main_00.zmb",
           "zmb_mapobject_index": 34
         },
         {
           "name": "Map",
           "type": "chest",
-          "contents": "SWSeaChart",
+          "contents": {
+            "name": "SWSeaChart"
+          },
           "zmb_file_path": "Map/dngn_main/map00.bin/zmb/dngn_main_00.zmb",
           "zmb_mapobject_index": 23
         }

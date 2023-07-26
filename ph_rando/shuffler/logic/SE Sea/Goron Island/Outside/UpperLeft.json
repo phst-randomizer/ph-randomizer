@@ -8,7 +8,9 @@
         {
           "name": "MazeChest",
           "type": "chest",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "Map/isle_power/map00.bin/zmb/isle_power_00.zmb",
           "zmb_mapobject_index": 5
         }
