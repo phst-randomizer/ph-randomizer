@@ -6,15 +6,6 @@
       "name": "MercayShop",
       "chests": [
         {
-          "name": "WoodenShield",
-          "type": "island_shop",
-          "contents": {
-            "name": "Shield"
-          },
-          "overlay": 31,
-          "overlay_offset": "0x2fd4"
-        },
-        {
           "name": "PowerGem",
           "type": "island_shop",
           "contents": {
@@ -22,15 +13,6 @@
           },
           "overlay": 31,
           "overlay_offset": "0x2f88"
-        },
-        {
-          "name": "QuiverUpgrade",
-          "type": "island_shop",
-          "contents": {
-            "name": "QuiverUpgrade"
-          },
-          "overlay": 31,
-          "overlay_offset": "0x2ea0"
         }
       ],
       "exits": [

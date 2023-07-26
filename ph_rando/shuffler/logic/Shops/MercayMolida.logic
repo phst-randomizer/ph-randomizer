@@ -1,0 +1,10 @@
+area MercayMolidaShop:
+  room Main:
+    node Main:
+      chest WoodenShield
+      # chest RandomTreasure
+
+    node StartSellingQuiver:
+      chest QuiverUpgrade
+
+    Main -> StartSellingQuiver: flag CourageTempleBeaten
