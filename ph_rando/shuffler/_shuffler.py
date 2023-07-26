@@ -12,6 +12,7 @@ from ph_rando.shuffler._parser import (
     annotate_logic,
     connect_mail_nodes,
     connect_rooms,
+    connect_shop_nodes,
     parse_aux_data,
 )
 from ph_rando.shuffler.aux_models import Check, Item
@@ -419,5 +420,7 @@ def init_logic_graph() -> ShufflerAuxData:
     connect_rooms(aux_data.areas)
 
     connect_mail_nodes(aux_data.areas.values())
+
+    connect_shop_nodes(aux_data.areas.values())
 
     return aux_data
