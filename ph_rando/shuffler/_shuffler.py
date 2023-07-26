@@ -1,5 +1,5 @@
 from collections import defaultdict, deque
-from copy import copy, deepcopy
+from copy import deepcopy
 import logging
 import random
 
@@ -14,7 +14,7 @@ from ph_rando.shuffler._parser import (
     connect_rooms,
     parse_aux_data,
 )
-from ph_rando.shuffler.aux_models import Check
+from ph_rando.shuffler.aux_models import Check, Item
 
 logger = logging.getLogger(__name__)
 
@@ -111,7 +111,7 @@ class AssumedFillFailed(Exception):
 def search(
     starting_node: Node,
     aux_data: ShufflerAuxData,
-    items: list[str],
+    items: list[Item],
     flags: set[str],
     states: set[str],
 ) -> OrderedSet[Node]:
@@ -133,7 +133,9 @@ def search(
             for edge in r.edges:
                 target = edge.dest
 
-                requirements_met = edge.is_traversable(items, flags, states, aux_data)
+                requirements_met = edge.is_traversable(
+                    [i.name for i in items], flags, states, aux_data
+                )
 
                 if requirements_met and target not in visited_nodes:
                     if edge.locked_door:
@@ -146,8 +148,8 @@ def search(
         # Calculate key counts for each area
         keys: dict[str, int] = defaultdict(int)
         for item in items:
-            if item.startswith('SmallKey_'):
-                area_name = item[9:]
+            if item.name.startswith('SmallKey_'):
+                area_name = item.name[9:]
                 keys[area_name] += 1
 
         # Record any newly-reachable locked doors
@@ -182,15 +184,15 @@ def search(
 def assumed_search(
     starting_node: Node,
     aux_data: ShufflerAuxData,
-    items: list[str],
+    items: list[Item],
     area: str | None = None,
 ) -> OrderedSet[Node]:
     # Used to keep track of what checks/flags we've encountered
     completed_checks: set[Check] = set()
 
     flags: set[str] = set()
-    states: set[str] = set()
-    items = copy(items)  # make copy of items so we don't mutate the original list
+    items = deepcopy(items)  # make copy of items so we don't mutate the original list
+    states: set[str] = {state for item in items for state in item.states}
 
     while True:
         reachable_nodes = search(starting_node, aux_data, items, flags, states)
@@ -203,12 +205,13 @@ def assumed_search(
         for node in reachable_nodes:
             for check in node.checks:
                 if check.contents and check not in completed_checks:
-                    item_name = check.contents
+                    item = check.contents
                     # If this is a small key, append the area name to it
                     # so that we can tell what dungeon it goes to.
-                    if item_name == 'SmallKey':
-                        item_name += f'_{node.area.name}'
-                    items.append(item_name)
+                    if item.name == 'SmallKey':
+                        item.name += f'_{node.area.name}'
+                    items.append(item)
+                    states.update(item.states)
                     found_new_items = True
                     completed_checks.add(check)
             for flag in node.flags:
@@ -228,9 +231,9 @@ def assumed_search(
 
 
 def _place_item(
-    item: str,
+    item: Item,
     starting_node: Node,
-    remaining_item_pool: list[str],
+    remaining_item_pool: list[Item],
     aux_data: ShufflerAuxData,
     candidates: OrderedSet[Check] | None = None,
     use_logic: bool = True,
@@ -268,12 +271,12 @@ def _place_item(
     r = locations[random.randint(0, max(0, len(reachable_null_checks) - 1))]
     r.contents = item
 
-    logger.info(f'Placed {item} at {reachable_null_checks[r]}')
+    logger.info(f'Placed {item.name} at {reachable_null_checks[r]}')
 
 
 def _place_dungeon_rewards(
     starting_node: Node,
-    item_pool: list[str],
+    item_pool: list[Item],
     aux_data: ShufflerAuxData,
 ) -> None:
     dungeon_reward_pool = [item for item in item_pool if item in DUNGEON_REWARD_CHECKS.values()]
@@ -294,11 +297,11 @@ def _place_dungeon_rewards(
 
 def _place_boss_keys(
     starting_node: Node,
-    item_pool: list[str],
+    item_pool: list[Item],
     aux_data: ShufflerAuxData,
 ) -> None:
     """Place all boss keys in `item_pool`."""
-    key_pool = [item for item in item_pool if item.startswith('BossKey')]
+    key_pool = [item for item in item_pool if item.name.startswith('BossKey')]
     for item in key_pool:
         possible_checks: OrderedSet[Check] = OrderedSet(
             [
@@ -307,7 +310,7 @@ def _place_boss_keys(
                 for room in area.rooms
                 for node in room.nodes
                 for check in node.checks
-                if node.area.name == item[7:]
+                if node.area.name == item.name[7:]
             ]
         )
         item_pool.remove(item)
@@ -316,11 +319,11 @@ def _place_boss_keys(
 
 def _place_small_keys(
     starting_node: Node,
-    item_pool: list[str],
+    item_pool: list[Item],
     aux_data: ShufflerAuxData,
 ) -> None:
     """Place all small keys in `item_pool`."""
-    key_pool = [item for item in item_pool if item.startswith('SmallKey_')]
+    key_pool = [item for item in item_pool if item.name.startswith('SmallKey_')]
     for item in key_pool:
         possible_checks: OrderedSet[Check] = OrderedSet(
             [
@@ -329,20 +332,21 @@ def _place_small_keys(
                 for room in area.rooms
                 for node in room.nodes
                 for check in node.checks
-                if node.area.name == item[9:]
+                if node.area.name == item.name[9:]
             ]
         )
         item_pool.remove(item)
-        _place_item(item[: item.index('_')], starting_node, item_pool, aux_data, possible_checks)
+        item.name = item.name[: item.name.index('_')]
+        _place_item(item, starting_node, item_pool, aux_data, possible_checks)
 
 
 def _place_important_items(
     starting_node: Node,
-    item_pool: list[str],
+    item_pool: list[Item],
     aux_data: ShufflerAuxData,
 ) -> None:
     """Place all "important" items in the given item_pool."""
-    important_items = [item for item in item_pool if item in IMPORTANT_ITEMS]
+    important_items = [item for item in item_pool if item.name in IMPORTANT_ITEMS]
     for item in important_items:
         item_pool.remove(item)
         _place_item(item, starting_node, item_pool, aux_data)
@@ -350,7 +354,7 @@ def _place_important_items(
 
 def _place_rest_of_items(
     starting_node: Node,
-    item_pool: list[str],
+    item_pool: list[Item],
     aux_data: ShufflerAuxData,
 ) -> None:
     """Place all items remaining in item_pool."""
@@ -367,7 +371,7 @@ def assumed_fill(
         aux_data_backup = deepcopy(aux_data)
 
         # Copy all items to a list and set all checks to null
-        item_pool: list[str] = []
+        item_pool: list[Item] = []
         for area in aux_data.areas.values():
             for room in area.rooms:
                 for check in room.chests:
@@ -375,8 +379,8 @@ def assumed_fill(
 
                     # Append area name for keys, so that we know where we can place
                     # it later on.
-                    if item == 'SmallKey':
-                        item += f'_{area.name}'
+                    if item.name == 'SmallKey':
+                        item.name += f'_{area.name}'
 
                     item_pool.append(item)
                     check.contents = None  # type: ignore

@@ -23,6 +23,29 @@
     "rooms"
   ],
   "definitions": {
+    "Item": {
+      "title": "Item",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "states": {
+          "title": "States",
+          "description": "State(s) that should be gained upon obtaining this item.",
+          "default": {},
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "Chest": {
       "title": "Chest",
       "type": "object",
@@ -35,7 +58,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -75,7 +102,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -115,7 +146,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -155,7 +190,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -195,7 +234,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -223,7 +266,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -251,7 +298,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -291,7 +342,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -331,7 +386,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
@@ -359,7 +418,11 @@
         "contents": {
           "title": "Contents",
           "description": "The item that this check contains",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
         },
         "type": {
           "title": "Type",
