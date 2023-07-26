@@ -1,0 +1,29 @@
+{
+  "$schema": "../../aux_schema.json",
+  "name": "MercayMolidaShop",
+  "rooms": [
+    {
+      "name": "Main",
+      "chests": [
+        {
+          "name": "WoodenShield",
+          "type": "island_shop",
+          "contents": {
+            "name": "Shield"
+          },
+          "overlay": 31,
+          "overlay_offset": "0x2fd4"
+        },
+        {
+          "name": "QuiverUpgrade",
+          "type": "island_shop",
+          "contents": {
+            "name": "QuiverUpgrade"
+          },
+          "overlay": 31,
+          "overlay_offset": "0x2ea0"
+        }
+      ]
+    }
+  ]
+}

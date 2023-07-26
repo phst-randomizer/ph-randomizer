@@ -43,6 +43,7 @@ class Node:
     states_gained: set[str] = field(default_factory=set)
     states_lost: set[str] = field(default_factory=set)
     mailbox: bool = False
+    shops: set[str] = field(default_factory=set)
 
     def __hash__(self) -> int:
         return hash(self.name)
@@ -342,7 +343,7 @@ def _parse_logic_file(logic_file_contents: str) -> _ParsedLogic:
             node_item = pp.Keyword(node_descriptor.value)
         else:
             node_item |= pp.Keyword(node_descriptor.value)
-    node_element = node_item('type') + pp.Word(pp.alphanums)('value')  # type: ignore
+    node_element = node_item('type') + pp.Word(pp.alphanums + '.')('value')  # type: ignore
 
     node_parser = (
         pp.Literal('node').suppress()
@@ -498,6 +499,8 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                 node.states_gained.add(descriptor.value)
                             case NodeDescriptor.LOSE.value:
                                 node.states_lost.add(descriptor.value)
+                            case NodeDescriptor.SHOP.value:
+                                node.shops.add(descriptor.value)
                             case other:
                                 if other not in NodeDescriptor:
                                     raise Exception(
@@ -613,6 +616,34 @@ def connect_mail_nodes(areas: Iterable[Area], mail_node_name: str = MAILBOX_NODE
             for node in room.nodes:
                 if node.mailbox:
                     node.edges.append(Edge(src=node, dest=mailbox_node, requirements=None))
+
+
+def connect_shop_nodes(areas: Iterable[Area]) -> None:
+    """Add edges to connect areas to their shops."""
+
+    def _get_shop_node(shop_node_name: str) -> Node:
+        area_name, room_name, _ = shop_node_name.split('.')
+        for area in areas:
+            if area.name != area_name:
+                continue
+            for room in area.rooms:
+                if room.name != room_name:
+                    continue
+                for node in room.nodes:
+                    if node.name != shop_node_name:
+                        continue
+                    return node
+        raise Exception(f'Shop node "{shop_node_name}" not found!')
+
+    shop_nodes: dict[str, Node] = {}
+
+    for area in areas:
+        for room in area.rooms:
+            for node in room.nodes:
+                for shop in node.shops:
+                    shop_node = shop_nodes.get(shop, _get_shop_node(shop))
+                    shop_nodes[shop] = shop_node
+                    node.edges.append(Edge(src=node, dest=shop_node, requirements=None))
 
 
 def parse_aux_data(

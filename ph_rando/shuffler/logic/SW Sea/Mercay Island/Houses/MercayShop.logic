@@ -2,7 +2,6 @@ area Mercay:
   room MercayShop:
     node Main:
       door Outside
-      chest WoodenShield
+      # Unlike the shield/quiver, the power gem is exclusive to Mercay shop
       chest PowerGem
-      chest QuiverUpgrade
-      chest RandomTreasure
+      shop MercayMolidaShop.Main.Main

@@ -3,4 +3,4 @@ area GoronIsland:
     node Main:
       door Outside
       chest BombchuBagUpgrade
-      chest RandomTreasure
+      # chest RandomTreasure
