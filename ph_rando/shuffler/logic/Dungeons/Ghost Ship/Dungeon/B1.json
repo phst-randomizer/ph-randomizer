@@ -8,14 +8,21 @@
         {
           "name": "AfterPit",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_ghost/map00.bin/zmb/dngn_ghost_00.zmb",
           "zmb_mapobject_index": 29
         },
         {
           "name": "NearPurpleCubus",
           "type": "chest",
-          "contents": "TriangleCrystal",
+          "contents": {
+            "name": "TriangleCrystal",
+            "states": [
+              "TriangleCrystal"
+            ]
+          },
           "zmb_file_path": "Map/dngn_ghost/map00.bin/zmb/dngn_ghost_00.zmb",
           "zmb_mapobject_index": 68
         }

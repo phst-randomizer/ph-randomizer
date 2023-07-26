@@ -8,14 +8,18 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "TreasureMapSW5",
+          "contents": {
+            "name": "TreasureMapSW5"
+          },
           "zmb_actor_index": 4,
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
         },
         {
           "name": "IslandChest",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 111
         }
@@ -83,28 +87,36 @@
         {
           "name": "CannonMiniGameBombBag",
           "type": "event",
-          "contents": "BombBagUpgrade",
+          "contents": {
+            "name": "BombBagUpgrade"
+          },
           "bmg_file_path": "todo",
           "bmg_instruction_index": -1
         },
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "TreasureMapSE4",
+          "contents": {
+            "name": "TreasureMapSE4"
+          },
           "zmb_actor_index": 5,
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
         },
         {
           "name": "LeftIslandChest",
           "type": "chest",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 86
         },
         {
           "name": "RightIslandChest",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 87
         }
@@ -136,21 +148,27 @@
         {
           "name": "FishingRodFromOldMan",
           "type": "event",
-          "contents": "FishingRod",
+          "contents": {
+            "name": "FishingRod"
+          },
           "bmg_instruction_index": 87,
           "bmg_file_path": "English/Message/hidari.bmg"
         },
         {
           "name": "WisdomGem",
           "type": "event",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         },
         {
           "name": "TradingSequenceEnd",
           "type": "chest",
-          "contents": "SwordsmansScroll",
+          "contents": {
+            "name": "SwordsmansScroll"
+          },
           "zmb_file_path": "Map/isle_hidari/map01.bin/zmb/isle_hidari_01.zmb",
           "zmb_mapobject_index": 1
         }

@@ -8,7 +8,9 @@
         {
           "name": "PowerGem",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/isle_main/map16.bin/zmb/isle_main_16.zmb",
           "zmb_mapobject_index": 2
         }

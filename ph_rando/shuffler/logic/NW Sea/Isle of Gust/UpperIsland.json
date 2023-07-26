@@ -7,14 +7,18 @@
       "chests": [
         {
           "name": "DigSpot",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map01.bin/zmb/isle_wind_01.zmb",
           "zmb_actor_index": 10
         },
         {
           "name": "WindmillChest",
-          "contents": "TreasureMapSW3",
+          "contents": {
+            "name": "TreasureMapSW3"
+          },
           "type": "chest",
           "zmb_file_path": "Map/isle_wind/map01.bin/zmb/isle_wind_01.zmb",
           "zmb_mapobject_index": 111

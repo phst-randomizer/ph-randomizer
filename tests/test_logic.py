@@ -6,7 +6,7 @@ from pprint import pprint
 from ph_rando.shuffler._descriptors import EdgeDescriptor
 from ph_rando.shuffler._parser import Edge, parse_edge_requirement
 from ph_rando.shuffler._shuffler import assumed_search, init_logic_graph
-from ph_rando.shuffler.aux_models import Area
+from ph_rando.shuffler.aux_models import Area, Item
 
 
 def test_graph_connectedness() -> None:
@@ -24,17 +24,18 @@ def test_graph_connectedness() -> None:
 
     # Put every item in the game in the current inventory, appending the area name to each
     # small_key so we know which key goes to which area.
-    items = [
-        chest.contents if chest.contents != 'SmallKey' else f'SmallKey_{area_name}'
-        for chest, area_name in all_checks
-    ]
+    items: list[Item] = []
+    for chest, area_name in all_checks:
+        if chest.contents == 'SmallKey':
+            chest.contents.name += f'_{area_name}'
+        items.append(chest.contents)
 
     # Populate the `keys` dict for the assumed search function with all of
     # the small keys in the inventory.
     keys: dict[str, int] = defaultdict(int)
     for item in items:
-        if item.startswith('SmallKey_'):
-            keys[item[len('SmallKey_') :]] += 1
+        if item.name.startswith('SmallKey_'):
+            keys[item.name[len('SmallKey_') :]] += 1
 
     starting_node = [
         node
@@ -135,6 +136,8 @@ def test_ensure_states_exist() -> None:
                     states_required.update(_get_required_states(edge, aux_data.requirement_macros))
                 states_gained.update(node.states_gained)
                 states_lost.update(node.states_lost)
+            for chest in room.chests:
+                states_gained.update(chest.contents.states)
 
     if states_required != states_gained:
         print('The following states are required by edges but are never gained:')

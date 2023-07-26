@@ -8,14 +8,18 @@
         {
           "name": "BombchuChest",
           "type": "chest",
-          "contents": "TreasureMapSW2",
+          "contents": {
+            "name": "TreasureMapSW2"
+          },
           "zmb_file_path": "Map/isle_power/map01.bin/zmb/isle_power_01.zmb",
           "zmb_mapobject_index": 17
         },
         {
           "name": "ChestBehindSpikes",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/isle_power/map01.bin/zmb/isle_power_01.zmb",
           "zmb_mapobject_index": 10
         }

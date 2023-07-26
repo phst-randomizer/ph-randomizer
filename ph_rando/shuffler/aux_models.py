@@ -11,29 +11,28 @@ if TYPE_CHECKING:
     from ph_rando.shuffler._shuffler import Node
 
 
-class BaseCheck(BaseModel):
-    name: str = Field(..., description='The name of the item check')
-    contents: str = Field(..., description='The item that this check contains')
+class Item(BaseModel):
+    name: str
+    states: set[str] = Field(
+        {},
+        description='State(s) that should be gained upon obtaining this item.',
+    )
 
-    def __hash__(self) -> int:
-        return id(self)
-
-    @validator('contents')
+    @validator('name')
     def check_if_item_is_valid(cls, v: str) -> str:
-        """
-        Ensure that this check's `contents` is set to a valid item.
-
-        It'd be nice to have this be a JSON-Schema level check instead of a pydantic validator,
-        but to do that, we need to dynamically generate an `Enum` with all possible item values
-        using the ITEMS dict in patcher._items.py. As part of that, we would want to use pydantic's
-        `use_enum_values` setting for the model, but mypy doesn't support it currently:
-        https://github.com/pydantic/pydantic/issues/3809 and reports type errors all over the
-        place if it's used. If this is ever fixed, it should be changed.
-        """
+        """Ensure that this check's `contents` is set to a valid item."""
         from ph_rando.patcher._items import ITEMS
 
         assert v in ITEMS
         return v
+
+
+class BaseCheck(BaseModel):
+    name: str = Field(..., description='The name of the item check')
+    contents: Item = Field(..., description='The item that this check contains')
+
+    def __hash__(self) -> int:
+        return id(self)
 
 
 class Chest(BaseCheck):

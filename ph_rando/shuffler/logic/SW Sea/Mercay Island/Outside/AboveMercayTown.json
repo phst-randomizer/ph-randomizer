@@ -34,21 +34,27 @@
         {
           "name": "RollIntoTree",
           "type": "tree",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
           "zmb_mapobject_index": 25
         },
         {
           "name": "AboveEntrance",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
           "zmb_mapobject_index": 54
         },
         {
           "name": "Freedle",
           "type": "event",
-          "contents": "TreasureMapSE6",
+          "contents": {
+            "name": "TreasureMapSE6"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": -1
         }

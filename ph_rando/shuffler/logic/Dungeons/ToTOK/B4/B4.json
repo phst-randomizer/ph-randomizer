@@ -8,19 +8,25 @@
         {
           "name": "FreestandingKey",
           "type": "freestanding",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_main/map05.bin/zmb/dngn_main_05.zmb",
           "zmb_mapobject_index": 4
         },
         {
           "name": "EyeKiller",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_main/map05.bin/zmb/dngn_main_05.zmb",
           "zmb_mapobject_index": 3
         }

@@ -8,21 +8,27 @@
         {
           "name": "TopRightChest",
           "type": "chest",
-          "contents": "RedPotion",
+          "contents": {
+            "name": "RedPotion"
+          },
           "zmb_file_path": "Map/dngn_water/map01.bin/zmb/dngn_water_01.zmb",
           "zmb_mapobject_index": 80
         },
         {
           "name": "ChestAfterBlue",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "Map/dngn_water/map01.bin/zmb/dngn_water_01.zmb",
           "zmb_mapobject_index": 61
         },
         {
           "name": "FreestandingKey",
           "type": "freestanding",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         }
       ],
       "exits": [

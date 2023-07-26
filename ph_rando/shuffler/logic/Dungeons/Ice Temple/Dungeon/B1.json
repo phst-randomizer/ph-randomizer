@@ -8,21 +8,27 @@
         {
           "name": "ChestAfterBombableWallPlate",
           "type": "chest",
-          "contents": "YellowPotion",
+          "contents": {
+            "name": "YellowPotion"
+          },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
           "zmb_mapobject_index": 4
         },
         {
           "name": "PullRedLever",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
           "zmb_mapobject_index": 23
         },
         {
           "name": "AfterLockedDoor",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
           "zmb_mapobject_index": 48
         }

@@ -8,14 +8,18 @@
         {
           "name": "KeesesSmallKey",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
           "zmb_mapobject_index": 26
         },
         {
           "name": "ChestNearLavaPit",
           "type": "chest",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
           "zmb_mapobject_index": 68
         }
@@ -71,21 +75,27 @@
         {
           "name": "BoomerangChest",
           "type": "chest",
-          "contents": "Boomerang",
+          "contents": {
+            "name": "Boomerang"
+          },
           "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
           "zmb_mapobject_index": 7
         },
         {
           "name": "AfterKeeses",
           "type": "chest",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
           "zmb_mapobject_index": 74
         },
         {
           "name": "RatKey",
           "type": "on_enemy",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         }
       ],
       "exits": [
@@ -163,12 +173,16 @@
         {
           "name": "SwitchesSmallKey",
           "type": "freestanding",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         },
         {
           "name": "BossKeyChest",
           "type": "chest",
-          "contents": "BossKeyFireTemple",
+          "contents": {
+            "name": "BossKeyFireTemple"
+          },
           "zmb_file_path": "Map/dngn_flame/map02.bin/zmb/dngn_flame_02.zmb",
           "zmb_mapobject_index": 15
         }

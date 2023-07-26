@@ -8,14 +8,18 @@
         {
           "name": "HeadChest",
           "type": "chest",
-          "contents": "TreasureMapNE5",
+          "contents": {
+            "name": "TreasureMapNE5"
+          },
           "zmb_file_path": "Map/isle_myou/map00.bin/zmb/isle_myou_00.zmb",
           "zmb_mapobject_index": 124
         },
         {
           "name": "RegalNecklace",
           "type": "chest",
-          "contents": "RegalNecklace",
+          "contents": {
+            "name": "RegalNecklace"
+          },
           "zmb_file_path": "Map/isle_myou/map00.bin/zmb/isle_myou_00.zmb",
           "zmb_mapobject_index": 39
         }

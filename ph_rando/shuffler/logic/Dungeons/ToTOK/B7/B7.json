@@ -7,21 +7,30 @@
         {
           "name": "RoundCrystal",
           "type": "chest",
-          "contents": "RoundCrystal",
+          "contents": {
+            "name": "RoundCrystal",
+            "states": [
+              "RoundCrystal"
+            ]
+          },
           "zmb_file_path": "Map/dngn_main/map10.bin/zmb/dngn_main_10.zmb",
           "zmb_mapobject_index": 4
         },
         {
           "name": "PhantomKiller",
           "type": "chest",
-          "contents": "RandomShipPart",
+          "contents": {
+            "name": "RandomShipPart"
+          },
           "zmb_file_path": "Map/dngn_main/map10.bin/zmb/dngn_main_10.zmb",
           "zmb_mapobject_index": 3
         },
         {
           "name": "BigChest",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_main/map10.bin/zmb/dngn_main_10.zmb",
           "zmb_mapobject_index": 5
         }

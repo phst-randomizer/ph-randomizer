@@ -66,7 +66,7 @@ def _patch_zmb_map_objects(aux_data: Iterable[Area], input_rom: rom.NintendoDSRo
                 logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
             zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = ITEMS[
-                chest.contents
+                chest.contents.name
             ]
 
 
@@ -99,7 +99,7 @@ def _patch_zmb_actors(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
                 logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
             zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = ITEMS[
-                chest.contents
+                chest.contents.name
             ]
             if type(chest) == SalvageTreasure:
                 zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
@@ -137,10 +137,10 @@ def _patch_shop_items(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
 
         # Set the item id to the new one. This changes the "internal" item representation,
         # but not the 3D model that is displayed prior to purchasing the item
-        overlay_table[shop_item.overlay].data[overlay_offset] = ITEMS[shop_item.contents]
+        overlay_table[shop_item.overlay].data[overlay_offset] = ITEMS[shop_item.contents.name]
 
         # Set new name of NSBMD/NSBTX 3D model
-        new_model_name = f'gd_{GD_MODELS[ITEMS[shop_item.contents]]}'
+        new_model_name = f'gd_{GD_MODELS[ITEMS[shop_item.contents.name]]}'
         offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbmd'.encode('ascii'))
         new_data = bytearray(f'Player/get/{new_model_name}.nsbmd'.encode('ascii') + b'\x00')
         arm9_executable = (
@@ -196,7 +196,7 @@ def _patch_bmg_events(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
             bmg_instructions = bmg_files[chest.bmg_file_path].instructions
             bmg_instructions[chest.bmg_instruction_index] = (
                 bmg_instructions[chest.bmg_instruction_index][:4]
-                + struct.pack('<B', ITEMS[chest.contents])
+                + struct.pack('<B', ITEMS[chest.contents.name])
                 + bmg_instructions[chest.bmg_instruction_index][5:]
             )
 

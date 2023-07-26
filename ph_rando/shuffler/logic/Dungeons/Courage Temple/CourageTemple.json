@@ -8,40 +8,52 @@
         {
           "name": "AfterSpikeTraps",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 105
         },
         {
           "name": "BombableWallChest",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 77
         },
         {
           "name": "PolsLeft",
           "type": "chest",
-          "contents": "RandomShipPart",
+          "contents": {
+            "name": "RandomShipPart"
+          },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 84
         },
         {
           "name": "PolsRight",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 95
         },
         {
           "name": "PolsKey",
           "type": "on_enemy",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         },
         {
           "name": "PolsKeyTopRight",
           "type": "on_enemy",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         }
       ],
       "exits": [
@@ -119,21 +131,27 @@
         {
           "name": "BowChest",
           "type": "chest",
-          "contents": "Bow",
+          "contents": {
+            "name": "Bow"
+          },
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
           "zmb_mapobject_index": 22
         },
         {
           "name": "IslandChest",
           "type": "chest",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
           "zmb_mapobject_index": 110
         },
         {
           "name": "EyeTarget",
           "type": "chest",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
           "zmb_mapobject_index": 95
         }
@@ -171,28 +189,39 @@
         {
           "name": "AfterUDRL",
           "type": "chest",
-          "contents": "SquareCrystal",
+          "contents": {
+            "name": "SquareCrystal",
+            "states": [
+              "SquareCrystal"
+            ]
+          },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 5
         },
         {
           "name": "TwoEyes",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 84
         },
         {
           "name": "SpikeTraps",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 100
         },
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "BossKeyCourageTemple",
+          "contents": {
+            "name": "BossKeyCourageTemple"
+          },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
           "zmb_mapobject_index": 76
         }
@@ -256,7 +285,9 @@
         {
           "name": "Hidden",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/dngn_pluck/map03.bin/zmb/dngn_pluck_03.zmb",
           "zmb_mapobject_index": 10
         }

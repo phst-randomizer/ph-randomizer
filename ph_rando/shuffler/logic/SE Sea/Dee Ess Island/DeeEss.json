@@ -8,26 +8,34 @@
         {
           "name": "BlowInTheMicrophone",
           "type": "chest",
-          "contents": "BigGoldRupee",
+          "contents": {
+            "name": "BigGoldRupee"
+          },
           "zmb_file_path": "Map/isle_small5/map00.bin/zmb/isle_small5_00.zmb",
           "zmb_mapobject_index": 21
         },
         {
           "name": "GoronGame",
           "type": "minigame_reward_chest",
-          "contents": "BombchuBagUpgrade"
+          "contents": {
+            "name": "BombchuBagUpgrade"
+          }
         },
         {
           "name": "HinoxSlayer",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/isle_small5/map00.bin/zmb/isle_small5_00.zmb",
           "zmb_mapobject_index": 76
         },
         {
           "name": "UndergroundGem",
           "type": "event",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "bmg_file_path": "English/Message/kojima5.bmg",
           "bmg_instruction_index": 135
         }

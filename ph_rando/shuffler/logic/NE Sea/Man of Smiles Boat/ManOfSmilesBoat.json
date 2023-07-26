@@ -8,14 +8,18 @@
         {
           "name": "NormalThing",
           "type": "event",
-          "contents": "TreasureMapNE6",
+          "contents": {
+            "name": "TreasureMapNE6"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         },
         {
           "name": "MysteriousThing",
           "type": "event",
-          "contents": "HeroNewClothes",
+          "contents": {
+            "name": "HeroNewClothes"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         }

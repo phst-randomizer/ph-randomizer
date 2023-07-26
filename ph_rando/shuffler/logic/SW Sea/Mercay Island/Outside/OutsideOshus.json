@@ -8,14 +8,18 @@
         {
           "name": "PickUpRock",
           "type": "event",
-          "contents": "SmallGreenRupee",
+          "contents": {
+            "name": "SmallGreenRupee"
+          },
           "bmg_file_path": "English/Message/main_isl.bmg",
           "bmg_instruction_index": 135
         },
         {
           "name": "TreeDigSpot",
           "type": "dig_spot",
-          "contents": "TreasureMapNW5",
+          "contents": {
+            "name": "TreasureMapNW5"
+          },
           "zmb_actor_index": 5,
           "zmb_file_path": "Map/isle_main/map00.bin/zmb/isle_main_00.zmb"
         }

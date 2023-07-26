@@ -8,14 +8,18 @@
         {
           "name": "WisdomGem",
           "type": "event",
-          "contents": "WisdomGem",
+          "contents": {
+            "name": "WisdomGem"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         },
         {
           "name": "BigRedRupee",
           "type": "event",
-          "contents": "BigRedRupee",
+          "contents": {
+            "name": "BigRedRupee"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": 0
         }

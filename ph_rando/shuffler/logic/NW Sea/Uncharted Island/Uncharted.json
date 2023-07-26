@@ -8,7 +8,9 @@
         {
           "name": "DigSpot",
           "type": "dig_spot",
-          "contents": "TreasureMapNW1",
+          "contents": {
+            "name": "TreasureMapNW1"
+          },
           "zmb_actor_index": 4,
           "zmb_file_path": "Map/isle_small3/map00.bin/zmb/isle_small3_00.zmb"
         }
@@ -30,7 +32,9 @@
         {
           "name": "CycloneSlate",
           "type": "event",
-          "contents": "CycloneSlate",
+          "contents": {
+            "name": "CycloneSlate"
+          },
           "bmg_file_path": "English/Message/kojima3.bmg",
           "bmg_instruction_index": 108
         }

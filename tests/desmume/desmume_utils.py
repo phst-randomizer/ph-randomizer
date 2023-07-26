@@ -198,7 +198,7 @@ def get_check_contents(
     chest_name: str,
 ) -> str:
     return [
-        chest.contents
+        chest.contents.name
         for area in aux_data
         for room in area.rooms
         for chest in room.chests

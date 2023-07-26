@@ -8,28 +8,36 @@
         {
           "name": "Cucco",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
           "zmb_mapobject_index": 113
         },
         {
           "name": "LeftLedgeChest",
           "type": "chest",
-          "contents": "RandomShipPart",
+          "contents": {
+            "name": "RandomShipPart"
+          },
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
           "zmb_mapobject_index": 97
         },
         {
           "name": "RightLedgeChest",
           "type": "chest",
-          "contents": "BigGreenRupee",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
           "zmb_mapobject_index": 98
         },
         {
           "name": "TreasureMapNPC",
           "type": "event",
-          "contents": "TreasureMapSW1",
+          "contents": {
+            "name": "TreasureMapSW1"
+          },
           "bmg_file_path": "TODO",
           "bmg_instruction_index": -1
         }

@@ -7,7 +7,9 @@
         {
           "name": "NESeaChart",
           "type": "chest",
-          "contents": "NESeaChart",
+          "contents": {
+            "name": "NESeaChart"
+          },
           "zmb_file_path": "Map/dngn_main/map17.bin/zmb/dngn_main_17.zmb",
           "zmb_mapobject_index": 3
         }

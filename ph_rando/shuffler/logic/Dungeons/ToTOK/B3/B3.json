@@ -7,40 +7,61 @@
         {
           "name": "TopLeft",
           "type": "chest",
-          "contents": "ForceGem",
+          "contents": {
+            "name": "ForceGem",
+            "states": [
+              "Gem1B3"
+            ]
+          },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
           "zmb_mapobject_index": 6
         },
         {
           "name": "BottomRight",
           "type": "chest",
-          "contents": "ForceGem",
+          "contents": {
+            "name": "ForceGem",
+            "states": [
+              "Gem2B3"
+            ]
+          },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
           "zmb_mapobject_index": 7
         },
         {
           "name": "PhantomKey",
           "type": "on_enemy",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         },
         {
           "name": "EyeChest",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
           "zmb_mapobject_index": 19
         },
         {
           "name": "Killer",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
           "zmb_mapobject_index": 20
         },
         {
           "name": "BehindDoor",
           "type": "chest",
-          "contents": "ForceGem",
+          "contents": {
+            "name": "ForceGem",
+            "states": [
+              "Gem3B3"
+            ]
+          },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
           "zmb_mapobject_index": 8
         }

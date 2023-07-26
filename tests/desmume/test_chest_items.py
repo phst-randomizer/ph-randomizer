@@ -8,7 +8,7 @@ import pytest
 from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher.main import GD_MODELS, _patch_zmb_map_objects
-from ph_rando.shuffler.aux_models import Chest
+from ph_rando.shuffler.aux_models import Chest, Item
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, start_first_file
@@ -35,7 +35,7 @@ def chest_test_emu(
         and chest.zmb_file_path == 'Map/isle_main/map19.bin/zmb/isle_main_19.zmb'
     ]
     for chest in chests:
-        chest.contents = ITEMS_REVERSED[request.param]
+        chest.contents = Item(name=ITEMS_REVERSED[request.param], states=set())
 
     _patch_zmb_map_objects(aux_data.areas.values(), rom)
 

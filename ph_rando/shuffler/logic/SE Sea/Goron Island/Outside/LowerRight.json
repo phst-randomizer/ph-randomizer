@@ -8,7 +8,9 @@
         {
           "name": "NearChiefHouse",
           "type": "dig_spot",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "zmb_file_path": "Map/isle_power/map03.bin/zmb/isle_power_03.zmb",
           "zmb_actor_index": 14
         }

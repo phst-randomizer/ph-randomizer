@@ -8,7 +8,9 @@
         {
           "name": "BossKey",
           "type": "chest",
-          "contents": "BossKeyWindTemple",
+          "contents": {
+            "name": "BossKeyWindTemple"
+          },
           "zmb_file_path": "Map/dngn_wind/map00.bin/zmb/dngn_wind_00.zmb",
           "zmb_mapobject_index": 29
         }
@@ -56,21 +58,27 @@
         {
           "name": "BottomRight",
           "type": "chest",
-          "contents": "RandomTreasure",
+          "contents": {
+            "name": "RandomTreasure"
+          },
           "zmb_file_path": "Map/dngn_wind/map01.bin/zmb/dngn_wind_01.zmb",
           "zmb_mapobject_index": 180
         },
         {
           "name": "AfterAirGeysers",
           "type": "chest",
-          "contents": "CourageGem",
+          "contents": {
+            "name": "CourageGem"
+          },
           "zmb_file_path": "Map/dngn_wind/map01.bin/zmb/dngn_wind_01.zmb",
           "zmb_mapobject_index": 178
         },
         {
           "name": "DroppedKey",
           "type": "freestanding",
-          "contents": "SmallKey"
+          "contents": {
+            "name": "SmallKey"
+          }
         }
       ],
       "exits": [
@@ -120,14 +128,18 @@
         {
           "name": "FarLeftChest",
           "type": "chest",
-          "contents": "PowerGem",
+          "contents": {
+            "name": "PowerGem"
+          },
           "zmb_file_path": "Map/dngn_wind/map02.bin/zmb/dngn_wind_02.zmb",
           "zmb_mapobject_index": 44
         },
         {
           "name": "BombsChest",
           "type": "chest",
-          "contents": "Bombs",
+          "contents": {
+            "name": "Bombs"
+          },
           "zmb_file_path": "Map/dngn_wind/map02.bin/zmb/dngn_wind_02.zmb",
           "zmb_mapobject_index": 7
         }
@@ -161,7 +173,9 @@
         {
           "name": "BigGreenRupee",
           "type": "freestanding",
-          "contents": "BigGreenRupee"
+          "contents": {
+            "name": "BigGreenRupee"
+          }
         }
       ],
       "exits": [

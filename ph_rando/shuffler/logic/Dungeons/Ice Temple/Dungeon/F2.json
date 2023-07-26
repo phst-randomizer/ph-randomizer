@@ -8,7 +8,9 @@
         {
           "name": "YookSlayer",
           "type": "chest",
-          "contents": "GrapplingHook",
+          "contents": {
+            "name": "GrapplingHook"
+          },
           "zmb_file_path": "Map/dngn_water/map03.bin/zmb/dngn_water_03.zmb",
           "zmb_mapobject_index": 3
         }

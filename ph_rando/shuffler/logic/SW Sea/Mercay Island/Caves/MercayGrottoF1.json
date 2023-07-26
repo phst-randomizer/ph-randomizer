@@ -8,21 +8,27 @@
         {
           "name": "KeyChest",
           "type": "chest",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
           "zmb_mapobject_index": 21
         },
         {
           "name": "SecondChest",
           "type": "chest",
-          "contents": "SmallRedRupee",
+          "contents": {
+            "name": "SmallRedRupee"
+          },
           "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
           "zmb_mapobject_index": 19
         },
         {
           "name": "KeyAfter2143",
           "type": "freestanding",
-          "contents": "SmallKey",
+          "contents": {
+            "name": "SmallKey"
+          },
           "zmb_file_path": "TODO",
           "zmb_mapobject_index": -1
         }
