@@ -369,7 +369,7 @@ def _parse_logic_file(logic_file_contents: str) -> _ParsedLogic:
 
     logic_parser = pp.OneOrMore(pp.Group(area_parser))('areas')
 
-    parsed = logic_parser.parse_string(logic_file_contents).as_dict()
+    parsed = logic_parser.parse_string(logic_file_contents, parseAll=True).as_dict()
 
     return _ParsedLogic(**parsed)
 
