@@ -5,4 +5,4 @@ area Mercay:
       chest WoodenShield
       chest PowerGem
       chest QuiverUpgrade
-      chest RandomTreasure
+      # chest RandomTreasure

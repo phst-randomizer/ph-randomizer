@@ -31,15 +31,6 @@
           },
           "overlay": 31,
           "overlay_offset": "0x2ea0"
-        },
-        {
-          "name": "RandomTreasure",
-          "type": "island_shop",
-          "contents": {
-            "name": "CommonTreasure"
-          },
-          "overlay": 31,
-          "overlay_offset": "0x2f54"
         }
       ],
       "exits": [

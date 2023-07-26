@@ -13,15 +13,6 @@
           },
           "overlay": 0,
           "overlay_offset": "TODO"
-        },
-        {
-          "name": "RandomTreasure",
-          "type": "island_shop",
-          "contents": {
-            "name": "CommonTreasure"
-          },
-          "overlay": 0,
-          "overlay_offset": "TODO"
         }
       ],
       "exits": [
