@@ -237,7 +237,7 @@ jobs:
         run: pip install -e .
 
       - name: Run the shuffler
-        run: ph_rando_shuffler -l DEBUG -o --
+        run: ph_rando_shuffler -o --
 
   tests:
     name: Run tests
