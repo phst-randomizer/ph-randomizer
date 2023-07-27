@@ -110,11 +110,11 @@ def _get_required_states(edge: Edge, macros: dict[str, str]) -> set[str]:
         for elem in constraints:
             if isinstance(elem, list):
                 states.update(_contains_state(elem, states))
-            elif EdgeDescriptor.STATE.value == elem:
+            elif EdgeDescriptor.STATE == elem:
                 state_name = constraints[constraints.index(elem) + 1]
                 assert isinstance(state_name, str)
                 states.add(state_name)
-            elif EdgeDescriptor.MACRO.value == elem:
+            elif EdgeDescriptor.MACRO == elem:
                 macro_name = constraints[constraints.index(elem) + 1]
                 assert isinstance(macro_name, str)
                 states.update(_contains_state(parse_edge_requirement(macros[macro_name]), states))

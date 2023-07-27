@@ -101,7 +101,7 @@ class Edge:
             for elem in constraints:
                 if isinstance(elem, list):
                     contains_open = _contains_open(elem)
-                elif EdgeDescriptor.OPEN.value == elem:
+                elif EdgeDescriptor.OPEN == elem:
                     lock_name = constraints[constraints.index(elem) + 1]
                     assert isinstance(lock_name, str)
                     return '.'.join([self.src.area.name, self.src.room.name, lock_name])
@@ -217,7 +217,7 @@ def evaluate_requirement(
         items currently accessible given the current shuffled state.
     """
     match type:
-        case EdgeDescriptor.ITEM.value:
+        case EdgeDescriptor.ITEM:
             # If a certain number of this item is required, check that.
             # Otherwise, just check if we have one of this item.
             count_descriptor = re.match(r'(.+)\[(\d+)\]', value)
@@ -231,13 +231,13 @@ def evaluate_requirement(
                 raise Exception(f'Invalid item "{value}"')
             else:
                 return value in items
-        case EdgeDescriptor.FLAG.value:
+        case EdgeDescriptor.FLAG:
             return value in flags
-        case EdgeDescriptor.OPEN.value:
+        case EdgeDescriptor.OPEN:
             return True  # We process these later during the assumed fill.
-        case EdgeDescriptor.STATE.value:
+        case EdgeDescriptor.STATE:
             return value in states
-        case EdgeDescriptor.DEFEATED.value:
+        case EdgeDescriptor.DEFEATED:
             if edge_instance is None:
                 raise Exception(
                     "Can't evaluate requirement of type 'defeated' with 'edge_instance' of None!!"
@@ -259,7 +259,7 @@ def evaluate_requirement(
                 f'{edge_instance.src.name} (Edge "...{type} {value}..."): '
                 f'enemy {value} not found!'
             )
-        case EdgeDescriptor.MACRO.value:
+        case EdgeDescriptor.MACRO:
             if value not in aux_data.requirement_macros:
                 raise Exception(f'Invalid macro "{value}", not found in macros.json!')
             return requirements_met(
@@ -413,7 +413,7 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                     node = Node(name=full_node_name, area=area, room=room)
                     for descriptor in logic_node.descriptors or []:
                         match descriptor.type:
-                            case NodeDescriptor.CHEST.value:
+                            case NodeDescriptor.CHEST:
                                 try:
                                     node.checks.append(
                                         [
@@ -429,13 +429,11 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                         'not found in aux data.'
                                     )
                             case (
-                                NodeDescriptor.ENTRANCE.value
-                                | NodeDescriptor.EXIT.value
-                                | NodeDescriptor.DOOR.value
+                                NodeDescriptor.ENTRANCE | NodeDescriptor.EXIT | NodeDescriptor.DOOR
                             ):
                                 if descriptor.type in (
-                                    NodeDescriptor.DOOR.value,
-                                    NodeDescriptor.ENTRANCE.value,
+                                    NodeDescriptor.DOOR,
+                                    NodeDescriptor.ENTRANCE,
                                 ):
                                     if descriptor.value in node.entrances:
                                         raise Exception(
@@ -444,8 +442,8 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                         )
                                     node.entrances.add(f'{node.name}.{descriptor.value}')
                                 if descriptor.type in (
-                                    NodeDescriptor.DOOR.value,
-                                    NodeDescriptor.EXIT.value,
+                                    NodeDescriptor.DOOR,
+                                    NodeDescriptor.EXIT,
                                 ):
                                     try:
                                         new_exit = [
@@ -467,14 +465,14 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                             f'Invalid exit link {new_exit.entrance!r}'
                                         )
                                     node.exits.append(new_exit)
-                            case NodeDescriptor.FLAG.value:
+                            case NodeDescriptor.FLAG:
                                 node.flags.add(descriptor.value)
-                            case NodeDescriptor.LOCK.value:
+                            case NodeDescriptor.LOCK:
                                 assert (
                                     not node.lock
                                 ), f'Node {node} already has a locked door associated with it.'
                                 node.lock = descriptor.value
-                            case NodeDescriptor.ENEMY.value:
+                            case NodeDescriptor.ENEMY:
                                 try:
                                     node.enemies.append(
                                         [
@@ -489,17 +487,17 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                                         f'{descriptor.type} {descriptor.value!r} '
                                         'not found in aux data.'
                                     )
-                            case NodeDescriptor.MAIL.value:
+                            case NodeDescriptor.MAIL:
                                 if node.mailbox:
                                     raise Exception(
                                         f'Node "{node.name}" contains more than one mailbox!'
                                     )
                                 node.mailbox = True
-                            case NodeDescriptor.GAIN.value:
+                            case NodeDescriptor.GAIN:
                                 node.states_gained.add(descriptor.value)
-                            case NodeDescriptor.LOSE.value:
+                            case NodeDescriptor.LOSE:
                                 node.states_lost.add(descriptor.value)
-                            case NodeDescriptor.SHOP.value:
+                            case NodeDescriptor.SHOP:
                                 node.shops.add(descriptor.value)
                             case other:
                                 if other not in NodeDescriptor:

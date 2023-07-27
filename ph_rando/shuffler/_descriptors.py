@@ -1,4 +1,4 @@
-from enum import Enum, EnumMeta
+from enum import EnumMeta, StrEnum
 from typing import Any
 
 
@@ -11,7 +11,7 @@ class MetaEnum(EnumMeta):
         return True
 
 
-class NodeDescriptor(Enum, metaclass=MetaEnum):
+class NodeDescriptor(StrEnum, metaclass=MetaEnum):
     CHEST = 'chest'
     FLAG = 'flag'
     DOOR = 'door'
@@ -26,7 +26,7 @@ class NodeDescriptor(Enum, metaclass=MetaEnum):
     SHOP = 'shop'
 
 
-class EdgeDescriptor(Enum, metaclass=MetaEnum):
+class EdgeDescriptor(StrEnum, metaclass=MetaEnum):
     ITEM = 'item'
     FLAG = 'flag'
     OPEN = 'open'
