@@ -284,7 +284,7 @@ def parse_edge_requirement(requirement: str) -> list[str | list[str | list]]:
     by the Edge._evaluate_requirement() method.
     """
     parser = Edge.get_edge_parser()
-    return parser.parse_string(requirement, parse_all=True).as_list()  # type: ignore
+    return parser.parse_string(requirement, parse_all=True).as_list()
 
 
 # Helper classes for parsing dict outputted by pyparsing.
