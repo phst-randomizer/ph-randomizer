@@ -86,12 +86,10 @@
       "chests": [
         {
           "name": "CannonMiniGameBombBag",
-          "type": "event",
+          "type": "minigame_reward_chest",
           "contents": {
             "name": "BombBagUpgrade"
-          },
-          "bmg_file_path": "todo",
-          "bmg_instruction_index": -1
+          }
         },
         {
           "name": "DigSpot",
