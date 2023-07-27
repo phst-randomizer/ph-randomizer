@@ -284,7 +284,7 @@ def parse_edge_requirement(requirement: str) -> list[str | list[str | list]]:
     by the Edge._evaluate_requirement() method.
     """
     parser = Edge.get_edge_parser()
-    return parser.parse_string(requirement).as_list()  # type: ignore
+    return parser.parse_string(requirement, parse_all=True).as_list()  # type: ignore
 
 
 # Helper classes for parsing dict outputted by pyparsing.
@@ -369,7 +369,7 @@ def _parse_logic_file(logic_file_contents: str) -> _ParsedLogic:
 
     logic_parser = pp.OneOrMore(pp.Group(area_parser))('areas')
 
-    parsed = logic_parser.parse_string(logic_file_contents).as_dict()
+    parsed = logic_parser.parse_string(logic_file_contents, parse_all=True).as_dict()
 
     return _ParsedLogic(**parsed)
 
