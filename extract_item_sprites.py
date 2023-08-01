@@ -5,7 +5,7 @@ from typing import TypeVar
 
 from PIL import Image
 from hacktools.nitro import NCER, NCGR, drawNCER, readNCER, readNCGR, readNCLR
-from ndspy import lz10
+from ndspy import color, lz10
 from ndspy.narc import NARC
 from ndspy.rom import NintendoDSRom
 
@@ -49,7 +49,7 @@ def _extract_bbox(image: Image.Image, xmin: int, xmax: int, ymin: int, ymax: int
     return new_img
 
 
-def extract_item_sprites(rom: NintendoDSRom) -> dict[str, Image.Image]:
+def extract_tiled_item_sprites(rom: NintendoDSRom) -> dict[str, Image.Image]:
     file = rom.getFileByName('English/Menu/UI_main/UIMField.bin')
 
     narc_file = NARC(lz10.decompress(file))
@@ -68,14 +68,100 @@ def extract_item_sprites(rom: NintendoDSRom) -> dict[str, Image.Image]:
     return item_images
 
 
-def insert_item_sprites(rom: NintendoDSRom, images: dict[str, Image.Image]) -> NintendoDSRom:
-    pass
+def extract_image(image_data: bytes, palette: list[color.ColorTuple]) -> Image.Image:
+    img = Image.new('RGB', (32, 32))
+    for y in range(32):
+        for x in range(16):
+            current_byte = image_data[y * 16 + x]
+            pixel_2_index = current_byte & 0xF
+            pixel_1_index = (current_byte & 0xF0) >> 4
+
+            px = palette[pixel_2_index]
+            px = (px[0] * 8, px[1] * 8, px[2] * 8, px[3] * 8)
+            img.putpixel((x, y), px)
+
+            px = palette[pixel_1_index]
+            px = (px[0] * 8, px[1] * 8, px[2] * 8, px[3] * 8)
+            img.putpixel((x + 1, y), px)
+    return img
+
+
+def insert_image(img: Image.Image) -> tuple[bytes, bytes]:
+    image: list[int] = []
+    palette: list[tuple[int, int, int]] = []
+
+    for y in range(32):
+        for x in range(16):
+            try:
+                px2 = img.getpixel((x, y))
+            except IndexError:
+                px2 = (0, 0, 0)
+            if px2 in palette:
+                pal2_index = palette.index(px2)
+            else:
+                palette.append(px2)
+                pal2_index = len(palette) - 1
+            try:
+                px1 = img.getpixel((x + 1, y))
+            except IndexError:
+                px1 = (0, 0, 0)
+            if px1 in palette:
+                pal1_index = palette.index(px1)
+            else:
+                palette.append(px1)
+                pal1_index = len(palette) - 1
+
+            image_index = y * 16 + x
+
+            # Ensure image list is long enough
+            if len(image) <= image_index:
+                image.extend([-1] * (image_index + 1 - len(image)))
+
+            image[image_index] = pal2_index | (pal1_index << 4)
+
+    assert len(palette) <= 16, 'Error: image contains more than 16 colors'
+    # Divide by 8 b/c RGB values are off by a factor of 8 in ndspy 4.0.0 for some reason
+    return bytes(image), color.savePalette([(r // 8, g // 8, b // 8, 255) for (r, g, b) in palette])
 
 
 def main() -> None:
-    nds_rom = NintendoDSRom.fromFile(Path(__file__).parent / 'out.nds')
+    rom = NintendoDSRom.fromFile(Path(__file__).parent / 'out.nds')
 
-    extract_item_sprites(nds_rom)
+    other = NARC(lz10.decompress(rom.getFileByName('Other/other.bin')))
+
+    # ######################
+    # #     Extraction     #
+    # ######################
+    # rupee_g_ntfp: bytes = other.getFileByName('rupee_G.ntfp')
+    # rupee_r_ntft: bytes = other.getFileByName('rupee_R.ntft')
+
+    # # Load tiles + palette
+    # palette = color.loadPalette(rupee_g_ntfp)
+
+    # Convert binary data to PIL Image
+    # extracted_img = extract_image(image_data=rupee_r_ntft, palette=palette)
+
+    item_sprites = extract_tiled_item_sprites(rom)
+
+    bow = (
+        item_sprites['Shovel']
+        .crop(item_sprites['Shovel'].getbbox())
+        .resize((16, 32))
+        .quantize(colors=16)
+        .convert('RGB')
+    )
+
+    # bow.save('test1.bmp')
+
+    new_image, new_palette = insert_image(bow)
+
+    # Replace green rupee sprite with shovel sprite
+    other.setFileByName('rupee_G.ntfp', new_palette)
+    other.setFileByName('rupee_R.ntft', new_image)
+
+    rom.setFileByName('Other/other.bin', lz10.compress(other.save()))
+
+    rom.saveToFile('out1.nds')
 
 
 main()
