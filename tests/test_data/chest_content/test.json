@@ -7,7 +7,9 @@
         {
           "name": "Chest1",
           "type": "chest",
-          "contents": "Boomerang",
+          "contents": {
+            "name": "Boomerang"
+          },
           "zmb_file_path": "test",
           "zmb_mapobject_index": 0
         }
