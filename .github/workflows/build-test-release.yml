@@ -241,7 +241,7 @@ jobs:
 
       - name: Print spoiler log
         run: cat spoiler.txt
-        
+
       - name: Save spoiler log as an artifact
         uses: actions/upload-artifact@v3
         with:
