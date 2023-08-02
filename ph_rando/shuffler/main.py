@@ -82,9 +82,9 @@ def shuffler_cli(
             (output_path / f'{area.name}.json').write_text(area.json())
         (output_path / 'seed.txt').write_text(seed)
 
-        if spoiler_log:
-            sl = generate_spoiler_log(results).dict()
-            Path(spoiler_log).write_text(json.dumps(sl, indent=2))
+    if spoiler_log:
+        sl = generate_spoiler_log(results).dict()
+        Path(spoiler_log).write_text(json.dumps(sl, indent=2))
 
 
 if __name__ == '__main__':
