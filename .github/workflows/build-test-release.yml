@@ -237,7 +237,16 @@ jobs:
         run: pip install -e .
 
       - name: Run the shuffler
-        run: ph_rando_shuffler -o --
+        run: ph_rando_shuffler -o -- --spoiler-log spoiler.txt
+
+      - name: Print spoiler log
+        run: cat spoiler.txt
+
+      - name: Save spoiler log as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: spoiler.txt
+          path: spoiler.txt
 
   tests:
     name: Run tests
