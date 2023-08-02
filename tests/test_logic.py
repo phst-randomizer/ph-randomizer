@@ -26,7 +26,7 @@ def test_graph_connectedness() -> None:
     # small_key so we know which key goes to which area.
     items: list[Item] = []
     for chest, area_name in all_checks:
-        if chest.contents == 'SmallKey':
+        if chest.contents.name == 'SmallKey':
             chest.contents.name += f'_{area_name}'
         items.append(chest.contents)
 
