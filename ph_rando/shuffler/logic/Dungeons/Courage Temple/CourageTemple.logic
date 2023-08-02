@@ -110,7 +110,7 @@ area CourageTemple:
 
     BottomLeft -> LeftSquarePedestal: state SquareCrystal
     LeftSquarePedestal -> BottomLeft
-    
+
     BottomLeft <-> StairsToF2Octorok: state SquarePedestalCourageBottomLeft
 
 
