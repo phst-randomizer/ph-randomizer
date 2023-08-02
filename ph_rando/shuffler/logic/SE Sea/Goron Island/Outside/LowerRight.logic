@@ -11,4 +11,4 @@ area GoronIsland:
     node DigSpot:
       chest NearChiefHouse
 
-    Main <-> DigSpot: item Shovel
+    Main -> DigSpot: item Shovel

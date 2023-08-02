@@ -36,7 +36,7 @@ area Gust:
       chest DigSpot2
       chest DigSpot3
 
-    BeforeCave <-> DigSpotsStart: item Shovel
+    BeforeCave -> DigSpotsStart: item Shovel
     BeforeCave -> BombableWall: macro Bombs
     BombableWall -> BeforeCave
 
@@ -59,7 +59,7 @@ area Gust:
     node DigSpotAfterCave:
       chest DigSpot4
 
-    AfterCave <-> DigSpotAfterCave: item Shovel
+    AfterCave -> DigSpotAfterCave: item Shovel
     node Ledge:
       door ToTempleFrontLedgeLeft
       enemy MiniBlin3

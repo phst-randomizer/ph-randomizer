@@ -22,8 +22,8 @@ area Bannan:
     node Island:
       chest IslandChest
 
-    Main <-> Island: item GrapplingHook
-    Main <-> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated YellowChuChu1 & defeated YellowChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
+    Main -> Island: item GrapplingHook
+    Main -> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated YellowChuChu1 & defeated YellowChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
 
   room OutsideRight:
     node Main:
@@ -36,7 +36,7 @@ area Bannan:
       chest LeftIslandChest
       chest RightIslandChest
 
-    Main <-> Island: item GrapplingHook
+    Main -> Island: item GrapplingHook
 
   room BannanGrotto:
     node LeftSide:
