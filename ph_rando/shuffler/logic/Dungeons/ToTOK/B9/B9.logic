@@ -14,13 +14,10 @@ area TempleOfTheOceanKing:
 
     node SquareCrystalPedestal:
       gain SquarePedestalTotOKStairway
-
-    node SquareCrystalPedestalToMain:
       lose SquareCrystal
 
     Main -> SquareCrystalPedestal: state SquareCrystal
-    SquareCrystalPedestal -> SquareCrystalPedestalToMain
-    SquareCrystalPedestalToMain -> Main
+    SquareCrystalPedestal -> Main
 
     Main <-> TopLeft: state SquarePedestalTotOKStairway
 

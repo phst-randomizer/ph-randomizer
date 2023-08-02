@@ -65,12 +65,9 @@ area GhostShip:
 
     node TrianglePedestal:
       gain TrianglePedestalGhostSet
-
-    node TopRightToTrianglePedestal:
       lose TriangleCrystal
 
-    TopRight -> TopRightToTrianglePedestal: state TriangleCrystal
-    TopRightToTrianglePedestal -> TrianglePedestal
+    TopRight -> TrianglePedestal: state TriangleCrystal
     TrianglePedestal -> TopRight
 
     node Right:
@@ -100,12 +97,9 @@ area GhostShip:
 
     node RoundPedestal:
       gain RoundPedestalGhostSet
-
-    node RightToRoundPedestal:
       lose RoundCrystal
 
-    Right -> RightToRoundPedestal: state RoundCrystal
-    RightToRoundPedestal -> RoundPedestal
+    Right -> RoundPedestal: state RoundCrystal
     RoundPedestal -> Right
     Right <-> Bottom: state RoundPedestalGhostSet
 

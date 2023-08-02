@@ -74,13 +74,11 @@ area CourageTemple:
 
     node PolsSquarePedestal:
       gain SquarePedestalCouragePolsVoice
+      lose SquareCrystal
     # Placed the Crystal on the pedestal
 
-    node PolsVoiceAreaToSquarePedestal:
-      lose SquareCrystal
-
-    PolsVoiceArea <-> PolsVoiceAreaToSquarePedestal: state SquareCrystal
-    PolsVoiceAreaToSquarePedestal <-> PolsSquarePedestal: state SquareCrystal
+    PolsVoiceArea -> PolsSquarePedestal: state SquareCrystal
+    PolsSquarePedestal -> PolsVoiceArea
     # Can't put the crystal on the pedestal if we don't have it, and after placing it, we don't have it anymore
     PolsVoiceArea <-> AfterSquareCrystal: state SquarePedestalCouragePolsVoice
     # The crystal has to be placed on that pedestal to go through
@@ -107,13 +105,12 @@ area CourageTemple:
       door ToF2Octorok
 
     node LeftSquarePedestal:
-      gain SquarePedestalCourageBottomLeft
+        gain SquarePedestalCourageBottomLeft
+        lose SquareCrystal
 
-    node BottomLeftToLeftSquarePedestal:
-      lose SquarePedestal
-
-    BottomLeft <-> BottomLeftToLeftSquarePedestal: state SquarePedestal
-    BottomLeftToLeftSquarePedestal <-> LeftSquarePedestal: state SquarePedestal
+    BottomLeft -> LeftSquarePedestal: state SquareCrystal
+    LeftSquarePedestal -> BottomLeft
+    
     BottomLeft <-> StairsToF2Octorok: state SquarePedestalCourageBottomLeft
 
 
