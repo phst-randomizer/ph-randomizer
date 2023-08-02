@@ -1,3 +1,4 @@
+import json
 import logging
 from pathlib import Path
 import random
@@ -8,6 +9,7 @@ import click
 
 from ph_rando.common import ShufflerAuxData, click_setting_options
 from ph_rando.shuffler._shuffler import assumed_fill, init_logic_graph
+from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 
 
 def shuffle(seed: str) -> ShufflerAuxData:
@@ -31,6 +33,13 @@ def shuffle(seed: str) -> ShufflerAuxData:
 @click.command()
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the RNG.')
 @click.option(
+    '--spoiler-log',
+    required=False,
+    type=str,
+    default=None,
+    help='Generate a spoiler log for this seed.',
+)
+@click.option(
     '-o',
     '--output',
     default=None,
@@ -51,6 +60,7 @@ def shuffler_cli(
     seed: str | None,
     output: str | None,
     log_level: str,
+    spoiler_log: str | None,
     **settings: bool | str,
 ) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
@@ -71,6 +81,10 @@ def shuffler_cli(
         for area in results.areas.values():
             (output_path / f'{area.name}.json').write_text(area.json())
         (output_path / 'seed.txt').write_text(seed)
+
+    if spoiler_log:
+        sl = generate_spoiler_log(results).dict()
+        Path(spoiler_log).write_text(json.dumps(sl, indent=2))
 
 
 if __name__ == '__main__':
