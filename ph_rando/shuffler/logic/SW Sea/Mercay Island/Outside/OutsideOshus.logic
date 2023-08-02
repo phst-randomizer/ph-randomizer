@@ -2,14 +2,17 @@ area Mercay:
   room OutsideOshus:
     node Outside:
       chest PickUpRock
-      chest TreeDigSpot
       door North
       door OshussHouse
       door RockHouse
       door OshusCave
       flag CountedTrees
 
+    node DigSpot:
+      chest TreeDigSpot
+
     node East:
       door East
 
+    Outside <-> DigSpot: item Shovel
     Outside <-> East: flag BridgeRepaired
