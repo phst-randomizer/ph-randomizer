@@ -52,6 +52,9 @@ def test_graph_connectedness() -> None:
             for node in room.nodes:
                 node.states_lost = set()
                 states.update(node.states_gained)
+            for chest in room.chests:
+                states.update(chest.contents.states)
+
     starting_node.states_gained = states
 
     assumed_search_nodes = set(
@@ -107,15 +110,15 @@ def _get_required_states(edge: Edge, macros: dict[str, str]) -> set[str]:
     ) -> set[str]:
         if states is None:
             states = set()
-        for elem in constraints:
+        for i, elem in enumerate(constraints):
             if isinstance(elem, list):
                 states.update(_contains_state(elem, states))
             elif EdgeDescriptor.STATE == elem:
-                state_name = constraints[constraints.index(elem) + 1]
+                state_name = constraints[i + 1]
                 assert isinstance(state_name, str)
                 states.add(state_name)
             elif EdgeDescriptor.MACRO == elem:
-                macro_name = constraints[constraints.index(elem) + 1]
+                macro_name = constraints[i + 1]
                 assert isinstance(macro_name, str)
                 states.update(_contains_state(parse_edge_requirement(macros[macro_name]), states))
         return states
@@ -142,6 +145,12 @@ def test_ensure_states_exist() -> None:
     if states_required != states_gained:
         print('The following states are required by edges but are never gained:')
         pprint(states_required.difference(states_gained))
+        print('The following states are gained but are never required by edges:')
+        pprint(states_gained.difference(states_required))
+
+    if not states_lost.issubset(states_gained):
+        print('The following states are lost but never gained')
+        pprint(states_lost.difference(states_gained))
 
     assert states_required == states_gained
     assert states_lost.issubset(states_gained)
