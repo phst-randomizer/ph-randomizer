@@ -237,7 +237,10 @@ jobs:
         run: pip install -e .
 
       - name: Run the shuffler
-        run: ph_rando_shuffler -o --
+        run: ph_rando_shuffler -o -- --spoiler-log spoiler.txt
+
+      - name: Print spoiler log
+        run: cat spoiler.txt
 
   tests:
     name: Run tests
