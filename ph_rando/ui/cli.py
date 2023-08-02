@@ -1,4 +1,6 @@
 from pathlib import Path
+import random
+import string
 
 import click
 
@@ -30,6 +32,10 @@ def randomizer_cli(
     seed: str | None,
     **settings: bool | str,
 ) -> None:
+    # Generate random seed if one isn't provided
+    if seed is None:
+        seed = ''.join(random.choices(string.ascii_letters, k=20))
+
     # Run the shuffler
     shuffled_aux_data = shuffle(seed)
 
