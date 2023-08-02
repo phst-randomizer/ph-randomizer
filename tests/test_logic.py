@@ -71,6 +71,7 @@ def test_graph_connectedness() -> None:
     # Create set consisting of all areas in the logic
     all_areas = {area.name for area in areas.values()}
 
+    print(sorted(all_areas - reachable_areas))
     assert reachable_areas == all_areas
 
     # Create set consisting of all rooms reported as reachable by the assumed search
@@ -79,6 +80,7 @@ def test_graph_connectedness() -> None:
     # Create set consisting of all rooms in the logic
     all_rooms = {f'{area.name}.{room.name}' for area in areas.values() for room in area.rooms}
 
+    print(sorted(all_rooms - reachable_rooms))
     assert reachable_rooms == all_rooms
 
     # # Create set consisting of all nods reported as reachable by the assumed search
