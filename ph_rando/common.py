@@ -22,6 +22,7 @@ class ShufflerAuxData:
     areas: dict[str, Area]
     enemy_requirements: dict[str, str]
     requirement_macros: dict[str, str]
+    seed: str | None = None
 
 
 RANDOMIZER_SETTINGS = Settings(

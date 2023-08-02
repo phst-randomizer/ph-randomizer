@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 import random
+import string
 import sys
 
 import click
@@ -9,7 +10,7 @@ from ph_rando.common import ShufflerAuxData, click_setting_options
 from ph_rando.shuffler._shuffler import assumed_fill, init_logic_graph
 
 
-def shuffle(seed: str | None) -> ShufflerAuxData:
+def shuffle(seed: str) -> ShufflerAuxData:
     """
     Parses aux data and logic, shuffles the aux data, and returns it.
 
@@ -19,10 +20,10 @@ def shuffle(seed: str | None) -> ShufflerAuxData:
     Returns:
         Randomized aux data.
     """
-    if seed is not None:
-        random.seed(seed)
+    random.seed(seed)
 
     aux_data = init_logic_graph()
+    aux_data.seed = seed
 
     return assumed_fill(aux_data)
 
@@ -54,16 +55,22 @@ def shuffler_cli(
 ) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
+    # Generate random seed if one isn't provided
+    if seed is None:
+        seed = ''.join(random.choices(string.ascii_letters, k=20))
+
     results = shuffle(seed)
 
     if output == '--':
         for area in results.areas.values():
             print(area.json(), file=sys.stdout)
+        print(f'Seed: {seed}')
     elif output is not None:
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
         for area in results.areas.values():
             (output_path / f'{area.name}.json').write_text(area.json())
+        (output_path / 'seed.txt').write_text(seed)
 
 
 if __name__ == '__main__':
