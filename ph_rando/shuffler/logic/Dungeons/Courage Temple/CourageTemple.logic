@@ -23,6 +23,8 @@ area CourageTemple:
     node StairsAfterMoldorm:
       door ToB1Arena
 
+    Entrance -> Main
+
     Entrance <-> BehindBombableWall: macro Bombs
 
     Entrance -> LockedDoorToArena
