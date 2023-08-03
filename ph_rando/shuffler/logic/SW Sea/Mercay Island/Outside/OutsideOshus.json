@@ -11,12 +11,14 @@
           "contents": {
             "name": "SmallGreenRupee"
           },
+          "display_name": "Remove rocks from Lapelli's yard",
           "bmg_file_path": "English/Message/main_isl.bmg",
           "bmg_instruction_index": 135
         },
         {
           "name": "TreeDigSpot",
           "type": "dig_spot",
+          "display_name": "Dig spot next to Oshus's house",
           "contents": {
             "name": "TreasureMapNW5"
           },
