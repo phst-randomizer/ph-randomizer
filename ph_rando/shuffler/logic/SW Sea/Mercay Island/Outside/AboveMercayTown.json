@@ -55,8 +55,8 @@
           "contents": {
             "name": "TreasureMapSE6"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": -1
+          "bmg_file_path": "English/Message/main_isl.bmg",
+          "bmg_instruction_index": 607
         }
       ],
       "enemies": [
