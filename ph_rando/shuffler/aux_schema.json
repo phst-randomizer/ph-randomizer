@@ -90,7 +90,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type",
         "zmb_file_path",
         "zmb_mapobject_index"
@@ -140,7 +139,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type",
         "bmg_file_path",
         "bmg_instruction_index"
@@ -190,7 +188,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type",
         "overlay",
         "overlay_offset"
@@ -240,7 +237,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type",
         "zmb_file_path",
         "zmb_mapobject_index"
@@ -280,7 +276,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type"
       ]
     },
@@ -318,7 +313,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type"
       ]
     },
@@ -366,7 +360,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type",
         "zmb_file_path",
         "zmb_actor_index"
@@ -416,7 +409,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type",
         "zmb_file_path",
         "zmb_actor_index"
@@ -456,7 +448,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type"
       ]
     },
@@ -494,7 +485,6 @@
       "required": [
         "name",
         "contents",
-        "display_name",
         "type"
       ]
     },
