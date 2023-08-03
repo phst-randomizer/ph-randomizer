@@ -6,7 +6,7 @@ area CourageTemple:
       lose TriangleCrystal
       lose SquareCrystal
       lose RoundCrystal
-    
+
     node Main:
       chest AfterSpikeTraps
 
