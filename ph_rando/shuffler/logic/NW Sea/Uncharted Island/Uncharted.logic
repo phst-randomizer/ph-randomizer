@@ -13,10 +13,10 @@ area Uncharted:
     node Main:
       door ToOutside
       door ToCyclos
-    
+
     node Ledge:
       chest ChestOnLedge
-    
+
     Main <-> Ledge: item GrapplingHook
 
   room Cave:

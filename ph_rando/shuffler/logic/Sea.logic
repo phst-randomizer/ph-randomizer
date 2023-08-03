@@ -147,7 +147,7 @@ area Sea:
 
     node LeftBoat:
       door BoardLeftBoat # S. S. Wayfarer
-    
+
     node PirateShip:
       chest CourageGem
 
