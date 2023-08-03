@@ -30,6 +30,10 @@ class Item(BaseModel):
 class BaseCheck(BaseModel):
     name: str = Field(..., description='The name of the item check')
     contents: Item = Field(..., description='The item that this check contains')
+    # TODO: make this field mandatory when all checks have this
+    display_name: str | None = Field(
+        None, description='Human-readable name used in spoiler logs, etc.'
+    )
 
     def __hash__(self) -> int:
         return id(self)

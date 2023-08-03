@@ -64,6 +64,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -85,6 +90,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type",
         "zmb_file_path",
         "zmb_mapobject_index"
@@ -108,6 +114,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -129,6 +140,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type",
         "bmg_file_path",
         "bmg_instruction_index"
@@ -152,6 +164,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -173,6 +190,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type",
         "overlay",
         "overlay_offset"
@@ -196,6 +214,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -217,6 +240,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type",
         "zmb_file_path",
         "zmb_mapobject_index"
@@ -240,6 +264,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -251,6 +280,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type"
       ]
     },
@@ -272,6 +302,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -283,6 +318,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type"
       ]
     },
@@ -303,6 +339,11 @@
               "$ref": "#/definitions/Item"
             }
           ]
+        },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
         },
         "type": {
           "title": "Type",
@@ -325,6 +366,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type",
         "zmb_file_path",
         "zmb_actor_index"
@@ -348,6 +390,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -369,6 +416,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type",
         "zmb_file_path",
         "zmb_actor_index"
@@ -392,6 +440,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -403,6 +456,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type"
       ]
     },
@@ -424,6 +478,11 @@
             }
           ]
         },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
         "type": {
           "title": "Type",
           "enum": [
@@ -435,6 +494,7 @@
       "required": [
         "name",
         "contents",
+        "display_name",
         "type"
       ]
     },
