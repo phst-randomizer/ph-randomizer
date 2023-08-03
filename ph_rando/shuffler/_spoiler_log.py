@@ -25,6 +25,6 @@ def generate_spoiler_log(randomized_aux_data: ShufflerAuxData) -> SpoilerLog:
             if len(room.chests):
                 items[area.name][room.name] = {}
             for chest in room.chests:
-                items[area.name][room.name][chest.name] = chest.contents.name
+                items[area.name][room.name][chest.display_name or chest.name] = chest.contents.name
 
     return SpoilerLog(version=version, seed=seed, items=items, settings=settings)
