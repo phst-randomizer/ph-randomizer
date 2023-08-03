@@ -7,6 +7,9 @@ area GoronTemple:
       enemy BlueChuAfterBeamos
       enemy ArmosLower
       enemy ArmosUpper
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node TopRight:
       chest AfterSwitch
@@ -184,3 +187,6 @@ area GoronTemple:
       door ToBoss
       chest Crimsonine
       exit BlueWarp
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal

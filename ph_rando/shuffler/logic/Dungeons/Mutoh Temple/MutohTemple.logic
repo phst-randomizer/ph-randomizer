@@ -12,6 +12,9 @@ area MutohTemple:
       enemy StalfosRight2
       enemy StalfosLeft1
       enemy StalfosLeft2
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node Up:
       door ToB1Top
@@ -343,3 +346,6 @@ area MutohTemple:
       door ToBoss
       chest Aquanine
       exit BlueWarp
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal

@@ -3,6 +3,11 @@ area CourageTemple:
     node Entrance:
       door Outside
       exit BlueWarp
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
+    
+    node Main:
       chest AfterSpikeTraps
 
     node BehindBombableWall:
@@ -248,6 +253,9 @@ area CourageTemple:
       door ToF2
       entrance BlueWarp
       door ToBoss
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node ChestBehindWall:
       chest Hidden

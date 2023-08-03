@@ -3,3 +3,6 @@ area GhostShip:
     node Main:
       door Boat
       door ToB1
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal

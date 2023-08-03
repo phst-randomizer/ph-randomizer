@@ -3,6 +3,9 @@ area WindTemple:
     node Entrance:
       door Entrance
       entrance BlueWarpShortcut
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node Arena:
       enemy Rope1

@@ -4,3 +4,6 @@ area IceTemple:
       door ToBoss
       chest Azurine
       exit BlueWarp
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal

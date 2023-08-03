@@ -25,6 +25,9 @@ area GhostShip:
 
     node AfterGhostKey:
       flag StoneTetra
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     Bottom -> Top
     Top <-> AfterSwitch # take a pot

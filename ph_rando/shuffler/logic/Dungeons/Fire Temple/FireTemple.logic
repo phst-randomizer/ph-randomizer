@@ -6,6 +6,9 @@ area FireTemple:
       enemy Keese2
       enemy Keese3
       enemy Keese4
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node LockedDoorToTopRight:
       lock LockedDoorToTopRight
@@ -169,3 +172,6 @@ area FireTemple:
       door ToF3
       door ToBoss
       entrance BlueWarp
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal

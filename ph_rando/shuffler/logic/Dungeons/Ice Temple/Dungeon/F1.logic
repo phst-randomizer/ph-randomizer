@@ -2,6 +2,9 @@ area IceTemple:
   room F1:
     node Entrance:
       door Exit
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node Switch:
       gain SwitchRed    # Switch is Red => Red is UP

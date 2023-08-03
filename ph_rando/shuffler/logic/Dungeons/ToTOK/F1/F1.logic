@@ -4,6 +4,9 @@ area TempleOfTheOceanKing:
       door Exit
       chest EmptyChest
       lock ToTOKKey
+      lose TriangleCrystal
+      lose SquareCrystal
+      lose RoundCrystal
 
     node Upper:
       chest Map
