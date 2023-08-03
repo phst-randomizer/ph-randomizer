@@ -206,7 +206,7 @@
       "exits": [
         {
           "name": "UnchartedPort",
-          "entrance": "Uncharted.Main.Main.Boat"
+          "entrance": "Uncharted.Outside.Main.Boat"
         },
         {
           "name": "ZauzPort",
@@ -322,6 +322,15 @@
           },
           "zmb_actor_index": 21,
           "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+        },
+        {
+          "name": "CourageGem",
+          "type": "event",
+          "contents": {
+            "name": "CourageGem"
+          },
+          "bmg_file_path": "",
+          "bmg_instruction_index": 0
         }
       ],
       "exits": [

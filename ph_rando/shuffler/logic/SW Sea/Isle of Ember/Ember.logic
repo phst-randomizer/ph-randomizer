@@ -70,10 +70,14 @@ area Ember:
       door ToOutside
       door ToBasement
 
-    node AfterTemple:
+    node AfterFireTemple:
       chest AstridPowerGem
 
-    Main <-> AfterTemple: flag FireTempleBeaten
+    node AfterWindTemple:
+      chest AstridWisdomGem
+
+    Main <-> AfterFireTemple: flag FireTempleBeaten
+    Main <-> AfterWindTemple: flag WindTempleBeaten
 
   room AstridBasement:
     node Arena:

@@ -138,6 +138,15 @@
           },
           "bmg_file_path": "English/Message/flame.bmg",
           "bmg_instruction_index": 415
+        },
+        {
+          "name": "AstridWisdomGem",
+          "type": "event",
+          "contents": {
+            "name": "WisdomGem"
+          },
+          "bmg_file_path": "English/Message/flame.bmg",
+          "bmg_instruction_index": 0
         }
       ],
       "exits": [

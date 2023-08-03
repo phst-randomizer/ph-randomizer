@@ -5,6 +5,9 @@ area Mail:
   room Mail:
     node Mail
 
+    node Oshus:
+      chest Oshus
+
     node Salvatore:
       chest Salvatore
 
@@ -38,6 +41,7 @@ area Mail:
     node Beedle3:
       chest Beedle3
 
+    Mail <-> Oshus: flag WindTempleBeaten
     Mail <-> Salvatore: (item SunKey & flag CanPlaySalvatoreMinigame)
     Mail <-> Romanos: flag CourageTempleBeaten
     Mail <-> Jolene: flag CourageTempleBeaten

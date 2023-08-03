@@ -1,5 +1,5 @@
 area Uncharted:
-  room Main:
+  room Outside:
     node Main:
       door Cave
       door Boat
@@ -8,6 +8,16 @@ area Uncharted:
       chest DigSpot # found in front of "eye" statue
 
     Main -> DigSpot: item Shovel
+
+  room CaveEntrance:
+    node Main:
+      door ToOutside
+      door ToCyclos
+    
+    node Ledge:
+      chest ChestOnLedge
+    
+    Main <-> Ledge: item GrapplingHook
 
   room Cave:
     node Main:

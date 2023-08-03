@@ -128,6 +128,7 @@ area Sea:
       entrance OmegaSlate
       entrance TeethSlate
       enemy MassiveEye
+      enemy PirateShipMiniblin
 
     node DeeEss:
       door DeeEssPort
@@ -146,6 +147,9 @@ area Sea:
 
     node LeftBoat:
       door BoardLeftBoat # S. S. Wayfarer
+    
+    node PirateShip:
+      chest CourageGem
 
     node Treasure1: chest Treasure1
     node Treasure2: chest Treasure2
@@ -178,6 +182,8 @@ area Sea:
     Main <-> Treasure6: (item SalvageArm & item TreasureMapSE6)
     Main <-> Treasure7: (item SalvageArm & item TreasureMapSE7)
     Main <-> Treasure8: (item SalvageArm & item TreasureMapSE8)
+
+    Main <-> PirateShip: defeated PirateShipMiniblin
 
   room NE:
     node Main:

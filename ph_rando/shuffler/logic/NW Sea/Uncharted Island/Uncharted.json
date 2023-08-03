@@ -3,7 +3,7 @@
   "name": "Uncharted",
   "rooms": [
     {
-      "name": "Main",
+      "name": "Outside",
       "chests": [
         {
           "name": "DigSpot",
@@ -18,12 +18,36 @@
       "exits": [
         {
           "name": "Cave",
-          "entrance": "Cave.Main.Entrance"
+          "entrance": "CaveEntrance.Main.ToOutside"
         },
         {
           "name": "Boat",
           "entrance": "Sea.NW.Uncharted.UnchartedPort"
         }
+      ]
+    },
+    {
+      "name": "CaveEntrance",
+      "chests": [
+        {
+          "name": "ChestOnLedge",
+          "type": "chest",
+          "contents": {
+            "name": "CourageGem"
+          },
+          "zmb_file_path": "",
+          "zmb_mapobject_index": 0
+        }
+      ],
+      "exits": [
+        {
+          "name": "ToOutside",
+          "entrance": "Outside.Main.Cave"
+        },
+        {
+          "name": "ToCyclos",
+          "entrance": "Cave.Main.Entrance"
+        } 
       ]
     },
     {
@@ -42,7 +66,7 @@
       "exits": [
         {
           "name": "Entrance",
-          "entrance": "Main.Main.Cave"
+          "entrance": "CaveEntrance.Main.ToCyclos"
         }
       ]
     }

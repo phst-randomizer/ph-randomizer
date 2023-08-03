@@ -6,6 +6,13 @@
       "name": "Mail",
       "chests": [
         {
+          "name": "Oshus",
+          "type": "mail",
+          "contents": {
+            "name": "PowerGem"
+          }
+        },
+        {
           "name": "Salvatore",
           "type": "mail",
           "contents": {
