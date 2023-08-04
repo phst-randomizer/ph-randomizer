@@ -11,8 +11,8 @@
           "contents": {
             "name": "WisdomGem"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_file_path": "English/Message/power.bmg",
+          "bmg_instruction_index": 208
         },
         {
           "name": "BigRedRupee",
@@ -20,8 +20,8 @@
           "contents": {
             "name": "BigRedRupee"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_file_path": "English/Message/power.bmg",
+          "bmg_instruction_index": 495
         }
       ],
       "exits": [
