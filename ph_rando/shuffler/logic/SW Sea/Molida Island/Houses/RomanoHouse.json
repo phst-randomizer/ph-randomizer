@@ -6,13 +6,22 @@
       "name": "RomanoHouse",
       "chests": [
         {
-          "name": "ShootingGallery",
+          "name": "ShootingGalleryReward1",
           "type": "event",
           "contents": {
             "name": "QuiverUpgrade"
           },
           "bmg_file_path": "English/Message/brave.bmg",
           "bmg_instruction_index": 126
+        },
+        {
+          "name": "ShootingGalleryReward2",
+          "type": "event",
+          "contents": {
+            "name": "HeartContainer"
+          },
+          "bmg_file_path": "English/Message/brave.bmg",
+          "bmg_instruction_index": 128
         }
       ],
       "exits": [
