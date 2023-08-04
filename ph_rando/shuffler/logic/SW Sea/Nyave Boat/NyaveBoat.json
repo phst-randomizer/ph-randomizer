@@ -11,8 +11,8 @@
           "contents": {
             "name": "BigGreenRupee"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_file_path": "English/Message/ship.bmg",
+          "bmg_instruction_index": 302
         },
         {
           "name": "WoodHeart",
@@ -20,8 +20,8 @@
           "contents": {
             "name": "WoodHeart"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_file_path": "English/Message/ship.bmg",
+          "bmg_instruction_index": 705
         }
       ],
       "exits": [
