@@ -234,7 +234,7 @@
         },
         {
           "name": "BannanPort",
-          "entrance": "Bannan.OutsideLeft.Main.Boat"
+          "entrance": "Bannan.Outside.LeftSide.Boat"
         },
         {
           "name": "BoardBoat",
