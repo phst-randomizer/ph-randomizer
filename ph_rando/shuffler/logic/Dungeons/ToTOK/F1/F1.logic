@@ -21,4 +21,4 @@ area TempleOfTheOceanKing:
       door ToB1
 
     Lower <-> Upper: open ToTOKKey
-    Lower -> Downstairs: item PowerSpirit
+    Lower -> Downstairs: (item PowerSpirit & item PhantomHourglass)

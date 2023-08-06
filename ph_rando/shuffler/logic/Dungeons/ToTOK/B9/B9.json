@@ -25,7 +25,7 @@
           },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
           "zmb_mapobject_index": 29,
-          "display_name": "Defeat the Wizzrobes"
+          "display_name": "Defeat all Wizzrobes"
         },
         {
           "name": "PhantomKiller",
@@ -35,7 +35,7 @@
           },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
           "zmb_mapobject_index": 30,
-          "display_name": "Defeat the Phantoms"
+          "display_name": "Defeat all Phantoms"
         },
         {
           "name": "SquareCrystal",
