@@ -12,7 +12,8 @@
             "name": "QuiverUpgrade"
           },
           "bmg_file_path": "English/Message/brave.bmg",
-          "bmg_instruction_index": 126
+          "bmg_instruction_index": 126,
+          "display_name": "Score more than 1700 at the shooting gallery"
         },
         {
           "name": "ShootingGalleryReward2",
@@ -21,7 +22,8 @@
             "name": "HeartContainer"
           },
           "bmg_file_path": "English/Message/brave.bmg",
-          "bmg_instruction_index": 128
+          "bmg_instruction_index": 128,
+          "display_name": "Score more than 2000 at the shooting gallery"
         }
       ],
       "exits": [

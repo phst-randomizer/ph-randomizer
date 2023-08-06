@@ -10,7 +10,8 @@
           "type": "freestanding",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Freestanding key after plate"
         },
         {
           "name": "Killer",
@@ -19,7 +20,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_main/map02.bin/zmb/dngn_main_02.zmb",
-          "zmb_mapobject_index": 14
+          "zmb_mapobject_index": 14,
+          "display_name": "Defeat all Phantoms"
         },
         {
           "name": "BombchuPath",
@@ -28,7 +30,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/dngn_main/map02.bin/zmb/dngn_main_02.zmb",
-          "zmb_mapobject_index": 13
+          "zmb_mapobject_index": 13,
+          "display_name": "Hit the Bombchu switch"
         }
       ],
       "exits": [

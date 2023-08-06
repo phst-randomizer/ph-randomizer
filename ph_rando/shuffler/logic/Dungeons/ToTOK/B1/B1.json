@@ -9,7 +9,8 @@
           "type": "freestanding",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Freestanding key after door"
         },
         {
           "name": "Killer",
@@ -18,7 +19,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_main/map01.bin/zmb/dngn_main_01.zmb",
-          "zmb_mapobject_index": 8
+          "zmb_mapobject_index": 8,
+          "display_name": "Defeat all the Phantoms"
         },
         {
           "name": "EyeTarget",
@@ -27,7 +29,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/dngn_main/map01.bin/zmb/dngn_main_01.zmb",
-          "zmb_mapobject_index": 7
+          "zmb_mapobject_index": 7,
+          "display_name": "Shoot the eye target"
         }
       ],
       "exits": [

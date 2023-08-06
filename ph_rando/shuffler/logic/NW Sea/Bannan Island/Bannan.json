@@ -12,7 +12,8 @@
             "name": "TreasureMapSW5"
           },
           "zmb_actor_index": 4,
-          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "display_name": "Dig near the Wayfarer's sign"
         },
         {
           "name": "IslandChest",
@@ -21,7 +22,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
-          "zmb_mapobject_index": 111
+          "zmb_mapobject_index": 111,
+          "display_name": "Chest on small island"
         }
       ],
       "exits": [
@@ -89,7 +91,8 @@
           "type": "minigame_reward_chest",
           "contents": {
             "name": "BombBagUpgrade"
-          }
+          },
+          "display_name": "Win the minigame"
         },
         {
           "name": "DigSpot",
@@ -98,7 +101,8 @@
             "name": "TreasureMapSE4"
           },
           "zmb_actor_index": 5,
-          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb"
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "display_name": "Dig between the chests"
         },
         {
           "name": "LeftIslandChest",
@@ -107,7 +111,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
-          "zmb_mapobject_index": 86
+          "zmb_mapobject_index": 86,
+          "display_name": "Left chest on righmost island"
         },
         {
           "name": "RightIslandChest",
@@ -116,7 +121,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
-          "zmb_mapobject_index": 87
+          "zmb_mapobject_index": 87,
+          "display_name": "Right chest on righmost island"
         }
       ],
       "exits": [

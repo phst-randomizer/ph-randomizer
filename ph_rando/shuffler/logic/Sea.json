@@ -12,7 +12,8 @@
             "name": "SandOfHours"
           },
           "zmb_actor_index": 18,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage west of Cannon Island"
         },
         {
           "name": "Treasure2",
@@ -21,7 +22,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 23,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage south of Cannon Island"
         },
         {
           "name": "Treasure3",
@@ -30,7 +32,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 24,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage south-east of Mercay Island"
         },
         {
           "name": "Treasure4",
@@ -39,7 +42,8 @@
             "name": "SandOfHours"
           },
           "zmb_actor_index": 25,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage north-east of Mercay Island"
         },
         {
           "name": "SunKey",
@@ -48,7 +52,8 @@
             "name": "SunKey"
           },
           "zmb_actor_index": 17,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage on the Sun Crest"
         },
         {
           "name": "Treasure5",
@@ -57,7 +62,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 26,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage north-west of Molida Island"
         },
         {
           "name": "Treasure6",
@@ -66,7 +72,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 27,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage north of Molida Island"
         },
         {
           "name": "Treasure7",
@@ -75,7 +82,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 28,
-          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb"
+          "zmb_file_path": "Map/sea/map00.bin/zmb/sea_00.zmb",
+          "display_name": "Salvage west of Isle of Spirits"
         }
       ],
       "exits": [
@@ -137,7 +145,8 @@
             "name": "CommonTreasure"
           },
           "zmb_actor_index": 22,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage south of Zauz's Island"
         },
         {
           "name": "Treasure2",
@@ -146,7 +155,8 @@
             "name": "SandOfHours"
           },
           "zmb_actor_index": 23,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage north of Isle of Gust"
         },
         {
           "name": "Treasure3",
@@ -155,7 +165,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 24,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage north-east of Isle of Gust"
         },
         {
           "name": "Treasure4",
@@ -164,7 +175,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 25,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage south of Uncharted Isle"
         },
         {
           "name": "Treasure5",
@@ -173,7 +185,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 26,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage east of Isle of Gust"
         },
         {
           "name": "Treasure6",
@@ -182,7 +195,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 27,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage south-west of Isle of Gust"
         },
         {
           "name": "Treasure7",
@@ -191,7 +205,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 28,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage east of Bannan Island"
         },
         {
           "name": "Treasure8",
@@ -200,7 +215,8 @@
             "name": "SandOfHours"
           },
           "zmb_actor_index": 29,
-          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb"
+          "zmb_file_path": "Map/sea/map01.bin/zmb/sea_01.zmb",
+          "display_name": "Salvage south-east of Bannan Island"
         }
       ],
       "exits": [
@@ -258,7 +274,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 14,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage north-west of Goron Island"
         },
         {
           "name": "Treasure2",
@@ -267,7 +284,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 15,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage west of Goron Island"
         },
         {
           "name": "Treasure3",
@@ -276,7 +294,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 16,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage east of Harrow Island"
         },
         {
           "name": "Treasure4",
@@ -285,7 +304,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 17,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage south of Harrow Island"
         },
         {
           "name": "Treasure5",
@@ -294,7 +314,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 18,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage in the middle of the map"
         },
         {
           "name": "Treasure6",
@@ -303,7 +324,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 19,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage north of Dee Ess Island"
         },
         {
           "name": "Treasure7",
@@ -312,7 +334,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 20,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage north-east of Dee Ess Island"
         },
         {
           "name": "Treasure8",
@@ -321,7 +344,8 @@
             "name": "SandOfHours"
           },
           "zmb_actor_index": 21,
-          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb"
+          "zmb_file_path": "Map/sea/map02.bin/zmb/sea_02.zmb",
+          "display_name": "Salvage north-west of Isle of Frost"
         },
         {
           "name": "CourageGem",
@@ -329,8 +353,9 @@
           "contents": {
             "name": "CourageGem"
           },
-          "bmg_file_path": "",
-          "bmg_instruction_index": 0
+          "bmg_file_path": "TODO",
+          "bmg_instruction_index": 0,
+          "display_name": "Defeat the Pirate north-west of Goron Island"
         }
       ],
       "exits": [
@@ -388,7 +413,8 @@
             "name": "RandomTreasure"
           },
           "zmb_actor_index": 12,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage north-west of Isle of Ruins"
         },
         {
           "name": "Treasure2",
@@ -397,7 +423,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 13,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage south-west of Isle of Ruins"
         },
         {
           "name": "Treasure3",
@@ -406,7 +433,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 14,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage south-east of Isle of the Dead"
         },
         {
           "name": "Treasure4",
@@ -415,7 +443,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 15,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage east of Maze Island"
         },
         {
           "name": "Treasure5",
@@ -424,7 +453,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 16,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage west of Maze Island"
         },
         {
           "name": "Treasure6",
@@ -433,7 +463,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 17,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage west of Isle of Ruins"
         },
         {
           "name": "Treasure7",
@@ -442,7 +473,8 @@
             "name": "ShipPart"
           },
           "zmb_actor_index": 18,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage south of Isle of Ruins"
         },
         {
           "name": "Treasure8",
@@ -451,7 +483,8 @@
             "name": "BigGoldRupee"
           },
           "zmb_actor_index": 19,
-          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb"
+          "zmb_file_path": "Map/sea/map03.bin/zmb/sea_03.zmb",
+          "display_name": "Salvage south of Isle of the Dead"
         }
       ],
       "exits": [

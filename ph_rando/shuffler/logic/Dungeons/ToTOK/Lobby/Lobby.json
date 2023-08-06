@@ -11,7 +11,8 @@
             "name": "PhantomHourglass"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Get the Phantom Hourglass"
         }
       ],
       "exits": [

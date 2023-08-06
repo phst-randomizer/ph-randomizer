@@ -3,8 +3,12 @@ area Molida:
     node Main:
       door Outside
 
+    node ShootingGallery:
       # Given for 1700-1999 points
       chest ShootingGalleryReward1
 
       # Given for 2000+ points
       chest ShootingGalleryReward2
+
+    Main <-> ShootingGallery: item Bow
+

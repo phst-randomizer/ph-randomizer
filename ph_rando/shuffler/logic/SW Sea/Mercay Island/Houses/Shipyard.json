@@ -12,7 +12,8 @@
             "name": "RandomShipPart"
           },
           "zmb_file_path": "Map/isle_main/map13.bin/zmb/isle_main_13.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Chest inside Shipyard"
         }
       ],
       "exits": [

@@ -7,6 +7,12 @@ area TempleOfTheOceanKing:
       lose TriangleCrystal
       lose SquareCrystal
       lose RoundCrystal
+      lose Gem1B3
+      lose Gem2B3
+      lose Gem3B3
+      lose Gem1B12
+      lose Gem2B12
+      lose Gem3B12
 
     node Upper:
       chest Map

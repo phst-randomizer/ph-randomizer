@@ -12,7 +12,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/isle_flame/map00.bin/zmb/isle_flame_00.zmb",
-          "zmb_mapobject_index": 75
+          "zmb_mapobject_index": 75,
+          "display_name": "Chest on the small northern island"
         },
         {
           "name": "SummitChest",
@@ -21,7 +22,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/isle_flame/map00.bin/zmb/isle_flame_00.zmb",
-          "zmb_mapobject_index": 74
+          "zmb_mapobject_index": 74,
+          "display_name": "Chest at the summit"
         }
       ],
       "exits": [
@@ -85,7 +87,8 @@
             "name": "TreasureMapNW8"
           },
           "zmb_actor_index": 29,
-          "zmb_file_path": "Map/isle_flame/map01.bin/zmb/isle_flame_01.zmb"
+          "zmb_file_path": "Map/isle_flame/map01.bin/zmb/isle_flame_01.zmb",
+          "display_name": "Dig the grass near the Temple Entrance"
         }
       ],
       "exits": [
@@ -137,7 +140,8 @@
             "name": "PowerGem"
           },
           "bmg_file_path": "English/Message/flame.bmg",
-          "bmg_instruction_index": 415
+          "bmg_instruction_index": 415,
+          "display_name": "Talk to Astrid after beating the Temple of Fire"
         },
         {
           "name": "AstridWisdomGem",
@@ -146,7 +150,8 @@
             "name": "WisdomGem"
           },
           "bmg_file_path": "English/Message/flame.bmg",
-          "bmg_instruction_index": 0
+          "bmg_instruction_index": 0,
+          "display_name": "Talk to Astrid after beating the Temple of Wind"
         }
       ],
       "exits": [
@@ -170,7 +175,8 @@
             "name": "TreasureMapNW6"
           },
           "zmb_file_path": "Map/isle_flame/map20.bin/zmb/isle_flame_20.zmb",
-          "zmb_actor_index": 17
+          "zmb_actor_index": 17,
+          "display_name": "Dig the mark"
         }
       ],
       "exits": [

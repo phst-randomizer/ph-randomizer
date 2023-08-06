@@ -19,7 +19,7 @@ area TempleOfTheOceanKing:
 
     Bottom -> ArenaLeft: (item Boomerang | item Bow | item GrapplingHook | item Hammer)
     ArenaLeft -> ArenaRight: (defeated EnemyL1 & defeated EnemyL2 & defeated EnemyL3 & defeated EnemyL4)
-    ArenaRight -> TopRight: (defeated EnemyR1 & defeated EnemyR2 & defeated EnemyR3 & (item Boomerang | item Bow | item GrapplingHook | item Hammer))
+    ArenaRight -> TopRight: (defeated EnemyR1 & defeated EnemyR2 & defeated EnemyR3 & (item Boomerang | item Bow | item GrapplingHook | (item Hammer & setting HammerReach)))
 
     node TopLeft:
       door ToB4Shortcut

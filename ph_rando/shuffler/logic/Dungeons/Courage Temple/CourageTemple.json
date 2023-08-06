@@ -12,7 +12,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
-          "zmb_mapobject_index": 105
+          "zmb_mapobject_index": 105,
+          "display_name": "Chest after spike traps"
         },
         {
           "name": "BombableWallChest",
@@ -21,7 +22,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
-          "zmb_mapobject_index": 77
+          "zmb_mapobject_index": 77,
+          "display_name": "Chest behind bombable wall"
         },
         {
           "name": "PolsLeft",
@@ -30,7 +32,8 @@
             "name": "RandomShipPart"
           },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
-          "zmb_mapobject_index": 84
+          "zmb_mapobject_index": 84,
+          "display_name": "Left chest near invisible maze hint"
         },
         {
           "name": "PolsRight",
@@ -39,21 +42,24 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
-          "zmb_mapobject_index": 95
+          "zmb_mapobject_index": 95,
+          "display_name": "Right chest near invisible maze hint"
         },
         {
           "name": "PolsKey",
           "type": "on_enemy",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Defeat the Pols Voice (left)"
         },
         {
           "name": "PolsKeyTopRight",
           "type": "on_enemy",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Defeat the Pols Voice (top right)"
         }
       ],
       "exits": [
@@ -135,7 +141,8 @@
             "name": "Bow"
           },
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
-          "zmb_mapobject_index": 22
+          "zmb_mapobject_index": 22,
+          "display_name": "Bow chest"
         },
         {
           "name": "IslandChest",
@@ -144,7 +151,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
-          "zmb_mapobject_index": 110
+          "zmb_mapobject_index": 110,
+          "display_name": "Chest on island"
         },
         {
           "name": "EyeTarget",
@@ -153,7 +161,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/dngn_pluck/map01.bin/zmb/dngn_pluck_01.zmb",
-          "zmb_mapobject_index": 95
+          "zmb_mapobject_index": 95,
+          "display_name": "Shoot the eye target"
         }
       ],
       "exits": [
@@ -196,7 +205,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
-          "zmb_mapobject_index": 5
+          "zmb_mapobject_index": 5,
+          "display_name": "Chest after pulling the levers"
         },
         {
           "name": "TwoEyes",
@@ -205,7 +215,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
-          "zmb_mapobject_index": 84
+          "zmb_mapobject_index": 84,
+          "display_name": "Shoot both eye targets"
         },
         {
           "name": "SpikeTraps",
@@ -214,7 +225,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
-          "zmb_mapobject_index": 100
+          "zmb_mapobject_index": 100,
+          "display_name": "Chest after spike traps"
         },
         {
           "name": "BossKey",
@@ -223,7 +235,8 @@
             "name": "BossKeyCourageTemple"
           },
           "zmb_file_path": "Map/dngn_pluck/map02.bin/zmb/dngn_pluck_02.zmb",
-          "zmb_mapobject_index": 76
+          "zmb_mapobject_index": 76,
+          "display_name": "Boss Key chest"
         }
       ],
       "exits": [

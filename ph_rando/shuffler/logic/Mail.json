@@ -10,84 +10,96 @@
           "type": "mail",
           "contents": {
             "name": "PowerGem"
-          }
+          },
+          "display_name": "Letter from Oshus after completing the Temple of Wind"
         },
         {
           "name": "Salvatore",
           "type": "mail",
           "contents": {
             "name": "WisdomGem"
-          }
+          },
+          "display_name": "Letter from Salvatore after salvaging the Sun Key"
         },
         {
           "name": "Romanos",
           "type": "mail",
           "contents": {
             "name": "RandomShipPart"
-          }
+          },
+          "display_name": "Letter from Romano after completing the Temple of Courage"
         },
         {
           "name": "Jolene",
           "type": "mail",
           "contents": {
             "name": "JolenesLetter"
-          }
+          },
+          "display_name": "Letter from Jolene after completing the Temple of Courage"
         },
         {
           "name": "Joanne",
           "type": "mail",
           "contents": {
             "name": "RandomShipPart"
-          }
+          },
+          "display_name": "Letter from Joanne after delivering the Jolene's Letter"
         },
         {
           "name": "Linebeck",
           "type": "mail",
           "contents": {
             "name": "RandomShipPart"
-          }
+          },
+          "display_name": "Letter from Linebeck after getting Petrified Tetra onboard"
         },
         {
           "name": "Gongoron",
           "type": "mail",
           "contents": {
             "name": "CourageGem"
-          }
+          },
+          "display_name": "Letter from Gongoron after completing the Goron Temple"
         },
         {
           "name": "Aroo",
           "type": "mail",
           "contents": {
             "name": "WisdomGem"
-          }
+          },
+          "display_name": "Letter from Aroo after completing the Temple of Ice"
         },
         {
           "name": "Mutoh",
           "type": "mail",
           "contents": {
             "name": "PowerGem"
-          }
+          },
+          "display_name": "Letter from Mutoh after completing Mutoh's Pyramid"
         },
         {
           "name": "Beedle1",
           "type": "mail",
           "contents": {
             "name": "FreebieCard"
-          }
+          },
+          "display_name": "Letter from Terry after reaching Silver Membership (20 points)"
         },
         {
           "name": "Beedle2",
           "type": "mail",
           "contents": {
             "name": "ComplimentCard"
-          }
+          },
+          "display_name": "Letter from Terry after reaching Gold Membership (50 points)"
         },
         {
           "name": "Beedle3",
           "type": "mail",
           "contents": {
             "name": "ComplimentaryCard"
-          }
+          },
+          "display_name": "Letter from Terry after reaching Platinum Membership (100 points)"
         }
       ]
     }

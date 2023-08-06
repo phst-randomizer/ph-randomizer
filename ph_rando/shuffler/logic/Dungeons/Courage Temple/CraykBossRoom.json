@@ -11,7 +11,8 @@
             "name": "Sand2M"
           },
           "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_instruction_index": 0,
+          "display_name": "Crayk's Sands of Hours"
         },
         {
           "name": "SpiritOfCourage",
@@ -20,7 +21,8 @@
             "name": "CourageSpirit"
           },
           "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_instruction_index": 0,
+          "display_name": "Dungeon Reward"
         },
         {
           "name": "HeartContainer",
@@ -29,7 +31,8 @@
             "name": "HeartContainer"
           },
           "zmb_file_path": "Map/boss_pluck/map00.bin/zmb/boss_pluck_00.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Heart Container chest"
         }
       ],
       "exits": [

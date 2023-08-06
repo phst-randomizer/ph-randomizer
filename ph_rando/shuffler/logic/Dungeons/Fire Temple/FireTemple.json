@@ -12,7 +12,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
-          "zmb_mapobject_index": 26
+          "zmb_mapobject_index": 26,
+          "display_name": "Defeat the Keeses"
         },
         {
           "name": "ChestNearLavaPit",
@@ -21,7 +22,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
-          "zmb_mapobject_index": 68
+          "zmb_mapobject_index": 68,
+          "display_name": "Chest near hidden lava traps"
         }
       ],
       "exits": [
@@ -79,7 +81,8 @@
             "name": "Boomerang"
           },
           "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
-          "zmb_mapobject_index": 7
+          "zmb_mapobject_index": 7,
+          "display_name": "Defeat the Gels"
         },
         {
           "name": "AfterKeeses",
@@ -88,14 +91,16 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/dngn_flame/map01.bin/zmb/dngn_flame_01.zmb",
-          "zmb_mapobject_index": 74
+          "zmb_mapobject_index": 74,
+          "display_name": "Defeat the Fire Keeses"
         },
         {
           "name": "RatKey",
           "type": "on_enemy",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Catch the Rat"
         }
       ],
       "exits": [
@@ -175,7 +180,8 @@
           "type": "freestanding",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Hit the switches in the right order"
         },
         {
           "name": "BossKeyChest",
@@ -184,7 +190,8 @@
             "name": "BossKeyFireTemple"
           },
           "zmb_file_path": "Map/dngn_flame/map02.bin/zmb/dngn_flame_02.zmb",
-          "zmb_mapobject_index": 15
+          "zmb_mapobject_index": 15,
+          "display_name": "Boss Key chest"
         }
       ],
       "exits": [

@@ -38,7 +38,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
-          "zmb_mapobject_index": 25
+          "zmb_mapobject_index": 25,
+          "display_name": "Roll into the highest tree"
         },
         {
           "name": "AboveEntrance",
@@ -47,7 +48,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/isle_main/map02.bin/zmb/isle_main_02.zmb",
-          "zmb_mapobject_index": 54
+          "zmb_mapobject_index": 54,
+          "display_name": "Island Chest"
         },
         {
           "name": "Freedle",
@@ -56,7 +58,8 @@
             "name": "TreasureMapSE6"
           },
           "bmg_file_path": "English/Message/main_isl.bmg",
-          "bmg_instruction_index": 607
+          "bmg_instruction_index": 607,
+          "display_name": "Talk to Freedle"
         }
       ],
       "enemies": [

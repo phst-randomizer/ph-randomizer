@@ -50,10 +50,12 @@ area Ember:
       door LeftMiddleBottom
 
     node TempleFront:
-      chest DigSpot
       door EmberTemple
       door LeftHigherBottom
       door LeftHigherTop
+
+    node DigSpotTempleFront:
+      chest DigSpot
 
     node Summit:
       door LeftHighestTop
@@ -61,6 +63,7 @@ area Ember:
 
     Summit -> TempleFront
     TempleFront -> AfterDoor
+    TempleFront <-> DigSpotTempleFront: item Shovel
     AfterDoor -> Lowest
     Lowest -> AfterDoor: flag AstridFreed
 

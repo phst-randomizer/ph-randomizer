@@ -12,7 +12,8 @@
             "name": "Shovel"
           },
           "zmb_file_path": "Map/isle_pluck/map15.bin/zmb/isle_pluck_15.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Shovel chest"
         }
       ],
       "exits": [

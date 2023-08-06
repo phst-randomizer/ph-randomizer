@@ -7,4 +7,4 @@ area Mercay:
     node HitBoomerangSwitch:
       chest BridgeChest
 
-    Main <-> HitBoomerangSwitch: item Boomerang
+    Main <-> HitBoomerangSwitch: (item Boomerang | item Bow | item GrapplingHook)

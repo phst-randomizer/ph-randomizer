@@ -12,7 +12,8 @@
             "name": "TreasureMapNW2"
           },
           "zmb_file_path": "Map/dngn_main/map07.bin/zmb/dngn_main_07.zmb",
-          "zmb_mapobject_index": 2
+          "zmb_mapobject_index": 2,
+          "display_name": "Shoot the eye target"
         },
         {
           "name": "PhantomKiller",
@@ -21,7 +22,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_main/map07.bin/zmb/dngn_main_07.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Defeat the Phantom"
         }
       ],
       "exits": [

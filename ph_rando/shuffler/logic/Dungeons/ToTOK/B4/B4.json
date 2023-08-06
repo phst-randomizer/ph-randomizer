@@ -10,7 +10,8 @@
           "type": "freestanding",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Freestanding Key"
         },
         {
           "name": "PhantomKiller",
@@ -19,7 +20,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_main/map05.bin/zmb/dngn_main_05.zmb",
-          "zmb_mapobject_index": 4
+          "zmb_mapobject_index": 4,
+          "display_name": "Defeat all Phantoms"
         },
         {
           "name": "EyeKiller",
@@ -28,7 +30,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/dngn_main/map05.bin/zmb/dngn_main_05.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Defeat all Phantom Eyes"
         }
       ],
       "exits": [

@@ -12,7 +12,8 @@
             "name": "TreasureMapSW7"
           },
           "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
-          "zmb_mapobject_index": 183
+          "zmb_mapobject_index": 183,
+          "display_name": "Chest near hive"
         },
         {
           "name": "NearRocks",
@@ -21,7 +22,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/isle_torii/map00.bin/zmb/isle_torii_00.zmb",
-          "zmb_mapobject_index": 185
+          "zmb_mapobject_index": 185,
+          "display_name": "Chest near rocks"
         }
       ],
       "exits": [
@@ -70,7 +72,8 @@
             "name": "Cannon"
           },
           "bmg_file_path": "English/Message/torii.bmg",
-          "bmg_instruction_index": 35
+          "bmg_instruction_index": 35,
+          "display_name": "Buy the Cannon (50 rupees)"
         },
         {
           "name": "SalvageArm",
@@ -79,7 +82,8 @@
             "name": "SalvageArm"
           },
           "bmg_file_path": "English/Message/torii.bmg",
-          "bmg_instruction_index": 73
+          "bmg_instruction_index": 73,
+          "display_name": "Buy the Salvage Arm (100? rupees)"
         }
       ],
       "exits": [

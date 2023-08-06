@@ -12,7 +12,8 @@
             "name": "ProgressiveSword"
           },
           "zmb_file_path": "Map/isle_main/map19.bin/zmb/isle_main_19.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Count the trees"
         }
       ],
       "exits": [

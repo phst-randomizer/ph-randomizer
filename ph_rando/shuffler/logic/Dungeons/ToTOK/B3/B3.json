@@ -14,7 +14,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
-          "zmb_mapobject_index": 6
+          "zmb_mapobject_index": 6,
+          "display_name": "Top Left chest"
         },
         {
           "name": "BottomRight",
@@ -26,14 +27,16 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
-          "zmb_mapobject_index": 7
+          "zmb_mapobject_index": 7,
+          "display_name": "Bottom Right chest"
         },
         {
           "name": "PhantomKey",
           "type": "on_enemy",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Hit the lower Phantom"
         },
         {
           "name": "EyeChest",
@@ -42,7 +45,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
-          "zmb_mapobject_index": 19
+          "zmb_mapobject_index": 19,
+          "display_name": "Shoot the eye target"
         },
         {
           "name": "Killer",
@@ -51,7 +55,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
-          "zmb_mapobject_index": 20
+          "zmb_mapobject_index": 20,
+          "display_name": "Defeat the Phantoms"
         },
         {
           "name": "BehindDoor",
@@ -63,7 +68,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map03.bin/zmb/dngn_main_03.zmb",
-          "zmb_mapobject_index": 8
+          "zmb_mapobject_index": 8,
+          "display_name": "Chest behind key door"
         }
       ],
       "exits": [

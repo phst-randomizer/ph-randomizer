@@ -12,7 +12,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_main/map00.bin/zmb/dngn_main_00.zmb",
-          "zmb_mapobject_index": 34
+          "zmb_mapobject_index": 34,
+          "display_name": "Linebeck's chest"
         },
         {
           "name": "Map",
@@ -21,7 +22,8 @@
             "name": "SWSeaChart"
           },
           "zmb_file_path": "Map/dngn_main/map00.bin/zmb/dngn_main_00.zmb",
-          "zmb_mapobject_index": 23
+          "zmb_mapobject_index": 23,
+          "display_name": "Sea chart chest"
         }
       ],
       "exits": [

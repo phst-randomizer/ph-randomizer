@@ -12,7 +12,8 @@
             "name": "TreasureMapNW1"
           },
           "zmb_actor_index": 4,
-          "zmb_file_path": "Map/isle_small3/map00.bin/zmb/isle_small3_00.zmb"
+          "zmb_file_path": "Map/isle_small3/map00.bin/zmb/isle_small3_00.zmb",
+          "display_name": "Dig in front of the eye Gossip Stone"
         }
       ],
       "exits": [
@@ -35,8 +36,9 @@
           "contents": {
             "name": "CourageGem"
           },
-          "zmb_file_path": "",
-          "zmb_mapobject_index": 0
+          "zmb_file_path": "TODO",
+          "zmb_mapobject_index": 0,
+          "display_name": "Chest on ledge"
         }
       ],
       "exits": [
@@ -60,7 +62,8 @@
             "name": "CycloneSlate"
           },
           "bmg_file_path": "English/Message/kojima3.bmg",
-          "bmg_instruction_index": 108
+          "bmg_instruction_index": 108,
+          "display_name": "Talk to Cyclos"
         }
       ],
       "exits": [

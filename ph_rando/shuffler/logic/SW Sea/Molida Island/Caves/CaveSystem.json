@@ -12,7 +12,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
-          "zmb_mapobject_index": 20
+          "zmb_mapobject_index": 20,
+          "display_name": "Chest on ledge"
         },
         {
           "name": "NearFogMap",
@@ -21,7 +22,8 @@
             "name": "TreasureMapSW4"
           },
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
-          "zmb_mapobject_index": 22
+          "zmb_mapobject_index": 22,
+          "display_name": "Chest near the path in the fog"
         },
         {
           "name": "ChestAfterHole",
@@ -30,7 +32,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/isle_pluck/map10.bin/zmb/isle_pluck_10.zmb",
-          "zmb_mapobject_index": 21
+          "zmb_mapobject_index": 21,
+          "display_name": "Chest from dig spot"
         }
       ],
       "exits": [

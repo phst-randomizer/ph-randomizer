@@ -12,7 +12,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/isle_pluck/map13.bin/zmb/isle_pluck_13.zmb",
-          "zmb_mapobject_index": 2
+          "zmb_mapobject_index": 2,
+          "display_name": "House chest"
         }
       ],
       "exits": [

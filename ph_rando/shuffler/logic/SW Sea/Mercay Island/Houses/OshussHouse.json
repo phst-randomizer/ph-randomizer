@@ -7,12 +7,13 @@
       "chests": [
         {
           "name": "PhantomSword",
+          "type": "event",
           "contents": {
             "name": "ProgressiveSword"
           },
-          "type": "event",
           "bmg_file_path": "TODO",
-          "bmg_instruction_index": -1
+          "bmg_instruction_index": -1,
+          "display_name": "Bring the Phantom Sword Blade and the Phantom Hourglass"
         }
       ],
       "exits": [

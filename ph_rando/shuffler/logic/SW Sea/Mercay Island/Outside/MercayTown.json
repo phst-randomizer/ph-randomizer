@@ -12,7 +12,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
-          "zmb_mapobject_index": 113
+          "zmb_mapobject_index": 113,
+          "display_name": "Chest after jumping with the cucco"
         },
         {
           "name": "LeftLedgeChest",
@@ -21,7 +22,8 @@
             "name": "RandomShipPart"
           },
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
-          "zmb_mapobject_index": 97
+          "zmb_mapobject_index": 97,
+          "display_name": "Left chest on the upper ledge"
         },
         {
           "name": "RightLedgeChest",
@@ -30,7 +32,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_main/map03.bin/zmb/isle_main_03.zmb",
-          "zmb_mapobject_index": 98
+          "zmb_mapobject_index": 98,
+          "display_name": "Right chest on the upper ledge"
         },
         {
           "name": "TreasureMapNPC",
@@ -39,7 +42,8 @@
             "name": "TreasureMapSW1"
           },
           "bmg_file_path": "English/Message/main_isl.bmg",
-          "bmg_instruction_index": 749
+          "bmg_instruction_index": 749,
+          "display_name": "Buy the treasure map near Linebeck (50 rupees)"
         }
       ],
       "exits": [

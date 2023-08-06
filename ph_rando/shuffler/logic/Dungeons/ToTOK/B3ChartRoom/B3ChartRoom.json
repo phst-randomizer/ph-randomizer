@@ -12,7 +12,8 @@
             "name": "NWSeaChart"
           },
           "zmb_file_path": "Map/dngn_main/map04.bin/zmb/dngn_main_04.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Sea Chart chest"
         }
       ],
       "exits": [

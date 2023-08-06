@@ -12,7 +12,8 @@
             "name": "RedPotion"
           },
           "zmb_file_path": "Map/dngn_main/map06.bin/zmb/dngn_main_06.zmb",
-          "zmb_mapobject_index": 11
+          "zmb_mapobject_index": 11,
+          "display_name": "Hit the switch after the arenas"
         },
         {
           "name": "BigChest",
@@ -21,7 +22,8 @@
             "name": "TreasureMapSE8"
           },
           "zmb_file_path": "Map/dngn_main/map06.bin/zmb/dngn_main_06.zmb",
-          "zmb_mapobject_index": 12
+          "zmb_mapobject_index": 12,
+          "display_name": "Chest in shortcut"
         }
       ],
       "exits": [

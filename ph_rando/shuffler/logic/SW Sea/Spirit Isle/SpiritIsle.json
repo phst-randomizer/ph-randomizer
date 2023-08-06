@@ -11,7 +11,8 @@
             "name": "PowerSpiritLv1"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Gather 10 Power Gems"
         },
         {
           "name": "Power2",
@@ -20,7 +21,8 @@
             "name": "PowerSpiritLv2"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Gather 20 Power Gems"
         },
         {
           "name": "Wisdom1",
@@ -29,7 +31,8 @@
             "name": "WisdomSpiritLv1"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Gather 10 Wisdom Gems"
         },
         {
           "name": "Wisdom2",
@@ -38,7 +41,8 @@
             "name": "WisdomSpiritLv2"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Gather 20 Wisdom Gems"
         },
         {
           "name": "Courage1",
@@ -47,7 +51,8 @@
             "name": "CourageSpiritLv1"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Gather 10 Courage Gems"
         },
         {
           "name": "Courage2",
@@ -56,7 +61,8 @@
             "name": "CourageSpiritLv2"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Gather 20 Courage Gems"
         }
       ],
       "exits": [
@@ -76,7 +82,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/isle_shrine/map00.bin/zmb/isle_shrine_00.zmb",
-          "zmb_mapobject_index": 138
+          "zmb_mapobject_index": 138,
+          "display_name": "Chest on main island"
         },
         {
           "name": "AfterJumps",
@@ -85,7 +92,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/isle_shrine/map00.bin/zmb/isle_shrine_00.zmb",
-          "zmb_mapobject_index": 105
+          "zmb_mapobject_index": 105,
+          "display_name": "Farthest chest"
         }
       ],
       "exits": [

@@ -12,7 +12,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/isle_pluck/map01.bin/zmb/isle_pluck_01.zmb",
-          "zmb_mapobject_index": 122
+          "zmb_mapobject_index": 122,
+          "display_name": "Chest on the small island"
         },
         {
           "name": "Cliff",
@@ -21,7 +22,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/isle_pluck/map01.bin/zmb/isle_pluck_01.zmb",
-          "zmb_mapobject_index": 135
+          "zmb_mapobject_index": 135,
+          "display_name": "Chest on cliff"
         }
       ],
       "exits": [
