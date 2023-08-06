@@ -1,5 +1,5 @@
 area Bannan:
-  room OutsideLeft:
+  room Outside:
     node LeftSide:
       chest DigSpotLeft
       door Boat
