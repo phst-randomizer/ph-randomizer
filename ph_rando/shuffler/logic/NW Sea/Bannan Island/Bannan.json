@@ -3,10 +3,10 @@
   "name": "Bannan",
   "rooms": [
     {
-      "name": "OutsideLeft",
+      "name": "Outside",
       "chests": [
         {
-          "name": "DigSpot",
+          "name": "DigSpotLeft",
           "type": "dig_spot",
           "contents": {
             "name": "TreasureMapSW5"
@@ -24,6 +24,44 @@
           "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
           "zmb_mapobject_index": 111,
           "display_name": "Chest on small island"
+        },
+        {
+          "name": "CannonMiniGameBombBag",
+          "type": "minigame_reward_chest",
+          "contents": {
+            "name": "BombBagUpgrade"
+          },
+          "display_name": "Win the minigame"
+        },
+        {
+          "name": "DigSpotRight",
+          "type": "dig_spot",
+          "contents": {
+            "name": "TreasureMapSE4"
+          },
+          "zmb_actor_index": 5,
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "display_name": "Dig between the chests"
+        },
+        {
+          "name": "LeftIslandChest",
+          "type": "chest",
+          "contents": {
+            "name": "BigGreenRupee"
+          },
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "zmb_mapobject_index": 86,
+          "display_name": "Left chest on righmost island"
+        },
+        {
+          "name": "RightIslandChest",
+          "type": "chest",
+          "contents": {
+            "name": "CourageGem"
+          },
+          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
+          "zmb_mapobject_index": 87,
+          "display_name": "Right chest on righmost island"
         }
       ],
       "exits": [
@@ -36,8 +74,12 @@
           "entrance": "WayfarerHouse.Main.Entrance"
         },
         {
-          "name": "BannanGrottoEntrance",
+          "name": "BannanGrottoEntranceLeft",
           "entrance": "BannanGrotto.LeftSide.OutsideLeft"
+        },
+        {
+          "name": "BannanGrottoEntranceRight",
+          "entrance": "BannanGrotto.RightSide.OutsideRight"
         }
       ],
       "enemies": [
@@ -84,65 +126,16 @@
       ]
     },
     {
-      "name": "OutsideRight",
-      "chests": [
-        {
-          "name": "CannonMiniGameBombBag",
-          "type": "minigame_reward_chest",
-          "contents": {
-            "name": "BombBagUpgrade"
-          },
-          "display_name": "Win the minigame"
-        },
-        {
-          "name": "DigSpot",
-          "type": "dig_spot",
-          "contents": {
-            "name": "TreasureMapSE4"
-          },
-          "zmb_actor_index": 5,
-          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
-          "display_name": "Dig between the chests"
-        },
-        {
-          "name": "LeftIslandChest",
-          "type": "chest",
-          "contents": {
-            "name": "BigGreenRupee"
-          },
-          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
-          "zmb_mapobject_index": 86,
-          "display_name": "Left chest on righmost island"
-        },
-        {
-          "name": "RightIslandChest",
-          "type": "chest",
-          "contents": {
-            "name": "CourageGem"
-          },
-          "zmb_file_path": "Map/isle_hidari/map00.bin/zmb/isle_hidari_00.zmb",
-          "zmb_mapobject_index": 87,
-          "display_name": "Right chest on righmost island"
-        }
-      ],
-      "exits": [
-        {
-          "name": "BannanGrottoEntrance",
-          "entrance": "BannanGrotto.RightSide.OutsideRight"
-        }
-      ]
-    },
-    {
       "name": "BannanGrotto",
       "chests": [],
       "exits": [
         {
           "name": "OutsideLeft",
-          "entrance": "OutsideLeft.Main.BannanGrottoEntrance"
+          "entrance": "Outside.LeftSide.BannanGrottoEntranceLeft"
         },
         {
           "name": "OutsideRight",
-          "entrance": "OutsideRight.Main.BannanGrottoEntrance"
+          "entrance": "Outside.RightSide.BannanGrottoEntranceRight"
         }
       ]
     },

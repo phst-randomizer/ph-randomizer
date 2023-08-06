@@ -1,7 +1,7 @@
 area Bannan:
   room OutsideLeft:
-    node Main:
-      chest DigSpot
+    node LeftSide:
+      chest DigSpotLeft
       door Boat
       door WayfarerHouse
       door BannanGrottoEntrance
@@ -19,24 +19,24 @@ area Bannan:
     node DefeatedAllEnemies:
       flag MermaidVisible
 
-    node Island:
+    node IslandLeft:
       chest IslandChest
 
-    Main -> Island: item GrapplingHook
-    Main -> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated YellowChuChu1 & defeated YellowChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
+    LeftSide -> IslandLeft: item GrapplingHook
+    LeftSide -> DefeatedAllEnemies: (defeated Rope1 & defeated Rope2 & defeated Rope3 & defeated Rope4 & defeated Rope5 & defeated Rope6 & defeated YellowChuChu1 & defeated YellowChuChu2 & defeated RedChuChu1 & defeated RedChuChu2)
 
-  room OutsideRight:
-    node Main:
+    node RightSide:
       chest CannonMiniGameBombBag
       door BannanGrottoEntrance
       flag CanPlaySalvatoreMinigame
 
-    node Island:
-      chest DigSpot
+    node IslandRight:
+      chest DigSpotRight
       chest LeftIslandChest
       chest RightIslandChest
 
-    Main -> Island: item GrapplingHook
+    RightSide -> IslandRight: item GrapplingHook
+
 
   room BannanGrotto:
     node LeftSide:
