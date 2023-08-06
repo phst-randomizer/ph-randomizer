@@ -12,7 +12,8 @@
             "name": "YellowPotion"
           },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
-          "zmb_mapobject_index": 4
+          "zmb_mapobject_index": 4,
+          "display_name": "Press the plate behind the bombable wall"
         },
         {
           "name": "PullRedLever",
@@ -21,7 +22,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
-          "zmb_mapobject_index": 23
+          "zmb_mapobject_index": 23,
+          "display_name": "Pull the lever with the Grappling Hook"
         },
         {
           "name": "AfterLockedDoor",
@@ -30,7 +32,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
-          "zmb_mapobject_index": 48
+          "zmb_mapobject_index": 48,
+          "display_name": "Chest after locked door"
         }
       ],
       "exits": [

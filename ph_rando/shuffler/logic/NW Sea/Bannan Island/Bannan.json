@@ -149,7 +149,8 @@
             "name": "FishingRod"
           },
           "bmg_instruction_index": 87,
-          "bmg_file_path": "English/Message/hidari.bmg"
+          "bmg_file_path": "English/Message/hidari.bmg",
+          "display_name": "Find the mermaid"
         },
         {
           "name": "WisdomGem",
@@ -158,7 +159,8 @@
             "name": "WisdomGem"
           },
           "bmg_file_path": "English/Message/hidari.bmg",
-          "bmg_instruction_index": 212
+          "bmg_instruction_index": 212,
+          "display_name": "Deliver Jolene's Letter"
         },
         {
           "name": "TradingSequenceEnd",
@@ -167,7 +169,8 @@
             "name": "SwordsmansScroll"
           },
           "zmb_file_path": "Map/isle_hidari/map01.bin/zmb/isle_hidari_01.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Give the Wood Heart to the SS Wayfarer in the SE Sea"
         }
       ],
       "exits": [

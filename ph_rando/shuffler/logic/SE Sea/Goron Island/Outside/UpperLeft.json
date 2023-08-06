@@ -12,7 +12,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_power/map00.bin/zmb/isle_power_00.zmb",
-          "zmb_mapobject_index": 5
+          "zmb_mapobject_index": 5,
+          "display_name": "Chest in maze from right"
         }
       ],
       "exits": [

@@ -14,7 +14,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map10.bin/zmb/dngn_main_10.zmb",
-          "zmb_mapobject_index": 4
+          "zmb_mapobject_index": 4,
+          "display_name": "Chest on island"
         },
         {
           "name": "PhantomKiller",
@@ -23,7 +24,8 @@
             "name": "RandomShipPart"
           },
           "zmb_file_path": "Map/dngn_main/map10.bin/zmb/dngn_main_10.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Defeat the Phantoms"
         },
         {
           "name": "BigChest",
@@ -32,7 +34,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/dngn_main/map10.bin/zmb/dngn_main_10.zmb",
-          "zmb_mapobject_index": 5
+          "zmb_mapobject_index": 5,
+          "display_name": "Hit the switch"
         }
       ],
       "exits": [

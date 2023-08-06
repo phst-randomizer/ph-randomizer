@@ -12,7 +12,8 @@
             "name": "TreasureMapSE1"
           },
           "zmb_file_path": "TODO",
-          "zmb_actor_index": 0
+          "zmb_actor_index": 0,
+          "display_name": "Play the game (1st treasure)"
         },
         {
           "name": "TreasureMap2",
@@ -21,7 +22,8 @@
             "name": "TreasureMapSE2"
           },
           "zmb_file_path": "TODO",
-          "zmb_actor_index": 0
+          "zmb_actor_index": 0,
+          "display_name": "Play the game (2nd treasure)"
         },
         {
           "name": "TreasureMap3",
@@ -30,7 +32,8 @@
             "name": "TreasureMapNE2"
           },
           "zmb_file_path": "TODO",
-          "zmb_actor_index": 0
+          "zmb_actor_index": 0,
+          "display_name": "Play the game after obtaining the NE Sea chart (3rd treasure)"
         },
         {
           "name": "TreasureMap4",
@@ -39,7 +42,8 @@
             "name": "TreasureMapNE3"
           },
           "zmb_file_path": "TODO",
-          "zmb_actor_index": 0
+          "zmb_actor_index": 0,
+          "display_name": "Play the game after obtaining the NE Sea chart (4th treasure)"
         }
       ],
       "exits": [

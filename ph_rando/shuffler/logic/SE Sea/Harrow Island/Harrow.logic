@@ -4,9 +4,7 @@ area HarrowIsland:
       door Boat
       mail Mailbox
 
-    node Minigame
-
-    node HaveSESeaChart:
+    node Minigame:
       chest TreasureMap1
       chest TreasureMap2
 
@@ -18,5 +16,4 @@ area HarrowIsland:
 
     # TODO: verify that these are actually the requirements
     # to dig up these treasures
-    Minigame <-> HaveSESeaChart: flag IceTempleBeaten
     Minigame <-> HaveNESeaChart: item NESeaChart

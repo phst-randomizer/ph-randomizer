@@ -12,7 +12,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/isle_myou/map04.bin/zmb/isle_myou_04.zmb",
-          "zmb_mapobject_index": 11
+          "zmb_mapobject_index": 11,
+          "display_name": "Chest in rupee room"
         }
       ],
       "exits": [

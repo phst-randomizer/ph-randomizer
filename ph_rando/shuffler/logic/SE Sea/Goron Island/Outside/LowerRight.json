@@ -12,7 +12,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/isle_power/map03.bin/zmb/isle_power_03.zmb",
-          "zmb_actor_index": 14
+          "zmb_actor_index": 14,
+          "display_name": "Dig the spot near the Chief's House"
         }
       ],
       "exits": [

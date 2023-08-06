@@ -12,7 +12,8 @@
             "name": "TreasureMapNE1"
           },
           "zmb_file_path": "Map/isle_myou/map02.bin/zmb/isle_myou_02.zmb",
-          "zmb_mapobject_index": 2
+          "zmb_mapobject_index": 2,
+          "display_name": "Leftmost chest"
         },
         {
           "name": "RupoorChest2",
@@ -21,7 +22,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/isle_myou/map02.bin/zmb/isle_myou_02.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Left chest"
         },
         {
           "name": "RupoorChest3",
@@ -30,7 +32,8 @@
             "name": "RandomShipPart2"
           },
           "zmb_file_path": "Map/isle_myou/map02.bin/zmb/isle_myou_02.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Right chest"
         },
         {
           "name": "RupoorChest4",
@@ -39,7 +42,8 @@
             "name": "RandomShipPart2"
           },
           "zmb_file_path": "Map/isle_myou/map02.bin/zmb/isle_myou_02.zmb",
-          "zmb_mapobject_index": 4
+          "zmb_mapobject_index": 4,
+          "display_name": "Rightmost chest"
         }
       ],
       "exits": [

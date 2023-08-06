@@ -12,7 +12,8 @@
             "name": "TreasureMapSE5"
           },
           "bmg_file_path": "English/Message/power.bmg",
-          "bmg_instruction_index": 727
+          "bmg_instruction_index": 727,
+          "display_name": "Defeat the enemies on the ledge"
         },
         {
           "name": "ChestAboveHouse",
@@ -21,7 +22,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Chest above the first Goron house"
         }
       ],
       "exits": [

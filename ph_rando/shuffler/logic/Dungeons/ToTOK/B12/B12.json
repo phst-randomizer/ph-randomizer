@@ -11,7 +11,8 @@
             "name": "BigGoldRupee"
           },
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
-          "zmb_mapobject_index": 10
+          "zmb_mapobject_index": 10,
+          "display_name": "Defeat all Phantoms"
         },
         {
           "name": "WizzrobeKiller",
@@ -20,7 +21,8 @@
             "name": "RandomShipPart"
           },
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
-          "zmb_mapobject_index": 31
+          "zmb_mapobject_index": 31,
+          "display_name": "Defeat all Wizzrobes"
         },
         {
           "name": "RightSwitch",
@@ -29,7 +31,8 @@
             "name": "TreasureMapNE8"
           },
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
-          "zmb_mapobject_index": 30
+          "zmb_mapobject_index": 30,
+          "display_name": "Hit the right switch"
         },
         {
           "name": "LeftForceGem",
@@ -41,7 +44,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
-          "zmb_mapobject_index": 8
+          "zmb_mapobject_index": 8,
+          "display_name": "Top left chest"
         },
         {
           "name": "RightForceGem",
@@ -53,7 +57,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map16.bin/zmb/dngn_main_16.zmb",
-          "zmb_mapobject_index": 9
+          "zmb_mapobject_index": 9,
+          "display_name": "Top right chest"
         },
         {
           "name": "PhantomForceGem",
@@ -63,7 +68,8 @@
             "states": [
               "Gem3B12"
             ]
-          }
+          },
+          "display_name": "Stun the Phantom"
         }
       ],
       "exits": [

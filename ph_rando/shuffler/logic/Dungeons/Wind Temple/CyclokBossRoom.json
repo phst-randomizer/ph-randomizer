@@ -11,7 +11,8 @@
             "name": "Sand2M"
           },
           "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_instruction_index": 0,
+          "display_name": "Cyclok's Sands of Hours"
         },
         {
           "name": "SpiritOfWisdom",
@@ -20,7 +21,8 @@
             "name": "WisdomSpirit"
           },
           "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0
+          "bmg_instruction_index": 0,
+          "display_name": "Spirit of Wisdom"
         },
         {
           "name": "HeartContainer",
@@ -29,7 +31,8 @@
             "name": "HeartContainer"
           },
           "zmb_file_path": "Map/boss_wind/map00.bin/zmb/boss_wind_00.zmb",
-          "zmb_mapobject_index": 12
+          "zmb_mapobject_index": 12,
+          "display_name": "Heart Container chest"
         }
       ],
       "exits": [

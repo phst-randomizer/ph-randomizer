@@ -12,7 +12,8 @@
           },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
-          "zmb_actor_index": 41
+          "zmb_actor_index": 41,
+          "display_name": "Dig the spot to the right of the cave entrance area"
         },
         {
           "name": "DigSpot2",
@@ -21,7 +22,8 @@
           },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
-          "zmb_actor_index": 42
+          "zmb_actor_index": 42,
+          "display_name": "Dig the spot to the top of the cave entrance area"
         },
         {
           "name": "DigSpot3",
@@ -30,7 +32,8 @@
           },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
-          "zmb_actor_index": 43
+          "zmb_actor_index": 43,
+          "display_name": "Dig the spot to the left of the cave entrance area"
         },
         {
           "name": "DigSpot4",
@@ -39,7 +42,8 @@
           },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
-          "zmb_actor_index": 50
+          "zmb_actor_index": 50,
+          "display_name": "Dig the spot after the vents"
         },
         {
           "name": "OnLedge",
@@ -48,7 +52,8 @@
           },
           "type": "chest",
           "zmb_file_path": "Map/isle_wind/map00.bin/zmb/isle_wind_00.zmb",
-          "zmb_mapobject_index": 156
+          "zmb_mapobject_index": 156,
+          "display_name": "Chest on ledge in the vents area"
         }
       ],
       "exits": [

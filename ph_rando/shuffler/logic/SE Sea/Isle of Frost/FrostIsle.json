@@ -12,7 +12,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/isle_water/map00.bin/zmb/isle_water_00.zmb",
-          "zmb_mapobject_index": 10
+          "zmb_mapobject_index": 10,
+          "display_name": "Chest on ledge near the more-or-less sensitive Anouki"
         },
         {
           "name": "BigGreenRupee",
@@ -21,7 +22,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_actor_index": 2,
-          "zmb_file_path": "Map/isle_water/map00.bin/zmb/isle_water_00.zmb"
+          "zmb_file_path": "Map/isle_water/map00.bin/zmb/isle_water_00.zmb",
+          "display_name": "Dig in front of the Chief's house sign"
         }
       ],
       "exits": [
@@ -91,7 +93,8 @@
             "name": "BigGoldRupee"
           },
           "zmb_actor_index": 9,
-          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
+          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb",
+          "display_name": "Dig in the middle of the bottom right islet"
         },
         {
           "name": "DoboSign",
@@ -100,7 +103,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_actor_index": 3,
-          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
+          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb",
+          "display_name": "Dig in front of Dobo's House sign"
         },
         {
           "name": "FofoSign",
@@ -109,7 +113,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_actor_index": 5,
-          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
+          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb",
+          "display_name": "Dig in front of Fofo's House sign"
         },
         {
           "name": "GossipStoneHint",
@@ -118,7 +123,8 @@
             "name": "BigRedRupee"
           },
           "zmb_actor_index": 8,
-          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
+          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb",
+          "display_name": "Dig in front of the right ~Anouki Estates~ sign"
         },
         {
           "name": "BottomLeftIsland",
@@ -127,7 +133,8 @@
             "name": "TreasureMapNW3"
           },
           "zmb_actor_index": 10,
-          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb"
+          "zmb_file_path": "Map/isle_water/map02.bin/zmb/isle_water_02.zmb",
+          "display_name": "Dig in the middle of the bottom left islet"
         }
       ],
       "exits": [
@@ -245,7 +252,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Chest on ledge to the right"
         },
         {
           "name": "DoubleLeft",
@@ -254,7 +262,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
-          "zmb_mapobject_index": 5
+          "zmb_mapobject_index": 5,
+          "display_name": "Left chest at the bottom"
         },
         {
           "name": "DoubleRight",
@@ -263,7 +272,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
-          "zmb_mapobject_index": 6
+          "zmb_mapobject_index": 6,
+          "display_name": "Right chest at the bottom"
         },
         {
           "name": "RightHigher",
@@ -272,7 +282,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_water/map03.bin/zmb/isle_water_03.zmb",
-          "zmb_mapobject_index": 24
+          "zmb_mapobject_index": 24,
+          "display_name": "Highest chest on the bottom right"
         }
       ],
       "exits": [

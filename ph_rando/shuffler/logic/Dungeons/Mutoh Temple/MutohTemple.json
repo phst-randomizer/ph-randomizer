@@ -88,7 +88,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_wisdom/map01.bin/zmb/dngn_wisdom_01.zmb",
-          "zmb_mapobject_index": 56
+          "zmb_mapobject_index": 56,
+          "display_name": "Defeat the enemies"
         }
       ],
       "exits": [
@@ -138,7 +139,8 @@
             "name": "Hammer"
           },
           "zmb_file_path": "Map/dngn_wisdom/map02.bin/zmb/dngn_wisdom_02.zmb",
-          "zmb_mapobject_index": 2
+          "zmb_mapobject_index": 2,
+          "display_name": "Hammer chest"
         }
       ],
       "exits": [
@@ -172,7 +174,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
-          "zmb_mapobject_index": 196
+          "zmb_mapobject_index": 196,
+          "display_name": "Chest in the middle"
         },
         {
           "name": "MiddleHammer",
@@ -181,7 +184,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
-          "zmb_mapobject_index": 262
+          "zmb_mapobject_index": 262,
+          "display_name": "Chest after Hammer"
         },
         {
           "name": "BigChest",
@@ -190,7 +194,8 @@
             "name": "BossKeyMutohTemple"
           },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
-          "zmb_mapobject_index": 28
+          "zmb_mapobject_index": 28,
+          "display_name": "Boss Key chest"
         }
       ],
       "exits": [
@@ -260,7 +265,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
-          "zmb_mapobject_index": 34
+          "zmb_mapobject_index": 34,
+          "display_name": "Chest after stairs"
         },
         {
           "name": "Bottom",
@@ -269,7 +275,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
-          "zmb_mapobject_index": 54
+          "zmb_mapobject_index": 54,
+          "display_name": "Chest in the bottom left corner"
         }
       ],
       "exits": [
@@ -357,7 +364,8 @@
             "name": "Aquanine"
           },
           "zmb_file_path": "Map/dngn_wisdom/map06.bin/zmb/dngn_wisdom_06.zmb",
-          "zmb_mapobject_index": 2
+          "zmb_mapobject_index": 2,
+          "display_name": "Dungeon reward"
         }
       ],
       "exits": [

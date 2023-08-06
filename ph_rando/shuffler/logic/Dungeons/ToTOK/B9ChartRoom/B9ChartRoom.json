@@ -11,7 +11,8 @@
             "name": "SESeaChart"
           },
           "zmb_file_path": "Map/dngn_main/map13.bin/zmb/dngn_main_13.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Sea Chart chest"
         }
       ],
       "exits": [

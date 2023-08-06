@@ -12,7 +12,8 @@
             "name": "WisdomGem"
           },
           "bmg_file_path": "English/Message/power.bmg",
-          "bmg_instruction_index": 208
+          "bmg_instruction_index": 208,
+          "display_name": "Answer the questions correctly"
         },
         {
           "name": "BigRedRupee",
@@ -21,7 +22,8 @@
             "name": "BigRedRupee"
           },
           "bmg_file_path": "English/Message/power.bmg",
-          "bmg_instruction_index": 495
+          "bmg_instruction_index": 495,
+          "display_name": "Come back after completing Goron Temple"
         }
       ],
       "exits": [

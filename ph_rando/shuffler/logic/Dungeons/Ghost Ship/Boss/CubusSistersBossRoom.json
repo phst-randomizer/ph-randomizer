@@ -10,7 +10,8 @@
           "type": "freestanding",
           "contents": {
             "name": "GhostKey"
-          }
+          },
+          "display_name": "Dungeon Reward"
         },
         {
           "name": "HeartContainer",
@@ -19,7 +20,8 @@
             "name": "HeartContainer"
           },
           "zmb_file_path": "Map/boss_ghost/map00.bin/zmb/boss_ghost_00.zmb",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Heart Container chest"
         }
       ],
       "exits": [

@@ -9,7 +9,8 @@
           "contents": {
             "name": "SmallKey"
           },
-          "type": "on_enemy"
+          "type": "on_enemy",
+          "display_name": "Stun the Phantom"
         },
         {
           "name": "PhantomKiller",
@@ -18,7 +19,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
-          "zmb_mapobject_index": 23
+          "zmb_mapobject_index": 23,
+          "display_name": "Defeat all Phantoms"
         },
         {
           "name": "EyeKiller",
@@ -27,7 +29,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
-          "zmb_mapobject_index": 31
+          "zmb_mapobject_index": 31,
+          "display_name": "Defeat all Phantom Eyes"
         },
         {
           "name": "ChestAfterHammer",
@@ -36,7 +39,8 @@
             "name": "TreasureMapNE7"
           },
           "zmb_file_path": "Map/dngn_main/map14.bin/zmb/dngn_main_14.zmb",
-          "zmb_mapobject_index": 28
+          "zmb_mapobject_index": 28,
+          "display_name": "Chest after Hammer catapult"
         }
       ],
       "exits": [

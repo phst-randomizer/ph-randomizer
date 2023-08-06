@@ -11,7 +11,8 @@
             "name": "BigRedRupee"
           },
           "zmb_file_path": "Map/dngn_main/map15.bin/zmb/dngn_main_15.zmb",
-          "zmb_mapobject_index": 15
+          "zmb_mapobject_index": 15,
+          "display_name": "Defeat all Phantoms"
         },
         {
           "name": "EyeKiller",
@@ -20,7 +21,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_main/map15.bin/zmb/dngn_main_15.zmb",
-          "zmb_mapobject_index": 80
+          "zmb_mapobject_index": 80,
+          "display_name": "Defeat all Phantom Eyes"
         }
       ],
       "exits": [

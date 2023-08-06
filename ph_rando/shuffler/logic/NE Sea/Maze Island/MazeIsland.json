@@ -12,7 +12,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_mapobject_index": 33
+          "zmb_mapobject_index": 33,
+          "display_name": "Complete the Beginner Challenge"
         },
         {
           "name": "NormalChest",
@@ -21,7 +22,8 @@
             "name": "TreasureMapNE4"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_mapobject_index": 34
+          "zmb_mapobject_index": 34,
+          "display_name": "Complete the Normal Challenge"
         },
         {
           "name": "ExpertChest",
@@ -30,7 +32,8 @@
             "name": "HeartContainer"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_mapobject_index": 35
+          "zmb_mapobject_index": 35,
+          "display_name": "Complete the Expert Challenge"
         },
         {
           "name": "GoldRupeeChest",
@@ -39,7 +42,8 @@
             "name": "BigGoldRupee"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_mapobject_index": 100
+          "zmb_mapobject_index": 100,
+          "display_name": "Complete all Challenges"
         },
         {
           "name": "HiddenChest",
@@ -48,7 +52,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_mapobject_index": 105
+          "zmb_mapobject_index": 105,
+          "display_name": "Chest behind bombable wall"
         },
         {
           "name": "BigGreenRupeeDigSpot1",
@@ -57,7 +62,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_actor_index": 37
+          "zmb_actor_index": 37,
+          "display_name": "Dig west of the upper right pool"
         },
         {
           "name": "BigGreenRupeeDigSpot2",
@@ -66,7 +72,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_actor_index": 40
+          "zmb_actor_index": 40,
+          "display_name": "Dig around the slingshot pegs to the top left corner"
         },
         {
           "name": "BigGreenRupeeDigSpot3",
@@ -75,7 +82,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "Map/isle_small2/map00.bin/zmb/isle_small2_00.zmb",
-          "zmb_actor_index": 41
+          "zmb_actor_index": 41,
+          "display_name": "Near the bottom right corner"
         },
         {
           "name": "SmallRedRupeeDigSpot1",

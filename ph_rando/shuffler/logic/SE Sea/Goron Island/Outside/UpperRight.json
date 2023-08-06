@@ -12,7 +12,8 @@
             "name": "TreasureMapSW2"
           },
           "zmb_file_path": "Map/isle_power/map01.bin/zmb/isle_power_01.zmb",
-          "zmb_mapobject_index": 17
+          "zmb_mapobject_index": 17,
+          "display_name": "Chest after Bombchus"
         },
         {
           "name": "ChestBehindSpikes",
@@ -21,7 +22,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/isle_power/map01.bin/zmb/isle_power_01.zmb",
-          "zmb_mapobject_index": 10
+          "zmb_mapobject_index": 10,
+          "display_name": "Press the plate"
         }
       ],
       "exits": [

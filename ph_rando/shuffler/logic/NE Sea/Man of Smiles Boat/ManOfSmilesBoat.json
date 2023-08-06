@@ -12,7 +12,8 @@
             "name": "TreasureMapNE6"
           },
           "bmg_file_path": "TODO",
-          "bmg_instruction_index": -1
+          "bmg_instruction_index": -1,
+          "display_name": "Take the Normal thing"
         },
         {
           "name": "MysteriousThing",
@@ -21,7 +22,8 @@
             "name": "HeroNewClothes"
           },
           "bmg_file_path": "English/Message/ship.bmg",
-          "bmg_instruction_index": 374
+          "bmg_instruction_index": 374,
+          "display_name": "Take the Mysterious thing"
         }
       ],
       "exits": [

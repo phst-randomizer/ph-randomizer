@@ -12,7 +12,8 @@
             "name": "BossKeyWindTemple"
           },
           "zmb_file_path": "Map/dngn_wind/map00.bin/zmb/dngn_wind_00.zmb",
-          "zmb_mapobject_index": 29
+          "zmb_mapobject_index": 29,
+          "display_name": "Boss Key chest"
         }
       ],
       "exits": [
@@ -62,7 +63,8 @@
             "name": "RandomTreasure"
           },
           "zmb_file_path": "Map/dngn_wind/map01.bin/zmb/dngn_wind_01.zmb",
-          "zmb_mapobject_index": 180
+          "zmb_mapobject_index": 180,
+          "display_name": "Chest in the bottom right corner"
         },
         {
           "name": "AfterAirGeysers",
@@ -71,14 +73,16 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/dngn_wind/map01.bin/zmb/dngn_wind_01.zmb",
-          "zmb_mapobject_index": 178
+          "zmb_mapobject_index": 178,
+          "display_name": "Chest after air geysers"
         },
         {
           "name": "DroppedKey",
           "type": "freestanding",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Activate the windmill"
         }
       ],
       "exits": [
@@ -132,7 +136,8 @@
             "name": "PowerGem"
           },
           "zmb_file_path": "Map/dngn_wind/map02.bin/zmb/dngn_wind_02.zmb",
-          "zmb_mapobject_index": 44
+          "zmb_mapobject_index": 44,
+          "display_name": "Chest to the left of the sand pit"
         },
         {
           "name": "BombsChest",
@@ -141,7 +146,8 @@
             "name": "Bombs"
           },
           "zmb_file_path": "Map/dngn_wind/map02.bin/zmb/dngn_wind_02.zmb",
-          "zmb_mapobject_index": 7
+          "zmb_mapobject_index": 7,
+          "display_name": "Bombs chest"
         }
       ],
       "exits": [
@@ -175,7 +181,8 @@
           "type": "freestanding",
           "contents": {
             "name": "BigGreenRupee"
-          }
+          },
+          "display_name": "Freestanding rupee"
         }
       ],
       "exits": [

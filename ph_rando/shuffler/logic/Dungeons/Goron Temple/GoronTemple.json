@@ -12,7 +12,8 @@
             "name": "TreasureMapSE7"
           },
           "zmb_file_path": "Map/dngn_power/map00.bin/zmb/dngn_power_00.zmb",
-          "zmb_mapobject_index": 18
+          "zmb_mapobject_index": 18,
+          "display_name": "Hit the switch in the top right sand"
         },
         {
           "name": "EyeShot",
@@ -21,7 +22,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/dngn_power/map00.bin/zmb/dngn_power_00.zmb",
-          "zmb_mapobject_index": 16
+          "zmb_mapobject_index": 16,
+          "display_name": "Shoot the eye target"
         }
       ],
       "exits": [
@@ -104,7 +106,8 @@
             "name": "Bombchus"
           },
           "zmb_file_path": "Map/dngn_power/map01.bin/zmb/dngn_power_01.zmb",
-          "zmb_mapobject_index": 20
+          "zmb_mapobject_index": 20,
+          "display_name": "Bombchus chest"
         },
         {
           "name": "EyeSlugSlayer",
@@ -113,7 +116,8 @@
             "name": "RandomTreasure2"
           },
           "zmb_file_path": "Map/dngn_power/map01.bin/zmb/dngn_power_01.zmb",
-          "zmb_mapobject_index": 31
+          "zmb_mapobject_index": 31,
+          "display_name": "Defeat all the Eye Slugs"
         }
       ],
       "exits": [
@@ -191,7 +195,8 @@
             "name": "RandomTreasure2"
           },
           "zmb_file_path": "Map/dngn_power/map02.bin/zmb/dngn_power_02.zmb",
-          "zmb_mapobject_index": 31
+          "zmb_mapobject_index": 31,
+          "display_name": "Defeat all the Eye Slugs"
         },
         {
           "name": "BossKey",
@@ -200,7 +205,8 @@
             "name": "BossKeyGoronTemple"
           },
           "zmb_file_path": "Map/dngn_power/map02.bin/zmb/dngn_power_02.zmb",
-          "zmb_mapobject_index": 3
+          "zmb_mapobject_index": 3,
+          "display_name": "Boss Key chest"
         }
       ],
       "exits": [
@@ -298,7 +304,8 @@
             "name": "SmallRedRupee"
           },
           "zmb_file_path": "Map/dngn_power/map03.bin/zmb/dngn_power_03.zmb",
-          "zmb_mapobject_index": 32
+          "zmb_mapobject_index": 32,
+          "display_name": "Defeat all the Miniblins"
         }
       ],
       "exits": [
@@ -386,7 +393,8 @@
             "name": "Crimsonine"
           },
           "zmb_file_path": "Map/dngn_power/map10.bin/zmb/dngn_power_10.zmb",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Dungeon Reward"
         }
       ],
       "exits": [

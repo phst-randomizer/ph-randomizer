@@ -12,14 +12,16 @@
             "name": "BigGoldRupee"
           },
           "zmb_file_path": "Map/isle_small5/map00.bin/zmb/isle_small5_00.zmb",
-          "zmb_mapobject_index": 21
+          "zmb_mapobject_index": 21,
+          "display_name": "Blow in the microphone"
         },
         {
           "name": "GoronGame",
           "type": "minigame_reward_chest",
           "contents": {
             "name": "BombchuBagUpgrade"
-          }
+          },
+          "display_name": "Win Gongoron minigame"
         },
         {
           "name": "HinoxSlayer",
@@ -28,7 +30,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "Map/isle_small5/map00.bin/zmb/isle_small5_00.zmb",
-          "zmb_mapobject_index": 76
+          "zmb_mapobject_index": 76,
+          "display_name": "Defeat the Hinox on the upper screen"
         },
         {
           "name": "UndergroundGem",
@@ -37,7 +40,8 @@
             "name": "CourageGem"
           },
           "bmg_file_path": "English/Message/kojima5.bmg",
-          "bmg_instruction_index": 135
+          "bmg_instruction_index": 135,
+          "display_name": "Dig at the Menu button"
         }
       ],
       "exits": [

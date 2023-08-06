@@ -12,7 +12,8 @@
             "name": "BossKeyIceTemple"
           },
           "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Boss Key chest"
         },
         {
           "name": "Bounce",
@@ -21,7 +22,8 @@
             "name": "SmallKey"
           },
           "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
-          "zmb_mapobject_index": 26
+          "zmb_mapobject_index": 26,
+          "display_name": "Shoot the closing eyes"
         },
         {
           "name": "DefeatThemAll",
@@ -30,7 +32,8 @@
             "name": "PurplePotion"
           },
           "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
-          "zmb_mapobject_index": 92
+          "zmb_mapobject_index": 92,
+          "display_name": "Defeat the enemies in the arena"
         }
       ],
       "exits": [

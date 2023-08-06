@@ -12,7 +12,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/isle_wind/map11.bin/zmb/isle_wind_11.zmb",
-          "zmb_mapobject_index": 4
+          "zmb_mapobject_index": 4,
+          "display_name": "Chest in the miniblin pit"
         },
         {
           "name": "EnemyClearChest",
@@ -21,7 +22,8 @@
             "name": "TreasureMapNW4"
           },
           "zmb_file_path": "Map/isle_wind/map11.bin/zmb/isle_wind_11.zmb",
-          "zmb_mapobject_index": 10
+          "zmb_mapobject_index": 10,
+          "display_name": "Defeat all the miniblins in the pit"
         }
       ],
       "exits": [

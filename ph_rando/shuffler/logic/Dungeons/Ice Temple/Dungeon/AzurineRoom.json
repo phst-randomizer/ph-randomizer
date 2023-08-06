@@ -12,7 +12,8 @@
             "name": "Azurine"
           },
           "zmb_file_path": "Map/dngn_water/map06.bin/zmb/dngn_water_06.zmb",
-          "zmb_mapobject_index": 1
+          "zmb_mapobject_index": 1,
+          "display_name": "Dungeon Reward"
         }
       ],
       "exits": [

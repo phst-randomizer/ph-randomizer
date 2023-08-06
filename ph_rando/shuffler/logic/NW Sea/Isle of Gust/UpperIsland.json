@@ -12,7 +12,8 @@
           },
           "type": "dig_spot",
           "zmb_file_path": "Map/isle_wind/map01.bin/zmb/isle_wind_01.zmb",
-          "zmb_actor_index": 10
+          "zmb_actor_index": 10,
+          "display_name": "Dig the spot below the sacred windmill hint"
         },
         {
           "name": "WindmillChest",
@@ -21,7 +22,8 @@
           },
           "type": "chest",
           "zmb_file_path": "Map/isle_wind/map01.bin/zmb/isle_wind_01.zmb",
-          "zmb_mapobject_index": 111
+          "zmb_mapobject_index": 111,
+          "display_name": "Chest in the bottom right corner of the windmills"
         }
       ],
       "exits": [

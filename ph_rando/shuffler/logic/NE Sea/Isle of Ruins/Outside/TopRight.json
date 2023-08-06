@@ -12,7 +12,8 @@
             "name": "BigGreenRupee"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Underwater chest"
         },
         {
           "name": "LedgeChest",
@@ -21,7 +22,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Chest on ledge"
         },
         {
           "name": "NearDoylanPyramid",
@@ -30,7 +32,8 @@
             "name": "CourageGem"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Chest near Doylan's Pyramid"
         },
         {
           "name": "NearMutohPyramid",
@@ -39,7 +42,8 @@
             "name": "BigRedRupee"
           },
           "zmb_file_path": "TODO",
-          "zmb_mapobject_index": 0
+          "zmb_mapobject_index": 0,
+          "display_name": "Chest near Mutoh's Pyramid"
         }
       ],
       "exits": [

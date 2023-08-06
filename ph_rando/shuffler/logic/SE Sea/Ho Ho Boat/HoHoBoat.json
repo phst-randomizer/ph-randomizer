@@ -12,7 +12,8 @@
             "name": "GuardNotebook"
           },
           "bmg_file_path": "English/Message/ship.bmg",
-          "bmg_instruction_index": 468
+          "bmg_instruction_index": 468,
+          "display_name": "Give the Kaleidoscope"
         }
       ],
       "exits": [

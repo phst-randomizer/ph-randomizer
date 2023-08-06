@@ -12,7 +12,8 @@
             "name": "TreasureMapNE5"
           },
           "zmb_file_path": "Map/isle_myou/map00.bin/zmb/isle_myou_00.zmb",
-          "zmb_mapobject_index": 124
+          "zmb_mapobject_index": 124,
+          "display_name": "Chest on the head"
         },
         {
           "name": "RegalNecklace",
@@ -21,7 +22,8 @@
             "name": "RegalNecklace"
           },
           "zmb_file_path": "Map/isle_myou/map00.bin/zmb/isle_myou_00.zmb",
-          "zmb_mapobject_index": 39
+          "zmb_mapobject_index": 39,
+          "display_name": "Regal Necklace chest"
         }
       ],
       "exits": [

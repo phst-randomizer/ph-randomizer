@@ -14,7 +14,8 @@
             ]
           },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
-          "zmb_mapobject_index": 28
+          "zmb_mapobject_index": 28,
+          "display_name": "Top left chest"
         },
         {
           "name": "WizzrobeKiller",
@@ -23,7 +24,8 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
-          "zmb_mapobject_index": 29
+          "zmb_mapobject_index": 29,
+          "display_name": "Defeat the Wizzrobes"
         },
         {
           "name": "PhantomKiller",
@@ -32,7 +34,8 @@
             "name": "RandomShipPart"
           },
           "zmb_file_path": "Map/dngn_main/map12.bin/zmb/dngn_main_12.zmb",
-          "zmb_mapobject_index": 30
+          "zmb_mapobject_index": 30,
+          "display_name": "Defeat the Phantoms"
         },
         {
           "name": "SquareCrystal",
@@ -42,7 +45,8 @@
             "states": [
               "SquareCrystal"
             ]
-          }
+          },
+          "display_name": "Stun the Phantom"
         }
       ],
       "exits": [

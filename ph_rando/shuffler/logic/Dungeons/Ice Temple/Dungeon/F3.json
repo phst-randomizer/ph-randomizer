@@ -12,7 +12,8 @@
             "name": "RedPotion"
           },
           "zmb_file_path": "Map/dngn_water/map01.bin/zmb/dngn_water_01.zmb",
-          "zmb_mapobject_index": 80
+          "zmb_mapobject_index": 80,
+          "display_name": "Chest in the upper-right corner"
         },
         {
           "name": "ChestAfterBlue",
@@ -21,14 +22,16 @@
             "name": "WisdomGem"
           },
           "zmb_file_path": "Map/dngn_water/map01.bin/zmb/dngn_water_01.zmb",
-          "zmb_mapobject_index": 61
+          "zmb_mapobject_index": 61,
+          "display_name": "Chest after stairs on the left"
         },
         {
           "name": "FreestandingKey",
           "type": "freestanding",
           "contents": {
             "name": "SmallKey"
-          }
+          },
+          "display_name": "Hit the switches"
         }
       ],
       "exits": [
