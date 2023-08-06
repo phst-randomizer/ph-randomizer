@@ -4,7 +4,7 @@ area Bannan:
       chest DigSpotLeft
       door Boat
       door WayfarerHouse
-      door BannanGrottoEntrance
+      door BannanGrottoEntranceLeft
       enemy Rope1
       enemy Rope2
       enemy Rope3
@@ -27,7 +27,7 @@ area Bannan:
 
     node RightSide:
       chest CannonMiniGameBombBag
-      door BannanGrottoEntrance
+      door BannanGrottoEntranceRight
       flag CanPlaySalvatoreMinigame
 
     node IslandRight:
