@@ -173,7 +173,7 @@
       "exits": [
         {
           "name": "Entrance",
-          "entrance": "OutsideLeft.Main.WayfarerHouse"
+          "entrance": "Outside.LeftSide.WayfarerHouse"
         }
       ]
     }
