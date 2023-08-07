@@ -7,7 +7,7 @@
       "chests": [
         {
           "name": "WoodenShield",
-          "type": "island_shop",
+          "type": "shop",
           "contents": {
             "name": "Shield"
           },
@@ -16,7 +16,7 @@
         },
         {
           "name": "QuiverUpgrade",
-          "type": "island_shop",
+          "type": "shop",
           "contents": {
             "name": "QuiverUpgrade"
           },

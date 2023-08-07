@@ -7,7 +7,7 @@
       "chests": [
         {
           "name": "BombchuBagUpgrade",
-          "type": "island_shop",
+          "type": "shop",
           "contents": {
             "name": "BombchuBagUpgrade"
           },

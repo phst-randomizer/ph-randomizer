@@ -66,8 +66,8 @@ class Event(BaseCheck):
     )
 
 
-class IslandShop(BaseCheck):
-    type: Literal['island_shop']
+class Shop(BaseCheck):
+    type: Literal['shop']
     overlay: int = Field(..., description='The code overlay this shop item is on')
     overlay_offset: str = Field(..., description='Hex offset from overlay to the shop item')
 
@@ -106,7 +106,7 @@ class MinigameRewardChest(BaseCheck):
 Check: TypeAlias = (
     Chest
     | Event
-    | IslandShop
+    | Shop
     | Tree
     | Freestanding
     | OnEnemy

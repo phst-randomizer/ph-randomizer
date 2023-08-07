@@ -7,7 +7,7 @@ from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS
 from ph_rando.patcher.main import _patch_shop_items
-from ph_rando.shuffler.aux_models import IslandShop, Item
+from ph_rando.shuffler.aux_models import Item, Shop
 
 from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 
@@ -28,7 +28,7 @@ def island_shop_test_emu(
         for area in aux_data.areas.values()
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == IslandShop
+        if type(chest) == Shop
     ]
     for chest in chests:
         chest.contents = Item(name=ITEMS_REVERSED[request.param], states=set())

@@ -144,8 +144,8 @@
         "bmg_instruction_index"
       ]
     },
-    "IslandShop": {
-      "title": "IslandShop",
+    "Shop": {
+      "title": "Shop",
       "type": "object",
       "properties": {
         "name": {
@@ -170,7 +170,7 @@
         "type": {
           "title": "Type",
           "enum": [
-            "island_shop"
+            "shop"
           ],
           "type": "string"
         },
@@ -552,7 +552,7 @@
                 "$ref": "#/definitions/Event"
               },
               {
-                "$ref": "#/definitions/IslandShop"
+                "$ref": "#/definitions/Shop"
               },
               {
                 "$ref": "#/definitions/Tree"

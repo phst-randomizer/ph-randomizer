@@ -7,7 +7,7 @@
       "chests": [
         {
           "name": "PowerGem",
-          "type": "island_shop",
+          "type": "shop",
           "contents": {
             "name": "PowerGem"
           },

@@ -15,15 +15,7 @@ from vidua import bps
 from ph_rando.common import RANDOMIZER_SETTINGS, ShufflerAuxData, click_setting_options
 from ph_rando.patcher._items import ITEMS
 from ph_rando.patcher._util import GD_MODELS, open_bmg_files, open_zmb_files
-from ph_rando.shuffler.aux_models import (
-    Area,
-    Chest,
-    DigSpot,
-    Event,
-    IslandShop,
-    SalvageTreasure,
-    Tree,
-)
+from ph_rando.shuffler.aux_models import Area, Chest, DigSpot, Event, SalvageTreasure, Shop, Tree
 
 logger = logging.getLogger(__name__)
 
@@ -111,7 +103,7 @@ def _patch_shop_items(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
         for area in areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == IslandShop
+        if type(chest) == Shop
     }
 
     # Load arm9.bin and overlay table
@@ -119,7 +111,7 @@ def _patch_shop_items(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
     overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
 
     for shop_item in items:
-        assert isinstance(shop_item, IslandShop)
+        assert isinstance(shop_item, Shop)
 
         # Note, the offset is stored as a string in the aux data so that it can be represented as
         # a hex value for readability. So, we must convert it to an `int` here.
