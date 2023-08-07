@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Any, Literal, TypeAlias, Union
 
@@ -161,6 +162,13 @@ class Enemy(BaseModel):
         description='The type of the enemy. Should map to an entry in `shuffler/enemies.json`.',
         min_length=1,
     )
+
+    @validator('type')
+    def validate_enemy_name(cls, v: str) -> str:
+        assert v in json.loads(
+            (Path(__file__).parent / 'enemies.json').read_text()
+        ), f'{v} is not a valid enemy type'
+        return v
 
 
 class Room(BaseModel):
