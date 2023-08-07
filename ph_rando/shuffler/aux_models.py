@@ -41,7 +41,9 @@ class BaseCheck(BaseModel):
 
 class Chest(BaseCheck):
     type: Literal['chest']
-    zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
+    zmb_file_path: str = Field(
+        ..., description='File path to the zmb the chest is on', min_length=1
+    )
     zmb_mapobject_index: int = Field(..., description='Index of the chest in the defined zmb file')
 
 
@@ -52,7 +54,7 @@ class Mail(BaseCheck):
 
 class Tree(BaseCheck):
     type: Literal['tree']
-    zmb_file_path: str = Field(..., description='File path to the zmb the tree is on')
+    zmb_file_path: str = Field(..., description='File path to the zmb the tree is on', min_length=1)
     zmb_mapobject_index: int = Field(
         ..., description='Index of the tree object in the defined zmb file'
     )
@@ -60,7 +62,9 @@ class Tree(BaseCheck):
 
 class Event(BaseCheck):
     type: Literal['event']
-    bmg_file_path: str = Field(..., description='File path to the bmg the instruction is on')
+    bmg_file_path: str = Field(
+        ..., description='File path to the bmg the instruction is on', min_length=1
+    )
     bmg_instruction_index: int = Field(
         ..., description='Index of the instruction in the defined bmg file'
     )
@@ -69,7 +73,9 @@ class Event(BaseCheck):
 class Shop(BaseCheck):
     type: Literal['shop']
     overlay: int = Field(..., description='The code overlay this shop item is on')
-    overlay_offset: str = Field(..., description='Hex offset from overlay to the shop item')
+    overlay_offset: str = Field(
+        ..., description='Hex offset from overlay to the shop item', min_length=1
+    )
 
 
 class Freestanding(BaseCheck):
@@ -84,7 +90,9 @@ class OnEnemy(BaseCheck):
 
 class SalvageTreasure(BaseCheck):
     type: Literal['salvage_treasure']
-    zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
+    zmb_file_path: str = Field(
+        ..., description='File path to the zmb the chest is on', min_length=1
+    )
     zmb_actor_index: int = Field(
         ..., description='Index of the chest in the NPCA section of the zmb file'
     )
@@ -92,7 +100,9 @@ class SalvageTreasure(BaseCheck):
 
 class DigSpot(BaseCheck):
     type: Literal['dig_spot']
-    zmb_file_path: str = Field(..., description='File path to the zmb the chest is on')
+    zmb_file_path: str = Field(
+        ..., description='File path to the zmb the chest is on', min_length=1
+    )
     zmb_actor_index: int = Field(
         ..., description='Index of the chest in the NPCA section of the zmb file'
     )
@@ -136,14 +146,20 @@ validate_check_type()
 
 
 class Exit(BaseModel):
-    name: str = Field(..., description='The name of this exit')
-    entrance: str = Field(..., description='The `entrance` or `door` where this exit leads.')
+    name: str = Field(..., description='The name of this exit', min_length=1)
+    entrance: str = Field(
+        ..., description='The `entrance` or `door` where this exit leads.', min_length=1
+    )
 
 
 class Enemy(BaseModel):
-    name: str = Field(..., description='The name of the referenced `enemy` in the .logic file.')
+    name: str = Field(
+        ..., description='The name of the referenced `enemy` in the .logic file.', min_length=1
+    )
     type: str = Field(
-        ..., description='The type of the enemy. Should map to an entry in `shuffler/enemies.json`.'
+        ...,
+        description='The type of the enemy. Should map to an entry in `shuffler/enemies.json`.',
+        min_length=1,
     )
 
 
@@ -151,7 +167,7 @@ class Room(BaseModel):
     class Config:
         extra = Extra.allow
 
-    name: str = Field(..., description='The name of the room')
+    name: str = Field(..., description='The name of the room', min_length=1)
     chests: list[Annotated[Check, Field(discriminator='type')]] = Field(
         [],
         description='Item checks that can be made in this room',
@@ -209,7 +225,7 @@ class Room(BaseModel):
 
 
 class Area(BaseModel):
-    name: str = Field(..., description='The name of the area')
+    name: str = Field(..., description='The name of the area', min_length=1)
     rooms: list[Room] = Field(
         ..., description='All of the rooms inside this area', min_items=1, unique_items=True
     )

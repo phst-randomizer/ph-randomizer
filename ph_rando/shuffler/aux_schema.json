@@ -5,6 +5,7 @@
     "name": {
       "title": "Name",
       "description": "The name of the area",
+      "minLength": 1,
       "type": "string"
     },
     "rooms": {
@@ -79,6 +80,7 @@
         "zmb_file_path": {
           "title": "Zmb File Path",
           "description": "File path to the zmb the chest is on",
+          "minLength": 1,
           "type": "string"
         },
         "zmb_mapobject_index": {
@@ -128,6 +130,7 @@
         "bmg_file_path": {
           "title": "Bmg File Path",
           "description": "File path to the bmg the instruction is on",
+          "minLength": 1,
           "type": "string"
         },
         "bmg_instruction_index": {
@@ -182,6 +185,7 @@
         "overlay_offset": {
           "title": "Overlay Offset",
           "description": "Hex offset from overlay to the shop item",
+          "minLength": 1,
           "type": "string"
         }
       },
@@ -226,6 +230,7 @@
         "zmb_file_path": {
           "title": "Zmb File Path",
           "description": "File path to the zmb the tree is on",
+          "minLength": 1,
           "type": "string"
         },
         "zmb_mapobject_index": {
@@ -349,6 +354,7 @@
         "zmb_file_path": {
           "title": "Zmb File Path",
           "description": "File path to the zmb the chest is on",
+          "minLength": 1,
           "type": "string"
         },
         "zmb_actor_index": {
@@ -398,6 +404,7 @@
         "zmb_file_path": {
           "title": "Zmb File Path",
           "description": "File path to the zmb the chest is on",
+          "minLength": 1,
           "type": "string"
         },
         "zmb_actor_index": {
@@ -495,11 +502,13 @@
         "name": {
           "title": "Name",
           "description": "The name of this exit",
+          "minLength": 1,
           "type": "string"
         },
         "entrance": {
           "title": "Entrance",
           "description": "The `entrance` or `door` where this exit leads.",
+          "minLength": 1,
           "type": "string"
         }
       },
@@ -515,11 +524,13 @@
         "name": {
           "title": "Name",
           "description": "The name of the referenced `enemy` in the .logic file.",
+          "minLength": 1,
           "type": "string"
         },
         "type": {
           "title": "Type",
           "description": "The type of the enemy. Should map to an entry in `shuffler/enemies.json`.",
+          "minLength": 1,
           "type": "string"
         }
       },
@@ -535,6 +546,7 @@
         "name": {
           "title": "Name",
           "description": "The name of the room",
+          "minLength": 1,
           "type": "string"
         },
         "chests": {
