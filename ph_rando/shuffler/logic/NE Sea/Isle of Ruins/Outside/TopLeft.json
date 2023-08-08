@@ -73,23 +73,23 @@
         },
         {
           "name": "PirateBlin1",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin2",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin3",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin4",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin5",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "Stalfos",
@@ -97,15 +97,15 @@
         },
         {
           "name": "PirateBlin6",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin7",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin8",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "Stalfos1",

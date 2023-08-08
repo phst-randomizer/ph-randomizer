@@ -95,15 +95,15 @@
       "enemies": [
         {
           "name": "PirateBlin1",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin2",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "PirateBlin3",
-          "type": "pirate_blin"
+          "type": "pirate_miniblin"
         },
         {
           "name": "Stalfos",
