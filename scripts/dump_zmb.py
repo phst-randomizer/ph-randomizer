@@ -1,21 +1,11 @@
 import argparse
-from collections.abc import Iterable
 from pathlib import Path
-from typing import TypeVar
 
 from ndspy import lz10
 from ndspy.fnt import Folder
 from ndspy.narc import NARC
 from ndspy.rom import NintendoDSRom
-
-try:
-    from tqdm import tqdm
-except ModuleNotFoundError:
-    T = TypeVar('T')
-
-    def tqdm(iterable: Iterable[T]) -> Iterable[T]:
-        return iterable
-
+from tqdm import tqdm
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -46,7 +36,4 @@ if __name__ == '__main__':
                     (output_dir / outfile).write_bytes(
                         narc_file.getFileByName(f'zmb/{folder_name}_{map_number}.zmb')
                     )
-                    print_fn = print
-                    if hasattr(tqdm, 'write'):
-                        print_fn = tqdm.write
-                    print_fn(f'Saved "{outfile}"')
+                    tqdm.write(f'Saved "{outfile}"')
