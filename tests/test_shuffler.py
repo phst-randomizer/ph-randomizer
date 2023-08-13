@@ -86,7 +86,7 @@ def test_edge_parser(
     edge = Edge(src=node1, dest=node2, requirements=parse_edge_requirement(expression))
     node1.edges.append(edge)
     assert (
-        edge.is_traversable(inventory, flags, states, aux_data=ShufflerAuxData({}, {}, {}))
+        edge.is_traversable(inventory, flags, states, aux_data=ShufflerAuxData([], {}, {}))
         == expected_result
     )
 
