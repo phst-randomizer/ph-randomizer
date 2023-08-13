@@ -1,4 +1,4 @@
-from collections.abc import Iterable, Iterator
+from collections.abc import Generator, Iterable
 from contextlib import contextmanager
 
 from ndspy import bmg, lz10, narc, rom
@@ -150,7 +150,7 @@ GD_MODELS = {
 def open_bmg_files(
     bmg_file_paths: Iterable[str],
     input_rom: rom.NintendoDSRom,
-) -> Iterator[dict[str, bmg.BMG]]:
+) -> Generator[dict[str, bmg.BMG], None, None]:
     bmg_file_map: dict[str, bmg.BMG] = {}
 
     bmg_file_map = {
@@ -167,7 +167,7 @@ def open_bmg_files(
 def open_zmb_files(
     zmb_file_paths: Iterable[str],
     input_rom: rom.NintendoDSRom,
-) -> Iterator[dict[str, ZMB]]:
+) -> Generator[dict[str, ZMB], None, None]:
     zmb_file_map: dict[str, ZMB] = {}
 
     for path in zmb_file_paths:
