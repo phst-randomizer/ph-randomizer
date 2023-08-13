@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
 from dataclasses import dataclass, field
 from functools import cache, cached_property
 import json
@@ -374,7 +373,7 @@ def _parse_logic_file(logic_file_contents: str) -> _ParsedLogic:
     return _ParsedLogic(**parsed)
 
 
-def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -> None:
+def annotate_logic(areas: list[Area], logic_directory: Path | None = None) -> None:
     """
     Parse .logic files and annotate the given aux data with them.
 
@@ -548,7 +547,7 @@ def annotate_logic(areas: Iterable[Area], logic_directory: Path | None = None) -
                     area.rooms.append(room)
 
 
-def connect_rooms(areas: dict[str, Area]) -> None:
+def connect_rooms(areas: list[Area]) -> None:
     """
     Replaces `entrance`/`exit`/`door` node descriptors with actual edges.
 
@@ -564,16 +563,18 @@ def connect_rooms(areas: dict[str, Area]) -> None:
 
         dest_node_name = '.'.join(dest_node_split[:-1])
 
-        for room in areas[area_name].rooms:
-            if room.name == room_name:
-                for node in room.nodes:
-                    if dest_node_name == node.name:
-                        for entrance in node.entrances:
-                            if entrance == dest_node_entrance:
-                                return node
+        for area in areas:
+            if area.name == area_name:
+                for room in area.rooms:
+                    if room.name == room_name:
+                        for node in room.nodes:
+                            if dest_node_name == node.name:
+                                for entrance in node.entrances:
+                                    if entrance == dest_node_entrance:
+                                        return node
         raise Exception(f'Entrance {dest_node_entrance!r} not found')
 
-    for area in areas.values():
+    for area in areas:
         for room in area.rooms:
             for src_node in room.nodes:
                 for exit in src_node.exits:
@@ -584,7 +585,7 @@ def connect_rooms(areas: dict[str, Area]) -> None:
                     )
 
 
-def connect_mail_nodes(areas: Iterable[Area], mail_node_name: str = MAILBOX_NODE_NAME) -> None:
+def connect_mail_nodes(areas: list[Area], mail_node_name: str = MAILBOX_NODE_NAME) -> None:
     """Connect all nodes with a `mail` descriptor to the "Mail" node."""
     mailbox_node: Node | None = None
 
@@ -616,7 +617,7 @@ def connect_mail_nodes(areas: Iterable[Area], mail_node_name: str = MAILBOX_NODE
                     node.edges.append(Edge(src=node, dest=mailbox_node, requirements=None))
 
 
-def connect_shop_nodes(areas: Iterable[Area]) -> None:
+def connect_shop_nodes(areas: list[Area]) -> None:
     """Add edges to connect areas to their shops."""
 
     def _get_shop_node(shop_node_name: str) -> Node:
@@ -674,7 +675,7 @@ def parse_aux_data(
     macros = json.loads(macros_file.read_text())
 
     return ShufflerAuxData(
-        areas=areas,
+        areas=list(areas.values()),
         enemy_requirements=enemy_mapping,
         requirement_macros=macros,
     )

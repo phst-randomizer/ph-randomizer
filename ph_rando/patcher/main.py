@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 import hashlib
 from io import BytesIO
 import logging
@@ -39,7 +38,7 @@ def apply_base_patch(input_rom_data: bytes) -> rom.NintendoDSRom:
     return rom.NintendoDSRom(data=patched_rom.read())
 
 
-def _patch_zmb_map_objects(aux_data: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
     chests = [
         chest
         for area in aux_data
@@ -62,7 +61,7 @@ def _patch_zmb_map_objects(aux_data: Iterable[Area], input_rom: rom.NintendoDSRo
             ]
 
 
-def _patch_zmb_actors(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
     salvage_treasures = {
         chest
         for area in areas
@@ -97,7 +96,7 @@ def _patch_zmb_actors(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
                 zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
 
 
-def _patch_shop_items(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
     items = {
         chest
         for area in areas
@@ -170,7 +169,7 @@ def _patch_shop_items(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> No
         input_rom.arm9 = arm9_executable
 
 
-def _patch_bmg_events(areas: Iterable[Area], input_rom: rom.NintendoDSRom) -> None:
+def _patch_bmg_events(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
     chests = [
         chest
         for area in areas
@@ -202,10 +201,10 @@ def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.
     ROM patch is also applied and should be located at the expected location (see apply_base_patch
     function for more details).
     """
-    _patch_zmb_map_objects(aux_data.areas.values(), input_rom)
-    _patch_zmb_actors(aux_data.areas.values(), input_rom)
-    _patch_shop_items(aux_data.areas.values(), input_rom)
-    _patch_bmg_events(aux_data.areas.values(), input_rom)
+    _patch_zmb_map_objects(aux_data.areas, input_rom)
+    _patch_zmb_actors(aux_data.areas, input_rom)
+    _patch_shop_items(aux_data.areas, input_rom)
+    _patch_bmg_events(aux_data.areas, input_rom)
 
     return input_rom
 

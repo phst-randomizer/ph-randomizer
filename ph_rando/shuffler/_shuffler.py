@@ -257,7 +257,7 @@ def _place_item(
                     reachable_null_checks[check] = node.name
 
     else:
-        for area in aux_data.areas.values():
+        for area in aux_data.areas:
             for room in area.rooms:
                 for node in room.nodes:
                     for check in node.checks:
@@ -285,7 +285,7 @@ def _place_dungeon_rewards(
         possible_checks: OrderedSet[Check] = OrderedSet(
             [
                 check
-                for area in aux_data.areas.values()
+                for area in aux_data.areas
                 for room in area.rooms
                 for node in room.nodes
                 for check in node.checks
@@ -307,7 +307,7 @@ def _place_boss_keys(
         possible_checks: OrderedSet[Check] = OrderedSet(
             [
                 check
-                for area in aux_data.areas.values()
+                for area in aux_data.areas
                 for room in area.rooms
                 for node in room.nodes
                 for check in node.checks
@@ -329,7 +329,7 @@ def _place_small_keys(
         possible_checks: OrderedSet[Check] = OrderedSet(
             [
                 check
-                for area in aux_data.areas.values()
+                for area in aux_data.areas
                 for room in area.rooms
                 for node in room.nodes
                 for check in node.checks
@@ -373,7 +373,7 @@ def assumed_fill(
 
         # Copy all items to a list and set all checks to null
         item_pool: list[Item] = []
-        for area in aux_data.areas.values():
+        for area in aux_data.areas:
             for room in area.rooms:
                 for check in room.chests:
                     item = check.contents
@@ -391,7 +391,7 @@ def assumed_fill(
 
         starting_node = [
             node
-            for area in aux_data.areas.values()
+            for area in aux_data.areas
             for room in area.rooms
             for node in room.nodes
             if node.name == starting_node_name
@@ -415,12 +415,12 @@ def assumed_fill(
 def init_logic_graph() -> ShufflerAuxData:
     aux_data = parse_aux_data()
 
-    annotate_logic(areas=aux_data.areas.values())
+    annotate_logic(areas=aux_data.areas)
 
     connect_rooms(aux_data.areas)
 
-    connect_mail_nodes(aux_data.areas.values())
+    connect_mail_nodes(aux_data.areas)
 
-    connect_shop_nodes(aux_data.areas.values())
+    connect_shop_nodes(aux_data.areas)
 
     return aux_data

@@ -25,7 +25,7 @@ def island_shop_test_emu(
     rom = NintendoDSRom.fromFile(rom_path)
     chests = [
         chest
-        for area in aux_data.areas.values()
+        for area in aux_data.areas
         for room in area.rooms
         for chest in room.chests
         if type(chest) == Shop
@@ -33,7 +33,7 @@ def island_shop_test_emu(
     for chest in chests:
         chest.contents = Item(name=ITEMS_REVERSED[request.param], states=set())
 
-    _patch_shop_items(aux_data.areas.values(), rom)
+    _patch_shop_items(aux_data.areas, rom)
 
     rom.saveToFile(rom_path)
 

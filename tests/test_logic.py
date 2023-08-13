@@ -16,10 +16,7 @@ def test_graph_connectedness() -> None:
 
     # Compute list of tuples of each check its area.
     all_checks = [
-        (chest, area.name)
-        for area in areas.values()
-        for room in area.rooms
-        for chest in room.chests
+        (chest, area.name) for area in areas for room in area.rooms for chest in room.chests
     ]
 
     # Put every item in the game in the current inventory, appending the area name to each
@@ -39,7 +36,7 @@ def test_graph_connectedness() -> None:
 
     starting_node = [
         node
-        for area in areas.values()
+        for area in areas
         for room in area.rooms
         for node in room.nodes
         if node.name == 'Mercay.OutsideOshus.Outside'
@@ -47,7 +44,7 @@ def test_graph_connectedness() -> None:
 
     # Remove all state "lose" descriptors, since they aren't the same per run
     states: set[str] = set()
-    for area in areas.values():
+    for area in areas:
         for room in area.rooms:
             for node in room.nodes:
                 node.states_lost = set()
@@ -69,7 +66,7 @@ def test_graph_connectedness() -> None:
     reachable_areas = {node.area.name for node in assumed_search_nodes}
 
     # Create set consisting of all areas in the logic
-    all_areas = {area.name for area in areas.values()}
+    all_areas = {area.name for area in areas}
 
     print(sorted(all_areas - reachable_areas))
     assert reachable_areas == all_areas
@@ -78,7 +75,7 @@ def test_graph_connectedness() -> None:
     reachable_rooms = {f'{node.area.name}.{node.room.name}' for node in assumed_search_nodes}
 
     # Create set consisting of all rooms in the logic
-    all_rooms = {f'{area.name}.{room.name}' for area in areas.values() for room in area.rooms}
+    all_rooms = {f'{area.name}.{room.name}' for area in areas for room in area.rooms}
 
     print(sorted(all_rooms - reachable_rooms))
     assert reachable_rooms == all_rooms
@@ -87,7 +84,7 @@ def test_graph_connectedness() -> None:
     reachable_nodes = {node.name for node in assumed_search_nodes}
 
     # Create set consisting of all nodes in the logic
-    all_nodes = {node.name for area in areas.values() for room in area.rooms for node in room.nodes}
+    all_nodes = {node.name for area in areas for room in area.rooms for node in room.nodes}
 
     print(sorted(all_nodes - reachable_nodes))
     assert reachable_nodes == all_nodes
@@ -134,7 +131,7 @@ def test_ensure_states_exist() -> None:
     states_required: set[str] = set()
     states_gained: set[str] = set()
     states_lost: set[str] = set()
-    for area in aux_data.areas.values():
+    for area in aux_data.areas:
         for room in area.rooms:
             for node in room.nodes:
                 for edge in node.edges:

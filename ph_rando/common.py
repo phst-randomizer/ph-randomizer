@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 @dataclass
 class ShufflerAuxData:
-    areas: dict[str, Area]
+    areas: list[Area]
     enemy_requirements: dict[str, str]
     requirement_macros: dict[str, str]
     seed: str | None = None

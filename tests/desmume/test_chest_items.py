@@ -28,7 +28,7 @@ def chest_test_emu(
     rom = NintendoDSRom.fromFile(rom_path)
     chests = [
         chest
-        for area in aux_data.areas.values()
+        for area in aux_data.areas
         for room in area.rooms
         for chest in room.chests
         if type(chest) == Chest
@@ -37,7 +37,7 @@ def chest_test_emu(
     for chest in chests:
         chest.contents = Item(name=ITEMS_REVERSED[request.param], states=set())
 
-    _patch_zmb_map_objects(aux_data.areas.values(), rom)
+    _patch_zmb_map_objects(aux_data.areas, rom)
 
     rom.saveToFile(rom_path)
 

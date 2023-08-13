@@ -179,14 +179,14 @@ def test_assumed_search(
     current_test_dir = TEST_DATA_DIR / test_data_name
 
     aux_data = parse_aux_data(areas_directory=current_test_dir)
-    annotate_logic(areas=aux_data.areas.values(), logic_directory=current_test_dir)
+    annotate_logic(areas=aux_data.areas, logic_directory=current_test_dir)
     connect_rooms(aux_data.areas)
 
     areas = aux_data.areas
 
     _nodes = [
         node
-        for area in areas.values()
+        for area in areas
         for room in area.rooms
         for node in room.nodes
         if node.name == starting_node_name

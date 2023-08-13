@@ -76,7 +76,7 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
     base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 20)
     base_rom_emu.wait(10)
 
-    item = get_check_contents(aux_data.areas.values(), 'Mercay', 'OutsideOshus', 'PickUpRock')
+    item = get_check_contents(aux_data.areas, 'Mercay', 'OutsideOshus', 'PickUpRock')
     with assert_item_is_picked_up(item, base_rom_emu):
         # Click through his dialog
         base_rom_emu.touch_input((232, 64), 2)

@@ -19,7 +19,7 @@ def generate_spoiler_log(randomized_aux_data: ShufflerAuxData) -> SpoilerLog:
     items: dict[str, dict[str, dict[str, str]]] = {}
     settings: list = []
 
-    for area in randomized_aux_data.areas.values():
+    for area in randomized_aux_data.areas:
         items[area.name] = {}
         for room in area.rooms:
             if len(room.chests):

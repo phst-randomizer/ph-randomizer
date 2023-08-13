@@ -72,13 +72,13 @@ def shuffler_cli(
     results = shuffle(seed)
 
     if output == '--':
-        for area in results.areas.values():
+        for area in results.areas:
             print(area.json(), file=sys.stdout)
         print(f'Seed: {seed}')
     elif output is not None:
         output_path = Path(output)
         output_path.mkdir(parents=True, exist_ok=True)
-        for area in results.areas.values():
+        for area in results.areas:
             (output_path / f'{area.name}.json').write_text(area.json())
         (output_path / 'seed.txt').write_text(seed)
 
