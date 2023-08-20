@@ -5,24 +5,24 @@
 
 Flag flags[] = {
     /* Mercay Island */
-    {0x0, 0x2, NO_SETTING},  // celia dialogue after getting oshus sword
-    {0x0, 0x4, NO_SETTING},  // completed oshus sword tutorial
-    {0x0, 0x8, NO_SETTING},  // talked to mercay bartender about linebeck
-    {0x0, 0x20, NO_SETTING}, // talked to oshus after seeing red chuchus
-    {0x0, 0x40, NO_SETTING}, // showed linebeck the SW sea chart after ToTOK
-    {0x0, 0x80, NO_SETTING}, // set sail for the first time (linebeck dialog)
+    {0x0, 0x2, NO_SETTING},                        // celia dialogue after getting oshus sword
+    {0x0, 0x4, NO_SETTING},                        // completed oshus sword tutorial
+    {0x0, 0x8, NO_SETTING},                        // talked to mercay bartender about linebeck
+    {0x0, 0x20, NO_SETTING},                       // talked to oshus after seeing red chuchus
+    {0x0, 0x40, NO_SETTING},                       // showed linebeck the SW sea chart after ToTOK
+    {0x0, 0x80, NO_SETTING},                       // set sail for the first time (linebeck dialog)
     // TODO: should this even be a setting? For now, it's always enabled
     // {0x2, 0x2, MERCAY_BRIDGE_REPAIRED_FROM_START}, // mercay bridge repaired
-    {0x2, 0x2, NO_SETTING},   // mercay bridge repaired
-    {0x18, 0x2, NO_SETTING},  // talked to Oshus first time
-    {0x2c, 0x1, NO_SETTING},  // saw broken mercay bridge for first time
-    {0x2, 0x4, NO_SETTING},   // SS Linebeck admirer cutscene
-    {0x18, 0x4, NO_SETTING},  // 1st Linebeck trapped in ToTOK cutscene
-    {0x9, 0x10, NO_SETTING},  // 2nd Linebeck trapped in ToTOK cutscene
-    {0x9, 0x20, NO_SETTING},  // Linebeck warning about ToTOK sucking life
-    {0x9, 0x40, NO_SETTING},  // Linebeck escapes ToTOK after hitting switch
-    {0x1c, 0x4, NO_SETTING},  // Linebeck introduction CS (after rescuing him)
-    {0x1, 0x2, NO_SETTING},   // Got the SW sea chart
+    {0x2, 0x2, NO_SETTING}, // mercay bridge repaired
+    {0x18, 0x2, NO_SETTING},                       // talked to Oshus first time
+    {0x2c, 0x1, NO_SETTING},                       // saw broken mercay bridge for first time
+    {0x2, 0x4, NO_SETTING},                        // SS Linebeck admirer cutscene
+    {0x18, 0x4, NO_SETTING},                       // 1st Linebeck trapped in ToTOK cutscene
+    {0x9, 0x10, NO_SETTING},                       // 2nd Linebeck trapped in ToTOK cutscene
+    {0x9, 0x20, NO_SETTING},                       // Linebeck warning about ToTOK sucking life
+    {0x9, 0x40, NO_SETTING},                       // Linebeck escapes ToTOK after hitting switch
+    {0x1c, 0x4, NO_SETTING},                       // Linebeck introduction CS (after rescuing him)
+    {0x1, 0x2, NO_SETTING},                        // Got the SW sea chart
     {0x9, 0x80, NO_SETTING},  // Discovered Linebeck left ToTOK after getting SW Sea Chart
     {0x1f, 0x40, NO_SETTING}, // Rocks fell in Oshus's neighbor's yard (in vanilla, player gets a
                               // rupee if they pick them up)
