@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y gcc software-properties-common
 RUN apt-get install -y gcc-arm-none-eabi
 # Install python dependencies
 ADD requirements.txt /app/
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 # Add needed source files to the docker build
 ADD data/* /app/
