@@ -38,4 +38,7 @@ Flag flags[] = {
 
     /* Uncharted Island */
     {0x26, 0x10, NO_SETTING}, // uncharted island bridge is extended
+
+    /* Sea */
+    {0x24, 0x20, NO_SETTING}, // blew dust off of NW sea chart
 };
