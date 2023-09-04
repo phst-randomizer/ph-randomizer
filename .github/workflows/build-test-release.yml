@@ -12,7 +12,7 @@ jobs:
     name: Linting/style checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -39,7 +39,7 @@ jobs:
     name: Type-checking
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -121,7 +121,7 @@ jobs:
     name: Validate aux data
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -173,7 +173,7 @@ jobs:
     name: Validate randomizer settings
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -223,7 +223,7 @@ jobs:
       # - check-logic
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -263,7 +263,7 @@ jobs:
         shell: bash
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -293,7 +293,7 @@ jobs:
           - rom_variant: US (D-Pad Patch)
             google_drive_url_secret: PH_US_DPAD_GOOGLE_DRIVE_ID
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -358,7 +358,7 @@ jobs:
       should-run-tests: ${{ steps.filter.outputs.base-patches }}
       job-matrix: ${{ steps.set-test-matrix.outputs.matrix }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Check if base patch tests should be run
       uses: dorny/paths-filter@v2
@@ -406,7 +406,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.generate-base-patch-test-jobs.outputs.job-matrix) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           # Also retrieve previous commit so we can check if there are relevant changes
           fetch-depth: 2
@@ -475,7 +475,7 @@ jobs:
         shell: bash
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -528,7 +528,7 @@ jobs:
     if: "startsWith(github.ref, 'refs/tags/')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Get current commit hash
         id: commit-hash
