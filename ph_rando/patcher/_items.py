@@ -17,6 +17,7 @@ ITEMS: dict[str, int] = {
     'BossKeyGoronTemple': 0xF,
     'BossKeyIceTemple': 0xF,
     'BossKeyMutohTemple': 0xF,
+    'PhantomHourglass': 0x12,
     'SWSeaChart': 0x13,
     'NWSeaChart': 0x14,
     'SESeaChart': 0x15,
@@ -103,7 +104,6 @@ ITEMS: dict[str, int] = {
     'RandomShipPart2': 0x85,  # TODO: what is this, and how does it relate to other ship parts?
     'RandomTreasure2': 0x86,  # TODO: what is this, and how does it relate to other treasures?
     # TODO: update these when their ids are known
-    'PhantomHourglass': -1,
     'Sand2M': -1,
     'PowerSpirit': -1,
     'WisdomSpirit': -1,
