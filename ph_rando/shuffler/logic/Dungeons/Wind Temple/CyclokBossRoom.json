@@ -6,22 +6,18 @@
       "chests": [
         {
           "name": "Sand",
-          "type": "event",
+          "type": "boss_reward",
           "contents": {
             "name": "Sand2M"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0,
           "display_name": "Cyclok's Sands of Hours"
         },
         {
           "name": "SpiritOfWisdom",
-          "type": "event",
+          "type": "boss_reward",
           "contents": {
             "name": "WisdomSpirit"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0,
           "display_name": "Spirit of Wisdom"
         },
         {

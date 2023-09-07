@@ -7,12 +7,10 @@
       "chests": [
         {
           "name": "Sand",
-          "type": "event",
+          "type": "boss_reward",
           "contents": {
             "name": "Sand2M"
           },
-          "bmg_file_path": "TODO",
-          "bmg_instruction_index": 0,
           "display_name": "Eox's Sands of Hours"
         },
         {
