@@ -114,6 +114,11 @@ class MinigameRewardChest(BaseCheck):
     # TODO: what other fields are needed?
 
 
+class BossReward(BaseCheck):
+    type: Literal['boss_reward']
+    # TODO: what other fields are needed? Is this just a special case of "Event"?
+
+
 Check: TypeAlias = (
     Chest
     | Event
@@ -125,6 +130,7 @@ Check: TypeAlias = (
     | DigSpot
     | MinigameRewardChest
     | Mail
+    | BossReward
 )
 
 
