@@ -88,6 +88,12 @@ ITEMS: dict[str, int] = {
     'TreasureMapNE6': 0x68,
     'TreasureMapNE7': 0x69,
     'TreasureMapNE8': 0x6A,
+    'PowerSpiritLv1': 0x6B,
+    'WisdomSpiritLv1': 0x6C,
+    'CourageSpiritLv1': 0x6D,
+    'PowerSpiritLv2': 0x6E,
+    'WisdomSpiritLv2': 0x6F,
+    'CourageSpiritLv2': 0x70,
     'SwordsmansScroll': 0x71,
     'Crimsonine': 0x72,
     'Azurine': 0x73,
@@ -108,12 +114,6 @@ ITEMS: dict[str, int] = {
     'PowerSpirit': -1,
     'WisdomSpirit': -1,
     'CourageSpirit': -1,
-    'PowerSpiritLv1': -1,
-    'WisdomSpiritLv1': -1,
-    'CourageSpiritLv1': -1,
-    'PowerSpiritLv2': -1,
-    'WisdomSpiritLv2': -1,
-    'CourageSpiritLv2': -1,
 }
 
 ITEMS_REVERSED = {v: k for k, v in ITEMS.items()}
