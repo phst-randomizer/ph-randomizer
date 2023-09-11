@@ -119,6 +119,11 @@ class BossReward(BaseCheck):
     # TODO: what other fields are needed? Is this just a special case of "Event"?
 
 
+class SpiritUpgrade(BaseCheck):
+    type: Literal['spirit_upgrade']
+    # TODO: what other fields are needed? Is this just a special case of another item type?
+
+
 Check: TypeAlias = (
     Chest
     | Event
@@ -131,6 +136,7 @@ Check: TypeAlias = (
     | MinigameRewardChest
     | Mail
     | BossReward
+    | SpiritUpgrade
 )
 
 

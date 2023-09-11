@@ -532,6 +532,43 @@
         "type"
       ]
     },
+    "SpiritUpgrade": {
+      "title": "SpiritUpgrade",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "The name of the item check",
+          "type": "string"
+        },
+        "contents": {
+          "title": "Contents",
+          "description": "The item that this check contains",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Item"
+            }
+          ]
+        },
+        "display_name": {
+          "title": "Display Name",
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "enum": [
+            "spirit_upgrade"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ]
+    },
     "Exit": {
       "title": "Exit",
       "type": "object",
@@ -626,6 +663,9 @@
               },
               {
                 "$ref": "#/definitions/BossReward"
+              },
+              {
+                "$ref": "#/definitions/SpiritUpgrade"
               }
             ]
           }
