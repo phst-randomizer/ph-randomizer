@@ -3,14 +3,25 @@ import json
 from pathlib import Path
 from pprint import pprint
 
-from ph_rando.shuffler import Shuffler
+from ph_rando.common import RANDOMIZER_SETTINGS
 from ph_rando.shuffler._descriptors import EdgeDescriptor
 from ph_rando.shuffler._parser import Edge, parse_edge_requirement
+from ph_rando.shuffler._shuffler import Shuffler
 from ph_rando.shuffler.aux_models import Area, Item
 
 
 def test_graph_connectedness() -> None:
-    shuffler = Shuffler(seed='test')
+    shuffler = Shuffler(
+        seed='test',
+        settings={
+            setting.name: True
+            if setting.type == 'flag'
+            else list(setting.default)
+            if setting.type == 'multiple_choice'
+            else setting.default
+            for setting in RANDOMIZER_SETTINGS.values()
+        },
+    )
 
     areas = shuffler.aux_data.areas
 
@@ -120,7 +131,7 @@ def _get_required_states(edge: Edge, macros: dict[str, str]) -> set[str]:
 
 
 def test_ensure_states_exist() -> None:
-    shuffler = Shuffler(seed='test')
+    shuffler = Shuffler(seed='test', settings={})
 
     aux_data = shuffler.aux_data
 

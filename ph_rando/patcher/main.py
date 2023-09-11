@@ -2,16 +2,14 @@ import hashlib
 from io import BytesIO
 import logging
 from pathlib import Path
-import re
 import struct
 
 import click
-import inflection
 from ndspy import code, rom
 from ndspy.codeCompression import compress, decompress
 from vidua import bps
 
-from ph_rando.common import RANDOMIZER_SETTINGS, ShufflerAuxData, click_setting_options
+from ph_rando.common import ShufflerAuxData, click_setting_options
 from ph_rando.patcher._items import ITEMS
 from ph_rando.patcher._util import GD_MODELS, open_bmg_files, open_zmb_files
 from ph_rando.shuffler.aux_models import Area, Chest, DigSpot, Event, SalvageTreasure, Shop, Tree
@@ -211,33 +209,21 @@ def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.
 
 def apply_settings_patches(
     base_patched_rom: rom.NintendoDSRom,
-    settings: dict[str, bool | str],
+    settings: dict[str, bool | str | list[str]],
 ) -> rom.NintendoDSRom:
-    base_flags_addr = 0x58180  # address specified by .fill directive in main.asm
-    flags_header_file = (
-        Path(__file__).parents[2] / 'base' / 'code' / 'rando_settings.h'
-    ).read_text()
+    # TODO: this crashes the game.
+    return base_patched_rom
+
+    # base_flags_addr = 0x58180  # address specified by .fill directive in main.asm
     arm9_bin: bytearray = decompress(base_patched_rom.arm9)
 
-    for setting in RANDOMIZER_SETTINGS:
-        setting_value = settings[inflection.underscore(setting.name)]
-        logger.debug(f'Setting {setting.name!r} set to {setting_value!r}.')
-
-        if isinstance(setting_value, bool) and not setting_value:
-            continue
-        elif isinstance(setting_value, bool):
-            setting_name_header = inflection.underscore(setting.name[2:]).upper()
-            matches = re.findall(rf'#define {setting_name_header} (.+), (.+)', flags_header_file)
-
-            if not len(matches):
-                continue
-
-            assert len(matches) == 1
-            flag_offset, flag_bit = matches[0]
-            arm9_bin[base_flags_addr + int(flag_offset, 16)] |= int(flag_bit, 16)
-        else:
-            # TODO: implement string-based settings here
-            pass
+    # for setting_name, setting_value in settings.items():
+    #     match setting_name:
+    #         case 'mercay_bridge_repaired_from_start':
+    #             flag_offset, flag_bit = 0, 0x1
+    #             arm9_bin[base_flags_addr + flag_offset] |= flag_bit
+    #         case _:
+    #             pass
 
     base_patched_rom.arm9 = compress(arm9_bin, isArm9=True)
     return base_patched_rom
@@ -276,7 +262,7 @@ def patcher_cli(
     input_rom_path: Path,
     output_rom_path: str | None,
     log_level: str,
-    **settings: bool | str,
+    **settings: bool | str | list[str],
 ) -> None:
     from ph_rando.shuffler._shuffler import parse_aux_data
 

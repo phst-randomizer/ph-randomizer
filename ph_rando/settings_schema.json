@@ -6,7 +6,25 @@
       "title": "Settings",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Setting"
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "flag": "#/definitions/FlagSetting",
+            "single_choice": "#/definitions/SingleChoiceSetting",
+            "multiple_choice": "#/definitions/MultipleChoiceSetting"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/definitions/FlagSetting"
+          },
+          {
+            "$ref": "#/definitions/SingleChoiceSetting"
+          },
+          {
+            "$ref": "#/definitions/MultipleChoiceSetting"
+          }
+        ]
       }
     }
   },
@@ -14,8 +32,8 @@
     "settings"
   ],
   "definitions": {
-    "Setting": {
-      "title": "Setting",
+    "FlagSetting": {
+      "title": "FlagSetting",
       "type": "object",
       "properties": {
         "name": {
@@ -26,36 +44,143 @@
           "title": "Description",
           "type": "string"
         },
-        "flag": {
-          "title": "Flag",
+        "supported": {
+          "title": "Supported",
+          "default": true,
           "type": "boolean"
         },
-        "options": {
-          "title": "Options",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "patcher_hook": {
+          "title": "Patcher Hook",
+          "type": "string"
+        },
+        "shuffler_hook": {
+          "title": "Shuffler Hook",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "enum": [
+            "flag"
+          ],
+          "type": "string"
+        },
+        "default": {
+          "title": "Default",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "default"
+      ]
+    },
+    "SingleChoiceSetting": {
+      "title": "SingleChoiceSetting",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
         },
         "supported": {
           "title": "Supported",
           "default": true,
           "type": "boolean"
         },
+        "patcher_hook": {
+          "title": "Patcher Hook",
+          "type": "string"
+        },
+        "shuffler_hook": {
+          "title": "Shuffler Hook",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "enum": [
+            "single_choice"
+          ],
+          "type": "string"
+        },
+        "choices": {
+          "title": "Choices",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
         "default": {
           "title": "Default",
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "type": "string"
         }
       },
       "required": [
-        "name"
+        "name",
+        "type",
+        "choices",
+        "default"
+      ]
+    },
+    "MultipleChoiceSetting": {
+      "title": "MultipleChoiceSetting",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "supported": {
+          "title": "Supported",
+          "default": true,
+          "type": "boolean"
+        },
+        "patcher_hook": {
+          "title": "Patcher Hook",
+          "type": "string"
+        },
+        "shuffler_hook": {
+          "title": "Shuffler Hook",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "enum": [
+            "multiple_choice"
+          ],
+          "type": "string"
+        },
+        "choices": {
+          "title": "Choices",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "default": {
+          "title": "Default",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "choices",
+        "default"
       ]
     }
   }

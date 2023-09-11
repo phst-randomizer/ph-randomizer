@@ -6,7 +6,7 @@ import click
 
 from ph_rando.common import click_setting_options
 from ph_rando.patcher import apply_base_patch, apply_settings_patches, patch_items
-from ph_rando.shuffler import Shuffler
+from ph_rando.shuffler._shuffler import Shuffler
 
 
 @click.command()
@@ -30,14 +30,14 @@ def randomizer_cli(
     input_rom_path: Path,
     output_rom_path: Path,
     seed: str | None,
-    **settings: bool | str,
+    **settings: bool | str | list[str],
 ) -> None:
     # Generate random seed if one isn't provided
     if seed is None:
         seed = ''.join(random.choices(string.ascii_letters, k=20))
 
     # Run the shuffler
-    shuffled_aux_data = Shuffler(seed).generate()
+    shuffled_aux_data = Shuffler(seed, settings).generate()
 
     # Apply the base ROM patch
     patched_rom = apply_base_patch(input_rom_path.read_bytes())

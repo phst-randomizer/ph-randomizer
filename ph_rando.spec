@@ -25,10 +25,8 @@ a = Analysis(
     + [
         # Bundle base patches
         ('base/out/*.bps', 'base/out/'),
-        # Bundle settings header file (needed by patcher)
-        ('base/code/rando_settings.h', 'base/code/'),
-        # Bundle settings.yaml
-        ('ph_rando/settings.yaml', 'ph_rando/'),
+        # Bundle settings.json
+        ('ph_rando/settings.json', 'ph_rando/'),
     ],
     hiddenimports=[],
     hookspath=[],

@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from collections import defaultdict, deque
 from copy import deepcopy
+import importlib
 import logging
 from pathlib import Path
 import random
@@ -8,6 +11,7 @@ from typing import Self
 from ordered_set import OrderedSet
 
 from ph_rando.common import ShufflerAuxData
+from ph_rando.settings import ShufflerHook
 from ph_rando.shuffler._parser import (
     Edge,
     Node,
@@ -112,15 +116,24 @@ class AssumedFillFailed(Exception):
 
 
 class Shuffler:
+    settings: dict[str, str | list[str] | bool]
+    aux_data: ShufflerAuxData
+    starting_node: Node
+
+    _checks_to_exclude: set[Check]
+
     def __init__(
         self: Self,
         seed: str,
+        settings: dict[str, str | list[str] | bool],
         starting_node_name: str = 'Mercay.OutsideOshus.Outside',
         areas_directory: Path | None = None,
         enemy_mapping_file: Path | None = None,
         macros_file: Path | None = None,
     ) -> None:
         random.seed(seed)
+
+        self.settings = settings
 
         self.aux_data = parse_aux_data(
             areas_directory=areas_directory,
@@ -129,10 +142,13 @@ class Shuffler:
         )
         self.aux_data.seed = seed
 
+        self._checks_to_exclude: set[Check] = set()
+
         self._annotate_logic(logic_directory=areas_directory)
         self._connect_rooms()
         self._connect_mail_nodes()
         self._connect_shop_nodes()
+        self._apply_settings()
 
         self.starting_node = [
             node
@@ -154,26 +170,36 @@ class Shuffler:
     def _connect_shop_nodes(self: Self) -> None:
         return connect_shop_nodes(self.aux_data.areas)
 
+    def _apply_settings(self) -> None:
+        from ph_rando.common import RANDOMIZER_SETTINGS
+
+        for setting_name, setting_value in self.settings.items():
+            hook = RANDOMIZER_SETTINGS[setting_name].shuffler_hook
+            if hook:
+                fn: ShufflerHook = getattr(
+                    importlib.import_module('ph_rando.shuffler._settings'), hook
+                )
+                logger.debug(f'Setting "{setting_name}"...')
+                fn(value=setting_value, shuffler=self)
+
     def generate(self: Self) -> ShufflerAuxData:
-        while True:
-            aux_data_backup = deepcopy(self.aux_data)
+        # Copy all items to a list and set all checks to null
+        item_pool: list[Item] = []
+        for area in self.aux_data.areas:
+            for room in area.rooms:
+                for check in room.chests:
+                    item = check.contents
+                    # print(check)
+                    # Append area name for keys, so that we know where we can place
+                    # it later on.
+                    if item.name == 'SmallKey':
+                        item.name += f'_{area.name}'
 
-            # Copy all items to a list and set all checks to null
-            item_pool: list[Item] = []
-            for area in self.aux_data.areas:
-                for room in area.rooms:
-                    for check in room.chests:
-                        item = check.contents
-
-                        # Append area name for keys, so that we know where we can place
-                        # it later on.
-                        if item.name == 'SmallKey':
-                            item.name += f'_{area.name}'
-
+                    if check not in self._checks_to_exclude:
                         item_pool.append(item)
                         check.contents = None  # type: ignore
 
-            # Shuffle the item pool
+        while True:
             random.shuffle(item_pool)
 
             try:
@@ -184,8 +210,15 @@ class Shuffler:
                 self._place_rest_of_items(item_pool)
                 break
             except AssumedFillFailed:
-                self.aux_data = aux_data_backup
                 logging.info('Assumed fill failed! Trying again...\n')
+
+                # Remove all items that were placed, and add them back to the item pool
+                for area in self.aux_data.areas:
+                    for room in area.rooms:
+                        for check in room.chests:
+                            if check.contents is not None and check not in self._checks_to_exclude:
+                                item_pool.append(check.contents)
+                                check.contents = None  # type: ignore
                 continue
 
         return self.aux_data
@@ -219,6 +252,8 @@ class Shuffler:
                 for room in area.rooms:
                     for node in room.nodes:
                         for check in node.checks:
+                            if candidates is not None and check not in candidates:
+                                continue
                             if check.contents is None:
                                 reachable_null_checks[check] = node.name
 
@@ -230,10 +265,16 @@ class Shuffler:
         r = locations[random.randint(0, max(0, len(reachable_null_checks) - 1))]
         r.contents = item
 
+        # Now that the item has been placed successfully, remove the item from the item pool
+        remaining_item_pool.remove(item)
+
         logger.info(f'Placed {item.name} at {reachable_null_checks[r]}')
 
     def _place_dungeon_rewards(self: Self, item_pool: list[Item]) -> None:
-        dungeon_reward_pool = [item for item in item_pool if item in DUNGEON_REWARD_CHECKS.values()]
+        logger.debug('Placing dungeon rewards...')
+        dungeon_reward_pool = [
+            item for item in item_pool if item.name in DUNGEON_REWARD_CHECKS.values()
+        ]
         for item in dungeon_reward_pool:
             possible_checks: OrderedSet[Check] = OrderedSet(
                 [
@@ -245,11 +286,11 @@ class Shuffler:
                     if f'{node.area.name}.{node.room.name}.{check.name}' in DUNGEON_REWARD_CHECKS
                 ]
             )
-            item_pool.remove(item)
-            self._place_item(item, item_pool, possible_checks)
+            self._place_item(item, item_pool, possible_checks, use_logic=False)
 
     def _place_boss_keys(self: Self, item_pool: list[Item]) -> None:
         """Place all boss keys in `item_pool`."""
+        logger.debug('Placing boss keys...')
         key_pool = [item for item in item_pool if item.name.startswith('BossKey')]
         for item in key_pool:
             possible_checks: OrderedSet[Check] = OrderedSet(
@@ -262,11 +303,11 @@ class Shuffler:
                     if node.area.name == item.name[7:]
                 ]
             )
-            item_pool.remove(item)
-            self._place_item(item, item_pool, possible_checks)
+            self._place_item(item, item_pool, possible_checks, use_logic=False)
 
     def _place_small_keys(self: Self, item_pool: list[Item]) -> None:
         """Place all small keys in `item_pool`."""
+        logger.debug('Placing small keys...')
         key_pool = [item for item in item_pool if item.name.startswith('SmallKey_')]
         for item in key_pool:
             possible_checks: OrderedSet[Check] = OrderedSet(
@@ -279,22 +320,24 @@ class Shuffler:
                     if node.area.name == item.name[9:]
                 ]
             )
-            item_pool.remove(item)
-            item.name = item.name[: item.name.index('_')]
-            self._place_item(item, item_pool, possible_checks)
+            self._place_item(item, item_pool, possible_checks, use_logic=False)
 
     def _place_important_items(self: Self, item_pool: list[Item]) -> None:
         """Place all "important" items in the given item_pool."""
+        logger.debug('Placing important items...')
         important_items = [item for item in item_pool if item.name in IMPORTANT_ITEMS]
         for item in important_items:
-            item_pool.remove(item)
             self._place_item(item, item_pool)
 
     def _place_rest_of_items(self: Self, item_pool: list[Item]) -> None:
         """Place all items remaining in item_pool."""
+        logger.debug('Placing rest of items...')
         for item in item_pool:
             self._place_item(item, item_pool, use_logic=False)
         item_pool.clear()
+
+    def exclude_check(self: Self, check: Check) -> None:
+        self._checks_to_exclude.add(check)
 
     def search(
         self: Self,
@@ -321,7 +364,10 @@ class Shuffler:
                     target = edge.dest
 
                     requirements_met = edge.is_traversable(
-                        [i.name for i in items], flags, states, self.aux_data
+                        [i.name for i in items],
+                        flags,
+                        states,
+                        self,
                     )
 
                     if requirements_met and target not in visited_nodes:
