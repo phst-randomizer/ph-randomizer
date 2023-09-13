@@ -8,9 +8,9 @@
   },
   "packageRules": [
     {
-      "matchPaths": [
-        "+(.pre-commit-config.yaml)",
-        "+(setup.cfg)"
+      "matchFileNames": [
+        ".pre-commit-config.yaml",
+        ".github/workflows/**"
       ],
       "automerge": true,
       "schedule": [
