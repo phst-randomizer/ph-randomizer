@@ -1,3 +1,3 @@
-from .main import shuffle
+from ._shuffler import Shuffler
 
-__all__ = ['shuffle']
+__all__ = ['Shuffler']

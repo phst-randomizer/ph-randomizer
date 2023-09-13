@@ -6,7 +6,7 @@ import click
 
 from ph_rando.common import click_setting_options
 from ph_rando.patcher import apply_base_patch, apply_settings_patches, patch_items
-from ph_rando.shuffler import shuffle
+from ph_rando.shuffler import Shuffler
 
 
 @click.command()
@@ -37,7 +37,7 @@ def randomizer_cli(
         seed = ''.join(random.choices(string.ascii_letters, k=20))
 
     # Run the shuffler
-    shuffled_aux_data = shuffle(seed)
+    shuffled_aux_data = Shuffler(seed).generate()
 
     # Apply the base ROM patch
     patched_rom = apply_base_patch(input_rom_path.read_bytes())
