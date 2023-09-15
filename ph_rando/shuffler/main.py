@@ -8,7 +8,7 @@ import sys
 import click
 
 from ph_rando.common import ShufflerAuxData, click_setting_options
-from ph_rando.shuffler._shuffler import assumed_fill, init_logic_graph
+from ph_rando.shuffler import Shuffler
 from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 
 
@@ -22,12 +22,9 @@ def shuffle(seed: str) -> ShufflerAuxData:
     Returns:
         Randomized aux data.
     """
-    random.seed(seed)
+    shuffler = Shuffler(seed)
 
-    aux_data = init_logic_graph()
-    aux_data.seed = seed
-
-    return assumed_fill(aux_data)
+    return shuffler.generate()
 
 
 @click.command()
