@@ -127,6 +127,7 @@ class Shuffler:
             enemy_mapping_file=enemy_mapping_file,
             macros_file=macros_file,
         )
+        self.aux_data.seed = seed
 
         self._annotate_logic(logic_directory=areas_directory)
         self._connect_rooms()
