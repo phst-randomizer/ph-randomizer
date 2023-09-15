@@ -1,6 +1,7 @@
 from collections import defaultdict, deque
 from copy import deepcopy
 import logging
+from pathlib import Path
 import random
 from typing import Self
 
@@ -115,14 +116,22 @@ class Shuffler:
         self: Self,
         seed: str,
         starting_node_name: str = 'Mercay.OutsideOshus.Outside',
+        areas_directory: Path | None = None,
+        enemy_mapping_file: Path | None = None,
+        macros_file: Path | None = None,
     ) -> None:
         random.seed(seed)
 
-        self.aux_data = parse_aux_data()
-        annotate_logic(areas=self.aux_data.areas)
-        connect_rooms(self.aux_data.areas)
-        connect_mail_nodes(self.aux_data.areas)
-        connect_shop_nodes(self.aux_data.areas)
+        self.aux_data = parse_aux_data(
+            areas_directory=areas_directory,
+            enemy_mapping_file=enemy_mapping_file,
+            macros_file=macros_file,
+        )
+
+        self._annotate_logic(logic_directory=areas_directory)
+        self._connect_rooms()
+        self._connect_mail_nodes()
+        self._connect_shop_nodes()
 
         self.starting_node = [
             node
@@ -131,6 +140,18 @@ class Shuffler:
             for node in room.nodes
             if node.name == starting_node_name
         ][0]
+
+    def _annotate_logic(self: Self, logic_directory: Path | None = None) -> None:
+        return annotate_logic(areas=self.aux_data.areas, logic_directory=logic_directory)
+
+    def _connect_rooms(self: Self) -> None:
+        return connect_rooms(self.aux_data.areas)
+
+    def _connect_mail_nodes(self: Self) -> None:
+        return connect_mail_nodes(self.aux_data.areas)
+
+    def _connect_shop_nodes(self: Self) -> None:
+        return connect_shop_nodes(self.aux_data.areas)
 
     def generate(self: Self) -> ShufflerAuxData:
         while True:

@@ -3,8 +3,9 @@ from pathlib import Path
 import pytest
 
 from ph_rando.common import ShufflerAuxData
-from ph_rando.shuffler._parser import annotate_logic, parse_aux_data, parse_edge_requirement
-from ph_rando.shuffler._shuffler import Edge, Node, assumed_search, connect_rooms
+from ph_rando.shuffler import Shuffler
+from ph_rando.shuffler._parser import parse_edge_requirement
+from ph_rando.shuffler._shuffler import Edge, Node
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
@@ -178,24 +179,16 @@ def test_assumed_search(
 ) -> None:
     current_test_dir = TEST_DATA_DIR / test_data_name
 
-    aux_data = parse_aux_data(areas_directory=current_test_dir)
-    annotate_logic(areas=aux_data.areas, logic_directory=current_test_dir)
-    connect_rooms(aux_data.areas)
+    # Patch out check for mailbox node
+    Shuffler._connect_mail_nodes = lambda _: None  # type: ignore
 
-    areas = aux_data.areas
+    shuffler = Shuffler(
+        seed='test',
+        starting_node_name=starting_node_name,
+        areas_directory=current_test_dir,
+    )
 
-    _nodes = [
-        node
-        for area in areas
-        for room in area.rooms
-        for node in room.nodes
-        if node.name == starting_node_name
-    ]
-    assert len(_nodes) > 0, f'Invalid starting node {starting_node_name}'
-    assert len(_nodes) == 1, f'Multiple nodes with name "{starting_node_name}" found'
-    starting_node = _nodes[0]
-
-    reachable_nodes = assumed_search(starting_node=starting_node, aux_data=aux_data, items=[])
+    reachable_nodes = shuffler.assumed_search(items=[])
 
     reachable_nodes_names = [node.name for node in reachable_nodes]
 

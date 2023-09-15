@@ -3,16 +3,16 @@ import json
 from pathlib import Path
 from pprint import pprint
 
+from ph_rando.shuffler import Shuffler
 from ph_rando.shuffler._descriptors import EdgeDescriptor
 from ph_rando.shuffler._parser import Edge, parse_edge_requirement
-from ph_rando.shuffler._shuffler import assumed_search, init_logic_graph
 from ph_rando.shuffler.aux_models import Area, Item
 
 
 def test_graph_connectedness() -> None:
-    aux_data = init_logic_graph()
+    shuffler = Shuffler(seed='test')
 
-    areas = aux_data.areas
+    areas = shuffler.aux_data.areas
 
     # Compute list of tuples of each check its area.
     all_checks = [
@@ -54,13 +54,7 @@ def test_graph_connectedness() -> None:
 
     starting_node.states_gained = states
 
-    assumed_search_nodes = set(
-        assumed_search(
-            starting_node=starting_node,
-            aux_data=aux_data,
-            items=items,
-        )
-    )
+    assumed_search_nodes = set(shuffler.assumed_search(items=items))
 
     # Create set consisting of all areas reported as reachable by the assumed search
     reachable_areas = {node.area.name for node in assumed_search_nodes}
@@ -126,7 +120,9 @@ def _get_required_states(edge: Edge, macros: dict[str, str]) -> set[str]:
 
 
 def test_ensure_states_exist() -> None:
-    aux_data = init_logic_graph()
+    shuffler = Shuffler(seed='test')
+
+    aux_data = shuffler.aux_data
 
     states_required: set[str] = set()
     states_gained: set[str] = set()
