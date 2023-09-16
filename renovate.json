@@ -16,6 +16,16 @@
       "schedule": [
         "before 4am on the first day of the month"
       ]
+    },
+    {
+      "matchFileNames": [
+        "base/requirements.txt",
+        "setup.cfg"
+      ],
+      "automerge": false,
+      "schedule": [
+        "before 4am on the first day of the month"
+      ]
     }
   ]
 }
