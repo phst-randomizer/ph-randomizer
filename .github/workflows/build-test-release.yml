@@ -459,6 +459,7 @@ jobs:
           path: recordings/
 
       - name: Cleanup
+        if: always()
         run: rm -rf *.nds
 
   build:
@@ -511,6 +512,72 @@ jobs:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
           path: dist/
 
+  run-executable:
+    name: Run built randomizer executable [${{ matrix.os }} / ${{ matrix.rom_variant }}]
+    needs: [build]
+    runs-on: ${{ matrix.os }}-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, macos, windows]
+        rom_variant: [US, US (D-Pad Patch)]
+        include:
+          - rom_variant: US
+            google_drive_url_secret: PH_US_GOOGLE_DRIVE_ID
+          - rom_variant: US (D-Pad Patch)
+            google_drive_url_secret: PH_US_DPAD_GOOGLE_DRIVE_ID
+    steps:
+      - uses: actions/checkout@v4
+
+      # Note: intentionally use an older version of Python here;
+      # The pyinstaller build should not depend on a specific Python
+      # version being installed (or, Python being installed at all
+      # for that matter).
+      - name: Get two versions of Python behind min required
+        id: python-version
+        run: |
+          PYTHON_VERSION=$(cat .python-version)
+          echo "python-version="3.$(echo "${PYTHON_VERSION:2} 2" | awk '{print $1-$2}')"" >> $GITHUB_OUTPUT
+          rm -rf *
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ steps.python-version.outputs.python-version }}
+
+      - name: Upgrade `pip` and install `wheel`
+        run: python -m pip install --upgrade pip wheel
+
+      - name: Fetch PH rom
+        run: |
+          pip install gdown
+          gdown ${{ secrets[matrix.google_drive_url_secret] }}
+
+      - name: Get filename of rom
+        id: rom-filename
+        run: echo "rom_filename=$(ls *.nds)" >> $GITHUB_OUTPUT
+
+      - name: Get current commit hash
+        id: commit-hash
+        run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Download built executable from previous job
+        uses: actions/download-artifact@v3
+        with:
+          name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
+
+      - name: Run executable (no GUI)
+        run: |
+          chmod +x ./ph_rando
+          ./ph_rando --no-gui --input-rom-path="${{ steps.rom-filename.outputs.rom_filename }}" --output-rom-path="out.nds"
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf *.nds
+
   release:
     name: Publish a release
     # Require all tests to pass before a release is possible
@@ -523,6 +590,7 @@ jobs:
       - check-aux-data
       - run-shuffler
       - test-desmume
+      - run-executable
     # Only create a release if a tag was pushed
     if: "startsWith(github.ref, 'refs/tags/')"
     runs-on: ubuntu-latest
