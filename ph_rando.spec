@@ -6,7 +6,7 @@ from pathlib import Path
 block_cipher = None
 
 FILE_EXTENSIONS = ('bps', 'py', 'json', 'logic')
-DATA_FILES = [files for ext in FILE_EXTENSIONS for files in Path.cwd().rglob(f'*.{ext}')]
+DATA_FILES = [str(file.relative_to(Path.cwd())) for ext in FILE_EXTENSIONS for file in Path.cwd().rglob(f'*.{ext}')]
 
 a = Analysis(
     ['ph_rando/ui/main.py'],
