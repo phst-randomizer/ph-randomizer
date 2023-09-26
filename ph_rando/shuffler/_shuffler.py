@@ -64,13 +64,6 @@ IMPORTANT_ITEMS: set[str] = {
     'PowerGem',
     'WisdomGem',
     'CourageGem',
-    # Spirit upgrades
-    'PowerSpiritLv1'
-    'WisdomSpiritLv1'
-    'CourageSpiritLv1'
-    'PowerSpiritLv2'
-    'WisdomSpiritLv2'
-    'CourageSpiritLv2',
     # Trading quest items
     'Kaleidoscope',
     'WoodHeart',
@@ -265,9 +258,6 @@ class Shuffler:
         r = locations[random.randint(0, max(0, len(reachable_null_checks) - 1))]
         r.contents = item
 
-        # Now that the item has been placed successfully, remove the item from the item pool
-        remaining_item_pool.remove(item)
-
         logger.info(f'Placed {item.name} at {reachable_null_checks[r]}')
 
     def _place_dungeon_rewards(self: Self, item_pool: list[Item]) -> None:
@@ -287,6 +277,8 @@ class Shuffler:
                 ]
             )
             self._place_item(item, item_pool, possible_checks, use_logic=False)
+        for item in dungeon_reward_pool:
+            item_pool.remove(item)
 
     def _place_boss_keys(self: Self, item_pool: list[Item]) -> None:
         """Place all boss keys in `item_pool`."""
@@ -304,6 +296,8 @@ class Shuffler:
                 ]
             )
             self._place_item(item, item_pool, possible_checks, use_logic=False)
+        for item in key_pool:
+            item_pool.remove(item)
 
     def _place_small_keys(self: Self, item_pool: list[Item]) -> None:
         """Place all small keys in `item_pool`."""
@@ -321,6 +315,8 @@ class Shuffler:
                 ]
             )
             self._place_item(item, item_pool, possible_checks, use_logic=False)
+        for item in key_pool:
+            item_pool.remove(item)
 
     def _place_important_items(self: Self, item_pool: list[Item]) -> None:
         """Place all "important" items in the given item_pool."""
@@ -328,6 +324,8 @@ class Shuffler:
         important_items = [item for item in item_pool if item.name in IMPORTANT_ITEMS]
         for item in important_items:
             self._place_item(item, item_pool)
+        for item in important_items:
+            item_pool.remove(item)
 
     def _place_rest_of_items(self: Self, item_pool: list[Item]) -> None:
         """Place all items remaining in item_pool."""
