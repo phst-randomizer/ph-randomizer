@@ -1,9 +1,17 @@
 from collections.abc import Generator, Iterable
 from contextlib import contextmanager
+import logging
+import struct
 
-from ndspy import bmg, lz10, narc, rom
+from ndspy import bmg, code, lz10, narc, rom
 from zed.common import Game
 from zed.zmb import ZMB
+
+from ph_rando.common import ShufflerAuxData
+from ph_rando.patcher._items import ITEMS
+from ph_rando.shuffler.aux_models import Area, Chest, DigSpot, Event, SalvageTreasure, Shop, Tree
+
+logger = logging.getLogger(__name__)
 
 GD_MODELS = {
     0x00: None,
@@ -185,3 +193,174 @@ def open_zmb_files(
         narc_file = narc.NARC(lz10.decompress(input_rom.getFileByName(narc_path)))
         narc_file.setFileByName(zmb_path, zmb_file.save(game=Game.PhantomHourglass))
         input_rom.setFileByName(narc_path, lz10.compress(narc_file.save()))
+
+
+def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
+    chests = [
+        chest
+        for area in aux_data
+        for room in area.rooms
+        for chest in room.chests
+        if isinstance(chest, Chest | Tree)
+    ]
+
+    zmb_file_paths = {
+        chest.zmb_file_path for chest in chests if chest.zmb_file_path.lower() != 'todo'
+    }
+
+    with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
+        for chest in chests:
+            if chest.zmb_file_path.lower() == 'todo':
+                logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
+                continue
+            zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = ITEMS[
+                chest.contents.name
+            ]
+
+
+def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
+    salvage_treasures = {
+        chest
+        for area in areas
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) == SalvageTreasure
+    }
+
+    dig_spots = {
+        chest
+        for area in areas
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) == DigSpot
+    }
+
+    all_chests = salvage_treasures | dig_spots
+
+    zmb_file_paths = {
+        chest.zmb_file_path for chest in all_chests if chest.zmb_file_path.lower() != 'todo'
+    }
+
+    with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
+        for chest in all_chests:
+            if chest.zmb_file_path.lower() == 'todo':
+                logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
+                continue
+            zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = ITEMS[
+                chest.contents.name
+            ]
+            if type(chest) == SalvageTreasure:
+                zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
+
+
+def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
+    items = {
+        chest
+        for area in areas
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) == Shop
+    }
+
+    # Load arm9.bin and overlay table
+    arm9_executable = bytearray(code.MainCodeFile(input_rom.arm9, 0x02000000).save(compress=False))
+    overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
+
+    for shop_item in items:
+        assert isinstance(shop_item, Shop)
+
+        # Note, the offset is stored as a string in the aux data so that it can be represented as
+        # a hex value for readability. So, we must convert it to an `int` here.
+        try:  # TODO: remove this try/catch when all offsets are set correctly in aux data
+            overlay_offset = int(shop_item.overlay_offset, base=16)
+        except ValueError:
+            logger.warning(
+                f'Invalid overlay offset "{shop_item.overlay_offset}" for {shop_item.name}.'
+            )
+            continue
+
+        # Get current values of the items we're about to change
+        original_item_id: int = overlay_table[shop_item.overlay].data[overlay_offset]
+        original_model_name = f'gd_{GD_MODELS[original_item_id]}'
+
+        # Set the item id to the new one. This changes the "internal" item representation,
+        # but not the 3D model that is displayed prior to purchasing the item
+        overlay_table[shop_item.overlay].data[overlay_offset] = ITEMS[shop_item.contents.name]
+
+        # Set new name of NSBMD/NSBTX 3D model
+        new_model_name = f'gd_{GD_MODELS[ITEMS[shop_item.contents.name]]}'
+        offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbmd'.encode('ascii'))
+        new_data = bytearray(f'Player/get/{new_model_name}.nsbmd'.encode('ascii') + b'\x00')
+        arm9_executable = (
+            arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
+        )
+        offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbtx'.encode('ascii'))
+        new_data = bytearray(f'Player/get/{new_model_name}.nsbtx'.encode('ascii') + b'\x00')
+        arm9_executable = (
+            arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
+        )
+
+        try:
+            offset = overlay_table[shop_item.overlay].data.index(
+                original_model_name.encode('ascii')
+            )
+            new_data = bytearray(new_model_name.encode('ascii') + b'\x00')
+            overlay_table[shop_item.overlay].data = (
+                overlay_table[shop_item.overlay].data[:offset]
+                + new_data
+                + overlay_table[shop_item.overlay].data[offset + len(new_data) :]
+            )
+            # Pad remaining non-NULL chars to 0. If this isn't done and there are characters
+            # left from the previous item, the game will crash.
+            for i in range(offset + len(new_data), offset + 16):
+                overlay_table[shop_item.overlay].data[i] = 0x0
+        except ValueError:
+            # Random treasure items (which should be fixed to Pink Coral in our hacked base rom)
+            # are an exception and do not require this step.
+            assert original_item_id == 0x30
+
+        input_rom.files[overlay_table[shop_item.overlay].fileID] = overlay_table[
+            shop_item.overlay
+        ].save(compress=False)
+        input_rom.arm9OverlayTable = code.saveOverlayTable(overlay_table)
+        input_rom.arm9 = arm9_executable
+
+
+def _patch_bmg_events(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
+    chests = [
+        chest
+        for area in areas
+        for room in area.rooms
+        for chest in room.chests
+        if isinstance(chest, Event)
+    ]
+
+    bmg_file_paths = {
+        chest.bmg_file_path for chest in chests if chest.bmg_file_path.lower() != 'todo'
+    }
+
+    with open_bmg_files(bmg_file_paths, input_rom) as bmg_files:
+        for chest in chests:
+            bmg_instructions = bmg_files[chest.bmg_file_path].instructions
+            bmg_instructions[chest.bmg_instruction_index] = (
+                bmg_instructions[chest.bmg_instruction_index][:4]
+                + struct.pack('<B', ITEMS[chest.contents.name])
+                + bmg_instructions[chest.bmg_instruction_index][5:]
+            )
+
+
+def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
+    """
+    Patches a ROM with the given aux data.
+
+    Given aux data, an input rom, and an output path, this function reads the aux data and
+    patches the input rom with it accordingly, returning the patched rom. Note, the base
+    ROM patch is also applied and should be located at the expected location (see apply_base_patch
+    function for more details).
+    """
+    _patch_zmb_map_objects(aux_data.areas, input_rom)
+    _patch_zmb_actors(aux_data.areas, input_rom)
+    _patch_shop_items(aux_data.areas, input_rom)
+    _patch_bmg_events(aux_data.areas, input_rom)
+
+    return input_rom

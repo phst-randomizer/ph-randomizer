@@ -4,18 +4,16 @@ import importlib
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Literal, Protocol, runtime_checkable
 
-from ndspy.rom import NintendoDSRom
 from pydantic import BaseModel, Field, validator
 
 if TYPE_CHECKING:
+    from ph_rando.patcher._patcher import Patcher
     from ph_rando.shuffler._shuffler import Shuffler
 
 
 @runtime_checkable
 class PatcherHook(Protocol):
-    def __call__(
-        self, value: bool | str | list[str], rom: NintendoDSRom, arm9_bin: bytearray
-    ) -> tuple[NintendoDSRom, bytearray]:
+    def __call__(self, value: bool | str | list[str], patcher: Patcher) -> None:
         ...
 
 
