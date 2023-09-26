@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass
+import json
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import click
 import inflection
-import yaml
 
 from ph_rando.settings import Settings
 
@@ -25,14 +25,17 @@ class ShufflerAuxData:
     seed: str | None = None
 
 
-RANDOMIZER_SETTINGS = Settings(
-    **yaml.safe_load((Path(__file__).parent / 'settings.yaml').read_text())
-).settings
+RANDOMIZER_SETTINGS = {
+    setting.name: setting
+    for setting in Settings(
+        **json.loads((Path(__file__).parent / 'settings.json').read_text())
+    ).settings
+}
 
 
 def click_setting_options(function: Callable) -> Callable[[FC], FC]:
     """Generate `click` CLI options for each randomizer setting."""
-    for setting in RANDOMIZER_SETTINGS:
+    for setting in RANDOMIZER_SETTINGS.values():
         cli_arg = f'--{inflection.dasherize(inflection.underscore(setting.name))}'
 
         click_option_kwargs = {}
@@ -41,8 +44,8 @@ def click_setting_options(function: Callable) -> Callable[[FC], FC]:
 
         function = click.option(
             cli_arg,
-            is_flag=bool(setting.flag),
-            type=click.Choice(setting.options) if setting.options else bool,
+            setting.name,
+            type=bool if setting.type == 'flag' else click.Choice(list(setting.choices)),
             help=setting.description,
             show_default=True,
             **click_option_kwargs,

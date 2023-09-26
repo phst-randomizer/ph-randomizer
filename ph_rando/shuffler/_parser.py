@@ -19,6 +19,8 @@ from ph_rando.shuffler.aux_models import Area, Check, Enemy, Exit, Room
 if TYPE_CHECKING:
     from pyparsing import ParserElement
 
+    from ph_rando.shuffler._shuffler import Shuffler
+
 logger = logging.getLogger(__name__)
 
 # Name of node that represents the singleton "Mailbox" object.
@@ -67,7 +69,7 @@ class Edge:
         items: list[str],
         flags: set[str],
         states: set[str],
-        aux_data: ShufflerAuxData,
+        shuffler_instance: Shuffler,
     ) -> bool:
         """
         Determine if this edge is traversable given the current player state.
@@ -84,7 +86,7 @@ class Edge:
                 items=items,
                 flags=flags,
                 states=states,
-                aux_data=aux_data,
+                shuffler_instance=shuffler_instance,
                 edge_instance=self,
             )
         return True
@@ -139,7 +141,7 @@ def requirements_met(
     items: list[str],
     flags: set[str],
     states: set[str],
-    aux_data: ShufflerAuxData,
+    shuffler_instance: Shuffler,
     edge_instance: Edge | None = None,
     result: bool = True,
 ) -> bool:
@@ -155,7 +157,7 @@ def requirements_met(
                 items,
                 flags,
                 states,
-                aux_data,
+                shuffler_instance,
                 edge_instance,
                 result,
             )
@@ -174,7 +176,7 @@ def requirements_met(
                 items=items,
                 flags=flags,
                 states=states,
-                aux_data=aux_data,
+                shuffler_instance=shuffler_instance,
                 edge_instance=edge_instance,
             )
 
@@ -200,7 +202,7 @@ def evaluate_requirement(
     items: list[str],
     flags: set[str],
     states: set[str],
-    aux_data: ShufflerAuxData,
+    shuffler_instance: Shuffler,
     edge_instance: Edge | None = None,
 ) -> bool:
     """
@@ -244,14 +246,16 @@ def evaluate_requirement(
             for enemy in edge_instance.src.room.enemies:
                 if enemy.name != value:
                     continue
-                elif enemy.type not in aux_data.enemy_requirements:
+                elif enemy.type not in shuffler_instance.aux_data.enemy_requirements:
                     raise Exception(f'{edge_instance.src.name}: invalid enemy type {enemy.type!r}')
                 return requirements_met(
-                    parse_edge_requirement(aux_data.enemy_requirements[enemy.type]),
+                    parse_edge_requirement(
+                        shuffler_instance.aux_data.enemy_requirements[enemy.type]
+                    ),
                     items,
                     flags,
                     states,
-                    aux_data,
+                    shuffler_instance,
                     edge_instance,
                 )
             raise Exception(
@@ -259,16 +263,21 @@ def evaluate_requirement(
                 f'enemy {value} not found!'
             )
         case EdgeDescriptor.MACRO:
-            if value not in aux_data.requirement_macros:
+            if value not in shuffler_instance.aux_data.requirement_macros:
                 raise Exception(f'Invalid macro "{value}", not found in macros.json!')
             return requirements_met(
-                parse_edge_requirement(aux_data.requirement_macros[value]),
+                parse_edge_requirement(shuffler_instance.aux_data.requirement_macros[value]),
                 items,
                 flags,
                 states,
-                aux_data,
+                shuffler_instance,
                 edge_instance,
             )
+        case EdgeDescriptor.SETTING:
+            assert value in shuffler_instance.settings, f'Invalid setting "{value}"'
+            result = shuffler_instance.settings[value]
+            assert isinstance(result, bool)
+            return result
         case other:
             if other not in EdgeDescriptor:
                 raise Exception(f'Invalid edge descriptor {other!r}')

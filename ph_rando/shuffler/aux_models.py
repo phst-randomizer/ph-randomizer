@@ -19,6 +19,12 @@ class Item(BaseModel):
         description='State(s) that should be gained upon obtaining this item.',
     )
 
+    def __repr__(self) -> str:
+        s = self.name
+        if self.states:
+            s += f' ({self.states})'
+        return s
+
     @validator('name')
     def check_if_item_is_valid(cls, v: str) -> str:
         """Ensure that this check's `contents` is set to a valid item."""

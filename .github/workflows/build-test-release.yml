@@ -199,15 +199,14 @@ jobs:
       - name: Run pydantic validation on settings json
         run: |
           python <<HEREDOC
-          import sys
+          import json, sys
           from pathlib import Path
-          import yaml
           from pydantic import ValidationError
           from ph_rando.settings import Settings
           failed = False
-          with open(Path.cwd() / 'ph_rando' / 'settings.yaml') as f:
+          with open(Path.cwd() / 'ph_rando' / 'settings.json') as f:
             try:
-              Settings(**yaml.safe_load(f))
+              Settings(**json.load(f))
             except ValidationError as e:
               failed = True
               print(file.relative_to(Path.cwd()), file=sys.stderr, end='\n')
@@ -383,7 +382,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -e .[test]
-        pip install PyYAML
 
     - name: Get list of tests to run in separate jobs
       id: set-test-matrix

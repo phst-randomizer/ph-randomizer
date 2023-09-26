@@ -2,10 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from ph_rando.common import ShufflerAuxData
-from ph_rando.shuffler import Shuffler
+from ph_rando.common import RANDOMIZER_SETTINGS
 from ph_rando.shuffler._parser import parse_edge_requirement
-from ph_rando.shuffler._shuffler import Edge, Node
+from ph_rando.shuffler._shuffler import Edge, Node, Shuffler
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
@@ -87,7 +86,9 @@ def test_edge_parser(
     edge = Edge(src=node1, dest=node2, requirements=parse_edge_requirement(expression))
     node1.edges.append(edge)
     assert (
-        edge.is_traversable(inventory, flags, states, aux_data=ShufflerAuxData([], {}, {}))
+        edge.is_traversable(
+            inventory, flags, states, shuffler_instance=Shuffler(seed='test', settings={})
+        )
         == expected_result
     )
 
@@ -184,6 +185,14 @@ def test_assumed_search(
 
     shuffler = Shuffler(
         seed='test',
+        settings={
+            setting.name: True
+            if setting.type == 'flag'
+            else list(setting.default)
+            if setting.type == 'multiple_choice'
+            else setting.default
+            for setting in RANDOMIZER_SETTINGS.values()
+        },
         starting_node_name=starting_node_name,
         areas_directory=current_test_dir,
     )
