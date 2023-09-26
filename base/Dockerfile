@@ -1,5 +1,6 @@
 # Download and compile ARMIPS
-FROM rikorose/gcc-cmake:gcc-8 AS compile_armips
+FROM python:3.11 AS compile_armips
+RUN apt-get update && apt-get install -y cmake
 RUN git clone --recurse-submodules https://github.com/Kingcom/armips.git
 WORKDIR /armips
 RUN cmake .
