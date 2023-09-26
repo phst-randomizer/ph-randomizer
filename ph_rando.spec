@@ -5,28 +5,15 @@ from pathlib import Path
 
 block_cipher = None
 
-SHUFFLER_ROOT_DIR = Path('ph_rando/shuffler/')
-
+FILE_EXTENSIONS = ('bps', 'py', 'json', 'logic')
+DATA_FILES = [files for ext in FILE_EXTENSIONS for files in Path.cwd().rglob(f'*.{ext}')]
 
 a = Analysis(
     ['ph_rando/ui/main.py'],
     pathex=[],
     binaries=[],
     datas=[
-        # Bundle logic and aux data
-        (
-            str(file.relative_to(SHUFFLER_ROOT_DIR.parents[1])),
-            str(file.relative_to(SHUFFLER_ROOT_DIR.parents[1]).parent),
-        )
-        for file in list(SHUFFLER_ROOT_DIR.rglob('*.logic'))
-        + list(SHUFFLER_ROOT_DIR.rglob('*.json'))
-        if not str(file).startswith('.')
-    ]
-    + [
-        # Bundle base patches
-        ('base/out/*.bps', 'base/out/'),
-        # Bundle settings.json
-        ('ph_rando/settings.json', 'ph_rando/'),
+        (file, file) for file in DATA_FILES
     ],
     hiddenimports=[],
     hookspath=[],
