@@ -7,7 +7,7 @@ import pytest
 
 from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS_REVERSED
-from ph_rando.patcher.main import GD_MODELS, _patch_zmb_map_objects
+from ph_rando.patcher._util import GD_MODELS, _patch_zmb_map_objects
 from ph_rando.shuffler.aux_models import Chest, Item
 
 from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper

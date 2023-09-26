@@ -1,14 +1,12 @@
-import hashlib
 import importlib
-from io import BytesIO
 import logging
 from pathlib import Path
 from typing import Self
 
 from ndspy.rom import NintendoDSRom
-from vidua import bps
 
 from ph_rando.common import ShufflerAuxData
+from ph_rando.patcher._util import apply_base_patch
 from ph_rando.settings import PatcherHook
 from ph_rando.shuffler._parser import parse_aux_data
 from ph_rando.shuffler.aux_models import Area, Check
@@ -75,23 +73,4 @@ class Patcher:
                 fn(value=setting_value, patcher=self)
 
     def _apply_base_patch(self: Self, rom_data: bytes) -> NintendoDSRom:
-        """Apply the base patch to `input_rom`."""
-        # Calculate sha256 of provided ROM
-        sha256_calculator = hashlib.sha256()
-        sha256_calculator.update(rom_data)
-        sha256 = sha256_calculator.hexdigest()
-
-        # Get the path to the base patch for the given ROM, erroring out of it doesn't exist
-        base_patch_path = Path(__file__).parents[2] / 'base' / 'out' / f'{sha256}.bps'
-        if not base_patch_path.exists():
-            raise Exception(f'Invalid ROM! No base patch found for a ROM with sha256 of {sha256}.')
-
-        logger.info(f'Applying base patch for ROM with hash of "{sha256}"...')
-
-        # Apply the base patch to the ROM
-        with open(base_patch_path, 'rb') as patch_file:
-            patched_rom = bps.patch(source=BytesIO(rom_data), bps_patch=patch_file)
-
-        logger.info('Base patch applied successfully.')
-
-        return NintendoDSRom(data=patched_rom.read())
+        return apply_base_patch(rom_data)

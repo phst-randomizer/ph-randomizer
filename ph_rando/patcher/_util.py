@@ -1,9 +1,13 @@
 from collections.abc import Generator, Iterable
 from contextlib import contextmanager
+import hashlib
+from io import BytesIO
 import logging
+from pathlib import Path
 import struct
 
 from ndspy import bmg, code, lz10, narc, rom
+from vidua import bps
 from zed.common import Game
 from zed.zmb import ZMB
 
@@ -152,6 +156,29 @@ GD_MODELS = {
     0x87: '',  # TODO: what to do for random ship part?
     # TODO: are there any more items?
 }
+
+
+def apply_base_patch(rom_data: bytes) -> rom.NintendoDSRom:
+    """Apply the base patch to `input_rom`."""
+    # Calculate sha256 of provided ROM
+    sha256_calculator = hashlib.sha256()
+    sha256_calculator.update(rom_data)
+    sha256 = sha256_calculator.hexdigest()
+
+    # Get the path to the base patch for the given ROM, erroring out of it doesn't exist
+    base_patch_path = Path(__file__).parents[2] / 'base' / 'out' / f'{sha256}.bps'
+    if not base_patch_path.exists():
+        raise Exception(f'Invalid ROM! No base patch found for a ROM with sha256 of {sha256}.')
+
+    logger.info(f'Applying base patch for ROM with hash of "{sha256}"...')
+
+    # Apply the base patch to the ROM
+    with open(base_patch_path, 'rb') as patch_file:
+        patched_rom = bps.patch(source=BytesIO(rom_data), bps_patch=patch_file)
+
+    logger.info('Base patch applied successfully.')
+
+    return rom.NintendoDSRom(data=patched_rom.read())
 
 
 @contextmanager

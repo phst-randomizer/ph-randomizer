@@ -8,7 +8,7 @@ from time import sleep
 import cv2
 import pytest
 
-from ph_rando.patcher import apply_base_patch
+from ph_rando.patcher._util import apply_base_patch
 
 from .desmume_utils import DeSmuMEWrapper
 
