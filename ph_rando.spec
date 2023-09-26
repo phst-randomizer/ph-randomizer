@@ -6,14 +6,14 @@ from pathlib import Path
 block_cipher = None
 
 FILE_EXTENSIONS = ('bps', 'py', 'json', 'logic')
-DATA_FILES = [str(file.relative_to(Path.cwd())) for ext in FILE_EXTENSIONS for file in Path.cwd().rglob(f'*.{ext}')]
+DATA_FILES = [file.relative_to(Path.cwd()) for ext in FILE_EXTENSIONS for file in Path.cwd().rglob(f'*.{ext}')]
 
 a = Analysis(
     ['ph_rando/ui/main.py'],
     pathex=[],
     binaries=[],
     datas=[
-        (file, file) for file in DATA_FILES
+        (str(file), file.parent) for file in DATA_FILES
     ],
     hiddenimports=[],
     hookspath=[],
