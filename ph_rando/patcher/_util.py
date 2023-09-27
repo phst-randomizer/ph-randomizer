@@ -223,39 +223,44 @@ def open_zmb_files(
 
 
 def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
-    chests = [
-        chest
+    logging.info('Patching ZMB map objects...')
+
+    chests: dict[str, Chest | Tree] = {
+        '.'.join([area.name, room.name, chest.name]): chest
         for area in aux_data
         for room in area.rooms
         for chest in room.chests
         if isinstance(chest, Chest | Tree)
-    ]
+    }
 
     zmb_file_paths = {
-        chest.zmb_file_path for chest in chests if chest.zmb_file_path.lower() != 'todo'
+        chest.zmb_file_path for chest in chests.values() if chest.zmb_file_path.lower() != 'todo'
     }
 
     with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
-        for chest in chests:
+        for name, chest in chests.items():
             if chest.zmb_file_path.lower() == 'todo':
                 logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
+            logger.info(f'Patching check "{name}" with item {chest.contents.name}')
             zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = ITEMS[
                 chest.contents.name
             ]
 
 
 def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
-    salvage_treasures = {
-        chest
+    logging.info('Patching ZMB actors...')
+
+    salvage_treasures: dict[str, SalvageTreasure] = {
+        '.'.join([area.name, room.name, chest.name]): chest
         for area in areas
         for room in area.rooms
         for chest in room.chests
         if type(chest) == SalvageTreasure
     }
 
-    dig_spots = {
-        chest
+    dig_spots: dict[str, DigSpot] = {
+        '.'.join([area.name, room.name, chest.name]): chest
         for area in areas
         for room in area.rooms
         for chest in room.chests
@@ -265,14 +270,17 @@ def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
     all_chests = salvage_treasures | dig_spots
 
     zmb_file_paths = {
-        chest.zmb_file_path for chest in all_chests if chest.zmb_file_path.lower() != 'todo'
+        chest.zmb_file_path
+        for chest in all_chests.values()
+        if chest.zmb_file_path.lower() != 'todo'
     }
 
     with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
-        for chest in all_chests:
+        for name, chest in all_chests.items():
             if chest.zmb_file_path.lower() == 'todo':
                 logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
+            logger.info(f'Patching check "{name}" with item {chest.contents.name}')
             zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = ITEMS[
                 chest.contents.name
             ]
@@ -281,8 +289,10 @@ def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
 
 def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
-    items = {
-        chest
+    logging.info('Patching shop items...')
+
+    items: dict[str, Shop] = {
+        '.'.join([area.name, room.name, chest.name]): chest
         for area in areas
         for room in area.rooms
         for chest in room.chests
@@ -293,7 +303,8 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
     arm9_executable = bytearray(code.MainCodeFile(input_rom.arm9, 0x02000000).save(compress=False))
     overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
 
-    for shop_item in items:
+    for name, shop_item in items.items():
+        logger.info(f'Patching check "{name}" with item {shop_item.contents.name}')
         assert isinstance(shop_item, Shop)
 
         # Note, the offset is stored as a string in the aux data so that it can be represented as
@@ -316,7 +327,9 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
         # Set new name of NSBMD/NSBTX 3D model
         new_model_name = f'gd_{GD_MODELS[ITEMS[shop_item.contents.name]]}'
+        print(f'Player/get/{original_model_name}.nsbmd')
         offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbmd'.encode('ascii'))
+        print(hex(offset), original_model_name)
         new_data = bytearray(f'Player/get/{new_model_name}.nsbmd'.encode('ascii') + b'\x00')
         arm9_executable = (
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
@@ -360,11 +373,10 @@ def _patch_bmg_events(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
         for room in area.rooms
         for chest in room.chests
         if isinstance(chest, Event)
+        if chest.bmg_file_path.lower() != 'todo'
     ]
 
-    bmg_file_paths = {
-        chest.bmg_file_path for chest in chests if chest.bmg_file_path.lower() != 'todo'
-    }
+    bmg_file_paths = {chest.bmg_file_path for chest in chests}
 
     with open_bmg_files(bmg_file_paths, input_rom) as bmg_files:
         for chest in chests:
@@ -389,5 +401,4 @@ def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.
     _patch_zmb_actors(aux_data.areas, input_rom)
     _patch_shop_items(aux_data.areas, input_rom)
     _patch_bmg_events(aux_data.areas, input_rom)
-
     return input_rom
