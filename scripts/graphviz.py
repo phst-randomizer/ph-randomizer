@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys
 
-from ph_rando.shuffler._shuffler import init_logic_graph
+from ph_rando.shuffler._shuffler import Shuffler
 
 try:
     import pygraphviz as pgv
@@ -13,7 +13,7 @@ except ModuleNotFoundError:
 
 
 def main():
-    aux_data = init_logic_graph()
+    aux_data = Shuffler('test', {}).aux_data
 
     G = pgv.AGraph(strict=False, directed=True)
 
