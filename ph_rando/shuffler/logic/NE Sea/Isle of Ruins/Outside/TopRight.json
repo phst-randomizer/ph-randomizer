@@ -11,7 +11,7 @@
           "contents": {
             "name": "BigGreenRupee"
           },
-          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom_02.zmb",
+          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom2_02.zmb",
           "zmb_mapobject_index": 61,
           "display_name": "Underwater chest"
         },
@@ -21,7 +21,7 @@
           "contents": {
             "name": "WisdomGem"
           },
-          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom_02.zmb",
+          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom2_02.zmb",
           "zmb_mapobject_index": 0,
           "display_name": "Chest on ledge"
         },
@@ -31,7 +31,7 @@
           "contents": {
             "name": "CourageGem"
           },
-          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom_02.zmb",
+          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom2_02.zmb",
           "zmb_mapobject_index": 15,
           "display_name": "Chest near Doylan's Pyramid"
         },
@@ -41,7 +41,7 @@
           "contents": {
             "name": "BigRedRupee"
           },
-          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom_02.zmb",
+          "zmb_file_path": "Map/isle_wisdom2/map02.bin/zmb/isle_wisdom2_02.zmb",
           "zmb_mapobject_index": 56,
           "display_name": "Chest near Mutoh's Pyramid"
         }
