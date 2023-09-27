@@ -58,9 +58,9 @@ GD_MODELS = {
     0x25: 'ship',  # TODO: ship or ship02?
     0x26: 'key_su',
     0x27: '',  # TODO: what is this?
-    0x28: 'arrowpodL',  # TODO: arrowpod or arrowpodL?
+    0x28: 'arrowpod',
     0x29: 'bmbagL',  # TODO: bmbag or bmbagL or bmbagM?
-    0x2A: 'bcbagL',  # TODO: bcbag or bcbagL or bcbagM?
+    0x2A: 'bcbagM',
     0x2B: '',  # TODO: what is this?
     0x2C: 'key_ki',
     0x2D: 'minaP',
