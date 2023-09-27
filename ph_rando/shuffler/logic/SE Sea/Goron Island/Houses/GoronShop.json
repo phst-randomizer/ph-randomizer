@@ -11,8 +11,8 @@
           "contents": {
             "name": "BombchuBagUpgrade"
           },
-          "overlay": 0,
-          "overlay_offset": "TODO"
+          "overlay": 31,
+          "overlay_offset": "0x2f00"
         }
       ],
       "exits": [
