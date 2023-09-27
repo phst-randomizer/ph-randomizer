@@ -1,7 +1,6 @@
 import sys
 
 from ph_rando.ui.cli import randomizer_cli
-from ph_rando.ui.gui import render_ui
 
 
 def main() -> None:
@@ -9,6 +8,8 @@ def main() -> None:
         sys.argv.remove('--no-gui')
         randomizer_cli()
     else:
+        from ph_rando.ui.gui import render_ui
+
         render_ui()
 
 
