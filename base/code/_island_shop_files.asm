@@ -17,10 +17,10 @@ minaP_nsbtx:
     .asciiz "Player/get/gd_minaP.nsbtx"
     .fill 4, 0
 arrowpod_nsbmd:
-    .asciiz "Player/get/gd_arrowpodL.nsbmd"
+    .asciiz "Player/get/gd_arrowpod.nsbmd"
     .fill 1, 0
 arrowpod_nsbtx:
-    .asciiz "Player/get/gd_arrowpodL.nsbtx"
+    .asciiz "Player/get/gd_arrowpod.nsbtx"
     .fill 1, 0
 bcbagM_nsbmd:
     .asciiz "Player/get/gd_bcbagM.nsbmd"
