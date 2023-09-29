@@ -516,6 +516,7 @@ jobs:
     name: Run built randomizer executable [${{ matrix.os }} / ${{ matrix.rom_variant }}]
     needs: [build]
     runs-on: ${{ matrix.os }}-latest
+    timeout-minutes: 10
     defaults:
       run:
         shell: bash
