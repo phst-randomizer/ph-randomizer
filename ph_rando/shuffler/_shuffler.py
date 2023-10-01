@@ -193,6 +193,9 @@ class Shuffler:
                         check.contents = None  # type: ignore
 
         while True:
+            # Save shallow copy of original list so we can restart if the assumed fill fails
+            backup_item_pool = item_pool.copy()
+
             random.shuffle(item_pool)
 
             try:
@@ -210,8 +213,8 @@ class Shuffler:
                     for room in area.rooms:
                         for check in room.chests:
                             if check.contents is not None and check not in self._checks_to_exclude:
-                                item_pool.append(check.contents)
                                 check.contents = None  # type: ignore
+                item_pool = backup_item_pool
                 continue
 
         return self.aux_data
