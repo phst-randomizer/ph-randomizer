@@ -8,16 +8,15 @@ from ph_rando.shuffler._shuffler import Edge, Node, Shuffler
 
 TEST_DATA_DIR = Path(__file__).parent / 'test_data'
 
-# TODO: re-enable once shuffler actually works
-# @pytest.mark.repeat(3)
-# @pytest.mark.parametrize('seed', ['test', 'another_test'])
-# def test_seeds(seed: str, settings):
-# """Test that running the shuffler with same seed multiple times produces identical aux data."""
 
-#     first = shuffle(seed, settings)
-#     second = shuffle(seed, settings)
-#     third = shuffle(seed, settings)
-#     assert first == second == third
+@pytest.mark.repeat(3)
+@pytest.mark.parametrize('seed', ['test', 'another_test', 'another_another_test'])
+def test_seeds(seed: str, default_settings):
+    """Test that running the shuffler with same seed multiple times produces identical aux data."""
+    first = Shuffler(seed=seed, settings=default_settings).generate()
+    second = Shuffler(seed=seed, settings=default_settings).generate()
+    third = Shuffler(seed=seed, settings=default_settings).generate()
+    assert first == second == third
 
 
 @pytest.mark.parametrize(

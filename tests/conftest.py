@@ -6,10 +6,9 @@ from ph_rando.common import RANDOMIZER_SETTINGS, ShufflerAuxData
 from ph_rando.shuffler._parser import parse_aux_data
 
 
-# TODO: overhaul this fixture, maybe parametrize for all possible setting combinations
 @pytest.fixture
-def settings():
-    return {setting.name: True for setting in RANDOMIZER_SETTINGS}
+def default_settings() -> dict[str, str | set[str] | bool]:
+    return {setting_name: setting.default for setting_name, setting in RANDOMIZER_SETTINGS.items()}
 
 
 @pytest.fixture
