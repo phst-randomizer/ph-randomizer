@@ -242,10 +242,14 @@ def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -
             if chest.zmb_file_path.lower() == 'todo':
                 logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
+
+            item_id = ITEMS[chest.contents.name]
+            if item_id == -1:
+                logger.warning(f'Skipping {chest.name}, item {chest.contents.name} ID is unknown.')
+                continue
+
             logger.info(f'Patching check "{name}" with item {chest.contents.name}')
-            zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = ITEMS[
-                chest.contents.name
-            ]
+            zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = item_id
 
 
 def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
@@ -280,10 +284,14 @@ def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
             if chest.zmb_file_path.lower() == 'todo':
                 logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
                 continue
+
+            item_id = ITEMS[chest.contents.name]
+            if item_id == -1:
+                logger.warning(f'Skipping {chest.name}, item {chest.contents.name} ID is unknown.')
+                continue
+
             logger.info(f'Patching check "{name}" with item {chest.contents.name}')
-            zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = ITEMS[
-                chest.contents.name
-            ]
+            zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = item_id
             if type(chest) == SalvageTreasure:
                 zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
 
@@ -304,6 +312,13 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
     overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
 
     for name, shop_item in items.items():
+        item_id = ITEMS[shop_item.contents.name]
+        if item_id == -1:
+            logger.warning(
+                f'Skipping {shop_item.name}, item {shop_item.contents.name} ID is unknown.'
+            )
+            continue
+
         logger.info(f'Patching check "{name}" with item {shop_item.contents.name}')
         assert isinstance(shop_item, Shop)
 
@@ -323,13 +338,11 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
         # Set the item id to the new one. This changes the "internal" item representation,
         # but not the 3D model that is displayed prior to purchasing the item
-        overlay_table[shop_item.overlay].data[overlay_offset] = ITEMS[shop_item.contents.name]
+        overlay_table[shop_item.overlay].data[overlay_offset] = item_id
 
         # Set new name of NSBMD/NSBTX 3D model
-        new_model_name = f'gd_{GD_MODELS[ITEMS[shop_item.contents.name]]}'
-        print(f'Player/get/{original_model_name}.nsbmd')
+        new_model_name = f'gd_{GD_MODELS[item_id]}'
         offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbmd'.encode('ascii'))
-        print(hex(offset), original_model_name)
         new_data = bytearray(f'Player/get/{new_model_name}.nsbmd'.encode('ascii') + b'\x00')
         arm9_executable = (
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
@@ -380,6 +393,11 @@ def _patch_bmg_events(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
     with open_bmg_files(bmg_file_paths, input_rom) as bmg_files:
         for chest in chests:
+            item_id = ITEMS[chest.contents.name]
+            if item_id == -1:
+                logger.warning(f'Skipping {chest.name}, item {chest.contents.name} ID is unknown.')
+                continue
+
             bmg_instructions = bmg_files[chest.bmg_file_path].instructions
             bmg_instructions[chest.bmg_instruction_index] = (
                 bmg_instructions[chest.bmg_instruction_index][:4]
