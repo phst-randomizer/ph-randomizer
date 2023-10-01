@@ -35,7 +35,7 @@
         "states": {
           "title": "States",
           "description": "State(s) that should be gained upon obtaining this item.",
-          "default": {},
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
