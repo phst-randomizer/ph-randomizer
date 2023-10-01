@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 class Item(BaseModel):
     name: str
     states: set[str] = Field(
-        {},
+        set(),
         description='State(s) that should be gained upon obtaining this item.',
     )
 
