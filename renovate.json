@@ -3,13 +3,9 @@
   "extends": [
     "config:base"
   ],
-  "pre-commit": {
-    "enabled": true
-  },
   "packageRules": [
     {
       "matchFileNames": [
-        ".pre-commit-config.yaml",
         ".github/workflows/**"
       ],
       "automerge": true,
