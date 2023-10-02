@@ -28,10 +28,12 @@ WORKDIR /app
 COPY --from=compile_armips /armips/armips /app
 COPY --from=compile_ndstool /ndstool/ndstool /app
 COPY --from=compile_flips /Flips/flips /app
-# Install gcc + software-properties-common (the latter so we can use `apt-add-repository`)
-RUN apt-get update && apt-get install -y gcc software-properties-common
-# Install ARM gcc toolchain
-RUN apt-get install -y gcc-arm-none-eabi
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    gcc-arm-none-eabi \
+    software-properties-common \
+    parallel
 # Install python dependencies
 ADD requirements.txt /app/
 RUN pip install --upgrade pip

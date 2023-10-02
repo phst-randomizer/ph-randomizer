@@ -38,19 +38,23 @@ arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	truncate -s -12 arm9_original.bin
 
 	# Decompress BLZ-compressed binaries
-	ndspy_codeCompression decompress arm9_original.bin arm9_original.bin
+	cat /dev/null > commands.sh
+	echo "ndspy_codeCompression decompress arm9_original.bin arm9_original.bin" >> commands.sh
 	for file in $$(cat code/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		ndspy_codeCompression decompress overlay/$$file overlay/$$file; \
+		echo "ndspy_codeCompression decompress overlay/$$file overlay/$$file" >> commands.sh; \
 	done
+	parallel < commands.sh
 
 	# Patch the binaries with our custom code
 	./armips code/main.asm
 
 	# Recompress the binaries
-	ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin
+	cat /dev/null > commands.sh
+	echo "ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin" >> commands.sh
 	for file in $$(cat code/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		ndspy_codeCompression compress overlay/$$file overlay/$$file; \
+		echo "ndspy_codeCompression compress overlay/$$file overlay/$$file" >> commands.sh; \
 	done
+	parallel < commands.sh
 
 	# Combine arm9.bin back into a single file
 	# TODO: Do this in bash instead of an inline python script
