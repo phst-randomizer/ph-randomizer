@@ -20,14 +20,6 @@
             .include "_island_shop_files.asm"
 
             .arm
-            .align
-            @get_item_model:
-                push lr
-                ldr r3, =org(item_flags)
-                bl get_item_model
-                pop pc
-
-            .arm
             .importobj "code/get_item_model.o"
 
         .pool
@@ -40,6 +32,15 @@
             .importobj "code/set_initial_flags.o"
             .importobj "code/spawn_custom_freestanding_item.o"
 
+            .arm
+            .align
+            @get_item_model:
+                push lr
+                ldr r3, =org(item_flags)
+                bl get_item_model
+                pop pc
+
+            .arm
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
                 bl set_initial_flags
