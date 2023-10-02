@@ -59,10 +59,12 @@
       "supported": false,
       "choices": [
         "shuffle_amongst_themselves",
-        "shuffle_with_rest_of_items"
+        "shuffle_with_rest_of_items",
+        "vanilla"
       ],
-      "default": "shuffle_amongst_themselves",
-      "description": "Whether dungeon rewards should be randomized only amongst themselves, or in the general item pool."
+      "default": "vanilla",
+      "description": "Whether dungeon rewards should be randomized only amongst themselves, or in the general item pool.",
+      "shuffler_hook": "dungeon_rewards"
     },
     {
       "name": "MercayBridgeRepairedFromStart",

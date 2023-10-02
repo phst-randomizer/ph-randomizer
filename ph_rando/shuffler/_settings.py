@@ -90,3 +90,27 @@ def tree_drops(
             raise NotImplementedError()
         case other:
             raise Exception(f'{other}: invalid value for shop_items setting')
+
+
+def dungeon_rewards(
+    value: Literal['shuffle_amongst_themselves', 'shuffle_with_rest_of_items', 'vanilla'],
+    shuffler: Shuffler,
+) -> None:
+    from ._shuffler import DUNGEON_REWARD_CHECKS
+
+    match value:
+        case 'vanilla':
+            for area in shuffler.aux_data.areas:
+                for room in area.rooms:
+                    for chest in filter(
+                        lambda chest: '.'.join([area.name, room.name, chest.name])
+                        in DUNGEON_REWARD_CHECKS,
+                        room.chests,
+                    ):
+                        shuffler.exclude_check(chest)
+        case 'shuffle_amongst_themselves':
+            raise NotImplementedError()
+        case 'shuffle_with_rest_of_items':
+            raise NotImplementedError()
+        case other:
+            raise Exception(f'{other}: invalid value for shop_items setting')

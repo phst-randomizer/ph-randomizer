@@ -338,6 +338,7 @@ class Shuffler:
         item_pool.clear()
 
     def exclude_check(self: Self, check: Check) -> None:
+        logger.debug(f'Excluding check "{check.name}"')
         self._checks_to_exclude.add(check)
 
     def search(
