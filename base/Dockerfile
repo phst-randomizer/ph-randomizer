@@ -32,7 +32,6 @@ COPY --from=compile_flips /Flips/flips /app
 RUN apt-get update && apt-get install -y \
     gcc \
     gcc-arm-none-eabi \
-    software-properties-common \
     parallel
 # Install python dependencies
 ADD requirements.txt /app/
