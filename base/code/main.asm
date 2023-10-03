@@ -18,6 +18,11 @@
             .importobj "code/progressive_sword_check.o"
             .importobj "code/rando_settings.o"
             .include "_island_shop_files.asm"
+
+            .arm
+            .importobj "code/get_item_model.o"
+
+        .pool
         .endarea
 
     .org 0x54894 + 0x2004000
@@ -27,6 +32,15 @@
             .importobj "code/set_initial_flags.o"
             .importobj "code/spawn_custom_freestanding_item.o"
 
+            .arm
+            .align
+            @get_item_model:
+                push lr
+                ldr r3, =org(item_flags)
+                bl get_item_model
+                pop pc
+
+            .arm
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
                 bl set_initial_flags
@@ -107,6 +121,24 @@
             push r0, r1, r2, r3
             bl progressive_sword_check
             pop r0, r1, r2, r3
+        .endarea
+
+    .thumb
+    .org 0x20adbcc
+        .area 0x36, 0x00
+            ; Get current item id
+            mov r0, 0x46
+            lsl r0, r0, 0x2
+            add r0, r0, r5
+            ldr r0, [r0]
+
+            add r1, sp, 0x8c ; get dest address for nsbmd
+            add r2, sp, 0xc ; get dest address for nsbtx
+
+            blx @get_item_model
+
+            b 0x20ADC02
+        .pool
         .endarea
 
 
