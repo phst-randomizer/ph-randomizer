@@ -5,6 +5,7 @@ from ndspy import lz10, narc, rom
 
 NPC_MODELS = {
     'SwB': 'battle.bmg',
+    'Ptar': 'main_isl.bmg',
 }
 
 

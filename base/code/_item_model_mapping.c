@@ -3,7 +3,8 @@ char *ITEM_ID_TO_MODEL_NAME_MAPPING[] = {
     [0x04] = "shA",       [0x05] = "",           [0x06] = "force_y",   [0x07] = "bomb",
     [0x08] = "bow",       [0x09] = "rupee_g",    [0x0A] = "heart_utu", [0x0B] = "",
     [0x0C] = "boomerang", [0x0D] = "scp",        [0x0E] = "bomchu",    [0x0F] = "bosskey",
-    [0x10] = "rev_bin",   [0x11] = "",           [0x12] = "",          [0x13] = "mapSea",
+    [0x10] = "rev_bin",   [0x11] = "",           [0x12] = "main_isl.bmg", // TODO: placeholder model
+              [0x13] = "mapSea",
     [0x14] = "mapSea",    [0x15] = "mapSea",     [0x16] = "mapSea",    [0x17] = "",
     [0x18] = "rupee_b",   [0x19] = "rupee_r",    [0x1A] = "rupee_r",   [0x1B] = "rupee_go",
     [0x1C] = "force_y",   [0x1D] = "force_r",    [0x1E] = "force_b",   [0x1F] = "ham",
