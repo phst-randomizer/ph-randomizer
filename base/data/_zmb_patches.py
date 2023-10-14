@@ -75,7 +75,7 @@ def _add_chest_for_phantom_hourglass(rom: NintendoDSRom) -> NintendoDSRom:
         chest.x = 33
         chest.y = 12
         chest.rotation = 0
-        chest.unk08 = 0x3  # TODO: set to sword for now. Change this to phantom hourglass.
+        chest.unk08 = 0x12
         chest.unk0A = 0
         chest.unk0C = 0
         chest.unk10 = 1
@@ -87,6 +87,8 @@ def _add_chest_for_phantom_hourglass(rom: NintendoDSRom) -> NintendoDSRom:
         chest.unk1B = 0
         chest.type = 10
         zmb_file.mapObjects.append(chest)
+        # NOTE: this should match what's in the aux data.
+        assert zmb_file.mapObjects.index(chest) == 8
     return rom
 
 
