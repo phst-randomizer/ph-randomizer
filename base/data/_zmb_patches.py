@@ -67,10 +67,16 @@ def _patch_totok_lobby_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
 
 def _add_chest_for_phantom_hourglass(rom: NintendoDSRom) -> NintendoDSRom:
     """
-    Add a chest in front of the pedestal that you normally get the phantom hourglass from.
+    Add a chest in front of the pedestal that you normally get the phantom hourglass from,
+    and removes the phantom hourglass from the pedestal.
     This serves as a replacement for the phantom hourglass pedestal as an item location.
     """
     with edit_zmb(rom, 'Map/dngn_main_f/map00.bin', 'zmb/dngn_main_f_00.zmb') as zmb_file:
+        # Remove hourglass from pedestal
+        hgoj_actors = [a for a in zmb_file.actors if a.type == 'HGOJ']
+        assert len(hgoj_actors) == 1
+        zmb_file.actors.remove(hgoj_actors[0])
+        # Add new chest containing the phantom hourglass
         chest = zmb.MapObject(game=common.Game.PhantomHourglass)
         chest.x = 33
         chest.y = 12
