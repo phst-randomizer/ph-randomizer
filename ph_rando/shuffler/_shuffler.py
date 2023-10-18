@@ -142,6 +142,7 @@ class Shuffler:
         self._connect_mail_nodes()
         self._connect_shop_nodes()
         self._apply_settings()
+        self._remove_unsupported_items()
 
         self.starting_node = [
             node
@@ -174,6 +175,37 @@ class Shuffler:
                 )
                 logger.debug(f'Setting "{setting_name}"...')
                 fn(value=setting_value, shuffler=self)
+
+    def _remove_unsupported_items(self: Self) -> None:
+        """Removes any items that cannot currently be patched from shuffle pool."""
+        # TODO: remove this function when all item types are supported.
+        from ph_rando.shuffler.aux_models import (
+            BossReward,
+            Freestanding,
+            Mail,
+            MinigameRewardChest,
+            OnEnemy,
+            SpiritUpgrade,
+        )
+
+        unsupported_types = (
+            Freestanding,
+            OnEnemy,
+            MinigameRewardChest,
+            Mail,
+            BossReward,
+            SpiritUpgrade,
+        )
+        for area in self.aux_data.areas:
+            for room in area.rooms:
+                for check in room.chests:
+                    if check not in self._checks_to_exclude and type(check) in unsupported_types:
+                        logger.warning(
+                            f'Excluding "{".".join([area.name, room.name, check.name])}" from '
+                            f'shuffled item pool (item type "{type(check).__name__}" not '
+                            'supported yet)'
+                        )
+                        self.exclude_check(check)
 
     def generate(self: Self) -> ShufflerAuxData:
         # Copy all items to a list and set all checks to null
