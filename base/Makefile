@@ -27,7 +27,7 @@ $(OUTPUT_NDS_FILE): data overlay arm9.bin arm7.bin y9.bin y7.bin banner.bin head
 	./ndstool -c out.nds -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin
 
 $(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
-	python3 data_patcher.py --input-rom $(INPUT_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
+	VERSION_STRING=$(VERSION_STRING) python3 data_patcher.py --input-rom $(INPUT_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
 
 arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	python3 code/preprocess.py --input-rom $(PREPATCHED_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)

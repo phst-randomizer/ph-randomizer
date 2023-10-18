@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from _title_screen import insert_title_screen
@@ -24,7 +25,7 @@ from ndspy.rom import NintendoDSRom
 def patcher(input_rom: Path, output_rom: Path) -> None:
     rom = NintendoDSRom.fromFile(str(input_rom))
 
-    insert_title_screen(rom)
+    insert_title_screen(rom, os.environ.get('VERSION_STRING'))
     patch_zmb_files(rom)
 
     rom.saveToFile(str(output_rom))
