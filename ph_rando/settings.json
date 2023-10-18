@@ -69,9 +69,10 @@
     {
       "name": "MercayBridgeRepairedFromStart",
       "type": "flag",
-      "default": false,
+      "default": true,
       "supported": true,
-      "description": "Whether or not the bridge on Mercay is repaired at the start of the game."
+      "description": "Whether or not the bridge on Mercay is repaired at the start of the game.",
+      "patcher_hook": "mercay_bridge_repaired"
     },
     {
       "name": "HammerClip",
