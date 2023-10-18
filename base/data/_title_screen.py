@@ -52,12 +52,11 @@ def insert_title_screen(
         x = img_width - text_width - 2
         y = img_height - text_height
 
-        # draw border around letters
-        stroke_color = (24, 66, 115)
-        draw.text((x - 1, y), version_string, fill=stroke_color)
-        draw.text((x + 1, y), version_string, fill=stroke_color)
-        draw.text((x, y - 1), version_string, fill=stroke_color)
-        draw.text((x, y + 1), version_string, fill=stroke_color)
+        # draw rectangle to go behind text
+        draw.rectangle(
+            (x - 4, y - 2, x + text_width + 3, y + text_height),
+            fill=(255, 239, 82),
+        )
 
         # draw text
         draw.text((x, y), version_string, fill=(214, 41, 41), stroke_width=4, stroke_fill=(0, 0, 0))
