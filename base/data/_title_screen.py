@@ -48,7 +48,7 @@ def insert_title_screen(
     if version_string:
         draw = ImageDraw.Draw(img)
         img_width, img_height = img.size
-        text_width, text_height = draw.textsize(version_string)
+        _, _, text_width, text_height = draw.textbbox((0, 0), version_string)
         x = img_width - text_width - 2
         y = img_height - text_height
 
