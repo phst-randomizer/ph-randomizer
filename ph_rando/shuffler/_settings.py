@@ -24,7 +24,7 @@ def dig_spot_locations(
         case 'non_required_items_only':
             raise NotImplementedError()
         case 'fully_randomized':
-            raise NotImplementedError()
+            pass  # do nothing
         case other:
             raise Exception(f'{other}: invalid value for dig_spots setting')
 
@@ -45,7 +45,7 @@ def salvage_arm_treasures(
         case 'non_required_items_only':
             raise NotImplementedError()
         case 'fully_randomized':
-            raise NotImplementedError()
+            pass  # do nothing
         case other:
             raise Exception(f'{other}: invalid value for salvage_arm_treasures setting')
 
@@ -66,7 +66,7 @@ def shop_items(
         case 'non_required_items_only':
             raise NotImplementedError()
         case 'fully_randomized':
-            raise NotImplementedError()
+            pass  # do nothing
         case other:
             raise Exception(f'{other}: invalid value for shop_items setting')
 
@@ -87,7 +87,7 @@ def tree_drops(
         case 'non_required_items_only':
             raise NotImplementedError()
         case 'fully_randomized':
-            raise NotImplementedError()
+            pass  # do nothing
         case other:
             raise Exception(f'{other}: invalid value for shop_items setting')
 
