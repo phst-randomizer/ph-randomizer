@@ -1,3 +1,4 @@
+import json
 import logging
 from pathlib import Path
 import random
@@ -8,6 +9,7 @@ import click
 from ph_rando.common import click_setting_options
 from ph_rando.patcher._patcher import Patcher
 from ph_rando.shuffler._shuffler import Shuffler
+from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 
 
 @click.command()
@@ -25,6 +27,12 @@ from ph_rando.shuffler._shuffler import Shuffler
     required=True,
     help='Path to save randomized ROM to.',
 )
+@click.option(
+    '--spoiler-log',
+    required=False,
+    type=click.Path(exists=False, path_type=Path),
+    help='File path to save spoiler log to.',
+)
 @click.option('-s', '--seed', type=str, required=False, help='Seed for the randomizer.')
 @click.option(
     '-l',
@@ -39,6 +47,7 @@ from ph_rando.shuffler._shuffler import Shuffler
 def randomizer_cli(
     input_rom_path: Path,
     output_rom_path: Path,
+    spoiler_log: Path | None,
     seed: str | None,
     log_level: str,
     **settings: bool | str | list[str],
@@ -51,6 +60,10 @@ def randomizer_cli(
 
     # Run the shuffler
     shuffled_aux_data = Shuffler(seed, settings).generate()
+
+    if spoiler_log:
+        sl = generate_spoiler_log(shuffled_aux_data).dict()
+        Path(spoiler_log).write_text(json.dumps(sl, indent=2))
 
     patcher = Patcher(rom=input_rom_path, aux_data=shuffled_aux_data, settings=settings)
 
