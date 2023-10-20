@@ -1,91 +1,87 @@
 {
-  "title": "Area",
-  "type": "object",
-  "properties": {
-    "name": {
-      "title": "Name",
-      "description": "The name of the area",
-      "minLength": 1,
-      "type": "string"
-    },
-    "rooms": {
-      "title": "Rooms",
-      "description": "All of the rooms inside this area",
-      "minItems": 1,
-      "uniqueItems": true,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Room"
-      }
-    }
-  },
-  "required": [
-    "name",
-    "rooms"
-  ],
-  "definitions": {
-    "Item": {
-      "title": "Item",
-      "type": "object",
+  "$defs": {
+    "BossReward": {
       "properties": {
         "name": {
-          "title": "Name",
-          "type": "string"
-        },
-        "states": {
-          "title": "States",
-          "description": "State(s) that should be gained upon obtaining this item.",
-          "default": [],
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "Chest": {
-      "title": "Chest",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
           "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
         "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
           "allOf": [
             {
-              "$ref": "#/definitions/Item"
+              "$ref": "#/$defs/Item"
             }
-          ]
+          ],
+          "description": "The item that this check contains"
         },
         "display_name": {
-          "title": "Display Name",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
           "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
+          "title": "Display Name"
         },
         "type": {
-          "title": "Type",
-          "enum": [
-            "chest"
-          ],
+          "const": "boss_reward",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ],
+      "title": "BossReward",
+      "type": "object"
+    },
+    "Chest": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "chest",
+          "title": "Type"
+        },
         "zmb_file_path": {
-          "title": "Zmb File Path",
           "description": "File path to the zmb the chest is on",
           "minLength": 1,
+          "title": "Zmb File Path",
           "type": "string"
         },
         "zmb_mapobject_index": {
-          "title": "Zmb Mapobject Index",
           "description": "Index of the chest in the defined zmb file",
+          "title": "Zmb Mapobject Index",
           "type": "integer"
         }
       },
@@ -95,47 +91,127 @@
         "type",
         "zmb_file_path",
         "zmb_mapobject_index"
-      ]
+      ],
+      "title": "Chest",
+      "type": "object"
     },
-    "Event": {
-      "title": "Event",
-      "type": "object",
+    "DigSpot": {
       "properties": {
         "name": {
-          "title": "Name",
           "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
         "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
           "allOf": [
             {
-              "$ref": "#/definitions/Item"
+              "$ref": "#/$defs/Item"
             }
-          ]
+          ],
+          "description": "The item that this check contains"
         },
         "display_name": {
-          "title": "Display Name",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
           "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "dig_spot",
+          "title": "Type"
+        },
+        "zmb_file_path": {
+          "description": "File path to the zmb the chest is on",
+          "minLength": 1,
+          "title": "Zmb File Path",
+          "type": "string"
+        },
+        "zmb_actor_index": {
+          "description": "Index of the chest in the NPCA section of the zmb file",
+          "title": "Zmb Actor Index",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type",
+        "zmb_file_path",
+        "zmb_actor_index"
+      ],
+      "title": "DigSpot",
+      "type": "object"
+    },
+    "Enemy": {
+      "properties": {
+        "name": {
+          "description": "The name of the referenced `enemy` in the .logic file.",
+          "minLength": 1,
+          "title": "Name",
           "type": "string"
         },
         "type": {
+          "description": "The type of the enemy. Should map to an entry in `shuffler/enemies.json`.",
+          "minLength": 1,
           "title": "Type",
-          "enum": [
-            "event"
-          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "title": "Enemy",
+      "type": "object"
+    },
+    "Event": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "event",
+          "title": "Type"
+        },
         "bmg_file_path": {
-          "title": "Bmg File Path",
           "description": "File path to the bmg the instruction is on",
           "minLength": 1,
+          "title": "Bmg File Path",
           "type": "string"
         },
         "bmg_instruction_index": {
-          "title": "Bmg Instruction Index",
           "description": "Index of the instruction in the defined bmg file",
+          "title": "Bmg Instruction Index",
           "type": "integer"
         }
       },
@@ -145,47 +221,411 @@
         "type",
         "bmg_file_path",
         "bmg_instruction_index"
-      ]
+      ],
+      "title": "Event",
+      "type": "object"
     },
-    "Shop": {
-      "title": "Shop",
-      "type": "object",
+    "Exit": {
       "properties": {
         "name": {
+          "description": "The name of this exit",
+          "minLength": 1,
           "title": "Name",
+          "type": "string"
+        },
+        "entrance": {
+          "description": "The `entrance` or `door` where this exit leads.",
+          "minLength": 1,
+          "title": "Entrance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "entrance"
+      ],
+      "title": "Exit",
+      "type": "object"
+    },
+    "Freestanding": {
+      "properties": {
+        "name": {
           "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
         "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
           "allOf": [
             {
-              "$ref": "#/definitions/Item"
+              "$ref": "#/$defs/Item"
             }
-          ]
+          ],
+          "description": "The item that this check contains"
         },
         "display_name": {
-          "title": "Display Name",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
           "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
+          "title": "Display Name"
         },
         "type": {
-          "title": "Type",
-          "enum": [
-            "shop"
-          ],
+          "const": "freestanding",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ],
+      "title": "Freestanding",
+      "type": "object"
+    },
+    "Item": {
+      "properties": {
+        "name": {
+          "title": "Name",
           "type": "string"
         },
+        "states": {
+          "default": [],
+          "description": "State(s) that should be gained upon obtaining this item.",
+          "items": {
+            "type": "string"
+          },
+          "title": "States",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Item",
+      "type": "object"
+    },
+    "Mail": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
+          "type": "string"
+        },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "mail",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ],
+      "title": "Mail",
+      "type": "object"
+    },
+    "MinigameRewardChest": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
+          "type": "string"
+        },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "minigame_reward_chest",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ],
+      "title": "MinigameRewardChest",
+      "type": "object"
+    },
+    "OnEnemy": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
+          "type": "string"
+        },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "on_enemy",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ],
+      "title": "OnEnemy",
+      "type": "object"
+    },
+    "Room": {
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "description": "The name of the room",
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "chests": {
+          "default": [],
+          "description": "Item checks that can be made in this room",
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "boss_reward": "#/$defs/BossReward",
+                "chest": "#/$defs/Chest",
+                "dig_spot": "#/$defs/DigSpot",
+                "event": "#/$defs/Event",
+                "freestanding": "#/$defs/Freestanding",
+                "mail": "#/$defs/Mail",
+                "minigame_reward_chest": "#/$defs/MinigameRewardChest",
+                "on_enemy": "#/$defs/OnEnemy",
+                "salvage_treasure": "#/$defs/SalvageTreasure",
+                "shop": "#/$defs/Shop",
+                "spirit_upgrade": "#/$defs/SpiritUpgrade",
+                "tree": "#/$defs/Tree"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Chest"
+              },
+              {
+                "$ref": "#/$defs/Event"
+              },
+              {
+                "$ref": "#/$defs/Shop"
+              },
+              {
+                "$ref": "#/$defs/Tree"
+              },
+              {
+                "$ref": "#/$defs/Freestanding"
+              },
+              {
+                "$ref": "#/$defs/OnEnemy"
+              },
+              {
+                "$ref": "#/$defs/SalvageTreasure"
+              },
+              {
+                "$ref": "#/$defs/DigSpot"
+              },
+              {
+                "$ref": "#/$defs/MinigameRewardChest"
+              },
+              {
+                "$ref": "#/$defs/Mail"
+              },
+              {
+                "$ref": "#/$defs/BossReward"
+              },
+              {
+                "$ref": "#/$defs/SpiritUpgrade"
+              }
+            ]
+          },
+          "title": "Chests",
+          "type": "array"
+        },
+        "exits": {
+          "default": [],
+          "description": "All `exits` in this room that lead to an `entrance` in another room",
+          "items": {
+            "$ref": "#/$defs/Exit"
+          },
+          "title": "Exits",
+          "type": "array"
+        },
+        "enemies": {
+          "default": [],
+          "description": "All enemies in this room",
+          "items": {
+            "$ref": "#/$defs/Enemy"
+          },
+          "title": "Enemies",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Room",
+      "type": "object"
+    },
+    "SalvageTreasure": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
+          "type": "string"
+        },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "salvage_treasure",
+          "title": "Type"
+        },
+        "zmb_file_path": {
+          "description": "File path to the zmb the chest is on",
+          "minLength": 1,
+          "title": "Zmb File Path",
+          "type": "string"
+        },
+        "zmb_actor_index": {
+          "description": "Index of the chest in the NPCA section of the zmb file",
+          "title": "Zmb Actor Index",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type",
+        "zmb_file_path",
+        "zmb_actor_index"
+      ],
+      "title": "SalvageTreasure",
+      "type": "object"
+    },
+    "Shop": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
+          "type": "string"
+        },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "shop",
+          "title": "Type"
+        },
         "overlay": {
-          "title": "Overlay",
           "description": "The code overlay this shop item is on",
+          "title": "Overlay",
           "type": "integer"
         },
         "overlay_offset": {
-          "title": "Overlay Offset",
           "description": "Hex offset from overlay to the shop item",
           "minLength": 1,
+          "title": "Overlay Offset",
           "type": "string"
         }
       },
@@ -195,47 +635,92 @@
         "type",
         "overlay",
         "overlay_offset"
-      ]
+      ],
+      "title": "Shop",
+      "type": "object"
     },
-    "Tree": {
-      "title": "Tree",
-      "type": "object",
+    "SpiritUpgrade": {
       "properties": {
         "name": {
-          "title": "Name",
           "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
         "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
           "allOf": [
             {
-              "$ref": "#/definitions/Item"
+              "$ref": "#/$defs/Item"
             }
-          ]
+          ],
+          "description": "The item that this check contains"
         },
         "display_name": {
-          "title": "Display Name",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
           "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
+          "title": "Display Name"
         },
         "type": {
-          "title": "Type",
-          "enum": [
-            "tree"
-          ],
+          "const": "spirit_upgrade",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "contents",
+        "type"
+      ],
+      "title": "SpiritUpgrade",
+      "type": "object"
+    },
+    "Tree": {
+      "properties": {
+        "name": {
+          "description": "The name of the item check",
+          "title": "Name",
           "type": "string"
         },
+        "contents": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Item"
+            }
+          ],
+          "description": "The item that this check contains"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human-readable name used in spoiler logs, etc.",
+          "title": "Display Name"
+        },
+        "type": {
+          "const": "tree",
+          "title": "Type"
+        },
         "zmb_file_path": {
-          "title": "Zmb File Path",
           "description": "File path to the zmb the tree is on",
           "minLength": 1,
+          "title": "Zmb File Path",
           "type": "string"
         },
         "zmb_mapobject_index": {
-          "title": "Zmb Mapobject Index",
           "description": "Index of the tree object in the defined zmb file",
+          "title": "Zmb Mapobject Index",
           "type": "integer"
         }
       },
@@ -245,455 +730,32 @@
         "type",
         "zmb_file_path",
         "zmb_mapobject_index"
-      ]
-    },
-    "Freestanding": {
-      "title": "Freestanding",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "freestanding"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type"
-      ]
-    },
-    "OnEnemy": {
-      "title": "OnEnemy",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "on_enemy"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type"
-      ]
-    },
-    "SalvageTreasure": {
-      "title": "SalvageTreasure",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "salvage_treasure"
-          ],
-          "type": "string"
-        },
-        "zmb_file_path": {
-          "title": "Zmb File Path",
-          "description": "File path to the zmb the chest is on",
-          "minLength": 1,
-          "type": "string"
-        },
-        "zmb_actor_index": {
-          "title": "Zmb Actor Index",
-          "description": "Index of the chest in the NPCA section of the zmb file",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type",
-        "zmb_file_path",
-        "zmb_actor_index"
-      ]
-    },
-    "DigSpot": {
-      "title": "DigSpot",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "dig_spot"
-          ],
-          "type": "string"
-        },
-        "zmb_file_path": {
-          "title": "Zmb File Path",
-          "description": "File path to the zmb the chest is on",
-          "minLength": 1,
-          "type": "string"
-        },
-        "zmb_actor_index": {
-          "title": "Zmb Actor Index",
-          "description": "Index of the chest in the NPCA section of the zmb file",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type",
-        "zmb_file_path",
-        "zmb_actor_index"
-      ]
-    },
-    "MinigameRewardChest": {
-      "title": "MinigameRewardChest",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "minigame_reward_chest"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type"
-      ]
-    },
-    "Mail": {
-      "title": "Mail",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "mail"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type"
-      ]
-    },
-    "BossReward": {
-      "title": "BossReward",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "boss_reward"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type"
-      ]
-    },
-    "SpiritUpgrade": {
-      "title": "SpiritUpgrade",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the item check",
-          "type": "string"
-        },
-        "contents": {
-          "title": "Contents",
-          "description": "The item that this check contains",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Item"
-            }
-          ]
-        },
-        "display_name": {
-          "title": "Display Name",
-          "description": "Human-readable name used in spoiler logs, etc.",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "spirit_upgrade"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "contents",
-        "type"
-      ]
-    },
-    "Exit": {
-      "title": "Exit",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of this exit",
-          "minLength": 1,
-          "type": "string"
-        },
-        "entrance": {
-          "title": "Entrance",
-          "description": "The `entrance` or `door` where this exit leads.",
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "entrance"
-      ]
-    },
-    "Enemy": {
-      "title": "Enemy",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the referenced `enemy` in the .logic file.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "description": "The type of the enemy. Should map to an entry in `shuffler/enemies.json`.",
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "Room": {
-      "title": "Room",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "The name of the room",
-          "minLength": 1,
-          "type": "string"
-        },
-        "chests": {
-          "title": "Chests",
-          "description": "Item checks that can be made in this room",
-          "default": [],
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/Chest"
-              },
-              {
-                "$ref": "#/definitions/Event"
-              },
-              {
-                "$ref": "#/definitions/Shop"
-              },
-              {
-                "$ref": "#/definitions/Tree"
-              },
-              {
-                "$ref": "#/definitions/Freestanding"
-              },
-              {
-                "$ref": "#/definitions/OnEnemy"
-              },
-              {
-                "$ref": "#/definitions/SalvageTreasure"
-              },
-              {
-                "$ref": "#/definitions/DigSpot"
-              },
-              {
-                "$ref": "#/definitions/MinigameRewardChest"
-              },
-              {
-                "$ref": "#/definitions/Mail"
-              },
-              {
-                "$ref": "#/definitions/BossReward"
-              },
-              {
-                "$ref": "#/definitions/SpiritUpgrade"
-              }
-            ]
-          }
-        },
-        "exits": {
-          "title": "Exits",
-          "description": "All `exits` in this room that lead to an `entrance` in another room",
-          "default": [],
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Exit"
-          }
-        },
-        "enemies": {
-          "title": "Enemies",
-          "description": "All enemies in this room",
-          "default": [],
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Enemy"
-          }
-        }
-      },
-      "required": [
-        "name"
-      ]
+      ],
+      "title": "Tree",
+      "type": "object"
     }
-  }
+  },
+  "properties": {
+    "name": {
+      "description": "The name of the area",
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "rooms": {
+      "description": "All of the rooms inside this area",
+      "items": {
+        "$ref": "#/$defs/Room"
+      },
+      "minItems": 1,
+      "title": "Rooms",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "rooms"
+  ],
+  "title": "Area",
+  "type": "object"
 }

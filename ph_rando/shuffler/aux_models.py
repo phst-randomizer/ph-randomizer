@@ -2,13 +2,11 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Any, Literal, TypeAlias, Union
+from typing import TYPE_CHECKING, Annotated, Literal, TypeAlias, Union
 
-from pydantic import BaseModel, Extra, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 if TYPE_CHECKING:
-    from pydantic.main import ModelMetaclass
-
     from ph_rando.shuffler._shuffler import Node
 
 
@@ -25,7 +23,7 @@ class Item(BaseModel):
             s += f' ({self.states})'
         return s
 
-    @validator('name')
+    @field_validator('name')
     def check_if_item_is_valid(cls, v: str) -> str:
         """Ensure that this check's `contents` is set to a valid item."""
         from ph_rando.patcher._items import ITEMS
@@ -151,9 +149,9 @@ def validate_check_type() -> None:
     Ensure that the `Check` type alias includes all of the subclasses of `BaseCheck`.
     """
 
-    def get_all_subclasses(cls: ModelMetaclass) -> list[ModelMetaclass]:
+    def get_all_subclasses(cls: type[BaseCheck]) -> list[type[BaseCheck]]:
         """Recursively fetch all descendents of a class."""
-        all_subclasses: list[ModelMetaclass] = []
+        all_subclasses: list[type[BaseCheck]] = []
         for subclass in cls.__subclasses__():
             all_subclasses.extend([subclass] + get_all_subclasses(subclass))
         return all_subclasses
@@ -181,7 +179,7 @@ class Enemy(BaseModel):
         min_length=1,
     )
 
-    @validator('type')
+    @field_validator('type')
     def validate_enemy_name(cls, v: str) -> str:
         assert v in json.loads(
             (Path(__file__).parent / 'enemies.json').read_text()
@@ -191,26 +189,23 @@ class Enemy(BaseModel):
 
 class Room(BaseModel):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
 
     name: str = Field(..., description='The name of the room', min_length=1)
     chests: list[Annotated[Check, Field(discriminator='type')]] = Field(
         [],
         description='Item checks that can be made in this room',
-        unique_items=True,
     )
     exits: list[Exit] = Field(
         [],
         description='All `exits` in this room that lead to an `entrance` in another room',
-        unique_items=True,
     )
     enemies: list[Enemy] = Field(
         [],
         description='All enemies in this room',
-        unique_items=True,
     )
 
-    @validator('chests', 'exits', 'enemies')
+    @field_validator('chests', 'exits', 'enemies')
     def name_uniqueness_check(cls, v: list[Check | Exit | Enemy]) -> list[Check | Exit | Enemy]:
         names_set = {item.name for item in v}
         if len(names_set) != len(v):
@@ -223,7 +218,7 @@ class Room(BaseModel):
                     raise ValueError(f'{type(item)} {item.name}: names must be unique!')
         return v
 
-    @validator('exits')
+    @field_validator('exits')
     def entrance_uniqueness_check(cls, v: list[Exit]) -> list[Exit]:
         entrances_set = {item.entrance for item in v}
         if len(entrances_set) != len(v):
@@ -253,14 +248,13 @@ class Room(BaseModel):
 class Area(BaseModel):
     name: str = Field(..., description='The name of the area', min_length=1)
     rooms: list[Room] = Field(
-        ..., description='All of the rooms inside this area', min_items=1, unique_items=True
+        ...,
+        description='All of the rooms inside this area',
+        min_items=1,
     )
-
-    def json(self, *args: Any, **kwargs: Any) -> str:
-        return super().json(*args, exclude={'rooms': {'__all__': {'nodes', '_nodes'}}}, **kwargs)
 
 
 if __name__ == '__main__':
-    json_schema = Area.schema_json(indent=2)
+    json_schema = json.dumps(Area.model_json_schema(), indent=2)
     with open(Path(__file__).parent / 'aux_schema.json', 'w') as fd:
         fd.write(json_schema + '\n')
