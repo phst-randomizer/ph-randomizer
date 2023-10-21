@@ -31,7 +31,7 @@ def chest_test_emu(
         for area in aux_data.areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == Chest
+        if type(chest) is Chest
         and chest.zmb_file_path == 'Map/isle_main/map19.bin/zmb/isle_main_19.zmb'
     ]
     for chest in chests:

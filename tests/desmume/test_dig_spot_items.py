@@ -31,7 +31,7 @@ def dig_spot_test_emu(
         for area in aux_data.areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == DigSpot
+        if type(chest) is DigSpot
         and chest.zmb_file_path == 'Map/isle_main/map00.bin/zmb/isle_main_00.zmb'
     ]
     for chest in chests:

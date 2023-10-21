@@ -31,7 +31,7 @@ def salvage_item_test_emu(
         for area in aux_data.areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == SalvageTreasure
+        if type(chest) is SalvageTreasure
         and chest.zmb_file_path == 'Map/sea/map00.bin/zmb/sea_00.zmb'
     ]
     for chest in chests:

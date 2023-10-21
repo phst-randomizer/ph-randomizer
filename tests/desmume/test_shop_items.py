@@ -27,7 +27,7 @@ def island_shop_test_emu(
         for area in aux_data.areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == Shop
+        if type(chest) is Shop
     ]
     for chest in chests:
         chest.contents = Item(name=ITEMS_REVERSED[request.param], states=set())
