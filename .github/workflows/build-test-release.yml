@@ -369,6 +369,8 @@ jobs:
             - 'base/**'
             - 'tests/desmume/**'
             - '.github/workflows/**'
+            - '.python-version'
+            - 'setup.cfg'
 
     - name: Set up Python
       uses: actions/setup-python@v4
