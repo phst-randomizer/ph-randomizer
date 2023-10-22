@@ -1,7 +1,7 @@
 # Download and compile ARMIPS
 FROM python:3.12 AS compile_armips
 RUN apt-get update && apt-get install -y cmake
-RUN git clone --recurse-submodules https://github.com/Kingcom/armips.git
+RUN git clone --depth 1 --recurse-submodules https://github.com/Kingcom/armips.git
 WORKDIR /armips
 RUN cmake .
 RUN make
@@ -9,7 +9,7 @@ RUN make
 # Download and compile ndstool
 FROM python:3.12 AS compile_ndstool
 RUN apt-get update && apt-get install -y build-essential git gcc g++ autotools-dev autoconf
-RUN git clone https://github.com/devkitPro/ndstool
+RUN git clone --depth 1 https://github.com/devkitPro/ndstool
 WORKDIR /ndstool
 RUN aclocal && autoconf && automake --add-missing && chmod +x ./configure &&\
     ./configure --disable-dependency-tracking && make
@@ -17,7 +17,7 @@ RUN aclocal && autoconf && automake --add-missing && chmod +x ./configure &&\
 # Download and compile Floating IPS patcher
 FROM python:3.12 as compile_flips
 RUN apt-get update && apt-get install -y git g++ build-essential
-RUN git clone https://github.com/Alcaro/Flips.git
+RUN git clone --depth 1 https://github.com/Alcaro/Flips.git
 RUN chmod +x Flips/make.sh
 RUN cd Flips && ./make.sh
 
