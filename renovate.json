@@ -16,7 +16,7 @@
     {
       "matchFileNames": [
         "base/requirements.txt",
-        "setup.cfg"
+        "pyproject.toml"
       ],
       "automerge": false,
       "schedule": [
