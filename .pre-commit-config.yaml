@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-case-conflict
       - id: check-docstring-first
@@ -19,7 +19,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black
-    rev: 23.9.1
+    rev: 23.10.0
     hooks:
       - id: black
 
@@ -29,11 +29,10 @@ repos:
       - id: isort
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.4.0
+    rev: v3.15.0
     hooks:
       - id: pyupgrade
-        args:
-          - --py311-plus
+        args: [--py312-plus]
 
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.2.1
@@ -47,26 +46,27 @@ repos:
           - --remove-unused-variables
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
         additional_dependencies:
           - flake8-black
           - flake8-bugbear
           - flake8-isort
-          - flake8-quotes
+          # TODO: re-enable when https://github.com/zheller/flake8-quotes/issues/117 is fixed
+          # - flake8-quotes
         args:
           - --config
           - .flake8
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v16.0.6
+    rev: v17.0.3
     hooks:
       - id: clang-format
 
   # Validate aux data against schema
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.23.3
+    rev: 0.27.0
     hooks:
       - id: check-jsonschema
         files: ^ph_rando/shuffler/logic/.*\.json$
@@ -74,6 +74,6 @@ repos:
       - id: check-github-workflows
 
   - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v2.3.0
+    rev: v2.5.0
     hooks:
       - id: setup-cfg-fmt

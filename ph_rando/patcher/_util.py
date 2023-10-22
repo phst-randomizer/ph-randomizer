@@ -260,7 +260,7 @@ def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
         for area in areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == SalvageTreasure
+        if type(chest) is SalvageTreasure
     }
 
     dig_spots: dict[str, DigSpot] = {
@@ -268,7 +268,7 @@ def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
         for area in areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == DigSpot
+        if type(chest) is DigSpot
     }
 
     all_chests = salvage_treasures | dig_spots
@@ -292,7 +292,7 @@ def _patch_zmb_actors(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
             logger.info(f'Patching check "{name}" with item {chest.contents.name}')
             zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C = item_id
-            if type(chest) == SalvageTreasure:
+            if type(chest) is SalvageTreasure:
                 zmb_files[chest.zmb_file_path].actors[chest.zmb_actor_index].unk0C |= 0x8000
 
 
@@ -304,7 +304,7 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
         for area in areas
         for room in area.rooms
         for chest in room.chests
-        if type(chest) == Shop
+        if type(chest) is Shop
     }
 
     # Load arm9.bin and overlay table
