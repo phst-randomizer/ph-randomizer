@@ -27,7 +27,7 @@ test = [
     "tqdm~=4.66.1",
 ]
 types = [
-    "mypy==1.5.1",
+    "mypy==1.6.1",
     "types-Pillow~=9.5.0.1",
     "types-PyYAML~=6.0.12.8",
     "types-setuptools~=68.2.0.0",
