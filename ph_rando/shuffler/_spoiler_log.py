@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+from ph_rando import __version__
 from ph_rando.common import ShufflerAuxData
 
 
@@ -11,8 +12,6 @@ class SpoilerLog(BaseModel):
 
 
 def generate_spoiler_log(randomized_aux_data: ShufflerAuxData) -> SpoilerLog:
-    version = '0.0.0-dev'  # TODO: retrieve this from elsewhere
-
     seed = randomized_aux_data.seed
     assert seed is not None
 
@@ -27,4 +26,9 @@ def generate_spoiler_log(randomized_aux_data: ShufflerAuxData) -> SpoilerLog:
             for chest in room.chests:
                 items[area.name][room.name][chest.display_name or chest.name] = chest.contents.name
 
-    return SpoilerLog(version=version, seed=seed, items=items, settings=settings)
+    return SpoilerLog(
+        version=__version__,
+        seed=seed,
+        items=items,
+        settings=settings,
+    )
