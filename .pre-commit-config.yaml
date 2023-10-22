@@ -53,7 +53,8 @@ repos:
           - flake8-black
           - flake8-bugbear
           - flake8-isort
-          - flake8-quotes
+          # TODO: re-enable when https://github.com/zheller/flake8-quotes/issues/117 is fixed
+          # - flake8-quotes
         args:
           - --config
           - .flake8
