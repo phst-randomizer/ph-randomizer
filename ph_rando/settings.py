@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import importlib
+import json
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Literal, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Annotated, Literal, Protocol, Self, runtime_checkable
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 if TYPE_CHECKING:
     from ph_rando.patcher._patcher import Patcher
@@ -25,19 +26,19 @@ class ShufflerHook(Protocol):
 
 class BaseSetting(BaseModel):
     name: str
-    description: str | None
+    description: str | None = None
     supported: bool = Field(default=True)
 
-    patcher_hook: str | None
-    shuffler_hook: str | None
+    patcher_hook: str | None = None
+    shuffler_hook: str | None = None
 
-    @validator('patcher_hook', pre=True)
+    @field_validator('patcher_hook', mode='before')
     def import_patcher_hook(cls, v: str | None) -> str | None:
         if v is not None:
             assert hasattr(importlib.import_module('ph_rando.patcher._settings'), v)
         return v
 
-    @validator('shuffler_hook', pre=True)
+    @field_validator('shuffler_hook', mode='before')
     def import_shuffler_hook(cls, v: str | None) -> str | None:
         if v is not None:
             assert hasattr(importlib.import_module('ph_rando.shuffler._settings'), v)
@@ -54,11 +55,11 @@ class SingleChoiceSetting(BaseSetting):
     choices: set[str]
     default: str
 
-    @validator('default')
-    def ensure_values_or_flag(cls, v: str, values: dict) -> str:
-        if v not in values['choices']:
-            raise ValueError(f'Invalid default: must be one of "{"|".join(values["choices"])}"')
-        return v
+    @model_validator(mode='after')
+    def ensure_values_or_flag(self) -> Self:
+        if self.default not in self.choices:
+            raise ValueError(f'Invalid default: must be one of "{"|".join(self.choices)}"')
+        return self
 
 
 class MultipleChoiceSetting(BaseSetting):
@@ -66,11 +67,11 @@ class MultipleChoiceSetting(BaseSetting):
     choices: set[str]
     default: set[str]
 
-    @validator('default')
-    def ensure_values_or_flag(cls, v: set[str], values: dict) -> set[str]:
-        if not v.issubset(values['choices']):
+    @model_validator(mode='after')
+    def ensure_values_or_flag(self) -> Self:
+        if not self.default.issubset(self.choices):
             raise ValueError('Invalid default: "default" must be subset of "choices"')
-        return v
+        return self
 
 
 class Settings(BaseModel):
@@ -83,6 +84,6 @@ class Settings(BaseModel):
 
 
 if __name__ == '__main__':
-    json_schema = Settings.schema_json(indent=2)
+    json_schema = json.dumps(Settings.model_json_schema(), indent=2)
     with open(Path(__file__).parent / 'settings_schema.json', 'w') as fd:
         fd.write(json_schema + '\n')

@@ -1,187 +1,250 @@
 {
-  "title": "Settings",
-  "type": "object",
+  "$defs": {
+    "FlagSetting": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "supported": {
+          "default": true,
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "patcher_hook": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Patcher Hook"
+        },
+        "shuffler_hook": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shuffler Hook"
+        },
+        "type": {
+          "const": "flag",
+          "title": "Type"
+        },
+        "default": {
+          "title": "Default",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "default"
+      ],
+      "title": "FlagSetting",
+      "type": "object"
+    },
+    "MultipleChoiceSetting": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "supported": {
+          "default": true,
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "patcher_hook": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Patcher Hook"
+        },
+        "shuffler_hook": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shuffler Hook"
+        },
+        "type": {
+          "const": "multiple_choice",
+          "title": "Type"
+        },
+        "choices": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Choices",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "default": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Default",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "choices",
+        "default"
+      ],
+      "title": "MultipleChoiceSetting",
+      "type": "object"
+    },
+    "SingleChoiceSetting": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "supported": {
+          "default": true,
+          "title": "Supported",
+          "type": "boolean"
+        },
+        "patcher_hook": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Patcher Hook"
+        },
+        "shuffler_hook": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shuffler Hook"
+        },
+        "type": {
+          "const": "single_choice",
+          "title": "Type"
+        },
+        "choices": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Choices",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "default": {
+          "title": "Default",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "choices",
+        "default"
+      ],
+      "title": "SingleChoiceSetting",
+      "type": "object"
+    }
+  },
   "properties": {
     "settings": {
-      "title": "Settings",
-      "type": "array",
       "items": {
         "discriminator": {
-          "propertyName": "type",
           "mapping": {
-            "flag": "#/definitions/FlagSetting",
-            "single_choice": "#/definitions/SingleChoiceSetting",
-            "multiple_choice": "#/definitions/MultipleChoiceSetting"
-          }
+            "flag": "#/$defs/FlagSetting",
+            "multiple_choice": "#/$defs/MultipleChoiceSetting",
+            "single_choice": "#/$defs/SingleChoiceSetting"
+          },
+          "propertyName": "type"
         },
         "oneOf": [
           {
-            "$ref": "#/definitions/FlagSetting"
+            "$ref": "#/$defs/FlagSetting"
           },
           {
-            "$ref": "#/definitions/SingleChoiceSetting"
+            "$ref": "#/$defs/SingleChoiceSetting"
           },
           {
-            "$ref": "#/definitions/MultipleChoiceSetting"
+            "$ref": "#/$defs/MultipleChoiceSetting"
           }
         ]
-      }
+      },
+      "title": "Settings",
+      "type": "array"
     }
   },
   "required": [
     "settings"
   ],
-  "definitions": {
-    "FlagSetting": {
-      "title": "FlagSetting",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "type": "string"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "supported": {
-          "title": "Supported",
-          "default": true,
-          "type": "boolean"
-        },
-        "patcher_hook": {
-          "title": "Patcher Hook",
-          "type": "string"
-        },
-        "shuffler_hook": {
-          "title": "Shuffler Hook",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "flag"
-          ],
-          "type": "string"
-        },
-        "default": {
-          "title": "Default",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "default"
-      ]
-    },
-    "SingleChoiceSetting": {
-      "title": "SingleChoiceSetting",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "type": "string"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "supported": {
-          "title": "Supported",
-          "default": true,
-          "type": "boolean"
-        },
-        "patcher_hook": {
-          "title": "Patcher Hook",
-          "type": "string"
-        },
-        "shuffler_hook": {
-          "title": "Shuffler Hook",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "single_choice"
-          ],
-          "type": "string"
-        },
-        "choices": {
-          "title": "Choices",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        },
-        "default": {
-          "title": "Default",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "choices",
-        "default"
-      ]
-    },
-    "MultipleChoiceSetting": {
-      "title": "MultipleChoiceSetting",
-      "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "type": "string"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "supported": {
-          "title": "Supported",
-          "default": true,
-          "type": "boolean"
-        },
-        "patcher_hook": {
-          "title": "Patcher Hook",
-          "type": "string"
-        },
-        "shuffler_hook": {
-          "title": "Shuffler Hook",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type",
-          "enum": [
-            "multiple_choice"
-          ],
-          "type": "string"
-        },
-        "choices": {
-          "title": "Choices",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        },
-        "default": {
-          "title": "Default",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "choices",
-        "default"
-      ]
-    }
-  }
+  "title": "Settings",
+  "type": "object"
 }

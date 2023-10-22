@@ -144,11 +144,6 @@ jobs:
             exit 1
           fi
 
-      - name: Run JSON Schema validation on aux data
-        uses: walbo/validate-json@v1.1.0
-        with:
-          files: ph_rando/shuffler/logic/**/*.json
-
       - name: Run pydantic validation on aux data
         run: |
           python <<HEREDOC

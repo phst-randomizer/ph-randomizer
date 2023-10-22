@@ -300,7 +300,7 @@ class _LogicEdge(BaseModel):
     source_node: str
     destination_node: str
     direction: Literal['->', '<->']
-    requirements: str | None
+    requirements: str | None = None
 
 
 class _LogicNodeDescriptor(BaseModel):
@@ -310,7 +310,7 @@ class _LogicNodeDescriptor(BaseModel):
 
 class _LogicNode(BaseModel):
     name: str
-    descriptors: list[_LogicNodeDescriptor] | None
+    descriptors: list[_LogicNodeDescriptor] | None = None
 
 
 class _LogicRoom(BaseModel):
