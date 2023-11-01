@@ -233,20 +233,11 @@ def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -
         if isinstance(chest, Chest | Tree)
     }
 
-    zmb_file_paths = {
-        chest.zmb_file_path for chest in chests.values() if chest.zmb_file_path.lower() != 'todo'
-    }
+    zmb_file_paths = {chest.zmb_file_path for chest in chests.values()}
 
     with open_zmb_files(zmb_file_paths, input_rom) as zmb_files:
         for name, chest in chests.items():
-            if chest.zmb_file_path.lower() == 'todo':
-                logger.warning(f'Skipping {chest.name}, zmb_file_path is "TODO"')
-                continue
-
             item_id = ITEMS[chest.contents.name]
-            if item_id == -1:
-                logger.warning(f'Skipping {chest.name}, item {chest.contents.name} ID is unknown.')
-                continue
 
             logger.info(f'Patching check "{name}" with item {chest.contents.name}')
             zmb_files[chest.zmb_file_path].mapObjects[chest.zmb_mapobject_index].unk08 = item_id
