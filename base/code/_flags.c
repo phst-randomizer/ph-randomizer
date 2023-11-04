@@ -5,6 +5,7 @@
 
 Flag flags[] = {
     /* Mercay Island */
+    {0x28, 0x20, NO_SETTING},                      // celia dialogue explaining how to open door in oshus sword cave
     {0x0, 0x2, NO_SETTING},                        // celia dialogue after getting oshus sword
     {0x0, 0x4, NO_SETTING},                        // completed oshus sword tutorial
     {0x0, 0x8, NO_SETTING},                        // talked to mercay bartender about linebeck
