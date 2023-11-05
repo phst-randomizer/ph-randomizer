@@ -38,6 +38,9 @@ Flag flags[] = {
     // {0x8, 0x4, NO_SETTING},  // After getting fortune told by Astrid
     //                          // TODO: do we need this set?
 
+    /* Molida Island */
+    {0x3, 0x1, NO_SETTING}, // Romanos allows you into cave behind his house
+
     /* Uncharted Island */
     {0x26, 0x10, NO_SETTING}, // uncharted island bridge is extended
 
