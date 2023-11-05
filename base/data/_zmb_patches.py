@@ -110,6 +110,17 @@ def _patch_mercay_north_cutscenes(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
+def _patch_sunkey_first_sight_cutscene(rom: NintendoDSRom) -> NintendoDSRom:
+    """
+    Disable celia dialog that plays the first time you see the Sun Key door on molida.
+    """
+    with edit_zmb(rom, 'Map/isle_pluck/map10.bin', 'zmb/isle_pluck_10.zmb') as zmb_file:
+        fmsg_actors = [actor for actor in zmb_file.actors if actor.type == 'FMSG']
+        assert len(fmsg_actors) == 1
+        zmb_file.actors.remove(fmsg_actors[0])
+    return rom
+
+
 def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
     """Applies all patches to ZMB files."""
     _patch_mercay_earthquake(rom)
@@ -118,5 +129,6 @@ def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
     _patch_mercay_north_cutscenes(rom)
     _patch_totok_lobby_cutscenes(rom)
     _add_chest_for_phantom_hourglass(rom)
+    _patch_sunkey_first_sight_cutscene(rom)
 
     return rom
