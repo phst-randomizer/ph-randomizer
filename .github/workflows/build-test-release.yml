@@ -483,11 +483,8 @@ jobs:
       - name: Upgrade `pip` and install `wheel`
         run: python -m pip install --upgrade pip wheel
 
-      - name: Install randomizer dependencies
-        run: pip install .
-
-      - name: Install pyinstaller
-        run: pip install -U pyinstaller
+      - name: Install tox
+        run: pip install tox
 
       - name: Download base patches
         uses: actions/download-artifact@v3
@@ -498,7 +495,7 @@ jobs:
           mv ./**/*.bps base/out
 
       - name: Build randomizer executable
-        run: pyinstaller ph_rando.spec
+        run: tox -e build
 
       - name: Get current commit hash
         id: commit-hash
