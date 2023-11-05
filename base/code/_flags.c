@@ -40,6 +40,7 @@ Flag flags[] = {
 
     /* Molida Island */
     {0x3, 0x1, NO_SETTING}, // Romanos allows you into cave behind his house
+    {0x3, 0x2, NO_SETTING}, // Celia text after seeing sun key door for first time
 
     /* Uncharted Island */
     {0x26, 0x10, NO_SETTING}, // uncharted island bridge is extended
