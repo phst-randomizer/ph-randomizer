@@ -7,21 +7,6 @@ static void set_flag(uint32_t addr, uint8_t bit) {
   *((uint8_t *)addr) |= bit;
 }
 
-static int strcmp(char *X, char *Y) {
-  // TODO: replace with PH's native strcmp
-  while (*X) {
-    if (*X != *Y) {
-      break;
-    }
-
-    // move to the next pair of characters
-    X++;
-    Y++;
-  }
-
-  return *(const unsigned char *)X - *(const unsigned char *)Y;
-}
-
 void set_initial_flags(uint32_t base_flag_address) {
   Flag *f = (Flag *)(0x23DF24C);
 
