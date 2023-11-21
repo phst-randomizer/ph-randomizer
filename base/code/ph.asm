@@ -6,7 +6,7 @@
 .definelabel strncpy, 0x20470a8
 .definelabel strcat, 0x20470f8
 .definelabel strcmp, 0x2047128
-.definelabel memcmp, 0x204723c
+.definelabel strncmp, 0x204723c
 .definelabel strrchr, 0x2047270
 .definelabel strstr, 0x20472ac
 .definelabel sprintf, 0x200c8d0

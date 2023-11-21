@@ -3,9 +3,9 @@
 // This header file contains definitions for functions, variables, struct
 // definitions, etc that are present in the base game.
 
-extern int memcmp(void *s1, void *s2, int size);
 extern void strcat(char *dest, char *src);
 extern int strcmp(char *s1, char *s2);
+extern int strncmp(char *s1, char *s2, int n);
 extern void strcpy(char *dest, char *src);
 extern void strncpy(char *dest, char *src, int n);
 extern int32_t strlen(char *s);
