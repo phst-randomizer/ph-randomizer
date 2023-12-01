@@ -23,7 +23,7 @@ test = [
     "py-desmume==0.0.6",
     "pytest~=7.4.2",
     "pytest-repeat~=0.9.1",
-    "pytest-xdist~=3.3.0",
+    "pytest-xdist~=3.5.0",
     "tqdm~=4.66.1",
 ]
 types = [
