@@ -250,7 +250,7 @@ class Area(BaseModel):
     rooms: list[Room] = Field(
         ...,
         description='All of the rooms inside this area',
-        min_items=1,
+        min_length=1,
     )
 
 
