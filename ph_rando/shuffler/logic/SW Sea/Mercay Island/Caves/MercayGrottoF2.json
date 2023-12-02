@@ -9,7 +9,7 @@
           "name": "SmallKey",
           "type": "on_enemy",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_MercayGrotto"
           },
           "display_name": "Catch the Rat"
         }

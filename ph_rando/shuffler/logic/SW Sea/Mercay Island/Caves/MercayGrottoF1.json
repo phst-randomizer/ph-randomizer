@@ -9,7 +9,7 @@
           "name": "KeyChest",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_MercayGrotto"
           },
           "zmb_file_path": "Map/dngn_first/map00.bin/zmb/dngn_first_00.zmb",
           "zmb_mapobject_index": 21,
@@ -29,7 +29,7 @@
           "name": "KeyAfter2143",
           "type": "freestanding",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_MercayGrotto"
           },
           "display_name": "Key after levers 2143"
         }

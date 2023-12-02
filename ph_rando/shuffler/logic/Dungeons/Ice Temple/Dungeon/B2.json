@@ -19,7 +19,7 @@
           "name": "Bounce",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_IceTemple"
           },
           "zmb_file_path": "Map/dngn_water/map05.bin/zmb/dngn_water_05.zmb",
           "zmb_mapobject_index": 26,

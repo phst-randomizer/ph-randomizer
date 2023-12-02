@@ -1,5 +1,5 @@
 {
-  "name": "Test",
+  "name": "FireTemple",
   "rooms": [
     {
       "name": "Test",
@@ -8,7 +8,7 @@
           "name": "KeyChest",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_FireTemple"
           },
           "zmb_file_path": "test",
           "zmb_mapobject_index": 0

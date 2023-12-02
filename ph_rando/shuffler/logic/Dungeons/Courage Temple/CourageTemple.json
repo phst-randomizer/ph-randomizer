@@ -9,7 +9,7 @@
           "name": "AfterSpikeTraps",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_CourageTemple"
           },
           "zmb_file_path": "Map/dngn_pluck/map00.bin/zmb/dngn_pluck_00.zmb",
           "zmb_mapobject_index": 105,
@@ -49,7 +49,7 @@
           "name": "PolsKey",
           "type": "on_enemy",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_CourageTemple"
           },
           "display_name": "Defeat the Pols Voice (left)"
         },
@@ -57,7 +57,7 @@
           "name": "PolsKeyTopRight",
           "type": "on_enemy",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_CourageTemple"
           },
           "display_name": "Defeat the Pols Voice (top right)"
         }

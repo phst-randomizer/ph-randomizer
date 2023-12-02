@@ -80,7 +80,7 @@
           "name": "DroppedKey",
           "type": "freestanding",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_WindTemple"
           },
           "display_name": "Activate the windmill"
         }

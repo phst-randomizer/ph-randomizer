@@ -19,7 +19,7 @@
           "name": "PullRedLever",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_IceTemple"
           },
           "zmb_file_path": "Map/dngn_water/map02.bin/zmb/dngn_water_02.zmb",
           "zmb_mapobject_index": 23,

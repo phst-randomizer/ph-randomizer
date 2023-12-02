@@ -29,7 +29,7 @@
           "name": "FreestandingKey",
           "type": "freestanding",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_IceTemple"
           },
           "display_name": "Hit the switches"
         }

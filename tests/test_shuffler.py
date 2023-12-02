@@ -136,9 +136,9 @@ def test_edge_parser(
         ),
         (
             'key_test',
-            'Test.Test.Start',
-            ['Test.Test.Start', 'Test.Test.LockedDoor1', 'Test.Test.LockedDoor2'],
-            ['Test.Test.End'],
+            'FireTemple.Test.Start',
+            ['FireTemple.Test.Start', 'FireTemple.Test.LockedDoor1', 'FireTemple.Test.LockedDoor2'],
+            ['FireTemple.Test.End'],
         ),
         (
             'edge_directions_test',

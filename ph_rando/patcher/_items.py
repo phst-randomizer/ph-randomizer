@@ -1,5 +1,4 @@
 ITEMS: dict[str, int] = {
-    'SmallKey': 0x1,
     'SmallKey_MercayGrotto': 0x1,
     'SmallKey_FireTemple': 0x1,
     'SmallKey_WindTemple': 0x1,

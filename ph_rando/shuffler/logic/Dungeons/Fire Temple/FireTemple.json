@@ -9,7 +9,7 @@
           "name": "KeesesSmallKey",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_FireTemple"
           },
           "zmb_file_path": "Map/dngn_flame/map00.bin/zmb/dngn_flame_00.zmb",
           "zmb_mapobject_index": 26,
@@ -98,7 +98,7 @@
           "name": "RatKey",
           "type": "on_enemy",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_FireTemple"
           },
           "display_name": "Catch the Rat"
         }
@@ -179,7 +179,7 @@
           "name": "SwitchesSmallKey",
           "type": "freestanding",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_FireTemple"
           },
           "display_name": "Hit the switches in the right order"
         },

@@ -34,7 +34,7 @@
           "name": "PhantomKey",
           "type": "on_enemy",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_TempleOfTheOceanKing"
           },
           "display_name": "Hit the lower Phantom"
         },

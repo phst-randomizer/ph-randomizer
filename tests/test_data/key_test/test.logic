@@ -1,4 +1,4 @@
-area Test:
+area FireTemple:
   room Test:
     node Start:
       chest KeyChest

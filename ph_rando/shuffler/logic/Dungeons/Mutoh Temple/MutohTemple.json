@@ -181,7 +181,7 @@
           "name": "MiddleHammer",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_MutohTemple"
           },
           "zmb_file_path": "Map/dngn_wisdom/map03.bin/zmb/dngn_wisdom_03.zmb",
           "zmb_mapobject_index": 262,
@@ -262,7 +262,7 @@
           "name": "Middle",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_MutohTemple"
           },
           "zmb_file_path": "Map/dngn_wisdom/map04.bin/zmb/dngn_wisdom_04.zmb",
           "zmb_mapobject_index": 34,

@@ -9,7 +9,7 @@
           "name": "EmptyChest",
           "type": "chest",
           "contents": {
-            "name": "SmallKey"
+            "name": "SmallKey_TempleOfTheOceanKing"
           },
           "zmb_file_path": "Map/dngn_main/map00.bin/zmb/dngn_main_00.zmb",
           "zmb_mapobject_index": 34,

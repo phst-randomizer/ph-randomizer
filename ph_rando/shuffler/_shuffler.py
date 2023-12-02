@@ -214,11 +214,6 @@ class Shuffler:
             for room in area.rooms:
                 for check in room.chests:
                     item = check.contents
-                    # print(check)
-                    # Append area name for keys, so that we know where we can place
-                    # it later on.
-                    if item.name == 'SmallKey':
-                        item.name += f'_{area.name}'
 
                     if check not in self._checks_to_exclude:
                         item_pool.append(item)
@@ -467,10 +462,6 @@ class Shuffler:
                 for check in node.checks:
                     if check.contents and check not in completed_checks:
                         item = check.contents
-                        # If this is a small key, append the area name to it
-                        # so that we can tell what dungeon it goes to.
-                        if item.name == 'SmallKey':
-                            item.name += f'_{node.area.name}'
                         items.append(item)
                         states.update(item.states)
                         found_new_items = True
