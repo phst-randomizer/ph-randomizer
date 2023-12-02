@@ -30,7 +30,7 @@ types = [
     "mypy==1.6.1",
     "types-Pillow~=10.1.0.0",
     "types-PyYAML~=6.0.12.8",
-    "types-setuptools~=68.2.0.0",
+    "types-setuptools~=69.0.0.0",
     "types-tqdm~=4.66.0.1",
 ]
 pyinstaller = ["pyinstaller==6.1.0"]
