@@ -33,7 +33,7 @@ types = [
     "types-setuptools~=69.0.0.0",
     "types-tqdm~=4.66.0.1",
 ]
-pyinstaller = ["pyinstaller==6.2.0"]
+pyinstaller = ["pyinstaller==6.3.0"]
 
 [project.scripts]
 ph_rando = "ph_rando.ui.main:main"
