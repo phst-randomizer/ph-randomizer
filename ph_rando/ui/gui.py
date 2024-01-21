@@ -211,6 +211,11 @@ class RandomizerUi(QWidget):
         randomize_btn.clicked.connect(_on_randomize_button_click)
 
     def randomize(self) -> NintendoDSRom:
+        # TODO: actually validate these properly instead of using asserts
+        assert self.seed is not None
+        assert self.settings is not None
+        assert self.rom_path is not None
+
         # Run the shuffler
         shuffled_aux_data = Shuffler(self.seed, self.settings).generate()
 
