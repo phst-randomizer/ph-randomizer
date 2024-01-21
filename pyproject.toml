@@ -19,7 +19,7 @@ dependencies = [
 test = [
     "PyYAML==6.0.1",
     "numpy~=1.26.1",
-    "opencv-python~=4.7.0.68",
+    "opencv-python~=4.9.0.80",
     "py-desmume==0.0.6",
     "pytest~=7.4.2",
     "pytest-repeat~=0.9.1",
