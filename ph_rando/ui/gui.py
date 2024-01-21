@@ -1,3 +1,4 @@
+from pathlib import Path
 import sys
 from typing import NoReturn
 
@@ -5,6 +6,7 @@ from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
     QComboBox,
+    QFileDialog,
     QFormLayout,
     QGroupBox,
     QHBoxLayout,
@@ -20,6 +22,8 @@ from ph_rando.common import RANDOMIZER_SETTINGS
 
 
 class RandomizerUi(QWidget):
+    rom_path: Path
+
     def __init__(self) -> None:
         super().__init__()
 
@@ -31,15 +35,8 @@ class RandomizerUi(QWidget):
         self.render_settings()
         self.render_bottom_panel()
 
-    def render_file_open_ui(self) -> None:
-        layout = self.layout()
-        groupbox = QGroupBox('ROM Selection')
-        layout.addWidget(groupbox)
-        vbox = QVBoxLayout()
-        groupbox.setLayout(vbox)
-
+    def _get_rom_file_select_widget(self) -> None:
         rom_input_widget = QWidget()
-        vbox.addWidget(rom_input_widget)
         hbox = QHBoxLayout()
         rom_input_widget.setLayout(hbox)
         file_path = QLineEdit()
@@ -47,6 +44,32 @@ class RandomizerUi(QWidget):
         hbox.addWidget(QLabel('Input ROM'))
         hbox.addWidget(file_path)
         hbox.addWidget(browse_button)
+
+        def on_rom_path_click() -> None:
+            self.rom_path = Path(
+                QFileDialog.getOpenFileName(
+                    parent=self, caption='Open ROM', dir='.', filter='*.nds'
+                )[0]
+            )
+            file_path.setText(str(self.rom_path))
+
+        def on_rom_path_change(path: str) -> None:
+            self.rom_path = Path(path)
+            file_path.setText(str(self.rom_path))
+
+        browse_button.clicked.connect(on_rom_path_click)
+        file_path.textChanged.connect(on_rom_path_change)
+
+        return rom_input_widget
+
+    def render_file_open_ui(self) -> None:
+        layout = self.layout()
+        groupbox = QGroupBox('ROM Selection')
+        layout.addWidget(groupbox)
+        vbox = QVBoxLayout()
+        groupbox.setLayout(vbox)
+
+        vbox.addWidget(self._get_rom_file_select_widget())
 
         seed_input_widget = QWidget()
         vbox.addWidget(seed_input_widget)
