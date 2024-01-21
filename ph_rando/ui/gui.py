@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 import json
 import logging
 from pathlib import Path
@@ -33,7 +32,7 @@ from ph_rando.shuffler._util import generate_random_seed
 class RandomizerUi(QWidget):
     rom_path: Path | None
     seed: str | None
-    settings: dict[str, bool | str | Iterable[str]]
+    settings: dict[str, bool | str | set[str]]
     randomizing_in_progress: bool
 
     def __init__(self) -> None:

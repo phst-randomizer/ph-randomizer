@@ -109,7 +109,7 @@ class AssumedFillFailed(Exception):
 
 
 class Shuffler:
-    settings: dict[str, str | list[str] | bool]
+    settings: dict[str, str | set[str] | bool]
     aux_data: ShufflerAuxData
     starting_node: Node
 
@@ -118,7 +118,7 @@ class Shuffler:
     def __init__(
         self: Self,
         seed: str,
-        settings: dict[str, str | list[str] | bool],
+        settings: dict[str, str | set[str] | bool],
         starting_node_name: str = 'Mercay.OutsideOshus.Outside',
         areas_directory: Path | None = None,
         enemy_mapping_file: Path | None = None,

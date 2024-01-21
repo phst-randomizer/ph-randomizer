@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class Patcher:
-    settings: dict[str, str | list[str] | bool]
+    settings: dict[str, str | set[str] | bool]
     aux_data: ShufflerAuxData
     rom: NintendoDSRom
 
@@ -28,7 +28,7 @@ class Patcher:
         self: Self,
         rom: Path,
         aux_data: ShufflerAuxData,
-        settings: dict[str, str | list[str] | bool],
+        settings: dict[str, str | set[str] | bool],
     ) -> None:
         self.settings = settings
         self.aux_data = aux_data

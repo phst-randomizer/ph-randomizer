@@ -49,7 +49,7 @@ def randomizer_cli(
     spoiler_log: Path | None,
     seed: str | None,
     log_level: str,
-    **settings: bool | str | list[str],
+    **settings: bool | str | set[str],
 ) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
