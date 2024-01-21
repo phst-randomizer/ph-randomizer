@@ -1,4 +1,6 @@
 from collections.abc import Iterable
+import json
+import logging
 from pathlib import Path
 import sys
 from typing import NoReturn
@@ -18,9 +20,13 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 import inflection
+from ndspy.rom import NintendoDSRom
 
 from ph_rando.common import RANDOMIZER_SETTINGS
+from ph_rando.patcher._patcher import Patcher
 from ph_rando.settings import SingleChoiceSetting
+from ph_rando.shuffler._shuffler import Shuffler
+from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 from ph_rando.shuffler._util import generate_random_seed
 
 
@@ -28,6 +34,7 @@ class RandomizerUi(QWidget):
     rom_path: Path | None
     seed: str | None
     settings: dict[str, bool | str | Iterable[str]]
+    randomizing_in_progress: bool
 
     def __init__(self) -> None:
         super().__init__()
@@ -180,16 +187,45 @@ class RandomizerUi(QWidget):
 
     def render_bottom_panel(self) -> None:
         layout = self.layout()
-        container = QWidget()
-        layout.addWidget(container)
 
+        def _on_randomize_button_click() -> None:
+            # TODO: run this in a separate thread
+            randomized_rom = self.randomize()
+
+            save_to = Path(
+                QFileDialog.getSaveFileName(
+                    parent=self, caption='Save randomized ROM', dir='.', filter='*.nds'
+                )[0]
+            )
+
+            if save_to.suffix != '.nds':
+                save_to = save_to.parent / f'{save_to.name}.nds'
+
+            randomized_rom.saveToFile(save_to)
+
+        randomize_button_container = QWidget()
         hbox = QHBoxLayout()
-        container.setLayout(hbox)
+        randomize_button_container.setLayout(hbox)
         randomize_btn = QPushButton(text='Randomize')
         hbox.addWidget(randomize_btn)
+        layout.addWidget(randomize_button_container)
+        randomize_btn.clicked.connect(_on_randomize_button_click)
+
+    def randomize(self) -> NintendoDSRom:
+        # Run the shuffler
+        shuffled_aux_data = Shuffler(self.seed, self.settings).generate()
+
+        # Generate spoiler log
+        sl = generate_spoiler_log(shuffled_aux_data).dict()
+        (Path.cwd() / f'{self.seed}_spoiler.json').write_text(json.dumps(sl, indent=2))
+
+        # Patch the rom
+        patcher = Patcher(rom=self.rom_path, aux_data=shuffled_aux_data, settings=self.settings)
+        return patcher.generate()
 
 
 def render_ui() -> NoReturn:
+    logging.basicConfig(level=logging.DEBUG)
     app = QApplication(sys.argv)
     screen = RandomizerUi()
     screen.show()
