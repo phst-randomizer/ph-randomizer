@@ -19,13 +19,18 @@ from PySide6.QtWidgets import (
 import inflection
 
 from ph_rando.common import RANDOMIZER_SETTINGS
+from ph_rando.shuffler._util import generate_random_seed
 
 
 class RandomizerUi(QWidget):
-    rom_path: Path
+    rom_path: Path | None
+    seed: str | None
 
     def __init__(self) -> None:
         super().__init__()
+
+        self.rom_path = None
+        self.seed = None
 
         self.setWindowTitle('Phantom Hourglass Randomizer')
         layout = QFormLayout()
@@ -35,7 +40,7 @@ class RandomizerUi(QWidget):
         self.render_settings()
         self.render_bottom_panel()
 
-    def _get_rom_file_select_widget(self) -> None:
+    def _get_rom_file_select_widget(self) -> QWidget:
         rom_input_widget = QWidget()
         hbox = QHBoxLayout()
         rom_input_widget.setLayout(hbox)
@@ -62,24 +67,40 @@ class RandomizerUi(QWidget):
 
         return rom_input_widget
 
+    def _get_seed_widget(self) -> QWidget:
+        seed_widget = QWidget()
+        hbox = QHBoxLayout()
+        seed_widget.setLayout(hbox)
+        seed = QLineEdit()
+        hbox.addWidget(QLabel('Seed'))
+        hbox.addWidget(seed)
+
+        gen_seed_button = QPushButton(text='Random Seed')
+        hbox.addWidget(gen_seed_button)
+
+        def on_random_seed_click() -> None:
+            self.seed = generate_random_seed()
+            seed.setText(self.seed)
+
+        def on_seed_change(value: str) -> None:
+            self.seed = value
+            seed.setText(value)
+
+        gen_seed_button.clicked.connect(on_random_seed_click)
+        seed.textChanged.connect(on_seed_change)
+
+        return seed_widget
+
     def render_file_open_ui(self) -> None:
         layout = self.layout()
+
         groupbox = QGroupBox('ROM Selection')
         layout.addWidget(groupbox)
         vbox = QVBoxLayout()
         groupbox.setLayout(vbox)
 
         vbox.addWidget(self._get_rom_file_select_widget())
-
-        seed_input_widget = QWidget()
-        vbox.addWidget(seed_input_widget)
-        hbox = QHBoxLayout()
-        seed_input_widget.setLayout(hbox)
-        seed = QLineEdit()
-        gen_seed_button = QPushButton(text='Random Seed')
-        hbox.addWidget(QLabel('Seed'))
-        hbox.addWidget(seed)
-        hbox.addWidget(gen_seed_button)
+        vbox.addWidget(self._get_seed_widget())
 
     def render_settings(self) -> None:
         groupbox = QGroupBox('Randomizer Settings')

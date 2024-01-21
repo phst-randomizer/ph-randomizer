@@ -1,8 +1,6 @@
 import json
 import logging
 from pathlib import Path
-import random
-import string
 
 import click
 
@@ -10,6 +8,7 @@ from ph_rando.common import click_setting_options
 from ph_rando.patcher._patcher import Patcher
 from ph_rando.shuffler._shuffler import Shuffler
 from ph_rando.shuffler._spoiler_log import generate_spoiler_log
+from ph_rando.shuffler._util import generate_random_seed
 
 
 @click.command()
@@ -56,7 +55,7 @@ def randomizer_cli(
 
     # Generate random seed if one isn't provided
     if seed is None:
-        seed = ''.join(random.choices(string.ascii_letters, k=20))
+        seed = generate_random_seed()
 
     # Run the shuffler
     shuffled_aux_data = Shuffler(seed, settings).generate()
