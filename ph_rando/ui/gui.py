@@ -25,12 +25,14 @@ from ph_rando.shuffler._util import generate_random_seed
 class RandomizerUi(QWidget):
     rom_path: Path | None
     seed: str | None
+    settings: dict[str, bool | str | list[str]]
 
     def __init__(self) -> None:
         super().__init__()
 
         self.rom_path = None
         self.seed = None
+        self.settings = {}
 
         self.setWindowTitle('Phantom Hourglass Randomizer')
         layout = QFormLayout()
@@ -103,6 +105,17 @@ class RandomizerUi(QWidget):
         vbox.addWidget(self._get_seed_widget())
 
     def render_settings(self) -> None:
+        SETTINGS_INTERNAL_TO_HUMAN_READABLE = {
+            setting_name: inflection.titleize(setting_name) for setting_name in RANDOMIZER_SETTINGS
+        } | {
+            choice: inflection.titleize(choice)
+            for setting in filter(lambda s: hasattr(s, 'choices'), RANDOMIZER_SETTINGS.values())
+            for choice in setting.choices
+        }
+        SETTINGS_HUMAN_READABLE_TO_INTERNAL = {
+            v: k for k, v in SETTINGS_INTERNAL_TO_HUMAN_READABLE.items()
+        }
+
         groupbox = QGroupBox('Randomizer Settings')
         self.layout().addWidget(groupbox)
 
@@ -110,6 +123,8 @@ class RandomizerUi(QWidget):
         groupbox.setLayout(hbox)
 
         for i, setting in enumerate(RANDOMIZER_SETTINGS.values()):
+            self.settings[setting.name] = setting.default
+
             if i % 6 == 0:
                 current_widget = QWidget()
                 vbox = QVBoxLayout()
@@ -120,9 +135,18 @@ class RandomizerUi(QWidget):
             internal_hbox = QHBoxLayout()
             internal_widget.setLayout(internal_hbox)
             if setting.type == 'flag':
-                chbox = QCheckBox(inflection.titleize(setting.name))
+                chbox = QCheckBox(SETTINGS_INTERNAL_TO_HUMAN_READABLE[setting.name])
                 chbox.setEnabled(setting.supported)
+                chbox.setChecked(setting.default)
                 internal_hbox.addWidget(chbox)
+
+                def _on_change(checkbox: QCheckBox, setting: str) -> None:
+                    self.settings[setting] = not self.settings[setting]
+                    checkbox.setChecked(self.settings[setting])
+
+                chbox.clicked.connect(
+                    lambda chbox=chbox, setting=setting.name: _on_change(chbox, setting)
+                )
             else:
                 assert (
                     setting.choices is not None
@@ -134,6 +158,16 @@ class RandomizerUi(QWidget):
                 comboxbox.setEnabled(setting.supported)
                 internal_hbox.addWidget(comboxbox)
                 internal_hbox.addWidget(comboxbox_label)
+
+                def _on_change(cbox: QComboBox, setting: str) -> None:
+                    self.settings[setting] = SETTINGS_HUMAN_READABLE_TO_INTERNAL[cbox.currentText()]
+
+                comboxbox.currentTextChanged.connect(
+                    lambda _, comboxbox=comboxbox, setting=setting.name: _on_change(
+                        comboxbox, setting
+                    )
+                )
+
             vbox.addWidget(internal_widget)
             if setting.description:
                 internal_widget.setToolTip(setting.description)
