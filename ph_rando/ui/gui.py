@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from pathlib import Path
 import sys
 from typing import NoReturn
@@ -19,13 +20,14 @@ from PySide6.QtWidgets import (
 import inflection
 
 from ph_rando.common import RANDOMIZER_SETTINGS
+from ph_rando.settings import SingleChoiceSetting
 from ph_rando.shuffler._util import generate_random_seed
 
 
 class RandomizerUi(QWidget):
     rom_path: Path | None
     seed: str | None
-    settings: dict[str, bool | str | list[str]]
+    settings: dict[str, bool | str | Iterable[str]]
 
     def __init__(self) -> None:
         super().__init__()
@@ -109,7 +111,9 @@ class RandomizerUi(QWidget):
             setting_name: inflection.titleize(setting_name) for setting_name in RANDOMIZER_SETTINGS
         } | {
             choice: inflection.titleize(choice)
-            for setting in filter(lambda s: hasattr(s, 'choices'), RANDOMIZER_SETTINGS.values())
+            for setting in [
+                s for s in RANDOMIZER_SETTINGS.values() if isinstance(s, SingleChoiceSetting)
+            ]
             for choice in setting.choices
         }
         SETTINGS_HUMAN_READABLE_TO_INTERNAL = {
@@ -140,14 +144,16 @@ class RandomizerUi(QWidget):
                 chbox.setChecked(setting.default)
                 internal_hbox.addWidget(chbox)
 
-                def _on_change(checkbox: QCheckBox, setting: str) -> None:
-                    self.settings[setting] = not self.settings[setting]
-                    checkbox.setChecked(self.settings[setting])
+                def _on_chbox_change(checkbox: QCheckBox, setting: str) -> None:
+                    new_value = not self.settings[setting]
+                    assert isinstance(new_value, bool)  # for type-checker
+                    self.settings[setting] = new_value
+                    checkbox.setChecked(new_value)
 
                 chbox.clicked.connect(
-                    lambda chbox=chbox, setting=setting.name: _on_change(chbox, setting)
+                    lambda chbox=chbox, setting=setting.name: _on_chbox_change(chbox, setting)
                 )
-            else:
+            elif setting.type == 'single_choice':
                 assert (
                     setting.choices is not None
                 ), f'setting.choices is None for setting {setting.name!r}'
@@ -159,11 +165,11 @@ class RandomizerUi(QWidget):
                 internal_hbox.addWidget(comboxbox)
                 internal_hbox.addWidget(comboxbox_label)
 
-                def _on_change(cbox: QComboBox, setting: str) -> None:
+                def _on_cbox_change(cbox: QComboBox, setting: str) -> None:
                     self.settings[setting] = SETTINGS_HUMAN_READABLE_TO_INTERNAL[cbox.currentText()]
 
                 comboxbox.currentTextChanged.connect(
-                    lambda _, comboxbox=comboxbox, setting=setting.name: _on_change(
+                    lambda _, comboxbox=comboxbox, setting=setting.name: _on_cbox_change(
                         comboxbox, setting
                     )
                 )
