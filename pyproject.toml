@@ -9,7 +9,7 @@ dependencies = [
     "inflection==0.5.1",
     "ndspy==4.1.0",
     "ordered-set==4.1.0",
-    "pydantic==2.4.2",
+    "pydantic==2.5.3",
     "pyparsing==3.1.1",
     "vidua==0.4.5",
     "zed@git+https://github.com/phst-randomizer/zed.git@5ee969236bf3c3d0707da963e5edc818ddf246d3",
