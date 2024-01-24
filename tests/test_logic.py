@@ -16,7 +16,7 @@ def test_graph_connectedness() -> None:
         settings={
             setting.name: True
             if setting.type == 'flag'
-            else list(setting.default)
+            else setting.default
             if setting.type == 'multiple_choice'
             else setting.default
             for setting in RANDOMIZER_SETTINGS.values()

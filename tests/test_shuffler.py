@@ -187,7 +187,7 @@ def test_assumed_search(
         settings={
             setting.name: True
             if setting.type == 'flag'
-            else list(setting.default)
+            else setting.default
             if setting.type == 'multiple_choice'
             else setting.default
             for setting in RANDOMIZER_SETTINGS.values()
