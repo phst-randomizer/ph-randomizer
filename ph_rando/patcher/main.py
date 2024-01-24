@@ -43,7 +43,7 @@ def patcher_cli(
     input_rom_path: Path,
     output_rom_path: str | None,
     log_level: str,
-    **settings: bool | str | list[str],
+    **settings: bool | str | set[str],
 ) -> None:
     from ph_rando.shuffler._shuffler import parse_aux_data
 

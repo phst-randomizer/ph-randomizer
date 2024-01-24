@@ -14,7 +14,7 @@ from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 logger = logging.getLogger(__name__)
 
 
-def shuffle(seed: str, settings: dict[str, str | list[str] | bool]) -> ShufflerAuxData:
+def shuffle(seed: str, settings: dict[str, str | set[str] | bool]) -> ShufflerAuxData:
     """
     Parses aux data and logic, shuffles the aux data, and returns it.
 
@@ -60,7 +60,7 @@ def shuffler_cli(
     output: str | None,
     log_level: str,
     spoiler_log: str | None,
-    **settings: bool | str | list[str],
+    **settings: bool | str | set[str],
 ) -> None:
     logging.basicConfig(level=logging.getLevelNamesMapping()[log_level])
 
