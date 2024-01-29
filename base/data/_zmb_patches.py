@@ -121,6 +121,17 @@ def _patch_sunkey_first_sight_cutscene(rom: NintendoDSRom) -> NintendoDSRom:
     return rom
 
 
+def _patch_sw_nw_sea_transition_tornado(rom: NintendoDSRom) -> NintendoDSRom:
+    """
+    Disable tornados preventing access to NW Sea from SW sea.
+    """
+    with edit_zmb(rom, 'Map/sea/map00.bin', 'zmb/sea_00.zmb') as zmb_file:
+        hrcn_actors = [actor for actor in zmb_file.actors if actor.type == 'HRCN']
+        assert len(hrcn_actors) == 1
+        zmb_file.actors.remove(hrcn_actors[0])
+    return rom
+
+
 def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
     """Applies all patches to ZMB files."""
     _patch_mercay_earthquake(rom)
@@ -130,5 +141,6 @@ def patch_zmb_files(rom: NintendoDSRom) -> NintendoDSRom:
     _patch_totok_lobby_cutscenes(rom)
     _add_chest_for_phantom_hourglass(rom)
     _patch_sunkey_first_sight_cutscene(rom)
+    _patch_sw_nw_sea_transition_tornado(rom)
 
     return rom
