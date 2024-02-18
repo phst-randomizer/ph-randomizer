@@ -14,11 +14,11 @@ def test_graph_connectedness() -> None:
     shuffler = Shuffler(
         seed='test',
         settings={
-            setting.name: True
-            if setting.type == 'flag'
-            else setting.default
-            if setting.type == 'multiple_choice'
-            else setting.default
+            setting.name: (
+                True
+                if setting.type == 'flag'
+                else setting.default if setting.type == 'multiple_choice' else setting.default
+            )
             for setting in RANDOMIZER_SETTINGS.values()
         },
     )
