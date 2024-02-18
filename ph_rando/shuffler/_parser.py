@@ -524,9 +524,11 @@ def annotate_logic(areas: list[Area], logic_directory: Path | None = None) -> No
                                         Edge(
                                             src=node1,
                                             dest=node2,
-                                            requirements=parse_edge_requirement(edge.requirements)
-                                            if edge.requirements
-                                            else None,
+                                            requirements=(
+                                                parse_edge_requirement(edge.requirements)
+                                                if edge.requirements
+                                                else None
+                                            ),
                                         )
                                     )
                                     if edge.direction == '<->':
@@ -534,11 +536,11 @@ def annotate_logic(areas: list[Area], logic_directory: Path | None = None) -> No
                                             Edge(
                                                 src=node2,
                                                 dest=node1,
-                                                requirements=parse_edge_requirement(
-                                                    edge.requirements
-                                                )
-                                                if edge.requirements
-                                                else None,
+                                                requirements=(
+                                                    parse_edge_requirement(edge.requirements)
+                                                    if edge.requirements
+                                                    else None
+                                                ),
                                             )
                                         )
                                     break

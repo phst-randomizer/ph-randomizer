@@ -19,7 +19,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 24.2.0
     hooks:
       - id: black
 
@@ -46,15 +46,14 @@ repos:
           - --remove-unused-variables
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
+    rev: 7.0.0
     hooks:
       - id: flake8
         additional_dependencies:
           - flake8-black
           - flake8-bugbear
           - flake8-isort
-          # TODO: re-enable when https://github.com/zheller/flake8-quotes/issues/117 is fixed
-          # - flake8-quotes
+          - flake8-quotes
         args:
           - --config
           - .flake8
@@ -66,7 +65,7 @@ repos:
 
   # Validate aux data against schema
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.27.3
+    rev: 0.28.0
     hooks:
       - id: check-jsonschema
         files: ^ph_rando/shuffler/logic/.*\.json$

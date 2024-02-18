@@ -15,13 +15,13 @@ if TYPE_CHECKING:
 @runtime_checkable
 class PatcherHook(Protocol):
     def __call__(self, value: bool | str | set[str], patcher: Patcher) -> None:
-        ...
+        pass
 
 
 @runtime_checkable
 class ShufflerHook(Protocol):
     def __call__(self, value: bool | str | set[str], shuffler: Shuffler) -> None:
-        ...
+        pass
 
 
 class BaseSetting(BaseModel):

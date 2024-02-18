@@ -175,10 +175,11 @@
             ; patch out check that ensures only keys (id 0x1) can be spawned this way
         .endarea
 
-    .org 0x213a174
-        .area 0x4
-            bl spawn_custom_freestanding_item
-        .endarea
+    // TODO: this causes crashes sometimes. Disable for now.
+    // .org 0x213a174
+    //     .area 0x4
+    //         bl spawn_custom_freestanding_item
+    //     .endarea
 
     ; There is essentially a giant `switch` statement in the game code that determines which item
     ; id's are "valid" and able to be spawned from a shovel dig spot. For "invalid" items like
