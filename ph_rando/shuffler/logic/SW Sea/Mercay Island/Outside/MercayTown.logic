@@ -12,6 +12,8 @@ area Mercay:
       door NorthMain
       mail Mailbox
       chest Cucco
+
+    node AfterToTOK3:
       # NPC that stands on dock will sell you a treasure map for
       # 50 rupees after clearing ToTOK 3
       chest TreasureMapNPC
@@ -22,3 +24,4 @@ area Mercay:
       chest RightLedgeChest
 
     Ledge -> Main
+    Main -> AfterToTOK3: flag SunKeyMark
