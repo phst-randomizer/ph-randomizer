@@ -4,7 +4,6 @@ area Mercay:
       door Grotto
       door Tavern
       door Shop
-      door Shipyard
       door House
       door TreasureSelling
       door Boat
@@ -12,6 +11,9 @@ area Mercay:
       door NorthMain
       mail Mailbox
       chest Cucco
+
+    node AfterFireTemple:
+      door Shipyard
 
     node AfterToTOK3:
       # NPC that stands on dock will sell you a treasure map for
@@ -25,3 +27,6 @@ area Mercay:
 
     Ledge -> Main
     Main -> AfterToTOK3: flag SunKeyMark
+
+    # The door to the shipyard opens after defeating Blaaz
+    Main <-> AfterFireTemple: flag FireTempleBeaten
