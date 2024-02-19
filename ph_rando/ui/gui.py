@@ -168,7 +168,7 @@ class RandomizerUi(QWidget):
                 comboxbox = QComboBox()
                 comboxbox.addItems([inflection.titleize(s) for s in setting.choices])
                 comboxbox.setEnabled(setting.supported)
-                comboxbox.setCurrentText(setting.default)
+                comboxbox.setCurrentText(inflection.titleize(setting.default))
                 internal_hbox.addWidget(comboxbox)
                 internal_hbox.addWidget(comboxbox_label)
 
