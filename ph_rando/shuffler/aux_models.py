@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Literal, TypeAlias, Union
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 if TYPE_CHECKING:
     from ph_rando.shuffler._shuffler import Node
@@ -188,8 +188,7 @@ class Enemy(BaseModel):
 
 
 class Room(BaseModel):
-    class Config:
-        extra = 'allow'
+    model_config = ConfigDict(extra='allow')
 
     name: str = Field(..., description='The name of the room', min_length=1)
     chests: list[Annotated[Check, Field(discriminator='type')]] = Field(
