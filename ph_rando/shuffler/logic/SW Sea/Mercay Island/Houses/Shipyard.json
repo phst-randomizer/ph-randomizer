@@ -19,7 +19,7 @@
       "exits": [
         {
           "name": "Outside",
-          "entrance": "MercayTown.Main.Shipyard"
+          "entrance": "MercayTown.AfterFireTemple.Shipyard"
         }
       ]
     }
