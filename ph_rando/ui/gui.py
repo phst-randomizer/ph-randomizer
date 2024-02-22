@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 from typing import NoReturn
 
+from PySide6.QtCore import QObject, Qt, QThread, Signal, Slot
 from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
@@ -29,6 +30,31 @@ from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 from ph_rando.shuffler._util import generate_random_seed
 
 
+class RandomizerWorker(QObject):
+    finished = Signal()
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.randomized_rom: NintendoDSRom
+        self.rom_path: Path
+        self.seed: str
+        self.settings: dict[str, str | set[str] | bool]
+
+    @Slot()
+    def randomize(self) -> None:
+        # Run the shuffler
+        shuffled_aux_data = Shuffler(self.seed, self.settings).generate()
+
+        # Generate spoiler log
+        sl = generate_spoiler_log(shuffled_aux_data).dict()
+        (Path.cwd() / f'{self.seed}_spoiler.json').write_text(json.dumps(sl, indent=2))
+
+        # Patch the rom
+        patcher = Patcher(rom=self.rom_path, aux_data=shuffled_aux_data, settings=self.settings)
+        self.randomized_rom = patcher.generate()
+        self.finished.emit()
+
+
 class RandomizerUi(QWidget):
     rom_path: Path | None
     seed: str | None
@@ -41,6 +67,9 @@ class RandomizerUi(QWidget):
         self.rom_path = None
         self.seed = None
         self.settings = {}
+
+        self.worker: RandomizerWorker
+        self._thread: QThread
 
         self.setWindowTitle('Phantom Hourglass Randomizer')
         layout = QFormLayout()
@@ -189,44 +218,54 @@ class RandomizerUi(QWidget):
         layout = self.layout()
 
         def _on_randomize_button_click() -> None:
-            # TODO: run this in a separate thread
-            randomized_rom = self.randomize()
+            # TODO: actually validate these properly instead of using asserts
+            assert self.seed is not None
+            assert self.settings is not None
+            assert self.rom_path is not None
 
-            save_to = Path(
-                QFileDialog.getSaveFileName(
-                    parent=self, caption='Save randomized ROM', dir='.', filter='*.nds'
-                )[0]
-            )
+            status_label.setVisible(True)
+            randomize_btn.setEnabled(False)
 
-            if save_to.suffix != '.nds':
-                save_to = save_to.parent / f'{save_to.name}.nds'
+            def _on_randomize_finish() -> None:
+                save_to = Path(
+                    QFileDialog.getSaveFileName(
+                        parent=self, caption='Save randomized ROM', dir='.', filter='*.nds'
+                    )[0]
+                )
 
-            randomized_rom.saveToFile(save_to)
+                if save_to.suffix != '.nds':
+                    save_to = save_to.parent / f'{save_to.name}.nds'
+
+                self.worker.randomized_rom.saveToFile(save_to)
+                status_label.setVisible(False)
+                randomize_btn.setEnabled(True)
+
+            self.worker = RandomizerWorker()
+            self.worker.rom_path = self.rom_path
+            self.worker.seed = self.seed
+            self.worker.settings = self.settings
+
+            self._thread = QThread()
+            self.worker.moveToThread(self._thread)
+            self._thread.started.connect(self.worker.randomize)
+            self.worker.finished.connect(_on_randomize_finish)
+            self.worker.finished.connect(self._thread.quit)
+            self.worker.finished.connect(self.worker.deleteLater)
+            self._thread.finished.connect(self._thread.deleteLater)
+            self._thread.start()
 
         randomize_button_container = QWidget()
+        status_label = QLabel(text='Please wait...')
+        status_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        status_label.setVisible(False)
         hbox = QHBoxLayout()
         randomize_button_container.setLayout(hbox)
         randomize_btn = QPushButton(text='Randomize')
+        hbox.addWidget(status_label)
         hbox.addWidget(randomize_btn)
+        layout.addWidget(status_label)
         layout.addWidget(randomize_button_container)
         randomize_btn.clicked.connect(_on_randomize_button_click)
-
-    def randomize(self) -> NintendoDSRom:
-        # TODO: actually validate these properly instead of using asserts
-        assert self.seed is not None
-        assert self.settings is not None
-        assert self.rom_path is not None
-
-        # Run the shuffler
-        shuffled_aux_data = Shuffler(self.seed, self.settings).generate()
-
-        # Generate spoiler log
-        sl = generate_spoiler_log(shuffled_aux_data).dict()
-        (Path.cwd() / f'{self.seed}_spoiler.json').write_text(json.dumps(sl, indent=2))
-
-        # Patch the rom
-        patcher = Patcher(rom=self.rom_path, aux_data=shuffled_aux_data, settings=self.settings)
-        return patcher.generate()
 
 
 def render_ui() -> NoReturn:
