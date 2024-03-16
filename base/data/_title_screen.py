@@ -55,11 +55,11 @@ def insert_title_screen(
         # draw rectangle to go behind text
         draw.rectangle(
             (x - 4, y - 2, x + text_width + 3, y + text_height),
-            fill=(255, 239, 82),
+            fill=(209, 36, 37),
         )
 
         # draw text
-        draw.text((x, y), version_string, fill=(214, 41, 41), stroke_width=4, stroke_fill=(0, 0, 0))
+        draw.text((x, y), version_string, fill=(20, 68, 115), stroke_width=4, stroke_fill=(0, 0, 0))
 
     image_data = AutoList()
     palette_data: list[tuple[int, int, int]] = []
@@ -72,7 +72,9 @@ def insert_title_screen(
                 palette_data.append(px)
                 image_data[y * 256 + x] = len(palette_data) - 1
 
-    assert len(palette_data) <= 256, 'Error: image contains more than 256 colors'
+    assert (
+        len(palette_data) <= 256
+    ), f'Error: image contains more than 256 colors ({len(palette_data)})'
 
     narc_file.setFileByName('title.ntft', bytes(image_data))
     # Divide by 8 b/c RGB values are off by a factor of 8 in ndspy 4.0.0 for some reason
