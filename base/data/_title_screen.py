@@ -47,19 +47,16 @@ def insert_title_screen(
 
     if version_string:
         draw = ImageDraw.Draw(img)
-        img_width, img_height = img.size
-        _, _, text_width, text_height = draw.textbbox((0, 0), version_string)
-        x = img_width - text_width - 2
-        y = img_height - text_height
+        draw.fontmode = '1'  # disable anti-aliasing on text
 
-        # draw rectangle to go behind text
-        draw.rectangle(
-            (x - 4, y - 2, x + text_width + 3, y + text_height),
-            fill=(209, 36, 37),
-        )
+        # Calculate size/location to put version string
+        img_width, img_height = img.size
+        _, _, text_width, text_height = draw.textbbox(xy=(0, 0), text=version_string, font_size=10)
+        x = img_width - text_width - 2
+        y = img_height - text_height - 2
 
         # draw text
-        draw.text((x, y), version_string, fill=(20, 68, 115), stroke_width=4, stroke_fill=(0, 0, 0))
+        draw.text((x, y), version_string, fill=(20, 68, 115), font_size=10)
 
     image_data = AutoList()
     palette_data: list[tuple[int, int, int]] = []
