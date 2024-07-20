@@ -16,10 +16,10 @@ RUN aclocal && autoconf && automake --add-missing && chmod +x ./configure &&\
 
 # Download and compile Floating IPS patcher
 FROM python:3.12 as compile_flips
-RUN apt-get update && apt-get install -y git g++ build-essential
+RUN apt-get update && apt-get install -y git g++ build-essential libgtk-3-dev pkg-config
 RUN git clone --depth 1 https://github.com/Alcaro/Flips.git
-RUN chmod +x Flips/make.sh
-RUN cd Flips && ./make.sh
+RUN chmod +x Flips/make-linux.sh
+RUN cd Flips && ./make-linux.sh
 
 # Build base patch
 FROM python:3.12 as build
