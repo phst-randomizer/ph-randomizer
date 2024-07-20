@@ -25,7 +25,7 @@ test = [
     "pytest-xdist~=3.5.0",
     "tqdm~=4.66.1",
 ]
-test_desmume = [
+desmume = [
     "py-desmume==0.0.6",
 ]
 types = [
