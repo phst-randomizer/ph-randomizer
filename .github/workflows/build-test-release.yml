@@ -378,7 +378,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -e .[test]
+        pip install -e .[test,test_desmume]
 
     - name: Get list of tests to run in separate jobs
       id: set-test-matrix
