@@ -7,16 +7,15 @@ from ph_rando.common import ShufflerAuxData
 class SpoilerLog(BaseModel):
     version: str
     seed: str
-    settings: list
+    settings: dict
     items: dict[str, dict[str, dict[str, str]]]
 
 
-def generate_spoiler_log(randomized_aux_data: ShufflerAuxData) -> SpoilerLog:
+def generate_spoiler_log(randomized_aux_data: ShufflerAuxData, settings: dict) -> SpoilerLog:
     seed = randomized_aux_data.seed
     assert seed is not None
 
     items: dict[str, dict[str, dict[str, str]]] = {}
-    settings: list = []
 
     for area in randomized_aux_data.areas:
         items[area.name] = {}

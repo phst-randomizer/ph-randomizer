@@ -83,7 +83,7 @@ def shuffler_cli(
         (output_path / 'seed.txt').write_text(seed)
 
     if spoiler_log:
-        sl = generate_spoiler_log(results).dict()
+        sl = generate_spoiler_log(results, settings).dict()
         Path(spoiler_log).write_text(json.dumps(sl, indent=2))
 
 
