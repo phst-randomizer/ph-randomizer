@@ -46,7 +46,7 @@ class RandomizerWorker(QObject):
         shuffled_aux_data = Shuffler(self.seed, self.settings).generate()
 
         # Generate spoiler log
-        sl = generate_spoiler_log(shuffled_aux_data).dict()
+        sl = generate_spoiler_log(shuffled_aux_data, self.settings).dict()
         (Path.cwd() / f'{self.seed}_spoiler.json').write_text(json.dumps(sl, indent=2))
 
         # Patch the rom

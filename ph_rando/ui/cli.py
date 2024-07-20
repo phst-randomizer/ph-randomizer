@@ -61,7 +61,7 @@ def randomizer_cli(
     shuffled_aux_data = Shuffler(seed, settings).generate()
 
     if spoiler_log:
-        sl = generate_spoiler_log(shuffled_aux_data).dict()
+        sl = generate_spoiler_log(shuffled_aux_data, settings).dict()
         Path(spoiler_log).write_text(json.dumps(sl, indent=2))
 
     patcher = Patcher(rom=input_rom_path, aux_data=shuffled_aux_data, settings=settings)
