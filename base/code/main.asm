@@ -153,13 +153,16 @@
         ; clock-based randomization and makes it a fixed item.
         ; This code handles setting the 3D model (i.e. appearence only), see section for
         ; overlay 60 for the code that actually sets the item id.
-        .area 0x1C, 0x00
-            mov r0, sp
-            ldr r1, =org(random_treasure_nsbmd)
-            ldr r2, =org(random_treasure_nsbtx)
-            bl fixed_random_treasure_in_shop
-            .pool
-        .endarea
+        ;
+        ; TODO: this causes a crash when running on an actual DS (not in emulation, though),
+        ; so disable it for now.
+        // .area 0x1C, 0x00
+        //     mov r0, sp
+        //     ldr r1, =org(random_treasure_nsbmd)
+        //     ldr r2, =org(random_treasure_nsbtx)
+        //     bl fixed_random_treasure_in_shop
+        //     .pool
+        // .endarea
 .close
 
 
