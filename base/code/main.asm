@@ -303,6 +303,16 @@
         .endarea
 .close
 
+
+.open "../overlay/overlay_0048.bin", 0x2195460 ; overlay 52 in ghidra
+    .arm
+    .org 0x219613C
+        .area 0x4, 0xff
+            mov r4, 0x2D ; Change the goron game reward from bombchu bag to power gem
+        .endarea
+.close
+
+
 .open "../overlay/overlay_0060.bin", 0x0217bce0
     .arm
 
