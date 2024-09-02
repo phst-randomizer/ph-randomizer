@@ -32,20 +32,8 @@ $(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
 arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	python3 code/preprocess.py --input-rom $(PREPATCHED_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
 
-	./ndstool -x $(PREPATCHED_NDS_FILE) -9 arm9.bin -y overlay/ -d data/
-
-	# Split arm9.bin into two files - uncompressed and compressed parts
-	dd bs=1 skip=0 count=16384 if=arm9.bin of=arm9_header.bin
-	dd bs=1 skip=16384 if=arm9.bin of=arm9_original.bin
-	truncate -s -12 arm9_original.bin
-
-	# Decompress BLZ-compressed binaries
-	cat /dev/null > commands.sh
-	echo "ndspy_codeCompression decompress arm9_original.bin arm9_original.bin" >> commands.sh
-	for file in $$(cat code/main.asm | grep -oP "overlay_(\d+).bin"); do \
-		echo "ndspy_codeCompression decompress overlay/$$file overlay/$$file" >> commands.sh; \
-	done
-	parallel < commands.sh
+	./ndstool -x $(PREPATCHED_NDS_FILE)
+	python3 extract_rom.py $(PREPATCHED_NDS_FILE) .
 
 	# Patch the binaries with our custom code
 	./armips code/main.asm
@@ -53,7 +41,7 @@ arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	# Recompress the binaries
 	cat /dev/null > commands.sh
 	echo "ndspy_codeCompression compress --is_arm9 arm9_compressed.bin arm9_compressed.bin" >> commands.sh
-	for file in $$(cat code/main.asm | grep -oP "overlay_(\d+).bin"); do \
+	for file in $$(ls overlay); do \
 		echo "ndspy_codeCompression compress overlay/$$file overlay/$$file" >> commands.sh; \
 	done
 	parallel < commands.sh

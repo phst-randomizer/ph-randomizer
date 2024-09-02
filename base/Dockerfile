@@ -6,14 +6,6 @@ WORKDIR /armips
 RUN cmake .
 RUN make
 
-# Download and compile ndstool
-FROM python:3.12 AS compile_ndstool
-RUN apt-get update && apt-get install -y build-essential git gcc g++ autotools-dev autoconf
-RUN git clone --depth 1 https://github.com/devkitPro/ndstool
-WORKDIR /ndstool
-RUN aclocal && autoconf && automake --add-missing && chmod +x ./configure &&\
-    ./configure --disable-dependency-tracking && make
-
 # Download and compile Floating IPS patcher
 FROM python:3.12 as compile_flips
 RUN apt-get update && apt-get install -y git g++ build-essential libgtk-3-dev pkg-config
@@ -24,15 +16,13 @@ RUN cd Flips && ./make-linux.sh
 # Build base patch
 FROM python:3.12 as build
 WORKDIR /app
-# Copy compiled armips, ndstool, and flips binaries from previous stages
+# Copy compiled armips, and flips binaries from previous stages
 COPY --from=compile_armips /armips/armips /app
-COPY --from=compile_ndstool /ndstool/ndstool /app
 COPY --from=compile_flips /Flips/flips /app
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
-    gcc-arm-none-eabi \
-    parallel
+    gcc-arm-none-eabi
 # Needed for `flips` patcher
 RUN apt-get install -y libgtk-3-dev
 # Install python dependencies
@@ -43,6 +33,7 @@ RUN pip install -r requirements.txt
 ADD data/* /app/
 ADD code/* /app/code/
 ADD fix_y9.py /app
+ADD extract_rom.py /app
 ADD Makefile /app
 # Create base patch
 ARG PH_ROM_PATH
