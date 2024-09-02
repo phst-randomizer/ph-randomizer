@@ -42,6 +42,7 @@ RUN pip install -r requirements.txt
 # Add needed source files to the docker build
 ADD data/* /app/
 ADD code/* /app/code/
+ADD extract_overlay.py /app
 ADD fix_y9.py /app
 ADD Makefile /app
 # Create base patch

@@ -32,7 +32,8 @@ $(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
 arm9.bin overlay data: $(PREPATCHED_NDS_FILE) $(OBJ) y9.bin
 	python3 code/preprocess.py --input-rom $(PREPATCHED_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
 
-	./ndstool -x $(PREPATCHED_NDS_FILE) -9 arm9.bin -y overlay/ -d data/
+	./ndstool -x $(PREPATCHED_NDS_FILE) -9 arm9.bin -d data/
+	python3 extract_overlay.py $(PREPATCHED_NDS_FILE) overlay/
 
 	# Split arm9.bin into two files - uncompressed and compressed parts
 	dd bs=1 skip=0 count=16384 if=arm9.bin of=arm9_header.bin
