@@ -101,7 +101,35 @@
 
                 pop pc
 
+            .thumb
+            @load_extra_overlay:
+                ; make original function call
+                bl 0x202FF40
+
+                ; load new overlay
+                ldr r0, =org(@@ExtraOverlay)
+                bl LoadOverlay
+
+                ; original instruction. jumps back to normal game code
+                pop r3, r4, r5, r6, r7, pc
+
+                ; This is just an instance of an `Overlay` struct, see `ph.h` for its definition
+                @@ExtraOverlay:
+                    .word 62
+                    .word 0x23FA920
+                    .word 1024
+                    .word 0
+                    .word 0
+                    .word 0
+                    .word 2836
+                    .word 1024
         .pool
+        .endarea
+
+    .org 0x202ffec
+        .thumb
+        .area 0x6, 0x00
+            bl @load_extra_overlay
         .endarea
 .close
 
