@@ -430,7 +430,7 @@ jobs:
         run: echo "checksum=$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Download base patch from previous workflow
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
@@ -487,7 +487,7 @@ jobs:
         run: pip install tox
 
       - name: Download base patches
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
 
       - name: Move all patch files into the same directory so pyinstaller can find them
         run: |
@@ -560,7 +560,7 @@ jobs:
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Download built executable from previous job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
 
@@ -601,7 +601,7 @@ jobs:
         run: echo "version=$(git describe --tags)" >> $GITHUB_OUTPUT
 
       - name: Download built executables
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
 
       - name: Replace commit hash with version string
         run: |
