@@ -2,13 +2,44 @@ from pathlib import Path
 import struct
 import sys
 
-from ndspy import code, codeCompression
+from ndspy import code, codeCompression, fnt, lz10, narc
 from ndspy.rom import NintendoDSRom
 
 NEW_OVERLAY_ADDRESS = (
     0x23FA920  # some empty space in the ARM9 RAM area. TODO: verify this is safe to use
 )
 NEW_OVERLAY_SIZE = 2**10  # let's go with 1KB for now
+
+
+NPC_MODELS_TO_COPY = [
+    'SwB',
+    'Husband',
+]
+
+
+def _inject_new_get_item_models(rom: NintendoDSRom, folder: fnt.Folder) -> None:
+    for npc_modelname in NPC_MODELS_TO_COPY:
+        nsbmd = narc.NARC(
+            lz10.decompress(data=rom.getFileByName(f'Npc/{npc_modelname}.bin'))
+        ).getFileByName('model.nsbmd')
+        nsbtx = rom.getFileByName(f'Npc/{npc_modelname}.nsbtx')
+
+        folder.files.append(f'{npc_modelname}.nsbmd')
+        rom.files.append(nsbmd)
+        folder.files.append(f'{npc_modelname}.nsbtx')
+        rom.files.append(nsbtx)
+
+
+def inject_new_data_files(rom: NintendoDSRom) -> None:
+    new_folder = fnt.Folder(folders=[], files=[], firstID=sorted(rom.sortedFileIds)[-1] + 2)
+    rom.filenames.folders.append(
+        (
+            'r',
+            new_folder,
+        )
+    )
+
+    _inject_new_get_item_models(rom, new_folder)
 
 
 def reinsert_arm9(rom: NintendoDSRom, arm9_header_file: Path, arm9_code_file: Path) -> None:
@@ -45,6 +76,7 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
 
         ot[overlay_number].data = overlay_file.read_bytes()
         rom.files[ot[overlay_number].fileID] = ot[overlay_number].save(compress=False)
+        print(f'Rebuilt overlay_{str(overlay_number).rjust(4, "0")}.bin')
 
     # Now, add the new overlay
     new_overlay_file = overlay_directory / f'overlay_{str(new_overlay_number).rjust(4, "0")}.bin'
@@ -64,6 +96,10 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
     ot[new_overlay_number] = new_overlay
     rom.files.append(None)
     rom.files[new_overlay_file_id] = new_overlay.save(compress=False)
+    print(
+        f'Added new overlay_{str(new_overlay_number).rjust(4, "0")}.bin '
+        f'(size: {len(new_overlay_data)} bytes)'
+    )
 
     rom.arm9OverlayTable = code.saveOverlayTable(ot)
 
@@ -73,5 +109,6 @@ if __name__ == '__main__':
 
     reinsert_arm9(rom, Path(sys.argv[3]), Path(sys.argv[4]))
     reinsert_overlays(rom, Path(sys.argv[2]))
+    inject_new_data_files(rom)
 
     rom.saveToFile(sys.argv[5])

@@ -24,7 +24,6 @@ $(OUTPUT_BPS_FILE): $(INPUT_NDS_FILE) $(OUTPUT_NDS_FILE)
 	./flips --create $^ $@
 
 $(OUTPUT_NDS_FILE): $(PREPATCHED_NDS_FILE) $(OBJ)
-	python3 code/preprocess.py --input-rom $(PREPATCHED_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
 	python3 extract_rom.py $(PREPATCHED_NDS_FILE) .
 	./armips code/main.asm
 
