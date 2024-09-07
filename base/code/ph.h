@@ -41,3 +41,6 @@ typedef struct {
 // searches the list of NPC structs in memory for the given NPC and returns its
 // address.
 extern NPC *get_npc_address(uint32_t npc_id); // 203e824
+
+extern char *got_new_item_model_path_prefix;
+extern char *item_id_to_string[];

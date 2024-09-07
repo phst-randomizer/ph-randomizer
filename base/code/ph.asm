@@ -12,3 +12,5 @@
 .definelabel sprintf, 0x200c8d0
 .definelabel LoadOverlay, 0x2042348
 .definelabel get_npc_address, 0x203e824
+.definelabel got_new_item_model_path_prefix, 0x20e5da8
+.definelabel item_id_to_string, 0x20e5c3c

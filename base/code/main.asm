@@ -3,7 +3,6 @@
 .erroronwarning on
 
 .include "ph.asm"
-.include "_data.asm"
 
 .open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
@@ -18,14 +17,6 @@
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
-            .arm
-            .align
-            @get_item_model:
-                push lr
-                ldr r3, =org(item_flags)
-                bl get_item_model
-                pop pc
-
             .arm
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
@@ -149,7 +140,7 @@
             add r1, sp, 0x8c ; get dest address for nsbmd
             add r2, sp, 0xc ; get dest address for nsbtx
 
-            blx @get_item_model
+            blx get_item_model
 
             b 0x20ADC02
         .pool
