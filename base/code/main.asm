@@ -46,38 +46,6 @@
                 ; with the parameters that we have set here
                 b 0x212f3d8
 
-            @custom_salvage_item:
-                push lr
-
-                ; Unset most significant bit of the value specified in the ZMB,
-                ; so we can get the real item id that we want to spawn
-                bic r1, r0, 0x8000
-
-                ; Check if it's a heart container. If so, manually increment the player's max
-                ; health by 4. For some reason, this doesn't happen automatically when a
-                ; heart container is found in a salvage chest.
-                cmp r1, 0xa
-                bne @@end
-
-                push r0, r1
-                ; get current max health
-                ldr r0, =0x021BB5E8 ; TODO: this is a heap-allocated address, so we should dynamically compute it instead of hardcoding
-                ldrb r1, [r0]
-                ; add 4 (i.e. a new heart container) to it and set it to that value
-                add r1, r1, 0x4
-                strb r1, [r0]
-                ; set current health to new value (i.e. restore empty heart containers)
-                ldr r0, =0x021BB5E8 ; TODO: this is a heap-allocated address, so we should dynamically compute it instead of hardcoding
-                strb r1, [r0]
-                pop r0, r1
-
-                @@end:
-                ldr r0, =0x2146470
-                ldr r0, [r0]
-                str r1, [r0, 0xEC]
-
-                pop pc
-
             .thumb
             @load_extra_overlay:
                 ; make original function call
@@ -369,7 +337,7 @@
     ; Patch salvage item item-giving function so that any item can be given
     .org 0x2146430
         .area 0xC, 0x0
-            bl @custom_salvage_item
+            bl custom_salvage_item
         .endarea
 .close
 
@@ -447,5 +415,6 @@
         .importobj "code/get_item_model.o"
         .importobj "code/set_initial_flags.o"
         .importobj "code/spawn_custom_freestanding_item.o"
+        .importobj "code/custom_salvage_item.o"
         .include "_island_shop_files.asm"
 .close
