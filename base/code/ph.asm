@@ -10,4 +10,5 @@
 .definelabel strrchr, 0x2047270
 .definelabel strstr, 0x20472ac
 .definelabel sprintf, 0x200c8d0
+.definelabel LoadOverlay, 0x2042348
 .definelabel get_npc_address, 0x203e824

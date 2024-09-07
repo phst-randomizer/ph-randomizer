@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 
 // This header file contains definitions for functions, variables, struct
@@ -15,6 +16,19 @@ extern char *strstr(char *haystack, char needle);
 // TODO: verify this is correct. I'm not sure if this
 // function is really an implementation of sprintf.
 extern void sprintf(char *string, char *format);
+
+typedef struct {
+  uint32_t id;
+  void *baseAddr;
+  int32_t textSize;
+  int32_t bssSize;
+  int32_t sinitStart;
+  int32_t sinitEnd;
+  int32_t fileId;
+  int32_t fileSize;
+} Overlay;
+
+extern bool LoadOverlay(Overlay *overlay);
 
 typedef struct {
   uint32_t npc_id;
