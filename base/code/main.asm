@@ -69,6 +69,20 @@
                     .word 0
                     .word 2836
                     .word 1024
+
+            .thumb
+            @extend_give_item_function:
+                push lr
+                ; preserve scratch registers since we're interrupting a running function
+                push r0, r1, r2, r3
+                blx extend_give_item_function
+                pop r0, r1, r2, r3
+
+                ; original instructions. jumps back to normal game code
+                ldr r0, =0x20ae244
+                mov r1, 0x7d
+                ldr r0, [r0]
+                pop pc
         .pool
         .endarea
 
@@ -114,6 +128,13 @@
             b 0x20ADC02
         .pool
         .endarea
+
+    .thumb
+    .org 0x20ae1c2
+        .area 0x6, 0x00
+            bl @extend_give_item_function
+        .endarea
+
 .close
 
 .open "../overlay/overlay_0003.bin", 0x20eece0
@@ -417,4 +438,5 @@
         .importobj "code/set_initial_flags.o"
         .importobj "code/spawn_custom_freestanding_item.o"
         .importobj "code/custom_salvage_item.o"
+        .importobj "code/extend_give_item_function.o"
 .close
