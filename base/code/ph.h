@@ -44,3 +44,61 @@ extern NPC *get_npc_address(uint32_t npc_id); // 203e824
 
 extern char *got_new_item_model_path_prefix;
 extern char *item_id_to_string[];
+
+typedef struct {
+  int32_t mEquippedItem;
+  int32_t mPrevEquippedItem;
+  int32_t mForcedItem; // game crashes when any item besides this one is equipped
+  uint32_t mHourglassSandFrames;
+  int32_t mEquippedFairy;
+  void *mFairies[3];
+  uint16_t mEquipLoadTimer;
+  uint16_t mNumRupees;
+  uint8_t mNumGems[3];
+  uint8_t mUnk_027; // padding?
+  uint32_t mEquippedShipParts[8];
+  int8_t mShipParts[8][9];
+  int8_t mTreasure[8];
+  uint8_t mUnk_098[6];  // max 99
+  uint16_t mUnk_09e[6]; // max 9999, corresponds with mUnk_098
+  uint16_t mUnk_0aa;    // padding?
+  void *(*mEquipItems)[11];
+  uint16_t (*mAmmo)[11];
+  uint16_t mQuiverSize;
+  uint16_t mBombBagSize;
+  uint16_t mBombchuBagSize;
+  uint16_t mUnk_0ba; // only between 0 and 9
+  uint8_t mPotions[2];
+  uint8_t mUnk_0be[2]; // padding?
+  void *mItemModels[16];
+  void *mDungeonItemModels[5]; // non-null in dungeons/caves
+  void *mModelRender;
+  int32_t mFanfareItemId;
+  uint32_t mFanfareSfx;
+  void *mFanfareItemModel;
+  void *mUnk_124;
+  uint32_t mItemFlags[4];
+  uint32_t mSalvagedTreasureFlags;
+  uint32_t mShipPartPricesShown[3];
+  uint32_t mTreasurePriceShownFlag;
+  bool mMuteNextFanfare;
+  uint8_t mUnk_14d;
+  uint8_t mUnk_14e[0x2]; // padding?
+} ItemManager;
+
+extern ItemManager *gItemManager;
+extern void GiveItem(ItemManager *inventory, int32_t itemId);
+
+typedef struct {
+  uint16_t mMaxHealth;
+  uint16_t mHealth;
+  int16_t mMaxShipHealth;
+  int16_t mShipHealth;
+  uint16_t mSalvageArmHealth;
+  int16_t mFlags;
+  uint16_t mUnk_0c;
+  uint8_t mUnk_0e;
+  uint8_t mUnk_0f;
+} HealthManager;
+
+extern HealthManager *gHealthManager;

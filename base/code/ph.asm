@@ -14,3 +14,6 @@
 .definelabel get_npc_address, 0x203e824
 .definelabel got_new_item_model_path_prefix, 0x20e5da8
 .definelabel item_id_to_string, 0x20e5c3c
+.definelabel gItemManager, 0x27e0fb4
+.definelabel GiveItem, 0x20adc7c
+.definelabel gHealthManager, 0x27e0fbc
