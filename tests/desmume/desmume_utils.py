@@ -114,7 +114,7 @@ def start_first_file(desmume_emulator: DeSmuMEWrapper):
 
     # Click "Adventure"
     desmume_emulator.touch_input((130, 70), 0)
-    desmume_emulator.wait(200)
+    desmume_emulator.wait(300)
 
 
 def get_current_rupee_count(desmume: DeSmuMEWrapper):
