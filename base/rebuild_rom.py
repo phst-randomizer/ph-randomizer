@@ -32,7 +32,7 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
     )
 
     # Calculate new file id and overlay number for new overlay
-    new_overlay_file_id = rom.sortedFileIds[-1] + 1
+    new_overlay_file_id = sorted(rom.sortedFileIds)[-1] + 1
     new_overlay_number = max(ot.keys()) + 1
 
     # First, reinsert all the existing overlays
