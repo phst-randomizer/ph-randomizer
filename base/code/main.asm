@@ -11,6 +11,7 @@
         .area 0x301, 0xFF
             .fill 0xA, 0x0 ; bitmap for randomizer settings
 
+            .include "_island_shop_files.asm"
         .pool
         .endarea
 
@@ -416,5 +417,4 @@
         .importobj "code/set_initial_flags.o"
         .importobj "code/spawn_custom_freestanding_item.o"
         .importobj "code/custom_salvage_item.o"
-        .include "_island_shop_files.asm"
 .close
