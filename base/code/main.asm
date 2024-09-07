@@ -142,7 +142,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0010.bin", 0x20eece0 ; overlay 3 in ghidra
+.open "../overlay/overlay_0003.bin", 0x20eece0
     .arm
     ; update "got item" text ids for:
     .org 0x20ffb90 ; progressive sword
@@ -219,7 +219,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0021.bin", 0x02112ba0 ; overlay 9 in ghidra
+.open "../overlay/overlay_0009.bin", 0x02112ba0
     .thumb
     .org 0x211c09a
         ; This overrides the routine that is in charge of spawning the correct 3D model
@@ -240,7 +240,7 @@
 .close
 
 
-.open "../overlay/overlay_0029.bin", 0x0211F5C0 ; overlay 14 in ghidra
+.open "../overlay/overlay_0014.bin", 0x0211F5C0
     .arm
     .org 0x213b0e8
         .area 0x74, 0xFF
@@ -355,7 +355,7 @@
 .close
 
 
-.open "../overlay/overlay_0031.bin", 0x0211F5C0 ; overlay 15 in ghidra
+.open "../overlay/overlay_0015.bin", 0x0211F5C0
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
@@ -369,7 +369,7 @@
 .close
 
 
-.open "../overlay/overlay_0037.bin", 0x0215b400
+.open "../overlay/overlay_0018.bin", 0x0215b400
     .arm
     .org 0x216278c
         .area 0x4, 0xff
@@ -377,7 +377,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0060.bin", 0x0217bce0
+.open "../overlay/overlay_0031.bin", 0x0217bce0
     .arm
 
     ; Make the "random treasure" in shops a fixed item (i.e. "unrandomize" it)
@@ -426,5 +426,15 @@
     .org 0x21822ec
         .area 0x4
             .word org(bcbagM_nsbtx)
+        .endarea
+.close
+
+; Note: this is an extra overlay added by the randomizer.
+; It is not present in the original rom, and must be added prior
+; to executing this ARMIPS patch.
+.open "../overlay/overlay_0062.bin", 0x23FA920
+    .org 0x23FA921
+        .area 0x6
+            .ascii "hello"
         .endarea
 .close
