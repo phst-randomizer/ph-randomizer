@@ -12,26 +12,12 @@
         .area 0x301, 0xFF
             .fill 0xA, 0x0 ; bitmap for randomizer settings
 
-            .arm
-            .importobj "code/faster_boat.o"
-            .importobj "code/fixed_random_treasure_in_shop.o"
-            .importobj "code/progressive_sword_check.o"
-            .importobj "code/rando_settings.o"
-            .include "_island_shop_files.asm"
-
-            .arm
-            .importobj "code/get_item_model.o"
-
         .pool
         .endarea
 
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
-            .arm
-            .importobj "code/set_initial_flags.o"
-            .importobj "code/spawn_custom_freestanding_item.o"
-
             .arm
             .align
             @get_item_model:
@@ -461,8 +447,14 @@
 ; It is not present in the original rom, and must be added prior
 ; to executing this ARMIPS patch.
 .open "../overlay/overlay_0062.bin", 0x23FA920
-    .org 0x23FA921
-        .area 0x6
-            .ascii "hello"
-        .endarea
+    .org 0x23FA920
+        .arm
+        .importobj "code/faster_boat.o"
+        .importobj "code/fixed_random_treasure_in_shop.o"
+        .importobj "code/progressive_sword_check.o"
+        .importobj "code/rando_settings.o"
+        .importobj "code/get_item_model.o"
+        .importobj "code/set_initial_flags.o"
+        .importobj "code/spawn_custom_freestanding_item.o"
+        .include "_island_shop_files.asm"
 .close
