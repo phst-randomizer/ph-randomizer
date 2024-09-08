@@ -1,11 +1,17 @@
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
+from pathlib import Path
 import struct
+import os
 from abc import ABC
+import shutil
+import sys
+from time import sleep
 import cv2
 from desmume.controls import keymask
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME
 import numpy as np
+import pytest
 
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler.aux_models import Area
@@ -89,8 +95,11 @@ class AbstractEmulatorWrapper(ABC):
     def reset(self):
         raise NotImplementedError
     
+    def load_battery_file(self, test_name: str, rom_path: Path):
+        raise NotImplementedError
+    
     # Optional methods
-    def screenshot(self):
+    def stop(self):
         pass
 
 
@@ -164,6 +173,7 @@ class DeSmuMEWrapper(AbstractEmulatorWrapper):
         return self._emulator.input.touch_release()
 
     def read_memory(self, start: int, stop: int | None = None):
+        self._next_frame()
         if stop is None:
             stop = start
         return self._emulator.memory.read(start, stop, 1, False)
@@ -213,6 +223,38 @@ class DeSmuMEWrapper(AbstractEmulatorWrapper):
     @r3.setter
     def r3(self, value: int):
         self._emulator.memory.register_arm9.r3 = value
+
+    def load_battery_file(self, test_name: str, rom_path: Path):
+        python_version = sys.version_info
+
+        # The directory where py-desmume keeps its save files. This appears to vary from system
+        # to system, so it's configurable via an environment variable. In the absence of an env
+        # var, it defaults to the location from my Windows system.
+        battery_file_location = Path(
+            os.environ.get(
+                'PY_DESMUME_BATTERY_DIR',
+                f'C:\\Users\\{os.getlogin()}\\AppData\\Local\\Programs\\Python\\'
+                f'Python{python_version[0]}{python_version[1]}',
+            )
+        )
+
+        battery_file_src = Path(__file__).parent / 'test_data' / f'{test_name}.dsv'
+        battery_file_dest = battery_file_location / f'{rom_path.stem}.dsv'
+
+        if battery_file_src.exists():
+            # Copy save file to py-desmume battery directory
+            shutil.copy(battery_file_src, battery_file_dest)
+        else:
+            while True:
+                try:
+                    # If a dsv for this test doesn't exist, remove any that exist for this rom.
+                    battery_file_dest.unlink(missing_ok=True)
+                    break
+                except PermissionError:
+                    # If another test is using this file, wait 5 seconds
+                    # and try again.
+                    sleep(5)
+        
     
     def reset(self):
         self._emulator.reset()
@@ -295,16 +337,18 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
     if isinstance(item, str):
         item = ITEMS[item]
 
+    base_addr = emu_instance.event_flag_base_addr
+
     # Get original value (before item is retrieved)
-    original_value = emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr)
+    original_value = emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + base_addr)
     if ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.FLAG:
         assert original_value & ITEM_MEMORY_OFFSETS[item][1] != ITEM_MEMORY_OFFSETS[item][1]
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
-        original_value = emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr)
+        original_value = emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + base_addr)
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         original_value = int.from_bytes(
             emu_instance.read_memory(
-                ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr, ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr + 2
+                ITEM_MEMORY_OFFSETS[item][0] + base_addr, ITEM_MEMORY_OFFSETS[item][0] + base_addr + 2
             ),
             'little',
         )
@@ -316,13 +360,13 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
     # Make sure correct item was retrieved.
     if ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.FLAG:
         assert (
-            emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr)
+            emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + base_addr)
             & ITEM_MEMORY_OFFSETS[item][1]
             == ITEM_MEMORY_OFFSETS[item][1]
         )
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
         assert (
-            emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr)
+            emu_instance.read_memory(ITEM_MEMORY_OFFSETS[item][0] + base_addr)
             - ITEM_MEMORY_OFFSETS[item][1]
             == original_value
         )
@@ -330,7 +374,7 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
         assert (
             int.from_bytes(
                 emu_instance.read_memory(
-                    ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr, ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr + 2
+                    ITEM_MEMORY_OFFSETS[item][0] + base_addr, ITEM_MEMORY_OFFSETS[item][0] + base_addr + 2
                 ),
                 'little',
             )
