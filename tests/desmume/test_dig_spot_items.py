@@ -55,10 +55,10 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DeSmuMEWrapper, request: pytes
 
     with assert_item_is_picked_up(item_id, dig_spot_test_emu):
         # Walk down from Oshus house
-        dig_spot_test_emu.touch_input((SCREEN_WIDTH // 2, SCREEN_HEIGHT), 15)
+        dig_spot_test_emu.touch_set_and_release((SCREEN_WIDTH // 2, SCREEN_HEIGHT), 15)
 
         # Turn right and walk towards sword cave/tree with shovel spot
-        dig_spot_test_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 100)
+        dig_spot_test_emu.touch_set_and_release((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 100)
 
         dig_spot_test_emu.wait(30)
 
@@ -67,24 +67,24 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DeSmuMEWrapper, request: pytes
         use_equipped_item(dig_spot_test_emu)
 
         # Tap ground where item is buried to dig it up
-        dig_spot_test_emu.touch_input((206, 74), 2)
+        dig_spot_test_emu.touch_set_and_release((206, 74), 2)
 
         # Wait for Link to run over and use the shovel
         dig_spot_test_emu.wait(100)
 
         # Grab the item that appeared
-        dig_spot_test_emu.touch_input((int(SCREEN_WIDTH * (2 / 3)), 0), 40)
+        dig_spot_test_emu.touch_set_and_release((int(SCREEN_WIDTH * (2 / 3)), 0), 40)
 
         dig_spot_test_emu.wait(200)
-        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.touch_set_and_release((0, 0), 2)
         dig_spot_test_emu.wait(200)
-        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.touch_set_and_release((0, 0), 2)
 
         dig_spot_test_emu.wait(200)
 
-        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.touch_set_and_release((0, 0), 2)
         dig_spot_test_emu.wait(200)
-        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.touch_set_and_release((0, 0), 2)
         dig_spot_test_emu.wait(200)
-        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.touch_set_and_release((0, 0), 2)
         dig_spot_test_emu.wait(200)

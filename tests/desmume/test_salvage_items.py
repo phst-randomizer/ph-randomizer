@@ -56,50 +56,48 @@ def test_custom_salvage_items(
     start_first_file(salvage_item_test_emu)
 
     # Drag navigation pen to "X" on map
-    salvage_item_test_emu.input.touch_set_pos(207, 90)
+    salvage_item_test_emu.touch_set(207, 90)
     salvage_item_test_emu.wait(2)
-    salvage_item_test_emu.input.touch_set_pos(220, 90)
+    salvage_item_test_emu.touch_set(220, 90)
     salvage_item_test_emu.wait(2)
-    salvage_item_test_emu.input.touch_release()
+    salvage_item_test_emu.touch_release()
     salvage_item_test_emu.wait(2)
 
     # Click "Go!" button
-    salvage_item_test_emu.input.touch_set_pos(90, 130)
+    salvage_item_test_emu.touch_set(90, 130)
     salvage_item_test_emu.wait(2)
-    salvage_item_test_emu.input.touch_release()
+    salvage_item_test_emu.touch_release()
 
     # Wait for the boat to reach the "X"
     salvage_item_test_emu.wait(500)
 
     # Take out salvage arm
-    salvage_item_test_emu.input.touch_set_pos(0, SCREEN_HEIGHT)
+    salvage_item_test_emu.touch_set(0, SCREEN_HEIGHT)
     salvage_item_test_emu.wait(10)
-    salvage_item_test_emu.input.touch_release()
+    salvage_item_test_emu.touch_release()
     salvage_item_test_emu.wait(10)
-    salvage_item_test_emu.input.touch_set_pos(195, 175)
+    salvage_item_test_emu.touch_set(195, 175)
     salvage_item_test_emu.wait(10)
-    salvage_item_test_emu.input.touch_release()
+    salvage_item_test_emu.touch_release()
 
     # Wait for salvage arm to come out
     salvage_item_test_emu.wait(200)
 
     # Set salvage arm health to 255 so we don't have to worry about running out of health
-    salvage_item_test_emu.memory.unsigned[salvage_item_test_emu.event_flag_base_addr + 0x401A4] = (
-        0xFF
-    )
+    salvage_item_test_emu.write_memory(salvage_item_test_emu.event_flag_base_addr + 0x401A4, 0xFF)
 
     # Pull salvage icon down until we get to the chest
-    salvage_item_test_emu.input.touch_set_pos(125, 170)
+    salvage_item_test_emu.touch_set(125, 170)
     salvage_item_test_emu.wait(10)
-    salvage_item_test_emu.input.touch_set_pos(125, 190)
+    salvage_item_test_emu.touch_set(125, 190)
     salvage_item_test_emu.wait(2500)
 
     # Release the touch screen, and then pull the salvage icon up to bring the treasure up.
-    salvage_item_test_emu.input.touch_release()
+    salvage_item_test_emu.touch_release()
     salvage_item_test_emu.wait(10)
-    salvage_item_test_emu.input.touch_set_pos(125, 170)
+    salvage_item_test_emu.touch_set(125, 170)
     salvage_item_test_emu.wait(10)
-    salvage_item_test_emu.input.touch_set_pos(125, 130)
+    salvage_item_test_emu.touch_set(125, 130)
 
     # Wait until the chest *just* about to exit the water
     salvage_item_test_emu.wait(2300)
@@ -108,15 +106,15 @@ def test_custom_salvage_items(
         # Wait for the chest to be pulled out of the water and opened by Link
         salvage_item_test_emu.wait(1050)
 
-        salvage_item_test_emu.input.touch_release()
+        salvage_item_test_emu.touch_release()
 
         # Click through the "Got new item" text.
         salvage_item_test_emu.wait(200)
-        salvage_item_test_emu.input.touch_set_pos(0, 0)
+        salvage_item_test_emu.touch_set(0, 0)
         salvage_item_test_emu.wait(2)
-        salvage_item_test_emu.input.touch_release()
+        salvage_item_test_emu.touch_release()
         salvage_item_test_emu.wait(200)
-        salvage_item_test_emu.input.touch_set_pos(0, 0)
+        salvage_item_test_emu.touch_set(0, 0)
         salvage_item_test_emu.wait(2)
-        salvage_item_test_emu.input.touch_release()
+        salvage_item_test_emu.touch_release()
         salvage_item_test_emu.wait(200)
