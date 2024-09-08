@@ -56,13 +56,13 @@ def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.Fixt
 
     with assert_item_is_picked_up(item_id, chest_test_emu):
         # Walk up to chest
-        chest_test_emu.input.touch_set_pos(SCREEN_WIDTH // 2, 0)
+        chest_test_emu.touch_set(SCREEN_WIDTH // 2, 0)
         chest_test_emu.wait(320)
-        chest_test_emu.input.touch_release()
+        chest_test_emu.touch_release()
         chest_test_emu.wait(10)
 
         # Open chest
-        chest_test_emu.touch_input((SCREEN_WIDTH // 2, 100), 2)
+        chest_test_emu.touch_set_and_release((SCREEN_WIDTH // 2, 100), 2)
 
         # Wait for "Got item" text
         chest_test_emu.wait(800)
@@ -74,14 +74,14 @@ def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.Fixt
             ).replace('\u2019', "'")
             assert GOT_ITEM_TEXT[item_id] in ocr_text
 
-        chest_test_emu.touch_input((0, 0), 2)
+        chest_test_emu.touch_set_and_release((0, 0), 2)
         chest_test_emu.wait(200)
-        chest_test_emu.touch_input((0, 0), 2)
+        chest_test_emu.touch_set_and_release((0, 0), 2)
         chest_test_emu.wait(100)
 
         # Gems require one more text box to be clicked through.
         # Put this behind an if statement so we don't have to
         # wait extra time for every other item.
         if item_id in range(0x2D, 0x30) or item_id == 0x13:
-            chest_test_emu.touch_input((0, 0), 2)
+            chest_test_emu.touch_set_and_release((0, 0), 2)
             chest_test_emu.wait(50)

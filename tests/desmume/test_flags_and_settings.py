@@ -23,21 +23,21 @@ def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool)
     """Ensure all flags are set properly + all rando settings work."""
     for i in range(2):
         base_rom_emu.wait(500)
-        base_rom_emu.touch_input(
+        base_rom_emu.touch_set_and_release(
             (
                 SCREEN_WIDTH // 2,
                 SCREEN_HEIGHT // 2,
             )
         )
         base_rom_emu.wait(100)
-        base_rom_emu.touch_input(
+        base_rom_emu.touch_set_and_release(
             (
                 SCREEN_WIDTH // 2,
                 SCREEN_HEIGHT // 2,
             )
         )
         base_rom_emu.wait(200)
-        base_rom_emu.touch_input(
+        base_rom_emu.touch_set_and_release(
             (
                 SCREEN_WIDTH // 2,
                 SCREEN_HEIGHT // 2,
@@ -53,56 +53,56 @@ def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool)
             base_rom_emu.wait(400)
             base_rom_emu.reset()
 
-    base_rom_emu.memory.unsigned[RANDO_SETTINGS_BITMAP_ADDR] |= int(bridge_repaired)
+    base_rom_emu.write_memory(RANDO_SETTINGS_BITMAP_ADDR, base_rom_emu.read_memory(RANDO_SETTINGS_BITMAP_ADDR) | int(bridge_repaired))
 
     # Touch file
-    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.touch_set_and_release((130, 70), 0)
     base_rom_emu.wait(500)
 
     # Confirm name
-    base_rom_emu.touch_input((190, 180), 0)
+    base_rom_emu.touch_set_and_release((190, 180), 0)
     base_rom_emu.wait(100)
 
     # Click yes
-    base_rom_emu.touch_input((210, 110), 0)
+    base_rom_emu.touch_set_and_release((210, 110), 0)
     base_rom_emu.wait(100)
 
     # Click right hand
-    base_rom_emu.touch_input((210, 110), 0)
+    base_rom_emu.touch_set_and_release((210, 110), 0)
     base_rom_emu.wait(100)
 
     # Click yes
-    base_rom_emu.touch_input((210, 110), 0)
+    base_rom_emu.touch_set_and_release((210, 110), 0)
     base_rom_emu.wait(100)
 
     # Click newly created file
-    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.touch_set_and_release((130, 70), 0)
     base_rom_emu.wait(100)
 
     # Click it again
-    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.touch_set_and_release((130, 70), 0)
     base_rom_emu.wait(100)
 
     # Click "Adventure"
-    base_rom_emu.touch_input((130, 70), 0)
+    base_rom_emu.touch_set_and_release((130, 70), 0)
     base_rom_emu.wait(500)
 
     # Press start + touch "Skip" button to skip intro cs
     base_rom_emu.button_input(Keys.KEY_START)
     base_rom_emu.wait(50)
-    base_rom_emu.touch_input((SCREEN_WIDTH, 0))
+    base_rom_emu.touch_set_and_release((SCREEN_WIDTH, 0))
     base_rom_emu.wait(250)
 
     # Press start + touch "Skip" button to skip Tetra cs
     base_rom_emu.button_input(Keys.KEY_START)
     base_rom_emu.wait(100)
-    base_rom_emu.touch_input((SCREEN_WIDTH, 0))
+    base_rom_emu.touch_set_and_release((SCREEN_WIDTH, 0))
     base_rom_emu.wait(500)
 
     # Press start + touch "Skip" button to skip ciela/beach cs
     base_rom_emu.button_input(Keys.KEY_START)
     base_rom_emu.wait(15)
-    base_rom_emu.touch_input((SCREEN_WIDTH, 0))
+    base_rom_emu.touch_set_and_release((SCREEN_WIDTH, 0))
     base_rom_emu.wait(200)
 
     ########################################
@@ -110,10 +110,8 @@ def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool)
     ########################################
 
     # Mercay bridge repaired
-    assert (
-        base_rom_emu.memory.unsigned[base_rom_emu.event_flag_base_addr + 0x2] & 0x2 == 0x2
-    ) is bridge_repaired
+    assert (base_rom_emu.read_memory(base_rom_emu.event_flag_base_addr + 0x2) & 0x2 == 0x2) is bridge_repaired
     # Talked to Oshus for first time
-    assert base_rom_emu.memory.unsigned[base_rom_emu.event_flag_base_addr + 0x18] & 0x2 == 0x2
+    assert base_rom_emu.read_memory(base_rom_emu.event_flag_base_addr + 0x18) & 0x2 == 0x2
     # Saw broken bridge for first time
-    assert base_rom_emu.memory.unsigned[base_rom_emu.event_flag_base_addr + 0x2C] & 0x1 == 0x1
+    assert base_rom_emu.read_memory(base_rom_emu.event_flag_base_addr + 0x2C) & 0x1 == 0x1
