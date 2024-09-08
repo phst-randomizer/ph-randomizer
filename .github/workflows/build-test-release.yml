@@ -387,7 +387,7 @@ jobs:
         echo "matrix=$(cat .github/matrix.json)" >> $GITHUB_OUTPUT
 
   test-desmume:
-    name: Run base patch tests [${{ matrix.module }}] (${{ matrix.rom_variant }})
+    name: ${{ matrix.emulator }} tests [${{ matrix.module }}] (${{ matrix.rom_variant }})
     needs:
       - generate-base-patch
       - generate-base-patch-test-jobs
@@ -421,6 +421,20 @@ jobs:
           choco install -y tesseract
           echo "C:\Program Files\Tesseract-OCR" >> $GITHUB_PATH
 
+      - name: Download BizHawk
+        if: matrix.emulator == 'melonds'
+        run: |
+          curl -L https://github.com/TASEmulators/BizHawk/releases/download/2.9.1/BizHawk-2.9.1-win-x64.zip -o BizHawk-2.9.1-win-x64.zip
+          unzip BizHawk-2.9.1-win-x64.zip -d BizHawk
+          curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -L -o ExternalTool.zip "https://api.github.com/repos/mike8699/birds-eye/actions/artifacts/1906957269/zip" 
+          unzip ExternalTool.zip -d BizHawk/ExternalTools
+
+      - name: Install Microsoft Visual C++ 2010 SP1 Redistributable Package
+        if: matrix.emulator == 'melonds'
+        run: |
+          powershell -Command "Invoke-WebRequest https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe -OutFile vcredist_x64.exe"
+          powershell -Command "Start-Process -FilePath vcredist_x64.exe -ArgumentList '/install /q /norestart' -Verb RunAs -Wait"
+
       - name: Fetch PH rom
         run: |
           pip install gdown
@@ -448,10 +462,11 @@ jobs:
         run: pip install tox
 
       - name: Run tests
-        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-desmume -- -k "${{ matrix.module }}"
+        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-${{ matrix.emulator }} -- -k "${{ matrix.module }}"
         env:
           PH_ROM_PATH: ${{ steps.rom-filename.outputs.filename }}
           PY_DESMUME_VIDEO_RECORDING_DIR: recordings/
+          EMUHAWK_PATH: BizHawk/EmuHawk.exe
 
       - name: Save recordings of failed tests as artifacts
         if: failure()

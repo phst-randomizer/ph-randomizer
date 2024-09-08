@@ -68,7 +68,7 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
     base_rom_emu.wait(60)
     base_rom_emu.touch_set_and_release((163, 40), 1)
     base_rom_emu.wait(60)
-    base_rom_emu.touch_set_and_release((163, 40), 1)
+    base_rom_emu.touch_set_and_release((163, 45), 1)
     base_rom_emu.wait(60)
     base_rom_emu.touch_set_and_release((128, 34), 1)
     base_rom_emu.wait(60)
