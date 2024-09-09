@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from desmume.emulator import SCREEN_WIDTH
@@ -14,10 +13,7 @@ from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, start_first_file
 
 
-@pytest.fixture(
-    params=[val for val in ITEM_MEMORY_ADDRESSES.keys()],
-    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
-)
+@pytest.fixture
 def chest_test_emu(
     rom_path: Path,
     desmume_emulator: DeSmuMEWrapper,
@@ -46,8 +42,14 @@ def chest_test_emu(
     return desmume_emulator
 
 
-def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper):
-    item_id = int(os.environ['PYTEST_CURRENT_TEST'].split('[')[1].split('-')[0], 16)
+@pytest.mark.parametrize(
+    'chest_test_emu',
+    [val for val in ITEM_MEMORY_ADDRESSES.keys()],
+    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
+    indirect=['chest_test_emu'],
+)
+def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.FixtureRequest):
+    item_id: int = request.node.callspec.params['chest_test_emu']
 
     start_first_file(chest_test_emu)
 
