@@ -11,10 +11,7 @@ from ph_rando.shuffler.aux_models import Item, Shop
 from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 
 
-@pytest.fixture(
-    params=[val for val in GD_MODELS.keys() if GD_MODELS[val] and val in ITEMS_REVERSED],
-    ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val and val in ITEMS_REVERSED],
-)
+@pytest.fixture
 def island_shop_test_emu(
     rom_path: Path,
     desmume_emulator: DeSmuMEWrapper,
@@ -41,6 +38,12 @@ def island_shop_test_emu(
     return desmume_emulator
 
 
+@pytest.mark.parametrize(
+    'island_shop_test_emu',
+    [val for val in GD_MODELS.keys() if GD_MODELS[val] and val in ITEMS_REVERSED],
+    ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val and val in ITEMS_REVERSED],
+    indirect=['island_shop_test_emu'],
+)
 def test_custom_shop_items(island_shop_test_emu: DeSmuMEWrapper):
     start_first_file(island_shop_test_emu)
 
