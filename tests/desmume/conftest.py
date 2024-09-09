@@ -59,7 +59,7 @@ def desmume_emulator(desmume_instance: DeSmuMEWrapper, rom_path: Path) -> DeSmuM
 
 
 @pytest.fixture
-def rom_path(tmp_path: Path) -> Path:
+def rom_path(tmp_path: Path, request: pytest.FixtureRequest) -> Path:
     base_rom_path = Path(os.environ['PH_ROM_PATH'])
     python_version = sys.version_info
 
@@ -74,9 +74,7 @@ def rom_path(tmp_path: Path) -> Path:
         )
     )
 
-    # The name of the test function that is currently executing.
-    # PYTEST_CURRENT_TEST env var is set automatically by pytest at runtime.
-    test_name = os.environ['PYTEST_CURRENT_TEST'].split(':')[-1].split(' ')[0].split('[')[0]
+    test_name: str = request.node.originalname
 
     # Path to store rom for the currently running test
     temp_rom_path = tmp_path / f'{tmp_path.name}.nds'
