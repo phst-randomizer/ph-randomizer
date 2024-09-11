@@ -404,7 +404,7 @@ def _patch_system_bmg(input_rom: rom.NintendoDSRom) -> None:
     effectively making them global.
     The "got item" message is the text that pops up when Link collects an item.
     """
-    gims = list()
+    gims = []
 
     bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['MainIsland']))
     # Progressive Sword GIM
@@ -451,7 +451,7 @@ def _patch_system_bmg(input_rom: rom.NintendoDSRom) -> None:
 
     # To avoid overwriting non-empty entries
     if len(gims) > 0xA9 - 0x8A:
-        logger.warning(f'Aborting GIM patching, overflow ({len(gims)}/{0xa9 - 0x8a}).')
+        raise Exception(f'Aborting GIM patching, overflow ({len(gims)}/{0xA9 - 0x8A}).')
         return
 
     bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['System']))
