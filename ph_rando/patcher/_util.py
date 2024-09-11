@@ -452,7 +452,6 @@ def _patch_system_bmg(input_rom: rom.NintendoDSRom) -> None:
     # To avoid overwriting non-empty entries
     if len(gims) > 0xA9 - 0x8A:
         raise Exception(f'Aborting GIM patching, overflow ({len(gims)}/{0xA9 - 0x8A}).')
-        return
 
     bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['System']))
     for i, gim in enumerate(gims):
