@@ -414,6 +414,11 @@ def _patch_system_bmg(input_rom: rom.NintendoDSRom) -> None:
     gims.append(bmg_data.messages[0x5F].stringParts)
     # Shovel GIM
     gims.append(bmg_data.messages[0x60].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Power']))
+    # Bombchus GIM
+    gims.append(bmg_data.messages[0x71].stringParts)
+    # Crimsonine GIM
+    gims.append(bmg_data.messages[0x72].stringParts)
     bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Flame']))
     # Boomerang GIM
     gims.append(bmg_data.messages[0xDC].stringParts)
@@ -428,9 +433,13 @@ def _patch_system_bmg(input_rom: rom.NintendoDSRom) -> None:
     gims.append(bmg_data.messages[0x0].stringParts)
     # King Key GIM
     gims.append(bmg_data.messages[0x1].stringParts)
+    # Aquanine GIM
+    gims.append(bmg_data.messages[0x2].stringParts)
     bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Frost']))
     # Grappling Hook GIM
     gims.append(bmg_data.messages[0xDB].stringParts)
+    # Azurine GIM
+    gims.append(bmg_data.messages[0xDC].stringParts)
     bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Hidari']))
     # Fishing Rod GIM
     gims.append(bmg_data.messages[0x64].stringParts)
