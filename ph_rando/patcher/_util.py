@@ -1,8 +1,10 @@
 from collections.abc import Generator, Iterable
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from contextlib import contextmanager
 import hashlib
 from io import BytesIO
 import logging
+import os
 from pathlib import Path
 import struct
 
@@ -199,6 +201,14 @@ def open_bmg_files(
         input_rom.setFileByName(path, bmg_file.save())
 
 
+def _load_zmb_file(rom: rom.NintendoDSRom, path: str) -> tuple[str, bytearray]:
+    narc_path = path[: path.index('.bin/') + 4]
+    zmb_path = path[path.index('.bin/') + 5 :]
+    narc_file = narc.NARC(lz10.decompress(rom.getFileByName(narc_path)))
+    zmb_file = ZMB(game=Game.PhantomHourglass, data=narc_file.getFileByName(zmb_path))
+    return path, zmb_file.save(game=Game.PhantomHourglass)
+
+
 @contextmanager
 def open_zmb_files(
     zmb_file_paths: Iterable[str],
@@ -206,12 +216,14 @@ def open_zmb_files(
 ) -> Generator[dict[str, ZMB], None, None]:
     zmb_file_map: dict[str, ZMB] = {}
 
-    for path in zmb_file_paths:
-        narc_path = path[: path.index('.bin/') + 4]
-        zmb_path = path[path.index('.bin/') + 5 :]
-        narc_file = narc.NARC(lz10.decompress(input_rom.getFileByName(narc_path)))
-        zmb_file = ZMB(game=Game.PhantomHourglass, data=narc_file.getFileByName(zmb_path))
-        zmb_file_map[path] = zmb_file
+    with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
+        # Load files in parallel
+        futures = {
+            executor.submit(_load_zmb_file, input_rom, path): path for path in zmb_file_paths
+        }
+        for future in as_completed(futures):
+            path, zmb_file_bytes = future.result()
+            zmb_file_map[path] = ZMB(game=Game.PhantomHourglass, data=zmb_file_bytes)
 
     yield zmb_file_map
 
