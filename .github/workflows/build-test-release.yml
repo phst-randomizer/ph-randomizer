@@ -416,6 +416,11 @@ jobs:
       - name: Upgrade `pip` and install `wheel`
         run: python -m pip install --upgrade pip wheel
 
+      - name: Install system dependencies
+        run: |
+          choco install -y tesseract
+          echo "C:\Program Files\Tesseract-OCR" >> $GITHUB_PATH
+
       - name: Fetch PH rom
         run: |
           pip install gdown

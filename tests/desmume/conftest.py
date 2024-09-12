@@ -157,3 +157,31 @@ ITEM_MEMORY_ADDRESSES: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x74: (0x21B554B, 0x80, ItemMemoryAddressType.FLAG),  # aquanine
     # TODO: Add rest of items
 }
+
+GOT_ITEM_TEXT: dict[int, str] = {
+    0x2: "You got a green Rupee!\nIt's worth 1 Rupee!\n",
+    0x3: "You got Oshus's sword!\nTap an enemy or slide the\nstylus on the Touch Screen.\n",
+    0x4: 'You got the wooden shield!\nDefend yourself from minor\nattacks just by holding it!\n',
+    0x7: 'You got bombs! You can\nhold up to 10 in your\nbomb bag.\n',
+    0x8: 'You got the bow and\narrow! Tap the Touch\nScreen and release to fire.\n',
+    0x9: "You got a big green Rupee!\nIt's worth 100 Rupees!\n",
+    0xA: 'You got a Heart Container!\nYou increased your life by\n1 and refilled your hearts!\n',
+    0xC: 'You got the boomerang!\nThis item follows the path\nyou draw on the screen!\n',
+    0xE: 'You got a Bombchu! You\ncan carry up to 10\nBombchus in your bag!\n',
+    0x13: 'You found a sea chart!\n',
+    0x14: 'You got the Northwestern\nSea chart!\n',
+    0x15: 'You got the Southeastern\nSea chart!\n',
+    0x16: 'You got the Northeastern\nSea chart!\n',
+    0x18: "You got a blue Rupee!\nIt's worth 5 Rupees!\n",
+    0x19: "You got a red Rupee!\nIt's worth 20 Rupees!\n",
+    0x1A: "You got a big red Rupee!\nIt's worth 200 Rupees!\n",
+    0x1B: "You got a big gold Rupee!\nIt's worth 300 Rupees!\n",
+    0x1F: "You got a hammer! It's\nsmall, but it packs a\npunch!\n",
+    0x20: 'You got a grappling hook!\nTap things to grab on to\nthem!\n',
+    0x24: 'You got the fishing rod!\nTap Fish from the menu\nwhile sailing to use it.\n',
+    0x26: 'You found a sword!\n\n',
+    0x2C: "You got the King's Key!\nSome say it holds secrets\nof the Cobble Kingdom.\n",
+    0x2D: "You got a Power Gem!\nIt radiates power, but you\ncan't use it like this.\n",
+    0x2E: "You got a Wisdom Gem!\nIt radiates wisdom, but it\ncan't be used like this.\n",
+    0x2F: "You got a Courage Gem!\nIt radiates courage, but it\ncan't be used like this.\n",
+}
