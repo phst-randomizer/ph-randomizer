@@ -12,6 +12,7 @@ from zed.common import Game
 from zed.zmb import ZMB
 
 from ph_rando.common import ShufflerAuxData
+from ph_rando.patcher._bmgs import BMGS
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler.aux_models import Area, Chest, DigSpot, Event, SalvageTreasure, Shop, Tree
 
@@ -397,6 +398,77 @@ def _patch_bmg_events(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
             )
 
 
+def _patch_system_bmg(input_rom: rom.NintendoDSRom) -> None:
+    """
+    Patches the system BMG file to include all non-global "got item" BMG messages,
+    effectively making them global.
+    The "got item" message is the text that pops up when Link collects an item.
+    """
+    gims = []
+
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['MainIsland']))
+    # Progressive Sword GIM
+    gims.append(bmg_data.messages[0x0].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Brave']))
+    # Bow GIM
+    gims.append(bmg_data.messages[0x5F].stringParts)
+    # Shovel GIM
+    gims.append(bmg_data.messages[0x60].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Power']))
+    # Bombchus GIM
+    gims.append(bmg_data.messages[0x71].stringParts)
+    # Crimsonine GIM
+    gims.append(bmg_data.messages[0x72].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Flame']))
+    # Boomerang GIM
+    gims.append(bmg_data.messages[0xDC].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Kaitei']))
+    # SW/NW/SE/NE Sea Charts GIM
+    gims.append(bmg_data.messages[0x1].stringParts)
+    gims.append(bmg_data.messages[0x2].stringParts)
+    gims.append(bmg_data.messages[0x3].stringParts)
+    gims.append(bmg_data.messages[0x4].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['WisdomDungeon']))
+    # Hammer GIM
+    gims.append(bmg_data.messages[0x0].stringParts)
+    # King Key GIM
+    gims.append(bmg_data.messages[0x1].stringParts)
+    # Aquanine GIM
+    gims.append(bmg_data.messages[0x2].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Frost']))
+    # Grappling Hook GIM
+    gims.append(bmg_data.messages[0xDB].stringParts)
+    # Azurine GIM
+    gims.append(bmg_data.messages[0xDC].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Hidari']))
+    # Fishing Rod GIM
+    gims.append(bmg_data.messages[0x64].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Torii']))
+    # Cannon GIM
+    gims.append(bmg_data.messages[0x0].stringParts)
+    # Salvage Arm GIM
+    gims.append(bmg_data.messages[0x1].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Sea']))
+    # Sun Key GIM
+    gims.append(bmg_data.messages[0x1B].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Ghost']))
+    # Ghost Key GIM
+    gims.append(bmg_data.messages[0x3E].stringParts)
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['Myou']))
+    # Regal Necklace GIM
+    gims.append(bmg_data.messages[0x0].stringParts)
+
+    # To avoid overwriting non-empty entries
+    if len(gims) > 0xA9 - 0x8A:
+        raise Exception(f'Aborting GIM patching, overflow ({len(gims)}/{0xA9 - 0x8A}).')
+
+    bmg_data = bmg.BMG(input_rom.getFileByName(BMGS['System']))
+    for i, gim in enumerate(gims):
+        bmg_data.messages[0x8A + i].stringParts = gim
+
+    input_rom.setFileByName(BMGS['System'], bmg_data.save())
+
+
 def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.NintendoDSRom:
     """
     Patches a ROM with the given aux data.
@@ -410,4 +482,5 @@ def patch_items(aux_data: ShufflerAuxData, input_rom: rom.NintendoDSRom) -> rom.
     _patch_zmb_actors(aux_data.areas, input_rom)
     _patch_shop_items(aux_data.areas, input_rom)
     _patch_bmg_events(aux_data.areas, input_rom)
+    _patch_system_bmg(input_rom)
     return input_rom

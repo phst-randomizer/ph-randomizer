@@ -140,10 +140,84 @@
             b 0x20ADC02
         .pool
         .endarea
-
-
 .close
 
+.open "../overlay/overlay_0010.bin", 0x20eece0 ; overlay 3 in ghidra
+    .arm
+    ; update "got item" text ids for:
+    .org 0x20ffb90 ; progressive sword
+        .area 0x4, 0x0
+          .byte 0x8a
+        .endarea
+    .org 0x20ffba4 ; bow
+        .area 0x4, 0x0
+          .byte 0x8b
+        .endarea
+    .org 0x20ffbb8 ; shovel
+        .area 0x4, 0x0
+          .byte 0x8c
+        .endarea
+    .org 0x20ffbbc ; bombchus
+        .area 0x4, 0x0
+          .byte 0x8d
+        .endarea
+    ;.org 0xffffff ; crimsonine
+    ;    .area 0x4, 0x0
+    ;      .byte 0x8e
+    ;    .endarea
+    .org 0x20ffbb4 ; boomerang
+        .area 0x4, 0x0
+          .byte 0x8f
+        .endarea
+    .org 0x20ffbd0 ; sea charts (SW/NW/SE/NE)
+        .area 0xf, 0x0
+          .byte 0x90,0,0,0, 0x91,0,0,0, 0x92,0,0,0, 0x93
+        .endarea
+    .org 0x20ffc00 ; hammer
+        .area 0x4, 0x0
+          .byte 0x94
+        .endarea
+    .org 0x20ffc34 ; king key
+        .area 0x4, 0x0
+          .byte 0x95
+        .endarea
+    ;.org 0xffffff ; aquanine
+    ;    .area 0x4, 0x0
+    ;      .byte 0x96
+    ;    .endarea
+    .org 0x20ffc04 ; grappling hook
+        .area 0x4, 0x0
+          .byte 0x97
+        .endarea
+    ;.org 0xffffff ; azurine
+    ;    .area 0x4, 0x0
+    ;      .byte 0x98
+    ;    .endarea
+    .org 0x20ffc14 ; fishing rod
+        .area 0x4, 0x0
+          .byte 0x99
+        .endarea
+    .org 0x20ffc18 ; cannon
+        .area 0x4, 0x0
+          .byte 0x9a
+        .endarea
+    .org 0x20ffc78 ; salvage arm
+        .area 0x4, 0x0
+          .byte 0x9b
+        .endarea
+    ;.org 0xffffff ; sun key
+    ;    .area 0x4, 0x0
+    ;      .byte 0x9c
+    ;    .endarea
+    ;.org 0xffffff ; ghost key
+    ;    .area 0x4, 0x0
+    ;      .byte 0x9d
+    ;    .endarea
+    .org 0x20ffc74 ; regal necklace
+        .area 0x4, 0x0
+          .byte 0x9e
+        .endarea
+.close
 
 .open "../overlay/overlay_0021.bin", 0x02112ba0 ; overlay 9 in ghidra
     .thumb
