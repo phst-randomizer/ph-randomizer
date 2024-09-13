@@ -80,4 +80,11 @@ def test_custom_dig_spot_items(dig_spot_test_emu: DeSmuMEWrapper, request: pytes
         dig_spot_test_emu.wait(200)
         dig_spot_test_emu.touch_input((0, 0), 2)
 
-        dig_spot_test_emu.wait(100)
+        dig_spot_test_emu.wait(200)
+
+        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.wait(200)
+        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.wait(200)
+        dig_spot_test_emu.touch_input((0, 0), 2)
+        dig_spot_test_emu.wait(200)

@@ -82,6 +82,6 @@ def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.Fixt
         # Gems require one more text box to be clicked through.
         # Put this behind an if statement so we don't have to
         # wait extra time for every other item.
-        if item_id in range(0x2D, 0x30):
+        if item_id in range(0x2D, 0x30) or item_id == 0x13:
             chest_test_emu.touch_input((0, 0), 2)
             chest_test_emu.wait(50)
