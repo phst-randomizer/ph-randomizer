@@ -10,7 +10,7 @@ from ph_rando.patcher._util import GD_MODELS, _patch_zmb_actors
 from ph_rando.shuffler.aux_models import Item, SalvageTreasure
 from tests.desmume.desmume_utils import DeSmuMEWrapper, assert_item_is_picked_up, start_first_file
 
-from .conftest import ITEM_MEMORY_ADDRESSES
+from .conftest import ITEM_MEMORY_OFFSETS
 
 
 @pytest.fixture
@@ -44,8 +44,8 @@ def salvage_item_test_emu(
 
 @pytest.mark.parametrize(
     'salvage_item_test_emu',
-    [val for val in ITEM_MEMORY_ADDRESSES.keys()],
-    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
+    [val for val in ITEM_MEMORY_OFFSETS.keys()],
+    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_OFFSETS.keys()],
     indirect=['salvage_item_test_emu'],
 )
 def test_custom_salvage_items(

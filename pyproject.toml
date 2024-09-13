@@ -20,6 +20,7 @@ test = [
     "PyYAML==6.0.1",
     "numpy~=1.26.1",
     "opencv-python~=4.7.0.68",
+    "pytesseract~=0.3.13",
     "pytest~=7.4.2",
     "pytest-repeat~=0.9.1",
     "pytest-xdist~=3.5.0",
@@ -75,5 +76,5 @@ disallow_untyped_defs = false
 # These third-party libraries don't expose type information,
 # so we tell mypy not to try to type-check our usage of them.
 [[tool.mypy.overrides]]
-module = ['cv2.*', 'desmume.*', 'ndspy.*', 'zed.*']
+module = ['cv2.*', 'desmume.*', 'ndspy.*', 'pytesseract.*', 'zed.*']
 ignore_missing_imports = true

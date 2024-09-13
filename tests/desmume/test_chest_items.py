@@ -2,6 +2,7 @@ from pathlib import Path
 
 from desmume.emulator import SCREEN_WIDTH
 from ndspy.rom import NintendoDSRom
+import pytesseract
 import pytest
 
 from ph_rando.common import ShufflerAuxData
@@ -9,7 +10,7 @@ from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS, _patch_zmb_map_objects
 from ph_rando.shuffler.aux_models import Chest, Item
 
-from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
+from .conftest import GOT_ITEM_TEXT, ITEM_MEMORY_OFFSETS, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, start_first_file
 
 
@@ -44,8 +45,8 @@ def chest_test_emu(
 
 @pytest.mark.parametrize(
     'chest_test_emu',
-    [val for val in ITEM_MEMORY_ADDRESSES.keys()],
-    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
+    [val for val in ITEM_MEMORY_OFFSETS.keys()],
+    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_OFFSETS.keys()],
     indirect=['chest_test_emu'],
 )
 def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.FixtureRequest):
@@ -63,8 +64,16 @@ def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.Fixt
         # Open chest
         chest_test_emu.touch_input((SCREEN_WIDTH // 2, 100), 2)
 
-        # Wait for "Got item" text and skip through it
-        chest_test_emu.wait(200)
+        # Wait for "Got item" text
+        chest_test_emu.wait(800)
+
+        # Check if the "got item" text is correct
+        if item_id in GOT_ITEM_TEXT:
+            ocr_text: str = pytesseract.image_to_string(
+                chest_test_emu.screenshot().crop((24, 325, 231, 384))
+            ).replace('\u2019', "'")
+            assert GOT_ITEM_TEXT[item_id] in ocr_text
+
         chest_test_emu.touch_input((0, 0), 2)
         chest_test_emu.wait(200)
         chest_test_emu.touch_input((0, 0), 2)
@@ -73,6 +82,6 @@ def test_custom_chest_items(chest_test_emu: DeSmuMEWrapper, request: pytest.Fixt
         # Gems require one more text box to be clicked through.
         # Put this behind an if statement so we don't have to
         # wait extra time for every other item.
-        if item_id in range(0x2D, 0x30):
+        if item_id in range(0x2D, 0x30) or item_id == 0x13:
             chest_test_emu.touch_input((0, 0), 2)
             chest_test_emu.wait(50)
