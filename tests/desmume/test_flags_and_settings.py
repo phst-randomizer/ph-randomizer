@@ -5,7 +5,7 @@ from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 import pytest
 
-from .conftest import DeSmuMEWrapper
+from .conftest import BASE_FLAG_ADDRESS, DeSmuMEWrapper
 
 RANDO_SETTINGS_BITMAP_ADDR = int(
     re.findall(
@@ -110,8 +110,8 @@ def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool)
     ########################################
 
     # Mercay bridge repaired
-    assert (base_rom_emu.memory.unsigned[0x021B553C + 0x2] & 0x2 == 0x2) is bridge_repaired
+    assert (base_rom_emu.memory.unsigned[BASE_FLAG_ADDRESS + 0x2] & 0x2 == 0x2) is bridge_repaired
     # Talked to Oshus for first time
-    assert base_rom_emu.memory.unsigned[0x021B553C + 0x18] & 0x2 == 0x2
+    assert base_rom_emu.memory.unsigned[BASE_FLAG_ADDRESS + 0x18] & 0x2 == 0x2
     # Saw broken bridge for first time
-    assert base_rom_emu.memory.unsigned[0x021B553C + 0x2C] & 0x1 == 0x1
+    assert base_rom_emu.memory.unsigned[BASE_FLAG_ADDRESS + 0x2C] & 0x1 == 0x1

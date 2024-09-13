@@ -9,7 +9,7 @@ from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS, _patch_zmb_actors
 from ph_rando.shuffler.aux_models import DigSpot, Item
 
-from .conftest import ITEM_MEMORY_ADDRESSES, DeSmuMEWrapper
+from .conftest import ITEM_MEMORY_OFFSETS, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, equip_item, start_first_file, use_equipped_item
 
 
@@ -44,8 +44,8 @@ def dig_spot_test_emu(
 
 @pytest.mark.parametrize(
     'dig_spot_test_emu',
-    [val for val in ITEM_MEMORY_ADDRESSES.keys()],
-    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_ADDRESSES.keys()],
+    [val for val in ITEM_MEMORY_OFFSETS.keys()],
+    ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_OFFSETS.keys()],
     indirect=['dig_spot_test_emu'],
 )
 def test_custom_dig_spot_items(dig_spot_test_emu: DeSmuMEWrapper, request: pytest.FixtureRequest):

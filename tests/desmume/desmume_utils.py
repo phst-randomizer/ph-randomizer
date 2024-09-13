@@ -111,7 +111,10 @@ def start_first_file(desmume_emulator: DeSmuMEWrapper):
 
 
 def get_current_rupee_count(desmume: DeSmuMEWrapper):
-    return int.from_bytes(desmume.memory.unsigned[0x021BA4FE : 0x021BA4FE + 2], 'little')
+    from .conftest import BASE_FLAG_ADDRESS
+
+    addr = BASE_FLAG_ADDRESS + 0x4FC2
+    return int.from_bytes(desmume.memory.unsigned[addr : addr + 2], 'little')
 
 
 # Screen coordinates for each item when the "Items" menu is open
@@ -140,55 +143,63 @@ def use_equipped_item(desmume: DeSmuMEWrapper):
 
 @contextmanager
 def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> Generator:
-    from .conftest import ITEM_MEMORY_ADDRESSES, ItemMemoryAddressType
+    from .conftest import BASE_FLAG_ADDRESS, ITEM_MEMORY_OFFSETS, ItemMemoryAddressType
 
     if isinstance(item, str):
         item = ITEMS[item]
 
     # Get original value (before item is retrieved)
-    original_value = emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
-    if ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.FLAG:
-        assert original_value & ITEM_MEMORY_ADDRESSES[item][1] != ITEM_MEMORY_ADDRESSES[item][1]
-    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
-        original_value = emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
-    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
+    original_value = emu_instance.memory.unsigned[ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS]
+    if ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.FLAG:
+        assert original_value & ITEM_MEMORY_OFFSETS[item][1] != ITEM_MEMORY_OFFSETS[item][1]
+    elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
+        original_value = emu_instance.memory.unsigned[
+            ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS
+        ]
+    elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         original_value = int.from_bytes(
             emu_instance.memory.unsigned[
-                ITEM_MEMORY_ADDRESSES[item][0] : ITEM_MEMORY_ADDRESSES[item][0] + 2
+                ITEM_MEMORY_OFFSETS[item][0]
+                + BASE_FLAG_ADDRESS : ITEM_MEMORY_OFFSETS[item][0]
+                + BASE_FLAG_ADDRESS
+                + 2
             ],
             'little',
         )
     else:
-        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item][2]} not a valid item type.')
+        raise NotImplementedError(f'{ITEM_MEMORY_OFFSETS[item][2]} not a valid item type.')
 
     yield
 
     # Make sure correct item was retrieved.
-    if ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.FLAG:
+    if ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.FLAG:
         assert (
-            emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
-            & ITEM_MEMORY_ADDRESSES[item][1]
-            == ITEM_MEMORY_ADDRESSES[item][1]
+            emu_instance.memory.unsigned[ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS]
+            & ITEM_MEMORY_OFFSETS[item][1]
+            == ITEM_MEMORY_OFFSETS[item][1]
         )
-    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
+    elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
         assert (
-            emu_instance.memory.unsigned[ITEM_MEMORY_ADDRESSES[item][0]]
-            - ITEM_MEMORY_ADDRESSES[item][1]
+            emu_instance.memory.unsigned[ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS]
+            - ITEM_MEMORY_OFFSETS[item][1]
             == original_value
         )
-    elif ITEM_MEMORY_ADDRESSES[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
+    elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         assert (
             int.from_bytes(
                 emu_instance.memory.unsigned[
-                    ITEM_MEMORY_ADDRESSES[item][0] : ITEM_MEMORY_ADDRESSES[item][0] + 2
+                    ITEM_MEMORY_OFFSETS[item][0]
+                    + BASE_FLAG_ADDRESS : ITEM_MEMORY_OFFSETS[item][0]
+                    + BASE_FLAG_ADDRESS
+                    + 2
                 ],
                 'little',
             )
-            - ITEM_MEMORY_ADDRESSES[item][1]
+            - ITEM_MEMORY_OFFSETS[item][1]
             == original_value
         )
     else:
-        raise NotImplementedError(f'{ITEM_MEMORY_ADDRESSES[item][2]} not a valid item type.')
+        raise NotImplementedError(f'{ITEM_MEMORY_OFFSETS[item][2]} not a valid item type.')
 
 
 def get_check_contents(
