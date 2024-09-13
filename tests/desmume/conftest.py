@@ -8,7 +8,7 @@ from time import sleep
 import cv2
 import pytest
 
-from ph_rando.patcher._util import apply_base_patch
+from ph_rando.patcher._util import _patch_system_bmg, apply_base_patch
 
 from .desmume_utils import DeSmuMEWrapper
 
@@ -100,7 +100,12 @@ def rom_path(tmp_path: Path, request: pytest.FixtureRequest) -> Path:
                 sleep(10)
 
     # Apply base patches to ROM
-    apply_base_patch(temp_rom_path.read_bytes()).saveToFile(temp_rom_path)
+    patched_rom = apply_base_patch(temp_rom_path.read_bytes())
+
+    # Patch get item BMGs
+    _patch_system_bmg(patched_rom)
+
+    patched_rom.saveToFile(temp_rom_path)
 
     return temp_rom_path
 
