@@ -84,13 +84,13 @@
 
                 push r0, r1
                 ; get current max health
-                ldr r0, =0x021BA348
+                ldr r0, =0x021BB5E8 ; TODO: this is a heap-allocated address, so we should dynamically compute it instead of hardcoding
                 ldrb r1, [r0]
                 ; add 4 (i.e. a new heart container) to it and set it to that value
                 add r1, r1, 0x4
                 strb r1, [r0]
                 ; set current health to new value (i.e. restore empty heart containers)
-                ldr r0, =0x021BA34A
+                ldr r0, =0x021BB5E8 ; TODO: this is a heap-allocated address, so we should dynamically compute it instead of hardcoding
                 strb r1, [r0]
                 pop r0, r1
 
