@@ -239,7 +239,7 @@ jobs:
         run: cat spoiler.txt
 
       - name: Save spoiler log as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: spoiler.txt
           path: spoiler.txt
@@ -337,7 +337,7 @@ jobs:
             base/out
 
       - name: Save base patch as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
           path: base/out/${{ steps.rom-checksum.outputs.checksum }}.bps
@@ -435,7 +435,7 @@ jobs:
         run: echo "checksum=$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Download base patch from previous workflow
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
@@ -455,7 +455,7 @@ jobs:
 
       - name: Save recordings of failed tests as artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: test_recordings_${{ matrix.module }}_${{ matrix.rom_variant }}
           path: recordings/
@@ -492,7 +492,7 @@ jobs:
         run: pip install tox
 
       - name: Download base patches
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
 
       - name: Move all patch files into the same directory so pyinstaller can find them
         run: |
@@ -506,7 +506,7 @@ jobs:
         id: commit-hash
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
           path: dist/
@@ -565,7 +565,7 @@ jobs:
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Download built executable from previous job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
 
@@ -606,7 +606,7 @@ jobs:
         run: echo "version=$(git describe --tags)" >> $GITHUB_OUTPUT
 
       - name: Download built executables
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
 
       - name: Replace commit hash with version string
         run: |

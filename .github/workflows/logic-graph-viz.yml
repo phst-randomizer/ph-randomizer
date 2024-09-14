@@ -28,7 +28,7 @@ jobs:
         run: python scripts/graphviz.py
 
       - name: Upload PNGs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: graphs
           path: graphs
