@@ -16,6 +16,18 @@ class DeSmuMEWrapper(DeSmuME):
         super().__init__()
         self.window = self.create_sdl_window()
         self.video = None
+        self._event_flag_base_addr: int | None = None
+
+        def _get_base_addr(addr: int, size: int):
+            self._event_flag_base_addr = self.memory.register_arm9.lr - 0x30
+
+        self.memory.register_exec(0x2097660, _get_base_addr)
+
+    @property
+    def event_flag_base_addr(self) -> int:
+        if self._event_flag_base_addr is None:
+            raise ValueError('Event flag base address not set.')
+        return self._event_flag_base_addr
 
     def open(self, rom_path: str):
         super().open(rom_path)
@@ -111,9 +123,7 @@ def start_first_file(desmume_emulator: DeSmuMEWrapper):
 
 
 def get_current_rupee_count(desmume: DeSmuMEWrapper):
-    from .conftest import BASE_FLAG_ADDRESS
-
-    addr = BASE_FLAG_ADDRESS + 0x4FC2
+    addr = desmume.event_flag_base_addr + 0x4FC2
     return int.from_bytes(desmume.memory.unsigned[addr : addr + 2], 'little')
 
 
@@ -143,25 +153,27 @@ def use_equipped_item(desmume: DeSmuMEWrapper):
 
 @contextmanager
 def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> Generator:
-    from .conftest import BASE_FLAG_ADDRESS, ITEM_MEMORY_OFFSETS, ItemMemoryAddressType
+    from .conftest import ITEM_MEMORY_OFFSETS, ItemMemoryAddressType
 
     if isinstance(item, str):
         item = ITEMS[item]
 
     # Get original value (before item is retrieved)
-    original_value = emu_instance.memory.unsigned[ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS]
+    original_value = emu_instance.memory.unsigned[
+        ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr
+    ]
     if ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.FLAG:
         assert original_value & ITEM_MEMORY_OFFSETS[item][1] != ITEM_MEMORY_OFFSETS[item][1]
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
         original_value = emu_instance.memory.unsigned[
-            ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS
+            ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr
         ]
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         original_value = int.from_bytes(
             emu_instance.memory.unsigned[
                 ITEM_MEMORY_OFFSETS[item][0]
-                + BASE_FLAG_ADDRESS : ITEM_MEMORY_OFFSETS[item][0]
-                + BASE_FLAG_ADDRESS
+                + emu_instance.event_flag_base_addr : ITEM_MEMORY_OFFSETS[item][0]
+                + emu_instance.event_flag_base_addr
                 + 2
             ],
             'little',
@@ -174,13 +186,17 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
     # Make sure correct item was retrieved.
     if ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.FLAG:
         assert (
-            emu_instance.memory.unsigned[ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS]
+            emu_instance.memory.unsigned[
+                ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr
+            ]
             & ITEM_MEMORY_OFFSETS[item][1]
             == ITEM_MEMORY_OFFSETS[item][1]
         )
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_8_BIT:
         assert (
-            emu_instance.memory.unsigned[ITEM_MEMORY_OFFSETS[item][0] + BASE_FLAG_ADDRESS]
+            emu_instance.memory.unsigned[
+                ITEM_MEMORY_OFFSETS[item][0] + emu_instance.event_flag_base_addr
+            ]
             - ITEM_MEMORY_OFFSETS[item][1]
             == original_value
         )
@@ -189,8 +205,8 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
             int.from_bytes(
                 emu_instance.memory.unsigned[
                     ITEM_MEMORY_OFFSETS[item][0]
-                    + BASE_FLAG_ADDRESS : ITEM_MEMORY_OFFSETS[item][0]
-                    + BASE_FLAG_ADDRESS
+                    + emu_instance.event_flag_base_addr : ITEM_MEMORY_OFFSETS[item][0]
+                    + emu_instance.event_flag_base_addr
                     + 2
                 ],
                 'little',

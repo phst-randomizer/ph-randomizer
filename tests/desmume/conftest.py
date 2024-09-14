@@ -162,7 +162,6 @@ ITEM_MEMORY_OFFSETS: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     0x74: (0xF, 0x80, ItemMemoryAddressType.FLAG),  # aquanine
     # TODO: Add rest of items
 }
-BASE_FLAG_ADDRESS = 0x21B67DC  # TODO: dynamically find this address
 
 GOT_ITEM_TEXT: dict[int, str] = {
     0x2: "You got a green Rupee!\nIt's worth 1 Rupee!\n",
