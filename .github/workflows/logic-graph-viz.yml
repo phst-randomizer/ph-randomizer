@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version-file: '.python-version'
           check-latest: true
@@ -28,7 +28,7 @@ jobs:
         run: python scripts/graphviz.py
 
       - name: Upload PNGs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: graphs
           path: graphs
