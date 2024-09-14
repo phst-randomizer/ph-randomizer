@@ -16,18 +16,13 @@ class DeSmuMEWrapper(DeSmuME):
         super().__init__()
         self.window = self.create_sdl_window()
         self.video = None
-        self._event_flag_base_addr: int | None = None
-
-        def _get_base_addr(addr: int, size: int):
-            self._event_flag_base_addr = self.memory.register_arm9.lr - 0x30
-
-        self.memory.register_exec(0x2097660, _get_base_addr)
 
     @property
     def event_flag_base_addr(self) -> int:
-        if self._event_flag_base_addr is None:
+        addr = int.from_bytes(self.memory.unsigned[0x27E0F74:0x27E0F78], 'little')
+        if addr == 0:
             raise ValueError('Event flag base address not set.')
-        return self._event_flag_base_addr
+        return addr
 
     def open(self, rom_path: str):
         super().open(rom_path)
