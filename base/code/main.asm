@@ -62,7 +62,7 @@
                 ; This is just an instance of an `Overlay` struct, see `ph.h` for its definition
                 @@ExtraOverlay:
                     .word 62
-                    .word 0x21FF2A0
+                    .word 0x23FA920
                     .word 1024
                     .word 0
                     .word 0
@@ -427,8 +427,8 @@
 ; Note: this is an extra overlay added by the randomizer.
 ; It is not present in the original rom, and must be added prior
 ; to executing this ARMIPS patch.
-.open "../overlay/overlay_0062.bin", 0x21FF2A0
-    .org 0x21FF2A0
+.open "../overlay/overlay_0062.bin", 0x23FA920
+    .org 0x23FA920
         .arm
         .importobj "code/faster_boat.o"
         .importobj "code/fixed_random_treasure_in_shop.o"

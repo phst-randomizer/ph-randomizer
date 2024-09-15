@@ -6,7 +6,7 @@ from ndspy import code, codeCompression, fnt, lz10, narc
 from ndspy.rom import NintendoDSRom
 
 NEW_OVERLAY_ADDRESS = (
-    0x21FF2A0  # some empty space in the ARM9 RAM area. TODO: verify this is safe to use
+    0x23FA920  # some empty space in the ARM9 RAM area. TODO: verify this is safe to use
 )
 NEW_OVERLAY_SIZE = 2**10  # let's go with 1KB for now
 
