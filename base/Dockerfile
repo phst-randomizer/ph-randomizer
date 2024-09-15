@@ -32,7 +32,6 @@ RUN pip install -r requirements.txt
 # Add needed source files to the docker build
 ADD data/* /app/
 ADD code/* /app/code/
-ADD fix_y9.py /app
 ADD extract_rom.py /app
 ADD rebuild_rom.py /app
 ADD Makefile /app
