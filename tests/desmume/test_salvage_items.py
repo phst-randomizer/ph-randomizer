@@ -84,7 +84,9 @@ def test_custom_salvage_items(
     salvage_item_test_emu.wait(200)
 
     # Set salvage arm health to 255 so we don't have to worry about running out of health
-    salvage_item_test_emu.memory.unsigned[0x021F56E0] = 0xFF
+    salvage_item_test_emu.memory.unsigned[salvage_item_test_emu.event_flag_base_addr + 0x401A4] = (
+        0xFF
+    )
 
     # Pull salvage icon down until we get to the chest
     salvage_item_test_emu.input.touch_set_pos(125, 170)
