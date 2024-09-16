@@ -32,7 +32,7 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
     base_rom_emu.wait(200)
 
     # Approach oshus
-    base_rom_emu.touch_input((SCREEN_WIDTH // 2, 0), 80)
+    base_rom_emu.touch_input((SCREEN_WIDTH // 2, 0), 75)
     base_rom_emu.wait(20)
     base_rom_emu.input.touch_set_pos(125, 80)
     base_rom_emu.wait(1)
@@ -49,7 +49,7 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
 
     # Leave Oshus's house
     base_rom_emu.touch_input((SCREEN_WIDTH // 2, SCREEN_HEIGHT), 120)
-    base_rom_emu.wait(150)
+    base_rom_emu.wait(200)
 
     # Walk over to Mercay NPC with rocks in his yard
     base_rom_emu.touch_input((SCREEN_WIDTH // 2, SCREEN_HEIGHT), 35)
