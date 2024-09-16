@@ -20,16 +20,19 @@ def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
 
     # Enter oshus's house
     base_rom_emu.wait(1)
-    base_rom_emu.touch_input((int(SCREEN_WIDTH * (3 / 4)), 0), 200)
-    base_rom_emu.wait(1)
-    base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 50)
-    base_rom_emu.wait(1)
-    base_rom_emu.touch_input((SCREEN_WIDTH // 2, 0), 60)
-    base_rom_emu.touch_input(((SCREEN_WIDTH // 2) - 20, 0), 100)
-    base_rom_emu.wait(50)
+    base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 60)
+    base_rom_emu.input.touch_release()
+    base_rom_emu.wait(10)
+    base_rom_emu.touch_input(((SCREEN_WIDTH // 2) - 18, 0), 170)
+    base_rom_emu.input.touch_release()
+    base_rom_emu.wait(10)
+    base_rom_emu.touch_input((SCREEN_WIDTH, SCREEN_HEIGHT // 2), 100)
+    base_rom_emu.wait(10)
+    base_rom_emu.touch_input(((SCREEN_WIDTH // 2) - 30, 0), 170)
+    base_rom_emu.wait(200)
 
     # Approach oshus
-    base_rom_emu.touch_input((SCREEN_WIDTH // 2, 0), 120)
+    base_rom_emu.touch_input((SCREEN_WIDTH // 2, 0), 80)
     base_rom_emu.wait(20)
     base_rom_emu.input.touch_set_pos(125, 80)
     base_rom_emu.wait(1)
