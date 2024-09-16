@@ -80,7 +80,7 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
 
     # Now, add the new overlay
     new_overlay_file = overlay_directory / f'overlay_{str(new_overlay_number).rjust(4, "0")}.bin'
-    new_overlay_data = new_overlay_file.read_bytes().rstrip(b'\x00')  # trim padding
+    new_overlay_data = new_overlay_file.read_bytes()
 
     if len(new_overlay_data) > NEW_OVERLAY_SIZE:
         raise ValueError(

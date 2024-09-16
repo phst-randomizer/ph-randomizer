@@ -63,12 +63,12 @@
                 @@ExtraOverlay:
                     .word 62
                     .word 0x23C0900
-                    .word 1024
+                    .word 32512
                     .word 0
                     .word 0
                     .word 0
                     .word 2836
-                    .word 1024
+                    .word 32512
 
             .thumb
             @extend_give_item_function:
@@ -429,14 +429,16 @@
 ; to executing this ARMIPS patch.
 .open "../overlay/overlay_0062.bin", 0x23C0900
     .org 0x23C0900
-        .arm
-        .importobj "code/faster_boat.o"
-        .importobj "code/fixed_random_treasure_in_shop.o"
-        .importobj "code/progressive_sword_check.o"
-        .importobj "code/rando_settings.o"
-        .importobj "code/get_item_model.o"
-        .importobj "code/set_initial_flags.o"
-        .importobj "code/spawn_custom_freestanding_item.o"
-        .importobj "code/custom_salvage_item.o"
-        .importobj "code/extend_give_item_function.o"
+        .area 32512, 0xEE
+            .arm
+            .importobj "code/faster_boat.o"
+            .importobj "code/fixed_random_treasure_in_shop.o"
+            .importobj "code/progressive_sword_check.o"
+            .importobj "code/rando_settings.o"
+            .importobj "code/get_item_model.o"
+            .importobj "code/set_initial_flags.o"
+            .importobj "code/spawn_custom_freestanding_item.o"
+            .importobj "code/custom_salvage_item.o"
+            .importobj "code/extend_give_item_function.o"
+        .endarea
 .close
