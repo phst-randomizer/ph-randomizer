@@ -7,14 +7,14 @@ RUN cmake .
 RUN make
 
 # Download and compile Floating IPS patcher
-FROM python:3.12 as compile_flips
+FROM python:3.12 AS compile_flips
 RUN apt-get update && apt-get install -y git g++ build-essential libgtk-3-dev pkg-config
 RUN git clone --depth 1 https://github.com/Alcaro/Flips.git
 RUN chmod +x Flips/make-linux.sh
 RUN cd Flips && ./make-linux.sh
 
 # Build base patch
-FROM python:3.12 as build
+FROM python:3.12 AS build
 WORKDIR /app
 # Copy compiled armips, and flips binaries from previous stages
 COPY --from=compile_armips /armips/armips /app
