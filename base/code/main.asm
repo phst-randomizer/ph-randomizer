@@ -3,7 +3,6 @@
 .erroronwarning on
 
 .include "ph.asm"
-.include "_data.asm"
 
 .open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
     .arm
@@ -12,34 +11,13 @@
         .area 0x301, 0xFF
             .fill 0xA, 0x0 ; bitmap for randomizer settings
 
-            .arm
-            .importobj "code/faster_boat.o"
-            .importobj "code/fixed_random_treasure_in_shop.o"
-            .importobj "code/progressive_sword_check.o"
-            .importobj "code/rando_settings.o"
             .include "_island_shop_files.asm"
-
-            .arm
-            .importobj "code/get_item_model.o"
-
         .pool
         .endarea
 
     .org 0x54894 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x228, 0xFF
-            .arm
-            .importobj "code/set_initial_flags.o"
-            .importobj "code/spawn_custom_freestanding_item.o"
-
-            .arm
-            .align
-            @get_item_model:
-                push lr
-                ldr r3, =org(item_flags)
-                bl get_item_model
-                pop pc
-
             .arm
             @init_flags:
                 sub r0, lr, 0x30 ; set_initial_flags() function parameter
@@ -69,39 +47,49 @@
                 ; with the parameters that we have set here
                 b 0x212f3d8
 
-            @custom_salvage_item:
+            .thumb
+            @load_extra_overlay:
+                ; make original function call
+                bl 0x202FF40
+
+                ; load new overlay
+                ldr r0, =org(@@ExtraOverlay)
+                bl LoadOverlay
+
+                ; original instruction. jumps back to normal game code
+                pop r3, r4, r5, r6, r7, pc
+
+                ; This is just an instance of an `Overlay` struct, see `ph.h` for its definition
+                @@ExtraOverlay:
+                    .word 62
+                    .word 0x23C0900
+                    .word 1024
+                    .word 0
+                    .word 0
+                    .word 0
+                    .word 2836
+                    .word 1024
+
+            .thumb
+            @extend_give_item_function:
                 push lr
+                ; preserve scratch registers since we're interrupting a running function
+                push r0, r1, r2, r3
+                blx extend_give_item_function
+                pop r0, r1, r2, r3
 
-                ; Unset most significant bit of the value specified in the ZMB,
-                ; so we can get the real item id that we want to spawn
-                bic r1, r0, 0x8000
-
-                ; Check if it's a heart container. If so, manually increment the player's max
-                ; health by 4. For some reason, this doesn't happen automatically when a
-                ; heart container is found in a salvage chest.
-                cmp r1, 0xa
-                bne @@end
-
-                push r0, r1
-                ; get current max health
-                ldr r0, =0x021BB5E8 ; TODO: this is a heap-allocated address, so we should dynamically compute it instead of hardcoding
-                ldrb r1, [r0]
-                ; add 4 (i.e. a new heart container) to it and set it to that value
-                add r1, r1, 0x4
-                strb r1, [r0]
-                ; set current health to new value (i.e. restore empty heart containers)
-                ldr r0, =0x021BB5E8 ; TODO: this is a heap-allocated address, so we should dynamically compute it instead of hardcoding
-                strb r1, [r0]
-                pop r0, r1
-
-                @@end:
-                ldr r0, =0x2146470
+                ; original instructions. jumps back to normal game code
+                ldr r0, =0x20ae244
+                mov r1, 0x7d
                 ldr r0, [r0]
-                str r1, [r0, 0xEC]
-
                 pop pc
-
         .pool
+        .endarea
+
+    .org 0x202ffec
+        .thumb
+        .area 0x6, 0x00
+            bl @load_extra_overlay
         .endarea
 .close
 
@@ -135,14 +123,21 @@
             add r1, sp, 0x8c ; get dest address for nsbmd
             add r2, sp, 0xc ; get dest address for nsbtx
 
-            blx @get_item_model
+            blx get_item_model
 
             b 0x20ADC02
         .pool
         .endarea
+
+    .thumb
+    .org 0x20ae1c2
+        .area 0x6, 0x00
+            bl @extend_give_item_function
+        .endarea
+
 .close
 
-.open "../overlay/overlay_0010.bin", 0x20eece0 ; overlay 3 in ghidra
+.open "../overlay/overlay_0003.bin", 0x20eece0
     .arm
     ; update "got item" text ids for:
     .org 0x20ffb90 ; progressive sword
@@ -219,7 +214,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0021.bin", 0x02112ba0 ; overlay 9 in ghidra
+.open "../overlay/overlay_0009.bin", 0x02112ba0
     .thumb
     .org 0x211c09a
         ; This overrides the routine that is in charge of spawning the correct 3D model
@@ -240,7 +235,7 @@
 .close
 
 
-.open "../overlay/overlay_0029.bin", 0x0211F5C0 ; overlay 14 in ghidra
+.open "../overlay/overlay_0014.bin", 0x0211F5C0
     .arm
     .org 0x213b0e8
         .area 0x74, 0xFF
@@ -355,7 +350,7 @@
 .close
 
 
-.open "../overlay/overlay_0031.bin", 0x0211F5C0 ; overlay 15 in ghidra
+.open "../overlay/overlay_0015.bin", 0x0211F5C0
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
@@ -364,12 +359,12 @@
     ; Patch salvage item item-giving function so that any item can be given
     .org 0x2146430
         .area 0xC, 0x0
-            bl @custom_salvage_item
+            bl custom_salvage_item
         .endarea
 .close
 
 
-.open "../overlay/overlay_0037.bin", 0x0215b400
+.open "../overlay/overlay_0018.bin", 0x0215b400
     .arm
     .org 0x216278c
         .area 0x4, 0xff
@@ -377,7 +372,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0060.bin", 0x0217bce0
+.open "../overlay/overlay_0031.bin", 0x0217bce0
     .arm
 
     ; Make the "random treasure" in shops a fixed item (i.e. "unrandomize" it)
@@ -427,4 +422,21 @@
         .area 0x4
             .word org(bcbagM_nsbtx)
         .endarea
+.close
+
+; Note: this is an extra overlay added by the randomizer.
+; It is not present in the original rom, and must be added prior
+; to executing this ARMIPS patch.
+.open "../overlay/overlay_0062.bin", 0x23C0900
+    .org 0x23C0900
+        .arm
+        .importobj "code/faster_boat.o"
+        .importobj "code/fixed_random_treasure_in_shop.o"
+        .importobj "code/progressive_sword_check.o"
+        .importobj "code/rando_settings.o"
+        .importobj "code/get_item_model.o"
+        .importobj "code/set_initial_flags.o"
+        .importobj "code/spawn_custom_freestanding_item.o"
+        .importobj "code/custom_salvage_item.o"
+        .importobj "code/extend_give_item_function.o"
 .close

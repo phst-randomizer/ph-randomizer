@@ -157,6 +157,7 @@ ITEM_MEMORY_OFFSETS: dict[int, tuple[int, int, ItemMemoryAddressType]] = {
     # 0x39: (0xE, 0x40, ItemMemoryAddressType.FLAG),  # freebie card
     # 0x3A: (0xE, 0x80, ItemMemoryAddressType.FLAG),  # compliment card
     # 0x3B: (0xE, 0x20, ItemMemoryAddressType.FLAG),  # complimentary card
+    0x45: (0x50CC, 0x20, ItemMemoryAddressType.FLAG),  # phantom sword
     0x72: (0xF, 0x40, ItemMemoryAddressType.FLAG),  # crimsonine
     0x73: (0xF, 0x20, ItemMemoryAddressType.FLAG),  # azurine
     0x74: (0xF, 0x80, ItemMemoryAddressType.FLAG),  # aquanine
