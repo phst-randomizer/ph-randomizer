@@ -8,7 +8,7 @@ from ndspy.rom import NintendoDSRom
 NEW_OVERLAY_ADDRESS = (
     0x23C0900  # some empty space in the ARM9 RAM area. TODO: verify this is safe to use
 )
-NEW_OVERLAY_SIZE = 2**10  # let's go with 1KB for now
+NEW_OVERLAY_SIZE = 32512
 
 
 NPC_MODELS_TO_COPY = [
@@ -81,6 +81,12 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
     # Now, add the new overlay
     new_overlay_file = overlay_directory / f'overlay_{str(new_overlay_number).rjust(4, "0")}.bin'
     new_overlay_data = new_overlay_file.read_bytes().rstrip(b'\x00')  # trim padding
+
+    if len(new_overlay_data) > NEW_OVERLAY_SIZE:
+        raise ValueError(
+            f'Overlay {new_overlay_file} is too large: {len(new_overlay_data)} bytes '
+            f'(max: {NEW_OVERLAY_SIZE} bytes)'
+        )
 
     new_overlay = code.Overlay(
         data=new_overlay_data,
