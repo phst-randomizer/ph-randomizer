@@ -344,7 +344,9 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
         )
         arm9_executable_o = (
-            arm9_executable_o[:offset] + b' ' * len(new_data) + arm9_executable_o[offset + len(new_data) :]
+            arm9_executable_o[:offset]
+            + b' ' * len(new_data)
+            + arm9_executable_o[offset + len(new_data) :]
         )
 
         offset = arm9_executable_o.index(f'Player/get/{original_model_name}.nsbtx'.encode('ascii'))
@@ -353,7 +355,9 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
         )
         arm9_executable_o = (
-            arm9_executable_o[:offset] + b' ' * len(new_data) + arm9_executable_o[offset + len(new_data) :]
+            arm9_executable_o[:offset]
+            + b' ' * len(new_data)
+            + arm9_executable_o[offset + len(new_data) :]
         )
 
         try:
