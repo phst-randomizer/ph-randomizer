@@ -1,5 +1,6 @@
 from collections.abc import Generator, Iterable
 from contextlib import contextmanager
+from copy import copy
 import hashlib
 from io import BytesIO
 import logging
@@ -301,7 +302,7 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
     # Load arm9.bin and overlay table
     arm9_executable = bytearray(code.MainCodeFile(input_rom.arm9, 0x02000000).save(compress=False))
-    arm9_executable_o = arm9_executable
+    arm9_executable_o = copy(arm9_executable)
     overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
 
     for name, shop_item in items.items():
