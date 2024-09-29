@@ -135,10 +135,10 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
                 raise TimeoutError('BirdsEye did not connect within 30 seconds')
             try:
                 with socket.create_connection((self._host, self._port), timeout=5):
-                    logger.debug(f"Server {self._host}:{self._port} is available!")
+                    logger.debug(f'Server {self._host}:{self._port} is available!')
                     break
             except (TimeoutError, ConnectionRefusedError):
-                logger.debug(f"Waiting for server {self._host}:{self._port}...")
+                logger.debug(f'Waiting for server {self._host}:{self._port}...')
                 time.sleep(1)
 
         self._client = bird.Client(self._host, self._port)
@@ -260,7 +260,8 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
 
         battery_file_src = Path(__file__).parent / 'test_data' / f'{test_name}.dsv'
 
-        # For some reason, MelonDS strips underscores from the rom name when it saves the battery file.
+        # For some reason, MelonDS strips underscores from
+        # the rom name when it saves the battery file.
         battery_file_dest = (
             battery_file_location
             / f'{Path(rom_path.name.replace("_", " ")).with_suffix(".SaveRAM")}'

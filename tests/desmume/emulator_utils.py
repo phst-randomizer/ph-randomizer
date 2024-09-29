@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from pathlib import Path
@@ -11,80 +11,102 @@ from ph_rando.shuffler.aux_models import Area
 
 
 class AbstractEmulatorWrapper(ABC):
+    video = None
+
+    @abstractmethod
     def open(self, rom_path: str):
         raise NotImplementedError
 
+    @abstractmethod
     def destroy(self):
         raise NotImplementedError
 
+    @abstractmethod
     def wait(self, frames: int):
         raise NotImplementedError
 
+    @abstractmethod
     def button_input(self, buttons: int | list[int], frames: int = 1):
         raise NotImplementedError
 
+    @abstractmethod
     def touch_set(self, x: int, y: int):
         raise NotImplementedError
 
+    @abstractmethod
     def touch_release(self):
         raise NotImplementedError
 
+    @abstractmethod
     def touch_set_and_release(self, position: tuple[int, int], frames: int = 1):
         raise NotImplementedError
 
+    @abstractmethod
     def read_memory(self, start: int, stop: int | None = None):
         raise NotImplementedError
 
+    @abstractmethod
     def write_memory(self, address: int, data: bytes | int):
         raise NotImplementedError
 
+    @abstractmethod
     def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         raise NotImplementedError
 
+    @abstractmethod
     def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         raise NotImplementedError
 
+    @abstractmethod
     def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         raise NotImplementedError
 
     @property
+    @abstractmethod
     def r0(self):
         raise NotImplementedError
 
     @r0.setter
+    @abstractmethod
     def r0(self, value: int):
         raise NotImplementedError
 
     @property
+    @abstractmethod
     def r1(self):
         raise NotImplementedError
 
     @r1.setter
+    @abstractmethod
     def r1(self, value: int):
         raise NotImplementedError
 
     @property
+    @abstractmethod
     def r2(self):
         raise NotImplementedError
 
     @r2.setter
+    @abstractmethod
     def r2(self, value: int):
         raise NotImplementedError
 
     @property
+    @abstractmethod
     def r3(self):
         raise NotImplementedError
 
     @r3.setter
+    @abstractmethod
     def r3(self, value: int):
         raise NotImplementedError
-    
-    @property
-    def video(self):
+
+    @abstractmethod
+    def reset(self):
         raise NotImplementedError
-    
-    @video.setter
-    def video(self, value):
+
+    @abstractmethod
+    def load_battery_file(self, test_name: str, rom_path: Path):
         raise NotImplementedError
 
     @property
@@ -94,15 +116,9 @@ class AbstractEmulatorWrapper(ABC):
             raise ValueError('Event flag base address not set.')
         return addr
 
-    def reset(self):
-        raise NotImplementedError
-
-    def load_battery_file(self, test_name: str, rom_path: Path):
-        raise NotImplementedError
-
     # Optional methods
     def stop(self):
-        pass
+        return
 
 
 def start_first_file(desmume_emulator: AbstractEmulatorWrapper):
