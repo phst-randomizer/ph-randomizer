@@ -53,7 +53,10 @@ def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool)
             base_rom_emu.wait(400)
             base_rom_emu.reset()
 
-    base_rom_emu.write_memory(RANDO_SETTINGS_BITMAP_ADDR, base_rom_emu.read_memory(RANDO_SETTINGS_BITMAP_ADDR) | int(bridge_repaired))
+    base_rom_emu.write_memory(
+        RANDO_SETTINGS_BITMAP_ADDR,
+        base_rom_emu.read_memory(RANDO_SETTINGS_BITMAP_ADDR) | int(bridge_repaired),
+    )
 
     # Touch file
     base_rom_emu.touch_set_and_release((130, 70), 0)
@@ -110,7 +113,9 @@ def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool)
     ########################################
 
     # Mercay bridge repaired
-    assert (base_rom_emu.read_memory(base_rom_emu.event_flag_base_addr + 0x2) & 0x2 == 0x2) is bridge_repaired
+    assert (
+        base_rom_emu.read_memory(base_rom_emu.event_flag_base_addr + 0x2) & 0x2 == 0x2
+    ) is bridge_repaired
     # Talked to Oshus for first time
     assert base_rom_emu.read_memory(base_rom_emu.event_flag_base_addr + 0x18) & 0x2 == 0x2
     # Saw broken bridge for first time

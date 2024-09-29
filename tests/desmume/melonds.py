@@ -1,27 +1,27 @@
 from collections.abc import Callable
 import hashlib
 import json
+import logging
 import os
 from pathlib import Path
 import shutil
 import socket
 import subprocess
-import time
 from tempfile import TemporaryDirectory
+import time
+
 import birdseyelib as bird
 import pytest
-import logging
-from functools import cached_property
 
 from .desmume_utils import AbstractEmulatorWrapper
-
 
 logger = logging.getLogger(__name__)
 
 EMUHAWK_PATH = Path(
-    os.environ.get('EMUHAWK_PATH', 'C:\\Users\\Mike\\Downloads\\BizHawk-2.9.1-win-x64_2\\EmuHawk.exe')
+    os.environ.get(
+        'EMUHAWK_PATH', 'C:\\Users\\Mike\\Downloads\\BizHawk-2.9.1-win-x64_2\\EmuHawk.exe'
+    )
 )
-
 
 
 class MelonDSWrapper(AbstractEmulatorWrapper):
@@ -36,7 +36,6 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
         self._bizhawk_directory = None
         self._rom_path: str | None = None
         self.video = None
-
 
     def __del__(self):
         self._cleanup_bizhawk_directory()
@@ -61,7 +60,9 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
         try:
             self._bizhawk_directory.cleanup()
         except Exception:
-            logger.warning(f'Failed to cleanup {self._bizhawk_directory.name} due to PermissionError, skipping')
+            logger.warning(
+                f'Failed to cleanup {self._bizhawk_directory.name} due to PermissionError, skipping'
+            )
 
     def open(self, rom_path: str):
         # Create a temporary directory to store BizHawk files
@@ -93,7 +94,6 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
         birds_eye_config_file = Path(self._bizhawk_directory.name) / 'birdconfig.txt'
         birds_eye_config_file.touch(exist_ok=False)
         birds_eye_config_file.write_text(birds_eye_config, newline='\n')
-        
 
         # Delete the gamedb file to force BizHawk to use the ROM name as the SaveRAM
         # filename instead of the internal name
@@ -103,12 +103,16 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
 
         # Add BirdsEye to the list of trusted external tools
         logger.debug('Adding BirdsEye to the list of trusted external tools')
-        birds_eye_external_tool = Path(self._bizhawk_directory.name) / 'ExternalTools' / 'BirdsEye.dll'
+        birds_eye_external_tool = (
+            Path(self._bizhawk_directory.name) / 'ExternalTools' / 'BirdsEye.dll'
+        )
         be_tool_sha1 = hashlib.sha1(birds_eye_external_tool.read_bytes()).hexdigest().upper()
         emuhawk_config = json.loads(emuhawk_config_file_src.read_text())
         if 'TrustedExtTools' not in emuhawk_config:
             emuhawk_config['TrustedExtTools'] = {}
-        emuhawk_config['TrustedExtTools'][str(birds_eye_external_tool.resolve())] = f'SHA1:{be_tool_sha1}'
+        emuhawk_config['TrustedExtTools'][
+            str(birds_eye_external_tool.resolve())
+        ] = f'SHA1:{be_tool_sha1}'
         emuhawk_config_file_dest.write_text(json.dumps(emuhawk_config))
 
         # Launch BizHawk with the ROM and BirdsEye
@@ -119,7 +123,9 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
             '--open-ext-tool-dll=BirdsEye',
             f'--config={str(emuhawk_config_file_dest.resolve())}',
         ]
-        self._bizhawk_process = subprocess.Popen(emuhawk_args, cwd=Path(self._bizhawk_directory.name))
+        self._bizhawk_process = subprocess.Popen(
+            emuhawk_args, cwd=Path(self._bizhawk_directory.name)
+        )
 
         # Wait for BirdsEye to connect
         logger.debug(f'Waiting for BirdsEye to connect on port {self._port}')
@@ -193,12 +199,12 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
             self._memory.add_address_range(start, stop)
         self._memory.request_memory()
         self._client.advance_frame()
-        
+
         memory = self._memory.get_memory()
 
         if stop is None:
             return memory[hex(start)]
-        
+
         b = bytearray()
         for address in range(start, stop):
             b.append(memory[hex(address)])

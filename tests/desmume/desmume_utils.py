@@ -1,103 +1,104 @@
+from abc import ABC
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
-from pathlib import Path
-import struct
 import os
-from abc import ABC
+from pathlib import Path
 import shutil
+import struct
 import sys
 from time import sleep
+
 import cv2
 from desmume.controls import keymask
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH, DeSmuME
 import numpy as np
-import pytest
 
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler.aux_models import Area
 
+
 class AbstractEmulatorWrapper(ABC):
     def open(self, rom_path: str):
         raise NotImplementedError
-    
+
     def destroy(self):
         raise NotImplementedError
-    
+
     def wait(self, frames: int):
         raise NotImplementedError
-    
+
     def button_input(self, buttons: int | list[int], frames: int = 1):
         raise NotImplementedError
-    
+
     def touch_set(self, x: int, y: int):
         raise NotImplementedError
 
     def touch_release(self):
         raise NotImplementedError
-    
+
     def touch_set_and_release(self, position: tuple[int, int], frames: int = 1):
         raise NotImplementedError
-    
+
     def read_memory(self, start: int, stop: int | None = None):
         raise NotImplementedError
-    
+
     def write_memory(self, address: int, data: bytes | int):
         raise NotImplementedError
-    
+
     def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None]):
         raise NotImplementedError
-    
+
     def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None]):
         raise NotImplementedError
-    
+
     def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None]):
         raise NotImplementedError
-    
+
     @property
     def r0(self):
         raise NotImplementedError
-    
+
     @r0.setter
     def r0(self, value: int):
         raise NotImplementedError
-    
+
     @property
     def r1(self):
         raise NotImplementedError
-    
+
     @r1.setter
     def r1(self, value: int):
         raise NotImplementedError
-    
+
     @property
     def r2(self):
         raise NotImplementedError
-    
+
     @r2.setter
     def r2(self, value: int):
         raise NotImplementedError
-    
+
     @property
     def r3(self):
         raise NotImplementedError
-    
+
     @r3.setter
     def r3(self, value: int):
         raise NotImplementedError
-    
+
     @property
     def event_flag_base_addr(self) -> int:
         addr = int.from_bytes(self.read_memory(start=0x27E0F74, stop=0x27E0F78), 'little')
         if addr == 0:
             raise ValueError('Event flag base address not set.')
         return addr
-    
+
     def reset(self):
         raise NotImplementedError
-    
+
     def load_battery_file(self, test_name: str, rom_path: Path):
         raise NotImplementedError
-    
+
     # Optional methods
     def stop(self):
         pass
@@ -177,49 +178,49 @@ class DeSmuMEWrapper(AbstractEmulatorWrapper):
         if stop is None:
             stop = start
         return self._emulator.memory.read(start, stop, 1, False)
-    
+
     def write_memory(self, start: int, data: bytes | int):
         if isinstance(data, int):
             return self._emulator.memory.write(start, start, 1, bytes([data]))
         return self._emulator.memory.write(start, start + len(data), 1, data)
-    
+
     def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None]):
         return self._emulator.memory.register_read(address=address, callback=callback)
-    
+
     def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None]):
         return self._emulator.memory.register_write(address=address, callback=callback)
-    
+
     def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None]):
         return self._emulator.memory.register_exec(address=address, callback=callback)
-    
+
     @property
     def r0(self):
         return self._emulator.memory.register_arm9.r0
-    
+
     @r0.setter
     def r0(self, value: int):
         self._emulator.memory.register_arm9.r0 = value
-    
+
     @property
     def r1(self):
         return self._emulator.memory.register_arm9.r1
-    
+
     @r1.setter
     def r1(self, value: int):
         self._emulator.memory.register_arm9.r1 = value
-    
+
     @property
     def r2(self):
         return self._emulator.memory.register_arm9.r2
-    
+
     @r2.setter
     def r2(self, value: int):
         self._emulator.memory.register_arm9.r2 = value
-    
+
     @property
     def r3(self):
         return self._emulator.memory.register_arm9.r3
-    
+
     @r3.setter
     def r3(self, value: int):
         self._emulator.memory.register_arm9.r3 = value
@@ -254,15 +255,12 @@ class DeSmuMEWrapper(AbstractEmulatorWrapper):
                     # If another test is using this file, wait 5 seconds
                     # and try again.
                     sleep(5)
-        
-    
+
     def reset(self):
         self._emulator.reset()
 
     def screenshot(self):
         return self._emulator.screenshot()
-
-
 
 
 def start_first_file(desmume_emulator: DeSmuMEWrapper):
@@ -348,7 +346,8 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
     elif ITEM_MEMORY_OFFSETS[item][2] == ItemMemoryAddressType.COUNTER_16_BIT:
         original_value = int.from_bytes(
             emu_instance.read_memory(
-                ITEM_MEMORY_OFFSETS[item][0] + base_addr, ITEM_MEMORY_OFFSETS[item][0] + base_addr + 2
+                ITEM_MEMORY_OFFSETS[item][0] + base_addr,
+                ITEM_MEMORY_OFFSETS[item][0] + base_addr + 2,
             ),
             'little',
         )
@@ -374,7 +373,8 @@ def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> G
         assert (
             int.from_bytes(
                 emu_instance.read_memory(
-                    ITEM_MEMORY_OFFSETS[item][0] + base_addr, ITEM_MEMORY_OFFSETS[item][0] + base_addr + 2
+                    ITEM_MEMORY_OFFSETS[item][0] + base_addr,
+                    ITEM_MEMORY_OFFSETS[item][0] + base_addr + 2,
                 ),
                 'little',
             )

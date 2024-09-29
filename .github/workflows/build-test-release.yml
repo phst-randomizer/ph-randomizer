@@ -426,7 +426,7 @@ jobs:
         run: |
           curl -L https://github.com/TASEmulators/BizHawk/releases/download/2.9.1/BizHawk-2.9.1-win-x64.zip -o BizHawk-2.9.1-win-x64.zip
           unzip BizHawk-2.9.1-win-x64.zip -d BizHawk
-          curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -L -o ExternalTool.zip "https://api.github.com/repos/mike8699/birds-eye/actions/artifacts/1906957269/zip" 
+          curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -L -o ExternalTool.zip "https://api.github.com/repos/mike8699/birds-eye/actions/artifacts/1906957269/zip"
           unzip ExternalTool.zip -d BizHawk/ExternalTools
 
       - name: Install Microsoft Visual C++ 2010 SP1 Redistributable Package
