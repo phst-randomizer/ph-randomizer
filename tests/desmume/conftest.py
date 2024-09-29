@@ -2,8 +2,6 @@ from enum import Enum
 import os
 from pathlib import Path
 import shutil
-import sys
-from time import sleep
 
 import cv2
 import pytest
@@ -13,13 +11,11 @@ from ph_rando.patcher._util import _patch_system_bmg, apply_base_patch
 from .desmume_utils import DeSmuMEWrapper
 from .melonds import MelonDSWrapper
 
+
 def pytest_addoption(parser):
-    parser.addoption(
-        "--desmume", action="store_true", default=False, help="Enable DeSmuME tests"
-    )
-    parser.addoption(
-        "--melonds", action="store_true", default=False, help="Enable melonDS tests"
-    )
+    parser.addoption('--desmume', action='store_true', default=False, help='Enable DeSmuME tests')
+    parser.addoption('--melonds', action='store_true', default=False, help='Enable melonDS tests')
+
 
 @pytest.fixture(autouse=True)
 def test_teardown(rom_path: Path, request):

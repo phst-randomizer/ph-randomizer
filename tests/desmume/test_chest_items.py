@@ -14,6 +14,7 @@ from .conftest import GOT_ITEM_TEXT, ITEM_MEMORY_OFFSETS, DeSmuMEWrapper
 from .desmume_utils import assert_item_is_picked_up, start_first_file
 from .melonds import MelonDSWrapper
 
+
 @pytest.fixture
 def chest_test_emu(
     rom_path: Path,
