@@ -7,7 +7,7 @@ dependencies = [
     "PySide6==6.6.1",
     "click==8.1.3",
     "inflection==0.5.1",
-    "ndspy==4.1.0",
+    "ndspy@git+https://github.com/mike8699/ndspy.git@9d80480e8a3d65a389aac6f5d10978bd9113c977",
     "ordered-set==4.1.0",
     "pydantic==2.4.2",
     "pyparsing==3.1.1",
