@@ -74,7 +74,7 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
             # we'll handle adding the new overlay after this loop
             continue
 
-        ot[overlay_number].data = overlay_file.read_bytes()
+        ot[overlay_number].data = bytearray(overlay_file.read_bytes())
         rom.files[ot[overlay_number].fileID] = ot[overlay_number].save(compress=False)
         print(f'Rebuilt overlay_{str(overlay_number).rjust(4, "0")}.bin')
 
@@ -100,7 +100,7 @@ def reinsert_overlays(rom: NintendoDSRom, overlay_directory: Path) -> None:
         flags=0,
     )
     ot[new_overlay_number] = new_overlay
-    rom.files.append(None)
+    rom.files.append(None)  # type: ignore
     rom.files[new_overlay_file_id] = new_overlay.save(compress=False)
     print(
         f'Added new overlay_{str(new_overlay_number).rjust(4, "0")}.bin '

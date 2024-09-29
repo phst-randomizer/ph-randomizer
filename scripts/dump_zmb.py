@@ -20,7 +20,10 @@ if __name__ == '__main__':
     output_dir = Path.cwd() / 'zmbs'
     output_dir.mkdir(exist_ok=True)
 
-    for folder in tqdm(rom.filenames.subfolder('Map').folders):
+    map_subfolder = rom.filenames.subfolder('Map')
+    assert map_subfolder is not None
+
+    for folder in tqdm(map_subfolder.folders):
         folder_name = folder[0]
         file_path = f'Map/{folder_name}'
         for subfolder in folder:

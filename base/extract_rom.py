@@ -41,7 +41,10 @@ def _extract_data_recursive(folder: fnt.Folder, output_dir: Path) -> None:
     for child_file in folder.files:
         out_file = output_dir / child_file
         out_file.parent.mkdir(exist_ok=True, parents=True)
-        out_file.write_bytes(rom.files[folder.idOf(child_file)])
+        file_id = folder.idOf(child_file)
+        if file_id is None:
+            raise Exception(f'ID of file {child_file} not found')
+        out_file.write_bytes(rom.files[file_id])
     for child_folder_name, child_folder in folder.folders:
         _extract_data_recursive(child_folder, output_dir / child_folder_name)
 
