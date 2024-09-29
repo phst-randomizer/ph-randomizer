@@ -8,7 +8,7 @@ from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS, _patch_shop_items
 from ph_rando.shuffler.aux_models import Item, Shop
 
-from .desmume_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
+from .emulator_utils import DeSmuMEWrapper, get_current_rupee_count, start_first_file
 
 
 @pytest.fixture

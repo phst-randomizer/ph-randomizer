@@ -13,7 +13,7 @@ import time
 import birdseyelib as bird
 import pytest
 
-from .desmume_utils import AbstractEmulatorWrapper
+from .emulator_utils import AbstractEmulatorWrapper
 
 logger = logging.getLogger(__name__)
 
