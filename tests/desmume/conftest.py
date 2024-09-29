@@ -8,7 +8,7 @@ import pytest
 
 from ph_rando.patcher._util import _patch_system_bmg, apply_base_patch
 
-from .emulator_utils import DeSmuMEWrapper
+from .desmume import DeSmuMEWrapper
 from .melonds import MelonDSWrapper
 
 
