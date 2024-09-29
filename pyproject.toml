@@ -12,7 +12,7 @@ dependencies = [
     "pydantic==2.4.2",
     "pyparsing==3.1.1",
     "vidua==0.4.5",
-    "zed@git+https://github.com/phst-randomizer/zed.git@5ee969236bf3c3d0707da963e5edc818ddf246d3",
+    "zed@git+https://github.com/phst-randomizer/zed.git@e59a9653ea1344cbc147bab446821813200b9d19",
 ]
 
 [project.optional-dependencies]
