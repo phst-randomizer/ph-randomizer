@@ -1,5 +1,6 @@
 from collections.abc import Generator, Iterable
 from contextlib import contextmanager
+from copy import copy
 import hashlib
 from io import BytesIO
 import logging
@@ -60,7 +61,7 @@ GD_MODELS = {
     0x26: 'key_su',
     0x27: '',  # TODO: what is this?
     0x28: 'arrowpod',
-    0x29: 'bmbagL',  # TODO: bmbag or bmbagL or bmbagM?
+    0x29: 'bmbagM',  # bmbagL doesn't seem to render anything
     0x2A: 'bcbagM',
     0x2B: '',  # TODO: what is this?
     0x2C: 'key_ki',
@@ -132,7 +133,7 @@ GD_MODELS = {
     0x6E: '',  # TODO: what is this?
     0x6F: '',  # TODO: what is this?
     0x70: '',  # TODO: what is this?
-    0x71: '',
+    0x71: 'makimono',
     0x72: 'hagaH',
     0x73: 'hagaK',
     0x74: 'hagaS',
@@ -144,17 +145,17 @@ GD_MODELS = {
     0x7A: 'ship',  # TODO: ship or ship02?
     0x7B: 'ship',  # TODO: ship or ship02?
     0x7C: 'ship',  # TODO: ship or ship02?
-    0x7D: '',  # TODO: what to do for random treasure?
-    0x7E: '',  # TODO: what to do for random ship part?
+    0x7D: 'ship',  # TODO: what to do for random treasure?
+    0x7E: 'ship',  # TODO: what to do for random ship part?
     0x7F: '',  # TODO: find warp tablet model
     0x80: '',  # TODO: find bait model
     0x81: 'rupee_bb',
     0x82: 'rupee_bb',
     0x83: '',  # TODO: what is this?
     0x84: '',  # TODO: what is this?
-    0x85: '',  # TODO: what to do for random ship part?
-    0x86: '',  # TODO: what to do for random treasure?
-    0x87: '',  # TODO: what to do for random ship part?
+    0x85: 'ship',  # TODO: what to do for random ship part?
+    0x86: 'ship',  # TODO: what to do for random treasure?
+    0x87: 'ship',  # TODO: what to do for random ship part?
     # TODO: are there any more items?
 }
 
@@ -301,6 +302,7 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
     # Load arm9.bin and overlay table
     arm9_executable = bytearray(code.MainCodeFile(input_rom.arm9, 0x02000000).save(compress=False))
+    arm9_executable_o = copy(arm9_executable)
     overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
 
     for name, shop_item in items.items():
@@ -334,15 +336,29 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
 
         # Set new name of NSBMD/NSBTX 3D model
         new_model_name = f'gd_{GD_MODELS[item_id]}'
-        offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbmd'.encode('ascii'))
+
+        # Use the "untouched" copy of arm9.bin to avoid altering names of models that have
+        # already been changed.
+        offset = arm9_executable_o.index(f'Player/get/{original_model_name}.nsbmd'.encode('ascii'))
         new_data = bytearray(f'Player/get/{new_model_name}.nsbmd'.encode('ascii') + b'\x00')
         arm9_executable = (
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
         )
-        offset = arm9_executable.index(f'Player/get/{original_model_name}.nsbtx'.encode('ascii'))
+        arm9_executable_o = (
+            arm9_executable_o[:offset]
+            + b' ' * len(new_data)
+            + arm9_executable_o[offset + len(new_data) :]
+        )
+
+        offset = arm9_executable_o.index(f'Player/get/{original_model_name}.nsbtx'.encode('ascii'))
         new_data = bytearray(f'Player/get/{new_model_name}.nsbtx'.encode('ascii') + b'\x00')
         arm9_executable = (
             arm9_executable[:offset] + new_data + arm9_executable[offset + len(new_data) :]
+        )
+        arm9_executable_o = (
+            arm9_executable_o[:offset]
+            + b' ' * len(new_data)
+            + arm9_executable_o[offset + len(new_data) :]
         )
 
         try:

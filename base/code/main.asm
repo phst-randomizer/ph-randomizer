@@ -392,31 +392,63 @@
     ; they can be changed without length overflow issues:
     .org 0x21822b0
         .area 0x4
-            .word org(shA_nsbmd)
+            .word org(shA_nsbmd) ; progressive sword
         .endarea
     .org 0x2182304
         .area 0x4
             .word org(shA_nsbtx)
         .endarea
+    .org 0x2182290
+        .area 0x4
+            .word org(bmbagM_nsbmd) ; bomb bag upgrade
+        .endarea
+    .org 0x21822e4
+        .area 0x4
+            .word org(bmbagM_nsbtx)
+        .endarea
+    .org 0x218228c
+        .area 0x4
+            .word org(heart_utu_nsbmd) ; heart container
+        .endarea
+    .org 0x21822e0
+        .area 0x4
+            .word org(heart_utu_nsbtx)
+        .endarea
     .org 0x2182294
         .area 0x4
-            .word org(arrowpod_nsbmd)
+            .word org(arrowpod_nsbmd) ; quiver
         .endarea
     .org 0x21822e8
         .area 0x4
             .word org(arrowpod_nsbtx)
         .endarea
+    .org 0x21822ac
+        .area 0x4
+            .word org(minaC_nsbmd) ; wisdom gem
+        .endarea
+    .org 0x2182300
+        .area 0x4
+            .word org(minaC_nsbtx)
+        .endarea
     .org 0x21822a8
         .area 0x4
-            .word org(minaP_nsbmd)
+            .word org(minaP_nsbmd) ; power gem
         .endarea
     .org 0x21822fc
         .area 0x4
             .word org(minaP_nsbtx)
         .endarea
+    .org 0x21822a4
+        .area 0x4
+            .word org(minaY_nsbmd) ; courage gem
+        .endarea
+    .org 0x21822f8
+        .area 0x4
+            .word org(minaY_nsbtx)
+        .endarea
     .org 0x2182298
         .area 0x4
-            .word org(bcbagM_nsbmd)
+            .word org(bcbagM_nsbmd) ; bombchu bag upgrade
         .endarea
     .org 0x21822ec
         .area 0x4

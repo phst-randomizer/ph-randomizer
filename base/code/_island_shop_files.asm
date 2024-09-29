@@ -10,11 +10,35 @@ shA_nsbmd:
 shA_nsbtx:
     .asciiz "Player/get/gd_shA.nsbtx"
     .fill 6, 0
+bmbagM_nsbmd:
+    .asciiz "Player/get/gd_bmbagM.nsbmd"
+    .fill 3, 0
+bmbagM_nsbtx:
+    .asciiz "Player/get/gd_bmbagM.nsbtx"
+    .fill 3, 0
+heart_utu_nsbmd:
+    .asciiz "Player/get/gd_heart_utu.nsbmd"
+    ; No need for padding
+heart_utu_nsbtx:
+    .asciiz "Player/get/gd_heart_utu.nsbtx"
+    ; No need for padding
+minaC_nsbmd:
+    .asciiz "Player/get/gd_minaC.nsbmd"
+    .fill 4, 0
+minaC_nsbtx:
+    .asciiz "Player/get/gd_minaC.nsbtx"
+    .fill 4, 0
 minaP_nsbmd:
     .asciiz "Player/get/gd_minaP.nsbmd"
     .fill 4, 0
 minaP_nsbtx:
     .asciiz "Player/get/gd_minaP.nsbtx"
+    .fill 4, 0
+minaY_nsbmd:
+    .asciiz "Player/get/gd_minaY.nsbmd"
+    .fill 4, 0
+minaY_nsbtx:
+    .asciiz "Player/get/gd_minaY.nsbtx"
     .fill 4, 0
 arrowpod_nsbmd:
     .asciiz "Player/get/gd_arrowpod.nsbmd"
