@@ -11,7 +11,7 @@ from ph_rando.patcher._util import GD_MODELS, _patch_zmb_map_objects
 from ph_rando.shuffler.aux_models import Chest, Item
 
 from .conftest import GOT_ITEM_TEXT, ITEM_MEMORY_OFFSETS, DeSmuMEWrapper
-from .desmume_utils import assert_item_is_picked_up, start_first_file
+from .emulator_utils import assert_item_is_picked_up, start_first_file
 from .melonds import MelonDSWrapper
 
 

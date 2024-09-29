@@ -8,7 +8,7 @@ from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS, _patch_zmb_actors
 from ph_rando.shuffler.aux_models import Item, SalvageTreasure
-from tests.desmume.desmume_utils import DeSmuMEWrapper, assert_item_is_picked_up, start_first_file
+from tests.desmume.emulator_utils import DeSmuMEWrapper, assert_item_is_picked_up, start_first_file
 
 from .conftest import ITEM_MEMORY_OFFSETS
 

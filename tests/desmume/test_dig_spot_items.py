@@ -10,7 +10,7 @@ from ph_rando.patcher._util import GD_MODELS, _patch_zmb_actors
 from ph_rando.shuffler.aux_models import DigSpot, Item
 
 from .conftest import ITEM_MEMORY_OFFSETS, DeSmuMEWrapper
-from .desmume_utils import assert_item_is_picked_up, equip_item, start_first_file, use_equipped_item
+from .emulator_utils import assert_item_is_picked_up, equip_item, start_first_file, use_equipped_item
 
 
 @pytest.fixture

@@ -5,7 +5,7 @@ from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 from ph_rando.common import ShufflerAuxData
 
 from .conftest import DeSmuMEWrapper
-from .desmume_utils import (
+from .emulator_utils import (
     assert_item_is_picked_up,
     get_check_contents,
     prevent_actor_spawn,
