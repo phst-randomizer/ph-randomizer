@@ -1,7 +1,9 @@
+from collections.abc import Generator
 from enum import Enum
 import os
 from pathlib import Path
 import shutil
+from typing import Any
 
 import cv2
 import pytest
@@ -9,6 +11,7 @@ import pytest
 from ph_rando.patcher._util import _patch_system_bmg, apply_base_patch
 
 from .desmume import DeSmuMEWrapper
+from .emulator_utils import AbstractEmulatorWrapper
 from .melonds import MelonDSWrapper
 
 
@@ -53,9 +56,11 @@ def desmume_instance(request):
 
 
 @pytest.fixture
-def desmume_emulator(desmume_instance: DeSmuMEWrapper, rom_path: Path) -> DeSmuMEWrapper:
+def desmume_emulator(
+    desmume_instance: AbstractEmulatorWrapper, rom_path: Path
+) -> Generator[AbstractEmulatorWrapper, Any, None]:
     video_recording_directory = os.environ.get('PY_DESMUME_VIDEO_RECORDING_DIR')
-    if video_recording_directory:
+    if video_recording_directory and isinstance(desmume_instance, DeSmuMEWrapper):
         video_path = Path(video_recording_directory) / f'{rom_path.name}.mp4'
         video_path.parent.mkdir(parents=True, exist_ok=True)
         desmume_instance.video = cv2.VideoWriter(
@@ -93,7 +98,7 @@ def rom_path(tmp_path: Path, desmume_instance, request: pytest.FixtureRequest) -
 
 
 @pytest.fixture
-def base_rom_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper):
+def base_rom_emu(rom_path: Path, desmume_emulator: AbstractEmulatorWrapper):
     desmume_emulator.open(str(rom_path))
     return desmume_emulator
 

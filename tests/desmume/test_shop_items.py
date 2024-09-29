@@ -8,14 +8,13 @@ from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS, _patch_shop_items
 from ph_rando.shuffler.aux_models import Item, Shop
 
-from .desmume import DeSmuMEWrapper
-from .emulator_utils import get_current_rupee_count, start_first_file
+from .emulator_utils import AbstractEmulatorWrapper, get_current_rupee_count, start_first_file
 
 
 @pytest.fixture
 def island_shop_test_emu(
     rom_path: Path,
-    desmume_emulator: DeSmuMEWrapper,
+    desmume_emulator: AbstractEmulatorWrapper,
     request,
     aux_data: ShufflerAuxData,
 ):
@@ -45,7 +44,7 @@ def island_shop_test_emu(
     ids=[f'{hex(key)}-{val}' for key, val in GD_MODELS.items() if val and val in ITEMS_REVERSED],
     indirect=['island_shop_test_emu'],
 )
-def test_custom_shop_items(island_shop_test_emu: DeSmuMEWrapper):
+def test_custom_shop_items(island_shop_test_emu: AbstractEmulatorWrapper):
     start_first_file(island_shop_test_emu)
 
     island_shop_test_emu.wait(100)

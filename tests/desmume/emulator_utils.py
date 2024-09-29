@@ -9,8 +9,6 @@ from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler.aux_models import Area
 
-from .desmume import DeSmuMEWrapper
-
 
 class AbstractEmulatorWrapper(ABC):
     def open(self, rom_path: str):
@@ -40,13 +38,13 @@ class AbstractEmulatorWrapper(ABC):
     def write_memory(self, address: int, data: bytes | int):
         raise NotImplementedError
 
-    def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         raise NotImplementedError
 
-    def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         raise NotImplementedError
 
-    def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         raise NotImplementedError
 
     @property
@@ -80,6 +78,14 @@ class AbstractEmulatorWrapper(ABC):
     @r3.setter
     def r3(self, value: int):
         raise NotImplementedError
+    
+    @property
+    def video(self):
+        raise NotImplementedError
+    
+    @video.setter
+    def video(self, value):
+        raise NotImplementedError
 
     @property
     def event_flag_base_addr(self) -> int:
@@ -99,7 +105,7 @@ class AbstractEmulatorWrapper(ABC):
         pass
 
 
-def start_first_file(desmume_emulator: DeSmuMEWrapper):
+def start_first_file(desmume_emulator: AbstractEmulatorWrapper):
     """From game boot, goes through the title screen and starts the first save."""
     desmume_emulator.wait(500)
 
@@ -135,7 +141,7 @@ def start_first_file(desmume_emulator: DeSmuMEWrapper):
     desmume_emulator.wait(600)
 
 
-def get_current_rupee_count(desmume: DeSmuMEWrapper):
+def get_current_rupee_count(desmume: AbstractEmulatorWrapper):
     addr = desmume.event_flag_base_addr + 0x4FC2
     return int.from_bytes(desmume.read_memory(addr, addr + 2), 'little')
 
@@ -144,28 +150,28 @@ def get_current_rupee_count(desmume: DeSmuMEWrapper):
 ITEMS_MENU_COORDINATES = {'shovel': (225, 175), 'bombs': (98, 178)}
 
 
-def open_items_menu(desmume: DeSmuMEWrapper):
+def open_items_menu(desmume: AbstractEmulatorWrapper):
     desmume.touch_set_and_release((SCREEN_WIDTH - 5, SCREEN_HEIGHT - 5), 5)
     desmume.wait(20)
 
 
-def select_item_from_items_menu(desmume: DeSmuMEWrapper, item: str):
+def select_item_from_items_menu(desmume: AbstractEmulatorWrapper, item: str):
     desmume.touch_set_and_release(ITEMS_MENU_COORDINATES[item], 5)
     desmume.wait(20)
 
 
-def equip_item(desmume: DeSmuMEWrapper, item: str):
+def equip_item(desmume: AbstractEmulatorWrapper, item: str):
     open_items_menu(desmume)
     select_item_from_items_menu(desmume, item)
 
 
-def use_equipped_item(desmume: DeSmuMEWrapper):
+def use_equipped_item(desmume: AbstractEmulatorWrapper):
     desmume.touch_set_and_release((SCREEN_WIDTH, 0), 5)
     desmume.wait(20)
 
 
 @contextmanager
-def assert_item_is_picked_up(item: int | str, emu_instance: DeSmuMEWrapper) -> Generator:
+def assert_item_is_picked_up(item: int | str, emu_instance: AbstractEmulatorWrapper) -> Generator:
     from .conftest import ITEM_MEMORY_OFFSETS, ItemMemoryAddressType
 
     if isinstance(item, str):
@@ -238,7 +244,7 @@ def get_check_contents(
 
 @contextmanager
 def prevent_actor_spawn(
-    emu_instance: DeSmuMEWrapper,
+    emu_instance: AbstractEmulatorWrapper,
     actors: list[str] | str,
     replacement: str = 'RUPY',
 ):

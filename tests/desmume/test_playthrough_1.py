@@ -4,8 +4,8 @@ from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 
 from ph_rando.common import ShufflerAuxData
 
-from .conftest import DeSmuMEWrapper
 from .emulator_utils import (
+    AbstractEmulatorWrapper,
     assert_item_is_picked_up,
     get_check_contents,
     prevent_actor_spawn,
@@ -15,7 +15,7 @@ from .emulator_utils import (
 save_state = Path(__file__).parent / 'test_state.dsv'
 
 
-def test_mercay_1(base_rom_emu: DeSmuMEWrapper, aux_data: ShufflerAuxData):
+def test_mercay_1(base_rom_emu: AbstractEmulatorWrapper, aux_data: ShufflerAuxData):
     start_first_file(base_rom_emu)
 
     # Enter oshus's house

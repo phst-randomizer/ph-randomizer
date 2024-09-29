@@ -93,13 +93,13 @@ class DeSmuMEWrapper(AbstractEmulatorWrapper):
             return self._emulator.memory.write(start, start, 1, bytes([data]))
         return self._emulator.memory.write(start, start + len(data), 1, data)
 
-    def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         return self._emulator.memory.register_read(address=address, callback=callback)
 
-    def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         return self._emulator.memory.register_write(address=address, callback=callback)
 
-    def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         return self._emulator.memory.register_exec(address=address, callback=callback)
 
     @property

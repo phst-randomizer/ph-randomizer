@@ -9,14 +9,20 @@ from ph_rando.patcher._items import ITEMS_REVERSED
 from ph_rando.patcher._util import GD_MODELS, _patch_zmb_actors
 from ph_rando.shuffler.aux_models import DigSpot, Item
 
-from .conftest import ITEM_MEMORY_OFFSETS, DeSmuMEWrapper
-from .emulator_utils import assert_item_is_picked_up, equip_item, start_first_file, use_equipped_item
+from .conftest import ITEM_MEMORY_OFFSETS
+from .emulator_utils import (
+    AbstractEmulatorWrapper,
+    assert_item_is_picked_up,
+    equip_item,
+    start_first_file,
+    use_equipped_item,
+)
 
 
 @pytest.fixture
 def dig_spot_test_emu(
     rom_path: Path,
-    desmume_emulator: DeSmuMEWrapper,
+    desmume_emulator: AbstractEmulatorWrapper,
     request,
     aux_data: ShufflerAuxData,
 ):
@@ -48,7 +54,9 @@ def dig_spot_test_emu(
     ids=[f'{hex(val)}-{GD_MODELS[val]}' for val in ITEM_MEMORY_OFFSETS.keys()],
     indirect=['dig_spot_test_emu'],
 )
-def test_custom_dig_spot_items(dig_spot_test_emu: DeSmuMEWrapper, request: pytest.FixtureRequest):
+def test_custom_dig_spot_items(
+    dig_spot_test_emu: AbstractEmulatorWrapper, request: pytest.FixtureRequest
+):
     item_id: int = request.node.callspec.params['dig_spot_test_emu']
 
     start_first_file(dig_spot_test_emu)

@@ -214,13 +214,13 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
     def write_memory(self, address: int, data: bytes | int):
         pytest.skip('MelonDSWrapper does not support memory writing yet')
 
-    def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_read_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         pytest.skip('MelonDSWrapper does not support breakpoints yet')
 
-    def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_write_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         pytest.skip('MelonDSWrapper does not support breakpoints yet')
 
-    def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None]):
+    def set_exec_breakpoint(self, address: int, callback: Callable[[int, int], None] | None):
         pytest.skip('MelonDSWrapper does not support breakpoints yet')
 
     @property

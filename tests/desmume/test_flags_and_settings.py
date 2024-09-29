@@ -5,7 +5,7 @@ from desmume.controls import Keys
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 import pytest
 
-from .conftest import DeSmuMEWrapper
+from .emulator_utils import AbstractEmulatorWrapper
 
 RANDO_SETTINGS_BITMAP_ADDR = int(
     re.findall(
@@ -19,7 +19,7 @@ RANDO_SETTINGS_BITMAP_ADDR = int(
 @pytest.mark.parametrize(
     'bridge_repaired', [True, False], ids=['Bridge repaired from start', 'Bridge broken from start']
 )
-def test_flags_and_settings(base_rom_emu: DeSmuMEWrapper, bridge_repaired: bool):
+def test_flags_and_settings(base_rom_emu: AbstractEmulatorWrapper, bridge_repaired: bool):
     """Ensure all flags are set properly + all rando settings work."""
     for i in range(2):
         base_rom_emu.wait(500)
