@@ -10,6 +10,7 @@ dependencies = [
     "ndspy@git+https://github.com/mike8699/ndspy.git@9d80480e8a3d65a389aac6f5d10978bd9113c977",
     "ordered-set==4.1.0",
     "pydantic==2.4.2",
+    "pylz@git+https://github.com/mike8699/pylz.git@f4b5dceea32d9bbd98a4baab94419e0483621307",
     "pyparsing==3.1.1",
     "vidua==0.4.5",
     "zed@git+https://github.com/phst-randomizer/zed.git@e59a9653ea1344cbc147bab446821813200b9d19",

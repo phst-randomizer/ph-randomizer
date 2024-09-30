@@ -8,6 +8,7 @@ from pathlib import Path
 import struct
 
 from ndspy import bmg, code, lz10, narc, rom
+from pylz import lzs_encode
 from vidua import bps
 from zed.common import Game
 from zed.zmb import ZMB
@@ -221,7 +222,7 @@ def open_zmb_files(
         zmb_path = path[path.index('.bin/') + 5 :]
         narc_file = narc.NARC(lz10.decompress(input_rom.getFileByName(narc_path)))
         narc_file.setFileByName(zmb_path, zmb_file.save(game=Game.PhantomHourglass))
-        input_rom.setFileByName(narc_path, lz10.compress(narc_file.save()))
+        input_rom.setFileByName(narc_path, lzs_encode(narc_file.save()))
 
 
 def _patch_zmb_map_objects(aux_data: list[Area], input_rom: rom.NintendoDSRom) -> None:
