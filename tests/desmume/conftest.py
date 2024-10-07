@@ -55,7 +55,19 @@ def desmume_instance(request):
     desmume_emulator.destroy()
 
 
-@pytest.fixture
+@pytest.fixture(
+    params=[
+        pytest.param(
+            None,
+            # Rerun the test up to 5 times if it fails with an OSError.
+            # This is useful for MelonDS-based tests, which are flaky.
+            marks=pytest.mark.flaky(
+                reruns=5,
+                only_rerun=['OSError'],
+            ),
+        )
+    ]
+)
 def desmume_emulator(
     desmume_instance: AbstractEmulatorWrapper, rom_path: Path
 ) -> Generator[AbstractEmulatorWrapper, Any, None]:
