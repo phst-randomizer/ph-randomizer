@@ -1,16 +1,23 @@
+from collections.abc import Generator
 from enum import Enum
 import os
 from pathlib import Path
 import shutil
-import sys
-from time import sleep
+from typing import Any
 
 import cv2
 import pytest
 
 from ph_rando.patcher._util import _patch_system_bmg, apply_base_patch
 
-from .desmume_utils import DeSmuMEWrapper
+from .desmume import DeSmuMEWrapper
+from .emulator_utils import AbstractEmulatorWrapper
+from .melonds import MelonDSWrapper
+
+
+def pytest_addoption(parser):
+    parser.addoption('--desmume', action='store_true', default=False, help='Enable DeSmuME tests')
+    parser.addoption('--melonds', action='store_true', default=False, help='Enable melonDS tests')
 
 
 @pytest.fixture(autouse=True)
@@ -36,17 +43,36 @@ def test_teardown(rom_path: Path, request):
             file.unlink()
 
 
-@pytest.fixture(scope='session')
-def desmume_instance():
-    desmume_emulator = DeSmuMEWrapper()
+@pytest.fixture(scope='session', params=[MelonDSWrapper, DeSmuMEWrapper])
+def desmume_instance(request):
+    if request.param == DeSmuMEWrapper and not request.config.getoption('--desmume'):
+        pytest.skip('desmume tests are disabled')
+    elif request.param == MelonDSWrapper and not request.config.getoption('--melonds'):
+        pytest.skip('melonds tests are disabled')
+
+    desmume_emulator = request.param()
     yield desmume_emulator
     desmume_emulator.destroy()
 
 
-@pytest.fixture
-def desmume_emulator(desmume_instance: DeSmuMEWrapper, rom_path: Path) -> DeSmuMEWrapper:
+@pytest.fixture(
+    params=[
+        pytest.param(
+            None,
+            # Rerun the test up to 5 times if it fails with an OSError.
+            # This is useful for MelonDS-based tests, which are flaky.
+            marks=pytest.mark.flaky(
+                reruns=5,
+                only_rerun=['OSError', 'ConnectionResetError'],
+            ),
+        )
+    ]
+)
+def desmume_emulator(
+    desmume_instance: AbstractEmulatorWrapper, rom_path: Path
+) -> Generator[AbstractEmulatorWrapper, Any, None]:
     video_recording_directory = os.environ.get('PY_DESMUME_VIDEO_RECORDING_DIR')
-    if video_recording_directory:
+    if video_recording_directory and isinstance(desmume_instance, DeSmuMEWrapper):
         video_path = Path(video_recording_directory) / f'{rom_path.name}.mp4'
         video_path.parent.mkdir(parents=True, exist_ok=True)
         desmume_instance.video = cv2.VideoWriter(
@@ -55,49 +81,22 @@ def desmume_emulator(desmume_instance: DeSmuMEWrapper, rom_path: Path) -> DeSmuM
     else:
         desmume_instance.video = None
 
-    return desmume_instance
+    yield desmume_instance
+
+    desmume_instance.stop()
 
 
 @pytest.fixture
-def rom_path(tmp_path: Path, request: pytest.FixtureRequest) -> Path:
-    base_rom_path = Path(os.environ['PH_ROM_PATH'])
-    python_version = sys.version_info
-
-    # The directory where py-desmume keeps its save files. This appears to vary from system
-    # to system, so it's configurable via an environment variable. In the absence of an env
-    # var, it defaults to the location from my Windows system.
-    battery_file_location = Path(
-        os.environ.get(
-            'PY_DESMUME_BATTERY_DIR',
-            f'C:\\Users\\{os.getlogin()}\\AppData\\Local\\Programs\\Python\\'
-            f'Python{python_version[0]}{python_version[1]}',
-        )
-    )
-
+def rom_path(tmp_path: Path, desmume_instance, request: pytest.FixtureRequest) -> Path:
     test_name: str = request.node.originalname
 
     # Path to store rom for the currently running test
     temp_rom_path = tmp_path / f'{tmp_path.name}.nds'
 
-    battery_file_src = Path(__file__).parent / 'test_data' / f'{test_name}.dsv'
-    battery_file_dest = battery_file_location / f'{tmp_path.name}.dsv'
-
     # Make a copy of the rom for this test
-    shutil.copy(base_rom_path, temp_rom_path)
+    shutil.copy(Path(os.environ['PH_ROM_PATH']), temp_rom_path)
 
-    if battery_file_src.exists():
-        # Copy save file to py-desmume battery directory
-        shutil.copy(battery_file_src, battery_file_dest)
-    else:
-        while True:
-            try:
-                # If a dsv for this test doesn't exist, remove any that exist for this rom.
-                battery_file_dest.unlink(missing_ok=True)
-                break
-            except PermissionError:
-                # If another test is using this file, wait 10 seconds
-                # and try again.
-                sleep(10)
+    desmume_instance.load_battery_file(test_name, temp_rom_path)
 
     # Apply base patches to ROM
     patched_rom = apply_base_patch(temp_rom_path.read_bytes())
@@ -111,7 +110,7 @@ def rom_path(tmp_path: Path, request: pytest.FixtureRequest) -> Path:
 
 
 @pytest.fixture
-def base_rom_emu(rom_path: Path, desmume_emulator: DeSmuMEWrapper):
+def base_rom_emu(rom_path: Path, desmume_emulator: AbstractEmulatorWrapper):
     desmume_emulator.open(str(rom_path))
     return desmume_emulator
 
