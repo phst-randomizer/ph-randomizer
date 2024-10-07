@@ -418,6 +418,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
+          sleep $((RANDOM % 20))  # Random sleep to avoid rate limiting on chocolatey
           choco install -y tesseract
           echo "C:\Program Files\Tesseract-OCR" >> $GITHUB_PATH
 
