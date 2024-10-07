@@ -63,7 +63,7 @@ def desmume_instance(request):
             # This is useful for MelonDS-based tests, which are flaky.
             marks=pytest.mark.flaky(
                 reruns=5,
-                only_rerun=['OSError'],
+                only_rerun=['OSError', 'ConnectionResetError'],
             ),
         )
     ]
