@@ -32,7 +32,7 @@ area Gust:
     node WindmillArea:
       hint GossipStoneLeft
       hint GossipStoneRight
-      flag Windmills
+      set Windmills
       chest WindmillChest
       # The enemies are most likely infinite (went well above 12 during testing)
 

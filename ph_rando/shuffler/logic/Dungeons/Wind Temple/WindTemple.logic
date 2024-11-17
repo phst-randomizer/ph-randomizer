@@ -61,13 +61,13 @@ area WindTemple:
 
     node TopMiddlePlatform:
       door ToB2TopRoomStairs
-      flag B1TopWindmill
+      set B1TopWindmill
 
     TopMiddlePlatform -> Bottom
 
     node BottomLeftPlatform:
       door ToB2BottomLeft
-      flag B1BottomWindmill
+      set B1BottomWindmill
 
     BottomLeftPlatform -> Bottom
 

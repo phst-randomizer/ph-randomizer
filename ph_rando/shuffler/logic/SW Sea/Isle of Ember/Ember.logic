@@ -32,7 +32,7 @@ area Ember:
 
 
     node Torch:
-      flag SeenTopTorch
+      set SeenTopTorch
 
     Island -> Torch
     Main -> Torch
@@ -44,7 +44,7 @@ area Ember:
       door LeftLowerToppest
       door LeftLowerTop
       door LeftLowerBottom
-      flag Kayo
+      set Kayo
 
     node AfterDoor:
       door LeftMiddleBottom
@@ -96,7 +96,7 @@ area Ember:
     node Defeat
 
     node Astrid:
-      flag AstridFreed
+      set AstridFreed
 
     Arena <-> Defeat: (defeated Octorok1 & defeated Octorok2 & defeated Octorok3 & defeated Octorok4 & defeated Octorok5 & defeated Octorok6)
     Defeat -> Astrid: (flag Kayo & (setting NoPuzzleSolution | (flag SeenTopTorch & flag SeenKayoTorch)))
@@ -105,7 +105,7 @@ area Ember:
     node Main:
       door Entrance
       hint Book
-      flag SeenKayoTorch
+      set SeenKayoTorch
 
   room EmberEmptyHouse:
     node Main:

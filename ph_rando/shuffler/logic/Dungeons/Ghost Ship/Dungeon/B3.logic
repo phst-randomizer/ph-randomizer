@@ -20,7 +20,7 @@ area GhostShip:
       enemy SkulltulaTop3
       enemy SkulltulaTop4
       chest TopLeftChest # purple potion
-      flag LeverOrder24513
+      set LeverOrder24513
 
     Bottom -> Arena
     Arena -> Bottom: (defeated SkulltulaArena1 & defeated SkulltulaArena2 & defeated SkulltulaArena3 & defeated SkulltulaArena4 & defeated SkulltulaArena5)
@@ -28,10 +28,10 @@ area GhostShip:
     Top -> Arena: setting MirroredArenaDoors
 
     node Levers:
-      flag LeversPulled
+      set LeversPulled
 
     node AfterLevers:
-      flag PlatePressed
+      set PlatePressed
 
     Bottom <-> Levers: (flag LeverOrder24513 | setting NoPuzzleSolution)
     Top -> AfterLevers: (macro HammerClip | flag LeversPulled)

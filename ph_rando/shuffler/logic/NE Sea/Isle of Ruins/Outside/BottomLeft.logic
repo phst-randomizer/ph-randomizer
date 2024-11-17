@@ -28,7 +28,7 @@ area RuinsIsle:
       enemy RupeeLikeGreen1
       enemy RupeeLikeGreen2
       enemy RupeeLikeRed4
-      flag StarsOrder
+      set StarsOrder
 
     node ToNorthLeft:
       door ToNorthLeft

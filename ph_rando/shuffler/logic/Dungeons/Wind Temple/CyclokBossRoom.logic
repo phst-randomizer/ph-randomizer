@@ -8,7 +8,7 @@ area CyclokBossRoom:
       chest Sand
       chest SpiritOfWisdom
       chest HeartContainer
-      flag WindTempleBeaten
+      set WindTempleBeaten
       entrance ExitWarp
 
     Fight -> BossDefeat: defeated Cyclok

@@ -7,7 +7,7 @@ area GleeokBossRoom:
     node BossDefeat:
       chest Sand
       chest HeartContainer
-      flag IceTempleBeaten
+      set IceTempleBeaten
       door ToAzurineRoom
 
     Fight -> BossDefeat: defeated Gleeok

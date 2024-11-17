@@ -5,7 +5,7 @@ area TempleOfTheOceanKing:
       enemy StationaryPhantom
 
     node SummonKey:
-      flag KeySpawned
+      set KeySpawned
 
     Upper <-> SummonKey: (macro Sword | item Boomerang | item Bow | item Hammer | macro Bombs | item GrapplingHook)
 

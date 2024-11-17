@@ -32,7 +32,7 @@ area TempleOfTheOceanKing:
     TriangleCrystalPedestal -> Main
 
     node TopLeft:
-      flag WindDraft
+      set WindDraft
       door ToB9Left
 
     node AfterTriangleCrystal:

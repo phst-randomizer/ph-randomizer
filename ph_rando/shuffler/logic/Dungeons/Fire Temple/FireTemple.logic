@@ -22,7 +22,7 @@ area FireTemple:
       chest ChestNearLavaPit
 
     node Switches:
-      flag FireMiddleDoor
+      set FireMiddleDoor
 
     node StairsMiddle:
       door F2Middle

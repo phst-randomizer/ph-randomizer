@@ -14,7 +14,7 @@ area TempleOfTheOceanKing:
 
     node LeftStairs:
       door ToB11Left
-      flag LeftOpen
+      set LeftOpen
 
     LeftStairs <-> Main: flag LeftOpen
     RightSafe <-> Main: item Hammer

@@ -7,7 +7,7 @@ area EoxBossRoom:
     node BossDefeat:
       chest Sand
       chest HeartContainer
-      flag MutohTempleBeaten
+      set MutohTempleBeaten
       door ToAquanineRoom
 
     Fight -> BossDefeat: defeated Eox

@@ -10,7 +10,7 @@ area TempleOfTheOceanKing:
 
     node TopRight:
       chest RoundCrystal
-      flag RightFire
+      set RightFire
 
     node TopRightDoor:
       lock TopRightDoor

@@ -10,7 +10,7 @@ area GoronIsland:
     node Leftmost:
       door ToWestUpper
       door ToWestLowest
-      flag GoronMazeSwitch
+      set GoronMazeSwitch
 
     node LeftmostAfterBomb:
       door ToWestUppest

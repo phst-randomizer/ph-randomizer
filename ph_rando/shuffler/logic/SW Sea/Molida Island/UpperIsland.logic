@@ -3,7 +3,7 @@ area Molida:
     node RightSide:
       door ToCaveSystemRight
       chest Cliff
-      flag SeenUpperStone
+      set SeenUpperStone
       door ToLowerIsland
 
     node Hole:
@@ -19,7 +19,7 @@ area Molida:
       chest IslandChest
 
     node Statues:
-      flag MolidaDoorOpen
+      set MolidaDoorOpen
 
     node TempleEntrance:
       door CourageTemple

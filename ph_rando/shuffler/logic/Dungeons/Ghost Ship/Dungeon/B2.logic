@@ -24,7 +24,7 @@ area GhostShip:
       door ToB3
 
     node AfterGhostKey:
-      flag StoneTetra
+      set StoneTetra
       lose TriangleCrystal
       lose SquareCrystal
       lose RoundCrystal

@@ -44,8 +44,8 @@ area CourageTemple:
 
     node PolsVoiceArea:
       enemy PolsVoice
-      flag PolsDoorOpen
-      flag KnowCourageTempleOrder
+      set PolsDoorOpen
+      set KnowCourageTempleOrder
 
     PolsVoiceStairs <-> PolsVoiceStairsToArena: state SwitchBlue
     PolsVoiceStairsToArena <-> PolsVoiceArea: state SwitchBlue
@@ -54,7 +54,7 @@ area CourageTemple:
     node PolsBombableWall:
       chest PolsLeft
       chest PolsRight
-      flag InvisibleMazePath
+      set InvisibleMazePath
 
     PolsVoiceArea <-> PolsBombableWall: macro Bombs
 
@@ -100,7 +100,7 @@ area CourageTemple:
       lose SwitchBlue
 
     node EyeTargetDoor:
-      flag BottomLeftDoor
+      set BottomLeftDoor
 
     LeftmostStairsF1 <-> LeftmostStairsF1ToBottomLeft: state SwitchRed
     LeftmostStairsF1ToBottomLeft <-> BottomLeft: state SwitchRed

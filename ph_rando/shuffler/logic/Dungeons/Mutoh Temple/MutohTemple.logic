@@ -92,7 +92,7 @@ area MutohTemple:
 
     node StairsToB2Leftmost:
       door ToB2Leftmost
-      flag OpenedB2LDoor
+      set OpenedB2LDoor
 
     MiddleStairsF1 <-> StairsToB2Leftmost: flag OpenedB2LDoor
 
@@ -123,7 +123,7 @@ area MutohTemple:
 
     node BottomLeft
     node XOPuzzle:
-      flag DoorMiddleWaterSwitch
+      set DoorMiddleWaterSwitch
 
     # Separation needed because access from one side doesn't give access to all others
     node MiddleWaterSwitchR: # from Right
@@ -197,7 +197,7 @@ area MutohTemple:
       lose WaterUp
 
     node BottomRightPuzzle:
-      flag BottomRightDoor
+      set BottomRightDoor
 
     node BottomRightToBottomRightPuzzle:
       lose WaterDown

@@ -17,7 +17,7 @@ area Bannan:
       enemy RedChuChu2
 
     node DefeatedAllEnemies:
-      flag MermaidVisible
+      set MermaidVisible
 
     node IslandLeft:
       chest IslandChest
@@ -28,7 +28,7 @@ area Bannan:
     node RightSide:
       chest CannonMiniGameBombBag
       door BannanGrottoEntranceRight
-      flag CanPlaySalvatoreMinigame
+      set CanPlaySalvatoreMinigame
 
     node IslandRight:
       chest DigSpotRight
@@ -53,7 +53,7 @@ area Bannan:
 
     node FoundMermaid:
       chest FishingRodFromOldMan
-      flag FoundMermaid
+      set FoundMermaid
 
     node DeliveredLetter:
       chest WisdomGem

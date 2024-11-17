@@ -24,7 +24,7 @@ area TempleOfTheOceanKing:
 
 
     node Switch:
-      flag LeftSpikes
+      set LeftSpikes
 
     TopOuter -> Switch: item Bombchus
     MiddleRing -> Switch: (macro Sword | item Boomerang | macro Bombs | item Bow | item Hammer)
@@ -53,7 +53,7 @@ area TempleOfTheOceanKing:
 
 
     node BrokenPlate:
-      flag HammeredPlate
+      set HammeredPlate
 
     node HammeredChest:
       chest ChestAfterHammer # treasure map NE 7
