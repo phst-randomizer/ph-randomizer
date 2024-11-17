@@ -6,7 +6,7 @@ area Mercay:
       door OshussHouse
       door RockHouse
       door OshusCave
-      flag CountedTrees
+      set CountedTrees
 
     node DigSpot:
       chest TreeDigSpot

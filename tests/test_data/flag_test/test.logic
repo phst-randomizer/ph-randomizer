@@ -1,19 +1,19 @@
 area FlagTest:
   room Test:
     node Start:
-      flag FlagStart
+      set FlagStart
 
     node Node1:
-      flag Flag1
+      set Flag1
 
     node Node2:
-      flag Flag2
+      set Flag2
 
     node Node3:
-      flag Flag3
+      set Flag3
 
     node Node4:
-      flag Flag4
+      set Flag4
 
     Start <-> Node1 # Has access to Flag1
     Start -> Node2: flag FlagStart # Has access to Flag2

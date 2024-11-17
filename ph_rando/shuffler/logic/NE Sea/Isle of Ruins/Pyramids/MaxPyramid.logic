@@ -2,4 +2,4 @@ area MaxPyramid:
   room F1:
     node Main:
       door Exit
-      flag DoorToCorridor
+      set DoorToCorridor

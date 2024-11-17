@@ -4,4 +4,4 @@ area Molida:
       door Exit
       hint WayfarerJournal
       chest ShovelChest
-      flag PathThroughFog
+      set PathThroughFog

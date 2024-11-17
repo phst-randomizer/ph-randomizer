@@ -8,7 +8,7 @@ area BlaazBossRoom:
       chest Sand
       chest SpiritOfPower
       chest HeartContainer
-      flag FireTempleBeaten
+      set FireTempleBeaten
       entrance ExitWarp
 
     Fight -> BossDefeat: defeated Blaaz

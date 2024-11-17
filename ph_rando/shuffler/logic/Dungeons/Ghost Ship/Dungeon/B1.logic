@@ -15,7 +15,7 @@ area GhostShip:
       enemy PoeArena3
 
     node SistersGathering:
-      flag RedSisterSaved
+      set RedSisterSaved
 
     node TopLeft:
       enemy SkulltulaTopLeft
@@ -104,17 +104,17 @@ area GhostShip:
     Right <-> Bottom: state RoundPedestalGhostSet
 
     node PurpleCubusBrought:
-      flag PurpleCubusSaved
+      set PurpleCubusSaved
 
     SistersGathering <-> PurpleCubusBrought: state PurpleCubusFollowing
 
     node YellowCubusBrought:
-      flag YellowCubusSaved
+      set YellowCubusSaved
 
     SistersGathering <-> YellowCubusBrought: state YellowCubusFollowing
 
     node GreenCubusBrought:
-      flag GreenCubusSaved
+      set GreenCubusSaved
 
     SistersGathering <-> GreenCubusBrought: state GreenCubusFollowing
 

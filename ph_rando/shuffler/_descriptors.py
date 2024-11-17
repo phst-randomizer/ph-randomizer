@@ -13,7 +13,7 @@ class MetaEnum(EnumMeta):
 
 class NodeDescriptor(StrEnum, metaclass=MetaEnum):
     CHEST = 'chest'
-    FLAG = 'flag'
+    SET = 'set'
     DOOR = 'door'
     ENTRANCE = 'entrance'
     EXIT = 'exit'

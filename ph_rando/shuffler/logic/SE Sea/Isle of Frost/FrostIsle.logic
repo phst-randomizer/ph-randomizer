@@ -23,7 +23,7 @@ area FrostIsle:
 
   room AnoukiChiefHouse:
     node Main:
-      flag TalkedToChief
+      set TalkedToChief
       door Exit
 
   room AnoukiRedCauldronHouse:
@@ -63,7 +63,7 @@ area FrostIsle:
 
   room ArooHouse:
     node Main:
-      flag SolvedAnouki
+      set SolvedAnouki
       door Exit
 
   room MazoHouse:

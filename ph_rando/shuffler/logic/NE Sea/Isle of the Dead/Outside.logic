@@ -34,7 +34,7 @@ area DeadIsle:
       chest HeadChest
 
     node PillarSwitch:
-      flag GraveyardDoor
+      set GraveyardDoor
 
     Head -> PillarSwitch: (item Bow | item Boomerang)
     Head -> Main
@@ -44,7 +44,7 @@ area DeadIsle:
       enemy StalfosGraveyard1
       enemy StalfosGraveyard2
       enemy StalfosGraveyard3
-      flag PathOfCorridor
+      set PathOfCorridor
 
     Main <-> Graveyard: flag GraveyardDoor
 

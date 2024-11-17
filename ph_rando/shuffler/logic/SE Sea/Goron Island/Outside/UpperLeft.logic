@@ -9,7 +9,7 @@ area GoronIsland:
       enemy LikeLike
 
     node LikeLikeDefeated:
-      flag DefeatedGoronIslandLikeLike
+      set DefeatedGoronIslandLikeLike
 
     node ChestArea:
       door ToEastUpper
@@ -23,7 +23,7 @@ area GoronIsland:
       door ToSouth
 
     node ShortcutPlate:
-      flag GoronIslandShortcut
+      set GoronIslandShortcut
 
     Main <-> LikeLikeDefeated: defeated LikeLike
     Main <-> Dungeon: flag DefeatedGoronIslandLikeLike

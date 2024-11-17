@@ -8,7 +8,7 @@ area CraykBossRoom:
       chest Sand
       chest SpiritOfCourage
       chest HeartContainer
-      flag CourageTempleBeaten
+      set CourageTempleBeaten
       entrance ExitWarp
 
     Fight -> BossDefeat: defeated Crayk

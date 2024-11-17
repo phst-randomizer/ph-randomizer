@@ -242,11 +242,11 @@ area Sea:
       door Exit
       # TODO: figure out what items are available here and create shop Area
       # shop RegularBeedle
-      flag CanAccessBeedle
+      set CanAccessBeedle
 
   room MaskedBeedleBoat:
     node Main:
       door Exit
       # TODO: figure out what items are available here and create shop Area
       # shop MaskedBeedle
-      flag CanAccessBeedle
+      set CanAccessBeedle

@@ -4,6 +4,6 @@ area SSWayfarer:
       door Exit
 
     node TradingSequence:
-      flag FinishedTradingSequence
+      set FinishedTradingSequence
 
     Boat <-> TradingSequence: item WoodHeart

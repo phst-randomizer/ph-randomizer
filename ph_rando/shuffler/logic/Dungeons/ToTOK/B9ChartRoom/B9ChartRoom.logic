@@ -4,7 +4,7 @@ area TempleOfTheOceanKing:
       door ToB9
       exit BlueWarp
       chest SeaChart
-      flag KnowCrystalOrder
+      set KnowCrystalOrder
 
     node RightOrder:
       door ToB10
