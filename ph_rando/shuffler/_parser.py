@@ -473,7 +473,7 @@ def annotate_logic(areas: list[Area], logic_directory: Path | None = None) -> No
                                             f'Invalid exit link {new_exit.entrance!r}'
                                         )
                                     node.exits.append(new_exit)
-                            case NodeDescriptor.FLAG:
+                            case NodeDescriptor.SET:
                                 node.flags.add(descriptor.value)
                             case NodeDescriptor.LOCK:
                                 assert (
