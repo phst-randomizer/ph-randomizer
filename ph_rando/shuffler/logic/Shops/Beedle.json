@@ -1,0 +1,52 @@
+{
+  "$schema": "../../aux_schema.json",
+  "name": "BeedleShop",
+  "rooms": [
+    {
+      "name": "Normal",
+      "chests": [
+        {
+          "name": "WisdomGem",
+          "type": "shop",
+          "contents": {
+            "name": "WisdomGem"
+          },
+          "overlay": 31,
+          "overlay_offset": "0x2f9c"
+        },
+        {
+          "name": "BombBagUpgrade",
+          "type": "shop",
+          "contents": {
+            "name": "BombBagUpgrade"
+          },
+          "overlay": 31,
+          "overlay_offset": "0x2ed0"
+        }
+      ]
+    },
+    {
+      "name": "Masked",
+      "chests": [
+        {
+          "name": "HeartContainer",
+          "type": "shop",
+          "contents": {
+            "name": "HeartContainer"
+          },
+          "overlay": 31,
+          "overlay_offset": "0x2e70"
+        },
+        {
+          "name": "CourageGem",
+          "type": "shop",
+          "contents": {
+            "name": "CourageGem"
+          },
+          "overlay": 31,
+          "overlay_offset": "0x2fb0"
+        }
+      ]
+    }
+  ]
+}
