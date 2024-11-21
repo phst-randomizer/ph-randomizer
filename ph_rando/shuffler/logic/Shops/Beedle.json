@@ -23,6 +23,12 @@
           "overlay": 31,
           "overlay_offset": "0x2ed0"
         }
+      ],
+      "exits": [
+        {
+          "name": "Exit",
+          "entrance": "Sea.RegularBeedleBoat.Main.Exit"
+        }
       ]
     },
     {
@@ -45,6 +51,12 @@
           },
           "overlay": 31,
           "overlay_offset": "0x2fb0"
+        }
+      ],
+      "exits": [
+        {
+          "name": "Exit",
+          "entrance": "Sea.MaskedBeedleBoat.Main.Exit"
         }
       ]
     }
