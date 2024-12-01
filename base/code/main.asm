@@ -79,7 +79,7 @@
                 pop r0, r1, r2, r3
 
                 ; original instructions. jumps back to normal game code
-                ldr r0, =0x20ae244
+                ldr r0, =0x20ae1e4
                 mov r1, 0x7d
                 ldr r0, [r0]
                 pop pc
