@@ -47,6 +47,15 @@
                 ; with the parameters that we have set here
                 b 0x212f3d8
 
+            ;@patch_sea_chart_shop_softlock:
+            ;    cmp r4, 0x12
+            ;    moveq r0, 0x1
+            ;    streq r0, [r5,0x4]
+            ;    cmp r4, 0x29
+            ;    moveq r0, 0x1
+            ;    streq r0, [r5,0x4]
+            ;    b 0x211635c
+
             .thumb
             @load_extra_overlay:
                 ; make original function call
@@ -83,6 +92,7 @@
                 mov r1, 0x7d
                 ldr r0, [r0]
                 pop pc
+
         .pool
         .endarea
 
@@ -134,12 +144,18 @@
         .area 0x6, 0x00
             bl @extend_give_item_function
         .endarea
-
 .close
 
 .open "../overlay/overlay_0003.bin", 0x20eece0
     .arm
-    ; update "got item" text ids for:
+    ; Patch softlock when buying a sea chart or treasure map in a shop.
+    ; Replace UI animation id 0x29 with id 0x6 (id when closing map)
+    ; which seems to fix the issue.
+    .org 0x20f4818
+        .area 0x1, 0x0
+            .byte 0x6
+        .endarea
+    ; Update "got item" text ids for:
     .org 0x20ffb90 ; progressive sword
         .area 0x4, 0x0
           .byte 0x8a
@@ -216,7 +232,7 @@
 
 .open "../overlay/overlay_0009.bin", 0x02112ba0
     .thumb
-    .org 0x211c09a
+    .org 0x211c09a    
         ; This overrides the routine that is in charge of spawning the correct 3D model
         ; for the randomized treasure item in the shop. This code disables this
         ; clock-based randomization and makes it a fixed item.
@@ -346,7 +362,6 @@
         .area 0x8
             b @spawn_dig_item
         .endarea
-
 .close
 
 
@@ -472,5 +487,5 @@
             .importobj "code/spawn_custom_freestanding_item.o"
             .importobj "code/custom_salvage_item.o"
             .importobj "code/extend_give_item_function.o"
-        .endarea
+        .endarea 
 .close
