@@ -47,15 +47,6 @@
                 ; with the parameters that we have set here
                 b 0x212f3d8
 
-            ;@patch_sea_chart_shop_softlock:
-            ;    cmp r4, 0x12
-            ;    moveq r0, 0x1
-            ;    streq r0, [r5,0x4]
-            ;    cmp r4, 0x29
-            ;    moveq r0, 0x1
-            ;    streq r0, [r5,0x4]
-            ;    b 0x211635c
-
             .thumb
             @load_extra_overlay:
                 ; make original function call
@@ -232,7 +223,7 @@
 
 .open "../overlay/overlay_0009.bin", 0x02112ba0
     .thumb
-    .org 0x211c09a    
+    .org 0x211c09a
         ; This overrides the routine that is in charge of spawning the correct 3D model
         ; for the randomized treasure item in the shop. This code disables this
         ; clock-based randomization and makes it a fixed item.
@@ -487,5 +478,5 @@
             .importobj "code/spawn_custom_freestanding_item.o"
             .importobj "code/custom_salvage_item.o"
             .importobj "code/extend_give_item_function.o"
-        .endarea 
+        .endarea
 .close
