@@ -138,14 +138,15 @@
 .close
 
 .open "../overlay/overlay_0003.bin", 0x20eece0
-    .arm
+    .thumb
     ; Patch softlock when buying a sea chart or treasure map in a shop.
     ; Replace UI animation id 0x29 with id 0x6 (id when closing map)
     ; which seems to fix the issue.
     .org 0x20f4818
-        .area 0x1, 0x0
-            .byte 0x6
+        .area 0x2, 0x0
+            mov r1, 0x6
         .endarea
+    .arm
     ; Update "got item" text ids for:
     .org 0x20ffb90 ; progressive sword
         .area 0x4, 0x0
