@@ -121,69 +121,69 @@ class AbstractEmulatorWrapper(ABC):
         return
 
 
-def start_first_file(desmume_emulator: AbstractEmulatorWrapper):
+def start_first_file(emulator: AbstractEmulatorWrapper):
     """From game boot, goes through the title screen and starts the first save."""
-    desmume_emulator.wait(500)
+    emulator.wait(500)
 
     # Click title screen
-    desmume_emulator.touch_set_and_release(
+    emulator.touch_set_and_release(
         (
             SCREEN_WIDTH // 2,
             SCREEN_HEIGHT // 2,
         )
     )
 
-    desmume_emulator.wait(100)
+    emulator.wait(100)
 
     # Click title screen again
-    desmume_emulator.touch_set_and_release(
+    emulator.touch_set_and_release(
         (
             SCREEN_WIDTH // 2,
             SCREEN_HEIGHT // 2,
         )
     )
-    desmume_emulator.wait(200)
+    emulator.wait(200)
 
     # Click file
-    desmume_emulator.touch_set_and_release((130, 70), 0)
-    desmume_emulator.wait(100)
+    emulator.touch_set_and_release((130, 70), 0)
+    emulator.wait(100)
 
     # Click it again
-    desmume_emulator.touch_set_and_release((130, 70), 0)
-    desmume_emulator.wait(100)
+    emulator.touch_set_and_release((130, 70), 0)
+    emulator.wait(100)
 
     # Click "Adventure"
-    desmume_emulator.touch_set_and_release((130, 70), 0)
-    desmume_emulator.wait(600)
+    emulator.touch_set_and_release((130, 70), 0)
+    emulator.wait(600)
 
 
-def get_current_rupee_count(desmume: AbstractEmulatorWrapper):
-    addr = desmume.event_flag_base_addr + 0x4FC2
-    return int.from_bytes(desmume.read_memory(addr, addr + 2), 'little')
+def get_current_rupee_count(emulator: AbstractEmulatorWrapper):
+    addr = emulator.event_flag_base_addr + 0x4FC2
+    return int.from_bytes(emulator.read_memory(addr, addr + 2), 'little')
 
 
 # Screen coordinates for each item when the "Items" menu is open
 ITEMS_MENU_COORDINATES = {'shovel': (225, 175), 'bombs': (98, 178)}
 
 
-def open_items_menu(desmume: AbstractEmulatorWrapper):
-    desmume.touch_set_and_release((SCREEN_WIDTH - 5, SCREEN_HEIGHT - 5), 5)
-    desmume.wait(20)
+def open_items_menu(emulator: AbstractEmulatorWrapper):
+    emulator.touch_set_and_release((SCREEN_WIDTH - 5, SCREEN_HEIGHT - 5), 5)
+    emulator.wait(20)
 
 
-def select_item_from_items_menu(desmume: AbstractEmulatorWrapper, item: str):
-    desmume.touch_set_and_release(ITEMS_MENU_COORDINATES[item], 5)
-    desmume.wait(20)
+def select_item_from_items_menu(emulator: AbstractEmulatorWrapper, item: str):
+    emulator.touch_set_and_release(ITEMS_MENU_COORDINATES[item], 5)
+    emulator.wait(20)
 
 
-def equip_item(desmume: AbstractEmulatorWrapper, item: str):
-    open_items_menu(desmume)
-    select_item_from_items_menu(desmume, item)
+def equip_item(emulator: AbstractEmulatorWrapper, item: str):
+    open_items_menu(emulator)
+    select_item_from_items_menu(emulator, item)
 
 
-def use_equipped_item(desmume: AbstractEmulatorWrapper):
-    desmume.touch_set_and_release((SCREEN_WIDTH, 0), 5)
-    desmume.wait(20)
+def use_equipped_item(emulator: AbstractEmulatorWrapper):
+    emulator.touch_set_and_release((SCREEN_WIDTH, 0), 5)
+    emulator.wait(20)
 
 
 @contextmanager

@@ -44,15 +44,15 @@ def test_teardown(rom_path: Path, request):
 
 
 @pytest.fixture(scope='session', params=[MelonDSWrapper, DeSmuMEWrapper])
-def desmume_instance(request):
+def emulator_instance(request):
     if request.param == DeSmuMEWrapper and not request.config.getoption('--desmume'):
         pytest.skip('desmume tests are disabled')
     elif request.param == MelonDSWrapper and not request.config.getoption('--melonds'):
         pytest.skip('melonds tests are disabled')
 
-    desmume_emulator = request.param()
-    yield desmume_emulator
-    desmume_emulator.destroy()
+    emulator = request.param()
+    yield emulator
+    emulator.destroy()
 
 
 @pytest.fixture(
@@ -68,26 +68,26 @@ def desmume_instance(request):
         )
     ]
 )
-def desmume_emulator(
-    desmume_instance: AbstractEmulatorWrapper, rom_path: Path
+def emulator(
+    emulator_instance: AbstractEmulatorWrapper, rom_path: Path
 ) -> Generator[AbstractEmulatorWrapper, Any, None]:
     video_recording_directory = os.environ.get('PY_DESMUME_VIDEO_RECORDING_DIR')
-    if video_recording_directory and isinstance(desmume_instance, DeSmuMEWrapper):
+    if video_recording_directory and isinstance(emulator_instance, DeSmuMEWrapper):
         video_path = Path(video_recording_directory) / f'{rom_path.name}.mp4'
         video_path.parent.mkdir(parents=True, exist_ok=True)
-        desmume_instance.video = cv2.VideoWriter(
+        emulator_instance.video = cv2.VideoWriter(
             str(video_path), cv2.VideoWriter_fourcc(*'avc1'), 60, (256, 384)
         )
     else:
-        desmume_instance.video = None
+        emulator_instance.video = None
 
-    yield desmume_instance
+    yield emulator_instance
 
-    desmume_instance.stop()
+    emulator_instance.stop()
 
 
 @pytest.fixture
-def rom_path(tmp_path: Path, desmume_instance, request: pytest.FixtureRequest) -> Path:
+def rom_path(tmp_path: Path, emulator_instance, request: pytest.FixtureRequest) -> Path:
     test_name: str = request.node.originalname
 
     # Path to store rom for the currently running test
@@ -96,7 +96,7 @@ def rom_path(tmp_path: Path, desmume_instance, request: pytest.FixtureRequest) -
     # Make a copy of the rom for this test
     shutil.copy(Path(os.environ['PH_ROM_PATH']), temp_rom_path)
 
-    desmume_instance.load_battery_file(test_name, temp_rom_path)
+    emulator_instance.load_battery_file(test_name, temp_rom_path)
 
     # Apply base patches to ROM
     patched_rom = apply_base_patch(temp_rom_path.read_bytes())
@@ -110,9 +110,9 @@ def rom_path(tmp_path: Path, desmume_instance, request: pytest.FixtureRequest) -
 
 
 @pytest.fixture
-def base_rom_emu(rom_path: Path, desmume_emulator: AbstractEmulatorWrapper):
-    desmume_emulator.open(str(rom_path))
-    return desmume_emulator
+def base_rom_emu(rom_path: Path, emulator: AbstractEmulatorWrapper):
+    emulator.open(str(rom_path))
+    return emulator
 
 
 class ItemMemoryAddressType(Enum):
