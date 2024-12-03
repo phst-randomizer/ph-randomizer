@@ -23,11 +23,13 @@ test = [
     "pytesseract~=0.3.13",
     "pytest~=7.4.2",
     "pytest-repeat~=0.9.1",
+    "pytest-rerunfailures~=14.0",
     "pytest-xdist~=3.5.0",
     "tqdm~=4.66.1",
 ]
 desmume = [
     "py-desmume==0.0.6",
+    "birds-eye-lib@git+https://github.com/SkiHatDuckie/birds-eye.git@662d148c80830e8399e7025ba92fa44da01afa1c",
 ]
 types = [
     "mypy==1.8.0",
@@ -76,5 +78,12 @@ disallow_untyped_defs = false
 # These third-party libraries don't expose type information,
 # so we tell mypy not to try to type-check our usage of them.
 [[tool.mypy.overrides]]
-module = ['cv2.*', 'desmume.*', 'ndspy.*', 'pytesseract.*', 'zed.*']
+module = [
+    'birdseyelib.*',
+    'cv2.*',
+    'desmume.*',
+    'ndspy.*',
+    'pytesseract.*',
+    'zed.*'
+]
 ignore_missing_imports = true
