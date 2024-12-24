@@ -49,11 +49,12 @@
         },
         "type": {
           "const": "flag",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "default": {
-          "title": "Default",
-          "type": "boolean"
+          "type": "boolean",
+          "title": "Default"
         }
       },
       "required": [
@@ -113,7 +114,8 @@
         },
         "type": {
           "const": "multiple_choice",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "choices": {
           "items": {
@@ -124,12 +126,12 @@
           "uniqueItems": true
         },
         "default": {
+          "type": "array",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           },
-          "title": "Default",
-          "type": "array",
-          "uniqueItems": true
+          "title": "Default"
         }
       },
       "required": [
@@ -190,7 +192,8 @@
         },
         "type": {
           "const": "single_choice",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "choices": {
           "items": {
@@ -201,8 +204,8 @@
           "uniqueItems": true
         },
         "default": {
-          "title": "Default",
-          "type": "string"
+          "type": "string",
+          "title": "Default"
         }
       },
       "required": [

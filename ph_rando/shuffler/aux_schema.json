@@ -8,11 +8,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -30,7 +26,8 @@
         },
         "type": {
           "const": "boss_reward",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       },
       "required": [
@@ -49,11 +46,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -71,7 +64,8 @@
         },
         "type": {
           "const": "chest",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "zmb_file_path": {
           "description": "File path to the zmb the chest is on",
@@ -103,11 +97,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -125,7 +115,8 @@
         },
         "type": {
           "const": "dig_spot",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "zmb_file_path": {
           "description": "File path to the zmb the chest is on",
@@ -179,11 +170,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -201,7 +188,8 @@
         },
         "type": {
           "const": "event",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "bmg_file_path": {
           "description": "File path to the bmg the instruction is on",
@@ -255,11 +243,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -277,7 +261,8 @@
         },
         "type": {
           "const": "freestanding",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       },
       "required": [
@@ -319,11 +304,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -341,7 +322,8 @@
         },
         "type": {
           "const": "mail",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       },
       "required": [
@@ -360,11 +342,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -382,7 +360,8 @@
         },
         "type": {
           "const": "minigame_reward_chest",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       },
       "required": [
@@ -401,11 +380,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -423,7 +398,8 @@
         },
         "type": {
           "const": "on_enemy",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       },
       "required": [
@@ -539,11 +515,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -561,7 +533,8 @@
         },
         "type": {
           "const": "salvage_treasure",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "zmb_file_path": {
           "description": "File path to the zmb the chest is on",
@@ -593,11 +566,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -615,7 +584,8 @@
         },
         "type": {
           "const": "shop",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "overlay": {
           "description": "The code overlay this shop item is on",
@@ -647,11 +617,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -669,7 +635,8 @@
         },
         "type": {
           "const": "spirit_upgrade",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         }
       },
       "required": [
@@ -688,11 +655,7 @@
           "type": "string"
         },
         "contents": {
-          "allOf": [
-            {
-              "$ref": "#/$defs/Item"
-            }
-          ],
+          "$ref": "#/$defs/Item",
           "description": "The item that this check contains"
         },
         "display_name": {
@@ -710,7 +673,8 @@
         },
         "type": {
           "const": "tree",
-          "title": "Type"
+          "title": "Type",
+          "type": "string"
         },
         "zmb_file_path": {
           "description": "File path to the zmb the tree is on",
