@@ -48,7 +48,10 @@ def click_setting_options(function: Callable) -> Callable[[FC], FC]:
             type=bool if setting.type == 'flag' else click.Choice(list(setting.choices)),
             help=setting.description,
             show_default=True,
-            **click_option_kwargs,
+            # TODO: i can't get mypy to type check this correctly.
+            # `default=None` has a different meaning than not providing the argument,
+            # so we need to use dict unpacking here.
+            **click_option_kwargs,  # type: ignore
         )(function)
 
     return function
