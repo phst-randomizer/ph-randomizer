@@ -131,10 +131,13 @@ class RandomizerUi(QWidget):
         return seed_widget
 
     def render_file_open_ui(self) -> None:
-        layout = self.layout()
-
         groupbox = QGroupBox('ROM Selection')
+
+        layout = self.layout()
+        if layout is None:
+            raise ValueError('Layout is not initialized!')
         layout.addWidget(groupbox)
+
         vbox = QVBoxLayout()
         groupbox.setLayout(vbox)
 
@@ -156,7 +159,10 @@ class RandomizerUi(QWidget):
         }
 
         groupbox = QGroupBox('Randomizer Settings')
-        self.layout().addWidget(groupbox)
+        layout = self.layout()
+        if layout is None:
+            raise ValueError('Layout is not initialized!')
+        layout.addWidget(groupbox)
 
         hbox = QHBoxLayout()
         groupbox.setLayout(hbox)
@@ -216,6 +222,8 @@ class RandomizerUi(QWidget):
 
     def render_bottom_panel(self) -> None:
         layout = self.layout()
+        if layout is None:
+            raise ValueError('Layout is not initialized!')
 
         def _on_randomize_button_click() -> None:
             # TODO: actually validate these properly instead of using asserts
