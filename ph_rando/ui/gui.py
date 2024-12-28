@@ -185,14 +185,14 @@ class RandomizerUi(QWidget):
                 chbox.setChecked(setting.default)
                 internal_hbox.addWidget(chbox)
 
-                def _on_chbox_change(checkbox: QCheckBox, setting: str) -> None:
-                    new_value = not self.settings[setting]
-                    assert isinstance(new_value, bool)  # for type-checker
-                    self.settings[setting] = new_value
-                    checkbox.setChecked(new_value)
+                def _on_chbox_change(checked: bool, checkbox: QCheckBox, setting: str) -> None:
+                    self.settings[setting] = checked
+                    checkbox.setChecked(checked)
 
                 chbox.clicked.connect(
-                    lambda chbox=chbox, setting=setting.name: _on_chbox_change(chbox, setting)
+                    lambda checked, chbox=chbox, setting=setting.name: _on_chbox_change(
+                        checked, chbox, setting
+                    )
                 )
             elif setting.type == 'single_choice':
                 assert (
