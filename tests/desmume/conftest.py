@@ -1,5 +1,6 @@
 from collections.abc import Generator
 from enum import Enum
+import logging
 import os
 from pathlib import Path
 import shutil
@@ -13,6 +14,8 @@ from ph_rando.patcher._util import _patch_system_bmg, apply_base_patch
 from .desmume import DeSmuMEWrapper
 from .emulator_utils import AbstractEmulatorWrapper
 from .melonds import MelonDSWrapper
+
+logger = logging.getLogger(__name__)
 
 
 def pytest_addoption(parser):
@@ -33,7 +36,10 @@ def test_teardown(rom_path: Path, request):
 
     # If the test didn't fail, just delete the recording
     if tests_failed_before == request.session.testsfailed:
-        video_path.unlink(missing_ok=True)
+        try:
+            video_path.unlink(missing_ok=True)
+        except PermissionError:
+            logger.warning(f'Failed to delete video recording {video_path}')
         return
 
     for file in video_path.parent.iterdir():
