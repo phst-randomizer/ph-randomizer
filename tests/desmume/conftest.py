@@ -76,7 +76,7 @@ def emulator(
         video_path = Path(video_recording_directory) / f'{rom_path.name}.mp4'
         video_path.parent.mkdir(parents=True, exist_ok=True)
         emulator_instance.video = cv2.VideoWriter(
-            str(video_path), cv2.VideoWriter_fourcc(*'avc1'), 60, (256, 384)
+            str(video_path), cv2.VideoWriter_fourcc(*'mp4v'), 60, (256, 384)
         )
     else:
         emulator_instance.video = None
