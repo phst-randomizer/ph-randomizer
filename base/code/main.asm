@@ -456,6 +456,14 @@
         .endarea
 .close
 
+.open "../overlay/overlay_0052.bin", 0x2195460
+    .arm
+    .org 0x219613C
+        .area 0x4, 0xff
+            mov r4, 0x2D ; Change the goron game reward from bombchu bag to power gem
+        .endarea
+.close
+
 ; Note: this is an extra overlay added by the randomizer.
 ; It is not present in the original rom, and must be added prior
 ; to executing this ARMIPS patch.
