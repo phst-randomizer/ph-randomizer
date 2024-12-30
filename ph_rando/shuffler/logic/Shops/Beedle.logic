@@ -1,0 +1,13 @@
+area BeedleShop:
+  room Normal:
+    node Main:
+      door Exit
+      chest WisdomGem
+      chest BombBagUpgrade
+  room Masked:
+    node Main:
+      door Exit
+      chest HeartContainer
+      chest CourageGem
+      # chest RandomShipPart
+      # chest RandomTreasure
