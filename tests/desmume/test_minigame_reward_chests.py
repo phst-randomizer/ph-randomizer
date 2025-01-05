@@ -2,7 +2,6 @@ from pathlib import Path
 
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
 from ndspy.rom import NintendoDSRom
-import pytesseract
 import pytest
 
 from ph_rando.common import ShufflerAuxData
@@ -12,7 +11,7 @@ from ph_rando.shuffler.aux_models import Item, MinigameRewardChest
 from tests.desmume.conftest import GOT_ITEM_TEXT, ITEM_MEMORY_OFFSETS
 from tests.desmume.emulator_utils import assert_item_is_picked_up
 
-from .emulator_utils import AbstractEmulatorWrapper, start_first_file
+from .emulator_utils import AbstractEmulatorWrapper, assert_text_displayed, start_first_file
 from .melonds import MelonDSWrapper
 
 
@@ -208,11 +207,8 @@ def test_minigame_reward_chests(minigame_reward_chest_emu: AbstractEmulatorWrapp
         minigame_reward_chest_emu.wait(800)
 
         # Check if the "got item" text is correct
-        if hasattr(minigame_reward_chest_emu, 'screenshot') and item_id in GOT_ITEM_TEXT:
-            ocr_text: str = pytesseract.image_to_string(
-                minigame_reward_chest_emu.screenshot().crop((24, 325, 231, 384))
-            ).replace('\u2019', "'")
-            assert GOT_ITEM_TEXT[item_id] in ocr_text
+        if item_id in GOT_ITEM_TEXT:
+            assert_text_displayed(minigame_reward_chest_emu, GOT_ITEM_TEXT[item_id])
 
         minigame_reward_chest_emu.touch_set_and_release((0, 0), 2)
         minigame_reward_chest_emu.wait(200)
