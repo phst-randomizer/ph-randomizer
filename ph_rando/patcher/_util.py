@@ -15,7 +15,16 @@ from zed.zmb import ZMB
 from ph_rando.common import ShufflerAuxData
 from ph_rando.patcher._bmgs import BMGS
 from ph_rando.patcher._items import ITEMS
-from ph_rando.shuffler.aux_models import Area, Chest, DigSpot, Event, SalvageTreasure, Shop, Tree
+from ph_rando.shuffler.aux_models import (
+    Area,
+    Chest,
+    DigSpot,
+    Event,
+    MinigameRewardChest,
+    SalvageTreasure,
+    Shop,
+    Tree,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -385,6 +394,48 @@ def _patch_shop_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
         ].save(compress=False)
         input_rom.arm9OverlayTable = code.saveOverlayTable(overlay_table)
         input_rom.arm9 = arm9_executable
+
+
+def _patch_minigame_items(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:
+    logging.info('Patching minigame items...')
+
+    items: dict[str, MinigameRewardChest] = {
+        '.'.join([area.name, room.name, chest.name]): chest
+        for area in areas
+        for room in area.rooms
+        for chest in room.chests
+        if type(chest) is MinigameRewardChest
+    }
+
+    # Load overlay table
+    overlay_table: dict[int, code.Overlay] = input_rom.loadArm9Overlays()
+
+    for name, item in items.items():
+        item_id = ITEMS[item.contents.name]
+        if item_id == -1:
+            logger.warning(f'Skipping {item.name}, item {item.contents.name} ID is unknown.')
+            continue
+        elif item.overlay == -1:
+            logger.warning(f'Skipping {item.name}, overlay is unknown.')
+            continue
+
+        logger.info(f'Patching check "{name}" with item {item.contents.name}')
+        assert isinstance(item, MinigameRewardChest)
+
+        # Note, the offset is stored as a string in the aux data so that it can be represented as
+        # a hex value for readability. So, we must convert it to an `int` here.
+        try:  # TODO: remove this try/catch when all offsets are set correctly in aux data
+            overlay_offset = int(item.overlay_offset, base=16)
+        except ValueError:
+            logger.warning(f'Invalid overlay offset "{item.overlay_offset}" for {item.name}.')
+            continue
+
+        # Set the item id to the new one.
+        overlay_table[item.overlay].data[overlay_offset] = item_id
+
+        input_rom.files[overlay_table[item.overlay].fileID] = overlay_table[item.overlay].save(
+            compress=False
+        )
 
 
 def _patch_bmg_events(areas: list[Area], input_rom: rom.NintendoDSRom) -> None:

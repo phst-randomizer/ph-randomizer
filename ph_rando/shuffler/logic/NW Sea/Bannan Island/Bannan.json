@@ -31,6 +31,8 @@
           "contents": {
             "name": "BombBagUpgrade"
           },
+          "overlay": -1,
+          "overlay_offset": "0",
           "display_name": "Win the minigame"
         },
         {

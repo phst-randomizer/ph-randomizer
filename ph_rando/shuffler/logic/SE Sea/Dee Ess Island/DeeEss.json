@@ -21,6 +21,8 @@
           "contents": {
             "name": "BombchuBagUpgrade"
           },
+          "overlay": 52,
+          "overlay_offset": "0xCDC",
           "display_name": "Win Gongoron minigame"
         },
         {
