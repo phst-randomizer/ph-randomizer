@@ -362,12 +362,25 @@
           "const": "minigame_reward_chest",
           "title": "Type",
           "type": "string"
+        },
+        "overlay": {
+          "description": "The code overlay this minigame chest item is on",
+          "title": "Overlay",
+          "type": "integer"
+        },
+        "overlay_offset": {
+          "description": "Hex offset from overlay to the minigame chest item",
+          "minLength": 1,
+          "title": "Overlay Offset",
+          "type": "string"
         }
       },
       "required": [
         "name",
         "contents",
-        "type"
+        "type",
+        "overlay",
+        "overlay_offset"
       ],
       "title": "MinigameRewardChest",
       "type": "object"
