@@ -115,6 +115,10 @@ class DigSpot(BaseCheck):
 
 class MinigameRewardChest(BaseCheck):
     type: Literal['minigame_reward_chest']
+    overlay: int = Field(..., description='The code overlay this minigame chest item is on')
+    overlay_offset: str = Field(
+        ..., description='Hex offset from overlay to the minigame chest item', min_length=1
+    )
     # TODO: what other fields are needed?
 
 

@@ -35,6 +35,13 @@ def main():
     )
     matrix = workflow_yaml['jobs']['generate-base-patch']['strategy']['matrix']
 
+    extended_matrix = {'include': []}
+    for include in matrix['include']:
+        for emulator in ('desmume', 'melonds'):
+            extended_matrix['include'].append(include | {'emulator': emulator})
+
+    matrix = extended_matrix
+
     new_matrix = {'include': []}
 
     for module in test_modules:

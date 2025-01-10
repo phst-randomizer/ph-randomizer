@@ -16,9 +16,6 @@ RUN cd Flips && ./make-linux.sh
 # Build base patch
 FROM python:3.12 AS build
 WORKDIR /app
-# Copy compiled armips, and flips binaries from previous stages
-COPY --from=compile_armips /armips/armips /app
-COPY --from=compile_flips /Flips/flips /app
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
@@ -35,6 +32,9 @@ ADD code/* /app/code/
 ADD extract_rom.py /app
 ADD rebuild_rom.py /app
 ADD Makefile /app
+# Copy compiled armips, and flips binaries from previous stages
+COPY --from=compile_armips /armips/armips /app
+COPY --from=compile_flips /Flips/flips /app
 # Create base patch
 ARG PH_ROM_PATH
 ARG VERSION_STRING
