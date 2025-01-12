@@ -84,6 +84,20 @@
                 ldr r0, [r0]
                 pop pc
 
+            .thumb
+            @set_starting_items:
+                push lr
+
+                push r1 ; save r1, as it's used later on in the original code
+                bl set_starting_items
+                pop r1 ; restore r1
+
+                ; These three instructions are the original instructions that the `bl` to this current
+                ; function replaced. They are needed to be able to return to the original code.
+                mov r0, 0x3C
+                mul r0, r1
+
+                pop pc
         .pool
         .endarea
 
@@ -127,6 +141,16 @@
             blx get_item_model
 
             b 0x20ADC02
+        .pool
+        .endarea
+
+    .thumb
+    .org 0x20ad20e
+        .area 0x6, 0x00
+            ; hook into the function that sets the starting item flags
+            bl @set_starting_items
+            ; original instruction, do not change
+            b 0x20ad216
         .pool
         .endarea
 
@@ -479,5 +503,6 @@
             .importobj "code/spawn_custom_freestanding_item.o"
             .importobj "code/custom_salvage_item.o"
             .importobj "code/extend_give_item_function.o"
+            .importobj "code/set_starting_items.o"
         .endarea
 .close
