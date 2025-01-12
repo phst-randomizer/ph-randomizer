@@ -79,10 +79,11 @@
                 pop r0, r1, r2, r3
 
                 ; original instructions. jumps back to normal game code
-                ldr r0, =0x20ae244
+                ldr r0, =0x20ae1e4
                 mov r1, 0x7d
                 ldr r0, [r0]
                 pop pc
+
         .pool
         .endarea
 
@@ -134,12 +135,19 @@
         .area 0x6, 0x00
             bl @extend_give_item_function
         .endarea
-
 .close
 
 .open "../overlay/overlay_0003.bin", 0x20eece0
+    .thumb
+    ; Patch softlock when buying a sea chart or treasure map in a shop.
+    ; Replace UI animation id 0x29 with id 0x6 (id when closing map)
+    ; which seems to fix the issue.
+    .org 0x20f4818
+        .area 0x2, 0x0
+            mov r1, 0x6
+        .endarea
     .arm
-    ; update "got item" text ids for:
+    ; Update "got item" text ids for:
     .org 0x20ffb90 ; progressive sword
         .area 0x4, 0x0
           .byte 0x8a
@@ -346,7 +354,6 @@
         .area 0x8
             b @spawn_dig_item
         .endarea
-
 .close
 
 

@@ -117,7 +117,7 @@
         },
         {
           "name": "RegularBeedle",
-          "entrance": "RegularBeedleBoat.Main.Exit"
+          "entrance": "BeedleShop.Normal.Main.Exit"
         },
         {
           "name": "FogNW",
@@ -502,7 +502,7 @@
         },
         {
           "name": "MaskedBeedle",
-          "entrance": "MaskedBeedleBoat.Main.Exit"
+          "entrance": "BeedleShop.Masked.Main.Exit"
         },
         {
           "name": "RuinsIslePort",
