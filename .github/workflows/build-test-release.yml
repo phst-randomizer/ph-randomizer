@@ -511,7 +511,7 @@ jobs:
         uses: actions/download-artifact@v4
         env:
           # https://github.com/docker/build-push-action#summaries
-          DOCKER_BUILD_SUMMARY: false
+          DOCKER_BUILD_RECORD_UPLOAD: false
 
       - name: Move all patch files into the same directory so pyinstaller can find them
         run: |
@@ -628,7 +628,7 @@ jobs:
         uses: actions/download-artifact@v4
         env:
           # https://github.com/docker/build-push-action#summaries
-          DOCKER_BUILD_SUMMARY: false
+          DOCKER_BUILD_RECORD_UPLOAD: false
 
       - name: Replace commit hash with version string
         run: |
