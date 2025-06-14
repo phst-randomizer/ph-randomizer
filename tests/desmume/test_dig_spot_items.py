@@ -17,7 +17,6 @@ from .emulator_utils import (
     start_first_file,
     use_equipped_item,
 )
-from .melonds import MelonDSWrapper
 
 
 @pytest.fixture
@@ -28,8 +27,6 @@ def dig_spot_test_emu(
     aux_data: ShufflerAuxData,
 ):
     """Generate and run a rom with a custom dig/shovel spot item set."""
-    if isinstance(emulator, MelonDSWrapper):
-        pytest.skip('This test is broken on melonDS. TODO: Fix it and remove this skip')
     rom = NintendoDSRom.fromFile(rom_path)
     chests = [
         chest
