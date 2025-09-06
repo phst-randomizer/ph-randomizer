@@ -291,3 +291,6 @@ class MelonDSWrapper(AbstractEmulatorWrapper):
     def stop(self):
         logger.debug('Stopping MelonDS')
         self.destroy()
+
+    def screenshot(self):
+        pytest.skip('MelonDSWrapper does not support screenshots')

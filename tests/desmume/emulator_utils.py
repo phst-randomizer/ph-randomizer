@@ -1,13 +1,17 @@
 from abc import ABC, abstractmethod
 from collections.abc import Callable, Generator
 from contextlib import contextmanager
+import logging
 from pathlib import Path
 import struct
 
 from desmume.emulator import SCREEN_HEIGHT, SCREEN_WIDTH
+import pytesseract
 
 from ph_rando.patcher._items import ITEMS
 from ph_rando.shuffler.aux_models import Area
+
+logger = logging.getLogger(__name__)
 
 
 class AbstractEmulatorWrapper(ABC):
@@ -107,6 +111,10 @@ class AbstractEmulatorWrapper(ABC):
 
     @abstractmethod
     def load_battery_file(self, test_name: str, rom_path: Path):
+        raise NotImplementedError
+
+    @abstractmethod
+    def screenshot(self):
         raise NotImplementedError
 
     @property
@@ -282,3 +290,23 @@ def prevent_actor_spawn(
 
     # Clear callback on context manager exit
     emu_instance.set_exec_breakpoint(0x20C3FE8, None)
+
+
+def assert_text_displayed(emu_instance: AbstractEmulatorWrapper, text: str) -> None:
+    """
+    Asserts that the given text is displayed on the screen.
+    """
+    from .desmume import DeSmuMEWrapper
+
+    if not isinstance(emu_instance, DeSmuMEWrapper):
+        logger.warning('Text assertion only supported for DeSmuME emulator.')
+        return
+
+    screenshot = emu_instance.screenshot()
+
+    # Check if the text is correct
+    ocr_text: str = pytesseract.image_to_string(screenshot.crop((24, 325, 231, 384))).replace(
+        '\u2019', "'"
+    )
+
+    assert text in ocr_text
