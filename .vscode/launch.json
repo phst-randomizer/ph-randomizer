@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug DeSmuME (GDB Stub)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/bin/true",
+      "miDebuggerServerAddress": "localhost:8000",
+      "miDebuggerPath": "/usr/bin/gdb-multiarch",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "stopAtConnect": true,
+      "setupCommands": [
+        {
+          "description": "Set architecture to ARM",
+          "text": "set architecture arm",
+          "ignoreFailures": false
+        },
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "launch-desmume"
+    }
+  ]
+}

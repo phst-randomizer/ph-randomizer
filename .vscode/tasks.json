@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "launch-desmume",
+      "type": "shell",
+      "command": "desmume",
+      "args": [
+        "${input:romPath}",
+        "--arm9gdb=8000"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "."
+        }
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "romPath",
+      "type": "command",
+      "command": "extension.commandvariable.file.pickFile",
+      "args": {
+        "include": "**/*.nds"
+      }
+    }
+  ]
+}
