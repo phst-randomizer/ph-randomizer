@@ -15,7 +15,12 @@ dependencies = [
     "zed@git+https://github.com/phst-randomizer/zed.git@e59a9653ea1344cbc147bab446821813200b9d19",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
+dev = [
+    "pre-commit~=4.3.0",
+    "tox~=4.23.2",
+    "tox-uv~=1.16.0",
+]
 test = [
     "PyYAML==6.0.2",
     "numpy~=1.26.1",
@@ -46,13 +51,17 @@ ph_rando_shuffler = "ph_rando.shuffler.main:shuffler_cli"
 ph_rando_patcher = "ph_rando.patcher.main:patcher_cli"
 
 [build-system]
-requires = ["setuptools>68", "setuptools_scm"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
-[tool.setuptools]
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build]
 packages = ["ph_rando"]
-
-[tool.setuptools_scm]
 
 [tool.black]
 exclude = '\.eggs|\.git|\.mypy_cache|\.tox|\.venv|_build|buck-out|dist'
