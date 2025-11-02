@@ -14,7 +14,7 @@ OBJ=$(OBJ_CPP) $(OBJ_C)
 ASM=$(SRC_CPP:.cpp=.asm) $(SRC_C:.c=.asm)
 
 # Set up compilation flags
-CXXFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Os -nostdlib -fno-exceptions -fno-rtti -Wno-multichar
+CXXFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Os -nostdlib -fno-exceptions -fno-rtti -Wno-multichar -fpermissive -I$(SRC_DIR)/external/ph-decomp/include -I$(SRC_DIR)/external/ph-decomp/libs/nds/include -I$(SRC_DIR)/external/ph-decomp/libs/c/include
 CFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Wall -Os -nostdlib
 
 INPUT_NDS_FILE=$(PH_ROM_PATH)
