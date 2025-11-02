@@ -1,16 +1,21 @@
 .PHONY: all debug
 
-# Set ARM compiler
+# Set ARM compiler (using g++ for C++ support)
+CXX=arm-none-eabi-g++
 CC=arm-none-eabi-gcc
 
-# Set up compilation flags
-CFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Wall -Os
-
-# C source file directory
+# C++ source file directory
 SRC_DIR=code
-SRC=$(wildcard $(SRC_DIR)/*.c)
-OBJ=$(SRC:.c=.o)
-ASM=$(SRC:.c=.asm)
+SRC_CPP=$(wildcard $(SRC_DIR)/*.cpp)
+SRC_C=$(wildcard $(SRC_DIR)/*.c)
+OBJ_CPP=$(SRC_CPP:.cpp=.o)
+OBJ_C=$(SRC_C:.c=.o)
+OBJ=$(OBJ_CPP) $(OBJ_C)
+ASM=$(SRC_CPP:.cpp=.asm) $(SRC_C:.c=.asm)
+
+# Set up compilation flags
+CXXFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Os -nostdlib -fno-exceptions -fno-rtti -Wno-multichar
+CFLAGS	:=	-marm -mno-thumb-interwork -march=armv5te -mtune=arm946e-s -fno-inline -Wall -Os -nostdlib
 
 INPUT_NDS_FILE=$(PH_ROM_PATH)
 PREPATCHED_NDS_FILE=prepatched.nds
@@ -35,9 +40,17 @@ $(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
 # Same as `all`, but also includes readable .asm file
 debug: $(OBJ) $(ASM)
 
+# Compile C++ source file to assembly code
+%.asm: %.cpp
+	$(CXX) $(CXXFLAGS) -S "$<" -o "$@" -fverbose-asm
+
 # Compile C source file to assembly code
 %.asm: %.c
 	$(CC) $(CFLAGS) -S "$<" -o "$@" -fverbose-asm
+
+# Compile C++ source file to object file
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c "$<" -o "$@"
 
 # Compile C source file to object file
 %.o: %.c
