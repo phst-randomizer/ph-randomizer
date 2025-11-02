@@ -1,9 +1,9 @@
-#include <stdint.h>
+#include "ph.hpp"
 
 extern "C" {
 
-uint32_t extend_RUPY_npc(uint32_t *addr) {
-  uint32_t rupy_type = addr[0x56];
+u32 extend_RUPY_npc(u32 *addr) {
+  u32 rupy_type = addr[0x56];
   switch (rupy_type) {
   case 3:
     return 9;

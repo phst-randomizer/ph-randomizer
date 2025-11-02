@@ -1,21 +1,20 @@
 #include "ph.hpp"
 #include "rando_settings.h"
-#include <stdint.h>
 
 extern "C" {
 
 #define NO_SETTING -1, 0
 
 typedef struct {
-  uint16_t flag_offset;   // offset of the flag from the "base address" (see first
+  u16 flag_offset;   // offset of the flag from the "base address" (see first
                           // arg of set_initial_flags() )
-  uint8_t flag_bit;       // the bit within the value @ flag_offset that represents
+  u8 flag_bit;       // the bit within the value @ flag_offset that represents
                           // this flag
-  int32_t setting_offset; // offset of the randomizer setting that this flag is
+  s32 setting_offset; // offset of the randomizer setting that this flag is
                           // gated behind, or -1 if it's not gated behind any
                           // settings. Make this a 32 bit uint to pad struct to
                           // 16 bytes
-  uint8_t setting_bit;    // the bit within the value @ setting_offset that this
+  u8 setting_bit;    // the bit within the value @ setting_offset that this
                           // represents this setting
 } Flag;
 
@@ -74,14 +73,14 @@ Flag flags[] = {
     {0x24, 0x20, NO_SETTING}, // blew dust off of NW sea chart
 };
 
-static void set_flag(uint32_t addr, uint8_t bit) {
-  *((uint8_t *)addr) |= bit;
+static void set_flag(u32 addr, u8 bit) {
+  *((u8 *)addr) |= bit;
 }
 
-void set_initial_flags(uint32_t base_flag_address) {
+void set_initial_flags(u32 base_flag_address) {
   for (int i = 0; i < sizeof(flags) / sizeof(Flag); i++) {
     Flag f = flags[i];
-    if (f.setting_offset == -1 || setting_is_enabled((uint8_t)f.setting_offset, f.setting_bit)) {
+    if (f.setting_offset == -1 || setting_is_enabled((u8)f.setting_offset, f.setting_bit)) {
       set_flag(base_flag_address + f.flag_offset, f.flag_bit);
     }
   }

@@ -1,5 +1,4 @@
-#include <stdbool.h>
-#include <stdint.h>
+#include "ph.hpp"
 
 #define OSHUS_SWORD_FLAG_OFFSET (0x128)
 #define OSHUS_SWORD_FLAG_BIT (0x1)
@@ -8,12 +7,12 @@
 
 extern "C" {
 
-__attribute__((target("thumb"))) void progressive_sword_check(const uint32_t base_address) {
+__attribute__((target("thumb"))) void progressive_sword_check(const u32 base_address) {
   // Address of oshus sword flag
-  uint8_t *oshus_sword = (uint8_t *)(base_address + OSHUS_SWORD_FLAG_OFFSET);
+  u8 *oshus_sword = (u8 *)(base_address + OSHUS_SWORD_FLAG_OFFSET);
 
   // Address of phantom sword flag
-  uint8_t *phantom_sword = (uint8_t *)(base_address + PHANTOM_SWORD_FLAG_OFFSET);
+  u8 *phantom_sword = (u8 *)(base_address + PHANTOM_SWORD_FLAG_OFFSET);
 
   // Check if player has the oshus sword
   bool has_oshus_sword = (*oshus_sword & OSHUS_SWORD_FLAG_BIT) == OSHUS_SWORD_FLAG_BIT;

@@ -1,8 +1,7 @@
 #ifndef RANDO_SETTINGS_H
 #define RANDO_SETTINGS_H
 
-#include <stdbool.h>
-#include <stdint.h>
+#include "ph.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,7 +23,7 @@ extern "C" {
  * `RANDO_SETTINGS_BITMAP_ADDR[offset]` byte
  * @return true if setting is enabled, false if it is disabled
  */
-bool setting_is_enabled(uint8_t offset, uint8_t bit);
+bool setting_is_enabled(u8 offset, u8 bit);
 
 #ifdef __cplusplus
 }

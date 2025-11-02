@@ -1,11 +1,10 @@
 #include "ph.hpp"
-#include <stdint.h>
 
 #define NEW_DATA_FILE_PATH_PREFIX "r/"
 
 extern "C" {
 
-void get_item_model(uint32_t item_id, char *nsbmd_dest, char *nsbtx_dest) {
+void get_item_model(u32 item_id, char *nsbmd_dest, char *nsbtx_dest) {
   char *model_name;
   char *model_file_path_prefix = NEW_DATA_FILE_PATH_PREFIX;
 
