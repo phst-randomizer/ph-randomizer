@@ -6,6 +6,8 @@
 #define PHANTOM_SWORD_FLAG_OFFSET (0x12C)
 #define PHANTOM_SWORD_FLAG_BIT (0x20)
 
+extern "C" {
+
 __attribute__((target("thumb"))) void progressive_sword_check(const uint32_t base_address) {
   // Address of oshus sword flag
   uint8_t *oshus_sword = (uint8_t *)(base_address + OSHUS_SWORD_FLAG_OFFSET);
@@ -24,3 +26,5 @@ __attribute__((target("thumb"))) void progressive_sword_check(const uint32_t bas
     *oshus_sword |= OSHUS_SWORD_FLAG_BIT;
   }
 }
+
+} // extern "C"

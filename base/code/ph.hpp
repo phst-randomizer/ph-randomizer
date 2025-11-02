@@ -1,5 +1,12 @@
+#ifndef PH_RANDOMIZER_H
+#define PH_RANDOMIZER_H
+
 #include <stdbool.h>
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // This header file contains definitions for functions, variables, struct
 // definitions, etc that are present in the base game.
@@ -30,7 +37,7 @@ typedef struct {
 
 extern bool LoadOverlay(Overlay *overlay);
 
-typedef struct {
+typedef struct NPC {
   uint32_t npc_id;
   uint32_t (*spawn_function)(void);
   uint32_t unknown1;
@@ -102,3 +109,9 @@ typedef struct {
 } HealthManager;
 
 extern HealthManager *gHealthManager;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // PH_RANDOMIZER_H

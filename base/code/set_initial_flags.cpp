@@ -1,6 +1,8 @@
-#include "ph.h"
+#include "ph.hpp"
 #include "rando_settings.h"
 #include <stdint.h>
+
+extern "C" {
 
 #define NO_SETTING -1, 0
 
@@ -84,3 +86,5 @@ void set_initial_flags(uint32_t base_flag_address) {
     }
   }
 }
+
+} // extern "C"

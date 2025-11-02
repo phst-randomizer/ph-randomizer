@@ -1,7 +1,9 @@
-#include "ph.h"
+#include "ph.hpp"
 #include <stdint.h>
 
 #define NEW_DATA_FILE_PATH_PREFIX "r/"
+
+extern "C" {
 
 void get_item_model(uint32_t item_id, char *nsbmd_dest, char *nsbtx_dest) {
   char *model_name;
@@ -29,3 +31,5 @@ void get_item_model(uint32_t item_id, char *nsbmd_dest, char *nsbtx_dest) {
   strcat(nsbtx_dest, model_name);
   strcat(nsbtx_dest, ".nsbtx");
 }
+
+} // extern "C"

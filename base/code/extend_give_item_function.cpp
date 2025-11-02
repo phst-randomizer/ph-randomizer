@@ -1,5 +1,7 @@
-#include "ph.h"
+#include "ph.hpp"
 #include <stdint.h>
+
+extern "C" {
 
 void extend_give_item_function(ItemManager *inventory, int32_t item_id) {
   switch (item_id) {
@@ -8,3 +10,5 @@ void extend_give_item_function(ItemManager *inventory, int32_t item_id) {
     break;
   }
 }
+
+} // extern "C"

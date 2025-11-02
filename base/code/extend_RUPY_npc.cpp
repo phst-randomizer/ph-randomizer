@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+extern "C" {
+
 uint32_t extend_RUPY_npc(uint32_t *addr) {
   uint32_t rupy_type = addr[0x56];
   switch (rupy_type) {
@@ -24,3 +26,5 @@ uint32_t extend_RUPY_npc(uint32_t *addr) {
     return 0xffffffff;
   }
 }
+
+} // extern "C"

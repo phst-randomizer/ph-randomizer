@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+extern "C" {
+
 void faster_boat() {
   uint32_t boat_speed_offset = (*(uint32_t *)(0x20EE4B4) + 0xF7FFF5B4);
 
@@ -22,3 +24,5 @@ void faster_boat() {
   }
   return;
 }
+
+} // extern "C"

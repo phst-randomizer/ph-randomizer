@@ -2,6 +2,8 @@
 
 #define RUPY 0x52555059
 
+extern "C" {
+
 /**
  * @param param_1 - original function arg, don't modify
  * @param npc_type - 4 character string representing NPC type.
@@ -11,7 +13,7 @@
 uint16_t spawn_custom_freestanding_item(void *param_1, uint32_t npc_type, void *param_3,
                                         uint16_t *param_4) {
   // declare pointer to the game's `spawn_npc` function
-  uint16_t (*spawn_npc)(void *, uint32_t, void *, uint16_t *) = (void *)0x20C3FE8;
+  uint16_t (*spawn_npc)(void *, uint32_t, void *, uint16_t *) = reinterpret_cast<uint16_t (*)(void *, uint32_t, void *, uint16_t *)>(0x20C3FE8);
 
   uint16_t *item_id_address;
   // pull the base address of the NPCA entry's item_id off of the stack
@@ -29,3 +31,5 @@ uint16_t spawn_custom_freestanding_item(void *param_1, uint32_t npc_type, void *
   *param_4 = item_id;
   return (*spawn_npc)(param_1, RUPY, param_3, param_4);
 }
+
+} // extern "C"
