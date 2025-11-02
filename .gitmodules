@@ -1,0 +1,3 @@
+[submodule "base/code/external/ph-decomp"]
+	path = base/code/external/ph-decomp
+	url = https://github.com/zeldaret/ph
