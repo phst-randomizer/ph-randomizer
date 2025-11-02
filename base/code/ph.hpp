@@ -4,8 +4,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "types.h"
 #include "string.h"
+#include "types.h"
 #ifdef __cplusplus
 }
 #endif

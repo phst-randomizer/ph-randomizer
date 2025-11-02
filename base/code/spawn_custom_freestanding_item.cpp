@@ -10,10 +10,10 @@ extern "C" {
  * @param param_3 - original function arg, don't modify
  * @param param_4 - original function arg, don't modify
  */
-u16 spawn_custom_freestanding_item(void *param_1, u32 npc_type, void *param_3,
-                                        u16 *param_4) {
+u16 spawn_custom_freestanding_item(void *param_1, u32 npc_type, void *param_3, u16 *param_4) {
   // declare pointer to the game's `spawn_npc` function
-  u16 (*spawn_npc)(void *, u32, void *, u16 *) = reinterpret_cast<u16 (*)(void *, u32, void *, u16 *)>(0x20C3FE8);
+  u16 (*spawn_npc)(void *, u32, void *, u16 *) =
+      reinterpret_cast<u16 (*)(void *, u32, void *, u16 *)>(0x20C3FE8);
 
   u16 *item_id_address;
   // pull the base address of the NPCA entry's item_id off of the stack

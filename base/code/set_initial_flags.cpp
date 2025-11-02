@@ -6,16 +6,16 @@ extern "C" {
 #define NO_SETTING -1, 0
 
 typedef struct {
-  u16 flag_offset;   // offset of the flag from the "base address" (see first
-                          // arg of set_initial_flags() )
-  u8 flag_bit;       // the bit within the value @ flag_offset that represents
-                          // this flag
+  u16 flag_offset;    // offset of the flag from the "base address" (see first
+                      // arg of set_initial_flags() )
+  u8 flag_bit;        // the bit within the value @ flag_offset that represents
+                      // this flag
   s32 setting_offset; // offset of the randomizer setting that this flag is
-                          // gated behind, or -1 if it's not gated behind any
-                          // settings. Make this a 32 bit uint to pad struct to
-                          // 16 bytes
-  u8 setting_bit;    // the bit within the value @ setting_offset that this
-                          // represents this setting
+                      // gated behind, or -1 if it's not gated behind any
+                      // settings. Make this a 32 bit uint to pad struct to
+                      // 16 bytes
+  u8 setting_bit;     // the bit within the value @ setting_offset that this
+                      // represents this setting
 } Flag;
 
 /**
