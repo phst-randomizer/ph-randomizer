@@ -23,5 +23,6 @@ area Mercay:
       chest Freedle
 
     Island -> Main
+    HiddenBombableWall -> Main
     Main -> HiddenBombableWall: macro Bombs
     Ledge -> Main
