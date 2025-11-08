@@ -4,46 +4,46 @@ dynamic = ["version"]
 requires-python = ">=3.12"
 
 dependencies = [
-    "PySide6==6.8.1",
-    "click==8.1.8",
-    "inflection==0.5.1",
+    "PySide6",
+    "click",
+    "inflection",
     "ndspy@git+https://github.com/mike8699/ndspy.git@9d80480e8a3d65a389aac6f5d10978bd9113c977",
-    "ordered-set==4.1.0",
-    "pydantic==2.10.4",
-    "pyparsing==3.2.0",
-    "vidua==0.4.5",
+    "ordered-set",
+    "pydantic",
+    "pyparsing",
+    "vidua",
     "zed@git+https://github.com/phst-randomizer/zed.git@e59a9653ea1344cbc147bab446821813200b9d19",
 ]
 
 [dependency-groups]
 dev = [
-    "pre-commit~=4.3.0",
-    "tox~=4.23.2",
-    "tox-uv~=1.16.0",
+    "pre-commit",
+    "tox",
+    "tox-uv",
 ]
 test = [
-    "PyYAML==6.0.2",
-    "numpy~=1.26.1",
-    "opencv-python~=4.7.0.68",
-    "pytesseract~=0.3.13",
-    "pytest~=8.3.4",
-    "pytest-repeat~=0.9.3",
-    "pytest-rerunfailures~=15.0",
-    "pytest-xdist~=3.6.1",
-    "tqdm~=4.67.1",
+    "PyYAML",
+    "numpy",
+    "opencv-python",
+    "pytesseract",
+    "pytest",
+    "pytest-repeat",
+    "pytest-rerunfailures",
+    "pytest-xdist",
+    "tqdm",
 ]
 desmume = [
-    "py-desmume==0.0.7",
+    "py-desmume",
     "birds-eye-lib@git+https://github.com/SkiHatDuckie/birds-eye.git@662d148c80830e8399e7025ba92fa44da01afa1c",
 ]
 types = [
-    "mypy==1.14.0",
-    "types-Pillow~=10.2.0.20240822",
-    "types-PyYAML~=6.0.12.20241221",
-    "types-setuptools~=75.6.0.20241223",
-    "types-tqdm~=4.67.0.20241221",
+    "mypy",
+    "types-Pillow",
+    "types-PyYAML",
+    "types-setuptools",
+    "types-tqdm",
 ]
-pyinstaller = ["pyinstaller==6.11.1"]
+pyinstaller = ["pyinstaller"]
 
 [project.scripts]
 ph_rando = "ph_rando.ui.main:main"
