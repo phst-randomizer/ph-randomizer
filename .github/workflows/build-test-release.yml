@@ -210,7 +210,7 @@ jobs:
         run: cat spoiler.txt
 
       - name: Save spoiler log as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: spoiler.txt
           path: spoiler.txt
@@ -296,7 +296,7 @@ jobs:
             base/out
 
       - name: Save base patch as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
           path: base/out/${{ steps.rom-checksum.outputs.checksum }}.bps
@@ -400,7 +400,7 @@ jobs:
         run: echo "checksum=$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Download base patch from previous workflow
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
@@ -423,7 +423,7 @@ jobs:
 
       - name: Save recordings of failed tests as artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: test_recordings_${{ matrix.module }}_${{ matrix.rom_variant }}
           path: recordings/
@@ -453,7 +453,7 @@ jobs:
           enable-cache: true
 
       - name: Download base patches
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           # https://github.com/docker/build-push-action#summaries
           pattern: "!*.dockerbuild"
@@ -470,10 +470,14 @@ jobs:
         id: commit-hash
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - uses: actions/upload-artifact@v4
+      - name: Get executable file name
+        id: executable-filename
+        run: echo "file=$(basename $(ls -1 dist/))" >> $GITHUB_OUTPUT
+
+      - uses: actions/upload-artifact@v5
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
-          path: dist/
+          path: dist/${{ steps.executable-filename.outputs.file }}
 
   run-executable:
     name: Run built randomizer executable [${{ matrix.os }} / ${{ matrix.rom_variant }}]
@@ -513,14 +517,15 @@ jobs:
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Download built executable from previous job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
+          path: bin/
 
       - name: Run executable (no GUI)
         run: |
-          chmod +x ./ph_rando
-          ./ph_rando --no-gui --input-rom-path="${{ steps.rom-filename.outputs.rom_filename }}" --output-rom-path="out.nds"
+          chmod +x bin/ph_rando
+          bin/ph_rando --no-gui --input-rom-path="${{ steps.rom-filename.outputs.rom_filename }}" --output-rom-path="out.nds"
 
       - name: Cleanup
         if: always()
@@ -554,7 +559,7 @@ jobs:
         run: echo "version=$(git describe --tags)" >> $GITHUB_OUTPUT
 
       - name: Download built executables
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           # https://github.com/docker/build-push-action#summaries
           pattern: "!*.dockerbuild"
