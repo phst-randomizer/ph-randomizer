@@ -137,7 +137,7 @@ name = "macholib"
 version = "1.16.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "altgraph" },
+    { name = "altgraph", marker = "sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/95/ee/af1a3842bdd5902ce133bd246eb7ffd4375c38642aeb5dc0ae3a0329dfa2/macholib-1.16.3.tar.gz", hash = "sha256:07ae9e15e8e4cd9a788013d81f5908b3609aa76f9b1421bae9c4d7606ec86a30", size = 59309, upload-time = "2023-09-25T09:10:16.155Z" }
 wheels = [
@@ -299,45 +299,45 @@ types = [
 
 [package.metadata]
 requires-dist = [
-    { name = "click", specifier = "==8.1.8" },
-    { name = "inflection", specifier = "==0.5.1" },
+    { name = "click" },
+    { name = "inflection" },
     { name = "ndspy", git = "https://github.com/mike8699/ndspy.git?rev=9d80480e8a3d65a389aac6f5d10978bd9113c977" },
-    { name = "ordered-set", specifier = "==4.1.0" },
-    { name = "pydantic", specifier = "==2.10.4" },
-    { name = "pyparsing", specifier = "==3.2.0" },
-    { name = "pyside6", specifier = "==6.8.1" },
-    { name = "vidua", specifier = "==0.4.5" },
+    { name = "ordered-set" },
+    { name = "pydantic" },
+    { name = "pyparsing" },
+    { name = "pyside6" },
+    { name = "vidua" },
     { name = "zed", git = "https://github.com/phst-randomizer/zed.git?rev=e59a9653ea1344cbc147bab446821813200b9d19" },
 ]
 
 [package.metadata.requires-dev]
 desmume = [
     { name = "birds-eye-lib", git = "https://github.com/SkiHatDuckie/birds-eye.git?rev=662d148c80830e8399e7025ba92fa44da01afa1c" },
-    { name = "py-desmume", specifier = "==0.0.7" },
+    { name = "py-desmume" },
 ]
 dev = [
-    { name = "pre-commit", specifier = "~=4.3.0" },
-    { name = "tox", specifier = "~=4.23.2" },
-    { name = "tox-uv", specifier = "~=1.16.0" },
+    { name = "pre-commit" },
+    { name = "tox" },
+    { name = "tox-uv" },
 ]
-pyinstaller = [{ name = "pyinstaller", specifier = "==6.11.1" }]
+pyinstaller = [{ name = "pyinstaller" }]
 test = [
-    { name = "numpy", specifier = "~=1.26.1" },
-    { name = "opencv-python", specifier = "~=4.7.0.68" },
-    { name = "pytesseract", specifier = "~=0.3.13" },
-    { name = "pytest", specifier = "~=8.3.4" },
-    { name = "pytest-repeat", specifier = "~=0.9.3" },
-    { name = "pytest-rerunfailures", specifier = "~=15.0" },
-    { name = "pytest-xdist", specifier = "~=3.6.1" },
-    { name = "pyyaml", specifier = "==6.0.2" },
-    { name = "tqdm", specifier = "~=4.67.1" },
+    { name = "numpy" },
+    { name = "opencv-python" },
+    { name = "pytesseract" },
+    { name = "pytest" },
+    { name = "pytest-repeat" },
+    { name = "pytest-rerunfailures" },
+    { name = "pytest-xdist" },
+    { name = "pyyaml" },
+    { name = "tqdm" },
 ]
 types = [
-    { name = "mypy", specifier = "==1.14.0" },
-    { name = "types-pillow", specifier = "~=10.2.0.20240822" },
-    { name = "types-pyyaml", specifier = "~=6.0.12.20241221" },
-    { name = "types-setuptools", specifier = "~=75.6.0.20241223" },
-    { name = "types-tqdm", specifier = "~=4.67.0.20241221" },
+    { name = "mypy" },
+    { name = "types-pillow" },
+    { name = "types-pyyaml" },
+    { name = "types-setuptools" },
+    { name = "types-tqdm" },
 ]
 
 [[package]]
