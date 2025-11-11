@@ -1,24 +1,18 @@
 # Contributing to the randomizer
 
-Note, this document is very much a work-in-progress.
+## Local development environment
 
-## Running the randomizer from source
+Before proceeding further in this document, you will need to set up a development environment. All required dependencies and tools will be preinstalled into this containerized environment for you.
 
-Official releases of the randomizer are distributed as single executable files; these are created using [PyInstaller](https://pyinstaller.org). While convenient for end users to run, developers will likely want to run the randomizer from source. To do this:
-
-1. Install the version of [Python](https://www.python.org/downloads/) specified in [`.python-version`](https://github.com/phst-randomizer/ph-randomizer/blob/main/.python-version)
-2. Create a virtualenv using whatever tool you prefer
-3. Run `pip install -e .` from the root of the repository.
-   - It's also recommended to run the following pip install commands if setting up a development environment:
-     - `pip install -e .[test]` - installs dependencies needed to run automated tests
-     - `pip install -e .[types]` - installs dependencies needed to run type-checking, as well as provide IDE auto-complete for IDE's that support mypy
-4. Run `randomizer.py`. Alternatively, to run the shuffler or patcher in isolation, run `ph_rando_shuffler` or `ph_rando_patcher` inside the virtualenv you created above..
+1. Install [Visual Studio Code](https://code.visualstudio.com/)
+1. Follow [VSCode Dev Container setup](https://code.visualstudio.com/docs/devcontainers/containers#_installation), if needed
+1. Clone this git repository and open it in VSCode
+1. From VSCode, press Ctrl-Shift-p and run `Dev Containers: Reopen in Container`
+1. Now inside the container, run `uv run ph_rando` (or `uv run ph_rando --no-gui` for CLI-only mode). Alternatively, to run the shuffler or patcher in isolation, run `uv run ph_rando_shuffler` or `uv run ph_rando_patcher`.
 
 ## Code style/formatting guidelines
 
-All code is linted and, in the case of Python, type-checked in CI on every commit. These checks are handled through [`pre-commit`](https://github.com/pre-commit/pre-commit). First, install `pre-commit` through `pip`:
-
-`pip install pre-commit`
+All code is linted in CI on every commit. These checks are handled through [`pre-commit`](https://github.com/pre-commit/pre-commit).
 
 `pre-commit` can be configured as a `git` hook, which will cause all style/type-checks to be run on commit. This is the recommended mode to use `pre-commit` in, as it will reduce the chance of CI failures due to incorrectly formatted code and/or type-checking failures. To configure this, run `pre-commit install` in the root of the repository.
 
