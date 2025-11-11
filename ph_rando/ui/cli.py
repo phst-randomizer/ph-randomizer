@@ -4,14 +4,18 @@ from pathlib import Path
 
 import click
 
+from ph_rando import __version__
 from ph_rando.common import click_setting_options
 from ph_rando.patcher._patcher import Patcher
 from ph_rando.shuffler._shuffler import Shuffler
 from ph_rando.shuffler._spoiler_log import generate_spoiler_log
 from ph_rando.shuffler._util import generate_random_seed
 
+logger = logging.getLogger(__name__)
+
 
 @click.command()
+@click.version_option(version=__version__)
 @click.option(
     '-i',
     '--input-rom-path',
