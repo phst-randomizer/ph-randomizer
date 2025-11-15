@@ -1,5 +1,11 @@
-#include <stdbool.h>
-#include <stdint.h>
+#ifndef RANDO_SETTINGS_H
+#define RANDO_SETTINGS_H
+
+#include "ph.hpp"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // RAM address of bitmap encoding randomizer settings
 #define RANDO_SETTINGS_BITMAP_ADDR 0x2058180
@@ -17,4 +23,10 @@
  * `RANDO_SETTINGS_BITMAP_ADDR[offset]` byte
  * @return true if setting is enabled, false if it is disabled
  */
-bool setting_is_enabled(uint8_t offset, uint8_t bit);
+bool setting_is_enabled(u8 offset, u8 bit);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // RANDO_SETTINGS_H

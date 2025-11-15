@@ -289,6 +289,8 @@ jobs:
             google_drive_url_secret: PH_US_DPAD_GOOGLE_DRIVE_ID
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -404,6 +406,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          submodules: recursive
           # Also retrieve previous commit so we can check if there are relevant changes
           fetch-depth: 2
 
