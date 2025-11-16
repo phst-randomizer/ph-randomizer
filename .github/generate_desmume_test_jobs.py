@@ -30,10 +30,8 @@ def main():
         {x[0] for x in [re.findall(r'.+/(.+)\.py.+', module) for module in my_plugin.collected]}
     )
 
-    workflow_yaml = yaml.safe_load(
-        (Path(__file__).parent / 'workflows' / 'build-test-release.yml').read_text()
-    )
-    matrix = workflow_yaml['jobs']['generate-base-patch']['strategy']['matrix']
+    workflow_yaml = yaml.safe_load((Path(__file__).parent / 'workflows' / 'ci.yml').read_text())
+    matrix = workflow_yaml['jobs']['build-base-patch']['strategy']['matrix']
 
     extended_matrix = {'include': []}
     for include in matrix['include']:

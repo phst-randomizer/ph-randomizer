@@ -129,6 +129,36 @@ overlay/
 *.bin
 *.nds
 *.zmb
+*.narc
+*.spa
+*.bmg
+*.sgn
+*.srl
+*.NCLR
+*.nsbtx
+*.zeb
+*.ntft
+*.ntfp
+*.nftr
+*.nbfc
+*.nbfp
+*.nsbmd
+*.nsbca
+*.nsbtp
+*.nsbta
+*.nsbma
+*.sdat
+*.clb
+*.nsbmd
+*.ilb
+*.bhio
+
+# Build/script artifacts
+*.bps
+*.o
+base/data/*.png
+base/data/*.bmp
+graphs/*.png
 
 # PyCharm
 .idea/

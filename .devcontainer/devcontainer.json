@@ -1,7 +1,7 @@
 {
   "name": "ph-randomizer",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "../Dockerfile"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/ph-randomizer,type=bind",
   "workspaceFolder": "/home/vscode/ph-randomizer",
@@ -63,6 +63,12 @@
     "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
     "LIBGL_ALWAYS_INDIRECT": "0",
     "XDG_RUNTIME_DIR": "/home/vscode/.vscode-runtime",
+
+    // uv configuration
+    "UV_PROJECT_ENVIRONMENT": "/home/vscode/uv-env",
+    "UV_CACHE_DIR": "/home/vscode/uv/cache",
+    "UV_PYTHON_INSTALL_DIR": "/home/vscode/uv/bin",
+    "UV_LINK_MODE": "symlink",
 
     // For pytest tests
     "PY_DESMUME_BATTERY_DIR": "/home/vscode/.config/desmume/"

@@ -36,6 +36,9 @@ desmume = [
     "py-desmume",
     "birds-eye-lib@git+https://github.com/SkiHatDuckie/birds-eye.git@662d148c80830e8399e7025ba92fa44da01afa1c",
 ]
+base_patch = [
+    "Pillow",
+]
 types = [
     "mypy",
     "types-Pillow",

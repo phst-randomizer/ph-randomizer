@@ -1,17 +1,16 @@
 .nds
-.relativeinclude on
 .erroronwarning on
 
-.include "ph.asm"
+.include "../code/ph.asm"
 
-.open "../arm9_original.bin","../arm9_compressed.bin",0x02004000
+.open "arm9_original.bin","arm9_compressed.bin",0x02004000
     .arm
     .org 0x54180 + 0x2004000
         ; Area of unused space in arm9.bin; new code can be stored here
         .area 0x301, 0xFF
             .fill 0xA, 0x0 ; bitmap for randomizer settings
 
-            .include "_island_shop_files.asm"
+            .include "../code/_island_shop_files.asm"
         .pool
         .endarea
 
@@ -31,7 +30,7 @@
                 pop pc
 
             @check_additional_items_tree_drop:
-                .include "_additional_tree_items.asm"
+                .include "../code/_additional_tree_items.asm"
                 ldr r0, [r4, 0x6c]
                 b 0x2162790
 
@@ -95,7 +94,7 @@
 .close
 
 
-.open "../overlay/overlay_0000.bin", 0x02077360
+.open "overlay/overlay_0000.bin", 0x02077360
     .arm
     .org 0x20300 + 0x02077360
         .area 0x4
@@ -137,7 +136,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0003.bin", 0x20eece0
+.open "overlay/overlay_0003.bin", 0x20eece0
     .thumb
     ; Patch softlock when buying a sea chart or treasure map in a shop.
     ; Replace UI animation id 0x29 with id 0x6 (id when closing map)
@@ -222,7 +221,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0009.bin", 0x02112ba0
+.open "overlay/overlay_0009.bin", 0x02112ba0
     .thumb
     .org 0x211c09a
         ; This overrides the routine that is in charge of spawning the correct 3D model
@@ -243,11 +242,11 @@
 .close
 
 
-.open "../overlay/overlay_0014.bin", 0x0211F5C0
+.open "overlay/overlay_0014.bin", 0x0211F5C0
     .arm
     .org 0x213b0e8
         .area 0x74, 0xFF
-            .importobj "code/extend_RUPY_npc.o"
+            .importobj "../code/extend_RUPY_npc.o"
         .endarea
 
     .org 0x213a108
@@ -357,7 +356,7 @@
 .close
 
 
-.open "../overlay/overlay_0015.bin", 0x0211F5C0
+.open "overlay/overlay_0015.bin", 0x0211F5C0
     .arm
     .org 0x17420 + 0x0211F5C0 ;0x217bce0
         .area 0x4
@@ -371,7 +370,7 @@
 .close
 
 
-.open "../overlay/overlay_0018.bin", 0x0215b400
+.open "overlay/overlay_0018.bin", 0x0215b400
     .arm
     .org 0x216278c
         .area 0x4, 0xff
@@ -379,7 +378,7 @@
         .endarea
 .close
 
-.open "../overlay/overlay_0031.bin", 0x0217bce0
+.open "overlay/overlay_0031.bin", 0x0217bce0
     .arm
 
     ; Make the "random treasure" in shops a fixed item (i.e. "unrandomize" it)
@@ -466,18 +465,18 @@
 ; Note: this is an extra overlay added by the randomizer.
 ; It is not present in the original rom, and must be added prior
 ; to executing this ARMIPS patch.
-.open "../overlay/overlay_0062.bin", 0x23C0900
+.open "overlay/overlay_0062.bin", 0x23C0900
     .org 0x23C0900
         .area 32512, 0xEE
             .arm
-            .importobj "code/faster_boat.o"
-            .importobj "code/fixed_random_treasure_in_shop.o"
-            .importobj "code/progressive_sword_check.o"
-            .importobj "code/rando_settings.o"
-            .importobj "code/get_item_model.o"
-            .importobj "code/set_initial_flags.o"
-            .importobj "code/spawn_custom_freestanding_item.o"
-            .importobj "code/custom_salvage_item.o"
-            .importobj "code/extend_give_item_function.o"
+            .importobj "../code/faster_boat.o"
+            .importobj "../code/fixed_random_treasure_in_shop.o"
+            .importobj "../code/progressive_sword_check.o"
+            .importobj "../code/rando_settings.o"
+            .importobj "../code/get_item_model.o"
+            .importobj "../code/set_initial_flags.o"
+            .importobj "../code/spawn_custom_freestanding_item.o"
+            .importobj "../code/custom_salvage_item.o"
+            .importobj "../code/extend_give_item_function.o"
         .endarea
 .close

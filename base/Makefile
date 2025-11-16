@@ -14,23 +14,33 @@ ASM=$(SRC:.c=.asm)
 
 INPUT_NDS_FILE=$(PH_ROM_PATH)
 PREPATCHED_NDS_FILE=prepatched.nds
-OUTPUT_NDS_FILE=out.nds
-OUTPUT_BPS_FILE=patch.bps
+OUTPUT_DIR=out
+OUTPUT_NDS_FILE=$(OUTPUT_DIR)/out.nds
+OUTPUT_BPS_FILE=$(OUTPUT_DIR)/$(shell sha256sum $(INPUT_NDS_FILE) | cut -d ' ' -f 1).bps
 
 # Set version string to a default if it isn't provided
 VERSION_STRING := $(or $(VERSION_STRING), "no_version")
 
 $(OUTPUT_BPS_FILE): $(INPUT_NDS_FILE) $(OUTPUT_NDS_FILE)
-	./flips --create $^ $@
+	mkdir -p out
+	flips --create $^ $@
 
-$(OUTPUT_NDS_FILE): $(PREPATCHED_NDS_FILE) $(OBJ)
-	python3 extract_rom.py $(PREPATCHED_NDS_FILE) .
-	./armips code/main.asm
+$(OUTPUT_NDS_FILE): $(PREPATCHED_NDS_FILE) $(OBJ) $(OUTPUT_DIR)
+	uv sync --group=base_patch
 
-	python3 rebuild_rom.py $(PREPATCHED_NDS_FILE) overlay/ arm9_header.bin arm9_compressed.bin $(OUTPUT_NDS_FILE)
+	mkdir -p NDS_UNPACK/
+	uv run extract_rom.py $(PREPATCHED_NDS_FILE) NDS_UNPACK/
+
+	cd NDS_UNPACK/ && armips ../code/main.asm
+
+	uv run rebuild_rom.py $(PREPATCHED_NDS_FILE) NDS_UNPACK/overlay/ NDS_UNPACK/arm9_header.bin NDS_UNPACK/arm9_compressed.bin $(OUTPUT_NDS_FILE)
 
 $(PREPATCHED_NDS_FILE): $(INPUT_NDS_FILE)
-	VERSION_STRING=$(VERSION_STRING) python3 data_patcher.py --input-rom $(INPUT_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
+	uv sync --group=base_patch
+	VERSION_STRING=$(VERSION_STRING) uv run data/data_patcher.py --input-rom $(INPUT_NDS_FILE) --output-rom $(PREPATCHED_NDS_FILE)
+
+$(OUTPUT_DIR):
+	mkdir -p $(OUTPUT_DIR)
 
 # Same as `all`, but also includes readable .asm file
 debug: $(OBJ) $(ASM)

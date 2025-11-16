@@ -266,6 +266,9 @@ dependencies = [
 ]
 
 [package.dev-dependencies]
+base-patch = [
+    { name = "pillow" },
+]
 desmume = [
     { name = "birds-eye-lib" },
     { name = "py-desmume" },
@@ -311,6 +314,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
+base-patch = [{ name = "pillow" }]
 desmume = [
     { name = "birds-eye-lib", git = "https://github.com/SkiHatDuckie/birds-eye.git?rev=662d148c80830e8399e7025ba92fa44da01afa1c" },
     { name = "py-desmume" },
