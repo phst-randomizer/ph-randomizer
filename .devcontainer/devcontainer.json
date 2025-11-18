@@ -1,0 +1,80 @@
+{
+  "name": "ph-randomizer",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/ph-randomizer,type=bind",
+  "workspaceFolder": "/home/vscode/ph-randomizer",
+  "features": {
+    // Allows running `docker ...` commands inside the dev container
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1.6.5": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // TOML syntax highlighting
+        "tamasfe.even-better-toml",
+        // mypy support inline in editor
+        "matangover.mypy",
+        // Python extension
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        // Docker extension
+        "ms-azuretools.vscode-docker",
+        // C/C++ extension
+        "ms-vscode.cpptools",
+        // GitHub Actions extension
+        "github.vscode-github-actions",
+        // GitLens extension (inline git blame)
+        "eamodio.gitlens",
+        // ARMIPS extension
+        "ajarmar.armips",
+        // Claude Code extension
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.typeCheckingMode": "off",
+        "python.defaultInterpreterPath": "/home/vscode/uv-env/bin/python",
+        "python.testing.pytestEnabled": true,
+        "mypy.enabled": true,
+        "mypy.runUsingActiveInterpreter": true
+      }
+    }
+  },
+  "updateContentCommand": [
+    "uv",
+    "sync",
+    "--all-extras",
+    "--all-groups"
+  ],
+  "mounts": [
+    "source=precommit_cache,target=/home/vscode/.cache/pre-commit,type=volume",
+    "source=uv_cache,target=/home/vscode/uv,type=volume",
+    "source=${localEnv:XDG_RUNTIME_DIR}/wayland-0,target=/tmp/wayland-0,type=bind,consistency=cached",
+    // Mount local ssh as readonly (so git can find ssh keys)
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,readonly"
+  ],
+  "initializeCommand": "bash -c 'mkdir -p /tmp/.X11-unix 2>/dev/null || true; xhost +local: 2>/dev/null || true'",
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+    "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+    "LIBGL_ALWAYS_INDIRECT": "0",
+    "XDG_RUNTIME_DIR": "/home/vscode/.vscode-runtime",
+
+    // uv configuration
+    "UV_PROJECT_ENVIRONMENT": "/home/vscode/uv-env",
+    "UV_CACHE_DIR": "/home/vscode/uv/cache",
+    "UV_PYTHON_INSTALL_DIR": "/home/vscode/uv/bin",
+    "UV_LINK_MODE": "symlink",
+
+    // For pytest tests
+    "PY_DESMUME_BATTERY_DIR": "/home/vscode/.config/desmume/"
+  },
+  "runArgs": [
+    "--network=host"
+    // "--device=/dev/dri"  // TODO: need this for Linux, but causes errors on Windows
+  ]
+}

@@ -1,4 +1,5 @@
-name: CI
+name: CI/CD
+
 on:
   push:
     branches:
@@ -7,6 +8,11 @@ on:
       - "*"
   pull_request:
   workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   lint:
     name: Linting/style checks
@@ -14,26 +20,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
+          enable-cache: true
 
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install pre-commit
-        run: pip install pre-commit
+      - name: Install dependencies
+        run: uv sync --group dev
 
       - name: Cache pre-commit hooks
         uses: actions/cache@v3
         with:
           path: ~/.cache/pre-commit/
-          key: pre-commit-cache|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}|${{ hashFiles('setup.cfg') }}
+          key: pre-commit-cache|${{ hashFiles('uv.lock') }}|${{ hashFiles('.pre-commit-config.yaml') }}|${{ hashFiles('pyproject.toml') }}
 
       - name: Run pre-commit checks
-        run: pre-commit run --all-files --verbose
+        run: uv run pre-commit run --all-files --verbose
 
   type-check:
     name: Type-checking
@@ -41,20 +43,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
+          enable-cache: true
 
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install tox
-        run: pip install tox
+      - name: Install dependencies
+        run: uv sync --group types --group test
 
       - name: Run type checking
-        run: tox -e type
+        run: uv run tox -e type
 
   # check-logic:
   #   name: Validate logic
@@ -123,21 +121,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install dependencies
-        run: pip install -e .
+          enable-cache: true
 
       - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
         run: |
-          python ph_rando/shuffler/aux_models.py
+          uv run python ph_rando/shuffler/aux_models.py
           git diff --exit-code
           if [ $? -ne 0 ]
           then
@@ -146,7 +137,7 @@ jobs:
 
       - name: Run pydantic validation on aux data
         run: |
-          python <<HEREDOC
+          uv run python <<HEREDOC
           import json, sys
           from pathlib import Path
           from pydantic import ValidationError
@@ -170,21 +161,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install dependencies
-        run: pip install -e .
+          enable-cache: true
 
       - name: Check if there are changes to pydantic models that aren't reflected in JSON schema
         run: |
-          python ph_rando/settings.py
+          uv run python ph_rando/settings.py
           git diff --exit-code
           if [ $? -ne 0 ]
           then
@@ -193,7 +177,7 @@ jobs:
 
       - name: Run pydantic validation on settings json
         run: |
-          python <<HEREDOC
+          uv run python <<HEREDOC
           import json, sys
           from pathlib import Path
           from pydantic import ValidationError
@@ -220,26 +204,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install dependencies
-        run: pip install -e .
+          enable-cache: true
 
       - name: Run the shuffler
-        run: ph_rando_shuffler -o -- --spoiler-log spoiler.txt
+        run: uv run ph_rando_shuffler -o -- --spoiler-log spoiler.txt
 
       - name: Print spoiler log
         run: cat spoiler.txt
 
       - name: Save spoiler log as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: spoiler.txt
           path: spoiler.txt
@@ -260,25 +237,55 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install tox
-        run: pip install tox
+          enable-cache: true
 
       - name: Run tests
-        run: tox -e test
+        run: uv run tox -e test
 
 
-  generate-base-patch:
+  build-development-image:
+    name: Build development docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push development image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{
+              github.event_name == 'pull_request'
+                && format('pr{0}', github.event.pull_request.number)
+                || (github.ref_name == 'main'
+                      && github.sha
+                      || github.ref_name)
+            }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  build-base-patch:
     name: Build base patch [${{ matrix.rom_variant }}]
     runs-on: ubuntu-latest
+    needs: build-development-image
     strategy:
       fail-fast: false
       matrix:
@@ -290,19 +297,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
+          enable-cache: true
 
       - name: Fetch PH rom
         run: |
-          pip install gdown
-          gdown ${{ secrets[matrix.google_drive_url_secret] }}
+          uvx gdown ${{ secrets[matrix.google_drive_url_secret] }}
         working-directory: base
 
       - name: Get filename of rom
@@ -319,25 +321,31 @@ jobs:
         id: commit-hash
         run: echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Build base patch
-        uses: docker/build-push-action@v6
-        with:
-          context: base/
-          push: false
-          # cache-from: type=gha
-          # cache-to: type=gha,mode=max
-          build-args: |
-            PH_ROM_PATH=${{ steps.rom-filename.outputs.rom_filename }}
-            VERSION_STRING=${{ steps.commit-hash.outputs.commit_hash }}
-          outputs: |
-            base/out
+        run: |
+          mkdir -p .uv/cache .uv/python .uv/environments
+          docker run --rm \
+            --env PH_ROM_PATH \
+            --env UV_CACHE_DIR=/app/.uv/cache \
+            --env UV_PYTHON_INSTALL_DIR=/app/.uv/python \
+            --env UV_PROJECT_ENVIRONMENT_ROOT=/app/.uv/environments \
+            --env UV_LINK_MODE=copy \
+            --volume "$PWD":/app \
+            --workdir /app \
+            --user $(id -u):$(id -g) \
+            ghcr.io/${{ github.repository }}:${{
+              github.event_name == 'pull_request'
+                && format('pr{0}', github.event.pull_request.number)
+                || (github.ref_name == 'main'
+                      && github.sha
+                      || github.ref_name)
+            }} \
+            make --directory=base/
+        env:
+          PH_ROM_PATH: ${{ steps.rom-filename.outputs.rom_filename }}
 
       - name: Save base patch as an artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
           path: base/out/${{ steps.rom-checksum.outputs.checksum }}.bps
@@ -365,31 +373,28 @@ jobs:
             - 'tests/desmume/**'
             - '.github/workflows/**'
             - '.python-version'
-            - 'setup.cfg'
+            - 'pyproject.toml'
+            - 'uv.lock'
+            - 'tox.ini'
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
       with:
-        python-version-file: '.python-version'
-        check-latest: true
-
-    - name: Upgrade `pip` and install `wheel`
-      run: python -m pip install --upgrade pip wheel
+        enable-cache: true
 
     - name: Install dependencies
-      run: |
-        pip install -e .[test,desmume]
+      run: uv sync --group test --group desmume
 
     - name: Get list of tests to run in separate jobs
       id: set-test-matrix
       run: |
-        python .github/generate_desmume_test_jobs.py
+        uv run python .github/generate_desmume_test_jobs.py
         echo "matrix=$(cat .github/matrix.json)" >> $GITHUB_OUTPUT
 
   test-desmume:
     name: ${{ matrix.emulator }} tests [${{ matrix.module }}] (${{ matrix.rom_variant }})
     needs:
-      - generate-base-patch
+      - build-base-patch
       - generate-base-patch-test-jobs
     # Only run these tests if base patches or the tests themselves are modified, or if a release is happening, or on push to main.
     if: "startsWith(github.ref, 'refs/tags/') || needs.generate-base-patch-test-jobs.outputs.should-run-tests == 'true'"
@@ -407,14 +412,10 @@ jobs:
           # Also retrieve previous commit so we can check if there are relevant changes
           fetch-depth: 2
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
+          enable-cache: true
 
       - name: Install system dependencies
         run: |
@@ -437,9 +438,7 @@ jobs:
           powershell -Command "Start-Process -FilePath vcredist_x64.exe -ArgumentList '/install /q /norestart' -Verb RunAs -Wait"
 
       - name: Fetch PH rom
-        run: |
-          pip install gdown
-          gdown ${{ secrets[matrix.google_drive_url_secret] }}
+        run: uvx gdown ${{ secrets[matrix.google_drive_url_secret] }}
 
       - name: Get filename of rom
         id: rom-filename
@@ -450,7 +449,7 @@ jobs:
         run: echo "checksum=$(sha256sum '${{ steps.rom-filename.outputs.filename }}' | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Download base patch from previous workflow
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: ${{ steps.rom-checksum.outputs.checksum }}.bps
 
@@ -459,11 +458,13 @@ jobs:
           mkdir -p base/out
           mv ${{ steps.rom-checksum.outputs.checksum }}.bps base/out/${{ steps.rom-checksum.outputs.checksum }}.bps
 
-      - name: Install tox
-        run: pip install tox
+      - name: Install Python and write its location to environment
+        run: |
+          uv python install
+          echo "pythonLocation=$(dirname $(uv python list --only-installed --managed-python | awk '{print $2}'))" >> $GITHUB_ENV
 
       - name: Run tests
-        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" tox -e test-${{ matrix.emulator }} -- -k "${{ matrix.module }}"
+        run: PY_DESMUME_BATTERY_DIR="$pythonLocation" uv run tox -e test-${{ matrix.emulator }} -- -k "${{ matrix.module }}"
         env:
           PH_ROM_PATH: ${{ steps.rom-filename.outputs.filename }}
           PY_DESMUME_VIDEO_RECORDING_DIR: recordings/
@@ -471,7 +472,7 @@ jobs:
 
       - name: Save recordings of failed tests as artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: test_recordings_${{ matrix.module }}_${{ matrix.rom_variant }}
           path: recordings/
@@ -483,7 +484,7 @@ jobs:
   build:
     name: Build randomizer
     needs:
-      - generate-base-patch
+      - build-base-patch
     strategy:
       fail-fast: false
       matrix:
@@ -495,20 +496,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version-file: '.python-version'
-          check-latest: true
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install tox
-        run: pip install tox
+          enable-cache: true
 
       - name: Download base patches
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           # https://github.com/docker/build-push-action#summaries
           pattern: "!*.dockerbuild"
@@ -519,16 +513,20 @@ jobs:
           mv ./**/*.bps base/out
 
       - name: Build randomizer executable
-        run: tox -e build
+        run: uv run tox -e build
 
       - name: Get current commit hash
         id: commit-hash
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - uses: actions/upload-artifact@v4
+      - name: Get executable file name
+        id: executable-filename
+        run: echo "file=$(basename $(ls -1 dist/))" >> $GITHUB_OUTPUT
+
+      - uses: actions/upload-artifact@v5
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
-          path: dist/
+          path: dist/${{ steps.executable-filename.outputs.file }}
 
   run-executable:
     name: Run built randomizer executable [${{ matrix.os }} / ${{ matrix.rom_variant }}]
@@ -551,29 +549,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Note: intentionally use an older version of Python here;
-      # The pyinstaller build should not depend on a specific Python
-      # version being installed (or, Python being installed at all
-      # for that matter).
-      - name: Get two versions of Python behind min required
-        id: python-version
-        run: |
-          PYTHON_VERSION=$(cat .python-version)
-          echo "python-version="3.$(echo "${PYTHON_VERSION:2} 2" | awk '{print $1-$2}')"" >> $GITHUB_OUTPUT
-          rm -rf *
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: ${{ steps.python-version.outputs.python-version }}
-
-      - name: Upgrade `pip` and install `wheel`
-        run: python -m pip install --upgrade pip wheel
+          enable-cache: true
 
       - name: Fetch PH rom
-        run: |
-          pip install gdown
-          gdown ${{ secrets[matrix.google_drive_url_secret] }}
+        run: uvx gdown ${{ secrets[matrix.google_drive_url_secret] }}
 
       - name: Get filename of rom
         id: rom-filename
@@ -584,14 +566,15 @@ jobs:
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Download built executable from previous job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: ph-randomizer_${{ steps.commit-hash.outputs.hash }}_${{ matrix.os }}
+          path: bin/
 
       - name: Run executable (no GUI)
         run: |
-          chmod +x ./ph_rando
-          ./ph_rando --no-gui --input-rom-path="${{ steps.rom-filename.outputs.rom_filename }}" --output-rom-path="out.nds"
+          chmod +x bin/ph_rando
+          bin/ph_rando --no-gui --input-rom-path="${{ steps.rom-filename.outputs.rom_filename }}" --output-rom-path="out.nds"
 
       - name: Cleanup
         if: always()
@@ -625,7 +608,7 @@ jobs:
         run: echo "version=$(git describe --tags)" >> $GITHUB_OUTPUT
 
       - name: Download built executables
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           # https://github.com/docker/build-push-action#summaries
           pattern: "!*.dockerbuild"
